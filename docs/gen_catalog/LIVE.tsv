@@ -1,0 +1,112 @@
+# live /ai/run probe 2026-10-19T16:48Z
+model	status	valid_fields
+alibaba/hh1-i2v	live	image, prompt, negative_prompt, resolution, duration, seed, watermark
+alibaba/hh1-t2v	live	prompt, resolution, ratio, duration, seed, watermark
+alibaba/hh1.1-i2v	live	image, prompt, negative_prompt, resolution, duration, seed, watermark
+alibaba/hh1.1-r2v	live	prompt, images, resolution, ratio, duration, seed, watermark
+alibaba/hh1.1-t2v	live	prompt, resolution, ratio, duration, seed, watermark
+alibaba/qwen-image-3.0-pro	live	prompt, size, negative_prompt, n, seed, watermark, prompt_extend, prompt_extend_mode
+alibaba/wan-2.6-image	live	prompt, size, negative_prompt
+alibaba/wan-2.7-i2v	live	image, prompt, negative_prompt, resolution, duration, seed, watermark
+alibaba/wan-3.0	live	prompt, resolution, ratio, duration
+alibaba/wan-3.0-prime	live	prompt, resolution, ratio, duration
+assemblyai/universal-3-pro	live	audio_url, websocket, language_code, language_detection, prompt, keyterms_prompt, temperature, speaker_labels, speakers_expected, auto_chapters, entity_detection, sentiment_analysis, auto_highlights, content_safety, iab_categories, custom_spelling, disfluencies, multichannel, dual_channel, webhook_url, audio_start_from, audio_end_at, word_boost, boost_param, filter_profanity, redact_pii, redact_pii_audio, redact_pii_policies, redact_pii_sub, speech_threshold, domain
+assemblyai/universal-3.5-pro	live	audio_url, audio_start_from, audio_end_at, language_code, language_detection, language_detection_options.expected_languages, language_detection_options.fallback_language, language_detection_options.code_switching, language_detection_options.code_switching_confidence_threshold, language_detection_options.localization, prompt, keyterms_prompt, temperature, punctuate, format_text, disfluencies, filter_profanity, speaker_labels, speakers_expected, speaker_options.min_speakers_expected, speaker_options.max_speakers_expected, multichannel, custom_spelling, auto_highlights, content_safety, content_safety_confidence, iab_categories, entity_detection, sentiment_analysis, domain, speech_threshold, redact_pii, redact_pii_audio, redact_pii_audio_quality, redact_pii_audio_options.return_redacted_no_speech_audio, redact_pii_audio_options.override_audio_redaction_method, redact_pii_policies, redact_pii_sub, redact_pii_return_unredacted
+black-forest-labs/flux-1-kontext-max	live	prompt, input_image, aspect_ratio, seed, prompt_upsampling, safety_tolerance, output_format
+black-forest-labs/flux-1-kontext-pro	live	prompt, input_image, aspect_ratio, seed, prompt_upsampling, safety_tolerance, output_format
+black-forest-labs/flux-2-flex	live	prompt, seed, width, height, safety_tolerance, output_format, input_images, prompt_upsampling, guidance, steps
+black-forest-labs/flux-2-max	live	prompt, seed, width, height, safety_tolerance, output_format, input_images
+black-forest-labs/flux-2-pro-preview	live	prompt, seed, width, height, safety_tolerance, output_format, input_images
+black-forest-labs/flux-3-image-klein	live	prompt, images, aspect_ratio, resolution, seed
+black-forest-labs/flux-3-video	live	Model execution failed (User Input Error): Invalid value at mode: Invalid discriminator value. Expected 't2v' | 'i2v' | 'v2v'
+black-forest-labs/flux-video-upscale	live	input_video, upscale_factor, creativity, prompt, safety_tolerance
+bria/ad-delayer	live	image
+bria/fibo-edit-1.5	live	images, instruction, structured_instruction, mask, aspect_ratio, seed, output_type, ip_signal, prompt_content_moderation, visual_input_content_moderation, visual_output_content_moderation
+bria/fibo-generate-1.5	live	prompt, images, structured_prompt, resolution, aspect_ratio, seed, output_type, ip_signal, prompt_content_moderation, visual_input_content_moderation, visual_output_content_moderation
+bria/remove-background	live	image, preserve_alpha, visual_input_content_moderation, visual_output_content_moderation
+bria/v-rmbg-3.0	live	video, background_color, output_container_and_codec, auto_zoom, preserve_audio, spill_suppression
+bytedance/seedance-2.0	live	prompt, image, reference_video, last_frame_image, reference_images, duration, resolution, aspect_ratio, fps, camera_fixed, generate_audio, watermark, seed, use_virtual_avatar
+bytedance/seedance-2.0-fast	live	prompt, image, reference_video, last_frame_image, reference_images, duration, resolution, aspect_ratio, fps, camera_fixed, generate_audio, watermark, seed, use_virtual_avatar
+bytedance/seedance-2.0-mini	live	prompt, image, reference_video, last_frame_image, reference_images, duration, resolution, aspect_ratio, fps, camera_fixed, generate_audio, watermark, seed, use_virtual_avatar, reference_audio
+bytedance/seedance-2.5	live	prompt, image, last_frame_image, reference_images, reference_videos, reference_audios, duration, resolution, aspect_ratio, fps, camera_fixed, generate_audio, watermark, seed, output_format, use_virtual_avatar
+bytedance/seedream-4.0	live	prompt, size, aspect_ratio, width, height, enhance_prompt
+bytedance/seedream-4.5	live	prompt, image_input, size, aspect_ratio, sequential_image_generation, max_images, disable_safety_checker
+bytedance/seedream-5-lite	live	prompt, image_input, size, aspect_ratio, sequential_image_generation, max_images, output_format
+bytedance/seedream-5-pro	live	prompt, image, size, watermark
+elevenlabs/eleven-flash-v2-5	live	text, voice_id, output_format, language_code, voice_settings.stability, voice_settings.similarity_boost, voice_settings.style, voice_settings.use_speaker_boost, voice_settings.speed, seed, previous_text, next_text, apply_text_normalization
+elevenlabs/eleven-multilingual-v2	live	text, voice_id, output_format, language_code, voice_settings.stability, voice_settings.similarity_boost, voice_settings.style, voice_settings.use_speaker_boost, voice_settings.speed, seed, previous_text, next_text, apply_text_normalization
+elevenlabs/eleven-turbo-v2-5	live	text, voice_id, output_format, language_code, voice_settings.stability, voice_settings.similarity_boost, voice_settings.style, voice_settings.use_speaker_boost, voice_settings.speed, seed, previous_text, next_text, apply_text_normalization
+elevenlabs/eleven-v3	live	text, voice_id, output_format, language_code, voice_settings.stability, voice_settings.similarity_boost, voice_settings.style, voice_settings.use_speaker_boost, voice_settings.speed, seed, previous_text, next_text, apply_text_normalization
+elevenlabs/music-v2	live	prompt, composition_plan.chunks, music_length_ms, output_format, seed, force_instrumental, store_for_inpainting, sign_with_c2pa
+google/gemini-3.1-flash-tts	live	text, voice, temperature, topP, topK, maxOutputTokens, stopSequences
+google/gemini-3.8-flash-lite-tts	live	text, voice, temperature, topP, topK, maxOutputTokens, stopSequences
+google/gemini-3.8-flash-tts	live	text, voice, temperature, topP, topK, maxOutputTokens, stopSequences
+google/gemini-omni-1.1-flash	live	text, image, last_frame, reference_images, video, audio, previous_interaction_id, aspect_ratio, resolution
+google/gemini-omni-flash	live	text, image, last_frame, reference_images, video, audio, previous_interaction_id, aspect_ratio, resolution
+google/nano-banana	live	prompt, image_input, aspect_ratio, output_format, image_size
+google/nano-banana-2	live	prompt, image_input, aspect_ratio, output_format, resolution, google_search, image_search
+google/nano-banana-2-lite	live	prompt, image_input, aspect_ratio, output_format, resolution
+google/nano-banana-2.1	live	prompt, image_input, aspect_ratio, output_format, resolution, google_search, image_search
+google/nano-banana-pro	live	prompt, image_input, aspect_ratio, output_format, image_size
+google/veo-3.1	live	prompt, image_input, duration, aspect_ratio, resolution, generate_audio
+google/veo-3.1-fast	live	prompt, image_input, duration, aspect_ratio, resolution, generate_audio
+inworld/tts-1.5-max	live	text, voice_id, output_format, bit_rate, sample_rate, speaking_rate, temperature, timestamp_type, apply_text_normalization
+inworld/tts-1.5-mini	live	text, voice_id, output_format, bit_rate, sample_rate, speaking_rate, temperature, timestamp_type, apply_text_normalization
+inworld/tts-2	live	text, voice_id, output_format, bit_rate, sample_rate, speaking_rate, temperature, timestamp_type, apply_text_normalization
+krea/krea-2-large	live	prompt, aspect_ratio, resolution, seed, styles, image_style_references, creativity, intensity, complexity, movement, moodboards
+krea/krea-2-medium	live	prompt, aspect_ratio, resolution, seed, styles, image_style_references, creativity, intensity, complexity, movement, moodboards
+krea/krea-2-medium-turbo	live	prompt, aspect_ratio, resolution, seed, styles, image_style_references, creativity, intensity, complexity, movement, moodboards
+krea/krea-3	live	prompt, image_urls, thinking_mode, resolution, aspect_ratio, seed, negative_prompt, regional_edit
+lightricks/ltx-2-5-fast	live	prompt, image_uri, last_frame_uri, duration, resolution, fps, generate_audio
+minimax/h3	live	content, resolution, duration, ratio, callback_url
+minimax/h3-max	live	content, duration, ratio, callback_url, resolution, extra.prompt_expansion_mode
+minimax/hailuo-2.3	live	prompt, first_frame_image, prompt_optimizer, fast_pretreatment, duration, resolution
+minimax/hailuo-2.3-fast	live	first_frame_image, prompt, prompt_optimizer, fast_pretreatment, duration, resolution
+minimax/music-2.6	live	prompt, lyrics, sample_rate, bitrate, format, lyrics_optimizer, is_instrumental
+minimax/speech-2.8-hd	live	text, voice_id, speed, volume, pitch, emotion, format, sample_rate
+minimax/speech-2.8-turbo	live	text, voice_id, speed, volume, pitch, emotion, format, sample_rate
+openai/gpt-4o-transcribe	live	file, language, prompt, temperature
+openai/gpt-image-1.5	live	Model execution failed (User Input Error): Required value missing: prompt
+openai/gpt-image-2	live	Model execution failed (User Input Error): Required value missing: prompt
+openai/gpt-image-2.5-flare	live	Model execution failed (User Input Error): Required value missing: prompt
+openai/gpt-image-2.5-sunburst	live	Model execution failed (User Input Error): Required value missing: prompt
+openai/tts-1	live	text, voice, response_format, speed
+openai/tts-1-hd	live	text, voice, response_format, speed
+pixverse/v5.6	live	prompt, negative_prompt, image_input, duration, aspect_ratio, quality, seed, motion_mode, generate_audio
+pixverse/v6	live	prompt, negative_prompt, image_input, duration, aspect_ratio, quality, seed, generate_audio
+pruna/p-image	live	Model execution failed (User Input Error): Required value missing: prompt
+pruna/p-image-edit	live	Model execution failed (User Input Error): Required values missing: prompt, images
+pruna/p-image-try-on	live	Model execution failed (User Input Error): Required values missing: person_image, garment_images
+pruna/p-image-upscale	live	Model execution failed (User Input Error): Required value missing: image
+pruna/p-video	live	Model execution failed (User Input Error): Required value missing: prompt
+pruna/p-video-animate	live	Model execution failed (User Input Error): Required values missing: video, image
+pruna/p-video-avatar	live	Model execution failed (User Input Error): Required value missing: image
+pruna/p-video-replace	live	Model execution failed (User Input Error): Required values missing: video, images
+recraft/recraftv3	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-flash	live	prompt, size, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-pro	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-pro-vector	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-utility	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-utility-pro	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-utility-pro-vector	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-utility-vector	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-1-vector	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-pro	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-pro-vector	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+recraft/recraftv4-vector	live	prompt, size, style, substyle, controls.colors, controls.background_color.rgb
+runwayml/aleph-2	live	prompt, video_uri, keyframes, prompt_images, seed, content_moderation.public_figure_threshold, duration
+runwayml/gen-4.5	live	prompt, image_input, ratio, duration, seed, content_moderation.public_figure_threshold
+topaz/starlight-fast-2	live	video_uri, source_container, source_width, source_height, frame_count, frame_rate, target_resolution, upscaling_factor, start_index, end_index
+topaz/starlight-precise-2-6	live	video_uri, source_container, source_width, source_height, frame_count, frame_rate, target_resolution, sharpness
+vidu/q3-pro	live	prompt, start_image, end_image, duration, resolution, audio, aspect_ratio
+vidu/q3-turbo	live	prompt, start_image, end_image, duration, resolution, audio, aspect_ratio
+xai/grok-imagine-image	live	prompt, n, aspect_ratio, quality, resolution, response_format, user, image.url, image.type, images, mask.url
+xai/grok-imagine-image-2.0	live	prompt, aspect_ratio, quality, resolution, response_format, user, image.url, image.type, images, mask.url
+xai/grok-imagine-image-quality	live	prompt, n, aspect_ratio, quality, resolution, response_format, user, image.url, image.type, images, mask.url
+xai/grok-imagine-video	live	_operation, prompt, duration, aspect_ratio, resolution, size, image.url, video.url, reference_images, output.upload_url, user
+xai/grok-imagine-video-1.5-preview	live	_operation, prompt, duration, aspect_ratio, resolution, size, image.url, video.url, reference_images, output.upload_url, user
+xai/grok-stt	live	file, url, websocket, audio_format, sample_rate, language, format, diarize, filler_words, multichannel, channels, keyterm
+xai/grok-tts	live	text, language, websocket, voice_id, output_format.codec, output_format.sample_rate, output_format.bit_rate, optimize_streaming_latency, text_normalization, speed
+xai/grok-voice	live	websocket

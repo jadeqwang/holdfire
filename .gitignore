@@ -1,0 +1,6 @@
+media/
+work/
+node_modules/
+*.pyc
+__pycache__/
+render/out/

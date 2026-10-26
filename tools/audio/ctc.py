@@ -67,7 +67,7 @@ def viterbi(lp, toks):
     s = S - 1 if dp[-1, S - 1] >= dp[-1, S - 2] else S - 2
     path = []
     for t in range(T - 1, -1, -1):
-        path.append((t, s)); s -= bp[t, s]
+        path.append((t, s)); s -= int(bp[t, s])
     return path[::-1], ext
 def align(y16, a, b, words, gain=True):
     lp = logprobs(y16, a, b, gain)

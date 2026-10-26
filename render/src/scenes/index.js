@@ -6,8 +6,9 @@ import constellation from './constellation.js';
 import stipple from './stipple.js';
 import placeholder from './placeholder.js';
 import multi from './multi.js';
+import endcard from './endcard.js';
 import { SCENES as SPACE } from './space/index.js';
 import { SCENES as SIGNAL } from './signal/index.js';
 import { SCENES as HISTORY } from './history/index.js';
 
-export const SCENES = { sky, coldopen, engraved, constellation, stipple, placeholder, multi, ...SPACE, ...SIGNAL, ...HISTORY };
+export const SCENES = { sky, coldopen, engraved, constellation, stipple, placeholder, multi, endcard, ...SPACE, ...SIGNAL, ...HISTORY };

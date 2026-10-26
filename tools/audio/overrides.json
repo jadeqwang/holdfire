@@ -1,0 +1,12 @@
+{
+ "_doc": "Manual word-start overrides (seconds), keyed by sung-line id (tools/audio/sung.py order) then word index. Each one was read off the check plots (spectrogram + vocal RMS + onset candidates of both stems) after the fused estimate was found inconsistent; reasons in 'note'.",
+ "1": {"starts": {"2": 9.86}, "note": "intro count #2 'three': the theta fricative starts at 9.86 (high-band onset on both stems); the fused start (10.03) was the vowel"},
+ "16": {"starts": {"8": 66.43}, "note": "chorus 1 'breathe' was 60 ms after 'you'; pitch onset 66.43 matches the chorus-2 phrasing ('you'->'breathe' = 0.16 s)"},
+ "26": {"starts": {"1": 93.29, "2": 93.43}, "note": "'the satellites': energy onsets 93.29 / 93.43 (fused starts were only 40 ms apart)"},
+ "36": {"starts": {"1": 118.26}, "note": "chorus 2 'if': all CTC runs squeezed 'but if' together; parakeet 118.32, whisper 118.21 and the energy+pitch onset 118.26 agree, and chorus 1 has 'if' at the same bar position"},
+ "61": {"starts": {"1": 189.03, "2": 189.41, "3": 189.93, "4": 190.43}, "note": "drop 'but you were. You were counting too': CTC runs disagree by up to 2 s; starts set to the voiced segments (pyin: F4 188.65 | D4 189.13 | F3 189.41 | C5 189.93 | D5 190.43 | 'counting' 191.44). LOW confidence for these four words; all ASR systems hear 'you are, you are' here"},
+ "62": {"starts": {"0": 194.01}, "note": "'Thirteen!' shout on bar 77 beat 1 (3 of 4 CTC runs 194.00-194.08, energy onset 194.01); fused 193.55 was the tail of 'too'"},
+ "66": {"starts": {"0": 202.89}, "note": "'And' energy/pitch onset 202.89 (under the 'Eighty-nine!' shout)"},
+ "68": {"starts": {"6": 222.94, "8": 223.94}, "note": "'held' onset 222.94 (energy+high band), 'fire' fricative 223.94 (high band) - fused starts were the vowels"},
+ "69": {"starts": {"0": 225.56, "1": 226.2, "2": 226.79, "3": 227.48}, "note": "outro whispered count #1: the four whisper bursts are 225.56 / 226.20 / 226.79 / 227.48 (the CTC put 'One' on the breathy tail of 'fire' at 224.96)"}
+}

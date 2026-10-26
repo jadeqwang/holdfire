@@ -12,7 +12,7 @@ os.makedirs(out, exist_ok=True)
 py = sys.executable
 R = os.path.join(ROOT, 'tools', 'roto')
 if kind in ('keeper', 'env', 'archival'):
-    subprocess.run([py, os.path.join(R, 'engrave.py'), take, out, '--sep=6', *extra] + (['--matte=0'] if kind == 'env' else []), check=True)
+    subprocess.run([py, os.path.join(R, 'engrave.py'), take, out, '--sep=6', '--sigma=' + ('11' if kind == 'env' else '14'), *extra] + (['--matte=0'] if kind == 'env' else []), check=True)
 if kind == 'listener':
     subprocess.run([py, os.path.join(R, 'constellation.py'), take, out, '--n=2600', *extra], check=True)
 if kind == 'other':

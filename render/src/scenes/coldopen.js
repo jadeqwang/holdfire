@@ -31,19 +31,28 @@ function phases(t, counts) {
 }
 
 export default {
-  draw(ctx, shot, t, lt, p) {
+  draw(ctx, shot, t0, lt, p) {
     const e = ctx.engine;
+    // p.atT replays the scope at a moment of the cold open (the drop's reveal cuts back to the locked reticle)
+    const t = p.atT != null ? p.atT + lt * (p.rate ?? 0.15) : t0;
     const counts = p.counts;
     const k = countIdx(t, counts);
     const ph = phases(t, counts);
     const { open, lock, settle } = ph;
     const still = 1 - lock;        // during the lock the scope stops breathing
-    const drift = [lerp(-150, 0, settle) + Math.sin(t * 0.7) * 6 * (1 - open) * still, lerp(80, 0, settle) + Math.cos(t * 0.9) * 4 * (1 - open) * still];
-    drawSky(ctx, { pan: [t * 3 - drift[0] * 0.3, -drift[1] * 0.3], zoom: 1.0 + 0.06 * smooth(range(t, 0, 13)), density: 0.55, band: 0.55, bandAng: -0.42, bandOff: -120, neb: 0.5, nebCol: [0.03, 0.05, 0.11], nebCol2: [0.09, 0.03, 0.04], seed: 3 });
+    // the search: the view slews (the dot enters from the right, overshoots, and the scope snaps onto it at ~g1[0].t - 0.2)
+    const snapT = ph.g1[0].t - 0.2;
+    const u = clamp(t / snapT);
+    const ease = 1 - Math.pow(1 - u, 3);
+    const spring = t > snapT ? Math.exp(-(t - snapT) * 9) * Math.sin((t - snapT) * 26) * 18 : 0;
+    const off = [lerp(760, 0, ease) + spring, lerp(-330, 0, ease) - spring * 0.4];
+    const drift = [off[0] + Math.sin(t * 0.7) * 6 * (1 - open) * still, off[1] + Math.cos(t * 0.9) * 4 * (1 - open) * still];
+    drawSky(ctx, { pan: [t * 3 + drift[0], drift[1]], zoom: 1.0 + 0.06 * smooth(range(t, 0, 13)), density: 0.55, band: 0.55, bandAng: -0.42, bandOff: -120, neb: 0.5, nebCol: [0.03, 0.05, 0.11], nebCol2: [0.09, 0.03, 0.04], seed: 3 });
 
     const c = e.c2dBegin();
     const pv = pulses(t, counts);
     const dx = DOT[0] + drift[0], dy = DOT[1] + drift[1];
+    const cx0 = DOT[0] + Math.sin(t * 2.1) * 9, cy0 = DOT[1] + Math.cos(t * 1.7) * 7;   // before the snap the reticle sweeps at the scope's centre
     // the scope's field stop: dark outside a big circle, opening to the full frame as the reticle becomes a ring of light
     const R = lerp(470, 1500, open * open);
     c.save();
@@ -75,13 +84,13 @@ export default {
     const a = 0.85 + 0.15 * lock + 0.1 * Math.sin(t * 18) * lock;   // a nervous flicker while locked
     c.save();
     c.beginPath(); c.arc(960, 540, R - 4, 0, Math.PI * 2); c.clip();
-    c.translate(dx, dy);
+    c.translate(t >= snapT ? dx : cx0, t >= snapT ? dy : cy0);
     c.strokeStyle = css(col, a); c.fillStyle = css(col, a);
     const r0 = lerp(300, 226, tight) + open * 150;
     c.lineWidth = 2.2;
     c.beginPath(); c.arc(0, 0, r0, 0, Math.PI * 2); c.stroke();
     const fib = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
-    const spin = (t * 0.02) * (1 - open) * still + 0.3;
+    const spin = (t < snapT ? t * 0.35 : snapT * 0.35 + (t - snapT) * 0.02) * (1 - open) * still + 0.3;
     for (let i = 0; i < 120; i++) {
       const ang = (i / 120) * Math.PI * 2 + spin;
       const major = fib.includes(i % 90);
@@ -99,7 +108,7 @@ export default {
     c.lineWidth = 2;
     c.globalAlpha = 1 - open;
     for (const [ux, uy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { c.beginPath(); c.moveTo(ux * gap, uy * gap); c.lineTo(ux * (gap + 900), uy * (gap + 900)); c.stroke(); }
-    const bk = lerp(210, 112, easeOutCubic(tight)) + open * 320;
+    const bk = lerp(210, 112, easeOutCubic(tight)) + open * 320 + (t < snapT ? 140 : 140 * Math.exp(-(t - snapT) * 14));
     c.lineWidth = 3;
     c.globalAlpha = 1 - open;
     for (const [sx, sy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) { c.beginPath(); c.moveTo(sx * bk, sy * (bk - 34)); c.lineTo(sx * bk, sy * bk); c.lineTo(sx * (bk - 34), sy * bk); c.stroke(); }
@@ -118,11 +127,13 @@ export default {
       c.restore();
     }
     e.blit2d('over', 2.2);
-    ctx.state.coldopen = { dx, dy, k, open, lock, pv };
+    ctx.state.coldopen = { dx, dy, k, open, lock, pv, snapped: t >= snapT };
   },
 
-  type(ty, t, lt, shot, ctx) {
+  type(ty, t0, lt, shot, ctx) {
     const p = ctx.p; const counts = p.counts; const st = ctx.state.coldopen || {};
+    const t = p.atT != null ? p.atT + lt * (p.rate ?? 0.15) : t0;
+    if (p.atT != null && p.noType) return;
     const k = st.k ?? -1, open = st.open ?? 0, lock = st.lock ?? 0;
     const ph = phases(t, counts);
     const red = mix(P.gold, P.red, 1 - open);
@@ -130,13 +141,13 @@ export default {
     // premise (frame 0 poster), fades as the first count completes
     const qa = 1 - smooth(range(t, ph.g1[3].t, ph.g1end + 0.4));
     ty.text('THE UNIVERSE IS A DARK FOREST.', 100, 140, { font: 'Plex', size: 42, track: 0.1, color: P.red, alpha: qa, glow: 14 });
-    ty.text('EVERY CIVILIZATION IS AN ARMED HUNTER.', 100, 198, { font: 'Plex', size: 42, track: 0.1, color: P.red, alpha: qa, glow: 14 });
+    ty.mono('EVERY CIVILIZATION IS AN ARMED HUNTER.', 100, 198, t, { t0: 0.25, cps: 26, size: 42, track: 0.1, color: P.red, alpha: qa, glow: 14 });
     ty.label('LIU CIXIN · THE DARK FOREST · 2008', 100, 248, { color: P.bookGold, alpha: qa * 0.85 });
 
     // the scope's HUD in the Other's script, English beneath
     const g2k = counts.filter((c, i) => c.g && i <= k).length;
     const hud = [
-      ['TARGET', 'SOL III', P.red],
+      ['TARGET', st.snapped ? 'SOL III' : 'SCANNING', P.red],
       ['RANGE', '89 LIGHT-YEARS', P.red],
       ['SIGNAL', k < 0 ? 'NONE' : (g2k > 0 ? 'REPEATING' : 'DETECTED'), P.red],
       ['PATTERN', k < 0 ? '—' : (g2k > 0 ? '1 1 2 3 5 8 · AGAIN' : counts.slice(0, k + 1).map((c) => c.n).join(' ')), P.red],
@@ -155,10 +166,15 @@ export default {
     });
 
     // the count: one giant numeral per whisper (left), the sequence building beneath
+    if (k >= 1 && open < 1) {
+      const pc = counts[k - 1], cc0 = counts[k];
+      const u2 = clamp((t - cc0.t) / 0.2);
+      if (u2 < 1) ty.text(String(pc.n), 400 - 330 * easeOutCubic(u2), 520, { font: 'Archivo', weight: 800, stretch: '125%', size: 300, align: 'center', base: 'middle', color: P.gold, alpha: 0.35 * (1 - u2) * (1 - u2) });
+    }
     if (k >= 0 && open < 1) {
       const cc = counts[k];
       const t1 = k + 1 < counts.length ? Math.min(counts[k + 1].t, cc.t + 1.6) : cc.t + 1.0;
-      ty.numeral(cc.n, t, cc.t, t1, { x: 400, y: 520, size: cc.g ? 400 : 470, font: 'Archivo', weight: 800, stretch: '125%', color: P.gold, glow: 4, out: 0.12, alpha: cc.g ? 0.85 : 1 });
+      ty.numeral(cc.n, t, cc.t, t1, { x: 400, y: 520, size: cc.g ? 340 : 400, font: 'Archivo', weight: 800, stretch: '125%', color: P.gold, glow: 4, out: 0.12, alpha: cc.g ? 0.85 : 1 });
     }
     const seq1 = ph.g1.filter((c) => t >= c.t).map((c) => c.n).join('   ');
     const seq2 = ph.g2.filter((c) => t >= c.t).map((c) => c.n).join('   ');

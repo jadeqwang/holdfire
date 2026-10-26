@@ -160,8 +160,9 @@ def trace(seed_x, seed_y, vx, vy, occ, sep, test, step, maxpts):
     return outx[:npt], outy[:npt], lens
 
 
+SIGMA = 9.0
 def engrave(bgr, prev_pts=None, flow=None, sep=4.7, matte=None):
-    t, vx, vy = tone_and_flow(bgr, matte=matte)
+    t, vx, vy = tone_and_flow(bgr, sigma=SIGMA, matte=matte)
     cs = sep * 0.5
     occ = np.zeros((int(PH / cs) + 2, int(PW / cs) + 2), np.int32)
     seeds = []
@@ -207,6 +208,8 @@ def main():
     os.makedirs(outdir, exist_ok=True)
     start = float(o.get('start', 0)); dur = float(o.get('dur', 0)); step = 2 if o.get('twos', '1') == '1' else 1
     sep = float(o.get('sep', 7)) * PW / W
+    global SIGMA
+    SIGMA = float(o.get('sigma', 9.0))
     prev = None; prevg = None
     dis = cv2.DISOpticalFlow_create(cv2.DISOPTICAL_FLOW_PRESET_MEDIUM)
     meta = {'src': src, 'start': start, 'step': step, 'drawings': []}

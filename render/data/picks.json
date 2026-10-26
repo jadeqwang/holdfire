@@ -5,5 +5,19 @@
   "lag": 0,
   "kind": "keeper",
   "file": "media/gen/K4_t2_f4c2db5a84.mp4"
+ },
+ "L1": {
+  "clip": "L1_t2",
+  "s0": 82.35,
+  "lag": 0,
+  "kind": "listener",
+  "file": "media/gen/L1_t2_81c145b10b.mp4"
+ },
+ "L2": {
+  "clip": "L2_t1",
+  "s0": 92.45,
+  "lag": -0.125,
+  "kind": "listener",
+  "file": "media/gen/L2_t1_aa50df6837.mp4"
  }
 }

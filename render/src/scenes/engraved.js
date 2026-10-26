@@ -45,7 +45,9 @@ function build(e) {
       vec2 remap(vec2 w, vec2 mid){
         float m = hasMatte > .5 ? texture(tMatte, vec2(mid.x / 1920., 1. - mid.y / 1080.)).r : 1.;
         vec2 r = pow(clamp((w - wLo) / (wHi - wLo), 0., 1.), vec2(wGam));
-        return r * mix(bgW, 1., m);
+        vec2 e = min(mid, vec2(1920., 1080.) - mid);              // distance to the plate border
+        float ef = smoothstep(0., 140., min(e.x, e.y * 1.4));
+        return r * mix(bgW, 1., m) * ef;
       }
       void main(){
         vec2 a = (seg.xy - vec2(960., 540.)) * zoom + vec2(960., 540.) + pan;
@@ -90,7 +92,8 @@ function build(e) {
       vec2 uv = vec2(q.x / 1920., 1. - q.y / 1080.);
       vec3 col = bg;
       if (uv.x >= 0. && uv.x <= 1. && uv.y >= 0. && uv.y <= 1.) {
-        float t = texture(tTone, uv).r; float e = texture(tEdge, uv).r; float m = hasMatte > .5 ? texture(tMatte, uv).r : 1.;
+        vec2 bd = min(q, vec2(1920., 1080.) - q); float ef = smoothstep(0., 140., min(bd.x, bd.y * 1.4));
+        float t = texture(tTone, uv).r * ef; float e = texture(tEdge, uv).r * ef; float m = hasMatte > .5 ? texture(tMatte, uv).r : 1.;
         col += color * pow(t, 3.5) * fill * (.25 + .75 * m);
         col += color * e * edge * (.4 + .6 * m) * 1.6;
       }

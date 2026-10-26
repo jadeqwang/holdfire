@@ -14,7 +14,7 @@ const LOOK = {
   archival: { bloom: 0.15, bloomThreshold: 1.2, halation: 0.0, vignette: 0.25, grain: 0.04, tonemap: 0 },
   diagram: { bloom: 0.6, bloomThreshold: 0.8, halation: 0.15, vignette: 0.25, grain: 0.02 },
 };
-const ENG = { gain: 1.3, wmax: 6, wLo: 0.12, wHi: 0.95, wGam: 1.3, bgW: 0.35, fill: 0.25, edge: 0.45 };
+const ENG = { gain: 1.2, wmax: 5.2, wLo: 0.12, wHi: 1.08, wGam: 1.35, bgW: 0.35, fill: 0.18, edge: 0.45 };
 const CON = { starSize: 1.6, linkAlpha: 0.5 };
 const STI = { size: 1.6 };
 
@@ -135,8 +135,8 @@ export function buildTimeline(A) {
     type: (ty, t) => ty.lyric({ words: line(C, 1).words.slice(0, 4) }, t, { font: 'CormorantI', size: 92, x: 960, y: 960, align: 'center', color: P.cream, t1: prayerT }) });
   add({ id: 'C1c', t0: prayerT, t1: butT, ...keeper('E5', push(0.01)),
     type: (ty, t) => ty.lyric({ words: line(C, 1).words.slice(4) }, t, { font: 'CormorantI', size: 92, x: 960, y: 300, align: 'center', color: P.cream, t1: butT }) });
-  add({ id: 'C1d', t0: butT, t1: silentT, ...keeper('K4', push(0.006)),
-    type: hero(C, 2, { x: 110, y: 250, size: 128, breaks: [4, 6], t1: silentT }) });
+  add({ id: 'C1d', t0: butT, t1: silentT, ...keeper('K4', (t, lt) => ({ zoom: 0.86 + lt * 0.004, pan: [420, 40] })),
+    type: hero(C, 2, { x: 90, y: 300, size: 104, breaks: [4, 6], maxW: 1100, color: P.cream, t1: silentT }) });
   add({ id: 'C1e', t0: silentT, t1: noiseT, ...other('O3', push(0.005)),
     type: verse(C, 3, { x: 110, y: 420, size: 70, maxW: 700, italicWords: ['patient'], t1: noiseT }) });
   add({ id: 'C1f', t0: noiseT, t1: ifT, scene: 'multi', p: { layers: [{ scene: 'engraved', p: () => ({ ...ENG, gain: 1.1, ...(picks.E6 ? { clip: picks.E6.clip, s0: picks.E6.s0 } : {}) }) }, { scene: 'constellation', p: () => ({ ...CON, ...(picks.L1 ? { clip: picks.L1.clip, s0: picks.L1.s0, lag: picks.L1.lag } : {}), gain: 0.35, starSize: 1.0, linkAlpha: 0.15 }) }] },
@@ -272,9 +272,13 @@ export function buildTimeline(A) {
   const D = 'Drop';
   const dr = S(D);
   const msgT = ls(D, 1) - 0.1, butWT = ls(D, 2) - 0.08, thT = ls(D, 3) - 0.05, seenT = ls(D, 7) - 0.1;
-  add({ id: 'D1', t0: dr.start, t1: msgT, scene: 'multi', p: { layers: [
+  // the reveal: hard cut back to the cold open's locked reticle (whose scope was it?), then the Other at the instrument
+  const revealT = dr.start + 0.62;
+  add({ id: 'D0', t0: dr.start, t1: revealT, scene: 'coldopen', p: { counts, atT: lastCount - 2.9, rate: 0.2, noType: false }, look: { bloom: 0.7, halation: 0.35, streak: 0.5, streakCol: [1.0, 0.75, 0.45], vignette: 0.2, grain: 0.03 },
+    type: verse(D, 0, { x: 110, y: 1000, size: 64, t1: revealT }) });
+  add({ id: 'D1', t0: revealT, t1: msgT, scene: 'multi', p: { layers: [
     { scene: 'stipple', p: () => ({ ...STI, ...(picks.O6 ? { clip: picks.O6.clip, s0: picks.O6.s0 } : {}) }) }] },
-    look: (t) => ({ ...LOOK.other, flash: (1 - smooth(range(t, dr.start, dr.start + 0.3))) * 0.9, flashCol: [1, 0.85, 0.5] }),
+    look: (t) => ({ ...LOOK.other, flash: (1 - smooth(range(t, revealT, revealT + 0.3))) * 0.6, flashCol: [1, 0.85, 0.5] }),
     type: verse(D, 0, { x: 110, y: 220, size: 70, maxW: 700, t1: msgT }) });
   add({ id: 'D2', t0: msgT, t1: butWT, ...other('O7', push(0.006)), type: verse(D, 1, { x: 960, y: 960, size: 68, align: 'center', t1: butWT }) });
   add({ id: 'D3', t0: butWT, t1: thT, ...keeper('K8', push(0.006)), type: hero(D, 2, { x: 110, y: 300, size: 118, breaks: [3], color: P.goldPale, hotColor: P.gold, maxW: 760, t1: thT }) });
@@ -306,7 +310,7 @@ export function buildTimeline(A) {
     type: both((ty, t) => ty.lyric(line(Z, 4), t, { font: 'CormorantI', size: 52, x: 120, y: 520, color: P.steel, hotColor: P.goldPale, t1: le(Z, 4) + 0.6 }),
       (ty, t) => ty.lyric(line(Z, 5), t, { font: 'CormorantI', size: 64, x: 120, y: 620, color: P.cream, hotColor: P.goldPale, t1: finalT })) });
   add({ id: 'Z3', t0: finalT, t1: A.duration + 2, scene: 'endcard', p: { start: finalT, holdT: ls(Z, 6) }, look: { bloom: 0.7, halation: 0.3, streak: 0.4, streakCol: [1, 0.75, 0.45], vignette: 0.2, grain: 0.02 },
-    type: (ty, t) => ty.lyric(line(Z, 6), t, { font: 'CormorantI', size: 56, x: 960, y: 820, align: 'center', color: P.cream, hotColor: P.goldPale, t1: A.duration + 2 }) });
+    type: (ty, t) => ty.lyric(line(Z, 6), t, { font: 'CormorantI', size: 56, x: 960, y: 860, align: 'center', color: P.cream, hotColor: P.goldPale, t1: A.duration + 2 }) });
 
   // placeholders for plates not yet picked keep their names visible
   for (const s of shots) if (s.scene && s.scene.startsWith('placeholder_')) { s.want = s.scene.slice(12); s.scene = 'placeholder'; }

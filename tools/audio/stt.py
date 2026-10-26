@@ -56,3 +56,28 @@ if __name__ == '__main__':
     words, res = whisper(y[int(s * sr):int(e * sr)], sr, prompt=o.get('prompt'), offset=s)
     print(res.get('text'))
     print(' '.join(f"{w['w']}@{w['start']:.2f}" for w in words))
+
+
+def catalog_stt(model, y, sr, prompt=None, tag='hf-verify', offset=0.0):
+    """Unified-catalog STT (openai/gpt-4o-transcribe: text only; xai/grok-stt: text + word times). Returns (text, words)."""
+    dur = len(y) / sr
+    uri = "data:audio/mpeg;base64," + base64.b64encode(_mp3(y, sr)).decode()
+    inp = {"file": uri, "language": "en"}
+    if prompt and model.startswith('openai/'): inp["prompt"] = prompt
+    c = cf.catalog(model) or {}
+    rate = (c.get('pricing') or {}).get('Per audio minute', 0)
+    est = round(rate * max(dur, 1) / 60, 6)
+    cf.spend.check(est, f"{model} {tag}")
+    t0 = time.time()
+    try:
+        res, meta = cf.run_model(model, inp, timeout=45, retries=1, verbose=False)
+    except Exception as e:
+        cf.log({"model": model, "tag": tag, "input": {"audio_s": round(dur, 2), "offset": offset}, "est_usd": est, "ok": False,
+                "error": str(e)[:500], "secs": round(time.time() - t0, 1)})
+        raise
+    cf.log({"model": model, "tag": tag, "input": {"audio_s": round(dur, 2), "offset": offset}, "est_usd": est,
+            "est_basis": f"{dur:.1f}s x ${rate}/min", "ok": True, "secs": round(time.time() - t0, 1), "request_id": meta.get("request_id")})
+    if isinstance(res, dict) and 'result' in res and isinstance(res['result'], dict): res = res['result']
+    words = [dict(w=w.get('text', w.get('word', '')).strip(), start=round(w['start'] + offset, 3), end=round(w['end'] + offset, 3))
+             for w in (res.get('words') or [])] if isinstance(res, dict) else []
+    return (res.get('text', '') if isinstance(res, dict) else str(res)), words

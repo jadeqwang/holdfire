@@ -141,9 +141,25 @@ out = dict(
     eighths=[r3(x) for x in np.sort(np.r_[beats, (beats[:-1] + beats[1:]) / 2])],
     sections=sec_out,
     lines=lines)
-for f in ('hits', 'events', 'deviations', 'voices'):
+for f in ('events', 'deviations'):
     p = os.path.join(W, f'audio/{f}.json')
     if os.path.exists(p): out[f] = json.load(open(p))
+# hits: one flat, time-sorted list (the renderer's AudioMap reads timing.hits as an array of {t, kind, ...});
+# kind = group ('intro_whisper', 'post_chorus_1', 'post_chorus_2', 'drop_counts', 'counting_on_you', 'outro_whisper')
+HG = json.load(open(os.path.join(W, 'audio/hits.json')))
+SECN = {'intro_whisper': 'Intro', 'post_chorus_1': 'Post-Chorus 1', 'post_chorus_2': 'Post-Chorus 2', 'drop_counts': 'Drop', 'outro_whisper': 'Outro'}
+hits = []
+for k, v in HG.items():
+    if k.startswith('_'): continue
+    for h in v:
+        sec = SECN.get(k) or next(s_['name'] for s_ in sec_out if s_['start'] <= h['t'] < s_['end'])
+        hits.append(dict(t=h['t'], t_attack=h.get('t_attack', h['t']), word=h['word'], kind=k, section=sec,
+                         delivery='whisper' if h.get('kind') == 'whisper' else 'gang', line_n=h.get('line_n'), word_idx=h.get('word_idx'),
+                         bar=h['bar'], beat=h['beat'], off_ms=h['off_ms'], strength=h.get('strength'),
+                         **({'note': h['note']} if h.get('note') else {}), **({'extra': h['extra']} if h.get('extra') else {})))
+out['hits'] = sorted(hits, key=lambda h: h['t'])
+out['hits_doc'] = HG.get('_doc', '') + ' kind = group; t = word onset, t_attack = loud vowel attack (use for flashes).'
+out = {'duration': DUR, **out}
 os.makedirs(AN, exist_ok=True)
 json.dump(out, open(os.path.join(AN, 'timing.json'), 'w'), indent=1, ensure_ascii=False)
 print('wrote analysis/timing.json', STATUS, 'lines', len(lines), 'words', sum(len(l['words']) for l in lines), 'words source', src)

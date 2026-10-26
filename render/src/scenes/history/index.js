@@ -3,5 +3,6 @@ import archival from './archival.js';
 import oko from './oko.js';
 import forestreticles from './forest.js';
 import gunpowder from './gunpowder.js';
+import inkbomb from './inkbomb.js';
 
-export const SCENES = { archival, oko, forestreticles, gunpowder };
+export const SCENES = { archival, oko, forestreticles, gunpowder, inkbomb };

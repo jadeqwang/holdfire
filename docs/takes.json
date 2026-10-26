@@ -401,6 +401,18 @@
    "lag": null,
    "verdict": null,
    "state": "error"
+  },
+  {
+   "take": 2,
+   "job": "holdfire/C4_t2-2beb25a557",
+   "kf": "media/kf/C4_nbp.png",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T03:56:35Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
   }
  ],
  "O2": [
@@ -413,10 +425,12 @@
    "voc": null,
    "submitted": "2026-10-26T01:32:09Z",
    "file": "media/gen/O2_t1_42228c89db.mp4",
-   "lag": null,
+   "lag": 0.0,
    "verdict": null,
    "dims": "1280,720,121",
-   "sheet": "media/gen/O2_t1_42228c89db_sheet.jpg"
+   "sheet": "media/gen/O2_t1_42228c89db_sheet.jpg",
+   "pick": true,
+   "kind": "other"
   }
  ],
  "C6": [
@@ -429,10 +443,12 @@
    "voc": null,
    "submitted": "2026-10-26T01:39:18Z",
    "file": "media/gen/C6_t1_c31417843a.mp4",
-   "lag": null,
+   "lag": 0.0,
    "verdict": null,
    "dims": "1280,720,121",
-   "sheet": "media/gen/C6_t1_c31417843a_sheet.jpg"
+   "sheet": "media/gen/C6_t1_c31417843a_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ]
 }

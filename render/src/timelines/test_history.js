@@ -9,6 +9,8 @@ export function buildTimeline(A) {
   add({ id: 'h_gun', t0: A.section('Verse 2').start, t1: L(24).t, scene: 'gunpowder', p: {},
     look: (t) => ({ ...PRINT_LOOK, shakeX: 9 * Math.exp(-Math.max(0, t - W(23, 3)) / 0.09) * (t > W(23, 3) ? 1 : 0), shakeY: -6 * Math.exp(-Math.max(0, t - W(23, 3)) / 0.09) * (t > W(23, 3) ? 1 : 0) }) });
   // V2c is the Listener; here the archival test plate (stand-in for the Tang alchemists / Petrov / Arkhipov plates)
+  // V2d: the ink mushroom cloud
+  add({ id: 'h_bomb', t0: L(25).t - 0.04, t1: L(26).t - 0.1, scene: 'inkbomb', p: (t, lt) => ({ zoom: 1 + lt * 0.01 }), look: PRINT_LOOK });
   add({ id: 'h_arch', t0: L(24).t, t1: L(25).t - 0.04, scene: 'archival', p: (t, lt) => ({ clip: 'test_sing', s0: L(24).t, zoom: 1.0 + lt * 0.012 }), look: PRINT_LOOK });
   // V2e/V2f: Oko. "Eighty-three, the satellites saw five, / every rule said call it first strike;"
   const l26 = 26, l27 = 27;

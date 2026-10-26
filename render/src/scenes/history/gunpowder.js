@@ -113,17 +113,18 @@ const FRAG = /* glsl */`
   float wispsAt(vec2 d){
     float h = smokeSrc.y - d.y; if (h < 0.) return 0.;
     float acc = 0.;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
       float fi = float(i);
-      float ph = fi * 2.1 + seed;
-      float x0 = smokeSrc.x + (fi - 1.5) * 46.;
-      float sway = sin(h * (.0062 + fi * .0013) - time * (.9 + fi * .23) + ph) * (12. + h * .1)
-                 + sin(h * .0023 + time * .33 + ph * 1.7) * h * .19;
-      float wd = 7. + h * (.035 + fi * .012);
+      float ph = fi * 2.7 + seed;
+      float x0 = smokeSrc.x + (fi - 1.) * 90.;
+      float f1 = .0048 + fi * .0021, f2 = .0017 + fi * .0007;
+      float sway = sin(h * f1 - time * (.8 + fi * .37) + ph) * (10. + h * (.06 + fi * .03))
+                 + sin(h * f2 + time * (.3 + fi * .11) + ph * 1.7) * h * (.12 + fi * .07) * (fi == 1. ? -1. : 1.);
+      float wd = 5. + h * (.022 + fi * .008);
       float x = d.x - x0 - sway;
       float band = exp(-x * x / (wd * wd));
-      float br = fbm3(vec2(x * .012 + ph, (d.y + time * 75.) * .006));
-      acc += band * (.15 + .85 * smoothstep(.25, .8, br)) * (1. - smoothstep(240., 820., h)) * smoothstep(0., 90., h) * (.42 - fi * .05);
+      float br = fbm3(vec2(x * .015 + ph, (d.y + time * 80.) * .007));
+      acc += band * (.1 + .9 * smoothstep(.3, .75, br)) * (1. - smoothstep(220., 760., h)) * smoothstep(0., 80., h) * .5;
     }
     return clamp(acc, 0., .6);
   }

@@ -12,7 +12,7 @@ E = np.load(os.path.join(W, 'audio/env.npz')); T = E['T']
 v, sr = sf.read(os.path.join(W, 'stems/vocals.wav')); v = v.mean(1)
 y, _ = sf.read(os.path.join(W, 'audio/song.wav')); y = y.mean(1)
 beats = np.array(TJ['beats']); secs = TJ['sections']; lines = TJ['lines']
-hits = [h for grp in (TJ.get('hits') or {}).values() if isinstance(grp, list) for h in grp if isinstance(h, dict) and 't' in h]
+hits = [h for h in (TJ.get('hits') or []) if isinstance(h, dict) and 't' in h]
 COL = ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948', '#b07aa1', '#ff9da7', '#9c755f', '#bab0ac']
 only = sys.argv[1:]
 def panel(a, b, fname, title):

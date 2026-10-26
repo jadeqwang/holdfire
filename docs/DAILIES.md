@@ -47,3 +47,7 @@ Spend at start of this intake pass: $30.46.
 | 01:39 | K7 | kf K7_nbp.jpg | regen | — | composition/CRT light/beam in window good, but mole on her RIGHT cheek (mirrored, as K1b) → v2 mole hint (+ no legible labels) |
 | 01:39 | C3 | C3_t2_10bf8b3bd1 | **PICK** | 0 | holds the first frame, raises the lit torch high, looks up; consistent face/hands; 1284×716 |
 | 01:40 | K8 | kf K8_nbp.png | regen | — | on-model costume/framing, but she is crying (tear tracks, red eyes: spec 'tears in her eyes but not crying', 'relief and joy'), light from the side not in front, no mole visible → v2 |
+| 03:56 | — | — | resume | — | worker restart (usage limit) killed background jobs; resumed 03:55; kf queue had stopped before H5, H6, C10, C11, C12 |
+| 03:56 | C4 | C4_t1 | relay error | — | 2047 Invalid User Credentials; resubmitted as C4_t2 |
+| 03:56 | O2 | O2_t1_42228c89db | **PICK** | 0 | closed furred lid slowly opens on the dark glossy eye, gold ring catches the light; slight push; left third stays black |
+| 03:56 | C6 | C6_t1_c31417843a | **PICK** | 0 | starts lamp at shoulder (re-posed vs kf) and raises it high, breath visible, ger behind; consistent |

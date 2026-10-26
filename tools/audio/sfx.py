@@ -33,6 +33,7 @@ import time
 
 import numpy as np
 import soundfile as sf
+from scipy.ndimage import minimum_filter1d, uniform_filter1d
 from scipy.signal import butter, fftconvolve, lfilter, resample_poly, sosfilt
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -48,6 +49,8 @@ TOTAL_S = 249.2            # film length: render/src/timeline.js Z3 ends at A.du
 LAYER_PEAK_MAX_DB = -14.0  # brief: layer peak <= -14 dBFS
 MIX_TP_MAX_DB = -0.5       # brief: mix true peak <= -0.5 dBTP (where the song itself is below that)
 MIN_MARGIN_DB = 6.0        # brief: every cue >= 6 dB under the song (except scope pre-music and the end tail)
+VOCAL_ON_LUFS = -40.0      # the vocal stem counts as present (a word is sounding) above this, in 100 ms windows
+VOCAL_FIT_DB = 7.0         # where the vocal is present the layer sits >= 7 dB under it (rule: >= 6 dB, 1 dB safety)
 
 
 # ============================================================================================ small DSP kit
@@ -557,13 +560,15 @@ def end_ping(rng, impulse):
 
 # ============================================================================================ cues
 class Cue:
-    def __init__(self, cid, title, sync, how, t0, y, med, worst, cap_db, exempt=None, abs_gain_db=None, group=None):
+    def __init__(self, cid, title, sync, how, t0, y, med, worst, cap_db, exempt=None, abs_gain_db=None, group=None, ride=False):
         self.id, self.title, self.sync, self.how = cid, title, sync, how
         self.t0, self.y = t0, np.asarray(stereo(y), dtype=np.float64)
         self.med, self.worst, self.cap_db = med, worst, cap_db
         self.exempt = exempt or (lambda ts: np.zeros(len(ts), dtype=bool))
         self.abs_gain_db = abs_gain_db
         self.group = group or cid
+        self.ride = ride          # continuous cue: ducks (sidechain) under the vocal instead of a fixed lower gain
+        self.duck_max_db = 0.0
         self.gain_db = 0.0
         self.fit_note = ""
 
@@ -576,19 +581,19 @@ class Cue:
         k = max(0, min(self.y.shape[1], N(t_end - self.t0)))
         self.y = fades(self.y[:, :k], r=fade_s) if fade_s > 0 else self.y[:, :k]
 
-    def margins(self, songM, gain_db=None):
-        """Per 10 ms frame (in the cue's active span): song momentary loudness - cue momentary loudness."""
+    def margins(self, songM, gain_db=None, win=0.4):
+        """Per 10 ms frame (in the cue's active span): song loudness - cue loudness (momentary 400 ms, or 100 ms)."""
         g = self.gain_db if gain_db is None else gain_db
         pad = N(0.5)
         yk = kpow(np.pad(self.y * db2a(g), ((0, 0), (pad, pad))))
         M = Momentary(yk, self.t0 - 0.5)
         ts = np.arange(self.t0, self.t1, 0.01)
-        cM, sM = M(ts), songM(ts)
+        cM, sM = M(ts, win=win), songM(ts, win=win)
         act = cM > cM.max() - 20
         return ts, cM, sM, act
 
 
-def fit_level(cue, songM):
+def fit_level(cue, songM, vocM=None):
     """Gain so the cue sits at its median margin under the song, never closer than its worst-frame margin, and under its
     absolute peak cap; exempt frames (scope before the music, the end tail) do not count."""
     ts, cM, sM, act = cue.margins(songM, 0.0)
@@ -603,7 +608,32 @@ def fit_level(cue, songM):
         g = min(cue.abs_gain_db if cue.abs_gain_db is not None else 0.0, cap)
         cue.fit_note = "absolute (exempt)" if g != cap else "peak cap"
     cue.gain_db = g
-    return g
+    if vocM is not None:
+        under_vocal(cue, vocM)
+    return cue.gain_db
+
+
+def under_vocal(cue, vocM):
+    """Where a word is sounding (vocal stem >= -40 LUFS in 100 ms windows) the cue sits >= 7 dB under the vocal: event
+    cues take a lower fixed gain, continuous cues duck (a smoothed sidechain gain curve on the layer only)."""
+    for _ in range(3):
+        ts, cS, vS, act = cue.margins(vocM, win=0.1)
+        pres = act & (vS >= VOCAL_ON_LUFS) & ~cue.exempt(ts)
+        if not pres.any():
+            return
+        need = np.where(pres, vS - VOCAL_FIT_DB - cS, np.inf)
+        if need.min() >= 0:
+            return
+        if not cue.ride:
+            cue.gain_db += float(need.min())
+            cue.fit_note = "under the vocal"
+            return
+        d = np.minimum(0.0, np.where(np.isfinite(need), need, 0.0))
+        d = uniform_filter1d(minimum_filter1d(d, 11), 5) - 0.3 * (d < 0)
+        g = db2a(np.interp(cue.t0 + np.arange(cue.y.shape[1]) / SR, ts, d))
+        cue.y = cue.y * g
+        cue.duck_max_db = min(cue.duck_max_db, float(d.min()))
+        cue.fit_note = f"{cue.fit_note.split(';')[0]}; ducks under the vocal (max {cue.duck_max_db:.1f} dB)"
 
 
 def find_gap(vM, t_lo, t_hi):
@@ -652,7 +682,7 @@ def build_cues(T, song_len_s, songM, vocM):
                     f"0.000 -> first whisper {first:.3f} (settle curve ends {T_settle:.2f})",
                     "synth: band-passed noise tick; 2.6->7.4 kHz sine sweep; D2 (73.4 Hz) + 5 harmonics, LP 700 Hz, spin-up; servo = "
                     "gear-whine sine (620->1720 Hz with speed) + motor buzz (BP noise gated at 45-155 Hz), speed = d/dt of "
-                    "easeOutCubic settle, panned with the drift", 0.0, y, med=14, worst=8, cap_db=-30, exempt=pre_music))
+                    "easeOutCubic settle, panned with the drift", 0.0, y, med=14, worst=8, cap_db=-30, exempt=pre_music, ride=True))
     # ---- 2. the counts (two passes)
     for g, grp in ((0, g1), (1, g2)):
         y = count_pass(grp, grp[0]["t"], rng(10 + g), IR_PING)
@@ -668,7 +698,7 @@ def build_cues(T, song_len_s, songM, vocM):
     cues.append(Cue("lock", "The lock: two-tone warble 880/990 Hz alternating ~7 Hz, rising ~70 cents, cut dead",
                     f"{lock0:.3f} (first count's last word + 0.35) -> {lock1:.3f} (second count's first word)",
                     "synth: sine (+2nd/3rd harmonic) FM'd by a smoothed square (6.6->7.4 Hz), switch dips, LP 5 kHz; fade-in = "
-                    "the visual lock curve, +2.5 dB over the hold; 2 ms cut", lock0, y, med=12, worst=8, cap_db=-28))
+                    "the visual lock curve, +2.5 dB over the hold; 2 ms cut", lock0, y, med=12, worst=8, cap_db=-28, ride=True))
     # ---- 4. release chime
     t_open = last + 0.3
     y = release_chime(rng(4), IR_CHIME)
@@ -684,7 +714,7 @@ def build_cues(T, song_len_s, songM, vocM):
                     f"{v1 - wd:.3f} -> {v1:.3f} (Verse 1 start; ends exactly on it)",
                     "synth: two decorrelated pink noises through a TPT state-variable band-pass sweeping 300 Hz -> 7 kHz "
                     "(+ a low-pass body), stereo width opening 0.3 -> 1, crescendo x^2.4, 5 ms end fade on the downbeat",
-                    v1 - wd, y, med=10, worst=7, cap_db=-16))
+                    v1 - wd, y, med=10, worst=7, cap_db=-16, ride=True))
     # ---- 6a. wind in pines
     w_end = B(3)["t"]
     y = wind_pines(w_end - br["start"], rng(6))
@@ -692,7 +722,7 @@ def build_cues(T, song_len_s, songM, vocM):
                     f"{br['start']:.3f} (Bridge start) -> {w_end:.3f} (fade out 1.2 s; forest shot B1 ends {matchT + 2.3:.2f})",
                     "synth: pink noise LP 650 Hz with slow gusts (0.05-0.33 Hz), needle 'sough' (BP 1.8-6.5 kHz x gust^2), a "
                     "breathy SVF resonance drifting 650-1050 Hz; right channel's gusts 0.6 s late", br["start"], y,
-                    med=17, worst=9, cap_db=-24))
+                    med=17, worst=9, cap_db=-24, ride=True))
     # ---- 6b. match strike (flare on the sync point)
     t_match = matchT + 0.5
     y = match_strike(rng(7))
@@ -734,7 +764,7 @@ def build_cues(T, song_len_s, songM, vocM):
     cues.append(Cue("droplock", "Drop: 0.6 s reprise of the lock warble (cut back to the scope), soft release",
                     f"{dr['start']:.3f} (Drop start) -> cut {revealT:.3f} (+0.62, D0 -> D1), tail 0.38 s",
                     f"synth: the lock warble in its locked state (cold-open clock {atT:.2f} + 0.2*lt), 8 ms in, exponential "
-                    "release (22 ms) into the cut, small room (RT60 0.7 s, -11 dB)", dr["start"], y, med=12, worst=8, cap_db=-23))
+                    "release (22 ms) into the cut, small room (RT60 0.7 s, -11 dB)", dr["start"], y, med=12, worst=8, cap_db=-23, ride=True))
     # ---- 8. end card: the count goes on
     k = 0
     ends = []
@@ -757,7 +787,7 @@ END_CURVE_M0_LUFS = -39.0    # end card: ping k reaches -39 - 0.9 k LUFS (moment
 END_CURVE_STEP_DB = 0.9
 
 
-def level_end_pings(ends, songM):
+def level_end_pings(ends, songM, vocM=None):
     """End card: the count goes on and slowly fades. Ping k follows a slow fade curve (-39 - 0.9 k LUFS momentary); while the
     song still sounds, each ping is also held under it (fit_level), so pings under the last whisper and the final hit sit
     lower; after the music ends (the end tail) the curve carries on into silence. The visual pulse fades in over
@@ -771,6 +801,11 @@ def level_end_pings(ends, songM):
         c.gain_db = base + fade_in
         c.fit_note = ("end tail: fade curve" if exempt_all else ("fade curve" if curve <= fit else "held under the song")) + \
             (f", visual fade-in {fade_in:+.0f} dB" if fade_in else "")
+        if vocM is not None and not exempt_all:
+            g0 = c.gain_db
+            under_vocal(c, vocM)
+            if c.gain_db < g0:
+                c.fit_note += f"; {c.gain_db - g0:.1f} dB under the vocal"
 
 
 # ============================================================================================ main
@@ -811,8 +846,8 @@ def main(argv):
     ends = [c for c in cues if c.group == "end"]
     for c in cues:
         if c.group != "end":
-            fit_level(c, songM)
-    level_end_pings(ends, songM)
+            fit_level(c, songM, vocM)
+    level_end_pings(ends, songM, vocM)
 
     # ---- the song's own overs: keep the layer silent wherever the song's true peak exceeds -0.5 dBTP
     hot_total = 0
@@ -845,6 +880,17 @@ def main(argv):
                 for o in cues:
                     if o.t0 - 0.2 <= tw <= o.t1 + 0.2:
                         trims[o.id] = max(trims.get(o.id, 0.0), d)
+            if vocM is not None:
+                ts1, cS, vS, act1 = c.margins(vocM, win=0.1)
+                pres = act1 & (vS >= VOCAL_ON_LUFS) & ~c.exempt(ts1)
+                if pres.any():
+                    mv = vS[pres] - layM(ts1[pres], win=0.1)
+                    j = int(np.argmin(mv))
+                    if mv[j] < MIN_MARGIN_DB + 0.5:
+                        tw, d = ts1[pres][j], MIN_MARGIN_DB + 0.5 - mv[j]
+                        for o in cues:
+                            if o.t0 - 0.05 <= tw <= o.t1 + 0.05:
+                                trims[o.id] = max(trims.get(o.id, 0.0), d)
         if not trims:
             break
         for o in cues:
@@ -948,7 +994,13 @@ def main(argv):
         ok = act & ~ex
         m_c = sM[ok] - cM[ok] if ok.any() else np.array([])
         m_t = sM[ok] - tot[ok] if ok.any() else np.array([])
-        vM = vocM(ts) if vocM is not None else None
+        vm_med = vm_worst = None
+        if vocM is not None:
+            ts1, cS, vS, act1 = c.margins(vocM, win=0.1)
+            pres = act1 & (vS >= VOCAL_ON_LUFS) & ~c.exempt(ts1)
+            if pres.any():
+                mv = vS[pres] - layM(ts1[pres], win=0.1)
+                vm_med, vm_worst = round(float(np.median(mv)), 1), round(float(mv.min()), 1)
         rows.append(dict(
             id=c.id, title=c.title, sync=c.sync, how=c.how, start_s=round(c.t0, 3), end_s=round(c.t1, 3),
             start_sample=N(c.t0), gain_db=round(c.gain_db, 2), level_rule=c.fit_note,
@@ -957,9 +1009,9 @@ def main(argv):
             margin_median_db=None if not len(m_c) else round(float(np.median(m_c)), 1),
             margin_worst_db=None if not len(m_c) else round(float(m_c.min()), 1),
             margin_worst_total_layer_db=None if not len(m_t) else round(float(m_t.min()), 1),
-            margin_vs_vocal_median_db=None if vM is None or not ok.any() else round(float(np.median(vM[ok] - cM[ok])), 1),
+            under_vocal_median_db=vm_med, under_vocal_worst_db=vm_worst,
             exempt_fraction=round(float((act & ex).sum() / max(1, act.sum())), 2),
-            passes=bool(not len(m_t) or m_t.min() >= MIN_MARGIN_DB)))
+            passes=bool((not len(m_t) or m_t.min() >= MIN_MARGIN_DB) and (vm_worst is None or vm_worst >= MIN_MARGIN_DB))))
     V["cues_pass_6db_rule"] = all(r["passes"] for r in rows)
     V["song_length_s"] = n_song / SR
     V["timing"] = dict(file=os.path.relpath(T.path, ROOT), status=T.status, warnings=T.warnings,
@@ -968,7 +1020,8 @@ def main(argv):
         bit_identical_outside_cues=V["null_test"]["bit_identical_outside_cues"],
         layer_peak_ok=V["peaks"]["layer_true_peak_dbtp"] <= LAYER_PEAK_MAX_DB,
         mix_true_peak_ok=V["peaks"]["mix_true_peak_dbtp"] <= MIX_TP_MAX_DB or V["peaks"]["mix_true_peak_in_cue_windows_dbtp"] <= MIX_TP_MAX_DB,
-        no_clipping=clipped == 0, cues_6db_under_song=V["cues_pass_6db_rule"],
+        no_clipping=clipped == 0, cues_6db_under_song_and_vocal=V["cues_pass_6db_rule"],
+        loudness_within_1lu=abs(V["loudness"]["delta_lu"]) <= 1.0,
         lengths_ok=back.shape[1] == n_tot and lay_back.shape[1] == n_tot)
     json.dump(dict(summary=V, cues=rows, context=dict((k, v) for k, v in ctx.items() if k != "counts"),
                    counts=ctx["counts"]), open(os.path.join(WORK, "cues.json"), "w"), indent=1, default=float)
@@ -977,11 +1030,11 @@ def main(argv):
     write_doc(rows, V, ctx, T)
 
     # ---- report
-    print(f"{'cue':9s} {'start':>8s} {'end':>8s} {'gain':>6s} {'peak':>6s} {'maxM':>6s} {'med':>5s} {'worst':>5s} {'tot':>5s}  rule")
+    print(f"{'cue':9s} {'start':>8s} {'end':>8s} {'gain':>6s} {'peak':>6s} {'maxM':>6s} {'med':>5s} {'worst':>5s} {'tot':>5s} {'voc':>5s}  rule")
     for r in rows:
         f = lambda x: "  -  " if x is None else f"{x:5.1f}"
         print(f"{r['id']:9s} {r['start_s']:8.3f} {r['end_s']:8.3f} {r['gain_db']:6.1f} {r['peak_dbfs']:6.1f} "
-              f"{r['max_momentary_lufs']:6.1f} {f(r['margin_median_db'])} {f(r['margin_worst_db'])} {f(r['margin_worst_total_layer_db'])}  "
+              f"{r['max_momentary_lufs']:6.1f} {f(r['margin_median_db'])} {f(r['margin_worst_db'])} {f(r['margin_worst_total_layer_db'])} {f(r['under_vocal_worst_db'])}  "
               f"{r['level_rule']}{'' if r['passes'] else '  <-- FAIL'}")
     print(json.dumps(V, indent=1, default=float))
     print(f"done in {time.time() - t_start:.1f} s")
@@ -1058,20 +1111,27 @@ def write_doc(rows, V, ctx, T):
              "exempt only: the scope cue before the music starts (song < -40 LUFS, t < "
              f"{V['timing']['music_start_s']:.2f} s) and the end card's tail, after the music has ended (the song falls below the same "
              f"-40 LUFS for good, t >= {V['timing']['song_tail_s']:.2f} s).")
+    L.append("* **Under the vocal.** Wherever a word is sounding (vocal stem >= -40 LUFS in 100 ms windows) the whole layer sits "
+             ">= 6 dB under the vocal (fitted at 7): event cues (pings, thuds, the match) take a lower fixed gain; continuous cues "
+             "(scope hum/servo, lock, whoosh, wind, the drop's lock) duck under the words with a smoothed gain curve on the layer "
+             "only. Between words the layer may fill the gap, always under the song.")
+    L.append(f"* **Loudness unchanged.** The mix's integrated loudness must stay within 1 LU of the original master (it is "
+             f"{V['loudness']['delta_lu']:+.3f} LU).")
     L.append(f"* **Light, not percussion.** Pings are soft-attack glass tones in D minor (the song's key), high and short, far under "
              "the whisper. Nothing in the layer peaks above -14 dBFS; the mix never clips.")
     L.append("* **Synced to the picture**, not to a guess: count pings use `coldopen.js pulses()` exactly (n pings at t + i*gap); "
              "the lock follows `phases().lock`; the chime the reticle's `open`; the end pings `endcard.js` (period 1.15 s from S).")
     L.append("* **All synthesized** (numpy/scipy, seeded, deterministic). No generated audio was used ($0.00).\n")
     L.append("## Cues\n")
-    L.append("| # | cue | window (s) | sync | gain / peak | max momentary | margin under song: median / worst (all cues summed) | how it's made |")
-    L.append("|---|---|---|---|---|---|---|---|")
+    L.append("| # | cue | window (s) | sync | gain / peak | max momentary | under the song: median / worst (all cues summed) | under the vocal (worst, 100 ms) | how it's made |")
+    L.append("|---|---|---|---|---|---|---|---|---|")
     for i, r in enumerate(rows, 1):
         mg = "exempt" if r["margin_median_db"] is None else f"{r['margin_median_db']:.1f} / {r['margin_worst_total_layer_db']:.1f} dB"
         if r["exempt_fraction"] and r["margin_median_db"] is not None:
             mg += f" ({int(round(r['exempt_fraction'] * 100))}% exempt)"
+        uv = "no vocal" if r["under_vocal_worst_db"] is None else f"{r['under_vocal_worst_db']:.1f} dB"
         L.append(f"| {i} | **{r['id']}**: {r['title']} | {r['start_s']:.3f}-{r['end_s']:.3f} ({mmss(r['start_s'])}) | {r['sync']} | "
-                 f"{r['gain_db']:+.1f} dB / {r['peak_dbfs']:.1f} dBFS | {r['max_momentary_lufs']:.1f} LUFS | {mg} | {r['how']} |")
+                 f"{r['gain_db']:+.1f} dB / {r['peak_dbfs']:.1f} dBFS | {r['max_momentary_lufs']:.1f} LUFS | {mg} | {uv} | {r['how']} |")
     L.append("")
     L.append("Level rule per cue (which constraint set the gain) is in `work/sfx/cues.json` (`level_rule`), with the margin vs the "
              "vocal stem. Ear proxy: `work/sfx/cue_levels.png` (song vs layer momentary loudness per cue, the red dashed line is "
@@ -1100,7 +1160,7 @@ def write_doc(rows, V, ctx, T):
                  f"{m['integrated_lufs']:.2f} LUFS |")
     L.append(f"| lengths | mix and layer {nt['mix_length_samples']:,} samples = {nt['mix_length_s']:.3f} s (song "
              f"{V['song_length_s']:.3f} s + end-card tail) |")
-    L.append(f"| every cue >= 6 dB under the song (non-exempt frames, all cues summed) | {V['cues_pass_6db_rule']} |\n")
+    L.append(f"| every cue >= 6 dB under the song (400 ms) and under the vocal where it sounds (100 ms), all cues summed | {V['cues_pass_6db_rule']} |\n")
     L.append("## Timing notes\n")
     L.append(f"* Timing file: `{V['timing']['file']}`, status: *{V['timing']['status']}*")
     for w in V["timing"]["warnings"]:

@@ -65,7 +65,8 @@ for s in TJ['sections']:
     for p in s.get('parts', []): o.append(f"- {s['name']}: {p['name']} - {mm(p['start'])} to {mm(p['end'])}")
 o.append('\n## Count hits (big visual hits)\n')
 o.append('`t` = word onset (consonant), `attack` = loud vowel attack (use this for flashes on "Three!"/"Five!"), offset = vs nearest beat.\n')
-H = TJ['hits']
+H = {}
+for h in TJ['hits']: H.setdefault(h['kind'], []).append(h)
 for key, title in (('post_chorus_1', 'Post-Chorus 1'), ('post_chorus_2', 'Post-Chorus 2'), ('drop_counts', 'Drop numbers'),
                    ('counting_on_you', '"Counting on you!" shouts'), ('intro_whisper', 'Intro whispers'), ('outro_whisper', 'Outro whispers')):
     o.append(f"**{title}**: " + ', '.join(f"{h['word']} {h['t']:.3f}" + (f"/{h['t_attack']:.3f}" if abs(h['t_attack'] - h['t']) > 0.015 else '') +

@@ -56,9 +56,9 @@ for i in pk:
     if kr >= 6: kicks.append([round(float(T[i]), 3), st])
     if sr_ >= 6 and not (hr > 1.5 * sr_): snares.append([round(float(T[i]), 3), st])
 r3 = lambda a: [round(float(x), 3) for x in a]
-out = dict(doc=__doc__.strip(), fps=FPS, frames=n, duration=DUR, time_of_frame='t = i / 24 (frame start)',
-           rms=r3(rms), onset=r3(on), low=r3(bands['low']), mid=r3(bands['mid']), high=r3(bands['high']), vocal=r3(voc),
-           sung=sung.tolist(), kicks=kicks, snares=snares)
+out = dict(doc=__doc__.strip(), fps=FPS, n_frames=n, duration=DUR, time_of_frame='t = i / 24 (frame start)',
+           features=dict(rms=r3(rms), onset=r3(on), low=r3(bands['low']), mid=r3(bands['mid']), high=r3(bands['high']), vocal=r3(voc),
+                         sung=sung.tolist()), kicks=kicks, snares=snares)
 json.dump(out, open(os.path.join(AN, 'audio.json'), 'w'), separators=(',', ':'))
 g = np.array(TJ['beats']); six = np.sort(np.r_[g, g[:-1] + np.diff(g) / 4, g[:-1] + np.diff(g) / 2, g[:-1] + 3 * np.diff(g) / 4])
 for nm, lst in (('kicks', kicks), ('snares', snares)):

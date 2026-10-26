@@ -38,6 +38,8 @@ float spotE(vec2 q){ vec2 f = abs(fract(q) - .5) * 2.;
 float screenAM(vec2 page, float v, float cell, float ang, float n){
   vec2 q = rot(ang) * page / cell;
   v = clamp(v, 0., 1.);
+  v *= smoothstep(.01, .035, v);            // no press holds a dot under ~2 %: faint tints drop out instead of tinting
+
   // the paper's tooth eats dot edges, but never decides whether a light dot exists at all (no speckle in the highlights)
   float s = spotE(q) + n * smoothstep(0., .35, v) * smoothstep(1., .65, v);
   float w = max(fwidth(s), 1e-4) * .75;     // derivatives before any branch

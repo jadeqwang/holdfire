@@ -93,7 +93,7 @@ function build(e, yrs) {
         float fres = pow(1. - max(dot(N, V), 0.), 4.);
         float lines;
         if (abs(vFace) > .5) {
-          vec2 uv = vec2(vUv.y, 1. - vUv.x);             // cap uv -> tile orientation (year reads upright from the camera)
+          vec2 uv = vec2(vUv.y, vUv.x);             // cap uv -> tile orientation (year reads upright from the camera)
           if (vFace < 0.) uv.x = 1. - uv.x;
           float tl = vFace > 0. ? vTile : 40.;
           vec2 cell = vec2(mod(tl, 8.), floor(tl / 8.));
@@ -101,8 +101,8 @@ function build(e, yrs) {
         } else {
           lines = (.5 + .5 * sin(vUv.x * 6.2831853 * 110.)) * .35;   // reeded edge
         }
-        vec3 col = deep * (.14 + .5 * diff) + gold * spec * 1.3 + pale * pow(spec, 3.) * 1.5 + gold * fres * .35;
-        col += mix(gold, pale, .35 + .65 * vGlow) * lines * emis * (.62 + .8 * vGlow);
+        vec3 col = deep * (.05 + .26 * diff) + gold * spec * 1.1 + pale * pow(spec, 3.) * 1.4 + gold * fres * .3;
+        col += mix(gold, pale, .3 + .7 * vGlow) * lines * emis * (.95 + .9 * vGlow);
         fragColor = vec4(col, 1.);
       }`,
     side: THREE.DoubleSide,
@@ -226,10 +226,10 @@ export default {
         const tl2 = Math.hypot(tx, tz) || 1; const dx = tx / tl2, dz = tz / tl2;
         const up = smooth(range(t, s0, sUp));
         // axle: horizontal, perpendicular to the direction of travel
-        const axle = new THREE.Vector3(dz, 0, -dx);
+        const axle = new THREE.Vector3(-dz, 0, dx);   // heads (+y) turns toward the camera's side
         const qStand = S.q1.setFromUnitVectors(new THREE.Vector3(0, 1, 0), axle);
         const dist = L * u;
-        const qRoll = S.qa.setFromAxisAngle(axle, dist / RAD);
+        const qRoll = S.qa.setFromAxisAngle(axle, -dist / RAD);
         const qS = qRoll.multiply(qStand);
         d.quaternion.slerp(qS, up);
         x = px; z = pz;

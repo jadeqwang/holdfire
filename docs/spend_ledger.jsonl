@@ -677,3 +677,6 @@
 {"ts": "2026-10-26T05:04:06Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t6", "job": "holdfire/K8b_t6-495dc1d044", "event": "result", "ok": true, "est_usd": 3.2368, "where": "cloud"}
 {"ts": "2026-10-26T05:05:59Z", "model": "bytedance/seedance-2.5", "tag": "C8_t3", "job": "holdfire/C8_t3-129bb91bf1", "event": "submit", "ok": null, "est_usd": 1.156, "where": "cloud"}
 {"ts": "2026-10-26T05:12:37Z", "model": "bytedance/seedance-2.5", "tag": "C8_t3", "job": "holdfire/C8_t3-129bb91bf1", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T16:11:39Z", "model": "google/nano-banana-pro", "tag": "t2d_room_A_v1", "job": "holdfire/t2d_room_A_v1-25218ef3da", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T16:11:40Z", "model": "openai/gpt-image-2.5-sunburst", "tag": "t2d_teal_sheet_v1", "job": "holdfire/t2d_teal_sheet_v1-4f0816451a", "event": "submit", "ok": null, "est_usd": 0.2128, "where": "cloud"}
+{"ts": "2026-10-26T16:12:13Z", "model": "google/nano-banana-pro", "tag": "t2d_dish_field_v1", "job": "holdfire/t2d_dish_field_v1-435699ebd1", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}

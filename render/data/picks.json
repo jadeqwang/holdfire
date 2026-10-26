@@ -111,12 +111,33 @@
   "kind": "keeper",
   "file": "media/gen/K1b_t2_7d28bc2216.mp4"
  },
+ "K6": {
+  "clip": "K6_t4",
+  "s0": 113.0,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/K6_t4_7b1ab8b0e7.mp4"
+ },
+ "K7": {
+  "clip": "K7_t3",
+  "s0": 123.1,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/K7_t3_cde7d2fbc6.mp4"
+ },
  "C5": {
   "clip": "C5_t1",
   "s0": 0,
   "lag": 0,
   "kind": "keeper",
   "file": "media/gen/C5_t1_e077a1201d.mp4"
+ },
+ "O1": {
+  "clip": "O1_t1",
+  "s0": 0,
+  "lag": 0,
+  "kind": "other",
+  "file": "media/gen/O1_t1_0f1861ccc0.mp4"
  },
  "K10": {
   "clip": "K10_t1",
@@ -138,6 +159,13 @@
   "lag": 0,
   "kind": "keeper",
   "file": "media/gen/C1_t1_05896625b9.mp4"
+ },
+ "C9": {
+  "clip": "C9_t2c",
+  "s0": 0,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/C9_t2c_22161a8427.mp4"
  },
  "E1": {
   "clip": "E1_t1",
@@ -215,5 +243,12 @@
   "lag": 0,
   "kind": "other",
   "file": "media/gen/O8_t1_95ba41fda1.mp4"
+ },
+ "E7": {
+  "clip": "E7_t1",
+  "s0": 0,
+  "lag": 0,
+  "kind": "env",
+  "file": "media/gen/E7_t1_6f85c29fee.mp4"
  }
 }

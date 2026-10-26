@@ -108,3 +108,17 @@ Spend at start of this intake pass: $30.46.
 | 04:24 | C11 | kf C11_nbp.jpg | approve → C11_t1 | — | astronaut in the cupola raising a small torch, Earth below (flight suit, not EVA suit — plausible on station) |
 | 04:24 | C12 | kf C12_nbp.png → C12_nbp_c.png | approve → C12_t1 | — | farmer in straw hat in a rice terrace raising a paper lantern; pillarbox cropped |
 | 04:24 | C5 | C5_t1_e077a1201d | **PICK** | 0 | nurse raises the phone light high with both hands, looks up, hopeful; consistent |
+| 04:26 | H2 | kf H2_nbp_2.jpg → H2_nbp_2c.jpg | approve → H2_t1 | — | v2: mortar of black powder on a stone table, a hand in a dark wide Chinese sleeve brings a burning taper; 23 px letterbox cropped |
+| 04:26 | O1 | O1_t1_0f1861ccc0 | **PICK** | 0 | cradles the glowing egg, phosphorescent waves wash in; mostly stands, steps only at the end (walk is minimal); on-model |
+| 04:28 | K6 | K6_t3_22d5dda291 | alt | — | the tilt-up pushes her face off the bottom edge by ~8 s (sung shot) |
+| 04:28 | K6 | K6_t4_7b1ab8b0e7 | **PICK** | 0 | sings up at the Milky Way, face stays in frame, sky upper ~40 %; strips: 0 and +0.125 tie ("prayer/but" closed, "you" rounded, "are" open) → 0 |
+| 04:28 | K7 | K7_t3_cde7d2fbc6 | **PICK** | 0 | by the rainy window, CRT glow, beam outside right third; strips at 0: "patient/but/breathe" closed, "are/I'm" open (numeric +0.96 spurious) |
+| 04:29 | O5 | kf O5_nbp_2.png | approve → O5_t1 | — | v2: three young fast asleep, eyes closed, curled in the woven nest; adult's glowing eye-spot wing over them from the right. Reads more painterly than photoreal (fine for the stipple pass) |
+| 04:29 | K7 | K7_t4_4fb2e4d769 | alt (not reviewed) | — | t3 already picked |
+| 04:30 | K8 | K8_t3_acbffb3bc3 | REJECT | — | returned 1470×630 (21:9) → one more re-roll K8_t4 (aspect failure, not content) |
+| 04:31 | H5 | kf H5_nbp_2.png | approve → H5_t1 | — | v2: smooth Foxtrot-style hull in black water, no portholes/people, warships faint above |
+| 04:31 | H6 | H6_t1_41af78822d | REJECT | — | 1470×630 (21:9) → re-rolled as H6_t2 |
+| 04:32 | C9 | C9_t2_22161a8427 → C9_t2c_22161a8427 | **PICK** (salvage) | 0 | re-roll also came back 1470×630; content good (keeper turns the great lamp, it flares). Salvaged as a centre 16:9 crop (1120×630 at x=175 → 1280×720), registered as C9 take 3 |
+| 04:33 | O7 | kf O7_nbp_2.jpg | regen (2nd) | — | v2 centred and on-model, but a hard horizontal seam crosses the sky at ~20 % height and cuts the planet flat → v3 'one seamless sky' |
+| 04:33 | K12 | K12_t1 (alt), K12_t2 | 21:9 / relay error | — | t1 content good (wary eyes, whisper, match) but 1470×630; t2 also 21:9 and smirks; t3/t4 re-rolls died with 2047 credentials → resubmitted as t5, t6 |
+| 04:33 | E7 | E7_t1_6f85c29fee | **PICK** | 0 | very slow push between trunks into a foggy clearing, empty, near monochrome; 12 s |

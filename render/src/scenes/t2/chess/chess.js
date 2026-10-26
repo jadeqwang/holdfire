@@ -482,6 +482,7 @@ function squareOutline(half) {
 
 function drawDive2D(ctx, u, p, frame) {
   const e = ctx.engine, c = e.c2dBegin();
+  c.lineJoin = 'miter'; c.lineCap = 'butt'; c.miterLimit = 10; c.setLineDash([]);   // canvas state persists between frames: set it
   const cream = p.cream || '#F1E8D6', ink = p.ink || '#111010';
   c.fillStyle = cream; c.fillRect(0, 0, 1920, 1080);
   const k = frame.k, cx = 960, cy = frame.cy;     // px per unit, screen centre of the queen's mid-height

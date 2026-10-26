@@ -745,3 +745,4 @@
 {"ts": "2026-10-26T16:49:12Z", "model": "google/nano-banana-pro", "tag": "kf_WALK_nbp_v1", "job": "holdfire/kf_WALK_nbp_v1-f12f7c5aaf", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-26T16:49:12Z", "model": "google/nano-banana-pro", "tag": "t2kf_C103L_v2", "job": "holdfire/t2kf_C103L_v2-3a05ebd391", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-26T16:49:30Z", "model": "google/nano-banana-pro", "tag": "t2kf_C103R", "job": "holdfire/t2kf_C103R-2935f759f6", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T16:50:22Z", "model": "google/veo-3.1", "tag": "t2_CO01_veo_t1", "job": "holdfire/t2_CO01_veo_t1-66747bd17f", "event": "result", "ok": false, "est_usd": 0.8, "where": "cloud"}

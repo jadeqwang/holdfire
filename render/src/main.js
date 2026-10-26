@@ -49,7 +49,7 @@ async function renderAt(t) {
     const lt = t - shot.t0;
     const T0 = performance.now();
     let scene = SCENES[shot.scene];
-    if (!scene) { scene = SCENES.placeholder; shot.want = shot.scene; }
+    if (!scene) { scene = SCENES.placeholder; shot.missing = shot.scene; }   // shot.want (the edit's description) is kept for the label
     ctx.t = t; ctx.lt = lt; ctx.shot = shot;
     let p = typeof shot.p === 'function' ? shot.p(t, lt, ctx) : (shot.p || {});
     if (window.__pOverride) p = { ...p, ...window.__pOverride };   // look-dev (tools/lookdev.mjs)
@@ -57,7 +57,7 @@ async function renderAt(t) {
     // scenes may need assets: prepare() resolves them, so cache timing never changes pixels
     if (scene.prepare) {
       try { await scene.prepare(ctx, shot, t, lt, p); }
-      catch (err) { if (qs.get('strict')) throw err; console.warn('prepare failed', shot.id, String(err)); scene = SCENES.placeholder; shot.want = `${shot.scene} (${p.clip || 'asset'} missing)`; }
+      catch (err) { if (qs.get('strict')) throw err; console.warn('prepare failed', shot.id, String(err)); scene = SCENES.placeholder; shot.missing = `${shot.scene} (${p.clip || 'asset'} missing)`; }
     }
     await scene.draw(ctx, shot, t, lt, p);
     const T1 = performance.now();

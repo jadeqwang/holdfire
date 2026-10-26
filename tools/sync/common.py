@@ -56,7 +56,7 @@ def vocal_env(a, b, voc=None, fps=FPS):
     if i0 < 0:
         y = np.concatenate([np.zeros(-i0, np.float32), y])
     ts = np.arange(a, b + 1e-9, 1 / fps)
-    c = np.round(ts * sr).astype(int) - max(0, i0) + (min(0, i0) * -1 if i0 < 0 else 0)
+    c = np.round(ts * sr).astype(int) - i0              # y[0] is sample i0 (zero-padded when i0 < 0)
     half = int(hop)                                   # window = 2 hops, centred (librosa frame_length=2*hop)
     y2 = np.concatenate([[0.0], np.cumsum(y.astype(np.float64) ** 2)])
     lo = np.clip(c - half, 0, len(y)); hi = np.clip(c + half, 0, len(y))

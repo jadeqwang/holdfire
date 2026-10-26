@@ -7,9 +7,10 @@ export default {
   async prepare(ctx, shot, t, lt, p) {
     ctx.state.multi = [];
     for (const [i, L] of (p.layers || []).entries()) {
-      const sc = SCENES[L.scene];
+      let sc = SCENES[L.scene];
       const lp = { ...(typeof L.p === 'function' ? L.p(t, lt, ctx) : (L.p || {})), over: i > 0 };
-      if (!sc) continue;
+      // a missing base layer draws the labelled placeholder (so the frame never shows stale pixels); missing overlays are skipped
+      if (!sc) { if (i > 0) continue; sc = SCENES.placeholder; shot.missing = L.scene; }
       if (sc.prepare) { await sc.prepare(ctx, shot, t, lt, lp); }
       // scenes keep per-frame state in ctx.state under their own key; snapshot it so layers of the same scene don't collide
       ctx.state.multi.push({ sc, lp, st: { ...ctx.state } });

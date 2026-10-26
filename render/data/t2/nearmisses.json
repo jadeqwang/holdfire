@@ -1,0 +1,310 @@
+{
+ "title": "Near-miss list, take two (fact-checked)",
+ "from_doc": "docs/PLAN_TAKE_TWO.md § The near-miss list (fact-checked): year, place, on-screen text and source copied exactly, in the plan's order",
+ "dates": "Day and month researched per entry (date_source). Every entry has a known day; none uses the 1 Jan fallback (date_precision would read 'year').",
+ "epoch": {
+  "date": "1945-08-09",
+  "note": "Nagasaki: day 0 of the outro counter (last use of a nuclear weapon in war)"
+ },
+ "release_default": "2026-10-26",
+ "count": 27,
+ "entries": [
+  {
+   "n": 1,
+   "year": 1950,
+   "place": "BC, Canada",
+   "text": "B-36 jettisons A-bomb with dummy core",
+   "source": "https://www.atomicarchive.com/almanac/broken-arrows/",
+   "date": "1950-02-13",
+   "date_precision": "day",
+   "date_note": "Night of 13/14 Feb 1950, off British Columbia; bomb jettisoned 13 Feb.",
+   "date_source": "https://en.wikipedia.org/wiki/1950_British_Columbia_B-36_crash"
+  },
+  {
+   "n": 2,
+   "year": 1957,
+   "place": "Kyshtym, USSR",
+   "text": "Bomb-plant waste tank explodes",
+   "source": "https://www.britannica.com/print/article/2104111",
+   "date": "1957-09-29",
+   "date_precision": "day",
+   "date_note": "Mayak waste-tank explosion, 29 Sep 1957.",
+   "date_source": "https://en.wikipedia.org/wiki/Kyshtym_disaster"
+  },
+  {
+   "n": 3,
+   "year": 1958,
+   "place": "Georgia, US",
+   "text": "H-bomb lost at sea, never found",
+   "source": "https://armscontrolcenter.org/fact-sheet-the-missing-tybee-bomb/",
+   "date": "1958-02-05",
+   "date_precision": "day",
+   "date_note": "Tybee Island mid-air collision, 5 Feb 1958.",
+   "date_source": "https://en.wikipedia.org/wiki/1958_Tybee_Island_mid-air_collision"
+  },
+  {
+   "n": 4,
+   "year": 1960,
+   "place": "Greenland",
+   "text": "Radar mistakes the Moon for missiles",
+   "source": "https://blog.ucs.org/david-wright/the-moon-and-nuclear-war-904/",
+   "date": "1960-10-05",
+   "date_precision": "day",
+   "date_note": "BMEWS Thule moonrise alarm, 5 Oct 1960.",
+   "date_source": "https://blog.ucs.org/david-wright/the-moon-and-nuclear-war-904/"
+  },
+  {
+   "n": 5,
+   "year": 1961,
+   "place": "N. Carolina",
+   "text": "Two H-bombs fall; one switch holds",
+   "source": "https://blog.nuclearsecrecy.com/2013/09/27/final-switch-goldsboro-1961/",
+   "date": "1961-01-24",
+   "date_precision": "day",
+   "date_note": "B-52 broke up just after midnight, 24 Jan 1961 (some sources: night of 23/24 Jan).",
+   "date_source": "https://en.wikipedia.org/wiki/1961_Goldsboro_B-52_crash"
+  },
+  {
+   "n": 6,
+   "year": 1962,
+   "place": "Duluth, MN",
+   "text": "Bear trips alarm; nuclear jets roll",
+   "source": "https://www.armscontrolwonk.com/archive/402833/organizations-accidents-and-nuclear-weapons/",
+   "date": "1962-10-25",
+   "date_precision": "day",
+   "date_note": "Around midnight 25/26 Oct 1962 (Sagan 1993).",
+   "date_source": "https://en.wikipedia.org/wiki/Duluth_Air_Defense_Sector"
+  },
+  {
+   "n": 7,
+   "year": 1962,
+   "place": "Vandenberg",
+   "text": "Test ICBM launched, SAC at DEFCON 2",
+   "source": "https://www.armscontrolwonk.com/archive/402833/organizations-accidents-and-nuclear-weapons/",
+   "date": "1962-10-26",
+   "date_precision": "day",
+   "date_note": "Atlas test launched 04:00 on 26 Oct 1962 (Sagan, quoted by Arms Control Wonk).",
+   "date_source": "https://www.armscontrolwonk.com/archive/402833/organizations-accidents-and-nuclear-weapons/"
+  },
+  {
+   "n": 8,
+   "year": 1962,
+   "place": "Atlantic",
+   "text": "Nuclear-armed sub B-59 forced to surface",
+   "source": "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB75/",
+   "date": "1962-10-27",
+   "date_precision": "day",
+   "date_note": "27 Oct 1962 (plan fact sheet; NSA EBB 75).",
+   "date_source": "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB75/"
+  },
+  {
+   "n": 9,
+   "year": 1962,
+   "place": "Chukotka",
+   "text": "Lost U-2 strays into Soviet airspace",
+   "source": "https://www.adn.com/alaska-life/we-alaskans/2017/06/09/when-off-course-u-2-spy-plane-out-of-alaska-nearly-triggered-war/",
+   "date": "1962-10-27",
+   "date_precision": "day",
+   "date_note": "Maultsby's U-2, Saturday 27 Oct 1962.",
+   "date_source": "https://www.adn.com/alaska-life/we-alaskans/2017/06/09/when-off-course-u-2-spy-plane-out-of-alaska-nearly-triggered-war/"
+  },
+  {
+   "n": 10,
+   "year": 1966,
+   "place": "Palomares",
+   "text": "4 H-bombs fall; 2 spill plutonium",
+   "source": "https://ahf.nuclearmuseum.org/ahf/history/broken-arrow-accidents/",
+   "date": "1966-01-17",
+   "date_precision": "day",
+   "date_note": "B-52 / KC-135 collision, 17 Jan 1966.",
+   "date_source": "https://en.wikipedia.org/wiki/1966_Palomares_accident"
+  },
+  {
+   "n": 11,
+   "year": 1967,
+   "place": "Arctic",
+   "text": "Solar storm jams all 3 missile radars",
+   "source": "https://www.colorado.edu/today/2016/08/09/1967-solar-storm-nearly-took-us-brink-war",
+   "date": "1967-05-23",
+   "date_precision": "day",
+   "date_note": "Solar storm radar jamming, 23 May 1967.",
+   "date_source": "https://www.colorado.edu/today/2016/08/09/1967-solar-storm-nearly-took-us-brink-war"
+  },
+  {
+   "n": 12,
+   "year": 1968,
+   "place": "Greenland",
+   "text": "Burning B-52 crashes with 4 H-bombs",
+   "source": "https://en.wikipedia.org/wiki/1968_Thule_Air_Base_B-52_crash",
+   "date": "1968-01-21",
+   "date_precision": "day",
+   "date_note": "Thule crash, 21 Jan 1968.",
+   "date_source": "https://en.wikipedia.org/wiki/1968_Thule_Air_Base_B-52_crash"
+  },
+  {
+   "n": 13,
+   "year": 1968,
+   "place": "N. Pacific",
+   "text": "K-129 sinks with nuclear missiles",
+   "source": "https://en.wikipedia.org/wiki/Soviet_submarine_K-129_(1960)",
+   "date": "1968-03-08",
+   "date_precision": "day",
+   "date_note": "Wikipedia: sank on 8 Mar 1968 (US acoustic detection); some accounts give 11/12 Mar.",
+   "date_source": "https://en.wikipedia.org/wiki/Soviet_submarine_K-129_(1960)"
+  },
+  {
+   "n": 14,
+   "year": 1968,
+   "place": "Azores",
+   "text": "USS Scorpion lost with nuclear torpedoes",
+   "source": "https://en.wikipedia.org/wiki/USS_Scorpion_(SSN-589)",
+   "date": "1968-05-22",
+   "date_precision": "day",
+   "date_note": "Lost 22 May 1968, about 740 km SW of the Azores.",
+   "date_source": "https://en.wikipedia.org/wiki/USS_Scorpion_(SSN-589)"
+  },
+  {
+   "n": 15,
+   "year": 1973,
+   "place": "Washington",
+   "text": "US forces go to DEFCON 3",
+   "source": "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB98/press.htm",
+   "date": "1973-10-24",
+   "date_precision": "day",
+   "date_note": "Decided late on 24 Oct 1973, Washington time (plan correction; often printed 25 Oct).",
+   "date_source": "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB98/press.htm"
+  },
+  {
+   "n": 16,
+   "year": 1979,
+   "place": "Sverdlovsk, USSR",
+   "text": "Anthrax escapes bioweapons plant",
+   "source": "https://en.wikipedia.org/wiki/Sverdlovsk_anthrax_leak",
+   "date": "1979-04-02",
+   "date_precision": "day",
+   "date_note": "2 Apr 1979 (plan fact sheet).",
+   "date_source": "https://en.wikipedia.org/wiki/Sverdlovsk_anthrax_leak"
+  },
+  {
+   "n": 17,
+   "year": 1979,
+   "place": "NORAD",
+   "text": "Exercise data shows mass Soviet attack",
+   "source": "https://nsarchive2.gwu.edu/nukevault/ebb371/",
+   "date": "1979-11-09",
+   "date_precision": "day",
+   "date_note": "Training tape on live NORAD computers, 9 Nov 1979.",
+   "date_source": "https://nsarchive2.gwu.edu/nukevault/ebb371/"
+  },
+  {
+   "n": 18,
+   "year": 1980,
+   "place": "NORAD",
+   "text": "46-cent chip blamed for phantom missiles",
+   "source": "https://nsarchive2.gwu.edu/nukevault/ebb371/",
+   "date": "1980-06-03",
+   "date_precision": "day",
+   "date_note": "First false warning 3 Jun 1980 (recurred 6 Jun).",
+   "date_source": "https://nsarchive2.gwu.edu/nukevault/ebb371/"
+  },
+  {
+   "n": 19,
+   "year": 1980,
+   "place": "Arkansas",
+   "text": "Dropped socket blows up a Titan II",
+   "source": "https://encyclopediaofarkansas.net/entries/titan-ii-missile-explosion-2543/",
+   "date": "1980-09-19",
+   "date_precision": "day",
+   "date_note": "Socket dropped evening of 18 Sep; explosion about 03:00 on 19 Sep 1980.",
+   "date_source": "https://en.wikipedia.org/wiki/1980_Damascus_Titan_missile_explosion"
+  },
+  {
+   "n": 20,
+   "year": 1980,
+   "place": "N. Dakota",
+   "text": "Nuclear-armed B-52 burns for hours",
+   "source": "https://archive.seattletimes.com/archive/19910813/1299674/nearly-a-nuclear-disaster----wind-shifted-fire-on-b-52-away-from-bomb-experts-say",
+   "date": "1980-09-15",
+   "date_precision": "day",
+   "date_note": "Grand Forks AFB engine fire, night of 15 Sep 1980 (a few sources say 16 Sep). Four days BEFORE the Arkansas entry: the counter resets in date order.",
+   "date_source": "https://nationalinterest.org/node/183210"
+  },
+  {
+   "n": 21,
+   "year": 1983,
+   "place": "USSR",
+   "text": "Petrov calls 5 'launches' a false alarm",
+   "source": "https://en.wikipedia.org/wiki/1983_Soviet_nuclear_false_alarm_incident",
+   "date": "1983-09-26",
+   "date_precision": "day",
+   "date_note": "Just after midnight 26 Sep 1983, Moscow time (25 Sep UTC).",
+   "date_source": "https://en.wikipedia.org/wiki/1983_Soviet_nuclear_false_alarm_incident"
+  },
+  {
+   "n": 22,
+   "year": 1983,
+   "place": "Europe",
+   "text": "Able Archer exercise alarms Moscow",
+   "source": "https://history.state.gov/historicaldocuments/frus1981-88v04/d135",
+   "date": "1983-11-07",
+   "date_precision": "day",
+   "date_note": "Exercise ran 7-11 Nov 1983; reset on its first day.",
+   "date_source": "https://en.wikipedia.org/wiki/Able_Archer_83"
+  },
+  {
+   "n": 23,
+   "year": 1995,
+   "place": "Norway",
+   "text": "Rocket alert activates Yeltsin's briefcase",
+   "source": "https://en.wikipedia.org/wiki/Norwegian_rocket_incident",
+   "date": "1995-01-25",
+   "date_precision": "day",
+   "date_note": "Black Brant XII launch from Andoya, 25 Jan 1995.",
+   "date_source": "https://en.wikipedia.org/wiki/Norwegian_rocket_incident"
+  },
+  {
+   "n": 24,
+   "year": 2007,
+   "place": "USA",
+   "text": "B-52 flies 6 nuclear missiles unawares",
+   "source": "https://en.wikipedia.org/wiki/2007_United_States_Air_Force_nuclear_weapons_incident",
+   "date": "2007-08-30",
+   "date_precision": "day",
+   "date_note": "Minot-Barksdale flight 30 Aug 2007 (missiles loaded 29 Aug).",
+   "date_source": "https://en.wikipedia.org/wiki/2007_United_States_Air_Force_nuclear_weapons_incident"
+  },
+  {
+   "n": 25,
+   "year": 2010,
+   "place": "Wyoming",
+   "text": "50 ICBMs lose contact for 45 minutes",
+   "source": "https://www.globalsecurity.org/wmd/library/news/usa/2010/usa-101027-afps01.htm",
+   "date": "2010-10-23",
+   "date_precision": "day",
+   "date_note": "F.E. Warren launch-facility outage, 23 Oct 2010.",
+   "date_source": "https://www.globalsecurity.org/wmd/library/news/usa/2010/usa-101027-afps01.htm"
+  },
+  {
+   "n": 26,
+   "year": 2022,
+   "place": "Pakistan",
+   "text": "Unarmed Indian missile fired by accident",
+   "source": "https://www.aljazeera.com/news/2022/8/23/india-fires-officers-for-accidental-missile-launch-into-pakistan",
+   "date": "2022-03-09",
+   "date_precision": "day",
+   "date_note": "BrahMos accidental launch, 9 Mar 2022.",
+   "date_source": "https://www.armscontrol.org/act/2022-04/news/india-accidentally-fires-missile-pakistan"
+  },
+  {
+   "n": 27,
+   "year": 2025,
+   "place": "India–Pakistan",
+   "text": "Nuclear-armed rivals trade strikes",
+   "source": "https://www.armscontrol.org/node/14664",
+   "date": "2025-05-10",
+   "date_precision": "day",
+   "date_note": "Strikes 7-10 May 2025; reset on the last day, 10 May (plan fact sheet: the counter's 534 days run from 10 May 2025).",
+   "date_source": "https://www.armscontrol.org/node/14664"
+  }
+ ]
+}

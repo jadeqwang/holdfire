@@ -26,4 +26,13 @@ for (const s of shots) {
 }
 await b.close(); server.close();
 spawnSync('python3', ['/home/user/holdfire/tools/sheet.py', out, ...files, `--cols=${args.cols || 6}`, `--w=${Math.min(W, 400)}`], { stdio: 'inherit' });
+// a long edit (take two has ~180 shots) is also cut into readable pages: OUT_p1.jpg, OUT_p2.jpg ... (--page N tiles, 0 = off)
+const PAGE = Number(args.page ?? 36);
+if (PAGE > 0 && files.length > PAGE) {
+  for (let i = 0; i * PAGE < files.length; i++) {
+    const pg = out.replace(/(\.[a-z]+)$/i, `_p${i + 1}$1`);
+    spawnSync('python3', ['/home/user/holdfire/tools/sheet.py', pg, ...files.slice(i * PAGE, (i + 1) * PAGE), `--cols=${args.cols || 6}`, `--w=${Math.min(W, 400)}`], { stdio: 'inherit' });
+  }
+}
+fs.rmSync(dir, { recursive: true, force: true });
 console.log(shots.length, 'shots');

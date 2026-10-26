@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Lip lag for a sung take, scored only over the window the edit uses, as played on twos.
-  $MP312/bin/python tools/sync/lipsync.py TAKE.mp4 S0 A B [--voc=work/stems/vocals.wav] [--out=PREFIX] [--words=w@t,...]
+  work/venv/mp312/bin/python tools/sync/lipsync.py TAKE.mp4 S0 A B [--voc=work/stems/vocals.wav] [--out=PREFIX] [--words=w@t,...]
 S0 = song time of the take's audio-reference start; [A, B] = song-time window the edit plays. Convention: clip time = song time - S0 + lag.
 Mouth = FaceMesh inner-lip gap (13/14) / face height (10..152); vocal = log RMS of the vocal stem x voicing (zero-crossing gate).
+FaceMesh (realistic faces); for anime takes use tools/sync/t2sync.py (anime cascade + colour metrics).
 Writes PREFIX.sync.json {best_lag, corr, curve[[lag, r]], face_found, open[]} and PREFIX.strip.jpg (mouth crops at word onsets, rows = lags)."""
 import json, os, subprocess, sys
 import numpy as np, cv2, mediapipe as mp

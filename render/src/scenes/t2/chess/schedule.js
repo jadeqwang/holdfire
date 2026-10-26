@@ -1,0 +1,113 @@
+// Ply timing for the bridge (docs/PLAN_TAKE_TWO.md, "Bridge, the game and the submarine"), computed from timing.json so it
+// follows the beat list (the tempo drifts). Anchors are word onsets / events; every ply between anchors snaps to the beat grid
+// (beats, eighths = beat midpoints, sixteenths = beat quarters).
+//
+//   startPress  Black (teal-tips Jade) presses the clock, starting White's clock: the last sixteenth of the 16th-note drum fill,
+//               one sixteenth before the drums-out beat. (A press has to precede White's first move; the plan puts both at
+//               2:23.58, so the press takes the fill's last hit and 1.e4 takes the drums-out beat.)
+//   plies 1-8   1.e4 .. 4...c5    one per eighth from the drums-out beat (2:23.58)
+//   plies 9-12  5.a3 .. 6...cxd4  one per beat; a hand hovers over the piece for the full beat before each
+//   plies 13-17 7.Qg4 .. 9.Qxg7   speeding up (4, 3, 2 sixteenths) into 9.Qxg7 on "spark"
+//   plies 18-26 9...Rg8 .. 13...O-O-O  on eighths; 13...O-O-O on "death"
+//   plies 27-36 14.Bg5 .. 18...Rxg2+   one per eighth from the drums returning (2:33.69)
+//   plies 37-42 19.Kh1 .. 21...Qg4+    sixteenth-note flurry; 21...Qg4+ on "hand"
+//   stop        clocks stop on "let" of "let go"
+// The set (post-chorus 2): pieces slam down on the shouts, 1, 1, 2, 3, 5 of them, and "Counting on you!" lands the other 20.
+import { GAME, sqOf } from './pgn.js';
+
+const clean = (w) => (w || '').toLowerCase().replace(/[^a-z0-9']/g, '');
+
+export function buildSchedule(audio) {
+  const beats = audio.beats;
+  const words = [];
+  for (const l of audio.lines) for (const w of l.words) words.push({ w: clean(w.w), t: w.t, section: l.section || '' });
+  const word = (w, after, fb) => { const x = words.find((y) => y.w === w && y.t >= after); return x ? x.t : fb; };
+  const bi = (t) => { let k = 0; for (let i = 0; i < beats.length; i++) if (Math.abs(beats[i] - t) < Math.abs(beats[k] - t)) k = i; return k; };
+  // grid position g in beats (fractional; multiples of 1/4) relative to beat index k -> time
+  const G = (k, g) => { const i = k + Math.floor(g), f = g - Math.floor(g); const a = audio.beatT(i), b = audio.beatT(i + 1); return a + (b - a) * f; };
+
+  const drumsOut = audio.event('drums_out', null, 140) ?? 143.595;
+  const k0 = bi(drumsOut);                                       // 143.581
+  const spark = word('spark', 148, 150.325);
+  const death = word('death', 151, 153.037);
+  const back = audio.event('impact', /return/i, 150) ?? 153.695;
+  const kb = bi(back);                                           // 153.694
+  const hand = word('hand', 156, 157.482);
+  const letgo = word('let', 157.5, 158.101);
+
+  const T = [];  // [t, grid]
+  for (let i = 0; i < 8; i++) T.push([G(k0, i / 2), i ? '8th' : 'beat']);            // 1.e4 .. 4...c5
+  for (let i = 0; i < 4; i++) T.push([G(k0, 4 + i), 'beat']);                       // 5.a3 .. 6...cxd4
+  T.push([G(k0, 8), 'beat']);                                                       // 7.Qg4
+  T.push([G(k0, 9), 'beat']);                                                       // 7...Ne7   (+4 sixteenths)
+  T.push([G(k0, 9.75), '16th']);                                                    // 8.bxa5    (+3)
+  T.push([G(k0, 10.25), '16th']);                                                   // 8...dxc3  (+2)
+  T.push([spark, 'word']);                                                          // 9.Qxg7 on "spark"
+  { // 9...Rg8 .. 13.O-O on the eighths after "spark"; 13...O-O-O on "death"
+    let g = Math.ceil((spark - audio.beatT(k0)) / 0.3 * 2) / 2; // first eighth after spark (approx, refined below)
+    while (G(k0, g) <= spark + 0.08) g += 0.5;
+    while (G(k0, g - 0.5) > spark + 0.08) g -= 0.5;
+    for (let i = 0; i < 8; i++) T.push([G(k0, g + i / 2), '8th']);
+    T.push([death, 'word']);
+  }
+  for (let i = 0; i < 10; i++) T.push([G(kb, i / 2), i ? '8th' : 'beat']);         // 14.Bg5 .. 18...Rxg2+
+  { // the flurry: five sixteenths leading into "hand"
+    const kh = bi(hand);
+    let gh = Math.round((hand - audio.beatT(kh)) / (audio.beatT(kh + 1) - audio.beatT(kh)) * 4) / 4;
+    for (let i = 5; i >= 1; i--) T.push([G(kh, gh - i / 4), '16th']);
+    T.push([hand, 'word']);
+  }
+  if (T.length !== GAME.plies.length) throw new Error(`schedule has ${T.length} plies`);
+
+  const startPress = G(k0, -0.25);
+  const plies = GAME.plies.map((p, i) => {
+    const [t, grid] = T[i];
+    const prev = i ? T[i - 1][0] : startPress;
+    const gap = t - prev;
+    const dur = Math.min(0.34, Math.max(0.085, gap * 0.62));   // travel time: the piece lands (and the clock is slapped) at t
+    const beat = audio.beatT(bi(t) + 1) - audio.beatT(bi(t));
+    const hover = (i >= 8 && i < 12) ? beat : 0;                  // moves 5-6: a hand hovers a full beat before the move
+    return { ...p, t, grid, gap, t0: t - dur, hover0: hover ? t - hover : t - dur };
+  });
+
+  // clocks: three minutes each, each side's clock runs while it is that side's move
+  const presses = [{ t: startPress, side: 'b' }, ...plies.map((p) => ({ t: p.t, side: p.side }))];
+  const stop = letgo;
+  function clockAt(t) {
+    let w = 180, b = 180, running = null, last = null;
+    for (let i = 0; i < presses.length; i++) {
+      const pr = presses[i];
+      if (t < pr.t) break;
+      last = pr;
+      const next = i + 1 < presses.length ? Math.min(presses[i + 1].t, stop) : stop;
+      const run = pr.side === 'w' ? 'b' : 'w';     // pressing your button starts the opponent's clock
+      const el = Math.max(0, Math.min(t, next) - pr.t);
+      if (run === 'w') w -= el; else b -= el;
+      running = t < stop ? run : null;
+    }
+    return { w, b, running, last, stopped: t >= stop };
+  }
+
+  // the set: shouts from timing.json hits (t_attack), squares per shout (1, 1, 2, 3, 5, then 20 on "Counting on you!")
+  const shouts = audio.hits.filter((h) => h.t > 138.8 && h.t < 142.0 && /post_chorus/.test(h.kind || '')).map((h) => h.t_attack ?? h.t);
+  const cy = audio.hits.find((h) => h.t > 141.9 && h.t < 143 && /counting/.test(h.kind || ''));
+  const count = cy ? (cy.t_attack ?? cy.t) : 142.21;
+  const on = word('on', count + 0.2, 142.915), you = word('you', count + 0.2, 143.199);
+  const S = (n) => sqOf(n);
+  const groups = [['e1'], ['e8'], ['d1', 'd8'], ['a1', 'h8', 'h1'], ['a8', 'c1', 'f8', 'f1', 'c8']];
+  const set = [];
+  groups.forEach((g, i) => g.forEach((n, j) => set.push({ sq: S(n), t: (shouts[i] ?? (139.13 + i * 0.63)) + j * 0.06, shout: i })));
+  ['b1', 'g1', 'b8', 'g8'].forEach((n, j) => set.push({ sq: S(n), t: count + j * 0.05, shout: 5 }));
+  'abcdefgh'.split('').forEach((f, j) => set.push({ sq: S(f + '2'), t: count + 0.26 + j * ((on - 0.04 - count - 0.26) / 7), shout: 5 }));
+  'hgfedcba'.split('').forEach((f, j) => set.push({ sq: S(f + '7'), t: on + j * ((you - on) / 7), shout: 5 }));
+  const setBySq = new Map(set.map((x) => [x.sq, x]));
+
+  return { plies, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };
+}
+
+// index of the last ply that has landed at time t (-1 before 1.e4)
+export function plyIndexAt(S, t) {
+  let k = -1;
+  for (let i = 0; i < S.plies.length; i++) if (S.plies[i].t <= t) k = i; else break;
+  return k;
+}

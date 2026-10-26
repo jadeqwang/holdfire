@@ -14,10 +14,16 @@ stall or rush her body. This does what cel animation does instead, and times the
   4. that mouth is registered onto the body frame (ECC on the face around the mouth, the mouths masked out) and
      blended in over every mouth pixel of both drawings, taking on the body frame's shading.
 
-The renderer then redraws the plate as ink like any other. Writes <take>_sync.mp4 into pipeline/base_clips/ and a
-log of the choices; selects.json points at the result.
+The renderer then redraws the plate like any other. Ported from Rare Earth pipeline/sync/remouth.py (its PLATES table of
+RE takes is replaced by command-line arguments; the vocal target is computed only around the window).
 
-  python3 pipeline/sync/remouth.py [sd07 sd10 ...] [--preview DIR]
+  python3 tools/sync/remouth.py TAKE.mp4 S0 LAG A B [--face=cascade|track|keys] [--ref=F --box=cx,cy,w,h]
+          [--keys=f:cx:cy:w:h;...] [--frames=lo,hi] [--size=0.28,0.2] [--max_dev=18] [--w_near=0.25]
+          [--hold=a:b:v;...] [--mask=sx,sy] [--no-recentre] [--clear=0.8] [--out=TAKE_sync.mp4] [--preview=DIR]
+          [--voc=work/stems/vocals.wav]
+
+  [A, B] = the song window the edit plays, S0 / LAG = the take's audio-ref start and lag (clip t = song t - S0 + lag).
+  Writes TAKE_sync.mp4 (same frame count, 24 fps, no audio) and, with --preview, the per-drawing choices as JSON + frames.
 """
 import json
 import os
@@ -32,44 +38,7 @@ from scipy.ndimage import gaussian_filter1d
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import mouth  # noqa: E402
-
-CLIPS = os.path.join(HERE, '..', 'base_clips')
-VOCALS = '/tmp/work/vocals.wav'      # Kim_Vocal_2 stem (docs/PROCESS.md §1)
-FPS = 24
-
-# One entry per take. Shots are the edit's uses of it: (song window, the take's song start, lag) exactly as
-# render/src/timeline.js plays them. 'face': how the mouth is found.
-#   cascade: the anime face cascade's box (mouth centred at 0.5 w, 0.655 h)
-#   track:   a mouth box given at one frame, followed by registering the lower face frame to frame
-#   keys:    mouth boxes placed by hand at a few frames, interpolated
-PLATES = {
-    'sd06': {'src': 'sd06_blink__a30f474b95.mp4', 'face': 'cascade',
-             'shots': [('blink', (25.30, 27.82), 25.0, 0.333333)]},
-    # extreme close-ups: the head hardly moves, so a mouth can come from further away in the take
-    'sd07': {'src': 'sd07_transit__9681e0518b.mp4', 'face': 'track', 'ref': 60, 'box': (652, 478, 92, 64),
-             'max_dev': 40, 'w_near': 0.02, 'shots': [('transit_eye', (30.98, 35.94), 30.0, 0.0)]},
-    # 'vision' opens on the end of "transmission": its last syllable (-sion) runs to 71.27 on D4, and "Our" starts
-    # a tone up. The /ən/ is voiced, so the stem alone would open her mouth for it; it is held nearly shut instead
-    'sd10': {'src': 'sd10_vision__1368eb119a.mp4', 'face': 'cascade', 'size': (0.3, 0.24),
-             'hold': [(71.10, 71.27, 0.12)],
-             'shots': [('vision', (71.14, 72.54), 71.0, 0.0), ('vision2', (73.999, 75.36), 71.0, 0.125)]},
-    'sd11': {'src': 'sd11_care__03ce0c9203.mp4', 'face': 'cascade',
-             'shots': [('care2', (75.36, 77.66), 75.0, 0.125)]},
-    'sd13': {'src': 'sd13_caught_reply__935323d481_lettering.mp4', 'face': 'cascade',
-             'shots': [('caught2', (94.61, 97.45), 93.3, -0.333333)]},
-    # the push-in turns her from behind into profile, then three-quarter view: the mouth is only drawn from frame 50
-    # on, and is placed by hand at a few frames; the back-of-head frames are left alone. In profile the open lips
-    # meet the sky, so the mouth can't be told apart by colour: an ellipse around it is transplanted instead
-    'sd16': {'src': 'sd16_alone_beam__c43ef1f6ef.mp4', 'face': 'keys', 'frames': (50, 121), 'max_dev': 6,
-             'recentre': False, 'mask': (1.9, 2.2), 'clear': None,
-             'keys': [(50, 593, 375, 14, 10), (56, 600, 377, 16, 12), (60, 610, 377, 18, 13), (64, 617, 379, 20, 15),
-                      (70, 627, 393, 28, 22), (76, 640, 404, 38, 30), (82, 640, 405, 46, 34), (90, 647, 440, 55, 42),
-                      (120, 650, 450, 55, 42)],
-             'shots': [('alone2', (107.79, 112.02), 107.5, 0.0)]},
-    'sd15': {'src': 'sd15_own_ecu__3eb552a647.mp4', 'face': 'track', 'ref': 60, 'box': (638, 500, 130, 80),
-             'max_dev': 40, 'w_near': 0.02, 'shots': [('own', (104.34, 107.79), 102.8, -0.083333)]},
-}
-
+from common import FPS, VOCALS  # noqa: E402  (work/stems/vocals.wav)
 
 def read_clip(path):
     cap = cv2.VideoCapture(path)
@@ -183,24 +152,26 @@ def openness(frames, boxes):
 _VOC = None
 
 
-def vocal_target():
-    """Log RMS and voicing probability of the vocal stem at 100 Hz."""
+def vocal_target(win=None, voc=None):
+    """Log RMS and voicing probability of the vocal stem at 100 Hz (song time), over win +- 2 s (pYIN is slow)."""
     global _VOC
     if _VOC is None:
-        y, sr = librosa.load(VOCALS, sr=16000, mono=True)
+        a, b = (win[0] - 2, win[1] + 2) if win else (0, None)
+        a = max(0.0, a)
+        y, sr = librosa.load(voc or VOCALS, sr=16000, mono=True, offset=a, duration=None if b is None else b - a)
         hop = 160
         rms = librosa.feature.rms(y=y, frame_length=640, hop_length=hop, center=True)[0]
         _, _, vp = librosa.pyin(y, fmin=150, fmax=1000, sr=sr, frame_length=1024, hop_length=hop)
         n = min(len(rms), len(vp))
-        _VOC = (np.arange(n) * hop / sr, gaussian_filter1d(np.log(rms[:n] + 1e-5), 2.0),
+        _VOC = (a + np.arange(n) * hop / sr, gaussian_filter1d(np.log(rms[:n] + 1e-5), 2.0),
                 gaussian_filter1d(np.nan_to_num(vp[:n]), 2.0))
     return _VOC
 
 
-def target_at(ts, win):
+def target_at(ts, win, voc=None):
     """0 = closed, 1 = open. Loudness is compressed (log RMS), so a low, quiet vowel still opens the mouth, and
     weighted by the voicing probability, so silences, stops and unvoiced consonants (s, f, th, t) close it."""
-    t, lr, vp = vocal_target()
+    t, lr, vp = vocal_target(win, voc)
     m = (t >= win[0] - 1) & (t <= win[1] + 1)
     lo, hi = np.percentile(lr[m], 10), np.percentile(lr[m], 90)
     v = np.clip((lr - lo) / (hi - lo + 1e-9), 0, 1.1) * np.clip(vp / 0.6, 0, 1) ** 0.7
@@ -354,9 +325,10 @@ def composite(body, src, bbox, sbox, ellipse=None):
     return out
 
 
-def run(key, preview=None):
-    spec = PLATES[key]
-    frames = read_clip(os.path.join(CLIPS, spec['src']))
+def run(spec, preview=None, voc=None):
+    """spec: {'src': path, 'face': 'cascade'|'track'|'keys', 'shots': [(name, (A, B), S0, lag)], ...options}."""
+    frames = read_clip(spec['src'])
+    key = os.path.splitext(os.path.basename(spec['src']))[0]
     n = len(frames)
     if spec['face'] == 'cascade':
         boxes = boxes_cascade(frames, spec.get('size', (0.28, 0.2)))
@@ -373,7 +345,7 @@ def run(key, preview=None):
     log = {'openness': [round(float(v), 3) for v in op], 'clear': [round(float(v), 3) for v in clear], 'shots': {}}
     for name, win, start, lag in spec['shots']:
         units = [u for u in display_units(win, start, lag, n) if lo <= u[0] < hi]
-        tgt = target_at(np.array([t for _, t in units]), win)
+        tgt = target_at(np.array([t for _, t in units]), win, voc)
         for a, b, v in spec.get('hold', []):            # phonemes the stem can't tell apart (a voiced /n/)
             tgt[[a <= t < b for _, t in units]] = v
         opr = op.copy()
@@ -391,8 +363,8 @@ def run(key, preview=None):
         log['shots'][name] = [{'body': e, 'mouth': j, 't': round(t, 3), 'target': round(float(g), 3), 'open': round(float(op[j]), 3),
                                'remnant': r} for (e, t), j, g, r in zip(units, path, tgt, rem)]
         print(f'  {name}: {len(units)} drawings, {sum(j != e for (e, _), j in zip(units, path))} re-mouthed, '
-              f'worst remnant {max(rem)} px', flush=True)
-    dst = os.path.join(CLIPS, spec['src'].replace('.mp4', '_sync.mp4'))
+              f'worst remnant {max(rem) if rem else 0} px', flush=True)
+    dst = spec.get('out') or spec['src'].replace('.mp4', '_sync.mp4')
     write_clip(out, dst)
     if preview:
         os.makedirs(preview, exist_ok=True)
@@ -401,7 +373,26 @@ def run(key, preview=None):
     return dst
 
 
+def _floats(v):
+    return tuple(float(x) for x in v.split(','))
+
+
 if __name__ == '__main__':
-    keys = [a for a in sys.argv[1:] if a in PLATES] or list(PLATES)
-    prev = sys.argv[sys.argv.index('--preview') + 1] if '--preview' in sys.argv else None
-    for k in keys: print(k, '->', run(k, prev), flush=True)
+    a = [x for x in sys.argv[1:] if not x.startswith('--')]
+    o = dict(x[2:].split('=', 1) if '=' in x else (x[2:], '1') for x in sys.argv[1:] if x.startswith('--'))
+    if len(a) < 5:
+        sys.exit(__doc__)
+    take, s0, lag, A, B = a[0], float(a[1]), float(a[2]), float(a[3]), float(a[4])
+    spec = {'src': take, 'face': o.get('face', 'cascade'), 'shots': [('shot', (A, B), s0, lag)], 'out': o.get('out')}
+    if 'size' in o: spec['size'] = _floats(o['size'])
+    if 'ref' in o: spec['ref'] = int(o['ref'])
+    if 'box' in o: spec['box'] = _floats(o['box'])
+    if 'keys' in o: spec['keys'] = [tuple(float(x) for x in k.split(':')) for k in o['keys'].split(';')]
+    if 'frames' in o: spec['frames'] = tuple(int(x) for x in o['frames'].split(','))
+    if 'hold' in o: spec['hold'] = [tuple(float(x) for x in k.split(':')) for k in o['hold'].split(';')]
+    if 'mask' in o: spec['mask'] = _floats(o['mask'])
+    if 'clear' in o: spec['clear'] = float(o['clear']) or None
+    for k in ('max_dev',): spec[k] = int(o[k]) if k in o else spec.get(k, 18)
+    if 'w_near' in o: spec['w_near'] = float(o['w_near'])
+    if 'no-recentre' in o: spec['recentre'] = False
+    print(take, '->', run(spec, o.get('preview'), o.get('voc')), flush=True)

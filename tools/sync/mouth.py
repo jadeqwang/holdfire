@@ -1,13 +1,16 @@
-"""Mouth-openness track for anime faces in a clip.
+"""Mouth-openness track for anime faces in a clip (ported from Rare Earth pipeline/sync/mouth.py).
 
 Face: nagadomi's lbpcascade_animeface, smoothed over time. Mouth ROI: lower part of the face box.
 Openness: area of mouth-interior pixels (dark / red-pink, low-luminance, saturated) inside the ROI.
+
+  python3 tools/sync/mouth.py CLIP.mp4 [OUT.json]      -> {fps, hit, open[], boxes[]}
 """
-import sys, json
+import sys, json, os
 import numpy as np
 import cv2
 
-CASCADE = "/tmp/work/lbpcascade_animeface.xml"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import CASCADE  # work/models/lbpcascade_animeface.xml
 
 
 def skin_ratio(frame, b):
@@ -21,6 +24,9 @@ def skin_ratio(frame, b):
 
 
 def detect_faces(frames):
+    if not os.path.exists(CASCADE):
+        raise SystemExit(f"missing {CASCADE}: curl -sSL -o {CASCADE} "
+                         "https://raw.githubusercontent.com/nagadomi/lbpcascade_animeface/master/lbpcascade_animeface.xml")
     cas = cv2.CascadeClassifier(CASCADE)
     raw = []
     for f in frames:
@@ -84,15 +90,16 @@ def openness(frame, roi):
     return float(m.mean()), crop
 
 
-def track(path, stride=1, fixed_roi=None):
-    cap = cv2.VideoCapture(path)
-    fps = cap.get(cv2.CAP_PROP_FPS) or 24
-    frames = []
-    while True:
-        ok, f = cap.read()
-        if not ok:
-            break
-        frames.append(f)
+def track(path, stride=1, fixed_roi=None, frames=None, fps=24):
+    if frames is None:
+        cap = cv2.VideoCapture(path)
+        fps = cap.get(cv2.CAP_PROP_FPS) or 24
+        frames = []
+        while True:
+            ok, f = cap.read()
+            if not ok:
+                break
+            frames.append(f)
     if fixed_roi is not None:
         op = [openness(f, fixed_roi)[0] for f in frames]
         return {"fps": fps, "hit": 1.0, "open": op, "fixed": list(fixed_roi)}

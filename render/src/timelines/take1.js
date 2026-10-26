@@ -1,10 +1,11 @@
+// TAKE ONE edit (moved from src/timeline.js for take two; load with ?tl=take1 / TL=take1).
 // THE EDIT. Every shot is placed on word onsets and the tracked bar grid from data/timing.json, so it re-times when the
 // timing is refined. Plates resolve through data/picks.json (plate -> {clip, s0, lag}); a missing plate or scene renders as
 // a labelled placeholder, so the whole film always renders.
 // shot: {id, t0, t1, scene, p (object | fn(t, lt, ctx)), look (post | fn), type (fn(ty, t, lt, shot, ctx)), post (fn)}
-import { smooth, range, easeInCubic, easeOutCubic, clamp, lerp } from './util.js';
-import { P } from './palette.js';
-import { PRINT_LOOK } from './scenes/history/print.js';
+import { smooth, range, easeInCubic, easeOutCubic, clamp, lerp } from '../util.js';
+import { P } from '../palette.js';
+import { PRINT_LOOK } from '../scenes/history/print.js';
 
 // ---------------------------------------------------------------------------------------------------- looks
 const LOOK = {

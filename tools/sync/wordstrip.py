@@ -1,66 +1,92 @@
-"""Visual lip-sync check: face crops at each sung word onset, for several candidate lags.
+"""Visual lip-sync check: mouth crops at each sung word onset, one row per candidate lag (as played, on twos).
+(Ported from Rare Earth pipeline/sync/wordstrip.py: words now come from render/data/timing.json, the crop follows the
+anime-face-cascade box frame by frame, rows = lags and columns = words.) The most reliable check (pipeline_lessons §2):
+pick the row where b/m/p close, vowels open and the mouth is shut in the gaps.
 
-  python3 wordstrip.py clip.mp4 song_t0 out.jpg [face_box x,y,w,h]
-Rows = words sung inside the clip window; columns = lag candidates (clip shown at song time + lag).
+  python3 tools/sync/wordstrip.py CLIP.mp4 S0 A B OUT.jpg [--lags=-0.125,0,0.125] [--box=x,y,w,h] [--words=timing.json]
 """
-import json
+import os
 import sys
 
 import cv2
 import numpy as np
 
-WORDS = "/tmp/work/lyrics_words_v3.json"
-LAGS = [-0.25, -0.125, 0.0, 0.125, 0.25]
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import FPS, frame_on_twos, load_words, read_frames  # noqa: E402
+
+TH = 112            # tile height px
+MAXW = 18           # at most this many word columns (evenly thinned)
 
 
-def main(clip, t0, out, box=None):
-    cap = cv2.VideoCapture(clip)
-    fps = cap.get(cv2.CAP_PROP_FPS) or 24
-    frames = []
-    while True:
-        ok, f = cap.read()
-        if not ok:
-            break
-        frames.append(f)
-    dur = len(frames) / fps
-    words = [w for w in json.load(open(WORDS)) if t0 <= w["t"] < t0 + dur - 0.05]
+def mouth_crop_box(fbox):
+    """Lower face from a cascade face box (x, y, w, h): the mouth with nose tip and chin for context."""
+    x, y, w, h = fbox
+    return x + 0.18 * w, y + 0.40 * h, 0.64 * w, 0.52 * h
+
+
+def strip(frames, f0, words, s0, lags, out, boxes=None, fixed=None, best=None, title=None):
+    """frames[i] is clip frame f0 + i; boxes[i] its face box (x, y, w, h) or None; fixed = crop box for all frames.
+    Writes OUT.jpg: rows = lags, columns = words."""
     H, W = frames[0].shape[:2]
-    if box is None:
-        # face box from the anime cascade on the middle frame, else center crop
-        cas = cv2.CascadeClassifier("/tmp/work/lbpcascade_animeface.xml")
-        best = None
-        for f in frames[::6]:
-            det = cas.detectMultiScale(cv2.equalizeHist(cv2.cvtColor(f, cv2.COLOR_BGR2GRAY)), 1.06, 3, minSize=(40, 40))
-            for b in det:
-                if best is None or b[2] > best[2]:
-                    best = b
-        if best is not None:
-            x, y, w, h = best
-            box = (int(x + 0.15 * w), int(y + 0.35 * h), int(0.7 * w), int(0.6 * h))
-        else:
-            box = (W // 3, H // 4, W // 3, H // 2)
-    x, y, w, h = box
-    th = 96
-    tw = max(1, int(w * th / max(1, h)))
-    rows = []
-    for wd in words:
-        tiles = []
-        for lag in LAGS:
-            fi = int(round((wd["t"] - t0 + lag) * fps))
-            fi = max(0, min(len(frames) - 1, fi))
-            crop = frames[fi][max(0, y):y + h, max(0, x):x + w]
-            crop = cv2.resize(crop, (tw, th))
-            cv2.putText(crop, f"{lag:+.2f}", (2, 12), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 255), 1)
-            tiles.append(crop)
-        label = np.zeros((th, 150, 3), np.uint8)
-        cv2.putText(label, wd["word"][:14], (4, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 1)
-        cv2.putText(label, f"{wd['t']:.2f}", (4, 70), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (180, 180, 180), 1)
-        rows.append(np.hstack([label] + tiles))
-    img = np.vstack(rows) if rows else np.zeros((10, 10, 3), np.uint8)
-    cv2.imwrite(out, img)
-    print(json.dumps({"words": len(words), "box": list(map(int, box))}))
+    if len(words) > MAXW:
+        words = [words[int(round(k))] for k in np.linspace(0, len(words) - 1, MAXW)]
+    if fixed is None:
+        good = [b for b in (boxes or []) if b is not None]
+        fixed = mouth_crop_box(np.median(np.array(good), 0)) if good else (W / 3, H / 3, W / 3, H / 3)
+    aspect = fixed[2] / max(1.0, fixed[3])
+    tw = int(np.clip(TH * aspect, 72, 200))
+    lab_w = 74
+    head = np.full((34, lab_w + tw * len(words), 3), 24, np.uint8)
+    for j, (wd, t) in enumerate(words):
+        cv2.putText(head, wd[:10], (lab_w + j * tw + 3, 14), cv2.FONT_HERSHEY_SIMPLEX, 0.42, (255, 255, 255), 1)
+        cv2.putText(head, f'{t:.2f}', (lab_w + j * tw + 3, 29), cv2.FONT_HERSHEY_SIMPLEX, 0.36, (170, 170, 170), 1)
+    rows = [head]
+    for lag in lags:
+        lab = np.full((TH, lab_w, 3), 24, np.uint8)
+        col = (0, 255, 0) if best is not None and abs(lag - best) < 1e-6 else (200, 200, 200)
+        cv2.putText(lab, f'{lag:+.3f}', (4, TH // 2 - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.5, col, 1)
+        cv2.putText(lab, f'{lag * FPS:+.0f}f', (4, TH // 2 + 16), cv2.FONT_HERSHEY_SIMPLEX, 0.42, col, 1)
+        tiles = [lab]
+        for wd, t in words:
+            fi = int(frame_on_twos(t, s0, lag))
+            k = fi - f0
+            tile = np.zeros((TH, tw, 3), np.uint8)
+            if 0 <= k < len(frames):
+                b = boxes[k] if boxes is not None and boxes[k] is not None else None
+                x, y, w, h = mouth_crop_box(b) if b is not None else fixed
+                x0, y0 = int(max(0, x)), int(max(0, y))
+                c = frames[k][y0:int(min(H, y + h)), x0:int(min(W, x + w))]
+                if c.size:
+                    tile = cv2.resize(c, (tw, TH), interpolation=cv2.INTER_AREA)
+            else:
+                cv2.putText(tile, 'out', (4, TH // 2), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (80, 80, 255), 1)
+            cv2.putText(tile, f'f{fi}', (3, TH - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.33, (0, 255, 255), 1)
+            tiles.append(tile)
+        row = np.hstack(tiles)
+        if best is not None and abs(lag - best) < 1e-6:
+            cv2.rectangle(row, (0, 0), (row.shape[1] - 1, TH - 1), (0, 200, 0), 2)
+        rows.append(row)
+    img = np.vstack(rows)
+    if title:
+        bar = np.full((22, img.shape[1], 3), 0, np.uint8)
+        cv2.putText(bar, title[:int(img.shape[1] / 7)], (4, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.42, (255, 255, 255), 1)
+        img = np.vstack([bar, img])
+    cv2.imwrite(out, img, [cv2.IMWRITE_JPEG_QUALITY, 88])
+    return out
 
 
-if __name__ == "__main__":
-    b = tuple(int(v) for v in sys.argv[4].split(",")) if len(sys.argv) > 4 else None
-    main(sys.argv[1], float(sys.argv[2]), sys.argv[3], b)
+if __name__ == '__main__':
+    import mouth
+    a = [x for x in sys.argv[1:] if not x.startswith('--')]
+    o = dict(x[2:].split('=', 1) if '=' in x else (x[2:], '1') for x in sys.argv[1:] if x.startswith('--'))
+    clip, s0, A, B, out = a[0], float(a[1]), float(a[2]), float(a[3]), a[4]
+    lags = [float(v) for v in o.get('lags', '-0.25,-0.125,0,0.125,0.25').split(',')]
+    frames, fps, n = read_frames(clip)
+    words = load_words(A, B, o.get('words'))
+    fixed = tuple(float(v) for v in o['box'].split(',')) if 'box' in o else None
+    boxes = None
+    if fixed is None:
+        fb, hit = mouth.detect_faces(frames)
+        boxes = [tuple(b) for b in fb] if fb is not None else None
+    strip(frames, 0, words, s0, lags, out, boxes=boxes, fixed=fixed, title=f'{os.path.basename(clip)}  S0 {s0}')
+    print(f'{out}: {len(words)} words x {len(lags)} lags')

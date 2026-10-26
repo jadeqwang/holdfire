@@ -1,0 +1,14 @@
+Make a new anime character turnaround sheet that matches Image 1 (the "DOT" character sheet) exactly in layout, paper colour, drawing style, line weight, flat cel shading, proportions and lettering style. It is the same young woman (Jade, age 20, same face, same eye shape and size, same brown eyes, same nose and mouth, same body), drawn by the same artist, but with a different haircut: the hair of the girl in Image 2.
+
+HAIR (the only change): shoulder-length straight black hair that ends just below the shoulders, parted slightly off-centre and swept back from the forehead, NO bangs and NO fringe, one side tucked behind her ear. The lower third of the hair fades into bright teal (#19B3B0) ends, with a teal under-layer that shows when the hair moves. Same teal tips in every view. Clean straight ends, not wavy.
+
+OUTFIT, identical to Image 1: cropped white jacket with one orange band across the chest and one orange band around each upper arm; a single pale-blue dot on her LEFT chest (viewer's right in the front view); a round black-and-white "1420 MHz" patch on her LEFT sleeve; on the back a big pale-blue circle with small "RARE EARTH" lettering under it; black high-neck crop top showing a little midriff; navy wide cargo trousers with orange straps and black belt; chunky white sneakers; orange-foam 1977-style headphones resting around her neck. She does NOT hold an antenna; her hands are relaxed at her sides.
+
+LAYOUT (same grid as Image 1, 3:2):
+- Top left: big bold title "TEAL" with a small teal dot after it, and a colour swatch column below (black, teal, beacon orange, pale blue, white, navy).
+- Top row: four full-body views on the plain paper background: FRONT, THREE-QUARTER, SIDE, BACK, each labelled underneath. The back view shows the pale-blue circle and RARE EARTH and the teal hair ends.
+- Right column: "JACKET DETAILS" panel with three insets (left chest dot, left sleeve 1420 MHz patch, back circle), then "HEADPHONES" panel, then "HAIR DETAIL" panel showing the teal ends and teal under-layer.
+- Bottom row: "EXPRESSIONS", four head-and-shoulders busts with headphones around the neck: SINGING "AH" (mouth open wide, eyes open), SINGING "OO" (small round mouth), EYES CLOSED (calm, singing softly), DETERMINED (looking up, jaw set, no smile). Her default mood is cool and a little skeptical, never grinning, no teeth showing except inside the "ah".
+- Bottom right: "EYE DETAIL" close-up of one brown eye with a small teal dot catchlight.
+
+Keep labels short and in the same small sans-serif capitals as Image 1. No other text, no extra people, no logos.

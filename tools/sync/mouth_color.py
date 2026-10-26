@@ -4,25 +4,32 @@ Per frame: find the face as the largest skin-coloured blob, take the lower part 
 region, and count dark-red mouth-interior pixels there (normalised by the box area). The openness curve
 and the vocal-stem envelope are both high-passed, then cross-correlated over the window the edit uses.
 
-  python3 mouth_color.py clip.mp4 SONG_T0 WIN_A WIN_B
+  python3 tools/sync/mouth_color.py clip.mp4 S0 WIN_A WIN_B [VOCALS.wav]
+(ported from Rare Earth pipeline/sync/mouth_color.py; vocals default work/stems/vocals.wav; t2sync.py scores it on twos)
 """
+import os
 import json
 import sys
 
 import cv2
-import librosa
 import numpy as np
 
-FPS = 24
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import VOCALS, FPS, vocal_env
 
 
-def openness(path):
+def _frames(path):
     cap = cv2.VideoCapture(path)
-    vals, boxes = [], []
     while True:
         ok, f = cap.read()
         if not ok:
             break
+        yield f
+
+
+def openness(path, frames=None):
+    vals, boxes = [], []
+    for f in (frames if frames is not None else _frames(path)):
         hsv = cv2.cvtColor(f, cv2.COLOR_BGR2HSV)
         h, s, v = hsv[..., 0], hsv[..., 1], hsv[..., 2]
         skin = ((h <= 22) & (s >= 25) & (s <= 130) & (v >= 150)).astype(np.uint8)
@@ -44,15 +51,12 @@ def openness(path):
     return np.array(vals, float), boxes
 
 
-def score(vals, t0, win, vocals="/tmp/work/vocals.wav", max_lag=0.3):
+def score(vals, t0, win, vocals=None, max_lag=0.3):
     ok = np.isfinite(vals)
     if ok.mean() < 0.5:
         return {"error": f"face blob in only {ok.mean():.0%} of frames"}
     v = np.where(ok, vals, np.nanmedian(vals))
-    y, sr = librosa.load(vocals, sr=22050, mono=True)
-    hop = sr // FPS
-    env = librosa.feature.rms(y=y, frame_length=hop * 2, hop_length=hop, center=True)[0]
-    et = np.arange(len(env)) / FPS
+    et, env = vocal_env(0, win[1] + 2, vocals or VOCALS)
 
     def hp(x, w=12):
         return x - np.convolve(x, np.ones(w) / w, mode="same")
@@ -72,4 +76,5 @@ def score(vals, t0, win, vocals="/tmp/work/vocals.wav", max_lag=0.3):
 
 if __name__ == "__main__":
     vals, _ = openness(sys.argv[1])
-    print(json.dumps(score(vals, float(sys.argv[2]), (float(sys.argv[3]), float(sys.argv[4])))))
+    print(json.dumps(score(vals, float(sys.argv[2]), (float(sys.argv[3]), float(sys.argv[4])),
+                           sys.argv[5] if len(sys.argv) > 5 else None)))

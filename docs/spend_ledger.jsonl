@@ -826,3 +826,5 @@
 {"ts": "2026-10-26T17:14:19Z", "model": "google/veo-3.1", "tag": "t2_CO17_veo_t1", "job": "holdfire/t2_CO17_veo_t1-f3cac7dd15", "event": "submit", "ok": null, "est_usd": 0.8, "where": "cloud"}
 {"ts": "2026-10-26T17:15:49Z", "model": "google/nano-banana-pro", "tag": "kf_CO03_nbp_v1", "job": "holdfire/kf_CO03_nbp_v1-78f57ccf08", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-26T17:15:50Z", "model": "google/nano-banana-pro", "tag": "kf_CO16S_nbp_v1", "job": "holdfire/kf_CO16S_nbp_v1-c9f934d5a6", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T17:16:20Z", "model": "google/nano-banana-pro", "tag": "t2g3_V218_nbp_v1", "job": "holdfire/t2g3_V218_nbp_v1-99dda0a7b8", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T17:16:22Z", "model": "google/nano-banana-pro", "tag": "t2g3_BR15_nbp_v1", "job": "holdfire/t2g3_BR15_nbp_v1-e5bb6e6bac", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}

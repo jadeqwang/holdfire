@@ -581,6 +581,14 @@
   "rate": 1.5,
   "note": "plate = take 0.5-1.5 s; in 0.16 (take 0.66 s) at 1.5x: the hand opens across the 0.28 s shot and lands spread (palm centre ~1000,560; fingertips reach y~360)"
  },
+ "V107": {
+  "dir": "work/plates/V107",
+  "kind": "video",
+  "src": "media/gen/t2_V107_veo_t3_624affc89f.mp4",
+  "in": 0.17,
+  "rate": 1.2,
+  "note": "plate = take 1.0-3.6 s; in 0.17 (take 1.17 s) at 1.2x: mist settles, hand lifts at ~+0.5 s, the stencil shows from ~+0.9 s. Do not use take time < 1.0 s (anachronistic spray can)"
+ },
  "V108": {
   "dir": "work/plates/V108",
   "kind": "video",
@@ -601,6 +609,26 @@
   "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
   "in": 0,
   "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.691 s, keyed, over painted era plate media/kf2/V110_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+ },
+ "V111": {
+  "dir": "work/plates/V111",
+  "kind": "video",
+  "src": "media/gen/t2_V111_veo_t1_f767e336bc.mp4",
+  "in": 0.2,
+  "note": "plate = take 0.3-2.1 s; the grain jar on the woman's shoulder sits at ~(1120-1280, 80-320) design px (centre ~1200,200), the anchor for the blueprint egg outline; Jade at x~600, walking toward camera"
+ },
+ "V112": {
+  "dir": "work/plates/V112",
+  "kind": "video",
+  "src": "media/gen/t2_V112_veof_t1_495586925d.mp4",
+  "in": 0,
+  "note": "plate = take 0.3-1.5 s"
+ },
+ "V115": {
+  "dir": "work/plates/V115",
+  "kind": "still",
+  "src": "media/kf2/V115_nbp_v1.jpg",
+  "note": "painted cutaway: field surface/horizon at y~500, the seed just below the surface at ~(950,700), the dry canal in section at right (~1600-1800, 560-640); calm soil and sky for the blueprint cross-section"
  },
  "V201": {
   "dir": "work/plates/V201",

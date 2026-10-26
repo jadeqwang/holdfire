@@ -155,5 +155,33 @@
   "src": "media/gen/t2_V102_sd20_t2_b72e2c06c8.mp4",
   "in": 0,
   "note": "Seedance 2.0 (Veo t1 drifted). V103 continues it at in 1.92: at that time the near front fin is at (1140,760) in the plate (shoulder 1100,680 to tip 1140,790), head 760-900,560-620. With the edit p zoom 1.5 pan [-120,60] the fin lands at screen ~(1110,930), near the bottom edge; pan [-270,-270] puts it at (960,600)"
+ },
+ "V107": {
+  "dir": "work/plates/V107",
+  "kind": "video",
+  "src": "media/gen/t2_V107_veo_t3_624affc89f.mp4",
+  "in": 0.17,
+  "rate": 1.2,
+  "note": "plate = take 1.0-3.6 s; in 0.17 (take 1.17 s) at 1.2x: mist settles, hand lifts at ~+0.5 s, the stencil shows from ~+0.9 s. Do not use take time < 1.0 s (anachronistic spray can)"
+ },
+ "V111": {
+  "dir": "work/plates/V111",
+  "kind": "video",
+  "src": "media/gen/t2_V111_veo_t1_f767e336bc.mp4",
+  "in": 0.2,
+  "note": "plate = take 0.3-2.1 s; the grain jar on the woman's shoulder sits at ~(1120-1280, 80-320) design px (centre ~1200,200), the anchor for the blueprint egg outline; Jade at x~600, walking toward camera"
+ },
+ "V112": {
+  "dir": "work/plates/V112",
+  "kind": "video",
+  "src": "media/gen/t2_V112_veof_t1_495586925d.mp4",
+  "in": 0,
+  "note": "plate = take 0.3-1.5 s"
+ },
+ "V115": {
+  "dir": "work/plates/V115",
+  "kind": "still",
+  "src": "media/kf2/V115_nbp_v1.jpg",
+  "note": "painted cutaway: field surface/horizon at y~500, the seed just below the surface at ~(950,630), the dry canal in section at right (~1600-1800, 560-640); calm soil and sky for the blueprint cross-section"
  }
 }

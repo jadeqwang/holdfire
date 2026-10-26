@@ -29,3 +29,18 @@
 - Lags to confirm on word strips: all teal-tips lags were picked by eye from fixed-box strips (mouth detector failed under cool light), C203R especially (+0.917).
 - Teal-tips' 1420 patch is on her right sleeve in P105, C103R, C108 (consistent with the mirrored room); accepted as the mirror logic.
 - P107: the 5× push into her eye is soft at the end (720p source); end the push earlier or cross into a crisp eye still.
+
+## End card (Jade, 26 Oct): credit humans and robots alike, as in rewind-take-two
+rewind-take-two's model is its `tools/sectionF/edl.py` CREDIT / CREDIT_R: the song credit in one corner, one line per beat,
+and in the other corner "Animated by Opus 5.5 / and a supporting cast of models:" with the models that actually made the cut.
+Take two's end card (`t2_endcard`) should read, set on the beats after the final hit:
+- **Hold Fire** · from the album *Rare Earth*
+- Lyrics "by" Jade Wang (the quotation marks are Jade's)
+- assembled by Opus 5.5 from a corpus of four books of poetry written by Jade Wang:
+  *Inference*, *Petrov Test*, *Tao of Totality* (the Spaces Left Blank trilogy) and *Variations and Metamorphosis*
+- Instruments arranged by Suno
+- Animated by Opus 5.5 and a supporting cast of models: the `cast` list in `render/data/t2/credits.json`, which
+  `python3 tools/t2/credits.py` computes from the picks the edit actually uses (re-run it after the last pick change; bake-off
+  losers don't appear), then the `support` list (stems, face tracking, transcription, the renderer).
+- small: Fischer–Tal · Leipzig 1960 · ½–½; near-miss sources (National Security Archive, UCS, Chatham House, Atomic Heritage
+  Foundation); fonts under the SIL Open Font License; no NASA/ESA imagery is used unless credits.json lists it.

@@ -251,6 +251,55 @@
    "verdict": "reject: no visible ochre spray; faint outline only",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_V107_veo_t3",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V107_veo_t3-624affc89f",
+   "kf": "media/kf2/V107_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V107_veo_t3.txt",
+   "s0": null,
+   "dur": "6s",
+   "file": "media/gen/t2_V107_veo_t3_624affc89f.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.2,
+   "verdict": "pick (window 1.17-3.2 s): ochre mist round the pressed hand, hand lifts, a rock-coloured hand stencil in a red halo among the old ones. Rest of take unusable: a yellow spray can at 0-0.9 s",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "V111": [
+  {
+   "tag": "t2_V111_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V111_veo_t1-f767e336bc",
+   "kf": "media/kf2/V111_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V111_veo_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_V111_veo_t1_f767e336bc.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.8,
+   "verdict": "pick: Jade and the woman with the grain jar walk toward camera, camera backs away; on model",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "V112": [
+  {
+   "tag": "t2_V112_veof_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V112_veof_t1-495586925d",
+   "kf": "media/kf2/V112_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V112_veof_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_V112_veof_t1_495586925d.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "verdict": "pick: low glide along the ruts, dust drifting",
+   "lag": null,
+   "pick": true
   }
  ]
 }

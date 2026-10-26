@@ -400,7 +400,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 2,
@@ -410,9 +411,13 @@
    "dur": 5,
    "voc": null,
    "submitted": "2026-10-26T03:56:35Z",
-   "file": null,
-   "lag": null,
-   "verdict": null
+   "file": "media/gen/C4_t2_2beb25a557.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1280,720,121",
+   "sheet": "media/gen/C4_t2_2beb25a557_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ],
  "O2": [
@@ -604,6 +609,294 @@
    "dur": 6,
    "voc": null,
    "submitted": "2026-10-26T03:59:37Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "K10": [
+  {
+   "take": 1,
+   "job": "holdfire/K10_t1-d7f43cffd4",
+   "kf": "media/kf/K10_nbp.png",
+   "s0": 212.7,
+   "dur": 17,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:01:24Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  },
+  {
+   "take": 2,
+   "job": "holdfire/K10_t2-2f0ad89194",
+   "kf": "media/kf/K10_nbp.png",
+   "s0": 212.7,
+   "dur": 17,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:01:24Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "K12": [
+  {
+   "take": 1,
+   "job": "holdfire/K12_t1-c66df4cbc3",
+   "kf": "media/kf/K12_nbp.png",
+   "s0": 148.5,
+   "dur": 8,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:01:26Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  },
+  {
+   "take": 2,
+   "job": "holdfire/K12_t2-8c46dd5dac",
+   "kf": "media/kf/K12_nbp.png",
+   "s0": 148.5,
+   "dur": 8,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:01:27Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "L3": [
+  {
+   "take": 1,
+   "job": "holdfire/L3_t1-ec2f8df5db",
+   "kf": "media/kf/L3_nbp.jpg",
+   "s0": 102.65,
+   "dur": 11,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:01:29Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  },
+  {
+   "take": 2,
+   "job": "holdfire/L3_t2-d898a88627",
+   "kf": "media/kf/L3_nbp.jpg",
+   "s0": 102.65,
+   "dur": 11,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:01:30Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "C1": [
+  {
+   "take": 1,
+   "job": "holdfire/C1_t1-05896625b9",
+   "kf": "media/kf/C1_nbp.jpg",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:31Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "C7": [
+  {
+   "take": 1,
+   "job": "holdfire/C7_t1-edbc18a069",
+   "kf": "media/kf/C7_nbp.jpg",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:33Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "C8": [
+  {
+   "take": 1,
+   "job": "holdfire/C8_t1-9147a58c84",
+   "kf": "media/kf/C8_nbp.jpg",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:34Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "C9": [
+  {
+   "take": 1,
+   "job": "holdfire/C9_t1-b030f31bb9",
+   "kf": "media/kf/C9_nbp_c.png",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:35Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "E1": [
+  {
+   "take": 1,
+   "job": "holdfire/E1_t1-bcb73bb347",
+   "kf": "media/kf/E1_nbp.jpg",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:37Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "E3": [
+  {
+   "take": 1,
+   "job": "holdfire/E3_t1-401121939c",
+   "kf": "media/kf/E3_nbp_c.png",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:39Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "E4": [
+  {
+   "take": 1,
+   "job": "holdfire/E4_t1-ba7ab0311f",
+   "kf": "media/kf/E4_nbp.png",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:40Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "E5": [
+  {
+   "take": 1,
+   "job": "holdfire/E5_t1-d528ada7f3",
+   "kf": "media/kf/E5_nbp_c.png",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:41Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "E6": [
+  {
+   "take": 1,
+   "job": "holdfire/E6_t1-4727a5d6d9",
+   "kf": "media/kf/E6_nbp.png",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:43Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "H1": [
+  {
+   "take": 1,
+   "job": "holdfire/H1_t1-1048a8d224",
+   "kf": "media/kf/H1_nbp.jpg",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:44Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "H4": [
+  {
+   "take": 1,
+   "job": "holdfire/H4_t1-a2bcedf4c2",
+   "kf": "media/kf/H4_nbp.jpg",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:46Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "L4": [
+  {
+   "take": 1,
+   "job": "holdfire/L4_t1-0418464ec2",
+   "kf": "media/kf/L4_nbp.jpg",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:47Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "L5": [
+  {
+   "take": 1,
+   "job": "holdfire/L5_t1-6cf6559422",
+   "kf": "media/kf/L5_nbp.png",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:49Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "O4": [
+  {
+   "take": 1,
+   "job": "holdfire/O4_t1-503af49bed",
+   "kf": "media/kf/O4_nbp.jpg",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:51Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "O8": [
+  {
+   "take": 1,
+   "job": "holdfire/O8_t1-95ba41fda1",
+   "kf": "media/kf/O8_nbp.jpg",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T04:01:52Z",
    "file": null,
    "lag": null,
    "verdict": null

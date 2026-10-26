@@ -8,7 +8,7 @@
 import { drawSky } from '../sky.js';
 import { P, css } from '../../palette.js';
 import { clamp, lerp, smooth, smoother, range, easeInOutCubic, easeOutCubic, hash1, hash2, rng } from '../../util.js';
-import { wordT, ad, env, pick } from './common.js';
+import { wordT, ad, env, pick, Buckets } from './common.js';
 
 const LY_AU = 63241.08, LS_LY = 1 / 31557600, AU_LY = 1 / 63241.08;
 const TILT = Math.cos(63 * Math.PI / 180);             // the ecliptic seen obliquely
@@ -17,6 +17,7 @@ const PLANETS = [['MERCURY', 0.387, 40], ['VENUS', 0.723, 200], ['EARTH', 1.0, 1
 const NEAR = [['ALPHA CENTAURI', 4.37, [0.55, 0.62]], ['BARNARD\'S STAR', 5.96, [-0.2, -0.9]], ['WOLF 359', 7.86, [-0.85, 0.2]], ['SIRIUS', 8.6, [0.25, 0.8]]];
 
 let STARS = null, KUIPER = null, OORT = null;
+const COOL = [0.82, 0.88, 1], WARM = [1, 0.93, 0.82];
 function build() {
   const R = rng(4242);
   // a sample of stars out to ~140 ly (not to density: a legible field), with magnitudes
@@ -145,14 +146,14 @@ export default {
     // the nearest stars and the field beyond
     if (K < 2e4) {
       const fa = smooth(range(Math.log10(K), Math.log10(2e4), Math.log10(1500)));
+      const BS = new Buckets(12);
       for (const s of STARS) {
         const q = scr(s.x, s.y);
         if (q[0] < -5 || q[0] > 1925 || q[1] < -5 || q[1] > 1085) continue;
         const f = lit(Math.hypot(s.x, s.y));
-        c.fillStyle = css(s.w < 0.7 ? [0.82, 0.88, 1] : [1, 0.93, 0.82], clamp(fa * (0.22 + 0.36 * s.b) + 0.6 * f * fa));
-        const rr = 0.9 + 0.7 * s.b;
-        c.beginPath(); c.arc(q[0], q[1], rr, 0, Math.PI * 2); c.fill();
+        BS.dot(q[0], q[1], Math.round((0.9 + 0.7 * s.b) * 2) / 2, s.w < 0.7 ? COOL : WARM, clamp(fa * (0.22 + 0.36 * s.b) + 0.6 * f * fa));
       }
+      BS.flush(c);
       for (const [name, d, dir] of NEAR) {
         const n = Math.hypot(dir[0], dir[1]);
         const q = scr(dir[0] / n * d * 0.92, dir[1] / n * d * 0.92);

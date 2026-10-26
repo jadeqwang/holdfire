@@ -33,7 +33,7 @@ import time
 
 import numpy as np
 import soundfile as sf
-from scipy.ndimage import minimum_filter1d, uniform_filter1d
+from scipy.ndimage import maximum_filter1d, minimum_filter1d, uniform_filter1d
 from scipy.signal import butter, fftconvolve, lfilter, resample_poly, sosfilt
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -49,7 +49,8 @@ TOTAL_S = 249.2            # film length: render/src/timeline.js Z3 ends at A.du
 LAYER_PEAK_MAX_DB = -14.0  # brief: layer peak <= -14 dBFS
 MIX_TP_MAX_DB = -0.5       # brief: mix true peak <= -0.5 dBTP (where the song itself is below that)
 MIN_MARGIN_DB = 6.0        # brief: every cue >= 6 dB under the song (except scope pre-music and the end tail)
-VOCAL_ON_LUFS = -40.0      # the vocal stem counts as present (a word is sounding) above this, in 100 ms windows
+VOCAL_ON_LUFS = -40.0      # a word is sounding where the vocal stem (100 ms windows) is above this ...
+VOCAL_WORD_DB = 12.0       # ... and within 12 dB of the word's own peak (+-0.3 s): onset ramps and tails count as gaps
 VOCAL_FIT_DB = 7.0         # where the vocal is present the layer sits >= 7 dB under it (rule: >= 6 dB, 1 dB safety)
 
 
@@ -613,12 +614,23 @@ def fit_level(cue, songM, vocM=None):
     return cue.gain_db
 
 
+def vocal_present(vocM, ts):
+    """Vocal level (100 ms) at ts and where a word is sounding (>= -40 LUFS and within 12 dB of the local peak)."""
+    pad = 30
+    tp = np.concatenate([ts[0] - 0.01 * np.arange(pad, 0, -1), ts, ts[-1] + 0.01 * np.arange(1, pad + 1)])
+    v = vocM(tp, win=0.1)
+    pk = maximum_filter1d(v, 2 * pad + 1)[pad:-pad]
+    v = v[pad:-pad]
+    return v, (v >= VOCAL_ON_LUFS) & (v >= pk - VOCAL_WORD_DB)
+
+
 def under_vocal(cue, vocM):
     """Where a word is sounding (vocal stem >= -40 LUFS in 100 ms windows) the cue sits >= 7 dB under the vocal: event
     cues take a lower fixed gain, continuous cues duck (a smoothed sidechain gain curve on the layer only)."""
     for _ in range(3):
         ts, cS, vS, act = cue.margins(vocM, win=0.1)
-        pres = act & (vS >= VOCAL_ON_LUFS) & ~cue.exempt(ts)
+        vS, word = vocal_present(vocM, ts)
+        pres = act & word & ~cue.exempt(ts)
         if not pres.any():
             return
         need = np.where(pres, vS - VOCAL_FIT_DB - cS, np.inf)
@@ -882,7 +894,8 @@ def main(argv):
                         trims[o.id] = max(trims.get(o.id, 0.0), d)
             if vocM is not None:
                 ts1, cS, vS, act1 = c.margins(vocM, win=0.1)
-                pres = act1 & (vS >= VOCAL_ON_LUFS) & ~c.exempt(ts1)
+                vS, word = vocal_present(vocM, ts1)
+                pres = act1 & word & ~c.exempt(ts1)
                 if pres.any():
                     mv = vS[pres] - layM(ts1[pres], win=0.1)
                     j = int(np.argmin(mv))
@@ -997,7 +1010,8 @@ def main(argv):
         vm_med = vm_worst = None
         if vocM is not None:
             ts1, cS, vS, act1 = c.margins(vocM, win=0.1)
-            pres = act1 & (vS >= VOCAL_ON_LUFS) & ~c.exempt(ts1)
+            vS, word = vocal_present(vocM, ts1)
+            pres = act1 & word & ~c.exempt(ts1)
             if pres.any():
                 mv = vS[pres] - layM(ts1[pres], win=0.1)
                 vm_med, vm_worst = round(float(np.median(mv)), 1), round(float(mv.min()), 1)
@@ -1111,7 +1125,8 @@ def write_doc(rows, V, ctx, T):
              "exempt only: the scope cue before the music starts (song < -40 LUFS, t < "
              f"{V['timing']['music_start_s']:.2f} s) and the end card's tail, after the music has ended (the song falls below the same "
              f"-40 LUFS for good, t >= {V['timing']['song_tail_s']:.2f} s).")
-    L.append("* **Under the vocal.** Wherever a word is sounding (vocal stem >= -40 LUFS in 100 ms windows) the whole layer sits "
+    L.append("* **Under the vocal.** Wherever a word is sounding (vocal stem >= -40 LUFS in 100 ms windows and within 12 dB of "
+             "that word's peak, so onset ramps and tails count as gaps) the whole layer sits "
              ">= 6 dB under the vocal (fitted at 7): event cues (pings, thuds, the match) take a lower fixed gain; continuous cues "
              "(scope hum/servo, lock, whoosh, wind, the drop's lock) duck under the words with a smoothed gain curve on the layer "
              "only. Between words the layer may fill the gap, always under the song.")

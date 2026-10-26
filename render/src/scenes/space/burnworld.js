@@ -7,12 +7,13 @@
 //   radius (1250), targets (26), hud (0..1)
 import { P, css } from '../../palette.js';
 import { clamp, lerp, smooth, range, easeOutCubic, easeInCubic, hash1, hash2, rng } from '../../util.js';
-import { wordT, lineT, ad, env, pick, eighths } from './common.js';
+import { wordT, lineT, ad, env, pick, eighths, Buckets } from './common.js';
 import { drawSky } from '../sky.js';
 
 const D2R = Math.PI / 180;
 let GEO = null, LIGHTS = null, THREADS = null;
 
+const unit = (o) => { const a = o.lat * D2R, b = o.lon * D2R; o.u = [Math.cos(a) * Math.cos(b), Math.cos(a) * Math.sin(b), Math.sin(a)]; return o; };
 async function loadGeo() {
   if (GEO) return GEO;
   GEO = await fetch('src/scenes/space/earth_geo.json').then((r) => r.json());
@@ -24,12 +25,12 @@ async function loadGeo() {
     const rad = 0.06 + 0.05 * Math.pow(pop / 1e6, 0.35);        // degrees
     for (let k = 0; k < n; k++) {
       const a = R() * Math.PI * 2, r = rad * Math.sqrt(-Math.log(1 - R() * 0.98)) * 0.7;
-      LIGHTS.push({ lat: lat + Math.sin(a) * r, lon: lon + Math.cos(a) * r / Math.max(0.2, Math.cos(lat * D2R)), b: 0.5 + 0.9 * Math.pow(R(), 2) + (k === 0 ? 0.6 : 0), ci, h: R() });
+      LIGHTS.push(unit({ lat: lat + Math.sin(a) * r, lon: lon + Math.cos(a) * r / Math.max(0.2, Math.cos(lat * D2R)), b: 0.5 + 0.9 * Math.pow(R(), 2) + (k === 0 ? 0.6 : 0), ci, h: R() }));
     }
     const m = Math.round(Math.sqrt(pop) / 140);
     for (let k = 0; k < m; k++) {
       const a = R() * Math.PI * 2, r = 0.25 + R() * 1.4;
-      LIGHTS.push({ lat: lat + Math.sin(a) * r, lon: lon + Math.cos(a) * r / Math.max(0.2, Math.cos(lat * D2R)), b: 0.18 + 0.25 * R(), ci, h: R() });
+      LIGHTS.push(unit({ lat: lat + Math.sin(a) * r, lon: lon + Math.cos(a) * r / Math.max(0.2, Math.cos(lat * D2R)), b: 0.18 + 0.25 * R(), ci, h: R() }));
     }
   });
   // threads between neighbouring cities (< 3 deg): the lit roads, drawn as faint light
@@ -100,15 +101,16 @@ export default {
     }
     // coastlines
     c.strokeStyle = css(P.bookGold, 0.3); c.lineWidth = 1.6;
+    c.beginPath();
     for (const ring of GEO.coast) {
-      c.beginPath(); let on = false;
+      let on = false;
       for (let i = 0; i < ring.length; i += 2) {
         const q = pr(ring[i + 1], ring[i]);
         if (q[2] <= 0.02 || q[1] < -20 || q[1] > 1100) { on = false; continue; }
         if (!on) { c.moveTo(q[0], q[1]); on = true; } else c.lineTo(q[0], q[1]);
       }
-      c.stroke();
     }
+    c.stroke();
     // ---- the fires: targets are the largest cities in view, struck on a 16th-note grid around "burn"
     const vis = [];
     GEO.cities.forEach(([la, lo, pop], i) => { const q = pr(la, lo); if (q[2] > 0.08 && q[0] > 40 && q[0] < 1880 && q[1] > 330 && q[1] < 1060) vis.push(i); });
@@ -118,7 +120,7 @@ export default {
     const snap = (x) => { let b = x, d = 1e9; for (const g of grid) { const dd = Math.abs(g - x); if (dd < d) { d = dd; b = g; } } return b; };
     const fires = tg.map((ci, k) => {
       const ti = snap(tBurn - 0.08 + 0.6 * Math.pow(hash1(ci * 1.3 + 7), 1.3));
-      return { ci, ti, lat: GEO.cities[ci][0], lon: GEO.cities[ci][1], rmax: 1.6 + 3.2 * Math.pow(GEO.cities[ci][2] / 2e7, 0.4) + 1.2 * hash1(ci) };
+      const f = unit({ ci, ti, lat: GEO.cities[ci][0], lon: GEO.cities[ci][1], rmax: 1.6 + 3.2 * Math.pow(GEO.cities[ci][2] / 2e7, 0.4) + 1.2 * hash1(ci) }); f.cmax = Math.cos(f.rmax * D2R); return f;
     });
     const fireR = (f) => (t < f.ti ? 0 : f.rmax * easeOutCubic(clamp((t - f.ti) / 1.1)));
     // tracks: thin red arcs from over the limb down onto each target
@@ -156,14 +158,16 @@ export default {
       }
       c.stroke();
     }
+    const BL = new Buckets(14);
+    const lit = fires.filter((f) => t >= f.ti);
     for (const L of LIGHTS) {
       const q = pr(L.lat, L.lon); if (q[2] <= 0.03 || q[1] < 300 || q[1] > 1085 || q[0] < -5 || q[0] > 1925) continue;
-      // is it inside a fire?
+      // is it inside a fire? (cheap dot-product test first)
       let tb = Infinity;
-      for (const f of fires) {
-        if (t < f.ti) continue;
-        const d = gc(L.lat, L.lon, f.lat, f.lon);
-        if (d > f.rmax) continue;
+      for (const f of lit) {
+        const dot = L.u[0] * f.u[0] + L.u[1] * f.u[1] + L.u[2] * f.u[2];
+        if (dot < f.cmax) continue;
+        const d = Math.acos(Math.min(1, dot)) / D2R;
         const tr = f.ti + 1.1 * (1 - Math.cbrt(1 - d / f.rmax));    // when the front reaches it (inverse of easeOutCubic)
         tb = Math.min(tb, tr);
       }
@@ -178,9 +182,10 @@ export default {
         a *= Math.exp(-k / 0.08) * (k < 0.1 ? 0.6 + 0.4 * Math.sin(k * 140) : 1);   // the grid fails: a flicker, then dark
       }
       if (a < 0.01) continue;
-      c.fillStyle = css(col, clamp(a));
-      c.fillRect(q[0] - r, q[1] - r * Math.max(0.35, q[2]), 2 * r, 2 * r * Math.max(0.35, q[2]));
+      const rq = Math.round(r * 2) / 2, sy = Math.max(0.35, q[2]);
+      BL.rect(q[0] - rq, q[1] - rq * sy, 2 * rq, 2 * rq * sy, col, clamp(a));
     }
+    BL.flush(c);
     // fire fronts and their glow (projected circles on the sphere)
     for (const f of fires) {
       const rf = fireR(f); if (rf <= 0) continue;

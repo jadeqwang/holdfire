@@ -8,7 +8,7 @@
 import { drawSky } from '../sky.js';
 import { P, css } from '../../palette.js';
 import { clamp, lerp, smooth, smoother, range, easeInOutCubic, easeOutCubic, easeInCubic, hash1, hash2, noise1, rng } from '../../util.js';
-import { wordT, ad, env, pick } from './common.js';
+import { wordT, ad, env, pick, Buckets, glowSprite, drawGlow } from './common.js';
 
 const F = 1158;                // focal length (design px): ~50 deg vertical fov
 const H = 1.6;                 // camera height above the soil
@@ -71,55 +71,48 @@ export default {
     const groundA = 1 - smooth(range(tilt, 0.55, 0.95));
     if (groundA > 0.01) {
       const JN = 64;
+      const BR = new Buckets(16), BT = new Buckets(16);
+      const heads = [];
       for (let j = -JN; j <= JN; j++) {
-        const xr = j * PITCH;
-        // furrows that reach the frame (cheap test at the near end)
+        // the ridge: dark steel, thicker and lighter near (batched by quantised tone)
         const pts = [];
-        for (let s2 = 0; s2 <= 48; s2++) {
-          const Z = 0.9 + Math.pow(s2 / 48, 1.8) * 72 + drift;
+        for (let s2 = 0; s2 <= 40; s2++) {
+          const Z = 0.9 + Math.pow(s2 / 40, 1.8) * 72 + drift;
           const q = proj(furrowX(j, Z), 0.0, Z); if (!q) continue;
           pts.push([q[0], q[1], Z]);
         }
         if (pts.length < 2) continue;
-        if (Math.max(...pts.map((q) => q[0])) < -50 || Math.min(...pts.map((q) => q[0])) > 1970) continue;
-        // the ridge: dark steel, thicker and lighter near
+        let mnx = 1e9, mxx = -1e9; for (const q of pts) { mnx = Math.min(mnx, q[0]); mxx = Math.max(mxx, q[0]); }
+        if (mxx < -50 || mnx > 1970) continue;
         for (let k = 1; k < pts.length; k++) {
           const a = pts[k - 1], b = pts[k];
-          const near = clamp(1 - a[2] / 40);
-          const far = smooth(range(a[2], 70, 40));
-          c.strokeStyle = css(P.steel, (0.07 + 0.24 * near * near) * far * groundA);
-          c.lineWidth = 1.2 + 1.8 * near;
-          c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke();
+          const near = clamp(1 - a[2] / 40), far = smooth(range(a[2], 70, 40));
+          BR.line(a[0], a[1], b[0], b[1], P.steel, (0.07 + 0.24 * near * near) * far * groundA, 1.2 + 1.8 * near);
         }
         // the trough: lit by the flood behind its front (front -> horizon), hottest at the front
         const fz = frontZ(j, t);
         if (fz < ZF0 - 0.1) {
-          c.globalCompositeOperation = 'lighter';
-          const tro = [];
-          for (let s2 = 0; s2 <= 40; s2++) {
-            const Z = fz + Math.pow(s2 / 40, 1.6) * (72 - fz);
-            const q = proj(furrowX(j, Z) + PITCH / 2, -0.02, Z); if (q) tro.push([q[0], q[1], Z]);
+          let prev = null;
+          for (let s2 = 0; s2 <= 32; s2++) {
+            const Z = fz + Math.pow(s2 / 32, 1.6) * (72 - fz);
+            const q = proj(furrowX(j, Z) + PITCH / 2, -0.02, Z); if (!q) { prev = null; continue; }
+            if (prev) {
+              const d = prev[2] - fz;
+              const hot = Math.exp(-d / 1.6), body = Math.exp(-d / 22) * smooth(range(prev[2], 72, 45));
+              const near = clamp(1 - prev[2] / 40);
+              BT.line(prev[0], prev[1], q[0], q[1], hot > 0.3 ? P.goldPale : P.gold, clamp((0.12 + 0.22 * near) * body + 0.75 * hot) * groundA, 1.3 + 1.6 * near + 1.2 * hot);
+            } else if (fz > ZF1 + 0.2) heads.push([q[0], q[1], q[2]]);
+            prev = [q[0], q[1], Z];
           }
-          for (let k = 1; k < tro.length; k++) {
-            const a = tro[k - 1], b = tro[k];
-            const d = a[2] - fz;
-            const hot = Math.exp(-d / 1.6), body = Math.exp(-d / 22) * smooth(range(a[2], 72, 45));
-            const near = clamp(1 - a[2] / 40);
-            c.strokeStyle = css(hot > 0.3 ? P.goldPale : P.gold, clamp((0.12 + 0.22 * near) * body + 0.75 * hot) * groundA);
-            c.lineWidth = 1.3 + 1.6 * near + 1.2 * hot;
-            c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke();
-          }
-          // the leading edge of the water of light
-          const h0 = tro[0];
-          if (h0 && fz > ZF1 + 0.2) {
-            const r = 1.2 + 2.2 * clamp(1 - h0[2] / 30);
-            const g = c.createRadialGradient(h0[0], h0[1], 0, h0[0], h0[1], r * 3);
-            g.addColorStop(0, css(P.goldPale, 0.7 * groundA)); g.addColorStop(1, css(P.gold, 0));
-            c.fillStyle = g; c.beginPath(); c.arc(h0[0], h0[1], r * 3, 0, Math.PI * 2); c.fill();
-          }
-          c.globalCompositeOperation = 'source-over';
         }
       }
+      BR.flush(c);
+      c.globalCompositeOperation = 'lighter';
+      BT.flush(c);
+      // the leading edges of the water of light
+      const hs = glowSprite(P.goldPale);
+      for (const h0 of heads) drawGlow(c, hs, h0[0], h0[1], (1.2 + 2.2 * clamp(1 - h0[2] / 30)) * 3, 0.7 * groundA);
+      c.globalCompositeOperation = 'source-over';
       // dawn on the horizon line, as the flood comes
       const hz = proj(0, 0, 400);
       if (hz) {
@@ -136,8 +129,9 @@ export default {
       }
     }
 
-    // ---- the seeds
+    // ---- the seeds (batched: outlines, cores and trails bucketed by tone; halos from one pre-rendered sprite)
     c.globalCompositeOperation = 'lighter';
+    const BS = new Buckets(16), halo = glowSprite([1.0, 0.8, 0.45]);
     let woke = 0;
     for (let i = 0; i < SEEDS.length; i++) {
       const s = SEEDS[i];
@@ -175,13 +169,12 @@ export default {
         // the engraved seed: an almond (two arcs through the sides), a spine and two stripes
         const qa = (pp) => [2 * pp[0] - px, 2 * pp[1] - py];
         const cC = qa(pC), cD = qa(pD);
-        c.strokeStyle = css(col, a * shrink); c.lineWidth = Math.min(2.4, 1.2 + size / 30);
-        c.beginPath(); c.moveTo(pA[0], pA[1]); c.quadraticCurveTo(cC[0], cC[1], pB[0], pB[1]); c.quadraticCurveTo(cD[0], cD[1], pA[0], pA[1]); c.stroke();
+        const pth = BS.sp(col, a * shrink, Math.min(2.4, 1.2 + size / 30));
+        if (pth) { pth.moveTo(pA[0], pA[1]); pth.quadraticCurveTo(cC[0], cC[1], pB[0], pB[1]); pth.quadraticCurveTo(cD[0], cD[1], pA[0], pA[1]); }
         if (size > 14) {
-          c.lineWidth = 1; c.strokeStyle = css(col, a * 0.55 * shrink);
           for (const k of [-0.45, 0, 0.45]) {
             const ox = (pC[0] - px) * k, oy = (pC[1] - py) * k;
-            c.beginPath(); c.moveTo(lerp(pA[0], px, 0.25) + ox, lerp(pA[1], py, 0.25) + oy); c.lineTo(lerp(pB[0], px, 0.25) + ox, lerp(pB[1], py, 0.25) + oy); c.stroke();
+            BS.line(lerp(pA[0], px, 0.25) + ox, lerp(pA[1], py, 0.25) + oy, lerp(pB[0], px, 0.25) + ox, lerp(pB[1], py, 0.25) + oy, col, a * 0.55 * shrink, 1);
           }
         }
       }
@@ -190,28 +183,18 @@ export default {
       const r = Math.max(1.1, Math.min(3.2, 0.9 + size / 18)) * lerp(0.75, 0.55 + 0.45 * s.b, 1 - shrink);
       if (core > 0.01 || size <= 5) {
         const cc = wake > 0 ? P.goldPale : P.bookGold;
-        c.fillStyle = css(cc, clamp(size <= 5 ? Math.max(a * 0.8, core) : core));
-        c.beginPath(); c.arc(px, py, r, 0, Math.PI * 2); c.fill();
-        if (wake > 0) {
-          const hr = r * (3 + 2 * s.b);
-          const g = c.createRadialGradient(px, py, 0, px, py, hr);
-          g.addColorStop(0, css([1.0, 0.8, 0.45], 0.22 * wake * Math.min(1, s.b))); g.addColorStop(1, css(P.gold, 0));
-          c.fillStyle = g; c.beginPath(); c.arc(px, py, hr, 0, Math.PI * 2); c.fill();
-        }
+        BS.dot(px, py, r, cc, clamp(size <= 5 ? Math.max(a * 0.8, core) : core));
+        if (wake > 0) drawGlow(c, halo, px, py, r * (3 + 2 * s.b), 0.22 * wake * Math.min(1, s.b));
       }
       // rising: a short trail beneath, proportional to its speed (gone once it hangs still as a star)
       if (vel > 0.02) {
         const q0 = proj(X - lift * 0, Math.max(0, Y - Math.min(0.5, vel * Yf * 0.18)), Z);
-        if (q0) {
-          const g = c.createLinearGradient(q0[0], q0[1], px, py);
-          g.addColorStop(0, css(P.gold, 0)); g.addColorStop(1, css(P.gold, 0.3 * wake * vel));
-          c.strokeStyle = g; c.lineWidth = Math.max(1.1, r * 0.55);
-          c.beginPath(); c.moveTo(q0[0], q0[1]); c.lineTo(px, py); c.stroke();
-        }
+        if (q0) BS.line(q0[0], q0[1], px, py, P.gold, 0.16 * wake * vel, Math.max(1.1, r * 0.55));
       }
     }
+    BS.flush(c);
     c.globalCompositeOperation = 'source-over';
-    e.blit2d(skyA > 0.01 ? 'over' : 'over', 2.0);
+    e.blit2d('over', 2.0);
     ctx.state.seeds = { woke, tilt };
   },
   type(ty, t, lt, shot, ctx) {

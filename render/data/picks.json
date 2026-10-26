@@ -83,6 +83,13 @@
   "kind": "env",
   "file": "media/gen/E2_t1_d3de414e16.mp4"
  },
+ "C4": {
+  "clip": "C4_t2",
+  "s0": 0,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/C4_t2_2beb25a557.mp4"
+ },
  "O2": {
   "clip": "O2_t1",
   "s0": 0,

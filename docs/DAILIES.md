@@ -58,3 +58,23 @@ Spend at start of this intake pass: $30.46.
 | 03:59 | K8b | kf K8b_nbp.png → K8b_nbp_m.png | approve → K8b_t1, t2 | — | right hand raised palm-forward, upper third stars, patch left sleeve; mirrored mole (under her right eye) removed in the still |
 | 03:59 | C5 | kf C5_nbp_2.jpg | approve → C5_t1 | — | v2 full-bleed, nurse in scrubs raising her phone light with both hands, unbranded rooftop |
 | 03:59 | O1 | kf O1_nbp_2.png | approve → O1_t1 | — | v2: one being, egg cradled in both hands, shore with phosphorescent waves, ringed giant far right, upper left empty |
+| 04:02 | C1 C7 C8 | kf C1/C7/C8_nbp.jpg | approve → t1 each | — | fisherman lantern on a boat; teen with a road flare on a court; woman pressing a light to an office window (reflection) — hands plausible, no text |
+| 04:02 | C9 | kf C9_nbp.png → C9_nbp_c.png | approve → C9_t1 | — | lighthouse keeper at the lamp on the gallery; pillarbox bars cropped (1288×724) |
+| 04:02 | E1 | kf E1_nbp.jpg | approve → E1_t1 | — | coelacanth rising under moonlit surface, shafts of light; top third = surface |
+| 04:02 | E3 | kf E3_nbp.png → E3_nbp_c.png | approve → E3_t1 | — | ring of dishes round a mast on the basalt cliff, hut, waves; 12 px letterbox cropped |
+| 04:02 | E4 | kf E4_nbp.png | approve → E4_t1 | — | gold beam column from the station into clouds, tiny figure, space either side |
+| 04:02 | E5 | kf E5_nbp.png → E5_nbp_c.png | approve → E5_t1 | — | bottle with a candle-glow inside on black sea, stars above (top half clear); letterbox cropped |
+| 04:02 | E6 | kf E6_nbp.png | approve → E6_t1 | — | wall of static monitors left two-thirds, racks right, floor mist, no people |
+| 04:02 | E7 | kf E7_nbp.png | regen | — | a hooded man stands in the forest (spec: empty forest) + pillarbox bars → v2 "no figures" |
+| 04:02 | H1 | kf H1_nbp.jpg | approve → H1_t1 | — | two robed alchemists with topknots at a cauldron in a grotto, scrolls/jars; one jar has a small red paper seal (no legible text at plate scale) |
+| 04:02 | H2 | kf H2_nbp.jpg | regen | — | a European hooded monk lights the powder — wrong period/place, and no person was specified → v2 "Tang robe sleeve + hand only" |
+| 04:02 | H4 | kf H4_nbp.jpg | approve → H4_t1 | — | officer at the console under red/amber light, wall map behind; face grave, right half; left half is map/console (busy, archival print will carry type) |
+| 04:02 | K10 | kf K10_nbp.png | approve → K10_t1, t2 | — | close-up right half, eyes closed, gold glow; left half dark sea + stars |
+| 04:02 | K12 | kf K12_nbp.png | approve → K12_t1, t2 | — | chest-up (not ECU) in the left half holding a lit match, black right half; patch on left sleeve |
+| 04:02 | L3 | kf L3_nbp.jpg | approve → L3_t1, t2 | — | on-model Listener, hand raised to an unseen screen, left half; right half racks with soft lights |
+| 04:02 | L4 L5 | kf L4_nbp.jpg, L5_nbp.png | approve → t1 each | — | L4 small full figure centred, arms opening, coat lifting, black void; L5 waist-up right half, right palm raised, left half black |
+| 04:02 | O4 | kf O4_nbp.jpg | approve → O4_t1 | — | floating reef-islands with gold/green lights joined by luminous threads, ringed giant on the horizon |
+| 04:02 | O5 | kf O5_nbp.jpg | regen | — | the young are wide awake, staring at camera (spec: asleep) → v2 |
+| 04:02 | O7 | kf O7_nbp.png | regen | — | figure at the far left edge (spec: centre; wings will open off-frame), giant fills the top → v2 |
+| 04:02 | O8 | kf O8_nbp.jpg | approve → O8_t1 | — | waist-up centre, right hand raised in greeting, gold-ringed eyes; giant planet behind upper middle |
+| 04:02 | C4 | C4_t2_2beb25a557 | **PICK** | 0 | grandmother raises the candle high out of the stone window, looks up; consistent |

@@ -29,6 +29,7 @@ export function buildTimeline(A) {
   add({ id: 'h_sonar', t0: l50.t - 0.02, t1: l51.t - 0.02, scene: 'sonar', p: {},
     look: (t) => { const c = [159.6, 160.0, 160.56, 160.88].reduce((m, x) => Math.max(m, t >= x ? Math.exp(-(t - x) / 0.1) : 0), 0);
       return { bloom: 0.75, bloomThreshold: 0.55, halation: 0.12, halCol: [0.3, 1, 0.6], vignette: 0.5, grain: 0.05, shakeX: 6 * c * Math.sin(t * 90), shakeY: 4 * c }; } });
+  add({ id: 'h_handtest', t0: 240, t1: 241, scene: '_handtest', p: {}, look: { bloom: 0.2, vignette: 0, grain: 0 } });
   shots.sort((a, b) => a.t0 - b.t0);
   return shots;
 }

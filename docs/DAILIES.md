@@ -51,3 +51,10 @@ Spend at start of this intake pass: $30.46.
 | 03:56 | C4 | C4_t1 | relay error | — | 2047 Invalid User Credentials; resubmitted as C4_t2 |
 | 03:56 | O2 | O2_t1_42228c89db | **PICK** | 0 | closed furred lid slowly opens on the dark glossy eye, gold ring catches the light; slight push; left third stays black |
 | 03:56 | C6 | C6_t1_c31417843a | **PICK** | 0 | starts lamp at shoulder (re-posed vs kf) and raises it high, breath visible, ger behind; consistent |
+| 03:59 | K1b | kf K1b_nbp_2.png → K1b_nbp_2m.png | approve → K1b_t1, t2 | — | v2 still put the mole on her near (right) cheek; removed it in the still (scratchpad molefix.py: lift the spot to local skin) — far-cheek mole not visible in this ¾ view; composition left third, lamp at chest, dishes in fog right two-thirds |
+| 03:59 | K6 | kf K6_nbp.png (v1) | approve → K6_t1, t2 | — | v2 rejected: full figure, face ~10 % of frame height (too small to read singing). v1 kept: face large and readable; sky clear only in the upper ~third (spec: upper half) — constellation type must sit high; mole by her left mouth corner matches K4/K5 takes |
+| 03:59 | K7 | kf K7_nbp.jpg (v1) → K7_nbp_m.jpg | approve → K7_t1, t2 | — | v2 rejected: round patch moved to her RIGHT sleeve. v1 kept with the mirrored (right-cheek) mole removed in the still; right third = rainy window with the beam |
+| 03:59 | K8 | kf K8_nbp_2.jpg | approve → K8_t1, t2 | — | v2: relief, near-smile, eyes wet (one drop on the lid), warm gold light, patch on left sleeve, left half gold fog |
+| 03:59 | K8b | kf K8b_nbp.png → K8b_nbp_m.png | approve → K8b_t1, t2 | — | right hand raised palm-forward, upper third stars, patch left sleeve; mirrored mole (under her right eye) removed in the still |
+| 03:59 | C5 | kf C5_nbp_2.jpg | approve → C5_t1 | — | v2 full-bleed, nurse in scrubs raising her phone light with both hands, unbranded rooftop |
+| 03:59 | O1 | kf O1_nbp_2.png | approve → O1_t1 | — | v2: one being, egg cradled in both hands, shore with phosphorescent waves, ringed giant far right, upper left empty |

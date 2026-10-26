@@ -4,5 +4,6 @@ import oko from './oko.js';
 import forestreticles from './forest.js';
 import gunpowder from './gunpowder.js';
 import inkbomb from './inkbomb.js';
+import sonar from './sonar.js';
 
-export const SCENES = { archival, oko, forestreticles, gunpowder, inkbomb };
+export const SCENES = { archival, oko, forestreticles, gunpowder, inkbomb, sonar };

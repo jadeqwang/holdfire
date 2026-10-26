@@ -166,13 +166,9 @@ const FRAG = /* glsl */`
     // the flash (red: fire): a hot core and a ring that runs out fast
     if (bAge > 0.) {
       float r = length(dr - burstP);
-      vec2 q = dr - burstP; float ang = atan(q.y, q.x);
       float core = exp(-r / 110.) * exp(-bAge / .16) * 1.4;
-      float wob = (vnoise(vec2(ang * 4. + seed, bAge * 3.)) - .5) * 160. + (vnoise(vec2(ang * 11., 1.)) - .5) * 60.;
-      float Rf = 760. * pow(clamp(bAge / .4, 0., 1.), .55) + wob * clamp(bAge * 4., 0., 1.);
-      float ring = exp(-pow((r - Rf) / 34., 2.)) * max(exp(-bAge / .1) - .04, 0.) * .9;
-      float glow = exp(-r / 200.) * max(exp(-bAge / .3) - .03, 0.) * .5;
-      rT += core + ring + glow;
+      float glow = max(exp(-r / 160.) * .9 - .12, 0.) * max(exp(-bAge / .28) - .04, 0.) * .65;   // falls to nothing by ~320 px
+      rT += core + glow;
     }
     if (hasPress > .5) {
       vec3 ck = 1. - texture(tPress, pageUv(dk)).rgb, cr = 1. - texture(tPress, pageUv(dr)).rgb;

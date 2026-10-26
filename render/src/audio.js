@@ -16,7 +16,8 @@ export class AudioMap {
       ...l, i, t: l.start ?? l.t, end: l.end,
       words: (l.words || []).map((w) => ({ ...w, w: w.w ?? w.word ?? w.text, t: w.start ?? w.t, end: w.end })),
     }));
-    this.hits = (timing.hits || []).map((h) => ({ ...h, t: h.start ?? h.t ?? h.time }));
+    this.hits = (timing.hits || []).map((h) => ({ ...h, t: h.t_attack ?? h.start ?? h.t ?? h.time }));
+    this.events = timing.events || [];
     this.events = timing.events || [];
     this.fps = (feats && feats.fps) || 24;
     this.f = (feats && (feats.features || feats.frames || feats)) || {};
@@ -89,6 +90,8 @@ export class AudioMap {
     const ss = this.sections.filter((s) => (s.name || s.tag || '').toLowerCase().includes(name.toLowerCase()));
     return ss[k];
   }
+  // first analysed event of a type (impact, drums_out, ...) whose desc matches re, at or after t
+  event(type, re, t = 0) { const e = this.events.find((x) => x.type === type && x.t >= t && (!re || re.test(x.desc || ''))); return e ? e.t : null; }
   hitList(kind) { return this.hits.filter((h) => !kind || (h.kind || h.section || '').includes(kind)); }
   where(t) {
     const s = this.sections.find((x) => t >= x.start && t < x.end);

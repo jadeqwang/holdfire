@@ -24,6 +24,11 @@ export function buildTimeline(A) {
   add({ id: 'h_forest', t0: br.start, t1: A.findLine('Bridge', 4).t, scene: 'forestreticles', p: {},
     look: { bloom: 0.35, bloomThreshold: 0.7, halation: 0.45, halCol: [1.0, 0.12, 0.06], vignette: 0.5, grain: 0.04, exposure: 1.1 } });
   add({ id: 'h_v2g', t0: L(28).t - 0.05, t1: L(30).t - 0.1, scene: 'archival', p: (t, lt) => ({ clip: 'hist_test_warm', s0: L(28).t - 0.05, redMask: 1, zoom: 1.04 - lt * 0.01 }), look: PRINT_LOOK });
+  // B3: sonar ("sixty-two, depth charges falling,")
+  const l50 = A.lines.find((l) => /^sixty-two/.test(l.text)), l51 = A.lines.find((l) => /^two said fire/.test(l.text));
+  add({ id: 'h_sonar', t0: l50.t - 0.02, t1: l51.t - 0.02, scene: 'sonar', p: {},
+    look: (t) => { const c = [159.6, 160.0, 160.56, 160.88].reduce((m, x) => Math.max(m, t >= x ? Math.exp(-(t - x) / 0.1) : 0), 0);
+      return { bloom: 0.75, bloomThreshold: 0.55, halation: 0.12, halCol: [0.3, 1, 0.6], vignette: 0.5, grain: 0.05, shakeX: 6 * c * Math.sin(t * 90), shakeY: 4 * c }; } });
   shots.sort((a, b) => a.t0 - b.t0);
   return shots;
 }

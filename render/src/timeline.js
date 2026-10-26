@@ -61,7 +61,13 @@ export function buildTimeline(A) {
   // ================================================================================================= INTRO
   const intro = LS('Intro');
   const counts = [];
-  intro.forEach((l, g) => l.words.forEach((w, i) => counts.push({ n: [1, 1, 2, 3, 5, 8][i], t: w.t, g })));
+  // numerals follow the words actually whispered (count 1 doubles "eight", count 2 drops the second "one"); an echoed word is not a new numeral
+  const NUM = { one: 1, two: 2, three: 3, five: 5, eight: 8 };
+  intro.forEach((l, g) => l.words.forEach((w, i) => {
+    const n = NUM[w.w.toLowerCase().replace(/[^a-z]/g, '')];
+    const prev = counts[counts.length - 1];
+    if (n && !(prev && prev.g === g && prev.n === n && n !== 1)) counts.push({ n, t: w.t, g });
+  }));
   const lastCount = counts[counts.length - 1].t;
   const v1 = S('Verse 1').start;
   add({ id: 'I1', t0: 0, t1: v1, scene: 'coldopen', p: { counts, title: lastCount + 0.45 },
@@ -273,7 +279,7 @@ export function buildTimeline(A) {
   // ================================================================================================= DROP
   const D = 'Drop';
   const dr = S(D);
-  const msgT = ls(D, 1) - 0.1, butWT = ls(D, 2) - 0.08, thT = ls(D, 3) - 0.05, seenT = ls(D, 7) - 0.1;
+  const msgT = ls(D, 1) - 0.1, butWT = A.event('impact', /DROP/, dr.start) ?? ls(D, 2) - 0.08, thT = ls(D, 3) - 0.05, seenT = ls(D, 7) - 0.1;
   // the reveal: hard cut back to the cold open's locked reticle (whose scope was it?), then the Other at the instrument
   const revealT = dr.start + 0.62;
   add({ id: 'D0', t0: dr.start, t1: revealT, scene: 'coldopen', p: { counts, atT: lastCount - 2.9, rate: 0.2, noType: false }, look: { bloom: 0.7, halation: 0.35, streak: 0.5, streakCol: [1.0, 0.75, 0.45], vignette: 0.2, grain: 0.03 },
@@ -283,7 +289,8 @@ export function buildTimeline(A) {
     look: (t) => ({ ...LOOK.other, flash: (1 - smooth(range(t, revealT, revealT + 0.3))) * 0.6, flashCol: [1, 0.85, 0.5] }),
     type: verse(D, 0, { x: 110, y: 220, size: 70, maxW: 700, t1: msgT }) });
   add({ id: 'D2', t0: msgT, t1: butWT, ...other('O7', push(0.006)), type: verse(D, 1, { x: 960, y: 960, size: 68, align: 'center', t1: butWT }) });
-  add({ id: 'D3', t0: butWT, t1: thT, ...keeper('K8', push(0.006)), type: hero(D, 2, { x: 110, y: 300, size: 118, breaks: [3], color: P.goldPale, hotColor: P.gold, maxW: 760, t1: thT }) });
+  add({ id: 'D3', t0: butWT, t1: thT, ...keeper('K8', push(0.006)), look: (t) => ({ ...LOOK.keeper, flash: t >= butWT ? Math.exp(-(t - butWT) / 0.09) * 0.75 : 0, flashCol: [1, 0.9, 0.7], exposure: 1 + 0.35 * Math.exp(-Math.max(0, t - butWT) / 0.5) }),
+    type: hero(D, 2, { x: 110, y: 300, size: 118, breaks: [3], color: P.goldPale, hotColor: P.gold, maxW: 760, t1: thT }) });
   add({ id: 'D4', t0: thT, t1: seenT, scene: 'phyllo', p: { start: thT }, look: LOOK.space,
     type: (ty, t, lt, shot, ctx) => {
       const nums = [[3, [13, 21, 34]], [6, [55, 89]]];
@@ -311,7 +318,9 @@ export function buildTimeline(A) {
   add({ id: 'Z2', t0: kT, t1: finalT, ...keeper('K10', push(0.004)),
     type: both((ty, t) => ty.lyric(line(Z, 4), t, { font: 'CormorantI', size: 52, x: 120, y: 520, color: P.steel, hotColor: P.goldPale, t1: le(Z, 4) + 0.6 }),
       (ty, t) => ty.lyric(line(Z, 5), t, { font: 'CormorantI', size: 64, x: 120, y: 620, color: P.cream, hotColor: P.goldPale, t1: finalT })) });
-  add({ id: 'Z3', t0: finalT, t1: A.duration + 2, scene: 'endcard', p: { start: finalT, holdT: ls(Z, 6) }, look: { bloom: 0.7, halation: 0.3, streak: 0.4, streakCol: [1, 0.75, 0.45], vignette: 0.2, grain: 0.02 },
+  const finalHit = A.event('impact', /FINAL/, zo.start) ?? A.duration - 3;
+  add({ id: 'Z3', t0: finalT, t1: A.duration + 2, scene: 'endcard', p: { start: finalT, holdT: ls(Z, 6), hitT: finalHit },
+    look: (t) => ({ bloom: 0.7, halation: 0.3, streak: 0.4, streakCol: [1, 0.75, 0.45], vignette: 0.2, grain: 0.02, flash: t >= finalHit ? Math.exp(-(t - finalHit) / 0.08) * 0.35 : 0, flashCol: [1, 0.85, 0.55] }),
     type: (ty, t) => ty.lyric(line(Z, 6), t, { font: 'CormorantI', size: 56, x: 960, y: 860, align: 'center', color: P.cream, hotColor: P.goldPale, t1: A.duration + 2 }) });
 
   // placeholders for plates not yet picked keep their names visible

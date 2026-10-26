@@ -48,7 +48,7 @@ function material(e) {
       // Gaussian gather over the 4x4 axial block: smoothed occupancy at step k (the crystal's outline is its 0.5 iso-line,
       // so it falls between cells, not along hexagon edges) and a smoothed freeze time over frozen cells (the growth lines)
       float ws = 0., wo = 0., wt = 0., wf = 0.;
-      for (int j = -1; j <= 2; j++) for (int i = -1; i <= 2; i++) {
+      if (length(w) < rmax + 4.) for (int j = -1; j <= 2; j++) for (int i = -1; i <= 2; i++) {
         vec2 c = b + vec2(float(i), float(j));
         vec2 cp = vec2(c.x + c.y * .5, c.y * .8660254);
         vec2 dv = w - cp; float wg = exp(-dot(dv, dv) / (2. * .5 * .5));

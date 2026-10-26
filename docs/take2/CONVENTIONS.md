@@ -48,3 +48,61 @@ Never commit or push: the director does that. Never edit another group's directo
 - No model-made lettering: every word, number and seal on screen is drawn by the renderer. Say "No text, no letters, no logos"
   in every prompt (but keep the sanctioned jacket marks: RARE EARTH on the back and the 1420 MHz patch).
 - Historical people are not likenesses: Petrov, Arkhipov and the officers are painted as anonymous period figures.
+
+## Plate toolkit
+
+Code: `render/src/scenes/t2/plate/` (scenes in `index.js`); tools: `tools/t2/`; test timeline `TL=t2_plate` (shot i at [2i, 2i+2)).
+Contact sheet of every style: `work/t2/plate/contact_styles.jpg` (regenerate with the stills in `render/src/timelines/t2_plate.js`).
+
+**Getting a clip on screen**
+```bash
+python3 tools/t2/plates.py media/gen/X.mp4 NAME [--start S --dur D] [--fit cover|contain|keep] [--q 90] [--key green]
+python3 tools/t2/plates.py design/take2/still.jpg NAME --fit keep          # a still (keep = no crop, for Ken Burns)
+python3 tools/t2/picks.py -g GROUP set SHOT_ID NAME --in 1.2 --style riso --styleAmt 0.4   # then merges picks2.json
+python3 tools/t2/picks.py -g GROUP set SHOT_ID NAME --s0 52.30 --lag 0.04  # a lip-synced take (audio ref started at song time s0)
+```
+- `plates.py` conforms to 24 fps CFR, Lanczos-covers 1920×1080 with a centre crop, writes `work/plates/NAME/f_00000.jpg…` +
+  `meta.json {fps, n, w, h, src, start, dur, fit, kind, key}`; `--key green` also writes `m_00000.png` mattes and despills `f_`.
+- Picks live in `docs/take2/picks_<group>.json` (never edit `render/data/picks2.json`: `tools/t2/merge_picks.py` builds it).
+  `picks.py` writes the group file under an fcntl lock and runs the merge. Test plates are in `docs/take2/picks_test.json` (`TEST_*`).
+- A pick entry is `{dir, kind, src, s0?, lag?, in?, rate?, twos?, zoom?, pan?, rot?, flipX?, fit?, style?, styleAmt?, grade?, key?,
+  reverse?}`. **Pick fields are defaults; the shot's `p` overrides every key it sets.**
+- Clip clock (source-clip seconds): with `s0`, `clipT = t − s0 + lag` (song clock; a shot's explicit `p.in` still wins); otherwise
+  `clipT = (p.in ?? pick.in ?? plate start) + lt·rate` (`reverse` runs it backward; `p.at` = explicit source seconds or `fn(lt, t)`).
+  Clamped to the plate's frames, never looped. Twos (default for video unless `twos: false`) count film frames: `f -= f % 2`.
+- Textures load miss-driven in `prepare` (awaited, LRU 40), so cache state never changes pixels. Use `PLATE_LOOK`
+  (`import { PLATE_LOOK } from '../scenes/t2/plate/index.js'`) as the look: tonemap off, light bloom (plates are display-referred).
+
+**Scenes** (all params optional unless marked)
+- `t2_plate` {**clip** (picks2 id) | dir, in, s0, lag, rate, twos, reverse, at, zoom, push (zoom growth per s), pan [x,y] px,
+  rot (rad, + clockwise), flipX, fit, style, styleAmt, styleP {style params}, printSpace 'screen'|'image', key 'green', grade
+  {exposure, contrast, sat, lift, gamma, gain, tint, red (alarm-red relight)}, alpha, bg, vhs (0..1) + vhsP, seed, over}
+- `t2_still` {**img** (picks2 id | work/plates/NAME | path), zoom n | [from, to, …], pan [x,y] | [[x0,y0],[x1,y1]], rot n | [a,b],
+  ease ('inOut'; linear smooth smoother out in expo sine), dur, delay, parallax {img, depth 1.5, zoom, pan, key, grade, alpha},
+  + every t2_plate look param; paper and screens move with the print (printSpace 'image' by default)}
+- `t2_split` {left/right {scene, p (obj | fn)}, x 960, line 2, lineCol, slice 'centre'|'half', offL/offR, dim [l, r]}: any scenes.
+- `t2_vhs` (multi layer) {amt, rewind, speed, bleed, noise, head, seed}; also `p.vhs` on plates and the `vhs` style.
+- `t2_vhs_rewind` {clips [ids], steps [song times], blackAt, speed 6, amt, rewind, style, grade}: scrubs each clip back from its end
+  under the rewind pass; a clip with no plate yet shows black tape.
+- `t2_impact` (multi layer) {lines 'radial'|'parallel', centre, count, amount, inner, aspect, lineW, lineCol, angle, speed, reach,
+  impact (two-tone impact frame), neg, thresh, ink, paper, flash, flashCol, zoom, zoomBlur, ones}; helpers `smashZoom(t, tHit,
+  {from, peak, to, attack, decay})`, `impactPulse(t, hits, frames)`. Lines are redrawn on twos.
+- `t2_blueprint` (multi layer) {paths [{type 'poly'|'line'|'rect'|'circle'|'arc'|'dim'|'callout'|'ticks'|'cross', …shape, t0, t1, ease,
+  w, col, dash, alpha}], subject (fin_bones fin foot hand egg_to_jar egg jar seed_section locomotive wright_flyer jet_airliner saturn_v)
+  + t0 (song time), stages / stageT (default: the snares after t0), pos, scale, drawDur, full (drawing alone on cyanotype),
+  grid {step, alpha, t0, t1}, col, glowCol, glow, w 2.5, zoom/pan/rot (follow the plate under it), abs (path times in song time)}.
+  `drawBlueprint(ctx2d, paths, time, opts)` for your own canvas. Labels are for numbers and dates only.
+
+**Styles** (`styles.js`: `applyStyle(engine, name, srcTexture, targetRT, {amt, seed, t, over, pat, …})`, `stylize(engine, name,
+targetRT, o)` in place, `vhsPass`, `INKS`, `RISO_SETS`). `amt` 1 = full; 0.3–0.5 = a light touch for plates that are already painted.
+- `riso`: 3 inks found by a LUT search of the real overprint (inks 'earth' = Klein #002FA7 / beacon orange / pale blue, 'echo' =
+  violet / fluo pink / mint, 'mirror', or your own; `INKS.kleinRE` is the Rare Earth board's #1F2BD1), 7 px screens at 45/15/75°,
+  seeded 1.5–3 px misregistration, ink mottle, paper. {cell, mis, levels, density, push, angles, paper}
+- `halftone` (grey newsprint, 45°, ≥ 6 px) {cell, levels, sharp, ink, paper}; `newsprint` (black + poster red on cream) {cell, red,
+  redGain, redAll, mis}.
+- `ink` (rice paper, fibrous bleed, pooled wash edges, wash layers, fine contour, cinnabar kept) {bleed, layers, levels, line, keepRed}.
+- `oil` (structure-tensor brush smear, dabs and bristles, impasto, canvas weave, umber shadows, varnish) {stroke, umber, warm, canvas,
+  impasto}; `gouache` (Kuwahara flats, value bands, opaque edges, paper tooth) {radius, bands, edge, tooth, sat}.
+- `blueprint` (cyanotype, or `tone: 'sepia'`, faint grid) {dark, light, levels, grid, gridStep}; `vhs` (as t2_vhs).
+Cost: renderAt 17–76 ms per 1080p frame in `profile.mjs`; with a forced GPU sync, `oil` is the heaviest (≈ 2× a plain plate), the
+screens ≈ 1.2–1.5×. Paper is baked once per seed. Every style is a pure function of (source, seed, t).

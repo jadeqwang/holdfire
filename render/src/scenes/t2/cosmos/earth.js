@@ -64,7 +64,7 @@ function loadTex(url, mip = true) {
   return new Promise((res, rej) => new THREE.TextureLoader().load(url, (t) => {
     t.colorSpace = THREE.NoColorSpace; t.flipY = false; t.wrapS = THREE.RepeatWrapping; t.wrapT = THREE.ClampToEdgeWrapping;
     t.magFilter = THREE.LinearFilter; t.minFilter = mip ? THREE.LinearMipmapLinearFilter : THREE.LinearFilter; t.generateMipmaps = mip;
-    t.anisotropy = 4; t.needsUpdate = true; res(t);
+    t.anisotropy = 1; t.needsUpdate = true; res(t);
   }, undefined, rej));
 }
 
@@ -197,6 +197,7 @@ export async function initEarth(ctx) {
           if (i >= nImp) break;
           vec4 m = imp[i]; if (m.w < 0.) continue;
           float d = distance(g, m.xyz), age = m.w;
+          if (d > .1) continue;                                   // nothing of a detonation reaches past ~600 km
           float rb = .006 + .022 * (1. - exp(-age / .9));
           kill = max(kill, smoothstep(rb * 3.2, rb * 1.2, d) * clamp(age / .25, 0., 1.));
           float fn = vnoise(n.xy * 900. + float(i) * 3.1) * .6 + .4;
@@ -210,7 +211,7 @@ export async function initEarth(ctx) {
         vec3 lc = mix(colA, colB, clamp(Ld * 1.1 - .1, 0., 1.) * (1. - .7 * smoothstep(4., 1.2, fw) * detail));
         col = lc * lights;
         // light under cloud scatters wider (a mip-blurred lookup)
-        col += colA * texture(tL, uv, 4.).r * gain * .25 * cl * (1. - day) * (1. - kill) * (1. - dark);
+        if (cl > .02) col += colA * texture(tL, uv, 4.).r * gain * .25 * cl * (1. - day) * (1. - kill) * (1. - dark);
         // moonlit land and cloud, faint; the day side (if any) deep blue
         col += vec3(.03, .042, .065) * land * landK * (.4 + .6 * mu);
         col += vec3(.06, .075, .1) * cl * landK * 1.4;

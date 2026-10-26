@@ -103,6 +103,18 @@ void main(){
   col = mix(col, flatCol, uFlat);
   fragColor = vec4(col, 1.);
 }`;
+// big flat surfaces (table, floor, far tables): one tone from the top/side normal, no spec/rim/derivatives
+const FLATS_FS = /* glsl */`
+precision highp float;
+${LIB}
+uniform vec3 cLight, cMid, cShadow, flatCol; uniform float dim;
+in vec3 vN; in vec3 vW; in float vInk;
+out vec4 fragColor;
+void main(){
+  vec3 col = vN.y > .5 ? cLight : (vN.y < -.5 ? cShadow : cMid);
+  col *= lightAt(vW) * dim * (1. - .58 * handShadow(vW));
+  fragColor = vec4(mix(col, flatCol, uFlat), 1.);
+}`;
 const HULL_VS = /* glsl */`
 in vec3 onormal; uniform vec3 smear; uniform float smearJag; uniform float width; uniform vec2 res;
 void main(){
@@ -159,6 +171,11 @@ function toonMat(sh, pal, o = {}) {
     },
   });
 }
+function flatSurfMat(sh, pal, dim = 1) {
+  return new THREE.ShaderMaterial({ glslVersion: THREE.GLSL3, vertexShader: TOON_VS, fragmentShader: FLATS_FS,
+    uniforms: { room: sh.room, hand: sh.hand, uFlat: sh.uFlat, spotGain: sh.spotGain, cLight: { value: C3(pal.mid) }, cMid: { value: C3(pal.shadow) }, cShadow: { value: C3(pal.shadow) },
+      flatCol: { value: C3(CREAM) }, dim: { value: dim }, smear: { value: new THREE.Vector3() }, smearJag: { value: 0 } } });
+}
 function hullMat(sh, smear, o = {}) {
   return new THREE.ShaderMaterial({
     glslVersion: THREE.GLSL3, vertexShader: HULL_VS, fragmentShader: HULL_FS, side: THREE.BackSide,
@@ -198,17 +215,17 @@ function build(e, audio) {
 
   // table: dark wood disc under the board, lit by the spot
   // the hall: our table, the floor, and rows of other tables (each under its own lamp) that go dark with the lights
-  const table = withHull(new THREE.Mesh(boxGeo(16.5, 0.34, 12.8, 0, -0.45, 0), toonMat(sh, PAL.wood, { spec: 0.2, rim: 0.3, dim: 0.62 })), sh);
+  const table = withHull(new THREE.Mesh(boxGeo(16.5, 0.34, 12.8, 0, -0.45, 0), flatSurfMat(sh, PAL.wood, 0.85)), sh);
   scene.add(table);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 400).rotateX(-Math.PI / 2).translate(0, -3.2, 0), toonMat(sh, PAL.floor, { spec: 0, rim: 0 }));
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 400).rotateX(-Math.PI / 2).translate(0, -3.2, 0), flatSurfMat(sh, PAL.floor));
   scene.add(floor);
   const others = [];
   for (const x of [-38, -19, 19, 38]) for (const z of [-30, -12, 12, 30]) others.push([x, z]);
   for (const z of [-30, -12, 12, 30]) others.push([0, z + (z > 0 ? 6 : -6)]);
   const tGeo = boxGeo(11, 0.34, 5.6, 0, -0.45, 0), bGeo = boxGeo(3.4, 0.18, 3.4, 0, -0.19, 0);
-  const tables = new THREE.InstancedMesh(tGeo, toonMat(sh, PAL.wood, { spec: 0.2, rim: 0.3, dim: 0.62 }), others.length);
+  const tables = new THREE.InstancedMesh(tGeo, flatSurfMat(sh, PAL.wood, 0.85), others.length);
   const tHull = new THREE.InstancedMesh(tGeo, hullMat(sh, null), others.length);
-  const boards2 = new THREE.InstancedMesh(bGeo, toonMat(sh, PAL.boardFar, { spec: 0, rim: 0.2 }), others.length * 2);
+  const boards2 = new THREE.InstancedMesh(bGeo, flatSurfMat(sh, PAL.boardFar), others.length * 2);
   const m4 = new THREE.Matrix4();
   others.forEach(([x, z], i) => { m4.makeTranslation(x, 0, z); tables.setMatrixAt(i, m4); tHull.setMatrixAt(i, m4); m4.makeTranslation(x - 2.7, 0, z); boards2.setMatrixAt(i * 2, m4); m4.makeTranslation(x + 2.7, 0, z); boards2.setMatrixAt(i * 2 + 1, m4); });
   for (const m of [tables, tHull, boards2]) { m.frustumCulled = false; scene.add(m); }
@@ -407,8 +424,7 @@ function build(e, audio) {
   }
 
   const S = buildSchedule(audio);
-  const dbg = { dome, table, floor, tables, boards2, top, frameMesh, clock, sheet, bb, rings, shadowMesh, links, linksHull };   // PROFTMP
-  G = { dbg, sh, scene, cam, pieces, links, linksHull, linkMat, clock, btnW, btnB, lcd, cc, sheet, sc, bb, bbP, bbC, bbS, rings, ringA, shadowMesh, shadowA,
+  G = { sh, scene, cam, pieces, links, linksHull, linkMat, clock, btnW, btnB, lcd, cc, sheet, sc, bb, bbP, bbC, bbS, rings, ringA, shadowMesh, shadowA,
     topMat, dome, post, lamps, S, tmp: new THREE.Object3D(), m4: new THREE.Matrix4(), q: new THREE.Quaternion(), v: new THREE.Vector3() };
   return G;
 }
@@ -553,11 +569,10 @@ function diveCam(S, t, p, st, d0, d1) {
 export default {
   async init(ctx) { build(ctx.engine, ctx.audio); },
   draw(ctx, shot, t, lt, p) {
-    const e = ctx.engine; const S = G.S;
-    if (window.__chessProf) { const b = new Uint16Array(4); e.renderer.readRenderTargetPixels(e.rtScene, 0, 0, 1, 1, b); const T0 = performance.now(); drawImpl(ctx, shot, t, lt, p); e.renderer.readRenderTargetPixels(e.rtScene, 0, 0, 1, 1, b); window.__chessMs = performance.now() - T0; return; }   // PROFTMP
     drawImpl(ctx, shot, t, lt, p);
   },
 };
+
 function drawImpl(ctx, shot, t, lt, p) {
     const e = ctx.engine; const S = G.S;
     const mode = p.mode || 'game';
@@ -688,7 +703,6 @@ function drawImpl(ctx, shot, t, lt, p) {
     const needPost = sp.r > 0.001 || sp.l > 0.001 || imp > 0;
     const r = e.renderer;
     r.setRenderTarget(needPost ? e.rtTmp : e.rtScene); r.setClearColor(0x000000, 1); r.clear(true, true, false);
-    if (window.__chessHide) { const H = window.__chessHide; G.pieces.forEach((m) => { if (H.includes('pieces')) m.visible = false; if (H.includes('hulls')) m.userData.hull.visible = false; }); for (const [k, o] of Object.entries(G.dbg)) o.visible = !H.includes(k); }   // PROFTMP
     r.autoClear = false; r.render(G.scene, cam); r.autoClear = true;
     if (!needPost) return;
     const pu = G.post.uniforms;

@@ -83,10 +83,16 @@ export function buildTimeline(A) {
   const V = 'Verse 1';
   const finT = W(V, 1, 0) - 0.1;
   add({ id: 'V1a', t0: v1, t1: finT, ...keeper('K1', push(0.006)),
+    look: (t) => ({ ...LOOK.keeper, flash: t >= v1 ? Math.exp(-(t - v1) / 0.11) * 0.55 : 0, flashCol: [1, 0.86, 0.6] }),   // the title's ring of light breaks on the Verse 1 downbeat
     look: (t) => ({ ...LOOK.keeper, flash: (1 - smooth(range(t, v1, v1 + 0.35))) * 0.8, flashCol: [1, 0.86, 0.55] }),
     type: verse(V, 0, { x: 130, y: 470, size: 82, breaks: [3], italicWords: ['sea'], t1: finT }) });
   const fishT = le(V, 1) + 0.25;
-  add({ id: 'V1c', t0: finT, t1: fishT, ...keeper('E2', (t, lt) => ({ zoom: 0.94 + lt * 0.01, pan: [60, -60], gain: 0.95, wHi: 1.25, fadeEdges: [140, 360, 160, 100] })),
+  add({ id: 'V1c', t0: finT, t1: fishT, ...keeper('E2', (t, lt) => {
+      // E2 morphs fin (0-3 s) -> bony foot (3-5 s) -> hand (6.5 s); remap clip time so each stage lands on its sung word
+      const ww = line(V, 1).words, fin = ww[0].t, foot = ww[2].t, hand = ww[4].t;
+      const ct = t < fin ? 1.0 + (t - finT) * 0.3 : t < foot ? lerp(1.4, 4.0, (t - fin) / (foot - fin)) : t < hand ? lerp(4.0, 6.5, (t - foot) / (hand - foot)) : 6.5 + (t - hand) * 0.6;
+      return { s0: t - ct, lag: 0, zoom: 0.94 + lt * 0.01, pan: [60, -60], gain: 0.95, wHi: 1.25, fadeEdges: [140, 360, 160, 100] };
+    }),
     type: (ty, t) => {
       const L = line(V, 1); const ww = L.words;           // fin into foot into hand, we were young;
       const big = [[0, 'FIN'], [2, 'FOOT'], [4, 'HAND']];
@@ -113,7 +119,7 @@ export function buildTimeline(A) {
   const chordT = ls(PC, 1) - 0.2, burstT = ls(PC, 2) - 0.15, oneT = ls(PC, 3) - 0.15, patT = ls(PC, 4) - 0.1, hearT = ls(PC, 5) - 0.1;
   add({ id: 'P1a', t0: pc.start, t1: chordT, scene: 'snowflake', p: {}, look: LOOK.diagram,
     type: both(verse(PC, 0, { x: 960, y: 960, size: 66, align: 'center', italicWords: ['snowflake'], t1: chordT }),
-      excerpt('Identity Sequence', ['…are flying today to', 'the international space station, a snowflake in the boundless', 'night.'], 120, 90, pc.start + 0.3, chordT, { size: 26 })) });
+      excerpt('Identity Sequence', ['…are flying today to', 'the international space station,', 'a snowflake in the boundless night.'], 110, 470, pc.start + 0.3, chordT, { size: 28 })) });
   add({ id: 'P1b', t0: chordT, t1: burstT, scene: 'multi', p: { layers: [{ scene: 'engraved', p: () => ({ ...ENG, ...(picks.E3 ? { clip: picks.E3.clip, s0: picks.E3.s0 } : {}) }) }, { scene: 'chordrings', p: { origin: [960, 620] } }] }, look: LOOK.keeper,
     type: verse(PC, 1, { x: 960, y: 170, size: 64, align: 'center', italicWords: ['chord'], t1: burstT }) });
   add({ id: 'P1c', t0: burstT, t1: oneT, ...keeper('K3', push(0.006)),

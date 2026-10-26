@@ -25,13 +25,17 @@ Then list the 8 most important concrete problems, each with a timestamp (song ti
 t0 = time.time()
 res = cf.run_model('google/gemini-3.8-flash', {'contents': [{'role': 'user', 'parts': [{'inline_data': {'mime_type': 'video/mp4', 'data': b64}}, {'text': prompt}]}]}, timeout=120, retries=1)
 def texts(x):
+    """every string under a 'text' key, in order (handles streamed lists of candidates)"""
     if isinstance(x, dict):
-        if isinstance(x.get('text'), str) and 'thoughtSignature' not in x or (isinstance(x.get('text'), str) and x.get('text')):
-            yield x['text']
-        for v in x.values(): yield from texts(v)
+        for k, v in x.items():
+            if k == 'text' and isinstance(v, str): yield v
+            elif isinstance(v, (dict, list)): yield from texts(v)
     elif isinstance(x, list):
         for v in x: yield from texts(v)
-txt = ''.join(t for t in texts(res) if isinstance(t, str))
+json.dump(res, open(os.path.join(ROOT, 'work', 'logs', 'gemini_last.json'), 'w'))
+txt = ''.join(texts(res))
+if not txt.strip():
+    print('[empty response] ' + json.dumps(res)[:1500], file=sys.stderr)
 out = o.get('out')
 if out:
     os.makedirs(os.path.dirname(os.path.join(ROOT, out)), exist_ok=True)

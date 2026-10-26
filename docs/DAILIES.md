@@ -122,3 +122,10 @@ Spend at start of this intake pass: $30.46.
 | 04:33 | O7 | kf O7_nbp_2.jpg | regen (2nd) | — | v2 centred and on-model, but a hard horizontal seam crosses the sky at ~20 % height and cuts the planet flat → v3 'one seamless sky' |
 | 04:33 | K12 | K12_t1 (alt), K12_t2 | 21:9 / relay error | — | t1 content good (wary eyes, whisper, match) but 1470×630; t2 also 21:9 and smirks; t3/t4 re-rolls died with 2047 credentials → resubmitted as t5, t6 |
 | 04:33 | E7 | E7_t1_6f85c29fee | **PICK** | 0 | very slow push between trunks into a foggy clearing, empty, near monochrome; 12 s |
+| 04:38 | C7 | C7_t2_7a87480137 | **PICK** | 0 | teen holds the road flare high under the streetlight, looks up; sparks; consistent |
+| 04:38 | C12 | C12_t1_a5ec3a0cc0 | **PICK** | 0 | farmer lifts the paper lantern higher over the rice terraces, looks up |
+| 04:38 | O5 | O5_t1_83bf18d7d5 | **PICK** | 0 | young sleep and breathe, the adult wing's eye-spot glows warmer; painterly look carried from the kf |
+| 04:38 | H5 | H5_t1_e345bd8e95 | **PICK** | 0 | depth charges sink and burst into white flashes along the hull at ~3.5 s; top third dark water/surface |
+| 04:38 | C10 C11 H6 | C10_t1, C11_t1, H6_t2 | relay error | — | 2047 credentials → resubmitted C10_t2, C11_t2, H6_t3 |
+| 04:38 | K8 | K8_t4_2181c48355 | reject | — | recentred, sobbing (tears streaming), ends in an open-mouthed wail blown out to white; small articulation |
+| 04:38 | K8 | K8_t2_430fc7a418 | **PICK (provisional — DIRECTOR)** | 0 | best of 4: articulates "but you were / you were counting" ("but" closed, "were" rounded at 0) but "message in a bottle" stays open, grins on "too", push-in ends blown out. Needs a director call: re-prompt (steady exposure, no push-in, sing clearly not belting) or remouth/drawn mouth |

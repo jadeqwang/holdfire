@@ -140,9 +140,11 @@ export default {
     const titleT = p.title ?? (ph.last + 0.5);
     // premise (frame 0 poster), fades as the first count completes
     const qa = 1 - smooth(range(t, ph.g1[3].t, ph.g1end + 0.4));
-    ty.text('THE UNIVERSE IS A DARK FOREST.', 100, 140, { font: 'Plex', size: 42, track: 0.1, color: P.red, alpha: qa, glow: 14 });
-    ty.mono('EVERY CIVILIZATION IS AN ARMED HUNTER.', 100, 198, t, { t0: 0.25, cps: 26, size: 42, track: 0.1, color: P.red, alpha: qa, glow: 14 });
-    ty.label('LIU CIXIN · THE DARK FOREST · 2008', 100, 248, { color: P.bookGold, alpha: qa * 0.85 });
+    // sized for a phone feed: ~58 px at 1080p is the smallest that stays readable at feed width
+    ty.text('THE UNIVERSE IS A DARK FOREST.', 100, 150, { font: 'Plex', size: 58, track: 0.08, color: P.red, alpha: qa, glow: 14 });
+    ty.mono('EVERY CIVILIZATION', 100, 226, t, { t0: 0.25, cps: 26, size: 58, track: 0.08, color: P.red, alpha: qa, glow: 14 });
+    ty.mono('IS AN ARMED HUNTER.', 100, 302, t, { t0: 0.25 + 18 / 26, cps: 26, size: 58, track: 0.08, color: P.red, alpha: qa, glow: 14 });
+    ty.label('LIU CIXIN · THE DARK FOREST · 2008', 100, 360, { size: 22, color: P.bookGold, alpha: qa * 0.85 });
 
     // the scope's HUD in the Other's script, English beneath
     const g2k = counts.filter((c, i) => c.g && i <= k).length;

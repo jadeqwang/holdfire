@@ -747,3 +747,7 @@
 {"ts": "2026-10-26T16:49:30Z", "model": "google/nano-banana-pro", "tag": "t2kf_C103R", "job": "holdfire/t2kf_C103R-2935f759f6", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-26T16:50:22Z", "model": "google/veo-3.1", "tag": "t2_CO01_veo_t1", "job": "holdfire/t2_CO01_veo_t1-66747bd17f", "event": "result", "ok": false, "est_usd": 0.8, "where": "cloud"}
 {"ts": "2026-10-26T16:51:54Z", "model": "google/veo-3.1", "tag": "t2_DR01_veo_t1", "job": "holdfire/t2_DR01_veo_t1-6514fc0a3e", "event": "result", "ok": false, "est_usd": 1.6, "where": "cloud"}
+{"ts": "2026-10-26T16:52:12Z", "model": "google/nano-banana-pro", "tag": "t2g3_V201_nbp_v2", "job": "holdfire/t2g3_V201_nbp_v2-b4ada80840", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T16:52:13Z", "model": "google/nano-banana-pro", "tag": "t2d_style_poster_v1", "job": "holdfire/t2d_style_poster_v1-64850b4eae", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T16:52:14Z", "model": "google/nano-banana-pro", "tag": "t2g3_BR14_nbp_v1", "job": "holdfire/t2g3_BR14_nbp_v1-03646de1c4", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T16:52:14Z", "model": "google/nano-banana-pro", "tag": "t2d_style_ink_wash_v3", "job": "holdfire/t2d_style_ink_wash_v3-4421ff6c3b", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}

@@ -38,7 +38,7 @@ Take two's end card (`t2_endcard`) should read, set on the beats after the final
 - Lyrics "by" Jade Wang (the quotation marks are Jade's)
 - assembled by Opus 5.5 from a corpus of four books of poetry written by Jade Wang:
   *Inference*, *Petrov Test*, *Tao of Totality* (the Spaces Left Blank trilogy) and *Variations and Metamorphosis*
-- Instruments arranged by Suno
+- Music by Jade Wang and Suno (Jade, 26 Oct: this replaces "Instruments arranged by Suno")
 - Animated by Opus 5.5 and a supporting cast of models: the `cast` list in `render/data/t2/credits.json`, which
   `python3 tools/t2/credits.py` computes from the picks the edit actually uses (re-run it after the last pick change; bake-off
   losers don't appear), then the `support` list (stems, face tracking, transcription, the renderer).

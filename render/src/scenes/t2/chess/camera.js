@@ -34,7 +34,7 @@ export const PRESETS = {
   // close on a piece (p.focus: square 'g4' | 'mover' | 'queen'; p.az side to look from)
   piece: (t, p, st) => { const f = focusSq(p, st); const az = p.az ?? 0.6; return { pos: [f[0] + Math.sin(az) * 3.1, 1.25, f[2] + Math.cos(az) * 3.1], target: [f[0], 0.62, f[2]], fov: p.fov ?? 30 }; },
   // the clock faces
-  clock: () => ({ pos: [CLOCK_POS[0] + 3.6, 2.05, CLOCK_POS[2] + 0.35], target: [CLOCK_POS[0], 0.42, CLOCK_POS[2]], fov: 30 }),
+  clock: () => ({ pos: [CLOCK_POS[0] - 3.0, 2.5, CLOCK_POS[2] + 0.45], target: [CLOCK_POS[0], 0.3, CLOCK_POS[2]], fov: 30 }),
   // the scoresheet (pause-frame credit)
   sheet: () => ({ pos: [SHEET_POS[0] - 0.2, 4.6, SHEET_POS[2] + 2.0], target: [SHEET_POS[0], 0, SHEET_POS[2] - 0.1], fov: 34 }),
 };
@@ -53,9 +53,20 @@ function blendCam(a, b, u) {
 export function autoCam(S, t, p, st) {
   const A = S.anchors, P0 = S.plies;
   const seg = (t0, t1) => clamp((t - t0) / (t1 - t0));
-  if (t < A.count) {                 // the set: wide and high, slow push in
-    const u = seg(138.5, A.count);
-    return { pos: L3([8.6, 12.5, 14.6], [7.0, 10.2, 12.4], smooth(u)), target: [0.4, -0.6, 0.2], fov: 37 };
+  if (t < A.count) {                 // the set: a cut on every shout, each angle framing the pieces that land on it
+    const sh = A.shouts; const cuts = [-1e9, sh[0] - 0.12, sh[1] - 0.12, sh[2] - 0.12, sh[3] - 0.12, sh[4] - 0.12];
+    let i = 0; while (i < cuts.length - 1 && t >= cuts[i + 1]) i++;
+    const u = smooth(seg(cuts[Math.max(1, i)], (cuts[i + 1] ?? A.count)));
+    const shotsSet = [
+      [[8.6, 11.5, 13.6], [7.6, 10.4, 12.2], [0.3, -0.6, 0.2], 37],      // before the first shout: the empty board, wide
+      [[2.4, 1.15, 7.4], [1.9, 1.05, 6.8], [0, 0.55, 3.3], 34],          // One: the white king, low behind White
+      [[-2.4, 1.15, -7.4], [-1.9, 1.05, -6.8], [0, 0.55, -3.3], 34],     // One: the black king, low behind Black
+      [[-8.4, 1.7, 0.6], [-7.8, 1.5, 0.2], [0, 0.45, 0], 36],            // Two: the queens, across the d-file
+      [[7.8, 6.4, 7.8], [7.0, 5.6, 7.2], [0, -0.2, 0], 38],              // Three: the rooks, diagonal from h1
+      [[-5.6, 7.6, -8.6], [-4.8, 6.9, -7.9], [0, -0.3, 0], 38],          // Five: bishops and the last rook, from Black's side
+    ];
+    const S0 = shotsSet[i];
+    return { pos: L3(S0[0], S0[1], u), target: S0[2], fov: S0[3] };
   }
   if (t < A.drumsOut) {              // "Counting on you!": the pawns land, low along the White side
     const u = seg(A.count, A.drumsOut);
@@ -67,15 +78,15 @@ export function autoCam(S, t, p, st) {
   }
   if (t < P0[12].t) {                // slow orbit at board height
     const u = seg(P0[8].t, P0[12].t);
-    const az = lerp(-0.15, 0.95, u);
-    return { pos: orbit(az, 7.0, 1.05), target: [0.2, 0.45, -0.2], fov: 33 };
+    const az = lerp(-0.3, 0.75, u);
+    return { pos: orbit(az, 8.4, 1.2), target: [0.2, 0.45, -0.2], fov: 32 };
   }
-  if (t < P0[16].t) {                // 7.Qg4 .. 9.Qxg7: pushing in on the kingside, the clock in the foreground
-    const u = easeInCubic(seg(P0[12].t, P0[16].t));
-    return { pos: L3([9.6, 3.4, 5.4], [7.3, 2.15, 3.3], u), target: L3([3.4, 0.3, -0.4], [3.0, 0.5, -1.6], u), fov: lerp(36, 30, u) };
+  if (t < P0[18].t) {                // 7.Qg4 .. 9.Qxg7: pushing in on the kingside, the clock in frame (sparks on "spark")
+    const u = easeInCubic(seg(P0[12].t, P0[16].t)), w = smooth(seg(P0[16].t, P0[18].t));
+    return { pos: L3(L3([-0.6, 6.4, 8.6], [1.5, 4.2, 4.6], u), [1.7, 4.0, 4.3], w), target: L3([2.4, -0.3, 0.3], [3.6, 0.0, -0.8], u), fov: lerp(42, 40, u) };
   }
-  if (t < P0[24].t) {                // 9...Rg8 .. 13.O-O: high 3/4, every square readable
-    const u = seg(P0[16].t, P0[24].t);
+  if (t < P0[24].t) {                // 10...Nbc6 .. 13.O-O: high 3/4, every square readable
+    const u = seg(P0[18].t, P0[24].t);
     return { pos: L3([1.6, 11.0, 9.8], [0.6, 10.2, 9.4], smooth(u)), target: [0, -0.4, 0.5], fov: 40 };
   }
   if (t < A.back) {                  // 13...O-O-O on "death": low on Black's queenside

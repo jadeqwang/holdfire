@@ -5,4 +5,6 @@
 import earth_night from './earth_night.js';
 import graph_outro from './graph_outro.js';
 import graph_flash from './graph_flash.js';
-export const SCENES = { t2_earth_night: earth_night, t2_graph_outro: graph_outro, t2_graph_flash: graph_flash };
+import graph_grow from './graph_grow.js';
+import pulse from './pulse.js';
+export const SCENES = { t2_earth_night: earth_night, t2_graph_outro: graph_outro, t2_graph_flash: graph_flash, t2_graph_grow: graph_grow, t2_pulse: pulse };

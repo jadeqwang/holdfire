@@ -88,8 +88,9 @@ export function drawClock(cc, s, flagW = 0, flagB = 0) {
     c.fillStyle = accent; c.fillRect(x0 + 34, y0 + 16, 100, 12);
     if (run) { c.fillStyle = on; c.beginPath(); c.moveTo(x0 + fw - 60, y0 + 14); c.lineTo(x0 + fw - 30, y0 + 22); c.lineTo(x0 + fw - 60, y0 + 30); c.closePath(); c.fill(); }
   };
-  face(28, s.w, s.running === 'w', '#ff7a2a');     // left face: White (Jade, orange band)
-  face(526, s.b, s.running === 'b', '#3fe0c5');    // right face: Black (teal-tips Jade)
+  // the faces look toward the board: seen from there, Black's end (-z) is on the left
+  face(28, s.b, s.running === 'b', '#3fe0c5');     // left face: Black (teal-tips Jade)
+  face(526, s.w, s.running === 'w', '#ff7a2a');    // right face: White (Jade, orange band)
   cc.tex.needsUpdate = true;
 }
 

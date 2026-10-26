@@ -120,6 +120,13 @@ function drawCount(ty, t, c) {
 // CAP lines: c = {lines: [{text, t, size, color}], x, y, lead, t1, align}
 function drawCaps(ty, t, c) {
   const fade = 1 - smooth(range(t, c.t1 - 0.2, c.t1));
+  if (c.band && fade > 0) {   // a soft dark plate behind the lines, so small caps read over paper as well as night
+    const a0 = easeOutCubic(range(t, c.lines[0].t - 0.03, c.lines[0].t + 0.15)) * fade;
+    const w = Math.max(...c.lines.map((ln) => ty.measure(ln.text, { ...CAPST, size: ln.size || CAPST.size }))) + 64;
+    const y0 = (c.y ?? 960) - 42, h = (c.lines.length - 1) * (c.lead ?? 44) + 62;
+    const cx = ty.ctx; cx.save(); cx.globalAlpha = 0.62 * a0; cx.fillStyle = 'rgb(5,7,13)';
+    cx.beginPath(); cx.roundRect((c.x ?? SAFE.cx) - w / 2, y0, w, h, 10); cx.fill(); cx.restore();
+  }
   c.lines.forEach((ln, i) => {
     const a = easeOutCubic(range(t, ln.t - 0.03, ln.t + 0.15)) * fade;
     if (a > 0) ty.text(ln.text, c.x ?? SAFE.cx, (c.y ?? 960) + i * (c.lead ?? 44), { ...CAPST, size: ln.size || CAPST.size, color: ln.color || c.color || P.cream, align: c.align || 'center', alpha: a, shade: c.shade ?? 0.85, glow: ln.glow || 0 });
@@ -491,8 +498,8 @@ export function buildTimeline(A) {
   S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', {}, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
   hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 150, y: 250, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });
   const lookedT = wd('V2', 2, 'looked').t;
-  // the gloss sits in the top band (the years row owns the bottom) and holds into the first weapons so it reads at < 3 words/s
-  cue({ kind: 'cap', label: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE', t0: lookedT, t1: weapons[2][1].t, x: SAFE.cx, y: 120, lead: 40, draw: drawCaps,
+  // the gloss sits on a dark plate just above the years row (y 1000) and holds into the first weapons so it reads at < 3 words/s
+  cue({ kind: 'cap', label: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE', t0: lookedT, t1: weapons[2][1].t, x: SAFE.cx, y: 896, lead: 38, band: true, draw: drawCaps,
     lines: [{ text: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES', t: lookedT, size: 26 }, { text: 'c. 850 CE', t: lookedT + 0.4, size: 22, color: [0.86, 0.8, 0.68] }] });
   const yrs = [...weapons.map(([, an, , y]) => ({ text: String(y), t: an.t })), { text: '1945', t: ground.t }];
   cue({ kind: 'years', label: '1132 · 1288 · 1453 · 1916 · 1945 (small, brushed, accumulating)', t0: yrs[0].t, t1: LN('V2', 4).t, items: yrs, y: 1000, draw: drawYears });
@@ -520,7 +527,7 @@ export function buildTimeline(A) {
   const dl2 = A.sections.find((s) => s.name === 'Chorus 2').start;
   S(null, wd('C2', 0, "can't"), { ...split({ swingT: dl2 }, { swingT: dl2 }), method: 'video', era: ERA.room, look: LK.night,
     want: 'Split: each Jade alone on her own dish field at night (mirrored); the dishes swing to the same point', notes: 'chorus 1 shot returns as a split; cut on "Can\'t" like chorus 1' });
-  S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { cx: 480, R: 300 } }, right: { scene: 'goldenrecord', p: { cx: 1440, R: 300 } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
+  S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 200 } }, right: { scene: 'goldenrecord', p: { R: 200 } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
     want: 'Split: the Golden Record cover engraves itself on both sides at once' });
   S(null, wd('C2', 2, 'but'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: both Jades sing "but if you are, I\'m counting on you" at their mirrored consoles' });
   const silent2 = wd('C2', 3, 'silent');
@@ -624,11 +631,11 @@ export function buildTimeline(A) {
   rollBeats.forEach((b, i) => {
     const [m, sc, w] = rollW[i % rollW.length];
     S(i === 0 ? '3:00.80' : null, i === 0 ? roll2 : { t: b, kind: 'beat', ref: `beat ${i} of the build roll` }, { ...sc, method: m, era: m === 'video' ? ERA.room : ERA.light,
-      look: i === rollBeats.length - 1 ? (t) => ({ ...LK.light, flash: smooth(range(t, b, dropT)), flashCol: [1, 1, 1] }) : LK.light, want: `${w} (cut rate doubles on the roll: one per beat)` });
+      look: i === rollBeats.length - 1 ? (t) => ({ ...LK.light, flash: smooth(range(t, b + 0.25, dropT)), flashCol: [1, 1, 1] }) : LK.light, want: `${w} (cut rate doubles on the roll: one per beat)` });
   });
   cue({ kind: 'cap', label: 'NUCLEAR DETONATIONS · SIGNAL LOST', t0: burn.t, t1: LN('BU', 3).t, y: 960, lead: 44, draw: drawCaps, color: P.red,
     lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t, size: 30 }, { text: 'SIGNAL LOST', t: fall.t, size: 30, glow: 6 }] });
-  hero(caps(lineWords('BU', 5, 0, 3)), { size: 170, y: 280, t1: show1.t, color: P.cream, hot: [1, 0.5, 0.35] });              // HOLD YOUR FIRE
+  hero(caps(lineWords('BU', 5, 0, 3)), { size: 170, y: 280, t1: show1.t, color: [0.95, 0.2, 0.12], hot: [1, 0.6, 0.45], shade: 0.8 });   // HOLD YOUR FIRE (fire red: reads on the scroll's paper and on night)
   hero(caps(lineWords('BU', 6, 3, 6)), { size: 170, y: 280, t1: dropT, color: P.goldPale, hot: GOLD_HOT });                // SHOW YOUR LIGHT
 
   // ============================================================================================== DROP (183.88 to 213.04): the mirror

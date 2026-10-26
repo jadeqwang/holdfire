@@ -191,9 +191,9 @@ void main(){
   d = mix(d, dq, .65);
   d = clamp(d + rim * .38, 0., 1.);
   // dry brush in the darks: streaks of paper through the heaviest strokes
-  vec2 rb = rot(.35) * pp;
-  float dry = vnoise(vec2(rb.x * .012, rb.y * .42) + so);
-  d *= 1. - smoothstep(.65, .95, d) * smoothstep(.72, .95, dry) * .3;
+  vec2 rb = rot(.35 + (wet - .5) * 1.5) * pp;
+  float dry = vnoise(vec2(rb.x * .035, rb.y * .5) + so) * smoothstep(.4, .8, vnoise(pp * .015 + so.yx));
+  d *= 1. - smoothstep(.7, .95, d) * smoothstep(.6, .9, dry) * .22;
   d = max(d, contour * .9);
   d *= .9 + .12 * pa.g;
   vec3 paper = paperC * pa.r;
@@ -330,6 +330,9 @@ void main(){
   vec4 s = srcAt(q); vec4 pa = paperAt(pp);
   vec2 so = hash22(vec2(seed, 2.9)) * 500.;
   vec3 k = kAt(q);
+  // keep the drawing: the source's darkest fine lines survive the flattening (a painter paints up to the line)
+  float ls = luma(s.rgb), lk = luma(k);
+  k = mix(k, s.rgb, smoothstep(.06, .2, lk - ls) * .8);
   // value bands (soft), hue kept
   float l = luma(k);
   float lb = l * bands; float lq = (floor(lb) + smoothstep(.25, .75, fract(lb))) / bands;
@@ -339,7 +342,7 @@ void main(){
   float gx = luma(kAt(q + vec2(e, 0.))) - luma(kAt(q - vec2(e, 0.)));
   float gy = luma(kAt(q + vec2(0., e))) - luma(kAt(q - vec2(0., e)));
   float edge = smoothstep(.03, .2, length(vec2(gx, gy)));
-  k *= 1. - edge * .22 * edgeK;
+  k *= 1. - edge * .3 * edgeK;
   // brush: broad strokes vary the paint film; thin passages let the paper tooth through
   vec2 rb = rot(.5 + vnoise(pp * .003 + so) * 2.) * pp;
   float film = vnoise(vec2(rb.x * .012, rb.y * .09) + so);
@@ -380,8 +383,11 @@ void main(){
     float inb = smoothstep(y0, y0 + 10., q.y) * (1. - smoothstep(y0 + h - 10., y0 + h, q.y));
     float k = inb * (A * .3 + R);
     shift += k * (10. + 70. * hash12(vec2(line, fr + fb))) * (.25 + R);
-    float cellx = 2. + 7. * hash12(vec2(line, fb + fr));
-    snow = max(snow, k * step(.62 - R * .18, hash12(vec2(floor(q.x / cellx), line + fr * 7.13 + fb * 31.))));
+    // snow: short horizontal streaks (tape dropouts), denser toward the band's middle
+    float mid = 1. - abs((q.y - y0) / h * 2. - 1.);
+    float cellx = 6. + 46. * hash12(vec2(line, fb + fr));
+    float sx = hash12(vec2(floor((q.x + hash12(vec2(line, fr)) * 80.) / cellx), line + fr * 7.13 + fb * 31.));
+    snow = max(snow, k * mid * step(.8 - R * .14 - mid * .1, sx) * (.55 + .45 * hash12(vec2(sx, line))));
     track = max(track, k * (1. - smoothstep(0., 3., abs(q.y - y0 - h * .5))) * step(.3, hash12(vec2(floor(q.x / 40.), fr + fb))));
   }
   // head switching: the bottom lines tear right and fill with noise
@@ -407,7 +413,7 @@ void main(){
   // noise: luma grain each frame, snow, tracking streaks, the head-switch band
   float n = hash12(vec2(floor(q.x / 2.), line) + fr * 1.37 + seed) - .5;
   col += n * .07 * A * noiseK;
-  col = mix(col, vec3(.85 + .15 * hash12(q + fr)), snow * .85);
+  col = mix(col, vec3(.8 + .2 * hash12(q + fr)), snow);
   col = mix(col, vec3(1.), track * .7);
   col = mix(col, vec3(luma(col)) * .6 + n * .5 + .2, hs * .65);
   fragColor = vec4(clamp(col, 0., 1.5), s0.a);
@@ -563,7 +569,7 @@ export function applyStyle(e, name, srcTex, target, o = {}) {
     const m = mat(e, 'ink', GLSL.ink, { bleed: { value: 5 }, layers: { value: 4 }, levels: { value: [0, 1, 1] }, inkC: { value: INKS.sumi }, cinnabar: { value: INKS.cinnabar }, keepRed: { value: 1 }, lineK: { value: 1 } });
     common(e, m, srcTex, o, INKS.rice, 0.05);
     const u = m.uniforms;
-    u.bleed.value = (o.bleed ?? 5) * Math.max(0.2, o.amt ?? 1); u.layers.value = o.layers ?? 4; u.levels.value = o.levels || [0.1, 0.68, 1.5]; u.lineK.value = o.line ?? 1;
+    u.bleed.value = (o.bleed ?? 5) * Math.max(0.2, o.amt ?? 1); u.layers.value = o.layers ?? 4; u.levels.value = o.levels || [0.05, 0.74, 0.8]; u.lineK.value = o.line ?? 1;
     u.inkC.value = o.ink || INKS.sumi; u.cinnabar.value = o.cinnabar || INKS.cinnabar; u.keepRed.value = o.keepRed ?? 1;
     return finalPass(e, m, target, over);
   }
@@ -592,7 +598,7 @@ export function applyStyle(e, name, srcTex, target, o = {}) {
     const h = rt(e, 'gouK', 0.5);
     const mk = mat(e, 'kuwahara', GLSL.kuwahara, { sp: { value: 1.5 } }, false);
     mk.uniforms.tSrc.value = srcTex; mk.uniforms.texel.value = [1 / h.width, 1 / h.height];
-    mk.uniforms.sp.value = 1.5 * (o.radius ?? 1) * (0.4 + 0.6 * (o.amt ?? 1));
+    mk.uniforms.sp.value = 1.0 * (o.radius ?? 1) * (0.4 + 0.6 * (o.amt ?? 1));
     e.pass(mk, h);
     const m = mat(e, 'gouache', GLSL.gouache, { tK: { value: null }, bands: { value: 7 }, edgeK: { value: 1 }, toothK: { value: 1 }, satK: { value: 1.08 } });
     common(e, m, srcTex, o, INKS.paper, 0.02);

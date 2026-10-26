@@ -37,6 +37,8 @@ const PAL = {
   case: { light: [0.93, 0.9, 0.84], mid: [0.75, 0.72, 0.68], shadow: [0.42, 0.42, 0.5], rim: [1, 1, 1], spec: [1.1, 1.1, 1.1] },
   orange: { light: [1.0, 0.52, 0.2], mid: [0.86, 0.36, 0.12], shadow: [0.5, 0.16, 0.1], rim: [1, 0.8, 0.5], spec: [1.2, 1.1, 1] },
   teal: { light: [0.32, 0.9, 0.8], mid: [0.16, 0.66, 0.6], shadow: [0.06, 0.3, 0.32], rim: [0.7, 1, 0.95], spec: [1.1, 1.2, 1.2] },
+  floor: { light: [0.16, 0.13, 0.13], mid: [0.12, 0.1, 0.1], shadow: [0.07, 0.06, 0.07], rim: [0.2, 0.2, 0.2], spec: [0.2, 0.2, 0.2] },
+  boardFar: { light: [0.86, 0.82, 0.72], mid: [0.7, 0.66, 0.58], shadow: [0.36, 0.38, 0.4], rim: [1, 1, 1], spec: [1, 1, 1] },
   chain: { light: [1.0, 0.86, 0.55], mid: [0.8, 0.6, 0.3], shadow: [0.36, 0.24, 0.2], rim: [1, 0.95, 0.8], spec: [1.6, 1.5, 1.3] },
 };
 const SQ_LIGHT = CREAM, SQ_DARK = [0.2, 0.39, 0.37];
@@ -59,7 +61,7 @@ float handShadow(vec3 w){
 }`;
 
 const TOON_VS = /* glsl */`
-in float ink; uniform vec3 smear;
+in float ink; uniform vec3 smear; uniform float smearJag;
 out vec3 vN; out vec3 vW; out float vInk;
 void main(){
   mat4 m = modelMatrix;
@@ -69,7 +71,7 @@ void main(){
   vec4 w = m * vec4(position, 1.);
   vec3 n = normalize(mat3(m) * normal);
   float sl = length(smear);
-  if (sl > 1e-4) { float k = dot(n, smear / sl); if (k < 0.) w.xyz -= smear * (-k) * (.5 + .5 * fract(sin(dot(position, vec3(12.9898, 78.233, 37.719))) * 43758.5453)); }
+  if (sl > 1e-4) { float k = dot(n, smear / sl); if (k < 0.) w.xyz -= smear * (-k) * mix(1., .5 + .5 * fract(sin(dot(position, vec3(12.9898, 78.233, 37.719))) * 43758.5453), smearJag); }
   vN = n; vW = w.xyz; vInk = ink;
   gl_Position = projectionMatrix * viewMatrix * w;
 }`;
@@ -97,12 +99,12 @@ void main(){
   col = mix(col, cRim, rimMask * rimAmt);
   if (vInk > .5) col = cInk;
   col *= lightAt(vW) * dim;
-  col += glowCol * glow * (.35 + .65 * smoothstep(.45, .8, fr));
+  col += glowCol * glow * (.03 + .9 * smoothstep(.66, .7, fr));
   col = mix(col, flatCol, uFlat);
   fragColor = vec4(col, 1.);
 }`;
 const HULL_VS = /* glsl */`
-in vec3 onormal; uniform vec3 smear; uniform float width; uniform vec2 res;
+in vec3 onormal; uniform vec3 smear; uniform float smearJag; uniform float width; uniform vec2 res;
 void main(){
   mat4 m = modelMatrix;
   #ifdef USE_INSTANCING
@@ -111,7 +113,7 @@ void main(){
   vec4 w = m * vec4(position, 1.);
   vec3 n = normalize(mat3(m) * onormal);
   float sl = length(smear);
-  if (sl > 1e-4) { float k = dot(normalize(mat3(m) * normal), smear / sl); if (k < 0.) w.xyz -= smear * (-k) * (.5 + .5 * fract(sin(dot(position, vec3(12.9898, 78.233, 37.719))) * 43758.5453)); }
+  if (sl > 1e-4) { float k = dot(normalize(mat3(m) * normal), smear / sl); if (k < 0.) w.xyz -= smear * (-k) * mix(1., .5 + .5 * fract(sin(dot(position, vec3(12.9898, 78.233, 37.719))) * 43758.5453), smearJag); }
   vec4 c = projectionMatrix * viewMatrix * w;
   vec4 cn = projectionMatrix * viewMatrix * vec4(n, 0.);
   vec2 dir = cn.xy; float l = length(dir); dir = l > 1e-6 ? dir / l : vec2(0.);
@@ -126,11 +128,22 @@ void main(){ fragColor = vec4(mix(cInk, flatCol, uFlat * (1. - flatKeep)), 1.); 
 
 let G = null;
 
+// box with ink + welded radial outline normals (for the hull)
+function boxGeo(w, h, d, x = 0, y = 0, z = 0) {
+  const g = new THREE.BoxGeometry(w, h, d).toNonIndexed(); g.deleteAttribute('uv');
+  const n = g.attributes.position.count, p = g.attributes.position.array, on = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) { const a = p[i * 3] / w, b = p[i * 3 + 1] / h, c = p[i * 3 + 2] / d; const l = Math.hypot(a, b, c); on[i * 3] = a / l; on[i * 3 + 1] = b / l; on[i * 3 + 2] = c / l; }
+  g.setAttribute('onormal', new THREE.Float32BufferAttribute(on, 3));
+  g.setAttribute('ink', new THREE.Float32BufferAttribute(new Float32Array(n), 1));
+  g.translate(x, y, z);
+  return g;
+}
+
 function makeShared(e) {
   return {
     room: { value: 1 }, hand: { value: new THREE.Vector4(0, 0, 0, 1) }, uFlat: { value: 0 }, spotGain: { value: 1 },
     lightDir: { value: new THREE.Vector3(-0.42, 0.85, 0.32).normalize() }, rimDir: { value: new THREE.Vector3(0.5, 0.35, -0.8).normalize() },
-    camPos: { value: new THREE.Vector3() }, res: { value: new THREE.Vector2(e.W, e.H) }, width: { value: 2.6 * e.S },
+    camPos: { value: new THREE.Vector3() }, res: { value: new THREE.Vector2(e.W, e.H) }, width: { value: 3.2 * e.S },
     cInk: { value: C3(INK) },
   };
 }
@@ -142,19 +155,19 @@ function toonMat(sh, pal, o = {}) {
       room: sh.room, hand: sh.hand, uFlat: sh.uFlat, spotGain: sh.spotGain, lightDir: sh.lightDir, rimDir: sh.rimDir, camPos: sh.camPos, cInk: sh.cInk,
       cLight: { value: C3(pal.light) }, cMid: { value: C3(pal.mid) }, cShadow: { value: C3(pal.shadow) }, cRim: { value: C3(pal.rim) }, cSpec: { value: C3(pal.spec) },
       flatCol: { value: C3(o.flatCol || CREAM) }, glowCol: { value: C3(o.glowCol || [1, 0.6, 0.3]) }, glow: { value: 0 },
-      specAmt: { value: o.spec ?? 1 }, rimAmt: { value: o.rim ?? 1 }, dim: { value: o.dim ?? 1 }, smear: o.smear || { value: new THREE.Vector3() },
+      specAmt: { value: o.spec ?? 1 }, rimAmt: { value: o.rim ?? 1 }, dim: { value: o.dim ?? 1 }, smear: o.smear || { value: new THREE.Vector3() }, smearJag: { value: 1 },
     },
   });
 }
 function hullMat(sh, smear, o = {}) {
   return new THREE.ShaderMaterial({
     glslVersion: THREE.GLSL3, vertexShader: HULL_VS, fragmentShader: HULL_FS, side: THREE.BackSide,
-    uniforms: { cInk: sh.cInk, uFlat: sh.uFlat, res: sh.res, width: o.width || sh.width, smear: smear || { value: new THREE.Vector3() },
+    uniforms: { cInk: sh.cInk, uFlat: sh.uFlat, res: sh.res, width: o.width || sh.width, smear: smear || { value: new THREE.Vector3() }, smearJag: o.jag || { value: 1 },
       flatCol: { value: C3(o.flatCol || CREAM) }, flatKeep: { value: o.keep ? 1 : 0 } },
   });
 }
 function withHull(mesh, sh, o = {}) {
-  const h = new THREE.Mesh(mesh.geometry, hullMat(sh, mesh.material.uniforms.smear, o));
+  const h = new THREE.Mesh(mesh.geometry, hullMat(sh, mesh.material.uniforms.smear, { ...o, jag: mesh.material.uniforms.smearJag }));
   h.frustumCulled = false; mesh.add(h); mesh.userData.hull = h; return mesh;
 }
 
@@ -184,9 +197,21 @@ function build(e, audio) {
   dome.frustumCulled = false; dome.renderOrder = -10; scene.add(dome);
 
   // table: dark wood disc under the board, lit by the spot
-  const tableMat = toonMat(sh, PAL.wood, { spec: 0, rim: 0, dim: 0.62 });
-  const table = new THREE.Mesh(new THREE.CircleGeometry(30, 64).rotateX(-Math.PI / 2).translate(0, -0.28, 0), tableMat);
+  // the hall: our table, the floor, and rows of other tables (each under its own lamp) that go dark with the lights
+  const table = withHull(new THREE.Mesh(boxGeo(16.5, 0.34, 12.8, 0, -0.45, 0), toonMat(sh, PAL.wood, { spec: 0.2, rim: 0.3, dim: 0.62 })), sh);
   scene.add(table);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 400).rotateX(-Math.PI / 2).translate(0, -3.2, 0), toonMat(sh, PAL.floor, { spec: 0, rim: 0 }));
+  scene.add(floor);
+  const others = [];
+  for (const x of [-38, -19, 19, 38]) for (const z of [-30, -12, 12, 30]) others.push([x, z]);
+  for (const z of [-30, -12, 12, 30]) others.push([0, z + (z > 0 ? 6 : -6)]);
+  const tGeo = boxGeo(11, 0.34, 5.6, 0, -0.45, 0), bGeo = boxGeo(3.4, 0.18, 3.4, 0, -0.19, 0);
+  const tables = new THREE.InstancedMesh(tGeo, toonMat(sh, PAL.wood, { spec: 0.2, rim: 0.3, dim: 0.62 }), others.length);
+  const tHull = new THREE.InstancedMesh(tGeo, hullMat(sh, null), others.length);
+  const boards2 = new THREE.InstancedMesh(bGeo, toonMat(sh, PAL.boardFar, { spec: 0, rim: 0.2 }), others.length * 2);
+  const m4 = new THREE.Matrix4();
+  others.forEach(([x, z], i) => { m4.makeTranslation(x, 0, z); tables.setMatrixAt(i, m4); tHull.setMatrixAt(i, m4); m4.makeTranslation(x - 2.7, 0, z); boards2.setMatrixAt(i * 2, m4); m4.makeTranslation(x + 2.7, 0, z); boards2.setMatrixAt(i * 2 + 1, m4); });
+  for (const m of [tables, tHull, boards2]) { m.frustumCulled = false; scene.add(m); }
 
   // board: frame box (wood, outlined) and the top (procedural squares, highlights, coordinates)
   const BW = 8 + 2 * BORDER;
@@ -280,12 +305,13 @@ function build(e, audio) {
     fragmentShader: `precision highp float; ${LIB} uniform sampler2D t; uniform vec3 flatCol; uniform float gain; in vec2 vUv; in vec3 vW; out vec4 fragColor;
       void main(){ vec3 c = texture(t, vUv).rgb; c *= max(lightAt(vW), .55) * gain; fragColor = vec4(mix(c, flatCol, uFlat), 1.); }`,
   }));
-  { const X = new THREE.Vector3(0, 0, -1), Z = faceN.clone(), Y = Z.clone().cross(X).normalize(); const m = new THREE.Matrix4().makeBasis(X, Y, Z); lcd.quaternion.setFromRotationMatrix(m); lcd.position.set(0.34, 0.15, 0).addScaledVector(faceN, 0.012); }
+  { const X = new THREE.Vector3(0, 0, -1), Z = faceN.clone(), Y = Z.clone().cross(X).normalize(); const m = new THREE.Matrix4().makeBasis(X, Y, Z); lcd.quaternion.setFromRotationMatrix(m); lcd.position.set(0.34, 0.15, 0).addScaledVector(faceN, 0.055); }
   clock.add(lcd);
+  clock.rotation.y = Math.PI;   // faces toward the board (the players and most cameras)
   const btnGeo = (() => { const g = new THREE.CylinderGeometry(0.17, 0.19, 0.16, 20).toNonIndexed(); g.deleteAttribute('uv'); const n = g.attributes.position.count; g.setAttribute('ink', new THREE.Float32BufferAttribute(new Float32Array(n), 1));
     const p = g.attributes.position.array, on = new Float32Array(n * 3); for (let i = 0; i < n; i++) { const l = Math.hypot(p[i * 3], p[i * 3 + 1] * 1.5, p[i * 3 + 2]); on[i * 3] = p[i * 3] / l; on[i * 3 + 1] = p[i * 3 + 1] * 1.5 / l; on[i * 3 + 2] = p[i * 3 + 2] / l; } g.setAttribute('onormal', new THREE.Float32BufferAttribute(on, 3)); return g; })();
-  const btnW = withHull(new THREE.Mesh(btnGeo, toonMat(sh, PAL.orange)), sh); btnW.position.set(-0.18, 0.62, 0.68); clock.add(btnW);
-  const btnB = withHull(new THREE.Mesh(btnGeo, toonMat(sh, PAL.teal)), sh); btnB.position.set(-0.18, 0.62, -0.68); clock.add(btnB);
+  const btnW = withHull(new THREE.Mesh(btnGeo, toonMat(sh, PAL.orange)), sh); btnW.position.set(-0.18, 0.62, -0.68); clock.add(btnW);
+  const btnB = withHull(new THREE.Mesh(btnGeo, toonMat(sh, PAL.teal)), sh); btnB.position.set(-0.18, 0.62, 0.68); clock.add(btnB);
   clock.position.y = 0.0;
 
   // scoresheet
@@ -364,7 +390,7 @@ function build(e, audio) {
         c = mix(c, lineCol, clamp(on * speedL, 0., 1.));
       }
       if (impact > .5) {
-        float l = luma(c); float b = step(.3, l);
+        float l = luma(c); float b = step(.52, l);
         vec3 ink = vec3(.02, .02, .035), paper = vec3(1.04, 1.0, .94);
         c = impact < 1.5 ? mix(paper, ink, b) : mix(ink, paper, b);
       }
@@ -444,9 +470,9 @@ function drawDive2D(ctx, u, p, frame) {
   const k = frame.k, cx = 960, cy = frame.cy;     // px per unit, screen centre of the queen's mid-height
   const QH = HEIGHT.Q;
   // the board: edge-on line at the queen's foot that unfolds into a flat grid, then its squares slide out
-  const unfold = smoother((u - 0.0) / 0.3);
-  const out = (u - 0.28) / 0.6;
-  const sq = 150 * (1 + 0.2 * unfold);
+  const unfold = smoother(u / 0.26);
+  const out = (u - 0.16) / 0.62;
+  const sq = 112 * (1 + 0.15 * unfold);
   const gy = cy + (QH / 2) * k;                           // board line (foot of the queen) in px
   const g4 = [6, 3];                                       // g4: the queen's square
   for (let f = 0; f < 8; f++) for (let r = 0; r < 8; r++) {
@@ -454,8 +480,9 @@ function drawDive2D(ctx, u, p, frame) {
     const dx = (f - g4[0]) * sq, dy = -(r - g4[1]) * sq * unfold;
     let x = cx + dx, y = lerp(gy, cy + dy, unfold);
     const h = hash2(f * 1.7 + 3, r * 2.3 + 1);
-    const delay = h * 0.45 + 0.1 * (Math.abs(f - g4[0]) + Math.abs(r - g4[1])) / 8;
-    const v = clamp((out - delay) / 0.45);
+    const near = Math.max(Math.abs(f - g4[0]), Math.abs(r - g4[1]));
+    const delay = h * 0.35 + 0.12 * (1 - near / 7);         // outer tiles go first, the ones round the queen last
+    const v = clamp((out - delay) / 0.4);
     const ang = Math.atan2(dy + (r === g4[1] ? 0.001 : 0), dx + 0.001) + (h - 0.5) * 0.9;
     const dist = easeInCubic(v) * 2400;
     x += Math.cos(ang) * dist; y += Math.sin(ang) * dist;
@@ -477,7 +504,10 @@ function drawDive2D(ctx, u, p, frame) {
     const x = lerp(qx, cx + s[0], m), y = lerp(qy, cy - s[1] * 1 + 0, m);
     if (i) c.lineTo(x, y); else c.moveTo(x, y);
   }
-  c.closePath(); c.fill();
+  c.closePath();
+  const key = clamp(unfold * 1.4) * (1 - smooth((u - 0.85) / 0.1));
+  if (key > 0.01) { c.strokeStyle = cream; c.lineJoin = 'round'; c.lineWidth = 22 * key; c.stroke(); }   // a cream keyline off the tiles
+  c.fill();
   if (m < 1) { c.strokeStyle = ink; c.lineJoin = 'round'; c.lineWidth = 5.2 * (1 - m); c.stroke(); }   // the 3D ink outline's width
   // crown balls sink into the shape
   for (let i = 0; i < QUEEN_BALLS.n; i++) {
@@ -565,10 +595,11 @@ export default {
       m.position.set(...ps.pos); m.quaternion.set(...ps.q); m.scale.set(...ps.scale);
       const sp = Math.hypot(...ps.vel);
       const sm = m.material.uniforms.smear.value;
-      if (sp > 2.5) { const k = Math.min(0.03, 1.3 / sp); sm.set(ps.vel[0] * k, ps.vel[1] * k, ps.vel[2] * k); } else sm.set(0, 0, 0);
+      m.material.uniforms.smearJag.value = (ps.pos[1] > 1.2 && !ps.flying) ? 0 : 1;
+      if (sp > 2.5) { const k = Math.min(0.03, (ps.pos[1] > 1.2 && !ps.flying ? 0.4 : 0.75) / sp); sm.set(ps.vel[0] * k, ps.vel[1] * k, ps.vel[2] * k); } else sm.set(0, 0, 0);
       // glow: the checked king, the black queen giving the last check
       let glow = 0;
-      if (st.check && st.check.sq !== undefined && GAME.boards[st.k + 1][st.check.sq] === ps.id) glow = 0.55 + 0.45 * Math.exp(-st.check.age / 0.25);
+      if (st.check && st.check.sq !== undefined && GAME.boards[st.k + 1][st.check.sq] === ps.id) glow = 0.6 + 0.4 * Math.exp(-st.check.age / 0.25);
       if (st.hand && st.hand.hover && st.moving == null && S.plies[st.k + 1] && S.plies[st.k + 1].id === ps.id) glow = 0.25;
       m.material.uniforms.glow.value = glow;
       m.material.uniforms.glowCol.value.setRGB(...(glow > 0.5 ? [1.0, 0.3, 0.12] : (ps.white ? [1, 0.6, 0.3] : [0.3, 1, 0.85])));
@@ -621,7 +652,7 @@ export default {
     // sparks off the clock on 9.Qxg7 (White's button)
     const sparkT = S.anchors.spark, sa = t - sparkT;
     if (sa >= 0 && sa < 1.0 && (p.sparks ?? 1) > 0) {
-      const btn = [CLOCK_POS[0] - 0.18, 0.75, CLOCK_POS[2] + 0.68];
+      const btn = [CLOCK_POS[0] + 0.18, 0.75, CLOCK_POS[2] + 0.68];
       for (let i = 0; i < 70; i++) {
         const life = 0.35 + 0.6 * hash1(i * 1.3); if (sa > life) continue;
         const a = hash1(i * 2.7) * Math.PI * 2, el = 0.25 + hash1(i * 3.1) * 1.1, sp = 3 + 7 * hash1(i * 5.9);
@@ -630,7 +661,7 @@ export default {
         if (pos[1] < -0.27) continue;
         const vel = [v[0], v[1] - 9.8 * sa, v[2]];
         const fade = 1 - sa / life, hot = 2.6 * fade * (p.sparks ?? 1);
-        push(pos, 0.025 + 0.02 * hash1(i), [hot * 1.0, hot * 0.62, hot * 0.25], vel.map((x) => x * 0.035));
+        push(pos, 0.014 + 0.012 * hash1(i), [hot * 1.0, hot * 0.7, hot * 0.32], vel.map((x) => x * 0.026));
       }
       if (sa < 0.12) push(btn, 0.9 * (1 - sa / 0.12), [3, 2.2, 1.2]);
     }

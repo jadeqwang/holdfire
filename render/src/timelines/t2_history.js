@@ -9,6 +9,9 @@ export function buildTimeline(A) {
     look: (t) => ({ ...INK_LOOK, shakeX: 10 * shake(t, 86.42) * Math.sin(t * 97), shakeY: -7 * shake(t, 86.42) }) });
   add({ id: 'h2_scroll', t0: 87.39, t1: 90.0, scene: 't2_scroll_warning', p: {},
     look: (t) => ({ ...INK_LOOK, shakeY: 5 * shake(t, 89.97) }) });
+  add({ id: 'h2_weapons', t0: 90.0, t1: 92.6, scene: 't2_ink_weapons',
+    p: { under: { scene: 'oko', p: { tLaunch: [93.5, 94.62, 94.78, 94.92, 95.08], tAttack: 96.5, tPush: [95.36, 96.4], caption: false, gloss: false } } },
+    look: (t) => ({ ...INK_LOOK, shakeX: 8 * shake(t, 92.15) * Math.sin(t * 91), shakeY: 6 * shake(t, 91.61) + 5 * shake(t, 90.92) }) });
   shots.sort((a, b) => a.t0 - b.t0);
   return shots;
 }

@@ -30,7 +30,7 @@ export function outroTimes(A, p = {}) {
 
 export function outroCam(t, six) {
   const u = t - six, k = smooth(range(u, -6, 14));
-  return { target: [0.3, 0, lerp(-1.6, -0.8, k)], dist: lerp(37, 44, k), az: 3.45 + u * 0.017, el: lerp(0.58, 0.74, k), fov: 30 };
+  return { target: [0, 0, lerp(-0.8, -0.3, k)], dist: lerp(37, 44, k), az: 3.45 + u * 0.017, el: lerp(0.58, 0.74, k), fov: 30 };
 }
 
 export default {
@@ -67,6 +67,6 @@ export default {
       G.sprites.add(w.x, w.h, -w.y, 2.1, C.red[0], C.red[1], C.red[2], 3.0 * fl, 11, 6 * fl + 2.5);
     }
     const cam = p.cam || outroCam(t, T.six);
-    renderGalaxy(ctx, { cam, off: p.off || [20, 40], stars: p.stars ?? 1, glow: p.glow ?? 0.3, bulge: p.bulge ?? 0.8, sky: p.sky ?? true, skyExp: 0.55, over: p.over });
+    renderGalaxy(ctx, { cam, off: p.off || [0, 20], stars: p.stars ?? 1, glow: p.glow ?? 0.3, bulge: p.bulge ?? 0.8, sky: p.sky ?? true, skyExp: 0.55, over: p.over });
   },
 };

@@ -16,33 +16,53 @@ import { rt, copy } from '../plate/lib.js';
 
 const TITLE = { font: 'Archivo', weight: 800, stretch: '125%', track: 0.14, size: 150 };
 
-export function credits(p = {}) {
+// Jade's wording (docs/take2/REVIEW_NOTES.md, "End card"; modelled on rewind-take-two's tools/sectionF/edl.py CREDIT / CREDIT_R).
+// A credit is a list of rows; a row is a list of [text, style] segments (style: 'title' italic book face, 'line', 'dim', 'small').
+// SONG sits above the title, one credit per beat after the final hit; MODELS sits below the rule, one row per sixteenth.
+const SONG = [
+  [[['Hold Fire', 'title'], ['  ·  from the album ', 'line'], ['Rare Earth', 'title']]],
+  [[['Lyrics \u201cby\u201d Jade Wang', 'line']]],
+  [[['assembled by Opus 5.5 from a corpus of four books', 'dim']], [['of poetry written by Jade Wang:', 'dim']],
+    [['Inference', 'ititle'], [', ', 'dim'], ['Petrov Test', 'ititle'], [', ', 'dim'], ['Tao of Totality', 'ititle'], [' (the Spaces Left Blank trilogy)', 'dim']],
+    [['and ', 'dim'], ['Variations and Metamorphosis', 'ititle']]],
+];
+const SMALL = ['Fischer\u2013Tal · Leipzig 1960 · \u00bd\u2013\u00bd   ·   fonts under the SIL Open Font License', 'near-miss sources: National Security Archive, Union of Concerned Scientists,', 'Chatham House, Atomic Heritage Foundation'];
+// rows of names joined with " · ", wrapped to the safe width
+function nameRows(ty, names, st, maxW) {
+  const rows = []; let cur = [];
+  for (const n of names) {
+    const test = [...cur, n].join('  ·  ');
+    if (cur.length && ty.measure(test, st) > maxW) { rows.push(cur.join('  ·  ')); cur = [n]; } else cur.push(n);
+  }
+  if (cur.length) rows.push(cur.join('  ·  '));
+  return rows;
+}
+// credits.json (tools/t2/credits.py): the models that made the cut, read at render time
+let creditsP = null;
+const creditsJSON = () => (creditsP = creditsP || fetch('data/t2/credits.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
+export function credits(p = {}, cj = null) {
   if (p.credits) return p.credits;
-  const img = (p.images || []).map((x) => ['PICTURES', x.credit]);
-  return [
-    ['SONG', '“HOLD FIRE” — JADE WANG WITH CLAUDE · FROM THE ALBUM RARE EARTH'],
-    ['WORDS', 'FOUND IN JADE’S POETRY · SPACES LEFT BLANK (TRILOGY) · VARIATIONS AND METAMORPHOSIS'],
-    ['VIDEO', 'JADE WANG AND CLAUDE'],
-    ...img,
-    ['TYPE', 'FONTS UNDER THE SIL OPEN FONT LICENSE'],
-    ['GAME', 'FISCHER–TAL · LEIPZIG 1960 · ½–½'],
-    ['', 'SOURCES: NATIONAL SECURITY ARCHIVE, UCS, CHATHAM HOUSE, ATOMIC HERITAGE FOUNDATION'],
-    ['', 'ECHO AND THE 610 WORLDS ARE FICTIONAL · THE NEAR-MISSES ARE REAL'],
-  ];
+  const img = (p.images || []).map((x) => x.credit);
+  return { song: SONG, animated: (cj && cj.animated_by) || 'Opus 5.5', cast: (cj && cj.cast) || [], support: (cj && cj.support) || [], images: img };
 }
 
 let dimMat = null;
 function times(ctx, shot, p) {
   const hitT = p.hitT ?? shot.t0;
   const endT = p.endT ?? ctx.audio.duration ?? shot.t1;
-  const cIn = hitT + 0.55;                       // credits after the hit, so it lands alone
-  const cOut = Math.max(cIn + 1.4, endT - 0.75);  // everything but the eye has gone before the loop point
-  return { hitT, endT, cIn, cOut };
+  // the beats after the hit carry the song credit (the title lands alone on the hit); everything but the eye is gone by the end
+  const B = (ctx.audio.beats || []).filter((b) => b > hitT + 0.05);
+  const bp = B.length > 1 ? B[1] - B[0] : 0.64;
+  const beats = [0, 1, 2].map((i) => B[i] ?? hitT + (i + 1) * bp);
+  const cIn = beats[0];
+  const cOut = Math.max(beats[2] + 0.7, endT - 0.42);
+  return { hitT, endT, cIn, cOut, beats, s16: bp / 4 };
 }
 
 export default {
   async prepare(ctx, shot, t, lt, p) {
     ctx.state.t2end = p.under ? await pickFirst(ctx, shot, t, lt, [p.under], false).catch(() => null) : null;
+    ctx.state.t2credits = await creditsJSON();
   },
   draw(ctx, shot, t, lt, p) {
     const e = ctx.engine;
@@ -52,7 +72,7 @@ export default {
     if (U) {
       Object.assign(ctx.state, U.st); U.sc.draw(ctx, shot, t, lt, U.lp);
       // dim it under the card, then give it back at full strength for the loop
-      const k = smooth(range(t, T.hitT - 0.02, T.hitT + 0.25)) * (1 - smooth(range(t, T.cOut, T.endT - 0.12)));
+      const k = smooth(range(t, T.hitT - 0.02, T.hitT + 0.25)) * (1 - smooth(range(t, T.cOut, T.endT - 0.08)));
       const g = lerp(1, p.dim ?? 0.28, k);
       if (!dimMat) dimMat = e.shader('uniform sampler2D tSrc; uniform float g; void main(){ fragColor = vec4(texture(tSrc, vUv).rgb * g, 1.); }', { tSrc: { value: null }, g: { value: 1 } });
       const tmp = rt(e, 'endcardTmp'); copy(e, e.rtScene.texture, tmp);
@@ -60,7 +80,7 @@ export default {
     }
     // a thin gold rule that draws out under the title with the credits
     const c = e.c2dBegin();
-    const ra = smooth(range(t, T.cIn - 0.2, T.cIn + 0.5)) * (1 - smooth(range(t, T.cOut - 0.2, T.cOut + 0.3)));
+    const ra = smooth(range(t, T.cIn - 0.2, T.cIn + 0.5)) * (1 - smooth(range(t, T.cOut - 0.1, T.cOut + 0.25)));
     if (ra > 0) {
       const w = 420 * easeOutCubic(ra);
       c.strokeStyle = css(P.gold, 0.8 * ra); c.lineWidth = 2;
@@ -82,18 +102,48 @@ export default {
       ty.text('HOLD FIRE', 960, 590, { ...TITLE, align: 'center', color: col, alpha: k * out, glow: 10, shade: 0.55 });
       cx.restore();
     }
-    const L = credits(p);
-    const a = smooth(range(t, T.cIn, T.cIn + 0.45)) * (1 - smooth(range(t, T.cOut, T.cOut + 0.4)));
+    const C = credits(p, ctx.state.t2credits);
+    const a = smooth(range(t, T.cIn - 0.03, T.cIn + 0.2)) * (1 - smooth(range(t, T.cOut, T.cOut + 0.3)));
     if (a <= 0) return;
-    // one centred column (the 4:5 crop keeps it): the key in book gold, then the line
-    const ST = { font: 'OpenSans', weight: 600, size: 13, track: 0.2 };
-    L.forEach(([k, v], i) => {
-      const ai = a * smooth(range(t, T.cIn + i * 0.05, T.cIn + 0.35 + i * 0.05));
-      const y = 708 + i * 32;
-      const wk = k ? ty.measure(k, ST) + 18 : 0, wv = ty.measure(v, ST);
-      const x0 = 960 - (wk + wv) / 2;
-      if (k) ty.text(k, x0, y, { ...ST, color: P.bookGold, alpha: ai, shade: 0.6 });
-      ty.text(v, x0 + wk, y, { ...ST, color: P.cream, alpha: ai * 0.9, shade: 0.6 });
+    // sizes for a 540p phone: nothing under 22 design px (11 px on the phone), the main lines 30-40
+    const STY = {
+      title: { font: 'CormorantI', weight: 600, size: 44, color: P.cream },
+      line: { font: 'OpenSans', weight: 600, size: 30, color: P.cream },
+      dim: { font: 'OpenSans', weight: 500, size: 25, color: [0.86, 0.82, 0.74] },
+      ititle: { font: 'CormorantI', weight: 600, size: 32, color: P.cream },
+      key: { font: 'OpenSans', weight: 700, size: 26, color: P.cream },
+      name: { font: 'OpenSans', weight: 600, size: 27, color: P.goldPale },
+      support: { font: 'OpenSans', weight: 500, size: 23, color: P.bookGold },
+      small: { font: 'OpenSans', weight: 500, size: 22, color: P.bookGold },
+    };
+    const W = 864;   // the centred 4:5 safe area
+    const row = (segs, y, al) => {
+      const ws = segs.map(([s, k]) => ty.measure(s, STY[k]));
+      const tot = ws.reduce((s, w) => s + w, 0);
+      const f = Math.min(1, W / tot);
+      let x = 960 - (tot * f) / 2;
+      segs.forEach(([s, k], i) => { const st = { ...STY[k], size: STY[k].size * f }; ty.text(s, x, y, { ...st, alpha: al, shade: 0.75 }); x += ws[i] * f; });
+    };
+    const ain = (t0) => a * smooth(range(t, t0 - 0.03, t0 + 0.16));
+    // SONG: above the title, one credit per beat after the hit
+    let y = 170;
+    C.song.forEach((cr, i) => {
+      const al = ain(T.beats[i]);
+      cr.forEach((segs, r) => { if (al > 0) row(segs, y, al); y += r + 1 < cr.length ? 40 : 62; });
     });
+    // MODELS: below the rule, one row per sixteenth from the first beat
+    const lines = [[['Music by Jade Wang and Suno', 'line']], null, [[`Animated by ${C.animated}`, 'key']], [['and a supporting cast of models:', 'dim']]];
+    nameRows(ty, C.cast, STY.name, W).forEach((s) => lines.push([[s, 'name']]));
+    nameRows(ty, C.support, STY.support, W).forEach((s) => lines.push([[s, 'support']]));
+    C.images.forEach((s) => lines.push([[s, 'support']]));
+    y = 700; let k = 0;
+    lines.forEach((segs) => {
+      if (!segs) { y += 12; return; }
+      const al = ain(T.cIn + T.s16 * (1 + k++));
+      if (al > 0) row(segs, y, al);
+      y += 38;
+    });
+    const asm = ain(T.beats[2]);
+    if (asm > 0) SMALL.forEach((x, i) => row([[x, 'small']], Math.max(y + 12, 990) + i * 28, asm * 0.9));
   },
 };

@@ -301,5 +301,54 @@
    "lag": null,
    "pick": true
   }
+ ],
+ "V114": [
+  {
+   "tag": "t2_V114_veof_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V114_veof_t1-4c58ce8044",
+   "kf": "media/kf2/V114_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V114_veof_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_V114_veof_t1_4c58ce8044.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "verdict": "pick (0-1.4 s): the cel hand presses a seed into the furrow beside the cracked dry channel; later it scoops soil (unused)",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "V116": [
+  {
+   "tag": "t2_V116_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V116_veo_t1-91f61bb415",
+   "kf": "media/kf2/V116_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V116_veo_t1.txt",
+   "s0": null,
+   "dur": "6s",
+   "file": "media/gen/t2_V116_veo_t1_91f61bb415.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.2,
+   "verdict": "pick: the flood surges in (0.4-1.6 s), then the dry ditch fills and lilies open (2-3.6 s); 1080p",
+   "lag": null,
+   "pick": true
+  },
+  {
+   "tag": "t2_V116_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_V116_sd20_t2-bc250d6887",
+   "kf": "media/kf2/V116_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V116_sd20_t2.txt",
+   "s0": null,
+   "dur": 5,
+   "file": "media/gen/t2_V116_sd20_t2_bc250d6887.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.75,
+   "verdict": "bake-off alt: gentler spread with ripples, ditch fills only at 4-5 s; 720p; less punch for a 0.9 s shot",
+   "lag": null,
+   "pick": false
+  }
  ]
 }

@@ -44,3 +44,40 @@ Take two's end card (`t2_endcard`) should read, set on the beats after the final
   losers don't appear), then the `support` list (stems, face tracking, transcription, the renderer).
 - small: Fischer–Tal · Leipzig 1960 · ½–½; near-miss sources (National Security Archive, UCS, Chatham House, Atomic Heritage
   Foundation); fonts under the SIL Open Font License; no NASA/ESA imagery is used unless credits.json lists it.
+
+## Polish pass 1 (35.5 s → 247.16 s; finishing editor, 26 Oct)
+Final sheets: `work/t2/polish2_sheets/sheet_*.jpg` (0.5 s grid, 30 tiles each; before: `work/t2/polish0_sheets/`). Motion strips
+(12 frames at 24 fps round 29 cuts): `work/t2/motion1/m_*.jpg`. New check: `render/tools/plate_windows.mjs` walks every frame of
+every plate layer against plate meta `n` and the picks' usable windows. check_cuts: 0 cuts off onset, coverage OK, no type
+rule breaks; chess_check OK (42 plies legal, final position as planned).
+
+**Fixed**
+- V211–V217: overlays mapped onto g3's `screen` quad; new `p.occ` in `t2_petrov_screen` (a chroma matte of the plate inside a
+  head box) keeps his head and the lifted receiver in front of the map / СТАРТ / ghost. V217 protocol is now an insert on the
+  desk (painting pushed 4× on g3's `paper` quad, sheet above the subtitle, lamp-lit); nothing draws over the subtitle.
+- V214 zoom 1.12 (Veo's red line). V218 WE'RE ALIVE: full shade, no glow, warmer cream.
+- V206–V209: `t2_ink_weapons` now brushes the year over generated stills too (1132 · 1288 · 1453 · 1916).
+- V201 re-scored on vocals.wav: −0.125 confirmed (metrics agree). DR04 +0.583 and DR16 +0.958 confirmed on fixed-box word strips
+  (`work/t2/sync/*_strip.jpg`); C203L −0.375 / C203R +0.917 / C208L / C209L / C209R re-scored: unchanged. P106 lag 1.18 → 1.263
+  (eyes open 2 frames after "awake"), recorded in picks_g2.json + merged.
+- P102 / DR14 tower rings from the measured crowns (+ `hide`). Chorus 2 CRT insets CRT_roomA / CRT_roomB. P107 rate 0.8 (stops
+  short of the softest push frames); WE'RE AWAKE now leaves before the push.
+- Bridge: BR_clock (press on the cut), BR_handB, BR_faceW / BR_faceB, BR_LETGO (from clip 2.0, on "that can") cut in as lettered
+  inserts (BR01, BR02b–d, BR11b) so every later id is kept.
+- Build: BU12–BU17 were not missing in this render (the g4 placeholders came from an earlier picks merge); hand-light shots use
+  a low-bloom room look; BU04 graded toward black. HOLD YOUR FIRE cream with a full shade; SHOW YOUR LIGHT moved to the lower
+  third; NUCLEAR DETONATIONS / SIGNAL LOST on dark plates, SIGNAL LOST held while Jade grabs the jog wheel.
+- DR03: the swing is now two impact frames, a 3-frame capped whip and the clean reveal still (reads in one look). DR05/DR06:
+  the palms touch on "too" (DR05 contact frame on the cut; DR06 at rate 0.8 no longer runs off its plate).
+- Splits: teal-tips' half contrast/exposure matched to Jade's per split (C103, C203, C208, C209, BU12; cool tint kept).
+- Counter: the 26 resets end on "The count"; 534 lands on "higher" (229.48) and holds.
+- Subtitles never cross-fade into a double line. I'M COUNTING ON YOU raised above both heads.
+- End card (Jade's wording, Music by Jade Wang and Suno): song credits above the title one per beat, models below from
+  `render/data/t2/credits.json` (read at render time), ≥ 22 design px, eye frame clean at the end.
+
+**Left**
+- C203L starts 3 frames before its plate (lag −0.375 is right; the take's head is short): a held first frame.
+- DR11's vanish holds DR06's last frame for 0.45 s under the flare (deliberate).
+- DR11 lag −0.125 not confirmable (metrics disagree); C103L/R metrics disagree, strips agree with −0.25 (left as is).
+- Teal-tips' teal irises in DR03/DR04 and the CO01/OU12 white catchlight disc are not graded (needs a matte or a regen).
+- Plan-time notes: BR01 press at the fill's last 16th, BR13 dive "let"→"go", V218 on "We're" (all deliberate).

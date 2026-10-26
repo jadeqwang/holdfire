@@ -1124,7 +1124,7 @@
   "clip": [
    "P102"
   ],
-  "type": "a chord that's searching through the fog / counting out in bursts of light",
+  "type": "counting out in bursts of light",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -2106,7 +2106,7 @@
    "t": 96.719
   },
   "plan": null,
-  "notes": null
+  "notes": "zoom 1.12 crops the red line Veo drew along the screen from 0.75 s"
  },
  {
   "id": "V215",
@@ -2173,7 +2173,7 @@
   "timing_section": "Verse 2",
   "lyric": "previous instructions",
   "voice": "B",
-  "picture": "The printed protocol beside him is struck through line by line",
+  "picture": "Insert: the printed protocol on the desk beside him is struck through line by line",
   "era_style": "Petrov: Russian realist oil painting, one figure, a dark room, light from the screen; umber and CRT red",
   "method": "procedural",
   "scene": "multi",
@@ -2394,11 +2394,14 @@
   "timing_section": "Chorus 2",
   "lyric": "Silent and patient but I swear",
   "voice": "both",
-  "picture": "The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades' control rooms (procedural stand-ins until the room plates exist)",
+  "picture": "The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades' control rooms (the g2 loops CRT_roomA / CRT_roomB)",
   "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
   "method": "procedural",
   "scene": "t2_crt_matrix",
-  "clip": null,
+  "clip": [
+   "CRT_roomA",
+   "CRT_roomB"
+  ],
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -2826,17 +2829,19 @@
  {
   "id": "BR01",
   "t0": 143.423,
-  "t1": 146.111,
+  "t1": 143.898,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Post-Chorus 2",
-  "lyric": "They say the forest's dark",
+  "lyric": "They",
   "voice": "both",
-  "picture": "Teal-tips Jade presses the clock on the fill's last sixteenth; premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit",
+  "picture": "Teal-tips Jade slaps the clock on the fill's last sixteenth (BR_clock: her finger comes down on the button from clip 0.3 s, on the cut; out before 2 s)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
-  "method": "procedural",
-  "scene": "t2_chess",
-  "clip": null,
+  "method": "video",
+  "scene": "t2_plate",
+  "clip": [
+   "BR_clock"
+  ],
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -2848,19 +2853,45 @@
   "notes": null
  },
  {
-  "id": "BR02",
-  "t0": 146.111,
-  "t1": 148.64,
+  "id": "BR01b",
+  "t0": 143.898,
+  "t1": 146.111,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
-  "lyric": "every hunter holds its breath",
+  "lyric": "say the forest's dark",
   "voice": "A",
-  "picture": "Slow orbit at board height; a hand hovers a full beat over its piece; eyes in the dark reflect light like animals in a forest (moves 5-6)",
+  "picture": "Premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
   "clip": null,
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "eighth",
+   "ref": "eighth nearest 2:23.9",
+   "t": 143.898
+  },
+  "plan": null,
+  "notes": null
+ },
+ {
+  "id": "BR02",
+  "t0": 146.111,
+  "t1": 146.744,
+  "section": "Bridge",
+  "edit_section": "BR",
+  "timing_section": "Bridge",
+  "lyric": "every",
+  "voice": "A",
+  "picture": "Black's hand hovers a full beat over the bishop, then grips it (BR_handB; 5...Ba5 lands on the cut back to the board)",
+  "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
+  "method": "video",
+  "scene": "t2_plate",
+  "clip": [
+   "BR_handB"
+  ],
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -2869,6 +2900,82 @@
    "t": 146.111
   },
   "plan": "2:26.1",
+  "notes": null
+ },
+ {
+  "id": "BR02b",
+  "t0": 146.744,
+  "t1": 147.365,
+  "section": "Bridge",
+  "edit_section": "BR",
+  "timing_section": "Bridge",
+  "lyric": "hunter",
+  "voice": "A",
+  "picture": "Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)",
+  "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
+  "method": "procedural",
+  "scene": "t2_chess",
+  "clip": null,
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "beat",
+   "ref": "beat after 2:26.1 (5...Ba5)",
+   "t": 146.744
+  },
+  "plan": null,
+  "notes": null
+ },
+ {
+  "id": "BR02c",
+  "t0": 147.365,
+  "t1": 147.979,
+  "section": "Bridge",
+  "edit_section": "BR",
+  "timing_section": "Bridge",
+  "lyric": "holds its",
+  "voice": "A",
+  "picture": "Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW)",
+  "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
+  "method": "video",
+  "scene": "t2_plate",
+  "clip": [
+   "BR_faceW"
+  ],
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "word",
+   "ref": "Bridge[1] \"holds\"",
+   "t": 147.365
+  },
+  "plan": null,
+  "notes": null
+ },
+ {
+  "id": "BR02d",
+  "t0": 147.979,
+  "t1": 148.64,
+  "section": "Bridge",
+  "edit_section": "BR",
+  "timing_section": "Bridge",
+  "lyric": "breath",
+  "voice": "A",
+  "picture": "Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB)",
+  "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
+  "method": "video",
+  "scene": "t2_plate",
+  "clip": [
+   "BR_faceB"
+  ],
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "word",
+   "ref": "Bridge[1] \"breath\"",
+   "t": 147.979
+  },
+  "plan": null,
   "notes": null
  },
  {
@@ -3066,11 +3173,11 @@
  {
   "id": "BR11",
   "t0": 157.482,
-  "t1": 158.101,
+  "t1": 157.786,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
-  "lyric": "hand that can",
+  "lyric": "hand",
   "voice": "B",
   "picture": "21...Qg4+ on \"hand\": the black queen gives check, White has one legal move: perpetual (Fischer-Tal · Leipzig 1960 · ½-½ on the scoresheet)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
@@ -3085,6 +3192,32 @@
    "t": 157.482
   },
   "plan": "2:37.48",
+  "notes": null
+ },
+ {
+  "id": "BR11b",
+  "t0": 157.786,
+  "t1": 158.101,
+  "section": "Bridge",
+  "edit_section": "BR",
+  "timing_section": "Bridge",
+  "lyric": "that can",
+  "voice": "B",
+  "picture": "Both Jades take their hands off the pieces (\"that can let go\"); neither one wins",
+  "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
+  "method": "video",
+  "scene": "t2_plate",
+  "clip": [
+   "BR_LETGO"
+  ],
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "word",
+   "ref": "Bridge[5] \"that\"",
+   "t": 157.786
+  },
+  "plan": null,
   "notes": null
  },
  {
@@ -3293,7 +3426,7 @@
   "method": "procedural",
   "scene": "t2_war",
   "clip": null,
-  "type": "NUCLEAR DETONATIONS · SIGNAL LOST",
+  "type": "NUCLEAR DETONATIONS / SIGNAL LOST",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3319,7 +3452,7 @@
   "clip": [
    "BU04"
   ],
-  "type": null,
+  "type": "SIGNAL LOST",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3779,7 +3912,7 @@
   "timing_section": "Drop",
   "lyric": "counting",
   "voice": "B",
-  "picture": "The palms meet on the glass",
+  "picture": "The palms meet on the glass on \"too\"",
   "era_style": "Mirror: white void; each Jade keeps her own palette (signal-print inks on one side, cool teal and silver on the other)",
   "method": "video",
   "scene": "t2_mirror",

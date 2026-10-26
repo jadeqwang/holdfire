@@ -235,6 +235,19 @@ function trinity(ln, wa) {
   for (let k = 0; k < 9; k++) stroke(ln, [[X - 600 + k * 150 - 20 * (k % 2), H + 40 + 30 * (k % 3)], [X - 560 + k * 150, H + 40 + 30 * (k % 3)]], 2, 0.4);
 }
 const DRAW = [fireLance, handCannon, bombard, somme, trinity];
+// the years alone (white page, line ink), laid over a generated still the way the procedural images carry theirs
+let yearBakes = null;
+function bakeYears() {
+  if (yearBakes) return yearBakes;
+  yearBakes = YEARS.map((y) => {
+    const L = makeCanvas(1920, 1080);
+    L.c.fillStyle = '#fff'; L.c.fillRect(0, 0, 1920, 1080);
+    L.c.font = `400 76px ${NUM}`; L.c.textBaseline = 'alphabetic'; L.c.fillStyle = LN(); L.c.fillText(y, 572, 210);
+    L.tex.needsUpdate = true;
+    return L.tex;
+  });
+  return yearBakes;
+}
 
 let bakes = null;
 function bakeAll() {
@@ -275,6 +288,8 @@ function build(e) {
     ${INK_GLSL}
     uniform sampler2D tA; uniform sampler2D tB; uniform float fA; uniform float fB; uniform float zA; uniform float zB;
     uniform float imgA; uniform float imgB; uniform float time; uniform float smoke; uniform float seed;
+    uniform sampler2D tYA; uniform sampler2D tYB;
+    float yearInk(sampler2D t, vec2 page){ vec2 uv = vec2(page.x / 1920., 1. - page.y / 1080.); return 1. - texture(t, uv).g; }
     uniform sampler2D tUnder; uniform float bAge; uniform vec2 bC; uniform float bDur;
     vec3 dens(sampler2D t, vec2 page, float isImg){
       vec2 uv = vec2(page.x / 1920., 1. - page.y / 1080.);
@@ -305,8 +320,8 @@ function build(e) {
       vec2 d = fragDesign();
       vec4 pp = rice(d);
       float k = 0., r = 0.;
-      if (fA > 0.) { vec2 pa = (d - vec2(960., 540.)) / zA + vec2(960., 540.); vec3 m = dens(tA, pa, imgA) * showMask(pa, fA); k += m.r * .7 + m.g; r += m.b; }
-      if (fB > 0.) { vec2 pb = (d - vec2(960., 540.)) / zB + vec2(960., 540.); vec3 m = dens(tB, pb, imgB) * showMask(pb, fB); k = max(k, m.r * .7 + m.g); r = max(r, m.b); }
+      if (fA > 0.) { vec2 pa = (d - vec2(960., 540.)) / zA + vec2(960., 540.); vec3 m = dens(tA, pa, imgA); if (imgA > .5) m.g = max(m.g, yearInk(tYA, pa)); m *= showMask(pa, fA); k += m.r * .7 + m.g; r += m.b; }
+      if (fB > 0.) { vec2 pb = (d - vec2(960., 540.)) / zB + vec2(960., 540.); vec3 m = dens(tB, pb, imgB); if (imgB > .5) m.g = max(m.g, yearInk(tYB, pb)); m *= showMask(pb, fB); k = max(k, m.r * .7 + m.g); r = max(r, m.b); }
       k *= .9 + .2 * (pp.a - .5);
       // the alchemists' smoke, drifting left to right across the page
       vec2 q = d * vec2(.0013, .0024) + vec2(-time * .16, time * .03) + seed;
@@ -338,7 +353,7 @@ function build(e) {
     }
     `, {
     tRice: { value: null }, tA: { value: null }, tB: { value: null }, fA: { value: 0 }, fB: { value: 0 }, zA: { value: 1 }, zB: { value: 1 },
-    imgA: { value: 0 }, imgB: { value: 0 }, time: { value: 0 }, smoke: { value: 1 }, seed: { value: 0 },
+    imgA: { value: 0 }, imgB: { value: 0 }, tYA: { value: null }, tYB: { value: null }, time: { value: 0 }, smoke: { value: 1 }, seed: { value: 0 },
     tUnder: { value: null }, bAge: { value: -1 }, bC: { value: new THREE.Vector2(960, 436) }, bDur: { value: 0.42 },
   });
 }
@@ -378,6 +393,8 @@ export default {
     const zoom = (i) => 1 + 0.05 * easeOutCubic(range(t, T[i], T[i] + 0.9)) - (i === 4 ? 0 : 0);
     if (cur < 0) { u.fA.value = 0; u.fB.value = 0; }
     else {
+      const Y = bakeYears();
+      u.tYB.value = Y[cur]; u.tYA.value = Y[Math.max(0, cur - 1)];
       u.tB.value = tex(cur); u.imgB.value = isImg(cur); u.fB.value = fin(cur); u.zB.value = zoom(cur);
       if (cur > 0) { const fo = 1 - smooth(range(t, T[cur] - 0.03, T[cur] + 0.09)); u.tA.value = tex(cur - 1); u.imgA.value = isImg(cur - 1); u.fA.value = fo; u.zA.value = zoom(cur - 1); }
       else u.fA.value = 0;

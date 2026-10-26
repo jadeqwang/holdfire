@@ -10,7 +10,7 @@
 // whose scene is missing or whose prepare() fails (no plate yet) is replaced by a stand-in drawn here: the void in that side's
 // palette and a flat cel figure in that Jade's colours, posed for the phase, so the drop reads with every plate missing.
 // p: {phase 'approach' | 'reflection' | 'swing' | 'hands_rise' | 'palms_meet' | 'ripple' | 'gone', x (960: the plane),
-//     impactT (swing), swingDur (0.3), rippleT (default: the shot start for 'ripple'), palm ([960, 470]: where the palms meet),
+//     impactT (swing), swingDur (0.3), blurMax (520: the whip smear cap, px), rippleT (default: the shot start for 'ripple'), palm ([960, 470]: where the palms meet),
 //     vanishT (default: the shot start for 'gone'), vanishDur (0.45), full, left, right, both, label (true: name a missing plate)}
 import * as THREE from 'three';
 import { SCENES } from '../../index.js';
@@ -239,7 +239,7 @@ export default {
         X = Math.abs(tn) > 50 ? -1e4 : X0 + 640 * tn;          // the plane's vanishing line runs off and comes back
         whip = 760 * Math.sin(psi);
         const dk = Math.PI * (easeInOutCubic(clamp(k + 0.02)) - easeInOutCubic(clamp(k - 0.02))) / 0.04 / sd;   // dpsi/dt
-        blur = Math.min(520, dk * 70);
+        blur = Math.min(p.blurMax ?? 520, dk * 70);
       }
     }
     u.X.value = X; u.whip.value = whip; u.blur.value = blur; u.impact.value = impact;

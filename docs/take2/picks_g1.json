@@ -183,5 +183,20 @@
   "kind": "still",
   "src": "media/kf2/V115_nbp_v1.jpg",
   "note": "painted cutaway: field surface/horizon at y~500, the seed just below the surface at ~(950,630), the dry canal in section at right (~1600-1800, 560-640); calm soil and sky for the blueprint cross-section"
+ },
+ "V114": {
+  "dir": "work/plates/V114",
+  "kind": "video",
+  "src": "media/gen/t2_V114_veof_t1_4c58ce8044.mp4",
+  "in": 0,
+  "note": "the dry channel runs from (1350,1080) to the vanishing point (~1440,300); seed pressed at ~(1260,700)"
+ },
+ "V116": {
+  "dir": "work/plates/V116",
+  "kind": "video",
+  "src": "media/gen/t2_V116_veo_t1_91f61bb415.mp4",
+  "in": 0.4,
+  "rate": 1.5,
+  "note": "plate = take 1.5-3.9 s; in 0.4 (take 1.9 s) at 1.5x: the ditch fills with silver water and lilies open across the 0.9 s shot."
  }
 }

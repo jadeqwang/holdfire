@@ -259,9 +259,11 @@ export function buildTimeline(A) {
     return x;
   };
   // S(planTime | null, anchor, {scene, p, want, method, era, look, notes})
+  // spec.sub ('b', 'c', ...): an insert cut into the previous numbered shot keeps that number plus a letter, so every later id
+  // (picks, keyframes and takes are keyed by shot id) stays unchanged
   const S = (plan, anchor, spec) => {
-    counters[SEC] = (counters[SEC] || 0) + 1;
-    const id = `${SEC}${String(counters[SEC]).padStart(2, '0')}`;
+    if (!spec.sub) counters[SEC] = (counters[SEC] || 0) + 1;
+    const id = `${SEC}${String(counters[SEC]).padStart(2, '0')}${spec.sub || ''}`;
     if (!(anchor && Number.isFinite(anchor.t))) throw new Error(`shot ${id}: bad anchor`);
     const s = { id, section: SEC, t0: anchor.t, t1: null, anchor, plan, ...spec, p: subst(spec.p || {}, id) };
     shots.push(s); return s;
@@ -274,6 +276,10 @@ export function buildTimeline(A) {
   const still = (p = {}) => ({ scene: 't2_still', p: { img: '@', ...p } });
   // a plate base that is not there yet falls back to the labelled placeholder (t2_first), so the overlays still draw over it
   const over = (base, ...layers) => ({ scene: 'multi', p: { layers: [(base.scene === 't2_plate' || base.scene === 't2_still') ? { scene: 't2_first', p: { chain: [base, { scene: 'placeholder' }] } } : base, ...layers] } });
+  // RM(k, e): teal-tips' room (right half) graded to Jade's (left): the B takes come out flatter under the cool fluorescents, so they
+  // get the contrast and exposure that match the left half's luma mean and spread (measured per split on the polish-pass stills);
+  // the cooler tint is kept (plan: her room is Jade's flipped, with cooler light)
+  const RM = (contrast, exposure) => ({ grade: { contrast, exposure } });
   const split = (l = {}, r = {}, line = 2) => ({ scene: 't2_split', p: { left: { scene: 't2_plate', p: { clip: '@L', ...l } }, right: { scene: 't2_plate', p: { clip: '@R', ...r } }, x: 960, line } });
   const flash = (col = [1, 0.86, 0.6], k = 0.6, dec = 0.12) => (t, lt) => ({ flash: Math.exp(-Math.max(0, lt) / dec) * k, flashCol: col });
   const withLook = (L, f) => (t, lt, ctx) => ({ ...L, ...f(t, lt, ctx) });
@@ -422,9 +428,10 @@ export function buildTimeline(A) {
   const countingT = wd('P1', 2, 'counting');
   // TOWER_RING: the crown's ring of lamps in design px as the P102 still frames it (a placeholder until the still is picked:
   // the generation agent should report the ellipse, or compose the tower so its crown sits here)
-  const TOWER_RING = { cx: 960, cy: 250, rx: 330, ry: 46 };
+  const TOWER_RING = { cx: 970, cy: 267, rx: 148, ry: 32 }, TOWER_HIDE = [920, 1015];   // P102's crown (g2's measurement)
+  const DR14_RING = { cx: 1024, cy: 255, rx: 155, ry: 40 }, DR14_HIDE = [975, 1060];       // DR14's crown (measured on the still)
   const burstT = EIGHTHS.filter((e) => e >= countingT.t - 0.02).slice(0, 5);   // 1, 1, 2, 3, 5 lamps on five eighths
-  S('0:38.07', countingT, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { counts: [1, 1, 2, 3, 5], times: burstT, ring: TOWER_RING } }), method: 'still', era: ERA.signal, look: LK.riso,
+  S('0:38.07', countingT, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { counts: [1, 1, 2, 3, 5], times: burstT, ring: TOWER_RING, hide: TOWER_HIDE } }), method: 'still', era: ERA.signal, look: LK.riso,
     want: 'Echo: the signal tower above the violet clouds (Rare Earth world sheet, panel 04) fires its ring of lights in bursts of 1, 1, 2, 3, 5 on eighths' });
   S('0:40.65', wd('P1', 3, 'a'), { scene: 't2_pulse', p: { tSend: wd('P1', 3, 'one-way').t, tArrive: LN('P1', 4).t - 0.27, dir: 'toEcho', dist: 217 }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: 'Ride the pulse across the galaxy toward a small blue point: Echo, 217 light-years away (fictional; never presented as a real exoplanet)', notes: "teal-tips Jade's voice enters, heard not seen" });
@@ -434,14 +441,14 @@ export function buildTimeline(A) {
   S('0:46.02', hearT, { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'First sight of teal-tips Jade in her own (mirrored, cooler) control room, headphones on, singing' });
   S(null, wd('P1', 5, 'awake'), { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Closer: teal-tips Jade opens her eyes on "awake"', notes: 'cut on "awake" so the eyes open on the word' });
   const roll1 = ev('snare_roll', null, hearT.t);
-  S('0:49.24', roll1, { ...plate(), method: 'video', era: ERA.room,
+  S('0:49.24', roll1, { ...plate({ rate: 0.8 }), method: 'video', era: ERA.room,
     look: (t, lt) => ({ ...LK.room, exposure: 1 + 0.5 * range(t, roll1.t, LN('C1', 0).t) }), want: "The snare roll pushes into teal-tips Jade's eye (iris fills the frame)" });
   sub('P1', 1);                                                                                                         // a chord that's searching ...
   sub('P1', 2, { cap: LN('P1', 3).t });                                                                                   // counting out in bursts of light
   const lyT = wd('P1', 3, 'a').t;
   cue({ kind: 'hero', label: '217 LY', t0: lyT, t1: LN('P1', 4).t, size: 300, y: 420, out: 0.15, draw: drawHero,
     rows: [{ words: [{ text: '217', t: lyT }] }, { words: [{ text: 'LIGHT-YEARS', t: lyT + 0.25 }], k: 0.22 }], color: P.gold, hot: GOLD_HOT });
-  hero(caps(lineWords('P1', 5, 5)), { size: 200, y: 300, t1: LN('C1', 0).t - 0.25, rows: [1, 1] });                       // WE'RE / AWAKE
+  hero(caps(lineWords('P1', 5, 5)), { size: 180, y: 235, t1: roll1.t + 0.12, out: 0.25, rows: [1, 1] });                     // WE'RE / AWAKE (gone before the push reaches her eye)
 
   // ============================================================================================== CHORUS 1 (51.70 to 73.03)
   section('C1');
@@ -449,7 +456,7 @@ export function buildTimeline(A) {
   S('0:51.70', wd('C1', 0, "can't"), { ...plate({ swingT: dl1 }), method: 'video', era: ERA.room, look: (t) => ({ ...LK.night, flash: t >= dl1 ? Math.exp(-(t - dl1) / 0.15) * 0.4 : 0, flashCol: [1, 0.9, 0.7] }),
     want: 'Jade alone on the dish field at night; on the 0:51.82 downbeat every dish swings to the same point in the sky' });
   S('0:54.28', wd('C1', 1, 'message'), { scene: 'goldenrecord', p: {}, method: 'reuse', era: ERA.light, look: LK.diagram, want: "Take one's 0:54 diagram unchanged: the Golden Record cover engraves itself in gold light" });
-  S('0:56.67', wd('C1', 2, 'but'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split screen: both Jades sing the line at their own consoles, neither aware of the other (left Jade, right teal-tips)' });
+  S('0:56.67', wd('C1', 2, 'but'), { ...split({}, RM(1.18, 1.02)), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split screen: both Jades sing the line at their own consoles, neither aware of the other (left Jade, right teal-tips)' });
   // t2_crt_matrix is one continuous camera (close on one CRT, smash back on the two beats and on "swear"), so it is one shot;
   // the beats and "swear" are passed in (the scene would otherwise take the beats after its own start)
   const crt = (silent, sec, want, extra = {}) => ({ scene: 't2_crt_matrix', method: 'procedural', era: ERA.crt, look: CRT_LOOK, want,
@@ -464,7 +471,7 @@ export function buildTimeline(A) {
   S(null, wd('C1', 5, "i'm"), { scene: 't2_graph_grow', p: { mode: 'first_line' }, method: 'procedural', era: ERA.light, look: LK.light,
     want: 'Earth from far off: one faint line leaves Earth (sets up the graph)', notes: 'split from the crane on "I\'m"' });
   hero(caps(lineWords('C1', 0, 0, 3)), { size: 180, y: 290, t1: LN('C1', 1).t });                                       // CAN'T BE SURE
-  hero(caps(lineWords('C1', 2, 4)), { rows: [2, 2], size: 170, y: 270, t1: LN('C1', 3).t, out: 0.1 });                  // I'M COUNTING / ON YOU
+  hero(caps(lineWords('C1', 2, 4)), { rows: [2, 2], size: 150, y: 190, t1: LN('C1', 3).t, out: 0.1 });                  // I'M COUNTING / ON YOU (above both heads)
 
   // ============================================================================================== POST-CHORUS 1 (73.03 to 82.55)
   section('X1');
@@ -532,8 +539,11 @@ export function buildTimeline(A) {
   const petrovOpen = S('1:32.60', wd('V2', 4, 'eighty-three'), oil('Oil painting: the Serpukhov-15 command post at night, one figure, light from the big screen'));
   if (petrovOpen.id !== petrovId) throw new Error(`Petrov opening id ${petrovOpen.id} != ${petrovId}`);
   // the painting under the screens: the opening plate running on the song clock from its own start, else the umber stand-in
-  const painting = () => ({ scene: 't2_first', p: { chain: [petrovPlate({ at: (lt, t) => t - petrovOpen.t0 }), backdrop] } });
-  const screen = (mode, extra = {}) => ({ scene: 't2_petrov_screen', p: { mode, ...extra } });
+  const painting = (xf = {}) => ({ scene: 't2_first', p: { chain: [petrovPlate({ at: (lt, t) => t - petrovOpen.t0, ...xf }), backdrop] } });
+  // the painted wall screen of the V211 plate (g3's pick `screen` quad); his head (x ~620-930, y >= 505 as he turns and lifts the
+  // receiver) stands in front of its lower edge, so the overlays carry an occluder box and the scene's chroma matte keeps him in front
+  const SCREEN_Q = [[358, 164], [1530, 164], [1530, 652], [358, 652]], HEAD_BOX = [585, 470, 965, 668];
+  const screen = (mode, extra = {}) => ({ scene: 't2_petrov_screen', p: { mode, quad: SCREEN_Q, occ: HEAD_BOX, ...extra } });
   const sat = wd('V2', 4, 'satellites'), saw = wd('V2', 4, 'saw'), five = wd('V2', 4, 'five');
   // one track on "satellites", then four more: on "saw", two sixteenths, and "five"
   S(null, sat, { ...over(painting(), screen('map', { tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
@@ -541,15 +551,23 @@ export function buildTimeline(A) {
   const every = wd('V2', 5, 'every');
   S('1:35.36', every, { ...over(painting(), screen('start', { t0: every.t, tRel: wd('V2', 5, 'said').t })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'The wall display lights up in big red letters, СТАРТ (drawn by the scene); reliability rated highest' });
-  S(null, wd('V2', 5, 'first'), oil('Petrov sits with his hand near the phone (no launch button in the room)'));
+  S(null, wd('V2', 5, 'first'), oil('Petrov sits with his hand near the phone (no launch button in the room)', { zoom: 1.12 }, { notes: 'zoom 1.12 crops the red line Veo drew along the screen from 0.75 s' }));
   const petrovW = wd('V2', 6, 'petrov');
   S('1:37.88', petrovW, { ...over(painting(), screen('ghost', { t0: petrovW.t, tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'Over the five tracks, a ghost of a real first strike (hundreds of tracks) fades and leaves five' });
   S('1:40.31', wd('V2', 7, 'ignored'), oil('He picks up the phone and reports a system malfunction'));
   const prev = wd('V2', 7, 'previous');
-  // the protocol sheet beside him, struck through line by line from "previous", one line per sixteenth
-  S(null, prev, { ...over(painting(), screen('protocol', { rect: [1180, 560, 520, 420], quad: [[1190, 610], [1640, 585], [1700, 1010], [1225, 1040]], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
-    want: 'The printed protocol beside him is struck through line by line' });
+  // the protocol sheet beside him (the plate's own sheet on the desk: g3's pick `paper` quad), struck through line by line from
+  // "previous", one line per sixteenth: an insert, the painting pushed in 4x on the sheet so it reads, the sheet kept above the
+  // lower-third subtitle (the push's pan is held at the plate's bottom edge, which puts the sheet at y ~620-890)
+  const PAPER_Q = [[1485, 964], [1634, 975], [1565, 1032], [1395, 1012]];
+  const PZ = 4, PPAN = [-(PAPER_Q.reduce((a, q) => a + q[0], 0) / 4 - 960) * PZ, -(540 * PZ - 540)];
+  // the sheet, pushed in with the painting, then grown 1.45x about its centre (and slid back on the desk) so its typed lines read (it covers the plate's sheet)
+  const paperQ0 = PAPER_Q.map(([x, y]) => [960 + PZ * (x - 960) + PPAN[0], 540 + PZ * (y - 540) + PPAN[1]]);
+  const pc = [paperQ0.reduce((a, q) => a + q[0], 0) / 4, paperQ0.reduce((a, q) => a + q[1], 0) / 4];
+  const paperQ = paperQ0.map(([x, y]) => [pc[0] + 1.45 * (x - pc[0]), pc[1] - 75 + 1.45 * (y - pc[1])]);
+  S(null, prev, { ...over(painting({ zoom: PZ, pan: PPAN }), screen('protocol', { quad: paperQ, occ: null, light: [0.92, 0.74, 0.56], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
+    want: 'Insert: the printed protocol on the desk beside him is struck through line by line' });
   S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', {}, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
   hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 110, y: 905, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });   // lower third: the wall map is the picture
   const lookedT = looked.t;
@@ -558,7 +576,8 @@ export function buildTimeline(A) {
     lines: [{ text: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES', t: lookedT, size: 26 }, { text: 'c. 850 CE', t: lookedT + 0.4, size: 22, color: [0.86, 0.8, 0.68] }] });
   // the weapons' years (1132 · 1288 · 1453 · 1916 · 1945) are brushed by t2_ink_weapons itself, top left of each image
   sub('V2', 7, { to: 4, t1: wd('V2', 7, "we're").t });                                                                    // ignored all previous instructions
-  hero(caps(lineWords('V2', 7, 4)), { rows: [2], size: 200, y: 330, t1: LN('P2', 0).t + 0.1, out: 0.1 });                 // WE'RE ALIVE
+  // WE'RE ALIVE over the bright autumn sky: a full shade and no glow, so the cream holds (her face sits below it, y ~380-560)
+  hero(caps(lineWords('V2', 7, 4)), { rows: [2], size: 200, y: 330, t1: LN('P2', 0).t + 0.1, out: 0.1, shade: 1, glow: 0, color: [0.99, 0.95, 0.86] });
 
   // ============================================================================================== PRE-CHORUS 2 (102.99 to 113.18)
   section('P2');
@@ -584,17 +603,17 @@ export function buildTimeline(A) {
     want: 'Split: each Jade alone on her own dish field at night (mirrored); the dishes swing to the same point', notes: 'chorus 1 shot returns as a split; cut on "Can\'t" like chorus 1' });
   S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, right: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
     want: 'Split: the Golden Record cover engraves itself on both sides at once' });
-  S(null, wd('C2', 2, 'but'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: both Jades sing "but if you are, I\'m counting on you" at their mirrored consoles' });
+  S(null, wd('C2', 2, 'but'), { ...split({}, RM(1.22, 1.07)), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: both Jades sing "but if you are, I\'m counting on you" at their mirrored consoles' });
   const silent2 = wd('C2', 3, 'silent');
-  S(null, silent2, crt(silent2, 'C2', 'The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades\' control rooms (procedural stand-ins until the room plates exist)', { variant: 'mirror' }));
+  S(null, silent2, crt(silent2, 'C2', 'The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades\' control rooms (the g2 loops CRT_roomA / CRT_roomB)', { variant: 'mirror', inset: [{ clip: 'CRT_roomA', at: [0, 1] }, { clip: 'CRT_roomB', at: [1, 1] }] }));
   reserve(3);
-  S(null, wd('C2', 4, 'in'), { ...split({}, { flipX: true }, 4), method: 'seedance_sung', era: ERA.room, look: LK.room,
+  S(null, wd('C2', 4, 'in'), { ...split({}, { flipX: true, ...RM(1.22, 1.07) }, 4), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Both Jades in the studio pose; the two halves match exactly, hard vertical line between them' });
-  S(null, wd('C2', 5, 'if'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: each Jade looks at her own screen, singing "If you are"' });
+  S(null, wd('C2', 5, 'if'), { ...split({}, RM(1.25, 1.18)), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: each Jade looks at her own screen, singing "If you are"' });
   S(null, wd('C2', 5, "i'm"), { ...plate(), method: 'video', era: ERA.room, look: LK.night,
     want: 'Crane up out of both rooms side by side: the faint signal each one hears comes from the same direction, the other control room' });
   hero(caps(lineWords('C2', 0, 0, 3)), { size: 180, y: 290, t1: LN('C2', 1).t });
-  hero(caps(lineWords('C2', 2, 4)), { rows: [2, 2], size: 170, y: 270, t1: LN('C2', 3).t, out: 0.1 });
+  hero(caps(lineWords('C2', 2, 4)), { rows: [2, 2], size: 150, y: 190, t1: LN('C2', 3).t, out: 0.1 });
 
   // ============================================================================================== POST-CHORUS 2 (134.06 to 143.58)
   section('X2');
@@ -627,8 +646,16 @@ export function buildTimeline(A) {
   const tB1 = beat('2:26.1').t, tB2 = beat('2:28.6').t, tB3 = eighth('2:30.5').t;
   const pressT = SIXTEENTHS.filter((x) => x < br0.t - 0.02).pop();                                // Black presses the clock (143.42)
   const chess = (want, extra = {}, look = CHESS_LOOK) => ({ scene: 't2_chess', p: { mode: 'game', cam: 'auto', ...extra }, method: 'procedural', era: ERA.chess, look, want });
-  S('2:23.58', { t: pressT, kind: 'sixteenth', ref: 'last 16th before the drums-out beat (Black presses the clock; 1.e4 on the beat)' }, chess('Teal-tips Jade presses the clock on the fill\'s last sixteenth; premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit'));
-  S('2:26.1', beat('2:26.1'), chess('Slow orbit at board height; a hand hovers a full beat over its piece; eyes in the dark reflect light like animals in a forest (moves 5-6)'));
+  // the g2 bridge plates cut in (Veo; their model boards are not the game position, so each is a close insert, never a board view)
+  const brPlate = (clip, extra, want) => ({ scene: 't2_plate', p: { clip, ...extra }, method: 'video', era: ERA.chess, look: LK.room, want });
+  S('2:23.58', { t: pressT, kind: 'sixteenth', ref: 'last 16th before the drums-out beat (Black presses the clock; 1.e4 on the beat)' },
+    brPlate('BR_clock', { in: 0.3 }, 'Teal-tips Jade slaps the clock on the fill\'s last sixteenth (BR_clock: her finger comes down on the button from clip 0.3 s, on the cut; out before 2 s)'));
+  S(null, eighth('2:23.9'), { ...chess('Premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit'), sub: 'b' });
+  const brBa5 = nearest(BEATS, tB1 + 0.62), holdsW = wd('BR', 1, 'holds'), breathW = wd('BR', 1, 'breath');
+  S('2:26.1', beat('2:26.1'), brPlate('BR_handB', { in: 0.4 }, 'Black\'s hand hovers a full beat over the bishop, then grips it (BR_handB; 5...Ba5 lands on the cut back to the board)'));
+  S(null, { t: brBa5, kind: 'beat', ref: 'beat after 2:26.1 (5...Ba5)' }, { ...chess('Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)'), sub: 'b' });
+  S(null, holdsW, { ...brPlate('BR_faceW', { in: 0.3 }, 'Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW)'), sub: 'c' });
+  S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3 }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB)'), sub: 'd' });
   S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));
   S('2:30.32', wd('BR', 2, 'spark'), chess('The first capture, 9.Qxg7 on "spark": impact frame, sparks off the clock', {}, withLook(CHESS_LOOK, flash([1, 1, 1], 0.9, 0.05))));
   S('2:30.5', eighth('2:30.5'), chess('9...Rg8 to 13.O-O on eighths'));
@@ -638,6 +665,8 @@ export function buildTimeline(A) {
   S(null, wd('BR', 4, 'chains'), chess('Each captured piece is knocked off the board; the captured pieces fly past the lens joined like links of a chain'));
   S('2:35.90', wd('BR', 5, 'and'), chess('19.Kh1 Qe5 20.Rxf1 Qxe6 21.Kxg2 as a sixteenth-note flurry'));
   S('2:37.48', wd('BR', 5, 'hand'), chess('21...Qg4+ on "hand": the black queen gives check, White has one legal move: perpetual (Fischer-Tal · Leipzig 1960 · ½-½ on the scoresheet)'));
+  // hands off the pieces (BR_LETGO, usable from clip 2.0 s): cut on "that", so the hands open into "let go" before the dive
+  S(null, wd('BR', 5, 'that'), { ...brPlate('BR_LETGO', { in: 2.0, rate: 1.5 }, 'Both Jades take their hands off the pieces ("that can let go"); neither one wins'), sub: 'b' });
   // the dive into the black queen ends on a flat 360 px #101010 square on #F1E8D6, the frame t2_poster_morph opens on: the dive's
   // window ends exactly on the poster shot's cut ("go"), and the poster's square0 matches the dive's size
   const letW = wd('BR', 5, 'let'), goW = wd('BR', 5, 'go'), sixty2 = wd('BR', 6, 'sixty-two');
@@ -669,7 +698,7 @@ export function buildTimeline(A) {
   S('2:46.93', wd('BU', 1, 'fire'), { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war, want: 'Pull out to the contact graph: elsewhere in the galaxy, worlds fire on each other and go dark one by one' });
   const burn = wd('BU', 2, 'burn'), fall = wd('BU', 2, 'fall');
   S('2:49.44', burn, { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war, want: 'Back on Earth the warheads land and the lights go out' });
-  S('2:50.83', wd('BU', 3, 'only'), { ...plate(), method: 'video', era: ERA.room, look: LK.room, want: 'Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back' });
+  S('2:50.83', wd('BU', 3, 'only'), { ...plate({ grade: { contrast: 1.08, lift: -0.04, sat: 0.88 } }), method: 'video', era: ERA.room, look: LK.room, want: 'Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back' });
   S(null, wd('BU', 3, 'held'), { scene: 't2_war', p: { rewind: true }, method: 'procedural', era: ERA.war, look: LK.war,
     want: 'VHS rewind: the warheads lift off the cities, the tracks fall back into silos and submarines, the lights come back on' });
   S('2:53.25', wd('BU', 4, 'out'), { scene: 't2_war', p: { rewind: true }, method: 'procedural', era: ERA.war, look: LK.night, want: 'Earth whole again' });
@@ -679,21 +708,26 @@ export function buildTimeline(A) {
   S(null, wd('BU', 5, 'fire'), { ...plate({ style: 'oil' }), method: 'video', era: ERA.oil, look: LK.oil, want: 'The people who held fire, 2: Petrov, oil portrait lit by the screen' });
   S(null, barAfter(wd('BU', 5, 'fire').t, 'bar line after "fire"'), { ...still({ style: 'halftone' }), method: 'still', era: ERA.poster, look: LK.poster, want: 'The people who held fire, 3: Arkhipov, poster halftone' });
   S(null, show1, { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t }, method: 'procedural', era: ERA.lights, look: LK.night, want: 'On "Show your light" the cities come on across the night side' });
-  S('3:00.09', wd('BU', 6, 'hold'), { ...split(), method: 'video', era: ERA.room, look: LK.room, want: 'Both Jades raise a hand light at their consoles (split)' });
+  S('3:00.09', wd('BU', 6, 'hold'), { ...split({}, RM(1.09, 1.05)), method: 'video', era: ERA.room, look: { ...LK.room, bloom: 0.28, bloomThreshold: 0.93, halation: 0.1 }, want: 'Both Jades raise a hand light at their consoles (split)' });
   const roll2 = ev('snare_roll', /BUILD/);
   const dropT = LN('DR', 0).t;
   const rollBeats = [roll2.t, ...BEATS.filter((b) => b > roll2.t + 0.05 && b < dropT - 0.3)];
+  // the hand-light plates: the room look with little bloom (the lights must not wash the faces white)
+  const LK_HAND = { ...LK.room, bloom: 0.28, bloomThreshold: 0.93, halation: 0.1 };
   const rollW = [['video', plate(), 'Jade raises her hand light, close'], ['video', plate(), 'Teal-tips Jade raises her hand light, close'], ['procedural', { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t } }, 'Cities across the night side, brighter'],
     ['procedural', { scene: 't2_graph_outro', p: { reveal: false, wave: [roll2.t, roll2.t + 1.2] } }, 'The contact graph, every node lit'], ['video', split(), 'Both hand lights held up, split; the frame burns to white for the drums cut']];
   rollBeats.forEach((b, i) => {
     const [m, sc, w] = rollW[i % rollW.length];
     S(i === 0 ? '3:00.80' : null, i === 0 ? roll2 : { t: b, kind: 'beat', ref: `beat ${i} of the build roll` }, { ...sc, method: m, era: m === 'video' ? ERA.room : ERA.light,
-      look: i === rollBeats.length - 1 ? (t) => ({ ...LK.light, flash: smooth(range(t, b + 0.25, dropT)), flashCol: [1, 1, 1] }) : LK.light, want: `${w} (cut rate doubles on the roll: one per beat)` });
+      look: i === rollBeats.length - 1 ? (t) => ({ ...LK_HAND, flash: smooth(range(t, b + 0.25, dropT)), flashCol: [1, 1, 1] }) : (m === 'video' ? LK_HAND : LK.light), want: `${w} (cut rate doubles on the roll: one per beat)` });
   });
-  cue({ kind: 'cap', label: 'NUCLEAR DETONATIONS · SIGNAL LOST', t0: burn.t, t1: LN('BU', 3).t, y: 960, lead: 44, draw: drawCaps, color: P.red,
-    lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t, size: 30 }, { text: 'SIGNAL LOST', t: fall.t, size: 30, glow: 6 }] });
-  hero(caps(lineWords('BU', 5, 0, 3)), { size: 170, y: 280, t1: show1.t, color: [0.95, 0.2, 0.12], hot: [1, 0.6, 0.45], shade: 0.8 });   // HOLD YOUR FIRE (fire red: reads on the scroll's paper and on night)
-  hero(caps(lineWords('BU', 6, 3, 6)), { size: 170, y: 280, t1: dropT, color: P.goldPale, hot: GOLD_HOT });                // SHOW YOUR LIGHT
+  // on a dark plate (red caps over the red Earth did not read); SIGNAL LOST stays up while Jade sees it and grabs the jog wheel
+  cue({ kind: 'cap', label: 'NUCLEAR DETONATIONS', t0: burn.t, t1: LN('BU', 3).t, y: 960, draw: drawCaps, color: [1, 0.42, 0.3], band: true,
+    lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t, size: 30 }] });
+  cue({ kind: 'cap', label: 'SIGNAL LOST', t0: fall.t, t1: wd('BU', 3, 'held').t, y: 1010, draw: drawCaps, color: P.red, band: true,
+    lines: [{ text: 'SIGNAL LOST', t: fall.t, size: 30, glow: 6 }] });
+  hero(caps(lineWords('BU', 5, 0, 3)), { size: 170, y: 280, t1: show1.t, color: P.cream, hot: P.goldPale, shade: 1, glow: 2 });   // HOLD YOUR FIRE (cream with a full shade: red is for fire)
+  hero(caps(lineWords('BU', 6, 3, 6)), { size: 150, y: 960, t1: Math.min(dropT, rollBeats[rollBeats.length - 1] + 0.3), color: P.goldPale, hot: GOLD_HOT, shade: 0.8 });   // SHOW YOUR LIGHT (lower third: the closing split's faces fill the upper half; out as the frame burns white)
 
   // ============================================================================================== DROP (183.88 to 213.04): the mirror
   section('DR');
@@ -705,11 +739,15 @@ export function buildTimeline(A) {
   S('3:03.88', wd('DR', 0, "couldn't"), mirror('approach', 'Drums out, held pad. A white void: Jade walks toward an infinitely large mirror that divides the frame; her side drawn in signal-print inks'));
   S('3:06.42', wd('DR', 1, 'message'), mirror('reflection', 'She reaches the glass and sees what looks like her reflection'));
   const impact = ev('impact', /DROP IMPACT/);
-  S('3:08.355', impact, mirror('swing', 'Impact frame; the camera swings around the plane: on the other side is teal-tips Jade, in her own world and palette, in exactly the same pose', { impactT: impact.t, swingDur: 0.28 }, {
+  // a swing that reads in one look: the two-frame impact, a three-frame whip (smear capped), then the clean reveal (g4's still)
+  S('3:08.355', impact, mirror('swing', 'Impact frame; the camera swings around the plane: on the other side is teal-tips Jade, in her own world and palette, in exactly the same pose', { impactT: impact.t, swingDur: 0.13, blurMax: 220 }, {
     look: withLook({ ...LK.mirror, tonemap: 0 }, (t, lt) => ({ flash: lt > 2 / 24 ? 0.5 * Math.exp(-(lt - 2 / 24) / 0.08) : 0, flashCol: [1, 1, 1] })) }));
   S('3:08.68', wd('DR', 2, 'but'), mirror('hands_rise', 'Both raise a hand; teal-tips Jade sings "but you were. You were counting too."', {}, { method: 'seedance_sung' }));
-  S(null, wd('DR', 2, 'counting'), mirror('palms_meet', 'The palms meet on the glass'));
-  const rippleShot = S(null, wd('DR', 2, 'too'), mirror('ripple', 'On "too" the mirror starts to ripple (rings spread from the palms)', { rippleT: wd('DR', 2, 'too').t }));
+  // the palms touch on "too": DR05's contact frame (clip 3.40, g4) lands on the cut to DR06, which holds them together (rate 0.8 so
+  // the plate's last frame is reached at the shot's end, not before)
+  const tooT = wd('DR', 2, 'too').t, countingT2 = wd('DR', 2, 'counting').t;
+  S(null, wd('DR', 2, 'counting'), mirror('palms_meet', 'The palms meet on the glass on "too"', { full: { scene: 't2_plate', p: { clip: '@', in: 3.40 - (tooT - countingT2) } } }));
+  const rippleShot = S(null, wd('DR', 2, 'too'), mirror('ripple', 'On "too" the mirror starts to ripple (rings spread from the palms)', { rippleT: tooT, full: { scene: 't2_plate', p: { clip: '@', in: 3.40, rate: 0.8 } } }));
   const dropHits = HITS.filter((h) => h.kind === 'drop_counts');
   const phyllo = (want, k) => ({ scene: 'phyllo', p: { center: PALM, radius: 360 }, method: 'reuse', era: ERA.light,
     look: (t, lt) => ({ ...LK.light, zoom: 1 + 0.04 * Math.exp(-lt / 0.2), flash: 0.14 * Math.exp(-lt / 0.16), flashCol: [1, 0.8, 0.45] }), want });
@@ -727,7 +765,7 @@ export function buildTimeline(A) {
   S('3:21.55', hit('drop_counts', 3), phyllo('55 spiral arms'));
   S('3:22.26', hit('drop_counts', 4), phyllo('89 spiral arms; the disk relaxes back into the galaxy'));
   const andSeen = wd('DR', 7, 'and');
-  S('3:22.89', andSeen, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { mode: 'ring', t0: andSeen.t, fill: 0.9, ring: TOWER_RING } }), method: 'still', era: ERA.signal, look: LK.riso, want: "On Echo the signal tower's ring lights up" });
+  S('3:22.89', andSeen, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { mode: 'ring', t0: andSeen.t, fill: 0.9, ring: DR14_RING, hide: DR14_HIDE } }), method: 'still', era: ERA.signal, look: LK.riso, want: "On Echo the signal tower's ring lights up" });
   S(null, barAfter(wd('DR', 7, 'too').t, 'bar line after "too" (inside the held note)'), { scene: 't2_echo_night', p: { tRing: andSeen.t }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: "Echo's night side shows its cities linked like a constellation (Rare Earth continuity)" });
   S(null, wd('DR', 7, 'wherever'), { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Cut back to the two Jades at one console, receiving; teal-tips Jade sings "wherever you are"' });
@@ -748,7 +786,9 @@ export function buildTimeline(A) {
   const higher = wd('OU', 3, 'higher');
   // t2_counter is one continuous board (it resets on the real dates of the list on a grid from the drums' return, climbs past the
   // last reset on "higher"), so the whispered-count cuts are one shot; b0 and "higher" come from the timing
-  const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: '2026-10-26' };
+  // the 26 resets run through the whispered count and end (the 2025 entry) as "The count goes higher" begins; the climb then lands
+  // on the release-date value (534) just after "higher" begins, digits rolling upward into it, and holds it to the cut
+  const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: '2026-10-26', gaps: [6, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, ...Array(14).fill(1)], climbEnd: higher.t + 0.04 };
   S('3:44.33', drumsZ, { scene: 't2_counter', p: counterP, method: 'procedural', era: ERA.newsprint, look: COUNTER_LOOK,
     want: '[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 2025 entry; then it climbs to the release-date value (534 on 26 Oct 2026; recompute for release), digits rolling up on "higher"' });
   reserve(6);                                                                                                            // the board's other cuts keep their numbers
@@ -769,6 +809,9 @@ export function buildTimeline(A) {
     notes: 'no real images are used so far (every picture is generated or drawn): add p.images [{credit: "ESA/Hubble"}] / NASA if one is' });
 
   // ---------------------------------------------------------------------------------------------- finish: contiguous cuts, type per shot
+  // a subtitle gives way to the next one (both sit on the same lower-third baseline): no cross-faded double line
+  const subs = cues.filter((c) => c.kind === 'sub').sort((x, y) => x.t0 - y.t0);
+  for (let i = 0; i + 1 < subs.length; i++) if (subs[i].t1 > subs[i + 1].t0 - 0.02) subs[i].t1 = subs[i + 1].t0 - 0.02;
   shots.sort((a, b) => a.t0 - b.t0);
   // plates are display-referred: shots whose picture is a plate get the toolkit's tonemap 0 unless their look sets one
   const PLATE_SCENES = new Set(['t2_plate', 't2_still', 't2_split']);

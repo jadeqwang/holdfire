@@ -16,12 +16,16 @@
 //              transcription of any real document.
 //   'backdrop' a stand-in umber "painting" for the test timeline (a dark room, a dark wall screen, a lit desk).
 // p: {mode, rect, quad, over, t0 (mode's start; default the lyric line), tracks:[5 times] (map), strike:[times] (protocol),
-//     reliability (true), glow (1), grade (1), seed}
+//     reliability (true), glow (1), grade (1), seed, light ([r, g, b]: the light on the protocol sheet; default lamp + screen red),
+//     occ ([x0, y0, x1, y1] design px: a box round whatever stands in front of the screen, e.g. his head; inside it the overlay is
+//          held back wherever the painting under it is not screen red (a chroma matte of the plate, per frame), so the screen
+//          lights up BEHIND him; needs p.over)}
 import * as THREE from 'three';
 import land from '../../history/data/land_north.js';
 import { P, css, mix } from '../../../palette.js';
 import { clamp, lerp, smooth, smoother, easeOutCubic, easeInOutCubic, easeOutExpo, range, hash1, hash2, rng } from '../../../util.js';
 import { lineByText, wordT } from './lib.js';
+import { rt, copy } from '../plate/lib.js';
 
 const D2R = Math.PI / 180;
 const LATMIN = 20;                                  // the polar disc is cut here (Florida and the Sahara's edge stay on)
@@ -220,6 +224,20 @@ function material(e) {
   MAT = e.shader(/* glsl */`
     uniform sampler2D tSrc; uniform mat3 Hinv; uniform vec2 csize; uniform float emissive; uniform float glow; uniform float grade; uniform float seed; uniform float t;
     uniform vec3 light;    // paper mode: the light falling on the sheet
+    uniform sampler2D tBg; uniform vec4 occ; uniform float occOn;   // occluder matte (see p.occ)
+    float occluder(vec2 px) {
+      if (occOn < .5) return 0.;
+      vec2 b0 = occ.xy, b1 = occ.zw;
+      float box = smoothstep(b0.x, b0.x + 24., px.x) * (1. - smoothstep(b1.x - 24., b1.x, px.x)) * smoothstep(b0.y, b0.y + 24., px.y) * (1. - smoothstep(b1.y - 24., b1.y, px.y));
+      if (box <= 0.) return 0.;
+      float m = 0.;
+      for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+        vec3 c = texture(tBg, vUv + vec2(float(i), float(j)) * vec2(3. / 1920., 3. / 1080.)).rgb;
+        float red = c.r / (max(c.g, c.b) + .02);                     // screen glass: strongly red; hair, skin, cloth: not
+        m += 1. - smoothstep(1.5, 1.9, red);
+      }
+      return box * m / 9.;
+    }
     void main(){
       vec2 px = vec2(vUv.x * 1920., (1. - vUv.y) * 1080.);
       vec3 h = Hinv * vec3(px, 1.); vec2 uv = h.xy / h.z;          // content uv, y down
@@ -244,6 +262,7 @@ function material(e) {
         col = g * inside * 1.15 + (c1 * .5 + c2 * .9) * vec3(1., .45, .3) * glow * (inside * .5 + .5 * exp(-max(-min(e2.x, e2.y), 0.) * 9.));
         // glass: a faint dark umber film over the screen
         col += vec3(.03, .015, .01) * inside * brush;
+        col *= 1. - occluder(px);
         fragColor = vec4(col, 1.);
       } else {
         vec3 alb = mix(c0, c1, .25);
@@ -253,7 +272,8 @@ function material(e) {
         fragColor = vec4(lit, inside * .96);
       }
     }`, { tSrc: { value: null }, Hinv: { value: new THREE.Matrix3() }, csize: { value: new THREE.Vector2() }, emissive: { value: 1 }, glow: { value: 1 }, grade: { value: 1 },
-    seed: { value: 0 }, t: { value: 0 }, light: { value: new THREE.Vector3(1, 1, 1) } });
+    seed: { value: 0 }, t: { value: 0 }, light: { value: new THREE.Vector3(1, 1, 1) },
+    tBg: { value: null }, occ: { value: new THREE.Vector4(0, 0, 0, 0) }, occOn: { value: 0 } });
   BACK = e.shader(/* glsl */`
     uniform float seed;
     void main(){
@@ -332,7 +352,12 @@ export default {
     u.glow.value = p.glow ?? 1; u.grade.value = p.grade ?? 1; u.seed.value = seed; u.t.value = t;
     // paper: lit warm by a lamp from one side and red by the screen from the other (and the screen's flicker)
     const fl = 0.9 + 0.1 * Math.cos(t * 8.2);
-    u.light.value.set(0.52 * fl, 0.26 * fl, 0.17 * fl);
+    const Lc = p.light || [0.52, 0.26, 0.17];
+    u.light.value.set(Lc[0] * fl, Lc[1] * fl, Lc[2] * fl);
+    if (p.occ && p.over && mode !== 'protocol') {
+      const bg = rt(e, 'petrovBg'); copy(e, e.rtScene.texture, bg);
+      u.tBg.value = bg.texture; u.occ.value.set(...p.occ); u.occOn.value = 1;
+    } else { u.tBg.value = C.tex; u.occOn.value = 0; }
     e.passOver(M, e.rtScene, mode === 'protocol' ? 'normal' : 'add');
   },
 };

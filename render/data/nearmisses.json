@@ -1,0 +1,626 @@
+{
+  "title": "Hold Fire - nuclear close calls and accidents, 1950-2022",
+  "generated": "2026-10-26",
+  "count": 39,
+  "schema": {
+    "date": "ISO date (first day for multi-day events)",
+    "lat/lon": "approximate map placement in decimal degrees; null = no single point; loc_approx=true = rough",
+    "desc": "<= 90 characters, screen-ready",
+    "category": "false_alarm | weapon_accident | crisis | submarine | production | civil_reactor",
+    "status": "documented | disputed (event or key detail contested) | severity_debated"
+  },
+  "general_sources": [
+    "https://www.ucs.org/sites/default/files/attach/2015/04/Close%20Calls%20with%20Nuclear%20Weapons.pdf",
+    "https://futureoflife.org/resource/nuclear-close-calls-a-timeline/",
+    "https://www.chathamhouse.org/2014/04/too-close-comfort-cases-near-nuclear-use-and-options-policy",
+    "https://pugwashgroup.ca/cnanw/20-mishaps-that-might-have-started-a-nuclear-war/",
+    "https://ahf.nuclearmuseum.org/ahf/history/broken-arrow-accidents/"
+  ],
+  "caveat": "Not a complete list. 'Close call' severity is contested for many entries; do not show this as a probability tally.",
+  "incidents": [
+    {
+      "id": "nm01",
+      "date": "1950-02-13",
+      "place": "Off British Columbia, Canada",
+      "lat": 53.0,
+      "lon": -129.5,
+      "loc_approx": false,
+      "desc": "B-36 jettisons a Mark 4 atomic bomb (no plutonium core) at sea; first lost US nuke",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/1950_British_Columbia_B-36_crash",
+        "https://ahf.nuclearmuseum.org/ahf/history/broken-arrow-accidents/"
+      ]
+    },
+    {
+      "id": "nm02",
+      "date": "1956-07-27",
+      "place": "RAF Lakenheath, England",
+      "lat": 52.41,
+      "lon": 0.56,
+      "loc_approx": false,
+      "desc": "B-47 crashes into a bunker holding three Mark 6 bombs; fuel fire, no detonation",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/RAF_Lakenheath_nuclear_weapons_accidents"
+      ]
+    },
+    {
+      "id": "nm03",
+      "date": "1956-11-05",
+      "place": "Turkey / Syria (Suez Crisis)",
+      "lat": 39.0,
+      "lon": 35.0,
+      "loc_approx": false,
+      "desc": "Swans, a MiG escort and a 'downed' bomber briefly read as signs of Soviet attack",
+      "category": "false_alarm",
+      "status": "disputed",
+      "note": "Thinly sourced (popular lists citing A. F. Phillips). Often says 'NORAD', which did not exist until 1957-58.",
+      "sources": [
+        "https://www.globalsecurity.org/wmd/ops/1956-swans.htm",
+        "https://pugwashgroup.ca/cnanw/20-mishaps-that-might-have-started-a-nuclear-war/"
+      ]
+    },
+    {
+      "id": "nm04",
+      "date": "1957-05-22",
+      "place": "Near Kirtland AFB, Albuquerque, New Mexico",
+      "lat": 35.0,
+      "lon": -106.6,
+      "loc_approx": false,
+      "desc": "10-Mt-class Mark 17 H-bomb falls from a B-36; its explosives blast a crater, no core",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": "Mark 17 yield usually given as 10-15 Mt; capsule was aboard but not inserted.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Mark_17_nuclear_bomb",
+        "https://scalar.usc.edu/works/brokenarrowproject/1957---kirtland-air-force-base-new-mexico"
+      ]
+    },
+    {
+      "id": "nm05",
+      "date": "1957-09-29",
+      "place": "Mayak plutonium plant (Kyshtym), USSR",
+      "lat": 55.71,
+      "lon": 60.85,
+      "loc_approx": false,
+      "desc": "Waste tank at a bomb-plutonium plant explodes; INES 6; USSR admits it only in 1989",
+      "category": "production",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Kyshtym_disaster"
+      ]
+    },
+    {
+      "id": "nm06",
+      "date": "1958-02-05",
+      "place": "Off Tybee Island, Georgia",
+      "lat": 31.99,
+      "lon": -80.85,
+      "loc_approx": false,
+      "desc": "After a mid-air collision a B-47 jettisons a Mark 15 H-bomb; it has never been found",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": "USAF says no nuclear capsule was installed; disputed by some.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/1958_Tybee_Island_mid-air_collision",
+        "https://ahf.nuclearmuseum.org/ahf/history/broken-arrow-accidents/"
+      ]
+    },
+    {
+      "id": "nm07",
+      "date": "1958-03-11",
+      "place": "Mars Bluff, South Carolina",
+      "lat": 34.2,
+      "lon": -79.66,
+      "loc_approx": false,
+      "desc": "B-47 accidentally drops a Mark 6 bomb on a family's garden; explosives detonate, no core",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/1958_Mars_Bluff_B-47_nuclear_weapon_loss_incident"
+      ]
+    },
+    {
+      "id": "nm08",
+      "date": "1960-10-05",
+      "place": "BMEWS Thule, Greenland",
+      "lat": 76.53,
+      "lon": -68.7,
+      "loc_approx": false,
+      "desc": "Brand-new BMEWS radar reads the rising Moon as a massive Soviet missile attack",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": "'99.9% certainty' figure is widely repeated; Khrushchev was in New York at the time.",
+      "sources": [
+        "https://www.globalsecurity.org/wmd/ops/1960-moon.htm",
+        "https://blog.ucs.org/david-wright/the-moon-and-nuclear-war-904/"
+      ]
+    },
+    {
+      "id": "nm09",
+      "date": "1961-01-24",
+      "place": "Goldsboro, North Carolina",
+      "lat": 35.48,
+      "lon": -77.86,
+      "loc_approx": false,
+      "desc": "B-52 breaks up with two Mark 39 H-bombs; one low-voltage switch averted detonation",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": "Mark 39 yield ~3-4 Mt (not 20+ Mt). Quote source: 1969 Sandia memo 'Goldsboro Revisited' (Parker F. Jones).",
+      "sources": [
+        "https://nsarchive2.gwu.edu/nukevault/ebb475/",
+        "https://en.wikipedia.org/wiki/1961_Goldsboro_B-52_crash",
+        "https://www.theguardian.com/world/2013/sep/20/usaf-atomic-bomb-north-carolina-1961"
+      ]
+    },
+    {
+      "id": "nm10",
+      "date": "1961-03-14",
+      "place": "Near Yuba City, California",
+      "lat": 39.13,
+      "lon": -121.85,
+      "loc_approx": false,
+      "desc": "Fuel-starved B-52 crashes carrying two nuclear weapons; safety devices hold",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/1961_Yuba_City_B-52_crash"
+      ]
+    },
+    {
+      "id": "nm11",
+      "date": "1961-07-04",
+      "place": "North Atlantic, SE of Jan Mayen",
+      "lat": 68.0,
+      "lon": -2.0,
+      "loc_approx": true,
+      "desc": "Soviet sub K-19's reactor cooling fails; crew improvise a fix and take lethal doses",
+      "category": "submarine",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Soviet_submarine_K-19"
+      ]
+    },
+    {
+      "id": "nm12",
+      "date": "1961-11-24",
+      "place": "SAC HQ / AT&T relay, Black Forest, Colorado",
+      "lat": 39.01,
+      "lon": -104.7,
+      "loc_approx": false,
+      "desc": "One relay failure cuts SAC off from all BMEWS radars; B-52 crews start engines",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://www.globalsecurity.org/wmd/ops/1961-sac-norad.htm"
+      ]
+    },
+    {
+      "id": "nm13",
+      "date": "1962-10-25",
+      "place": "Duluth, Minnesota / Volk Field, Wisconsin",
+      "lat": 43.94,
+      "lon": -90.25,
+      "loc_approx": false,
+      "desc": "Bear on a fence trips sabotage alarm; miswired klaxon sends nuclear F-106s to runway",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": "Around midnight 25/26 Oct. Source chain: Sagan, The Limits of Safety (1993). Details vary.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Duluth_Air_Defense_Sector",
+        "https://www.globalzero.org/updates/seven-things-mistaken-for-an-incoming-nuclear-attack/"
+      ]
+    },
+    {
+      "id": "nm14",
+      "date": "1962-10-26",
+      "place": "Vandenberg AFB, California",
+      "lat": 34.74,
+      "lon": -120.57,
+      "loc_approx": false,
+      "desc": "Pre-scheduled ICBM test launched at DEFCON 3 while nearby missiles held warheads",
+      "category": "crisis",
+      "status": "disputed",
+      "note": "Missile type differs by source: Atlas (Sagan 1993) vs Titan II.",
+      "sources": [
+        "https://www.armscontrolwonk.com/archive/402833/organizations-accidents-and-nuclear-weapons/"
+      ]
+    },
+    {
+      "id": "nm15",
+      "date": "1962-10-27",
+      "place": "Western Atlantic (Sargasso Sea)",
+      "lat": null,
+      "lon": null,
+      "loc_approx": false,
+      "desc": "US ships drop signal depth charges on B-59; nuclear torpedo readied; Arkhipov objects",
+      "category": "submarine",
+      "status": "disputed",
+      "note": "Core event documented; the 'two-of-three vote' and Maslennikov's 'yes' rest on later retellings (Orlov 2002 et al.).",
+      "sources": [
+        "https://nsarchive.gwu.edu/briefing-book/russia-programs/2022-10-03/soviet-submarines-nuclear-torpedoes-cuban-missile-crisis",
+        "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB399/",
+        "https://en.wikipedia.org/wiki/Soviet_submarine_B-59"
+      ]
+    },
+    {
+      "id": "nm16",
+      "date": "1962-10-27",
+      "place": "Chukotka, USSR (from Eielson AFB, Alaska)",
+      "lat": 66.0,
+      "lon": -172.0,
+      "loc_approx": true,
+      "desc": "Lost U-2 (Maultsby) strays over Chukotka; MiGs scramble, nuclear-armed F-102s go up",
+      "category": "crisis",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://www.adn.com/alaska-life/we-alaskans/2017/06/09/when-off-course-u-2-spy-plane-out-of-alaska-nearly-triggered-war/"
+      ]
+    },
+    {
+      "id": "nm17",
+      "date": "1962-10-27",
+      "place": "Over Banes, Cuba",
+      "lat": 20.9,
+      "lon": -75.7,
+      "loc_approx": true,
+      "desc": "Soviet SAM shoots down Maj. Rudolf Anderson's U-2; the crisis's only combat death",
+      "category": "crisis",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Rudolf_Anderson"
+      ]
+    },
+    {
+      "id": "nm18",
+      "date": "1962-10-28",
+      "place": "Okinawa, Japan (Mace B sites)",
+      "lat": 26.4,
+      "lon": 127.8,
+      "loc_approx": false,
+      "desc": "DISPUTED: ex-airman says Mace B crews got a launch order, then stood down",
+      "category": "crisis",
+      "status": "disputed",
+      "note": "Single-source (John Bordne, 2015). Other missileers disputed it in Stars and Stripes (Dec 2015). No records released.",
+      "sources": [
+        "https://thebulletin.org/2015/10/the-okinawa-missiles-of-october/"
+      ]
+    },
+    {
+      "id": "nm19",
+      "date": "1962-10-28",
+      "place": "Moorestown, New Jersey",
+      "lat": 39.97,
+      "lon": -74.9,
+      "loc_approx": false,
+      "desc": "Test tape plus a passing satellite: radar reports a missile from Cuba hitting Tampa",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Falling_Leaves_(radar_network)",
+        "https://www.kas.de/en/web/multilateraler-dialog-wien/to-the-third-nuclear-age-a-timeline/detail/-/content/attack-on-tampa"
+      ]
+    },
+    {
+      "id": "nm20",
+      "date": "1964-01-13",
+      "place": "Savage Mountain, Maryland",
+      "lat": 39.6,
+      "lon": -79.1,
+      "loc_approx": false,
+      "desc": "Storm rips the tail off a B-52; it crashes with two nuclear bombs, found intact",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/1964_Savage_Mountain_B-52_crash"
+      ]
+    },
+    {
+      "id": "nm21",
+      "date": "1965-12-05",
+      "place": "Philippine Sea, ~130 km from Kikai Island",
+      "lat": 27.6,
+      "lon": 131.3,
+      "loc_approx": true,
+      "desc": "A-4 with a 1-Mt B43 rolls off USS Ticonderoga; lost in ~4,900 m of water",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/1965_Philippine_Sea_A-4_incident"
+      ]
+    },
+    {
+      "id": "nm22",
+      "date": "1966-01-17",
+      "place": "Palomares, Spain",
+      "lat": 37.25,
+      "lon": -1.8,
+      "loc_approx": false,
+      "desc": "B-52 and tanker collide; 4 H-bombs fall, 2 burst and scatter plutonium on farmland",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": "Fourth bomb recovered from the sea on 7 April 1966 with help from DSV Alvin.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/1966_Palomares_accident",
+        "https://www.whoi.edu/oceanus/feature/little-alvin-and-the-lost-h-bomb"
+      ]
+    },
+    {
+      "id": "nm23",
+      "date": "1967-05-23",
+      "place": "All three BMEWS sites (Thule, Clear, Fylingdales)",
+      "lat": null,
+      "lon": null,
+      "loc_approx": false,
+      "desc": "Solar storm 'jams' all BMEWS radars; space-weather forecasters stop an escalation",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://news.agu.org/press-release/1967-solar-storm-nearly-took-us-to-brink-of-war/"
+      ]
+    },
+    {
+      "id": "nm24",
+      "date": "1968-01-21",
+      "place": "Thule Air Base, Greenland",
+      "lat": 76.53,
+      "lon": -69.3,
+      "loc_approx": false,
+      "desc": "Burning B-52 crashes on sea ice with 4 H-bombs; explosives detonate, plutonium spreads",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/1968_Thule_Air_Base_B-52_crash"
+      ]
+    },
+    {
+      "id": "nm25",
+      "date": "1968-03-08",
+      "place": "North Pacific",
+      "lat": 40.1,
+      "lon": -179.9,
+      "loc_approx": true,
+      "desc": "Soviet missile sub K-129 sinks with three nuclear missiles; all 98 aboard die",
+      "category": "submarine",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Soviet_submarine_K-129_(1960)"
+      ]
+    },
+    {
+      "id": "nm26",
+      "date": "1973-10-25",
+      "place": "Washington DC / Middle East (Yom Kippur War)",
+      "lat": 38.9,
+      "lon": -77.04,
+      "loc_approx": false,
+      "desc": "After a Brezhnev letter, US nuclear forces go to DEFCON 3 overnight",
+      "category": "crisis",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://history.state.gov/historicaldocuments/frus1969-76v25/d269",
+        "https://nsarchive.gwu.edu/NSAEBB/NSAEBB98/press.htm"
+      ]
+    },
+    {
+      "id": "nm27",
+      "date": "1979-11-09",
+      "place": "NORAD, Cheyenne Mountain, Colorado",
+      "lat": 38.74,
+      "lon": -104.85,
+      "loc_approx": false,
+      "desc": "Training tape in a live NORAD computer shows a full-scale Soviet attack",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://nsarchive2.gwu.edu/nukevault/ebb371/"
+      ]
+    },
+    {
+      "id": "nm28",
+      "date": "1980-06-03",
+      "place": "NORAD, Cheyenne Mountain, Colorado",
+      "lat": 38.74,
+      "lon": -104.85,
+      "loc_approx": false,
+      "desc": "Failed 46-cent chip puts phantom Soviet missiles on US warning displays",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": "Pentagon blamed a failed 46-cent IC; it recurred 6 June. Testing could not make the part fail again.",
+      "sources": [
+        "https://nsarchive2.gwu.edu/nukevault/ebb371/",
+        "https://www.globalsecurity.org/wmd/ops/1980-norad-chip.htm"
+      ]
+    },
+    {
+      "id": "nm29",
+      "date": "1980-09-19",
+      "place": "Damascus, Arkansas (Titan II site 374-7)",
+      "lat": 35.39,
+      "lon": -92.4,
+      "loc_approx": false,
+      "desc": "Dropped socket punctures a Titan II; blast hurls its 9-Mt warhead out of the silo",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": "Leak began evening of 18 Sep; explosion ~03:00 on 19 Sep. One airman killed (David Livingston).",
+      "sources": [
+        "https://en.wikipedia.org/wiki/1980_Damascus_Titan_missile_explosion"
+      ]
+    },
+    {
+      "id": "nm30",
+      "date": "1983-09-26",
+      "place": "Serpukhov-15 command post, near Moscow",
+      "lat": 55.1,
+      "lon": 37.0,
+      "loc_approx": true,
+      "desc": "Oko reports 1, then 4 more US ICBM launches; Petrov reports a false alarm",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/1983_Soviet_nuclear_false_alarm_incident",
+        "https://www.peacemagazine.org/archive/v17n2p16.htm"
+      ]
+    },
+    {
+      "id": "nm31",
+      "date": "1983-11-07",
+      "place": "NATO Europe (Able Archer 83, 7-11 Nov)",
+      "lat": 50.5,
+      "lon": 3.98,
+      "loc_approx": false,
+      "desc": "NATO nuclear-release exercise alarms Soviet intelligence; some units put on alert",
+      "category": "crisis",
+      "status": "severity_debated",
+      "note": "Historians disagree how close it was (e.g., S. Miles, 'The Mythical War Scare of 1983').",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Able_Archer_83",
+        "https://warontherocks.com/the-mythical-war-scare-of-1983/"
+      ]
+    },
+    {
+      "id": "nm32",
+      "date": "1986-04-26",
+      "place": "Chernobyl, Ukrainian SSR",
+      "lat": 51.39,
+      "lon": 30.1,
+      "loc_approx": false,
+      "desc": "Reactor 4 explodes during a safety test; worst civil nuclear disaster (INES 7)",
+      "category": "civil_reactor",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Chernobyl_disaster"
+      ]
+    },
+    {
+      "id": "nm33",
+      "date": "1986-10-03",
+      "place": "~1,000 km NE of Bermuda",
+      "lat": 39.0,
+      "lon": -57.0,
+      "loc_approx": true,
+      "desc": "Missile-tube leak and blast on Soviet sub K-219; it sinks with nuclear missiles aboard",
+      "category": "submarine",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Soviet_submarine_K-219"
+      ]
+    },
+    {
+      "id": "nm34",
+      "date": "1991-08-18",
+      "place": "Foros, Crimea / Moscow (August coup)",
+      "lat": 44.39,
+      "lon": 33.78,
+      "loc_approx": false,
+      "desc": "Coup plotters cut Gorbachev's links, including nuclear command; control left unclear",
+      "category": "crisis",
+      "status": "disputed",
+      "note": "Who held usable launch authority during 18-21 Aug is debated.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Timeline_of_the_1991_Soviet_coup_attempt",
+        "https://www.themoscowtimes.com/archive/whose-nuclear-button"
+      ]
+    },
+    {
+      "id": "nm35",
+      "date": "1995-01-25",
+      "place": "Andoya Rocket Range, Norway",
+      "lat": 69.29,
+      "lon": 16.02,
+      "loc_approx": false,
+      "desc": "Norwegian aurora rocket mistaken for a Trident; Yeltsin's nuclear briefcase opened",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": "Norway had notified Russia; the notice never reached radar crews.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Norwegian_rocket_incident",
+        "https://ahf.nuclearmuseum.org/ahf/history/nuclear-close-calls-norwegian-rocket-incident"
+      ]
+    },
+    {
+      "id": "nm36",
+      "date": "2007-08-29",
+      "place": "Minot AFB, ND to Barksdale AFB, LA",
+      "lat": 48.42,
+      "lon": -101.36,
+      "loc_approx": false,
+      "desc": "B-52 unknowingly flies six nuclear cruise missiles across the US; ~36 h unaccounted",
+      "category": "weapon_accident",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/2007_United_States_Air_Force_nuclear_weapons_incident"
+      ]
+    },
+    {
+      "id": "nm37",
+      "date": "2010-10-23",
+      "place": "F.E. Warren AFB, Wyoming",
+      "lat": 41.15,
+      "lon": -104.87,
+      "loc_approx": false,
+      "desc": "50 Minuteman III ICBMs drop out of contact with launch crews for about an hour",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://foreignpolicy.com/2010/10/27/the-minuteman-iii-offline/"
+      ]
+    },
+    {
+      "id": "nm38",
+      "date": "2018-01-13",
+      "place": "Hawaii, USA",
+      "lat": 21.31,
+      "lon": -157.86,
+      "loc_approx": false,
+      "desc": "'BALLISTIC MISSILE THREAT INBOUND' alert sent in error; 38 minutes to correct",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/2018_Hawaii_false_missile_alert"
+      ]
+    },
+    {
+      "id": "nm39",
+      "date": "2022-03-09",
+      "place": "Sirsa, India to Mian Channu, Pakistan",
+      "lat": 30.44,
+      "lon": 72.36,
+      "loc_approx": false,
+      "desc": "Unarmed BrahMos cruise missile accidentally fired by India crashes in Pakistan",
+      "category": "false_alarm",
+      "status": "documented",
+      "note": null,
+      "sources": [
+        "https://www.armscontrol.org/act/2022-04/news/india-accidentally-fires-missile-pakistan",
+        "https://fas.org/publication/flying-under-the-radar-a-missile-accident-in-south-asia/"
+      ]
+    }
+  ]
+}

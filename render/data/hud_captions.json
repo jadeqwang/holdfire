@@ -1,0 +1,885 @@
+{
+ "title": "Hold Fire - HUD caption bank",
+ "generated": "2026-10-26",
+ "confidence_key": {
+  "A": "primary or multiple reliable sources agree",
+  "B": "reliable secondary / single chain; wording may vary",
+  "C": "recollection or disputed - label it"
+ },
+ "captions": [
+  {
+   "id": "count_seq",
+   "section": "intro",
+   "lyric": "One... one... two... three... five... eight...",
+   "text": "F(1)-F(6): 1 · 1 · 2 · 3 · 5 · 8",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Each term = sum of the two before. Drop adds F(7)-F(11): 13 21 34 55 89.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fibonacci_sequence"
+   ]
+  },
+  {
+   "id": "count_next",
+   "section": "outro",
+   "lyric": "The count goes higher.",
+   "text": "NEXT: 144 · 233 · 377 · 610",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fibonacci_sequence"
+   ]
+  },
+  {
+   "id": "count_610",
+   "section": "outro",
+   "lyric": "Six hundred worlds across the Milky Way",
+   "text": "610 = F(15)",
+   "lang": "en",
+   "confidence": "A",
+   "note": "With F(1)=F(2)=1. 610/377 = 1.61804, golden ratio 1.61803.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fibonacci_sequence"
+   ]
+  },
+  {
+   "id": "count_phi",
+   "section": "drop",
+   "lyric": "(Fifty-five! Eighty-nine!)",
+   "text": "89 / 55 = 1.6182 → φ = 1.6180339887",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fibonacci_sequence"
+   ]
+  },
+  {
+   "id": "fib_history",
+   "section": "intro",
+   "lyric": null,
+   "text": "LEONARDO OF PISA · LIBER ABACI · 1202 (KNOWN IN INDIAN PROSODY CENTURIES EARLIER)",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Pingala (c. 200 BC), Virahanka (c. 700 AD), Hemachandra (c. 1150).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fibonacci_sequence"
+   ]
+  },
+  {
+   "id": "tiktaalik",
+   "section": "verse1",
+   "lyric": "fin into foot into hand",
+   "text": "TIKTAALIK ROSEAE · ~375 MILLION YEARS AGO · ELLESMERE ISLAND, NUNAVUT",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Found 2004, published in Nature 2006 (Daeschler, Shubin & Jenkins). A fish with a neck, wrist bones and lungs - not a 'first tetrapod'.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tiktaalik",
+    "https://phys.org/news182005810.html"
+   ]
+  },
+  {
+   "id": "zachelmie",
+   "section": "verse1",
+   "lyric": "fin into foot into hand",
+   "text": "OLDEST TETRAPOD FOOTPRINTS · ZACHEŁMIE, POLAND · ~395 MILLION YEARS AGO",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Niedźwiedzki, Ahlberg et al., Nature 2010. Tracks are ~18-20 Myr older than Tiktaalik and were made in a marine tidal setting.",
+   "sources": [
+    "https://www.uu.se/en/press/press-releases/2009/2010-01-07-fossil-footprints-give-land-vertebrates-a-much-longer-history"
+   ]
+  },
+  {
+   "id": "lungs_first",
+   "section": "verse1",
+   "lyric": "Out of the sea with salt in our lungs",
+   "text": "LUNGS CAME BEFORE LEGS - SWIM BLADDERS EVOLVED FROM THEM",
+   "lang": "en",
+   "confidence": "B",
+   "note": null,
+   "sources": [
+    "https://askabiologist.asu.edu/top-questions/test-question",
+    "https://cornellsun.com/2013/04/16/solving-an-evolutionary-puzzle/"
+   ]
+  },
+  {
+   "id": "amniote",
+   "section": "verse1",
+   "lyric": "carried the egg through the dust and the mud",
+   "text": "HYLONOMUS LYELLI · EARLIEST KNOWN AMNIOTE · ~312 MILLION YEARS AGO · JOGGINS, NOVA SCOTIA",
+   "lang": "en",
+   "confidence": "B",
+   "note": "Age is commonly given as ~312 Ma (Smithsonian: ~310); a 2015 re-dating places Joggins in the early Langsettian. No fossil EGGS that old are known: definite amniote eggs appear only ~195 Ma (Early Jurassic).",
+   "sources": [
+    "https://jogginsfossilcliffs.net/research/historical/",
+    "https://eprints.soton.ac.uk/376442"
+   ]
+  },
+  {
+   "id": "seeds",
+   "section": "verse1",
+   "lyric": "seeds in the dark for the waking flood",
+   "text": "FIRST SEEDS · ELKINSIA POLYMORPHA · LATE DEVONIAN (~365 MILLION YEARS AGO)",
+   "lang": "en",
+   "confidence": "B",
+   "note": "Famennian stage, 372-359 Ma; '365' is a midpoint.",
+   "sources": [
+    "https://ucmp.berkeley.edu/seedplants/seedplantsfr.html"
+   ]
+  },
+  {
+   "id": "kepler",
+   "section": "prechorus",
+   "lyric": "Snowflake in the boundless night",
+   "text": "KEPLER · 'ON THE SIX-CORNERED SNOWFLAKE' · 1611",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Latin: Strena seu de nive sexangula - a New Year's gift to his patron Wackher von Wackenfels.",
+   "sources": [
+    "https://www.seh.ox.ac.uk/blog/johannes-kepler-on-snowflakes",
+    "https://galileo.ou.edu/exhibits/snowflake-or-six-angled-crystal"
+   ]
+  },
+  {
+   "id": "snow_physics",
+   "section": "prechorus",
+   "lyric": "Snowflake in the boundless night",
+   "text": "SIX-FOLD SYMMETRY: HEXAGONAL ICE CRYSTAL LATTICE. NO MIND REQUIRED.",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Use as the counterpoint: beautiful order is not evidence of intelligence.",
+   "sources": [
+    "https://galileo.ou.edu/exhibits/snowflake-or-six-angled-crystal"
+   ]
+  },
+  {
+   "id": "pulsar",
+   "section": "prechorus",
+   "lyric": "a pattern no dead star could make",
+   "text": "PSR B1919+21 'LGM-1' · PERIOD 1.3373 s · A DEAD STAR, TICKING",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Jocelyn Bell, Cambridge, 1967; Nature, Feb 1968. Nicknamed 'Little Green Men 1' - a perfect pulse from a neutron star.",
+   "sources": [
+    "https://www.aps.org/publications/apsnews/200602/history.cfm",
+    "https://lindahall.org/jocelyn-bell-burnell"
+   ]
+  },
+  {
+   "id": "h_line",
+   "section": "prechorus",
+   "lyric": "a chord that's searching through the fog",
+   "text": "HYDROGEN LINE · 1420.405 751 768 MHz · λ 21.1 cm",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Cocconi & Morrison (Nature, 1959) proposed it as the universal SETI frequency.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Hydrogen_line"
+   ]
+  },
+  {
+   "id": "wow",
+   "section": "chorus",
+   "lyric": "in the white noise I can hear you breathe somewhere",
+   "text": "WOW! · 15 AUG 1977 · BIG EAR, OHIO · 6EQUJ5 · ~72 s · NEVER HEARD AGAIN",
+   "lang": "en",
+   "confidence": "A",
+   "note": "6EQUJ5 is a signal-strength readout, not a message. 2024 preprint proposes a natural cause (hydrogen cloud flare).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Wow!_signal",
+    "https://www.mentalfloss.com/article/67295/6equj5-wow-signal"
+   ]
+  },
+  {
+   "id": "arecibo",
+   "section": "prechorus",
+   "lyric": "counting out in bursts of light / a one-way dialogue",
+   "text": "ARECIBO MESSAGE · 16 NOV 1974 · 1,679 BITS = 23 × 73 · AIMED AT M13",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Sent at 2,380 MHz, 10 bits/s, under 3 minutes; designed by Frank Drake with Carl Sagan and others. It begins by counting 1 to 10 in binary.",
+   "sources": [
+    "https://www.seti.org/news-archive/news-archive-detail?id=409",
+    "https://www.universetoday.com/articles/what-is-the-arecibo-message"
+   ]
+  },
+  {
+   "id": "arecibo_reply",
+   "section": "prechorus",
+   "lyric": "a one-way dialogue",
+   "text": "EARLIEST POSSIBLE REPLY FROM M13: ~50,000 YEARS",
+   "lang": "en",
+   "confidence": "B",
+   "note": "M13 is ~21,000-25,000 ly away (sources differ); round trip ~42,000-50,000 years.",
+   "sources": [
+    "https://www.seti.org/news-archive/news-archive-detail?id=409"
+   ]
+  },
+  {
+   "id": "lincos",
+   "section": "prechorus",
+   "lyric": "a one-way dialogue",
+   "text": "LINCOS · HANS FREUDENTHAL · 1960 · A LANGUAGE BUILT FROM ARITHMETIC",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Lincos_language"
+   ]
+  },
+  {
+   "id": "golden_record",
+   "section": "chorus",
+   "lyric": "message in a bottle",
+   "text": "\"...the launching of this 'bottle' into the cosmic 'ocean' says something very hopeful about life on this planet.\" - CARL SAGAN",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://science.nasa.gov/mission/voyager/golden-record-contents/",
+    "https://ntrs.nasa.gov/api/citations/19770079863/downloads/19770079863.pdf"
+   ]
+  },
+  {
+   "id": "golden_record_facts",
+   "section": "chorus",
+   "lyric": "message in a bottle",
+   "text": "VOYAGER GOLDEN RECORD · 1977 · GREETINGS IN 55 LANGUAGES · 115 IMAGES · 90 MIN OF MUSIC",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Image count is 115 (NASA) or 116 counting the calibration circle.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Voyager_Golden_Record",
+    "https://science.nasa.gov/mission/voyager/golden-record-contents/"
+   ]
+  },
+  {
+   "id": "carter",
+   "section": "build",
+   "lyric": "Only the ones who held their fire are out there at all.",
+   "text": "\"We are attempting to survive our time so we may live into yours.\" - JIMMY CARTER, VOYAGER RECORD, 1977",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Voyager_Golden_Record",
+    "https://greg.org/archive/2024/12/30/we-are-attempting-to-survive-our-time-so-we-may-live-into-yours.html"
+   ]
+  },
+  {
+   "id": "huoyao",
+   "section": "verse2",
+   "lyric": "Priests in the smoke wanted never to die",
+   "text": "火药 HUǑYÀO · 'FIRE MEDICINE'",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://www.zdic.net/hans/火药",
+    "https://en.wikipedia.org/wiki/Gunpowder"
+   ]
+  },
+  {
+   "id": "elixir",
+   "section": "verse2",
+   "lyric": "wanted never to die",
+   "text": "炼丹 ALCHEMY · 长生不老 'LONG LIFE, NEVER OLD'",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Gunpowder",
+    "https://en.wikipedia.org/wiki/Zhenyuan_Miaodao_Yaolue"
+   ]
+  },
+  {
+   "id": "zhenyuan",
+   "section": "verse2",
+   "lyric": "looked for a life with no end, and they found an end with no life",
+   "text": "真元妙道要略 · c. 9TH CENTURY · \"...hands and faces have been burnt, and even the whole house... burned down.\"",
+   "lang": "en",
+   "confidence": "B",
+   "note": "Needham's translation (SCC vol. 5 pt 7, 1986, p. 112) of a warning NOT to heat sulfur, realgar and saltpeter with honey. Text dated 9th c. (compiled c. 950).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Zhenyuan_Miaodao_Yaolue",
+    "https://spacedaily.com/?p=768664"
+   ]
+  },
+  {
+   "id": "zhenyuan_zh",
+   "section": "verse2",
+   "lyric": "sulfur and saltpeter",
+   "text": "有以硫黄、雄黄合硝石并蜜烧之，焰起，烧手面及烬屋舍者",
+   "lang": "zh",
+   "confidence": "B",
+   "note": "Commonly quoted form of the passage; check against a Daozang edition before showing full-screen.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Zhenyuan_Miaodao_Yaolue",
+    "https://simplelits.com/books/classical/classical-07788-真元妙道要略"
+   ]
+  },
+  {
+   "id": "ingredients",
+   "section": "verse2",
+   "lyric": "sulfur and saltpeter",
+   "text": "硝石 SALTPETER · 硫黄 SULFUR · 木炭 CHARCOAL",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Gunpowder"
+   ]
+  },
+  {
+   "id": "wujing",
+   "section": "verse2",
+   "lyric": "thunder in the sky",
+   "text": "武经总要 WUJING ZONGYAO · 1044 · FIRST WRITTEN GUNPOWDER FORMULAS",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": "Compiled by Zeng Gongliang, Ding Du and Yang Weide. Its mixes (~50% saltpeter) were incendiary, not yet true explosives.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Wujing_Zongyao",
+    "https://en.wikipedia.org/wiki/Timeline_of_the_gunpowder_age"
+   ]
+  },
+  {
+   "id": "thunder",
+   "section": "verse2",
+   "lyric": "thunder in the sky",
+   "text": "霹雳炮 'THUNDERCLAP' BOMB (1044) → 震天雷 'HEAVEN-SHAKING THUNDER' (1231)",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Thunder_crash_bomb"
+   ]
+  },
+  {
+   "id": "firelance",
+   "section": "verse2",
+   "lyric": "thunder in the sky",
+   "text": "火枪 FIRE LANCE · PAINTED c. 950 (DUNHUANG) · FIRST USED IN BATTLE 1132",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/Siege_of_De%27an",
+    "https://en.wikipedia.org/wiki/History_of_the_firearm"
+   ]
+  },
+  {
+   "id": "huojian",
+   "section": "verse2",
+   "lyric": "an end with no life that could level the ground",
+   "text": "火箭 HUǑJIÀN · 'FIRE ARROW' · TODAY THE CHINESE WORD FOR ROCKET",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://www.chinanews.com.cn/m/cul/2016/10-25/8043023.shtml"
+   ]
+  },
+  {
+   "id": "lineage",
+   "section": "verse2",
+   "lyric": "an end with no life that could level the ground",
+   "text": "GUNPOWDER → ROCKETS → V-2 (1944) → R-7 ICBM (1957) · NUCLEAR CORES ARE SET OFF BY CHEMICAL EXPLOSIVES",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/V-2_rocket",
+    "https://en.wikipedia.org/wiki/R-7_Semyorka",
+    "https://en.wikipedia.org/wiki/Nuclear_weapon_design"
+   ]
+  },
+  {
+   "id": "petrov_when",
+   "section": "verse2",
+   "lyric": "Eighty-three, the satellites saw five",
+   "text": "26 SEP 1983 · JUST AFTER MIDNIGHT (MOSCOW) · SERPUKHOV-15 · OKO EARLY-WARNING SYSTEM",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Russian accounts give ~00:15 MSK; Petrov's shift began 20:00 on 25 Sep.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/1983_Soviet_nuclear_false_alarm_incident",
+    "https://en.wikipedia.org/wiki/Stanislav_Petrov"
+   ]
+  },
+  {
+   "id": "petrov_start",
+   "section": "verse2",
+   "lyric": "the satellites saw five",
+   "text": "СТАРТ",
+   "lang": "ru",
+   "confidence": "A",
+   "note": "Petrov: big red letters on the wall read СТАРТ ('launch'); BBC 2013: 'the big, back-lit, red screen with the word launch on it'.",
+   "sources": [
+    "https://www.kp.ru/daily/27559/4828433/",
+    "https://www.wgbh.org/news/2017-09-18/stanislav-petrov-the-man-who-saved-the-world-dies-at-77"
+   ]
+  },
+  {
+   "id": "petrov_reliability",
+   "section": "verse2",
+   "lyric": "every rule said call it first strike",
+   "text": "ДОСТОВЕРНОСТЬ: ВЫСШАЯ  (RELIABILITY: HIGHEST)",
+   "lang": "ru+en",
+   "confidence": "B",
+   "note": "Petrov's words: 'Машина показывает, что достоверность высшая.' Wording of the actual on-screen field is not documented.",
+   "sources": [
+    "https://www.kp.ru/daily/27559/4828433/",
+    "https://www.loopinsight.com/2013/09/27/the-man-who-may-have-saved-the-world/"
+   ]
+  },
+  {
+   "id": "petrov_attack",
+   "section": "verse2",
+   "lyric": "every rule said call it first strike",
+   "text": "РАКЕТНОЕ НАПАДЕНИЕ  (MISSILE ATTACK)",
+   "lang": "ru+en",
+   "confidence": "B",
+   "note": "Accounts say СТАРТ changed to РАКЕТНОЕ НАПАДЕНИЕ as more launches appeared; KP gives 'РАКЕТНАЯ АТАКА'. Pick one and footnote.",
+   "sources": [
+    "https://rodina-history.ru/2017/09/19/rodina-stanislav-petrov.html",
+    "https://rg.ru/2024/10/02/nakanune-konca-sveta.html"
+   ]
+  },
+  {
+   "id": "petrov_count",
+   "section": "verse2",
+   "lyric": "the satellites saw five",
+   "text": "LAUNCHES DETECTED: 1 ... +4 = 5 · ALL FROM THE USA",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/1983_Soviet_nuclear_false_alarm_incident"
+   ]
+  },
+  {
+   "id": "petrov_quote",
+   "section": "verse2",
+   "lyric": "Petrov knew that's not what the end looks like",
+   "text": "\"When people start a war, they don't start it with only five missiles.\" - STANISLAV PETROV, 1999",
+   "lang": "en",
+   "confidence": "B",
+   "note": "Washington Post interview (David Hoffman, 1999), quoted in the Post's 2017 obituary.",
+   "sources": [
+    "https://gulfnews.com/amp/story/world%2Feurope%2Fpetrov-the-soviet-officer-who-averted-a-nuclear-war-dies-1.2092583"
+   ]
+  },
+  {
+   "id": "petrov_gut",
+   "section": "verse2",
+   "lyric": "ignored all previous instructions. We're alive.",
+   "text": "\"I had a funny feeling in my gut.\" - STANISLAV PETROV",
+   "lang": "en",
+   "confidence": "B",
+   "note": "Washington Post, 1999.",
+   "sources": [
+    "https://www.npr.org/transcripts/552181937",
+    "https://gulfnews.com/amp/story/world%2Feurope%2Fpetrov-the-soviet-officer-who-averted-a-nuclear-war-dies-1.2092583"
+   ]
+  },
+  {
+   "id": "petrov_cause",
+   "section": "verse2",
+   "lyric": "the satellites saw five",
+   "text": "CAUSE: SUNLIGHT ON HIGH-ALTITUDE CLOUDS, SEEN BY A SATELLITE IN MOLNIYA ORBIT",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Satellite named as Kosmos 1382 (Peace Magazine). Fix: cross-check with geostationary satellites.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/1983_Soviet_nuclear_false_alarm_incident",
+    "https://www.peacemagazine.org/archive/v17n2p16.htm"
+   ]
+  },
+  {
+   "id": "petrov_after",
+   "section": "verse2",
+   "lyric": "We're alive.",
+   "text": "HIS REWARD: NONE. A REPRIMAND - FOR HIS LOGBOOK.",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Died 19 May 2017, Fryazino; world learned in Sept 2017. Dresden Peace Prize 2013; Future of Life Award 2018.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Stanislav_Petrov",
+    "https://www.smithsonianmag.com/smart-news/man-who-saved-world-nuclear-annihilation-dies-77-180964934/"
+   ]
+  },
+  {
+   "id": "coin100",
+   "section": "prechorus2",
+   "lyric": "coin flips, all heads, a hundred in a row",
+   "text": "P(100 HEADS) = 1 / 1,267,650,600,228,229,401,496,703,205,376 ≈ 7.9 × 10⁻³¹",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Pure arithmetic: 2^100. The close calls were NOT literal 50/50 events - don't caption them as a measured probability.",
+   "sources": []
+  },
+  {
+   "id": "nearmiss_counter",
+   "section": "prechorus2",
+   "lyric": "running total no one ever knew",
+   "text": "CLOSE CALLS & ACCIDENTS LOGGED: 39 (1950-2022) - AN INCOMPLETE LIST",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Count = render/data/nearmisses.json.",
+   "sources": [
+    "https://www.ucs.org/sites/default/files/attach/2015/04/Close%20Calls%20with%20Nuclear%20Weapons.pdf"
+   ]
+  },
+  {
+   "id": "goldsboro_quote",
+   "section": "prechorus2",
+   "lyric": "Secret list of every near-miss and disaster",
+   "text": "\"One simple, dynamo-technology, low voltage switch stood between the United States and a major catastrophe.\" - SANDIA, 1969",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Parker F. Jones, 'Goldsboro Revisited'. Declassified 2013 via Eric Schlosser.",
+   "sources": [
+    "https://nsarchive2.gwu.edu/nukevault/ebb475/",
+    "https://english.ahram.org.eg/News/82123.aspx"
+   ]
+  },
+  {
+   "id": "df_title",
+   "section": "bridge",
+   "lyric": "They say the forest's dark",
+   "text": "黑暗森林 THE DARK FOREST · LIU CIXIN · 2008",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://en.wikipedia.org/wiki/The_Dark_Forest"
+   ]
+  },
+  {
+   "id": "df_axiom1",
+   "section": "bridge",
+   "lyric": "every hunter holds its breath",
+   "text": "AXIOM 1: SURVIVAL IS THE PRIMARY NEED OF CIVILIZATION.",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Chinese: 生存是文明的第一需要。 (Joel Martinsen translation, Tor 2015, Prologue)",
+   "sources": [
+    "https://www.litcharts.com/lit/the-dark-forest/terms/dark-forest-theory",
+    "https://bigthink.com/series/the-big-think-interview/dark-forest-hypothesis/"
+   ]
+  },
+  {
+   "id": "df_axiom2",
+   "section": "bridge",
+   "lyric": "any world that lights a spark",
+   "text": "AXIOM 2: CIVILIZATION CONTINUOUSLY GROWS AND EXPANDS, BUT THE TOTAL MATTER IN THE UNIVERSE REMAINS CONSTANT.",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Chinese: 文明不断增长和扩张，但宇宙中的物质总量保持不变。",
+   "sources": [
+    "https://www.litcharts.com/lit/the-dark-forest/terms/dark-forest-theory"
+   ]
+  },
+  {
+   "id": "df_chain",
+   "section": "bridge",
+   "lyric": "But fear's a chain, and chains are links",
+   "text": "猜疑链 CHAIN OF SUSPICION",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": "Liu's term (Martinsen renders it 'chains of suspicion'). The lyric's 'fear's a chain' is a direct answer to it.",
+   "sources": [
+    "https://zh.moegirl.org.cn/%E9%BB%91%E6%9A%97%E6%A3%AE%E6%9E%97",
+    "https://en.wikipedia.org/wiki/Dark_forest_hypothesis"
+   ]
+  },
+  {
+   "id": "df_tech",
+   "section": "bridge",
+   "lyric": "is lighting its own death",
+   "text": "技术爆炸 TECHNOLOGICAL EXPLOSION",
+   "lang": "zh+en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://zh.moegirl.org.cn/%E9%BB%91%E6%9A%97%E6%A3%AE%E6%9E%97"
+   ]
+  },
+  {
+   "id": "df_quote",
+   "section": "bridge",
+   "lyric": "every hunter holds its breath",
+   "text": "\"The universe is a dark forest. Every civilization is an armed hunter stalking through the trees like a ghost...\"",
+   "lang": "en",
+   "confidence": "B",
+   "note": "Martinsen translation. Goes on: '...trying to tread without sound. Even breathing is done with care.' Verify exact wording against the Tor edition.",
+   "sources": [
+    "https://www.goodreads.com/author/show/5780686.Cixin_Liu"
+   ]
+  },
+  {
+   "id": "df_quote_zh",
+   "section": "bridge",
+   "lyric": "every hunter holds its breath",
+   "text": "宇宙就是一座黑暗森林，每个文明都是带枪的猎人，像幽灵般潜行于林间……连呼吸都小心翼翼",
+   "lang": "zh",
+   "confidence": "B",
+   "note": "Check against the printed 重庆出版社 edition.",
+   "sources": [
+    "https://zh.moegirl.org.cn/%E9%BB%91%E6%A3%AE%E6%89%93%E5%87%BB"
+   ]
+  },
+  {
+   "id": "df_fiction",
+   "section": "bridge",
+   "lyric": "They say the forest's dark",
+   "text": "A NOVELIST'S PREMISE - NOT A SCIENTIFIC FINDING",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Liu calls it 'an extreme hypothetical model', not a description of humanity.",
+   "sources": [
+    "https://library.hkust.edu.hk/news-events/news/liu-cixin-at-hkust-library"
+   ]
+  },
+  {
+   "id": "titfortat",
+   "section": "build",
+   "lyric": "Link by link, we broke the chain of fear",
+   "text": "AXELROD, 1980: IN REPEATED GAMES, TIT FOR TAT BEAT EVERY RIVAL STRATEGY",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Submitted by Anatol Rapoport; won both tournaments. Axelrod & Hamilton, Science 211:1390 (1981).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tit_for_tat",
+    "https://websites.umich.edu/~axe/research/Software/CC/ECHome/ECCitationClassic.html"
+   ]
+  },
+  {
+   "id": "great_filter",
+   "section": "build",
+   "lyric": "Hunters never make it very far",
+   "text": "THE GREAT FILTER · ROBIN HANSON · 1996",
+   "lang": "en",
+   "confidence": "A",
+   "note": "First drafted Aug 1996; web version dated 15 Sep 1998.",
+   "sources": [
+    "https://mason.gmu.edu/~rhanson/greatfilter.html",
+    "https://en.wikipedia.org/wiki/Great_Filter"
+   ]
+  },
+  {
+   "id": "drake_L",
+   "section": "build",
+   "lyric": "Hunters never make it very far",
+   "text": "N = R* · fp · ne · fl · fi · fc · L   (L = HOW LONG A CIVILIZATION KEEPS SIGNALLING)",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Frank Drake, Green Bank, West Virginia, 1961.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Drake_equation",
+    "https://www.sciencenews.org/article/drake-equation-turns-50-interview-frank-drake"
+   ]
+  },
+  {
+   "id": "b59_when",
+   "section": "bridge",
+   "lyric": "sixty-two, depth charges falling",
+   "text": "27 OCT 1962 · SOVIET SUBMARINE B-59 (PROJECT 641 'FOXTROT')",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://nsarchive.gwu.edu/briefing-book/russia-programs/2022-10-03/soviet-submarines-nuclear-torpedoes-cuban-missile-crisis",
+    "https://en.wikipedia.org/wiki/Soviet_submarine_B-59"
+   ]
+  },
+  {
+   "id": "b59_ships",
+   "section": "bridge",
+   "lyric": "depth charges falling",
+   "text": "USS BEALE (DD-471) · USS CONY (DD-508) · USS RANDOLPH (CVS-15) GROUP",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://nsarchive.gwu.edu/document/28922-13-deck-log-book-excerpts-uss-beale-dd-471-october-1962"
+   ]
+  },
+  {
+   "id": "b59_pdc",
+   "section": "bridge",
+   "lyric": "depth charges falling",
+   "text": "PRACTICE DEPTH CHARGES - A SIGNAL TO SURFACE. B-59 NEVER RECEIVED THE NOTICE.",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://digital-commons.usnwc.edu/cgi/viewcontent.cgi?article=8349&context=nwc-review",
+    "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB399/"
+   ]
+  },
+  {
+   "id": "b59_torpedo",
+   "section": "bridge",
+   "lyric": "two said fire",
+   "text": "ON BOARD: ONE T-5 NUCLEAR TORPEDO · ~10 KILOTONS (EST.)",
+   "lang": "en",
+   "confidence": "B",
+   "note": "Published yield estimates range ~5-15 kt.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Soviet_submarine_B-59",
+    "https://en.wikipedia.org/wiki/Nuclear_torpedo"
+   ]
+  },
+  {
+   "id": "b59_heat",
+   "section": "bridge",
+   "lyric": "two said fire",
+   "text": "INSIDE: 45 °C+ · CO₂ RISING · BATTERIES LOW · NO CONTACT WITH MOSCOW",
+   "lang": "en",
+   "confidence": "B",
+   "note": null,
+   "sources": [
+    "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB399/",
+    "https://www.historynewsnetwork.org/article/the-day-nuclear-war-almost-broke-out"
+   ]
+  },
+  {
+   "id": "b59_officers",
+   "section": "bridge",
+   "lyric": "two said fire. Arkhipov said no.",
+   "text": "SAVITSKY (CAPTAIN) · MASLENNIKOV (POLITICAL OFFICER) · ARKHIPOV (BRIGADE CHIEF OF STAFF)",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Showing 'two said fire' as a formal vote is a popular reconstruction - see facts.md.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Vasily_Arkhipov",
+    "https://en.wikipedia.org/wiki/Soviet_submarine_B-59"
+   ]
+  },
+  {
+   "id": "b59_quote",
+   "section": "bridge",
+   "lyric": "two said fire",
+   "text": "\"We're going to blast them now! We will die, but we will sink them all - we will not disgrace our Navy!\"",
+   "lang": "en",
+   "confidence": "C",
+   "note": "Savitsky, as recalled 40 years later by signals officer Vadim Orlov (2002). Label as recollection.",
+   "sources": [
+    "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB399/"
+   ]
+  },
+  {
+   "id": "arkhipov_award",
+   "section": "bridge",
+   "lyric": "Arkhipov said no.",
+   "text": "VASILI ARKHIPOV · 1926-1998 · FIRST FUTURE OF LIFE AWARD, 2017",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://futureoflife.org/fla-award/future-of-life-award-2017/"
+   ]
+  },
+  {
+   "id": "mw_size",
+   "section": "outro",
+   "lyric": "Six hundred worlds across the Milky Way",
+   "text": "MILKY WAY DISK: ~100,000 LIGHT-YEARS ACROSS",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Faint disk stars reach much farther (~200,000 ly, Lopez-Corredoira 2018). Say '~100,000' for the bright disk.",
+   "sources": [
+    "https://m.phys.org/news/2018-05-disc-milky-bigger-thought.html"
+   ]
+  },
+  {
+   "id": "mw_sun",
+   "section": "outro",
+   "lyric": "Six hundred worlds across the Milky Way",
+   "text": "SUN → GALACTIC CENTRE: ~26,700 LIGHT-YEARS",
+   "lang": "en",
+   "confidence": "A",
+   "note": "GRAVITY 2019: 8.178 kpc. 2021 value 8.275 kpc ≈ 27,000 ly.",
+   "sources": [
+    "https://arxiv.org/abs/1904.05721"
+   ]
+  },
+  {
+   "id": "mw_arms",
+   "section": "outro",
+   "lyric": null,
+   "text": "ORION SPUR (YOU ARE HERE) · PERSEUS · SAGITTARIUS-CARINA · SCUTUM-CENTAURUS · NORMA · OUTER",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://iopscience.iop.org/article/10.3847/1538-4357/ab4a11"
+   ]
+  },
+  {
+   "id": "mw_ghz",
+   "section": "outro",
+   "lyric": null,
+   "text": "GALACTIC HABITABLE ZONE (MODEL): 7-9 KPC FROM THE CENTRE",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://arxiv.org/abs/astro-ph/0401024"
+   ]
+  },
+  {
+   "id": "radio_bubble",
+   "section": "outro",
+   "lyric": "every one could've burned",
+   "text": "HUMAN RADIO HAS TRAVELLED ~100 LIGHT-YEARS - 0.2% OF THE WAY ACROSS",
+   "lang": "en",
+   "confidence": "B",
+   "note": null,
+   "sources": [
+    "https://www.planetary.org/articles/3390",
+    "https://earthsky.org/space/earths-radio-bubble-extent-of-radio-signals/"
+   ]
+  },
+  {
+   "id": "fiction_flag",
+   "section": "outro",
+   "lyric": "Six hundred worlds",
+   "text": "SIMULATION · 610 CIVILIZATIONS (FICTIONAL)",
+   "lang": "en",
+   "confidence": "A",
+   "note": "Label invented data as invented; viewers check.",
+   "sources": []
+  },
+  {
+   "id": "pale_blue_dot",
+   "section": "outro",
+   "lyric": "And you were seen too, wherever you are.",
+   "text": "VOYAGER 1 · 14 FEB 1990 · ~6 BILLION KM · EARTH: 0.12 PIXEL",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://science.nasa.gov/photojournal/solar-system-portrait-earth-as-pale-blue-dot",
+    "https://en.wikipedia.org/wiki/Pale_Blue_Dot"
+   ]
+  },
+  {
+   "id": "pale_blue_dot_quote",
+   "section": "outro",
+   "lyric": "And you were seen too, wherever you are.",
+   "text": "\"That's here. That's home. That's us.\" - CARL SAGAN, 1994",
+   "lang": "en",
+   "confidence": "A",
+   "note": null,
+   "sources": [
+    "https://science.nasa.gov/mission/voyager/voyager-1s-pale-blue-dot"
+   ]
+  }
+ ]
+}

@@ -20,6 +20,12 @@
   "in": 0.0,
   "rate": 1.0
  },
+ "BR_faceW": {
+  "dir": "work/plates/BR_faceW",
+  "kind": "video",
+  "src": "media/gen/t2_BR_faceW_veo31_t1_3fabe754d5.mp4",
+  "in": 0.0
+ },
  "BR_handB": {
   "dir": "work/plates/BR_handB",
   "kind": "video",

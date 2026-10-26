@@ -1162,3 +1162,8 @@
 {"ts": "2026-10-26T21:55:36Z", "model": "google/veo-3.1", "tag": "t2_P101_veo31_t1", "job": "holdfire/t2_P101_veo31_t1-6d364042d0", "event": "result", "ok": true, "est_usd": 1.2, "where": "cloud"}
 {"ts": "2026-10-26T21:55:38Z", "model": "bytedance/seedance-2.5", "tag": "t2_P101_sd25_t1", "job": "holdfire/t2_P101_sd25_t1-afe137a781", "event": "result", "ok": true, "est_usd": 1.3872, "where": "cloud"}
 {"ts": "2026-10-26T21:57:15Z", "model": "google/veo-3.1", "tag": "t2_BR_faceW_veo31_t1", "job": "holdfire/t2_BR_faceW_veo31_t1-3fabe754d5", "event": "submit", "ok": null, "est_usd": 0.8, "where": "cloud"}
+{"ts": "2026-10-26T21:58:00Z", "model": "pruna/p-image-upscale", "tag": "kf_V114_nbp_v1_up", "job": "holdfire/kf_V114_nbp_v1_up-92c6efc27c", "event": "result", "ok": true, "est_usd": null, "where": "cloud"}
+{"ts": "2026-10-26T21:58:02Z", "model": "google/nano-banana-pro", "tag": "kf_V115_nbp_v1", "job": "holdfire/kf_V115_nbp_v1-9c51123753", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T22:01:45Z", "model": "google/nano-banana-pro", "tag": "kf_V115_nbp_v1", "job": "holdfire/kf_V115_nbp_v1-9c51123753", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T22:01:47Z", "model": "pruna/p-image-upscale", "tag": "kf_V115_nbp_v1_up", "job": "holdfire/kf_V115_nbp_v1_up-47f3f4dd7b", "event": "submit", "ok": null, "est_usd": null, "where": "cloud"}
+{"ts": "2026-10-26T22:02:17Z", "model": "google/veo-3.1", "tag": "t2_BR_faceW_veo31_t1", "job": "holdfire/t2_BR_faceW_veo31_t1-3fabe754d5", "event": "result", "ok": true, "est_usd": 0.8, "where": "cloud"}

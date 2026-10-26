@@ -378,12 +378,278 @@
    "kf": "media/kf2/C210_nbp.jpg",
    "prompt_file": "work/t2/g2/prompts/t2_C210_veo31_t1.txt",
    "s0": null,
-   "dur": 6,
-   "file": null,
-   "dims": null,
-   "verdict": "pending",
+   "dur": 6.0,
+   "file": "media/gen/t2_C210_veo31_t1_f1e5213b1d.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: steady crane up and tilt to the sky, both buildings shrink; slight rightward drift breaks exact symmetry; rate 1.5",
+   "lag": null,
+   "pick": [
+    "C210"
+   ]
+  }
+ ],
+ "P106": [
+  {
+   "tag": "t2_P106_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_t1-3e6c91a3aa",
+   "kf": "media/kf2/P106_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P106_sd25_t1.txt",
+   "s0": 47.432,
+   "dur": 4.042,
+   "file": "media/gen/t2_P106_sd25_t1_3e6c91a3aa.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: eyes open late (~1.58 s)",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_P106_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_t2-779c1dab1f",
+   "kf": "media/kf2/P106_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P106_sd25_t2.txt",
+   "s0": 47.432,
+   "dur": 4.042,
+   "file": "media/gen/t2_P106_sd25_t2_779c1dab1f.mp4",
+   "dims": "1280x720",
+   "verdict": "superseded: good eyes-open timing but the face sat under WE'RE AWAKE; reframed keyframe P106_v2 (outpainted) -> t3/t4",
+   "lag": 0.79,
+   "pick": false
+  },
+  {
+   "tag": "t2_P106_sd25_t3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_t3-eb735d9762",
+   "kf": "media/kf2/P106_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P106_sd25_t3.txt",
+   "s0": 47.432,
+   "dur": 4.042,
+   "file": "media/gen/t2_P106_sd25_t3_eb735d9762.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: reframed (eyes ~y577 under the type); eyes open ~1.62 s; lag +1.18 puts it 0.12 s after the cut on the held 'awake'; its tail (2.99-4.04 s, slowed 0.4x, pushed 5x into her eye) is P107 (work/t2/g2/P107_push.mp4)",
+   "lag": 1.18,
+   "pick": [
+    "P106"
+   ]
+  },
+  {
+   "tag": "t2_P106_sd25_t4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_t4-c7e315c41e",
+   "kf": "media/kf2/P106_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P106_sd25_t4.txt",
+   "s0": 47.432,
+   "dur": 4.042,
+   "file": "media/gen/t2_P106_sd25_t4_c7e315c41e.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: eyes open ~2.0 s",
+   "lag": null,
+   "pick": false
+  }
+ ],
+ "C201R": [
+  {
+   "tag": "t2_C201R_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_C201R_veo31_t1-d50e877697",
+   "kf": "media/kf2/C201R_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C201R_veo31_t1.txt",
+   "s0": null,
+   "dur": 6.0,
+   "file": "media/gen/t2_C201R_veo31_t1_d50e877697.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: mirrored teal-tips dish field, swing f19-40 and the same target star; in 0.77 rate 1.5 (C201L = C101 take at in 1.27)",
+   "lag": null,
+   "pick": [
+    "C201R"
+   ]
+  }
+ ],
+ "X213": [
+  {
+   "tag": "t2_X213_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_X213_veo31_t1-91f5ebedfb",
+   "kf": "media/kf2/X213_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_X213_veo31_t1.txt",
+   "s0": null,
+   "dur": 4,
+   "file": null,
+   "dims": null,
+   "verdict": "relay error 2047 (refunded); resubmitted as t2",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_X213_veo31_t2",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_X213_veo31_t2-aad36a3ad5",
+   "kf": "media/kf2/X213_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_X213_veo31_t2.txt",
+   "s0": null,
+   "dur": 4.0,
+   "file": "media/gen/t2_X213_veo31_t2_aad36a3ad5.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: both pull out their chairs and sit facing each other; in 1.6 rate 1.5 (0.67 s slot)",
+   "lag": null,
+   "pick": [
+    "X213"
+   ]
+  }
+ ],
+ "BR_LETGO": [
+  {
+   "tag": "t2_BR_LETGO_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR_LETGO_veo31_t1-6f1a75ff18",
+   "kf": "media/kf2/BR_LETGO_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_BR_LETGO_veo31_t1.txt",
+   "s0": null,
+   "dur": 4,
+   "file": null,
+   "dims": null,
+   "verdict": "relay error 2047 (refunded); resubmitted as t2",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_BR_LETGO_veo31_t2",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR_LETGO_veo31_t2-e5a801f702",
+   "kf": "media/kf2/BR_LETGO_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_BR_LETGO_veo31_t2.txt",
+   "s0": null,
+   "dur": 4.0,
+   "file": "media/gen/t2_BR_LETGO_veo31_t2_e5a801f702.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick (director's add): usable from 2.0 s, both hands open and withdraw together (~1.9 s); before that they lift the pieces, avoid; model board is not the game position, keep it short",
+   "lag": null,
+   "pick": [
+    "BR_LETGO"
+   ]
+  }
+ ],
+ "BR_faceB": [
+  {
+   "tag": "t2_BR_faceB_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR_faceB_veo31_t1-9e384a5af4",
+   "kf": "media/kf2/BR_faceB_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_BR_faceB_veo31_t1.txt",
+   "s0": null,
+   "dur": 4.0,
+   "file": "media/gen/t2_BR_faceB_veo31_t1_9e384a5af4.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: underlit stare, eyes flick up and back; intercut plate for the bridge",
+   "lag": null,
+   "pick": [
+    "BR_faceB"
+   ]
+  }
+ ],
+ "BR_clock": [
+  {
+   "tag": "t2_BR_clock_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR_clock_veo31_t1-760286b3fa",
+   "kf": "media/kf2/BR_clock_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_BR_clock_veo31_t1.txt",
+   "s0": null,
+   "dur": 4.0,
+   "file": "media/gen/t2_BR_clock_veo31_t1_760286b3fa.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: the slap lands ~0.5 s, clock faces hidden; after ~2 s she turns away, cut before",
+   "lag": null,
+   "pick": [
+    "BR_clock"
+   ]
+  }
+ ],
+ "BR_handW": [
+  {
+   "tag": "t2_BR_handW_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR_handW_veo31_t1-98e2d1efa7",
+   "kf": "media/kf2/BR_handW_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_BR_handW_veo31_t1.txt",
+   "s0": null,
+   "dur": 4.0,
+   "file": "media/gen/t2_BR_handW_veo31_t1_98e2d1efa7.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: hovers ~1 s, grips the knight, lifts it out; patch drawn on the cuff (minor)",
+   "lag": null,
+   "pick": [
+    "BR_handW"
+   ]
+  }
+ ],
+ "BR_handB": [
+  {
+   "tag": "t2_BR_handB_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR_handB_veo31_t1-75a1400d0c",
+   "kf": "media/kf2/BR_handB_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_BR_handB_veo31_t1.txt",
+   "s0": null,
+   "dur": 4.0,
+   "file": "media/gen/t2_BR_handB_veo31_t1_75a1400d0c.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: hovers ~1 s, grips the bishop, slides it out",
+   "lag": null,
+   "pick": [
+    "BR_handB"
+   ]
+  }
+ ],
+ "P101": [
+  {
+   "tag": "t2_P101_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_P101_veo31_t1-6d364042d0",
+   "kf": "media/kf2/P101_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P101_veo31_t1.txt",
+   "s0": null,
+   "dur": 6.0,
+   "file": "media/gen/t2_P101_veo31_t1_6d364042d0.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick (bake-off winner): turns, the Record flashes ~0.6 s, recedes to a point; in 0.3 rate 2",
+   "lag": null,
+   "pick": [
+    "P101"
+   ]
+  },
+  {
+   "tag": "t2_P101_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P101_sd25_t1-afe137a781",
+   "kf": "media/kf2/P101_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P101_sd25_t1.txt",
+   "s0": null,
+   "dur": 6.042,
+   "file": "media/gen/t2_P101_sd25_t1_afe137a781.mp4",
+   "dims": "1280x720",
+   "verdict": "bake-off loser: ignored the first frame (starts on a close-up)",
+   "lag": null,
+   "pick": false
+  }
+ ],
+ "BR_faceW": [
+  {
+   "tag": "t2_BR_faceW_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR_faceW_veo31_t1-3fabe754d5",
+   "kf": "media/kf2/BR_faceW_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_BR_faceW_veo31_t1.txt",
+   "s0": null,
+   "dur": 4.0,
+   "file": "media/gen/t2_BR_faceW_veo31_t1_3fabe754d5.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: underlit stare, eyes flick, cats' eyes blink; pairs with BR_faceB",
+   "lag": null,
+   "pick": [
+    "BR_faceW"
+   ]
   }
  ]
 }

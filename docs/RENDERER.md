@@ -1,7 +1,7 @@
 # HOLD FIRE renderer — guide for scene authors
 
 Every frame is a pure function of song time `t`: `window.renderAt(t)` (render/src/main.js). Headless Chromium + SwiftShader
-(CPU WebGL2), three.js r186 + Canvas 2D. Read `docs/STYLE_BIBLE.md` (the look) and `docs/SHOTLIST.md` (the shots) first.
+(CPU WebGL2), three.js r186 + Canvas 2D. For take one, read `docs/take1/STYLE_BIBLE.md` (the look) and `docs/take1/SHOTLIST.md` (the shots); for take two, `docs/PLAN_TAKE_TWO.md`.
 
 ## Files
 | file | what | who edits |

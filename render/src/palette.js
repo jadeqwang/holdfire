@@ -1,5 +1,5 @@
 // HOLD FIRE palette (display-referred sRGB 0..1). Red is fire (weapons, targeting, alarms, burning worlds) and nothing else;
-// gold is light (signal, contact, choice). See docs/STYLE_BIBLE.md.
+// gold is light (signal, contact, choice). See docs/take1/STYLE_BIBLE.md.
 const hex = (h) => [parseInt(h.slice(1, 3), 16) / 255, parseInt(h.slice(3, 5), 16) / 255, parseInt(h.slice(5, 7), 16) / 255];
 
 export const P = {

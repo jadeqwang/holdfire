@@ -3,6 +3,21 @@
 *Song: "Hold Fire" by Jade Wang with Claude, from the album* Rare Earth. *The words were found in Jade's poetry (the*
 Spaces Left Blank *trilogy and the 2009 chapbook* Variations and Metamorphosis*) and then rhymed.*
 
+## Take two (in progress)
+
+Take two is a new video for the same track, planned in [`docs/PLAN_TAKE_TWO.md`](docs/PLAN_TAKE_TWO.md), a copy of
+the Google Doc "Hold Fire music video plan (take two)" in the Hold Fire folder. It is a history video about three moments of
+restraint (the Daoist alchemists' gunpowder warning, Petrov, Arkhipov), with anime Jade (the Rare Earth design) and teal-tips Jade (from Rewind) in every era,
+each era in its own art style, and the Rare Earth contact graph as the reason to survive.
+
+It reuses take one's timing map (`analysis/timing.json`), renderer, audio and generation tools, and only the scenes the
+plan names (`pulsar.js`, `goldenrecord.js`, `coins.js`, `phyllo.js`, `nearmiss.js`). Take one's treatment, style bible,
+shot list and dailies are in [`docs/take1/`](docs/take1/). The Keeper, the Listener and the Other belong to take one.
+
+**Everything below this section describes take one.**
+
+## Take one
+
 > A hunter's crosshair settles on a small world that is counting in light, 1, 1, 2, 3, 5, 8, and the hunter does not
 > fire. Three minutes later we learn who the hunter was, and that the count it heard was answered by six hundred and
 > ten worlds that also held their fire.
@@ -15,13 +30,13 @@ mattes, face landmarks) and redraws everything; the footage itself never appears
 
 | | |
 |---|---|
-| Treatment | [`docs/TREATMENT.md`](docs/TREATMENT.md) |
-| Style bible | [`docs/STYLE_BIBLE.md`](docs/STYLE_BIBLE.md) |
-| Shot list | [`docs/SHOTLIST.md`](docs/SHOTLIST.md) |
+| Treatment | [`docs/take1/TREATMENT.md`](docs/take1/TREATMENT.md) |
+| Style bible | [`docs/take1/STYLE_BIBLE.md`](docs/take1/STYLE_BIBLE.md) |
+| Shot list | [`docs/take1/SHOTLIST.md`](docs/take1/SHOTLIST.md) |
 | Renderer guide | [`docs/RENDERER.md`](docs/RENDERER.md) |
 | Sound design | [`docs/SOUND.md`](docs/SOUND.md) |
 | Research | [`docs/research/`](docs/research/): poetry provenance, visual references, facts, pipeline lessons |
-| Dailies | [`docs/DAILIES.md`](docs/DAILIES.md), [`docs/takes.json`](docs/takes.json), [`docs/reviews/`](docs/reviews/) |
+| Dailies | [`docs/take1/DAILIES.md`](docs/take1/DAILIES.md), [`docs/takes.json`](docs/takes.json), [`docs/reviews/`](docs/reviews/) |
 
 ![HOLD FIRE title card](media/poster/hold_fire_poster.jpg)
 

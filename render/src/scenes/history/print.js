@@ -1,4 +1,4 @@
-// PRINTED MATTER, the history material (docs/STYLE_BIBLE.md §1): cream archival paper with fibre and tooth, black ink in an
+// PRINTED MATTER, the history material (docs/take1/STYLE_BIBLE.md §1): cream archival paper with fibre and tooth, black ink in an
 // amplitude-modulated halftone (Euclidean dot, 45°), ONE red spot ink (75°, for fire and alarm light only), the plates slightly
 // out of register, ink multiplied into the paper the way a press lays it down. Paper is static per shot (baked once per seed).
 //

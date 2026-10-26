@@ -1,7 +1,7 @@
 // Kinetic typography. Draws into engine.typeCtx in 1920x1080 design pixels (straight alpha), composited over the graded image;
 // its colour also feeds the bloom (post.typeGlow), so bright type glows without blurring the letterforms.
 //
-// Type system (docs/STYLE_BIBLE.md):
+// Type system (docs/take1/STYLE_BIBLE.md):
 //   Cormorant Garamond  — the human voice and the poems (the Spaces Left Blank books' face); italic for the hinge word
 //   Open Sans (tracked caps) — labels, "EXCERPT FROM", credits (the books' small caps)
 //   IBM Plex Mono       — the Listener (AI) voice, HUDs, terminals, data

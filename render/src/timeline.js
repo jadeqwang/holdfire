@@ -272,7 +272,8 @@ export function buildTimeline(A) {
   const nextId = (k = 0) => `${SEC}${String((counters[SEC] || 0) + 1 + k).padStart(2, '0')}`;   // the id the k-th next S() gets
   const plate = (p = {}) => ({ scene: 't2_plate', p: { clip: '@', ...p } });
   const still = (p = {}) => ({ scene: 't2_still', p: { img: '@', ...p } });
-  const over = (base, ...layers) => ({ scene: 'multi', p: { layers: [base, ...layers] } });
+  // a plate base that is not there yet falls back to the labelled placeholder (t2_first), so the overlays still draw over it
+  const over = (base, ...layers) => ({ scene: 'multi', p: { layers: [(base.scene === 't2_plate' || base.scene === 't2_still') ? { scene: 't2_first', p: { chain: [base, { scene: 'placeholder' }] } } : base, ...layers] } });
   const split = (l = {}, r = {}, line = 2) => ({ scene: 't2_split', p: { left: { scene: 't2_plate', p: { clip: '@L', ...l } }, right: { scene: 't2_plate', p: { clip: '@R', ...r } }, x: 960, line } });
   const flash = (col = [1, 0.86, 0.6], k = 0.6, dec = 0.12) => (t, lt) => ({ flash: Math.exp(-Math.max(0, lt) / dec) * k, flashCol: col });
   const withLook = (L, f) => (t, lt, ctx) => ({ ...L, ...f(t, lt, ctx) });
@@ -333,11 +334,15 @@ export function buildTimeline(A) {
   S('0:08.60', wd('CO', 1, 'one'), lightShot('Two hands strike a match in the dark'));
   S('0:09.23', wd('CO', 1, 'two'), lightShot('A lighthouse beam turning through fog'));
   S('0:09.86', wd('CO', 1, 'three'), lightShot('A city grid at night through a plane window'));
-  S('0:10.44', wd('CO', 1, 'five'), lightShot("Earth's night side from the ISS, cities joined by roads of light (NASA imagery is public domain)"));
-  S('0:11.16', wd('CO', 1, 'eight'), { scene: 't2_graph_grow', p: { mode: 'eight', t0: wd('CO', 1, 'eight').t }, method: 'procedural', era: ERA.light, look: LK.light,
-    want: 'The contact graph over the Milky Way, eight links lighting at once' });
+  // the plate if one is picked (NASA night imagery is public domain), else t2_earth_night's ISS view
+  S('0:10.44', wd('CO', 1, 'five'), { scene: 't2_first', p: { chain: [{ scene: 't2_plate', p: { clip: '@' } }, { scene: 't2_earth_night', p: { view: 'iss' } }] }, method: 'video', era: ERA.lights, look: LK.night,
+    want: "Earth's night side from the ISS, cities joined by roads of light (NASA imagery is public domain; t2_earth_night 'iss' until a plate is picked)" });
   const yeah = hitWord('(yeah)');
-  S('0:11.51', yeah, { ...plate(), method: 'video', era: ERA.room, look: LK.room,
+  // t2_graph_flash: eight links at once, then (from the last whisper) the light gathers into one pale-blue point at frame centre
+  const flashP = { tEight: wd('CO', 1, 'eight').t, tGather: [yeah.t, yeah.t + 0.8], dot: [960, 540] };
+  S('0:11.16', wd('CO', 1, 'eight'), { scene: 't2_graph_flash', p: flashP, method: 'procedural', era: ERA.light, look: LK.light,
+    want: 'The contact graph over the Milky Way, eight links lighting at once' });
+  S('0:11.51', yeah, { scene: 't2_first', p: { chain: [{ scene: 't2_plate', p: { clip: '@' } }, { scene: 't2_graph_flash', p: flashP }] }, method: 'video', era: ERA.room, look: LK.room,
     want: "The graph's light gathers into one point; pull back: it is the catchlight in Jade's eye; she is at her console in headphones, waterfall spectrograms behind" });
   S('0:12.50', beat('0:12.50'), { ...plate(), method: 'video', era: ERA.room, look: LK.room, want: 'Jade opens her eyes and looks up (on the beat before the verse)' });
 
@@ -394,7 +399,7 @@ export function buildTimeline(A) {
   const machines = [['0:31.18', 'locomotive', 'Steam locomotive'], ['0:31.51', 'wright_flyer', 'Wright Flyer'], ['0:31.83', 'jet_airliner', 'Jet airliner'], ['0:32.15', 'saturn_v', 'Saturn V lifting off']];
   machines.forEach(([pl, subj, name], i) => S(pl, eighth(pl), { ...over(plate(), bp(subj, { over: true })), method: 'video', era: ERA.v1, look: LK.blueprint,
     want: `${name}, blueprint linework over it; the flood becomes a flood of machines; Jade's walk breaks into a run`, notes: i === 0 ? 'bar 13 downbeat; stacked choir enters' : 'eighth-note cut' }));
-  S('0:32.62', wd('P1', 0, 'snowflake'), { ...plate(), method: 'video', era: ERA.v1, look: LK.night, want: 'Jade stops at night and looks up at a bright point crossing the sky' });
+  S('0:32.62', wd('P1', 0, 'snowflake'), { ...over(plate(), { scene: 't2_iss_pass', p: {} }), method: 'video', era: ERA.v1, look: LK.night, want: 'Jade stops at night and looks up at a bright point crossing the sky' });
   S(null, wd('P1', 0, 'boundless'), { ...plate({ style: 'riso' }), method: 'video', era: ERA.signal, look: LK.riso,
     want: 'The ISS against black, its solar arrays spread like the arms of a snowflake; the technology run ends here', notes: 'cut placed on "boundless" (plan gives no time for the cut to the ISS)' });
 
@@ -421,7 +426,7 @@ export function buildTimeline(A) {
   const burstT = EIGHTHS.filter((e) => e >= countingT.t - 0.02).slice(0, 5);   // 1, 1, 2, 3, 5 lamps on five eighths
   S('0:38.07', countingT, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { counts: [1, 1, 2, 3, 5], times: burstT, ring: TOWER_RING } }), method: 'still', era: ERA.signal, look: LK.riso,
     want: 'Echo: the signal tower above the violet clouds (Rare Earth world sheet, panel 04) fires its ring of lights in bursts of 1, 1, 2, 3, 5 on eighths' });
-  S('0:40.65', wd('P1', 3, 'a'), { scene: 't2_pulse_ride', p: { ly: 217 }, method: 'procedural', era: ERA.signal, look: LK.light,
+  S('0:40.65', wd('P1', 3, 'a'), { scene: 't2_pulse', p: { tSend: wd('P1', 3, 'one-way').t, tArrive: LN('P1', 4).t - 0.27, dir: 'toEcho', dist: 217 }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: 'Ride the pulse across the galaxy toward a small blue point: Echo, 217 light-years away (fictional; never presented as a real exoplanet)', notes: "teal-tips Jade's voice enters, heard not seen" });
   S('0:43.27', wd('P1', 4, 'a'), { scene: 'pulsar', p: {}, method: 'reuse', era: ERA.signal, look: LK.diagram,
     want: "Take one's 0:44 diagram unchanged: PSR B1919+21 ticking every 1.3373 s (left), the count 1 1 2 3 5 8 (right)", notes: 'NATURAL / NOT NATURAL are drawn by pulsar.js itself' });
@@ -464,14 +469,18 @@ export function buildTimeline(A) {
   // ============================================================================================== POST-CHORUS 1 (73.03 to 82.55)
   section('X1');
   const x1h = HITS.filter((h) => h.kind === 'post_chorus_1');
+  const cou = [hit('counting_on_you', 0).t, hit('counting_on_you', 1).t];
+  // t2_graph_grow is a pure function of t over the whole post-chorus (phase 'auto': the camera follows the scale), so every cut
+  // gets the same p: the twelve shouts, the flash on the last "Counting on you!", the smoke into verse 2
+  const growP = { shouts: [...x1h.slice(0, 5).map((h) => h.t), cou[0], ...x1h.slice(5, 10).map((h) => h.t), cou[1]], tFlash: cou[1], smoke: [wd('X1', 3, 'you').t, LN('V2', 0).t + 0.09], phase: 'auto' };
   const graphScale = ['local', 'local', 'local', 'local', 'local', 'local', 'arm', 'arm', 'arm', 'half', 'half'];
   const X1W = ['one node, then one link', 'one more link', 'two new links', 'three new links', 'five new links'];
-  for (let i = 0; i < 5; i++) S(['1:13.03', '1:13.67', '1:14.28', '1:14.98', '1:15.59'][i], hit('post_chorus_1', i), { scene: 't2_graph_grow', p: { stage: i + 1, scale: 'local' }, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.25)),
+  for (let i = 0; i < 5; i++) S(['1:13.03', '1:13.67', '1:14.28', '1:14.98', '1:15.59'][i], hit('post_chorus_1', i), { scene: 't2_graph_grow', p: growP, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.25)),
     want: `The contact graph grows from Earth among the nearest stars: ${X1W[i]}` });
-  S('1:16.24', wd('X1', 1, 'counting'), { scene: 't2_graph_grow', p: { stage: 6, scale: 'local' }, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.4)), want: 'The eighth link closes; giant 8' });
-  for (let i = 0; i < 5; i++) S(['1:18.18', null, null, null, '1:20.73'][i], hit('post_chorus_1', 5 + i), { scene: 't2_graph_grow', p: { stage: 7 + i, scale: graphScale[6 + i] }, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.25)),
+  S('1:16.24', wd('X1', 1, 'counting'), { scene: 't2_graph_grow', p: growP, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.4)), want: 'The eighth link closes; giant 8' });
+  for (let i = 0; i < 5; i++) S(['1:18.18', null, null, null, '1:20.73'][i], hit('post_chorus_1', 5 + i), { scene: 't2_graph_grow', p: growP, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.25)),
     want: `The same count one scale up (${graphScale[6 + i] === 'arm' ? 'across the Orion Arm' : 'half the galaxy'}): ${X1W[i]}` });
-  S('1:21.35', hit('counting_on_you', 1), { scene: 't2_graph_grow', p: { stage: 12, scale: 'half', flash: true, smokeT: wd('X1', 3, 'you').t }, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.6, 0.2)),
+  S('1:21.35', hit('counting_on_you', 1), { scene: 't2_graph_grow', p: growP, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.5], 0.6, 0.2)),
     want: 'The whole web flashes, then the frame fills with smoke for verse 2 (snare roll to 1:22.64)' });
   // shouted counts: small gold numerals fill the bottom-third row; the unsung 8 lands giant on "Counting on you!" and drops into the row
   const pcCount = (hs, ch, t1) => {
@@ -542,7 +551,7 @@ export function buildTimeline(A) {
   S(null, prev, { ...over(painting(), screen('protocol', { rect: [1180, 560, 520, 420], quad: [[1190, 610], [1640, 585], [1700, 1010], [1225, 1040]], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'The printed protocol beside him is struck through line by line' });
   S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', {}, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
-  hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 150, y: 250, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });
+  hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 110, y: 905, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });   // lower third: the wall map is the picture
   const lookedT = looked.t;
   // the gloss sits on a dark plate just above the years row (y 1000) and holds into the first weapons so it reads at < 3 words/s
   cue({ kind: 'cap', label: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE', t0: lookedT, t1: weapons[2][1].t, x: SAFE.cx, y: 896, lead: 38, band: true, draw: drawCaps,
@@ -573,7 +582,7 @@ export function buildTimeline(A) {
   const dl2 = A.sections.find((s) => s.name === 'Chorus 2').start;
   S(null, wd('C2', 0, "can't"), { ...split({ swingT: dl2 }, { swingT: dl2 }), method: 'video', era: ERA.room, look: LK.night,
     want: 'Split: each Jade alone on her own dish field at night (mirrored); the dishes swing to the same point', notes: 'chorus 1 shot returns as a split; cut on "Can\'t" like chorus 1' });
-  S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 200 } }, right: { scene: 'goldenrecord', p: { R: 200 } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
+  S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, right: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
     want: 'Split: the Golden Record cover engraves itself on both sides at once' });
   S(null, wd('C2', 2, 'but'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: both Jades sing "but if you are, I\'m counting on you" at their mirrored consoles' });
   const silent2 = wd('C2', 3, 'silent');
@@ -591,12 +600,19 @@ export function buildTimeline(A) {
   section('X2');
   const x2h = HITS.filter((h) => h.kind === 'post_chorus_2');
   const lightsW = ['A lamp in one window at night', 'A second window lights', 'A street of lit windows', 'A city at night', 'A coastline of city lights'];
-  for (let i = 0; i < 5; i++) S(i === 0 ? '2:14.06' : null, hit('post_chorus_2', i), { ...still(), method: 'still', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.2)), want: `Earth's lights at increasing scale: ${lightsW[i]}` });
-  S('2:17.21', wd('X2', 1, 'counting'), { scene: 't2_earth_night', p: { view: 'whole' }, method: 'procedural', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.35)), want: "Then the whole night side of Earth" });
+  // lamp, window, street: generated stills; from the city up, t2_earth_night's 'scale' view (one log-altitude jump per shout,
+  // its closest scales are too coarse for a window) carries it out to the whole night side on "Counting on you!"
+  const scaleP = { view: 'scale', shouts: [...x2h.slice(0, 5).map((h) => h.t), wd('X2', 1, 'counting').t] };
+  for (let i = 0; i < 5; i++) S(i === 0 ? '2:14.06' : null, hit('post_chorus_2', i), i < 3
+    ? { ...still(), method: 'still', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.2)), want: `Earth's lights at increasing scale: ${lightsW[i]}` }
+    : { scene: 't2_earth_night', p: scaleP, method: 'procedural', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.2)), want: `Earth's lights at increasing scale: ${lightsW[i]} (t2_earth_night 'scale')` });
+  S('2:17.21', wd('X2', 1, 'counting'), { scene: 't2_earth_night', p: scaleP, method: 'procedural', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.35)), want: "Then the whole night side of Earth" });
   const setN = [1, 2, 4, 7, 12];
-  for (let i = 0; i < 5; i++) S(i === 0 ? '2:19.11' : null, hit('post_chorus_2', 5 + i), { scene: 't2_chess', p: { phase: 'set', n: setN[i] }, method: 'procedural', era: ERA.chess, look: withLook(LK.anime, flash([1, 1, 1], 0.3, 0.06)),
+  // t2_chess sets the board from its own schedule (scenes/t2/chess/schedule.js: 1, 1, 2, 3, 5 pieces on the shouts, the other 20
+  // on "Counting on you!"); cam 'auto' cuts on each shout to the angle that frames the pieces landing
+  for (let i = 0; i < 5; i++) S(i === 0 ? '2:19.11' : null, hit('post_chorus_2', 5 + i), { scene: 't2_chess', p: { mode: 'set', cam: 'auto' }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.3, 0.06)),
     want: `A chessboard sets itself: pieces slam down from above (${setN[i]} on the board)` });
-  S('2:22.19', wd('X2', 3, 'counting'), { scene: 't2_chess', p: { phase: 'set', n: 32 }, method: 'procedural', era: ERA.chess, look: withLook(LK.anime, flash([1, 1, 1], 0.5, 0.08)), want: '"Counting on you!" lands the rest of the pieces' });
+  S('2:22.19', wd('X2', 3, 'counting'), { scene: 't2_chess', p: { mode: 'set', cam: 'auto' }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.5, 0.08)), want: '"Counting on you!" lands the rest of the pieces' });
   S(null, wd('X2', 3, 'on'), { ...plate(), method: 'video', era: ERA.chess, look: LK.anime, want: 'The two Jades sit down across the board from each other' });
   const x2Row = x2h.slice(0, 5).map((h, i) => ({ n: [1, 1, 2, 3, 5][i], t: h.t, slot: i, giant: false }));
   x2Row.push({ n: 8, t: wd('X2', 1, 'counting').t, slot: 5, giant: true });
@@ -605,61 +621,59 @@ export function buildTimeline(A) {
   // ============================================================================================== BRIDGE (143.58 to 163.67): Fischer-Tal
   section('BR');
   const br0 = secStart('BR');
-  // ply schedule: every ply on the eighth or sixteenth grid between the plan's anchors
-  const gi = (G, t) => { let b = 0; G.forEach((x, i) => { if (Math.abs(x - t) < Math.abs(G[b] - t)) b = i; }); return b; };
-  const spread = (G, a, b, n, fr) => { const ia = gi(G, a), ib = gi(G, b); return Array.from({ length: n }, (_, k) => G[Math.round(ia + (fr ? fr[k] : (n === 1 ? 0 : k / (n - 1))) * (ib - ia))]); };
-  const tB1 = beat('2:26.1').t, tB2 = beat('2:28.6').t, spark = wd('BR', 2, 'spark').t, tB3 = eighth('2:30.5').t, death = wd('BR', 3, 'death').t;
-  const drumsBack = ev('impact', /drums \+ 808 return/).t, andE = wd('BR', 5, 'and').t, handT = wd('BR', 5, 'hand').t;
-  const consec = (G, a, n) => { const i = gi(G, a); return G.slice(i, i + n); };
-  const plyT = [
-    ...consec(EIGHTHS, br0.t, 8),                                      // 1.e4 .. 4...c5, one per eighth from the drums-out
-    ...consec(BEATS, tB1, 4),                                          // 5.a3 .. 6...cxd4, one per beat
-    ...spread(SIXTEENTHS, tB2, spark, 5, [0, 0.42, 0.7, 0.88, 1]),     // 7.Qg4 .. 9.Qxg7 speeding up; Qxg7 on "spark"
-    ...spread(EIGHTHS, tB3, death, 9),                                 // 9...Rg8 .. 13...O-O-O on eighths; O-O-O on "death"
-    ...spread(SIXTEENTHS, drumsBack, andE - 0.1, 10),                  // 14.Bg5 .. 18...Rxg2+ (10 plies do not fit on eighths before 2:35.90)
-    ...spread(SIXTEENTHS, andE, handT, 6),                             // 19.Kh1 .. 21...Qg4+ flurry; the last check on "hand"
-  ];
-  const plies = PLIES.map((san, i) => ({ i, san, t: plyT[i] }));
-  const letT = wd('BR', 5, 'let').t;
-  const chess = (view, want, extra = {}, look = LK.anime) => ({ scene: 't2_chess', p: { view, plies, clocksStop: letT, ...extra }, method: 'procedural', era: ERA.chess, look, want });
-  S('2:23.58', br0, chess('hands_blur', 'Teal-tips Jade presses the clock on the drums-out; premoved opening (1.e4 ...), hands a blur; the room lights go down until only the board is lit', { lightsDown: [br0.t, tB1] }));
-  S('2:26.1', beat('2:26.1'), chess('orbit_low', 'Slow orbit at board height; a hand hovers a full beat over its piece; eyes in the dark reflect light like animals in a forest (moves 5-6)'));
-  S('2:28.6', beat('2:28.6'), chess('speedup', 'The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));
-  S('2:30.32', wd('BR', 2, 'spark'), chess('impact', 'The first capture, 9.Qxg7 on "spark": impact frame, sparks off the clock', {}, withLook(LK.anime, flash([1, 1, 1], 0.9, 0.05))));
-  S('2:30.5', eighth('2:30.5'), chess('castle', '9...Rg8 to 13.O-O on eighths'));
-  S('2:33.04', wd('BR', 3, 'death'), chess('overhead_castled', 'Black castles long on "death": kings on opposite sides, both attacks on'));
-  S('2:33.69', ev('impact', /drums \+ 808 return/), chess('battle', 'Drums return, 14.Bg5: the anime battle, speed lines, smash zooms', {}, withLook(LK.anime, flash([1, 1, 1], 0.6, 0.06))));
-  S('2:34.15', wd('BR', 4, 'chain'), chess('swing180', 'The camera swings 180 degrees around the board on "chain"'));
-  S(null, wd('BR', 4, 'chains'), chess('chain_of_pieces', 'Each captured piece is knocked off the board; the captured pieces fly past the lens joined like links of a chain'));
-  S('2:35.90', wd('BR', 5, 'and'), chess('flurry', '19.Kh1 Qe5 20.Rxf1 Qxe6 21.Kxg2 as a sixteenth-note flurry'));
-  S('2:37.48', wd('BR', 5, 'hand'), chess('perpetual', '21...Qg4+ on "hand": the black queen gives check, White has one legal move: perpetual. Fischer-Tal · Leipzig 1960 · ½-½ on the scoresheet'));
-  S('2:38.10', wd('BR', 5, 'let'), { ...plate(), method: 'video', era: ERA.chess, look: LK.anime, want: 'On "let go" both Jades take their hands off the pieces; the clocks stop; neither one wins' });
-  S('2:37.8', wd('BR', 5, 'go'), { scene: 't2_poster_morph', p: { from: 'black_queen', t1: LN('BR', 6).t + 0.6 }, method: 'procedural', era: ERA.poster, look: LK.poster,
-    want: 'The camera dives into the black queen: its silhouette flattens into a black square and a red wedge; the squares slide into a Suprematist composition that assembles into a Soviet poster',
-    notes: 'plan starts the dive at 2:37.8, before the "let go" hands (2:38.10); the hands keep their word anchor and the dive starts on "go"' });
-  S('2:38.76', wd('BR', 6, 'sixty-two'), { ...over(plate({ style: 'halftone' }), { scene: 't2_depth_charges', p: { t: LN('BR', 6).words.slice(1).map((w) => w.t) } }), method: 'video', era: ERA.poster, look: LK.poster,
+  // Fischer-Tal is played by t2_chess from its own ply schedule (scenes/t2/chess/schedule.js: every ply on the beat grid between
+  // the plan's anchors, the clocks counting down for real, the clocks stopping on "let"); cam 'auto' is its choreography (hard cuts
+  // on musical points, the 180-degree swing on "chain"), so the edit's cuts are the tracker's rows over one continuous game
+  const tB1 = beat('2:26.1').t, tB2 = beat('2:28.6').t, tB3 = eighth('2:30.5').t;
+  const pressT = SIXTEENTHS.filter((x) => x < br0.t - 0.02).pop();                                // Black presses the clock (143.42)
+  const chess = (want, extra = {}, look = CHESS_LOOK) => ({ scene: 't2_chess', p: { mode: 'game', cam: 'auto', ...extra }, method: 'procedural', era: ERA.chess, look, want });
+  S('2:23.58', { t: pressT, kind: 'sixteenth', ref: 'last 16th before the drums-out beat (Black presses the clock; 1.e4 on the beat)' }, chess('Teal-tips Jade presses the clock on the fill\'s last sixteenth; premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit'));
+  S('2:26.1', beat('2:26.1'), chess('Slow orbit at board height; a hand hovers a full beat over its piece; eyes in the dark reflect light like animals in a forest (moves 5-6)'));
+  S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));
+  S('2:30.32', wd('BR', 2, 'spark'), chess('The first capture, 9.Qxg7 on "spark": impact frame, sparks off the clock', {}, withLook(CHESS_LOOK, flash([1, 1, 1], 0.9, 0.05))));
+  S('2:30.5', eighth('2:30.5'), chess('9...Rg8 to 13.O-O on eighths'));
+  S('2:33.04', wd('BR', 3, 'death'), chess('Black castles long on "death": kings on opposite sides, both attacks on'));
+  S('2:33.69', ev('impact', /drums \+ 808 return/), chess('Drums return, 14.Bg5: the anime battle, speed lines, smash zooms', {}, withLook(CHESS_LOOK, flash([1, 1, 1], 0.6, 0.06))));
+  S('2:34.15', wd('BR', 4, 'chain'), chess('The camera swings 180 degrees around the board on "chain"'));
+  S(null, wd('BR', 4, 'chains'), chess('Each captured piece is knocked off the board; the captured pieces fly past the lens joined like links of a chain'));
+  S('2:35.90', wd('BR', 5, 'and'), chess('19.Kh1 Qe5 20.Rxf1 Qxe6 21.Kxg2 as a sixteenth-note flurry'));
+  S('2:37.48', wd('BR', 5, 'hand'), chess('21...Qg4+ on "hand": the black queen gives check, White has one legal move: perpetual (Fischer-Tal · Leipzig 1960 · ½-½ on the scoresheet)'));
+  // the dive into the black queen ends on a flat 360 px #101010 square on #F1E8D6, the frame t2_poster_morph opens on: the dive's
+  // window ends exactly on the poster shot's cut ("go"), and the poster's square0 matches the dive's size
+  const letW = wd('BR', 5, 'let'), goW = wd('BR', 5, 'go'), sixty2 = wd('BR', 6, 'sixty-two');
+  S('2:38.10', letW, { scene: 't2_chess', p: { mode: 'dive', d0: letW.t, d1: goW.t, size: 360 }, method: 'procedural', era: ERA.chess, look: DIVE_LOOK,
+    want: 'On "let go" the clocks stop and neither one wins; the camera dives into the black queen until her silhouette is a flat black square',
+    notes: 'was the hands-off plate; the dive needs the window between "let" and "go" (the poster cut on "go" is fixed)' });
+  S('2:37.8', goW, { scene: 't2_poster_morph', p: { t0: goW.t, t1: sixty2.t, tLock: nearest(SIXTEENTHS, (goW.t + sixty2.t) / 2), square0: 360, zoom0: 1.3 }, method: 'procedural', era: ERA.poster, look: LK.posterProc,
+    want: 'The black square tilts, a red wedge drives in, the board\'s squares slide into a Suprematist composition that assembles into a Soviet poster (ends on t2_arkhipov\'s opening frame)',
+    notes: 'plan starts the dive at 2:37.8; here the dive runs "let" to "go" and the morph "go" to "sixty-two"' });
+  // t2_arkhipov: one poster scene whose layout changes on the words (charges / fire / hand / NO); NO is its own poster lettering
+  const twoW = wd('BR', 7, 'two'), arkW = wd('BR', 7, 'arkhipov'), noT = wd('BR', 7, 'no');
+  const charges = EIGHTHS.filter((x) => x > sixty2.t + 0.45 && x < twoW.t - 0.1);                // practice charges on the eighths
+  const buildT = wd('BU', 0, 'hunters').t;
+  // the surfacing would get one frame before the build, so NO holds to the cut (tSurface after it)
+  const arkP = { charges, tFire: twoW.t, tHand: arkW.t, tNo: noT.t, tSurface: buildT + 1, zoom0: 1.3 };
+  const arkLook = (t) => ({ ...LK.posterProc, shakeX: 7 * charges.reduce((m, x) => Math.max(m, shk(t, x + 0.7, 1)), 0) * Math.sin(t * 83), shakeY: shk(t, noT.t, 10) });
+  S('2:38.76', sixty2, { scene: 't2_arkhipov', p: arkP, method: 'procedural', era: ERA.poster, look: arkLook,
     want: 'Pull back out of the poster into the Arkhipov scene (newsprint-halftone poster): B-59, batteries nearly dead, trapped under US destroyers; practice depth charges fall as black dots' });
-  S('2:41.23', wd('BR', 7, 'two'), { ...still({ style: 'halftone' }), method: 'still', era: ERA.poster, look: LK.poster,
+  S('2:41.23', twoW, { scene: 't2_arkhipov', p: arkP, method: 'procedural', era: ERA.poster, look: arkLook,
     want: 'Two officers in red silhouette, faces in shadow and unnamed, one pointing toward the torpedo room (anonymous; no one else shown as a hawk)' });
-  S('2:42.19', wd('BR', 7, 'arkhipov'), { ...still({ style: 'halftone' }), method: 'still', era: ERA.poster, look: LK.poster, want: "Arkhipov's open hand comes up between them, full frame (anonymous period figure)" });
-  const noT = wd('BR', 7, 'no');
-  S('2:43.34', noT, { ...plate({ style: 'halftone' }), method: 'video', era: ERA.poster, look: LK.poster,
-    want: 'NO fills the frame; behind it B-59 surfaces among the destroyers at night in their searchlights, and the poster\'s red drains to grey', notes: 'only 0.32 s before the build: the surfacing plays behind NO' });
-  cue({ kind: 'hero', label: 'NO (poster lettering)', t0: noT.t, t1: noT.t + 0.6, size: 760, y: 820, out: 0.12, draw: drawHero, font: { stretch: '62%', weight: 900 }, color: P.cream, hot: [1, 0.35, 0.25],
-    rows: [{ words: [{ text: 'NO', t: noT.t }] }] });
+  S('2:42.19', arkW, { scene: 't2_arkhipov', p: arkP, method: 'procedural', era: ERA.poster, look: arkLook, want: "Arkhipov's open hand comes up between them, full frame (anonymous period figure)" });
+  S('2:43.34', noT, { scene: 't2_arkhipov', p: arkP, method: 'procedural', era: ERA.poster, look: arkLook,
+    want: 'NO in poster lettering fills the frame (drawn by t2_arkhipov)', notes: 'B-59 surfacing (t2_arkhipov mode surface) has no room before the build at 2:43.67' });
 
   // ============================================================================================== BUILD (163.67 to 183.88)
   section('BU');
-  S('2:43.67', wd('BU', 0, 'hunters'), { scene: 't2_war', p: { phase: 'launch' }, method: 'reuse', era: ERA.war, look: LK.war,
+  S('2:43.67', wd('BU', 0, 'hunters'), { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war,
     want: "The Rare Earth war scene: Earth's night side over the pole, missile tracks rising from both sides' silo fields and from submarines" });
-  S('2:46.93', wd('BU', 1, 'fire'), { scene: 't2_graph', p: { mode: 'war' }, method: 'procedural', era: ERA.war, look: LK.war, want: 'Pull out to the contact graph: elsewhere in the galaxy, worlds fire on each other and go dark one by one' });
+  S('2:46.93', wd('BU', 1, 'fire'), { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war, want: 'Pull out to the contact graph: elsewhere in the galaxy, worlds fire on each other and go dark one by one' });
   const burn = wd('BU', 2, 'burn'), fall = wd('BU', 2, 'fall');
-  S('2:49.44', burn, { scene: 't2_war', p: { phase: 'impact' }, method: 'reuse', era: ERA.war, look: LK.war, want: 'Back on Earth the warheads land and the lights go out' });
+  S('2:49.44', burn, { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war, want: 'Back on Earth the warheads land and the lights go out' });
   S('2:50.83', wd('BU', 3, 'only'), { ...plate(), method: 'video', era: ERA.room, look: LK.room, want: 'Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back' });
-  S(null, wd('BU', 3, 'held'), { scene: 't2_war', p: { phase: 'rewind', vhs: true }, method: 'reuse', era: ERA.war, look: LK.war,
+  S(null, wd('BU', 3, 'held'), { scene: 't2_war', p: { rewind: true }, method: 'procedural', era: ERA.war, look: LK.war,
     want: 'VHS rewind: the warheads lift off the cities, the tracks fall back into silos and submarines, the lights come back on' });
-  S('2:53.25', wd('BU', 4, 'out'), { scene: 't2_war', p: { phase: 'whole' }, method: 'reuse', era: ERA.war, look: LK.night, want: 'Earth whole again' });
-  S(null, wd('BU', 4, 'all'), { scene: 't2_graph', p: { mode: 'relight' }, method: 'procedural', era: ERA.light, look: LK.light, want: "Earth's node on the contact graph lights again" });
+  S('2:53.25', wd('BU', 4, 'out'), { scene: 't2_war', p: { rewind: true }, method: 'procedural', era: ERA.war, look: LK.night, want: 'Earth whole again' });
+  S(null, wd('BU', 4, 'all'), { scene: 't2_war', p: { rewind: true, view: 'graph' }, method: 'procedural', era: ERA.light, look: LK.light, want: "Earth's node on the contact graph lights again" });
   const hold1 = wd('BU', 5, 'hold'), show1 = wd('BU', 5, 'show');
   S('2:55.06', hold1, { scene: 't2_scroll_warning', p: { phase: 'held', text: '有以硫黃、雄黃合硝石，并蜜燒之，焰起燒手面，及燼屋舍者。' }, method: 'procedural', era: ERA.ink, look: LK.ink, want: "The people who held fire, 1: the alchemists' warning scroll" });
   S(null, wd('BU', 5, 'fire'), { ...plate({ style: 'oil' }), method: 'video', era: ERA.oil, look: LK.oil, want: 'The people who held fire, 2: Petrov, oil portrait lit by the screen' });
@@ -670,7 +684,7 @@ export function buildTimeline(A) {
   const dropT = LN('DR', 0).t;
   const rollBeats = [roll2.t, ...BEATS.filter((b) => b > roll2.t + 0.05 && b < dropT - 0.3)];
   const rollW = [['video', plate(), 'Jade raises her hand light, close'], ['video', plate(), 'Teal-tips Jade raises her hand light, close'], ['procedural', { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t } }, 'Cities across the night side, brighter'],
-    ['procedural', { scene: 't2_graph', p: { mode: 'relight', bright: true } }, 'The contact graph, every node lit'], ['video', split(), 'Both hand lights held up, split; the frame burns to white for the drums cut']];
+    ['procedural', { scene: 't2_graph_outro', p: { reveal: false, wave: [roll2.t, roll2.t + 1.2] } }, 'The contact graph, every node lit'], ['video', split(), 'Both hand lights held up, split; the frame burns to white for the drums cut']];
   rollBeats.forEach((b, i) => {
     const [m, sc, w] = rollW[i % rollW.length];
     S(i === 0 ? '3:00.80' : null, i === 0 ? roll2 : { t: b, kind: 'beat', ref: `beat ${i} of the build roll` }, { ...sc, method: m, era: m === 'video' ? ERA.room : ERA.light,
@@ -683,64 +697,88 @@ export function buildTimeline(A) {
 
   // ============================================================================================== DROP (183.88 to 213.04): the mirror
   section('DR');
-  const mirror = (phase, want, extra = {}, more = {}) => ({ scene: 't2_mirror', p: { phase, clip: '@', ...extra }, method: 'video', era: ERA.mirror, look: LK.mirror, want, ...more });
+  // t2_mirror is the stage: the plane, the swing round it, the ripple, the vanish; each shot's generated frame (both sides, the
+  // plane at x 960, as the DR keyframes are composed) comes in as p.full; without it the scene draws its own stand-ins.
+  // PALM: where the palms meet on the glass = the centre of the phyllotaxis disk the ripple rings become
+  const PALM = [960, 470];
+  const mirror = (phase, want, extra = {}, more = {}) => ({ scene: 't2_mirror', p: { phase, full: { scene: 't2_plate', p: { clip: '@' } }, palm: PALM, ...extra }, method: 'video', era: ERA.mirror, look: { ...LK.mirror, tonemap: 0 }, want, ...more });
   S('3:03.88', wd('DR', 0, "couldn't"), mirror('approach', 'Drums out, held pad. A white void: Jade walks toward an infinitely large mirror that divides the frame; her side drawn in signal-print inks'));
   S('3:06.42', wd('DR', 1, 'message'), mirror('reflection', 'She reaches the glass and sees what looks like her reflection'));
   const impact = ev('impact', /DROP IMPACT/);
-  S('3:08.355', impact, mirror('swing', 'Impact frame; the camera swings around the plane: on the other side is teal-tips Jade, in her own world and palette, in exactly the same pose', { impactT: impact.t }, {
-    look: withLook(LK.mirror, flash([1, 1, 1], 0.9, 0.08)) }));
+  S('3:08.355', impact, mirror('swing', 'Impact frame; the camera swings around the plane: on the other side is teal-tips Jade, in her own world and palette, in exactly the same pose', { impactT: impact.t, swingDur: 0.28 }, {
+    look: withLook({ ...LK.mirror, tonemap: 0 }, (t, lt) => ({ flash: lt > 2 / 24 ? 0.5 * Math.exp(-(lt - 2 / 24) / 0.08) : 0, flashCol: [1, 1, 1] })) }));
   S('3:08.68', wd('DR', 2, 'but'), mirror('hands_rise', 'Both raise a hand; teal-tips Jade sings "but you were. You were counting too."', {}, { method: 'seedance_sung' }));
   S(null, wd('DR', 2, 'counting'), mirror('palms_meet', 'The palms meet on the glass'));
-  S(null, wd('DR', 2, 'too'), mirror('ripple', 'On "too" the mirror starts to ripple (rings spread from the palms)'));
+  const rippleShot = S(null, wd('DR', 2, 'too'), mirror('ripple', 'On "too" the mirror starts to ripple (rings spread from the palms)', { rippleT: wd('DR', 2, 'too').t }));
   const dropHits = HITS.filter((h) => h.kind === 'drop_counts');
-  const phyllo = (want, k) => ({ scene: 'phyllo', p: { center: [960, 470], radius: 360 }, method: 'reuse', era: ERA.light,
+  const phyllo = (want, k) => ({ scene: 'phyllo', p: { center: PALM, radius: 360 }, method: 'reuse', era: ERA.light,
     look: (t, lt) => ({ ...LK.light, zoom: 1 + 0.04 * Math.exp(-lt / 0.2), flash: 0.14 * Math.exp(-lt / 0.16), flashCol: [1, 0.8, 0.45] }), want });
   S('3:14.01', hit('drop_counts', 0), phyllo('The ripple rings become take one\'s phyllotaxis disk of 610 worlds; links n to n+13 light as 13 spiral arms'));
   S('3:14.62', hit('drop_counts', 1), phyllo('21 spiral arms'));
   S('3:15.27', hit('drop_counts', 2), phyllo('34 spiral arms'));
-  S('3:15.84', wd('DR', 4, 'link'), { ...over({ scene: 'phyllo', p: { center: [960, 470], radius: 360 } }, { scene: 't2_chain_links', p: { center: [960, 470], radius: 360 } }), method: 'procedural', era: ERA.light, look: LK.light,
+  // the ring links open on the line's words after "Link" (by, link, we, broke, chain, fear: centre outward), each into two hands
+  const linkW = LN('DR', 4).words;
+  const opens = ['by', 'link', 'we', 'broke', 'chain', 'fear'].map((w) => linkW.find((x, i) => i > 0 && norm(x.w) === w).t);
+  S('3:15.84', wd('DR', 4, 'link'), { ...over({ scene: 'phyllo', p: { center: PALM, radius: 360 } }, { scene: 't2_chain_links', p: { center: PALM, radius: 360, opens, t0: wd('DR', 4, 'link').t } }), method: 'procedural', era: ERA.light, look: LK.light,
     want: 'A chain runs through the disk; each link opens into two hands letting go, and the hands become edges of the graph' });
-  S('3:18.93', wd('DR', 5, 'alone'), { ...plate(), method: 'seedance_sung', era: ERA.mirror, look: LK.mirror, want: 'The mirror is gone: the two Jades stand side by side and look up, singing' });
+  // the mirror vanishes on "alone": the plane flares and is gone, the two halves give way to the side-by-side plate (p.both)
+  S('3:18.93', wd('DR', 5, 'alone'), { scene: 't2_mirror', p: { phase: 'gone', full: { scene: 't2_plate', p: { clip: rippleShot.id, at: 99 } }, both: { scene: 't2_plate', p: { clip: '@' } }, palm: PALM, vanishT: wd('DR', 5, 'alone').t },
+    method: 'seedance_sung', era: ERA.mirror, look: { ...LK.mirror, tonemap: 0 }, want: 'The mirror vanishes (t2_mirror): the two Jades stand side by side and look up, singing' });
   S('3:21.55', hit('drop_counts', 3), phyllo('55 spiral arms'));
   S('3:22.26', hit('drop_counts', 4), phyllo('89 spiral arms; the disk relaxes back into the galaxy'));
   const andSeen = wd('DR', 7, 'and');
-  S('3:22.89', andSeen, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { ring: true, t0: andSeen.t } }), method: 'still', era: ERA.signal, look: LK.riso, want: "On Echo the signal tower's ring lights up" });
-  S(null, barAfter(wd('DR', 7, 'too').t, 'bar line after "too" (inside the held note)'), { scene: 't2_echo_night', p: {}, method: 'procedural', era: ERA.signal, look: LK.light,
+  S('3:22.89', andSeen, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { mode: 'ring', t0: andSeen.t, fill: 0.9, ring: TOWER_RING } }), method: 'still', era: ERA.signal, look: LK.riso, want: "On Echo the signal tower's ring lights up" });
+  S(null, barAfter(wd('DR', 7, 'too').t, 'bar line after "too" (inside the held note)'), { scene: 't2_echo_night', p: { tRing: andSeen.t }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: "Echo's night side shows its cities linked like a constellation (Rare Earth continuity)" });
   S(null, wd('DR', 7, 'wherever'), { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Cut back to the two Jades at one console, receiving; teal-tips Jade sings "wherever you are"' });
   const drNums = (ns, hs, t1) => cue({ kind: 'num', label: ns.join(' '), t0: hs[0].t, t1, items: ns.map((n, i) => ({ n, t: hs[i].t, slot: i, giant: false })), slots: ns.length, size: 150, gap: 250, y: 960, draw: drawCount });
   drNums([13, 21, 34], dropHits.slice(0, 3), LN('DR', 4).t + 0.6);
   drNums([55, 89], dropHits.slice(3, 5), andSeen.t + 0.5);
+  // ink on the white void (cream would vanish): near-black, hot Klein blue as each word lands, no dark halo
   hero([{ text: 'YOU', t: wd('DR', 2, 'you', 1).t }, { text: 'WERE', t: wd('DR', 2, 'were', 1).t }, { text: 'COUNTING', t: wd('DR', 2, 'counting').t }, { text: 'TOO', t: wd('DR', 2, 'too').t }],
-    { rows: [2, 2], size: 170, y: 270, t1: dropHits[0].t });
+    { rows: [2, 2], size: 150, y: 200, t1: dropHits[0].t, color: [0.06, 0.07, 0.12], hot: [0.0, 0.18, 0.66], glow: 0, shade: 0 });
 
   // ============================================================================================== OUTRO (213.04 to 247.16)
   section('OU');
-  S('3:33.04', wd('OU', 0, 'six'), { scene: 't2_graph', p: { mode: 'finale' }, method: 'procedural', era: ERA.light, look: LK.light, want: 'The contact graph of 600-plus worlds over the Milky Way, slow orbit (the Rare Earth finale image)' });
-  S('3:38.87', wd('OU', 1, 'every'), { scene: 't2_graph', p: { mode: 'flicker', t0: LN('OU', 1).t }, method: 'procedural', era: ERA.light, look: LK.light,
+  S('3:33.04', wd('OU', 0, 'six'), { scene: 't2_graph_outro', p: { tSix: wd('OU', 0, 'six').t }, method: 'procedural', era: ERA.light, look: LK.light, want: 'The contact graph of 600-plus worlds over the Milky Way, slow orbit (the Rare Earth finale image)' });
+  S('3:38.87', wd('OU', 1, 'every'), { scene: 't2_graph_outro', p: { tSix: wd('OU', 0, 'six').t }, method: 'procedural', era: ERA.light, look: LK.light,
     want: 'Each world flickers red once, its own near-miss, then holds gold; the near-silences between phrases stay empty' });
   const drumsZ = ev('impact', /Outro/);
   const whisp = HITS.filter((h) => h.kind === 'outro_whisper');
   const higher = wd('OU', 3, 'higher');
-  const counterP = { years: NEAR_MISS_YEARS, t0: drumsZ.t, lastReset: LN('OU', 3).t, from: '1945-08-09', lastDate: '2025-05-10', today: '2026-10-26', rollT: higher.t };
-  const counter = (view, want, extra = {}) => ({ scene: 't2_counter', p: { ...counterP, view, ...extra }, method: 'procedural', era: ERA.newsprint, look: LK.newsprint, want });
-  S('3:44.33', drumsZ, counter('wide', '[ 0 ] DAYS SINCE LAST RESET, factory safety board style: counts up from 1945 and snaps to zero at each near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year small beside the number)'));
-  ['digits', 'board_year', 'digits', 'board_year'].forEach((v, i) => S(i === 0 ? '3:45.56' : null, hit('outro_whisper', i), counter(v, `Resets come faster through the whispered count (${['one', 'one', 'two', 'three'][i]}); ${v === 'digits' ? 'tight on the digits' : 'the board with the entry year'}${i === 3 ? '; the last reset is the 2025 entry' : ''}`)));
-  S('3:47.79', wd('OU', 3, 'the'), counter('climb', 'Past the last reset the counter climbs to the release-date value (534 days on 26 Oct 2026; recompute for release)'));
-  S('3:49.44', higher, counter('roll', 'Digits roll upward on "higher" and keep going'));
-  S('3:50.04', hit('outro_whisper', 4), { ...over(plate(), { scene: 't2_counter', p: { ...counterP, view: 'corner' } }), method: 'video', era: ERA.light, look: LK.night,
-    want: 'The counter keeps climbing (corner); the ISS crosses the night sky over the dish field' });
+  // t2_counter is one continuous board (it resets on the real dates of the list on a grid from the drums' return, climbs past the
+  // last reset on "higher"), so the whispered-count cuts are one shot; b0 and "higher" come from the timing
+  const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: '2026-10-26' };
+  S('3:44.33', drumsZ, { scene: 't2_counter', p: counterP, method: 'procedural', era: ERA.newsprint, look: COUNTER_LOOK,
+    want: '[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 2025 entry; then it climbs to the release-date value (534 on 26 Oct 2026; recompute for release), digits rolling up on "higher"' });
+  reserve(6);                                                                                                            // the board's other cuts keep their numbers
+  // the counter itself does not come back here (t2_counter has no corner view): the ISS crossing carries the shot
+  S('3:50.04', hit('outro_whisper', 4), { ...over(plate(), { scene: 't2_iss_pass', p: {} }), method: 'video', era: ERA.light, look: LK.night,
+    want: 'The ISS (t2_iss_pass, a steady bright point) crosses the night sky over the dish field' });
   S('3:53.17', wd('OU', 5, 'hold'), { ...plate(), method: 'video', era: ERA.room, look: LK.photo, want: 'Jade lowers her headphones and looks out over the dishes at dawn (drums cut at 3:54.31)' });
   S('3:58.5', ev('vocal_gap'), { ...plate(), method: 'video', era: ERA.spiral, look: LK.photo, want: "Extreme close-up of Jade's eye, returning to the opening frame" });
-  S('4:02.08', wd('OU', 6, 'hold'), { scene: 't2_plate', p: { clip: coEye.id, in: 0 }, method: 'video', era: ERA.spiral, look: LK.photo, want: "The opening frame itself (CO01 from its first frame), so the post loops cleanly" });
+  // the loop: the opening plate's first frame, the push running back to the opening framing (zoom 1) by the final hit; the end
+  // card then lays the title and credits over that same frame and gives it back clean at the end of the file (= frame 0)
   const finalHit = ev('impact', /FINAL HIT/);
-  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t }, method: 'procedural', era: ERA.light, look: withLook(LK.light, flash([1, 0.85, 0.55], 0.35, 0.08)),
-    want: 'Title on the final hit, then the end card with credits (incl. ESA/Hubble credit if used)' });
-  cue({ kind: 'hero', label: 'HOLD FIRE (title, final hit)', t0: finalHit.t, t1: A.duration + 0.5, size: 150, y: 590, out: 0.3, glow: 10, draw: drawHero,
-    font: { stretch: '125%', weight: 800, track: 0.14 }, rows: [{ words: [{ text: 'HOLD', t: finalHit.t }, { text: 'FIRE', t: finalHit.t }] }] });
+  const holdLast = wd('OU', 6, 'hold');
+  const z0 = 1.04, back = (1 - 1 / z0) / (finalHit.t - holdLast.t);
+  S('4:02.08', holdLast, { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: z0, push: -back }, method: 'video', era: ERA.spiral, look: LK.photo, want: "The opening frame itself (CO01's first frame, easing back to the opening framing), so the post loops cleanly" });
+  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t, endT: A.duration, under: { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: 1 } } }, method: 'procedural', era: ERA.light,
+    look: withLook(LK.photo, flash([1, 0.85, 0.55], 0.35, 0.08)),
+    want: 'HOLD FIRE lands on the final hit (the opening title\'s type and place), then the credits; the card clears to the opening frame by the end of the file (loop)',
+    notes: 'no real images are used so far (every picture is generated or drawn): add p.images [{credit: "ESA/Hubble"}] / NASA if one is' });
 
   // ---------------------------------------------------------------------------------------------- finish: contiguous cuts, type per shot
   shots.sort((a, b) => a.t0 - b.t0);
+  // plates are display-referred: shots whose picture is a plate get the toolkit's tonemap 0 unless their look sets one
+  const PLATE_SCENES = new Set(['t2_plate', 't2_still', 't2_split']);
+  const baseOf = (L) => (L.scene === 't2_first' ? L.p.chain[0] : L);
+  const plateBased = (s) => PLATE_SCENES.has(s.scene) || (s.scene === 'multi' && PLATE_SCENES.has(baseOf(s.p.layers[0]).scene));
+  for (const s of shots) {
+    if (!plateBased(s)) continue;
+    const L = s.look;
+    s.look = typeof L === 'function' ? (t, lt, ctx) => ({ tonemap: 0, ...L(t, lt, ctx) }) : { tonemap: 0, ...(L || {}) };
+  }
   for (let i = 0; i < shots.length; i++) {
     const s = shots[i];
     s.t1 = i + 1 < shots.length ? shots[i + 1].t0 : A.duration;

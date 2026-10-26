@@ -46,7 +46,7 @@ function build(e) {
           float R = 900. * (rAge - float(i) * 0.11);
           if (R <= 0.) continue;
           float w = 26. + 0.05 * R;
-          float g = exp(-pow((r - R) / w, 2.)) * rAmp * exp(-float(i) * 0.35);
+          float g = exp(-pow((r - R) / w, 2.)) * rAmp * exp(-float(i) * 0.35) * smoothstep(0., 60., R);
           ring += g;
           q += normalize(q - palm + 1e-3) * g * 14. * sin((r - R) / w * 3.1);
         }
@@ -60,12 +60,17 @@ function build(e) {
       if (both > 0.) col = mix(col, texture(tB, vec2(q.x / 1920., 1. - q.y / 1080.)).rgb, both);
       // the plane: a thin silver line with a cool sheen on the glass side; flares white as it goes
       float d = abs(q.x - X);
-      float ln = (1. - smoothstep(1.2, 2.4, d)) * lineA;
-      float sheen = exp(-max(0., q.x - X) / 90.) * step(X, q.x) * 0.06 * lineA;
-      col = mix(col, vec3(0.78, 0.84, 0.9), ln * 0.9);
-      col += vec3(0.6, 0.7, 0.8) * sheen;
-      col += vec3(1.) * lineFlare * exp(-d / 26.) * 1.4;
-      col += vec3(0.9, 0.95, 1.0) * ring * 0.22 + vec3(1.0, 0.85, 0.55) * ring * 0.08;
+      // a 3 px silver edge with a darker core line (it has to read on white), a cool sheen on the glass side
+      float ln = (1. - smoothstep(1.5, 3.0, d)) * lineA;
+      float core = (1. - smoothstep(0.4, 1.2, d)) * lineA;
+      float sheen = exp(-max(0., q.x - X) / 90.) * step(X, q.x) * 0.05 * lineA;
+      col = mix(col, vec3(0.62, 0.68, 0.75), ln * 0.85);
+      col = mix(col, vec3(0.38, 0.43, 0.5), core * 0.8);
+      col = mix(col, vec3(0.74, 0.8, 0.86), sheen);
+      col += vec3(0.6, 0.62, 0.65) * lineFlare * exp(-d / 26.);
+      // ripple rings on white: a cool refracted shadow line with a thin bright crest
+      col *= 1. - ring * 0.16;
+      col = mix(col, vec3(0.55, 0.66, 0.74), clamp(ring * 0.35, 0., 0.5));
       // impact frame: two-tone, ink on paper
       if (impact > 0.) { float l = dot(col, vec3(.299, .587, .114)); vec3 tw = l > 0.72 ? vec3(0.02, 0.02, 0.04) : vec3(0.98, 0.97, 0.94); col = mix(col, tw, impact); }
       fragColor = vec4(col, 1.);
@@ -93,7 +98,8 @@ function voidSide(c, x0, x1, paper, specks, seed) {
 function figure(c, o) {
   const { x, f, lift = 0, look = 0, hair, hairTip, jacket, band, dot, trousers, skin, ink } = o;
   const H = 640, foot = 905, top = foot - H;
-  c.save(); c.translate(x, 0); c.scale(f, 1);
+  // drawn at 0.8 with the feet at y 960: the head clears the upper-third type (hero rows end near y 360)
+  c.save(); c.translate(x, 960); c.scale(0.8 * f, 0.8); c.translate(0, -foot);
   c.lineJoin = 'round'; c.lineCap = 'round'; c.lineWidth = 4; c.strokeStyle = css(ink);
   // shadow
   c.fillStyle = css(ink, 0.12); c.beginPath(); c.ellipse(10, foot + 6, 120, 16, 0, 0, Math.PI * 2); c.fill();
@@ -170,8 +176,8 @@ function drawStandin(e, which, phase, u, x, both) {
   const A = which === 'left';
   voidSide(c, 0, 1920, A ? PAPER_A : PAPER_B, A ? [KLEIN, ORANGE, PALE] : [TEAL, SILVER, [0.55, 0.85, 0.85]], A ? 7 : 11);
   const ps = standinPose(phase, u);
-  if (A) figure(c, { x: x - ps.d - 40, f: 1, ...ps, ...JADE });
-  else figure(c, { x: x + ps.d + 40, f: -1, ...ps, ...TEALJ });
+  if (A) figure(c, { x: x - ps.d - 60, f: 1, ...ps, ...JADE });
+  else figure(c, { x: x + ps.d + 60, f: -1, ...ps, ...TEALJ });
   e.blit2d('replace', 1);
 }
 

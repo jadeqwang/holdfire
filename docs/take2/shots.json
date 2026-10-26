@@ -13,7 +13,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_seed_spiral"
   ],
   "clip": [
@@ -147,7 +147,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_spiral_trace"
   ],
   "clip": [
@@ -352,10 +352,10 @@
   "timing_section": "Intro",
   "lyric": "five",
   "voice": "A",
-  "picture": "Earth's night side from the ISS, cities joined by roads of light (NASA imagery is public domain)",
+  "picture": "Earth's night side from the ISS, cities joined by roads of light (NASA imagery is public domain; t2_earth_night 'iss' until a plate is picked)",
   "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
   "method": "video",
-  "scene": "t2_plate",
+  "scene": "t2_first",
   "clip": [
    "CO14"
   ],
@@ -381,7 +381,7 @@
   "picture": "The contact graph over the Milky Way, eight links lighting at once",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "procedural",
-  "scene": "t2_graph_grow",
+  "scene": "t2_graph_flash",
   "clip": null,
   "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
@@ -405,7 +405,7 @@
   "picture": "The graph's light gathers into one point; pull back: it is the catchlight in Jade's eye; she is at her console in headphones, waterfall spectrograms behind",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
-  "scene": "t2_plate",
+  "scene": "t2_first",
   "clip": [
    "CO16"
   ],
@@ -514,7 +514,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -592,7 +592,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -726,7 +726,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -834,7 +834,7 @@
   "method": "still",
   "scene": "multi",
   "layers": [
-   "t2_still",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -916,7 +916,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -946,7 +946,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -976,7 +976,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -1006,7 +1006,7 @@
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
+   "t2_first",
    "t2_blueprint"
   ],
   "clip": [
@@ -1034,7 +1034,11 @@
   "picture": "Jade stops at night and looks up at a bright point crossing the sky",
   "era_style": "Verse 1, deep time to spaceflight: painted plates with white blueprint linework drawn over them; sepia and cyanotype blue; schematics draw on with the snare",
   "method": "video",
-  "scene": "t2_plate",
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_iss_pass"
+  ],
   "clip": [
    "V122"
   ],
@@ -1114,7 +1118,7 @@
   "method": "still",
   "scene": "multi",
   "layers": [
-   "t2_still",
+   "t2_first",
    "t2_tower_bursts"
   ],
   "clip": [
@@ -1142,7 +1146,7 @@
   "picture": "Ride the pulse across the galaxy toward a small blue point: Echo, 217 light-years away (fictional; never presented as a real exoplanet)",
   "era_style": "Space and signals: Rare Earth \"signal print\" (risograph inks, halftone, slight misregistration); Klein blue, beacon orange, pale blue; Echo in fluo pink and mint",
   "method": "procedural",
-  "scene": "t2_pulse_ride",
+  "scene": "t2_pulse",
   "clip": null,
   "type": "217 LY",
   "lipsync_window": null,
@@ -1349,19 +1353,17 @@
  {
   "id": "C104",
   "t0": 62.154,
-  "t1": 62.766,
+  "t1": 64.589,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Chorus 1",
-  "lyric": "Silent and",
+  "lyric": "Silent and patient but I swear",
   "voice": "both",
-  "picture": "Close on one 1999 CRT in a dark bedroom running the SETI@home screensaver (power-spectrum graph)",
+  "picture": "Close on one 1999 CRT in a dark bedroom running the SETI@home screensaver (power-spectrum graph); on the beats at 1:02.77 and 1:03.41 the camera smashes back, 1 to 4 to 16 screens; on \"swear\" a matrix of hundreds of CRTs, each in its own dark room (over a million people ran SETI@home)",
   "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
+  "method": "procedural",
   "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -1370,84 +1372,6 @@
    "t": 62.154
   },
   "plan": "1:02.15",
-  "notes": null
- },
- {
-  "id": "C105",
-  "t0": 62.766,
-  "t1": 63.41,
-  "section": "Chorus 1",
-  "edit_section": "C1",
-  "timing_section": "Chorus 1",
-  "lyric": "patient",
-  "voice": "both",
-  "picture": "Pull back: the screens multiply, 1 to 4",
-  "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
-  "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "beat",
-   "ref": "1st beat after \"Silent\"",
-   "t": 62.766
-  },
-  "plan": "1:02.77",
-  "notes": null
- },
- {
-  "id": "C106",
-  "t0": 63.41,
-  "t1": 63.99,
-  "section": "Chorus 1",
-  "edit_section": "C1",
-  "timing_section": "Chorus 1",
-  "lyric": "but I",
-  "voice": "both",
-  "picture": "Pull back: 4 to 16 screens",
-  "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
-  "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "beat",
-   "ref": "2nd beat after \"Silent\"",
-   "t": 63.41
-  },
-  "plan": "1:03.41",
-  "notes": null
- },
- {
-  "id": "C107",
-  "t0": 63.99,
-  "t1": 64.589,
-  "section": "Chorus 1",
-  "edit_section": "C1",
-  "timing_section": "Chorus 1",
-  "lyric": "swear",
-  "voice": "both",
-  "picture": "A matrix of hundreds of CRTs fills the frame, each glowing in its own dark room (over a million people ran SETI@home)",
-  "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
-  "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "word",
-   "ref": "Chorus 1[3] \"swear\"",
-   "t": 63.99
-  },
-  "plan": "1:03.99",
   "notes": null
  },
  {
@@ -1858,7 +1782,7 @@
   "picture": "The characters for sulfur, 硫黃, brushed large",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "procedural",
-  "scene": "t2_ink_characters",
+  "scene": "t2_brush_chars",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -1882,7 +1806,7 @@
   "picture": "The characters for saltpeter, 硝石, brushed large",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "procedural",
-  "scene": "t2_ink_characters",
+  "scene": "t2_brush_chars",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -1906,7 +1830,7 @@
   "picture": "Thunder: the mixture flashes and the ink splatters",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "procedural",
-  "scene": "t2_ink_characters",
+  "scene": "t2_brush_chars",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -1954,11 +1878,11 @@
   "picture": "A fire lance (first recorded in battle at the siege of De'an, 1132); ink wash with harder, mechanical lines; the alchemists' smoke drifts across",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "still",
-  "scene": "t2_still",
+  "scene": "t2_ink_weapons",
   "clip": [
-   "V206"
+   "V211"
   ],
-  "type": "FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE / 1132 · 1288 · 1453 · 1916 · 1945 (small, brushed, accumulating)",
+  "type": "FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -1966,7 +1890,7 @@
    "t": 89.995
   },
   "plan": "1:30.00",
-  "notes": null
+  "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V207",
@@ -1980,11 +1904,11 @@
   "picture": "A bronze hand cannon (oldest surviving: no later than 1288); ink wash with harder, mechanical lines; the alchemists' smoke drifts across",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "still",
-  "scene": "t2_still",
+  "scene": "t2_ink_weapons",
   "clip": [
-   "V207"
+   "V211"
   ],
-  "type": "FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE / 1132 · 1288 · 1453 · 1916 · 1945 (small, brushed, accumulating)",
+  "type": "FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE",
   "lipsync_window": null,
   "anchor": {
    "kind": "beat",
@@ -1992,7 +1916,7 @@
    "t": 90.285
   },
   "plan": "1:30.28",
-  "notes": null
+  "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V208",
@@ -2006,11 +1930,11 @@
   "picture": "Ottoman bombards breaking the walls of Constantinople (1453); ink wash with harder, mechanical lines; the alchemists' smoke drifts across",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "still",
-  "scene": "t2_still",
+  "scene": "t2_ink_weapons",
   "clip": [
-   "V208"
+   "V211"
   ],
-  "type": "1132 · 1288 · 1453 · 1916 · 1945 (small, brushed, accumulating)",
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "beat",
@@ -2018,7 +1942,7 @@
    "t": 90.922
   },
   "plan": "1:30.92",
-  "notes": null
+  "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V209",
@@ -2032,11 +1956,11 @@
   "picture": "The shell-flattened ground of the Somme (1916); ink wash with harder, mechanical lines; the alchemists' smoke drifts across",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "still",
-  "scene": "t2_still",
+  "scene": "t2_ink_weapons",
   "clip": [
-   "V209"
+   "V211"
   ],
-  "type": "1132 · 1288 · 1453 · 1916 · 1945 (small, brushed, accumulating)",
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -2044,7 +1968,7 @@
    "t": 91.612
   },
   "plan": "1:31.61",
-  "notes": null
+  "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V210",
@@ -2058,9 +1982,11 @@
   "picture": "A white flash, the Trinity test (16 July 1945), burns through the paper into Petrov's oil painting; no mushroom cloud",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
   "method": "procedural",
-  "scene": "t2_burn_through",
-  "clip": null,
-  "type": "1132 · 1288 · 1453 · 1916 · 1945 (small, brushed, accumulating)",
+  "scene": "t2_ink_weapons",
+  "clip": [
+   "V211"
+  ],
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -2108,8 +2034,14 @@
   "picture": "The big screen: one missile track rises from the United States, then four more on \"five\"",
   "era_style": "Petrov: Russian realist oil painting, one figure, a dark room, light from the screen; umber and CRT red",
   "method": "procedural",
-  "scene": "t2_petrov_screen",
-  "clip": null,
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_petrov_screen"
+  ],
+  "clip": [
+   "V211"
+  ],
   "type": "26 SEP 1983 SERPUKHOV-15",
   "lipsync_window": null,
   "anchor": {
@@ -2132,8 +2064,14 @@
   "picture": "The wall display lights up in big red letters, СТАРТ (drawn by the scene); reliability rated highest",
   "era_style": "Petrov: Russian realist oil painting, one figure, a dark room, light from the screen; umber and CRT red",
   "method": "procedural",
-  "scene": "t2_petrov_screen",
-  "clip": null,
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_petrov_screen"
+  ],
+  "clip": [
+   "V211"
+  ],
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -2182,8 +2120,14 @@
   "picture": "Over the five tracks, a ghost of a real first strike (hundreds of tracks) fades and leaves five",
   "era_style": "Petrov: Russian realist oil painting, one figure, a dark room, light from the screen; umber and CRT red",
   "method": "procedural",
-  "scene": "t2_petrov_screen",
-  "clip": null,
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_petrov_screen"
+  ],
+  "clip": [
+   "V211"
+  ],
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -2232,8 +2176,14 @@
   "picture": "The printed protocol beside him is struck through line by line",
   "era_style": "Petrov: Russian realist oil painting, one figure, a dark room, light from the screen; umber and CRT red",
   "method": "procedural",
-  "scene": "t2_protocol_strike",
-  "clip": null,
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_petrov_screen"
+  ],
+  "clip": [
+   "V211"
+  ],
   "type": "ignored all previous instructions",
   "lipsync_window": null,
   "anchor": {
@@ -2273,13 +2223,13 @@
  {
   "id": "P201",
   "t0": 102.986,
-  "t1": 106.139,
+  "t1": 108.005,
   "section": "Pre-chorus 2",
   "edit_section": "P2",
   "timing_section": "Verse 2",
-  "lyric": "Secret list of every near-miss and disaster",
+  "lyric": "Secret list of every near-miss and disaster running total no one ever knew",
   "voice": "B",
-  "picture": "The near-miss list scrolls on teletype paper (~5 lines/s, fact-checked list); years big, place and description small",
+  "picture": "The near-miss list scrolls on teletype paper (~5 lines/s, the 27-entry fact-checked list); years big, place and description small; the tally beside it climbs with the entries, then its wheels keep spinning, never settling (no fixed total)",
   "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
   "method": "procedural",
   "scene": "t2_nearmiss",
@@ -2292,30 +2242,6 @@
    "t": 102.986
   },
   "plan": "1:42.99",
-  "notes": "take one nearmiss re-skinned to newsprint"
- },
- {
-  "id": "P202",
-  "t0": 106.139,
-  "t1": 108.005,
-  "section": "Pre-chorus 2",
-  "edit_section": "P2",
-  "timing_section": "Pre-Chorus 2",
-  "lyric": "running total no one ever knew",
-  "voice": "B",
-  "picture": "A counter beside the paper climbs as the entries pass; its digits keep rolling, never settling (no fixed total)",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_nearmiss",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "word",
-   "ref": "Pre-Chorus 2[1] \"running\"",
-   "t": 106.139
-  },
-  "plan": "1:46.14",
   "notes": null
  },
  {
@@ -2327,10 +2253,10 @@
   "timing_section": "Pre-Chorus 2",
   "lyric": "coin flips all heads a hundred in a row",
   "voice": "B",
-  "picture": "coins.js: 100 gold coins land heads, the first stamped with the list's years, filling a 10 x 10 grid; the full 2^100 number types across the bottom",
+  "picture": "100 gold coins land heads, the first 27 stamped with the list's years, filling a 10 x 10 grid; the full 2^100 number types across the bottom",
   "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "reuse",
-  "scene": "coins",
+  "method": "procedural",
+  "scene": "t2_coins",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -2340,21 +2266,21 @@
    "t": 108.005
   },
   "plan": "1:48.00",
-  "notes": "plan: first 27 coins carry the fact-checked list's years (coins.js uses take one's 39: data update needed)"
+  "notes": null
  },
  {
   "id": "P204",
   "t0": 110.609,
-  "t1": 111.249,
+  "t1": 113.178,
   "section": "Pre-chorus 2",
   "edit_section": "P2",
   "timing_section": "Pre-Chorus 2",
-  "lyric": "the only road",
+  "lyric": "the only road from here to you",
   "voice": "B",
-  "picture": "The camera pulls up out of the coin grid: the hundred coins are the forks of a branching tree, one fork per flip",
+  "picture": "The camera pulls up out of the coin grid: the hundred coins are the forks of a branching tree; on each beat (1:51.25, 1:51.88, 1:52.52) the lit depth doubles, every tails branch goes dark and ends in a tiny red SIGNAL LOST, and a single gold path threads all hundred forks; on \"you\" it leaves the top of the tree as one link toward a far star",
   "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
   "method": "procedural",
-  "scene": "t2_coin_tree",
+  "scene": "t2_cointree",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -2364,78 +2290,6 @@
    "t": 110.609
   },
   "plan": "1:50.61",
-  "notes": null
- },
- {
-  "id": "P205",
-  "t0": 111.249,
-  "t1": 111.883,
-  "section": "Pre-chorus 2",
-  "edit_section": "P2",
-  "timing_section": "Pre-Chorus 2",
-  "lyric": "from here",
-  "voice": "B",
-  "picture": "Smash zoom out, depth doubles: every tails branch goes dark and ends in a tiny red SIGNAL LOST",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_coin_tree",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "beat",
-   "ref": "beat nearest 1:51.25",
-   "t": 111.249
-  },
-  "plan": "1:51.25",
-  "notes": null
- },
- {
-  "id": "P206",
-  "t0": 111.883,
-  "t1": 112.4,
-  "section": "Pre-chorus 2",
-  "edit_section": "P2",
-  "timing_section": "Pre-Chorus 2",
-  "lyric": "to",
-  "voice": "B",
-  "picture": "Depth doubles again: a single gold path threads through all hundred forks",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_coin_tree",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "beat",
-   "ref": "beat nearest 1:51.88",
-   "t": 111.883
-  },
-  "plan": "1:51.88",
-  "notes": null
- },
- {
-  "id": "P207",
-  "t0": 112.4,
-  "t1": 113.178,
-  "section": "Pre-chorus 2",
-  "edit_section": "P2",
-  "timing_section": "Pre-Chorus 2",
-  "lyric": "you",
-  "voice": "B",
-  "picture": "On \"you\" the gold path leaves the top of the tree as one link toward a far star (depth doubles once more on the 1:52.52 beat); chorus lands at 1:53.15",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_coin_tree",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "word",
-   "ref": "Pre-Chorus 2[3] \"you\"",
-   "t": 112.4
-  },
-  "plan": "1:52.40",
   "notes": null
  },
  {
@@ -2534,103 +2388,23 @@
  {
   "id": "C204",
   "t0": 123.32,
-  "t1": 123.933,
+  "t1": 125.824,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
-  "lyric": "Silent and",
+  "lyric": "Silent and patient but I swear",
   "voice": "both",
-  "picture": "The single CRT returns (SETI@home screensaver)",
+  "picture": "The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades' control rooms (procedural stand-ins until the room plates exist)",
   "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
+  "method": "procedural",
   "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[3] \"Silent\"",
    "t": 123.32
-  },
-  "plan": null,
-  "notes": null
- },
- {
-  "id": "C205",
-  "t0": 123.933,
-  "t1": 124.567,
-  "section": "Chorus 2",
-  "edit_section": "C2",
-  "timing_section": "Chorus 2",
-  "lyric": "patient",
-  "voice": "both",
-  "picture": "Screens multiply, 1 to 4",
-  "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
-  "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "beat",
-   "ref": "1st beat after \"Silent\"",
-   "t": 123.933
-  },
-  "plan": null,
-  "notes": null
- },
- {
-  "id": "C206",
-  "t0": 124.567,
-  "t1": 125.18,
-  "section": "Chorus 2",
-  "edit_section": "C2",
-  "timing_section": "Chorus 2",
-  "lyric": "but I",
-  "voice": "both",
-  "picture": "4 to 16; two of the screens now show the two Jades' control rooms",
-  "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
-  "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "beat",
-   "ref": "2nd beat after \"Silent\"",
-   "t": 124.567
-  },
-  "plan": null,
-  "notes": null
- },
- {
-  "id": "C207",
-  "t0": 125.18,
-  "t1": 125.824,
-  "section": "Chorus 2",
-  "edit_section": "C2",
-  "timing_section": "Chorus 2",
-  "lyric": "swear",
-  "voice": "both",
-  "picture": "The matrix of hundreds; two screens show the two Jades' control rooms",
-  "era_style": "1999 bedroom CRTs running SETI@home (no era row): dark rooms, screen glow",
-  "method": "still",
-  "scene": "t2_crt_matrix",
-  "clip": [
-   "C104"
-  ],
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "word",
-   "ref": "Chorus 2[3] \"swear\"",
-   "t": 125.18
   },
   "plan": null,
   "notes": null
@@ -2816,13 +2590,11 @@
   "timing_section": "Post-Chorus 2",
   "lyric": "Three Five",
   "voice": "both",
-  "picture": "Earth's lights at increasing scale: A city at night",
+  "picture": "Earth's lights at increasing scale: A city at night (t2_earth_night 'scale')",
   "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
-  "method": "still",
-  "scene": "t2_still",
-  "clip": [
-   "X204"
-  ],
+  "method": "procedural",
+  "scene": "t2_earth_night",
+  "clip": null,
   "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
@@ -2842,13 +2614,11 @@
   "timing_section": "Post-Chorus 2",
   "lyric": null,
   "voice": "both",
-  "picture": "Earth's lights at increasing scale: A coastline of city lights",
+  "picture": "Earth's lights at increasing scale: A coastline of city lights (t2_earth_night 'scale')",
   "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
-  "method": "still",
-  "scene": "t2_still",
-  "clip": [
-   "X205"
-  ],
+  "method": "procedural",
+  "scene": "t2_earth_night",
+  "clip": null,
   "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
@@ -3030,7 +2800,7 @@
  {
   "id": "X213",
   "t0": 142.915,
-  "t1": 143.581,
+  "t1": 143.423,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -3055,14 +2825,14 @@
  },
  {
   "id": "BR01",
-  "t0": 143.581,
+  "t0": 143.423,
   "t1": 146.111,
   "section": "Bridge",
   "edit_section": "BR",
-  "timing_section": "Bridge",
+  "timing_section": "Post-Chorus 2",
   "lyric": "They say the forest's dark",
   "voice": "both",
-  "picture": "Teal-tips Jade presses the clock on the drums-out; premoved opening (1.e4 ...), hands a blur; the room lights go down until only the board is lit",
+  "picture": "Teal-tips Jade presses the clock on the fill's last sixteenth; premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -3070,9 +2840,9 @@
   "type": null,
   "lipsync_window": null,
   "anchor": {
-   "kind": "section",
-   "ref": "Bridge start",
-   "t": 143.581
+   "kind": "sixteenth",
+   "ref": "last 16th before the drums-out beat (Black presses the clock; 1.e4 on the beat)",
+   "t": 143.423
   },
   "plan": "2:23.58",
   "notes": null
@@ -3302,7 +3072,7 @@
   "timing_section": "Bridge",
   "lyric": "hand that can",
   "voice": "B",
-  "picture": "21...Qg4+ on \"hand\": the black queen gives check, White has one legal move: perpetual. Fischer-Tal · Leipzig 1960 · ½-½ on the scoresheet",
+  "picture": "21...Qg4+ on \"hand\": the black queen gives check, White has one legal move: perpetual (Fischer-Tal · Leipzig 1960 · ½-½ on the scoresheet)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -3326,13 +3096,11 @@
   "timing_section": "Bridge",
   "lyric": "let",
   "voice": "B",
-  "picture": "On \"let go\" both Jades take their hands off the pieces; the clocks stop; neither one wins",
+  "picture": "On \"let go\" the clocks stop and neither one wins; the camera dives into the black queen until her silhouette is a flat black square",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
-  "method": "video",
-  "scene": "t2_plate",
-  "clip": [
-   "BR12"
-  ],
+  "method": "procedural",
+  "scene": "t2_chess",
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -3341,7 +3109,7 @@
    "t": 158.101
   },
   "plan": "2:38.10",
-  "notes": null
+  "notes": "was the hands-off plate; the dive needs the window between \"let\" and \"go\" (the poster cut on \"go\" is fixed)"
  },
  {
   "id": "BR13",
@@ -3352,7 +3120,7 @@
   "timing_section": "Bridge",
   "lyric": "go",
   "voice": "B",
-  "picture": "The camera dives into the black queen: its silhouette flattens into a black square and a red wedge; the squares slide into a Suprematist composition that assembles into a Soviet poster",
+  "picture": "The black square tilts, a red wedge drives in, the board's squares slide into a Suprematist composition that assembles into a Soviet poster (ends on t2_arkhipov's opening frame)",
   "era_style": "Chess into Arkhipov: Suprematist shapes (black square, red wedge) assembling into a Soviet poster, printed as newsprint halftone; red, black, cream",
   "method": "procedural",
   "scene": "t2_poster_morph",
@@ -3365,7 +3133,7 @@
    "t": 158.405
   },
   "plan": "2:37.8",
-  "notes": "plan starts the dive at 2:37.8, before the \"let go\" hands (2:38.10); the hands keep their word anchor and the dive starts on \"go\""
+  "notes": "plan starts the dive at 2:37.8; here the dive runs \"let\" to \"go\" and the morph \"go\" to \"sixty-two\""
  },
  {
   "id": "BR14",
@@ -3378,15 +3146,9 @@
   "voice": "A",
   "picture": "Pull back out of the poster into the Arkhipov scene (newsprint-halftone poster): B-59, batteries nearly dead, trapped under US destroyers; practice depth charges fall as black dots",
   "era_style": "Chess into Arkhipov: Suprematist shapes (black square, red wedge) assembling into a Soviet poster, printed as newsprint halftone; red, black, cream",
-  "method": "video",
-  "scene": "multi",
-  "layers": [
-   "t2_plate",
-   "t2_depth_charges"
-  ],
-  "clip": [
-   "BR14"
-  ],
+  "method": "procedural",
+  "scene": "t2_arkhipov",
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -3408,11 +3170,9 @@
   "voice": "B",
   "picture": "Two officers in red silhouette, faces in shadow and unnamed, one pointing toward the torpedo room (anonymous; no one else shown as a hawk)",
   "era_style": "Chess into Arkhipov: Suprematist shapes (black square, red wedge) assembling into a Soviet poster, printed as newsprint halftone; red, black, cream",
-  "method": "still",
-  "scene": "t2_still",
-  "clip": [
-   "BR15"
-  ],
+  "method": "procedural",
+  "scene": "t2_arkhipov",
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -3434,11 +3194,9 @@
   "voice": "B",
   "picture": "Arkhipov's open hand comes up between them, full frame (anonymous period figure)",
   "era_style": "Chess into Arkhipov: Suprematist shapes (black square, red wedge) assembling into a Soviet poster, printed as newsprint halftone; red, black, cream",
-  "method": "still",
-  "scene": "t2_still",
-  "clip": [
-   "BR16"
-  ],
+  "method": "procedural",
+  "scene": "t2_arkhipov",
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -3458,14 +3216,12 @@
   "timing_section": "Bridge",
   "lyric": "no",
   "voice": "B",
-  "picture": "NO fills the frame; behind it B-59 surfaces among the destroyers at night in their searchlights, and the poster's red drains to grey",
+  "picture": "NO in poster lettering fills the frame (drawn by t2_arkhipov)",
   "era_style": "Chess into Arkhipov: Suprematist shapes (black square, red wedge) assembling into a Soviet poster, printed as newsprint halftone; red, black, cream",
-  "method": "video",
-  "scene": "t2_plate",
-  "clip": [
-   "BR17"
-  ],
-  "type": "NO (poster lettering)",
+  "method": "procedural",
+  "scene": "t2_arkhipov",
+  "clip": null,
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3473,7 +3229,7 @@
    "t": 163.344
   },
   "plan": "2:43.34",
-  "notes": "only 0.32 s before the build: the surfacing plays behind NO"
+  "notes": "B-59 surfacing (t2_arkhipov mode surface) has no room before the build at 2:43.67"
  },
  {
   "id": "BU01",
@@ -3486,10 +3242,10 @@
   "voice": "both",
   "picture": "The Rare Earth war scene: Earth's night side over the pole, missile tracks rising from both sides' silo fields and from submarines",
   "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
-  "method": "reuse",
+  "method": "procedural",
   "scene": "t2_war",
   "clip": null,
-  "type": "NO (poster lettering)",
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3511,7 +3267,7 @@
   "picture": "Pull out to the contact graph: elsewhere in the galaxy, worlds fire on each other and go dark one by one",
   "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
   "method": "procedural",
-  "scene": "t2_graph",
+  "scene": "t2_war",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -3534,7 +3290,7 @@
   "voice": "B",
   "picture": "Back on Earth the warheads land and the lights go out",
   "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
-  "method": "reuse",
+  "method": "procedural",
   "scene": "t2_war",
   "clip": null,
   "type": "NUCLEAR DETONATIONS · SIGNAL LOST",
@@ -3584,7 +3340,7 @@
   "voice": "B",
   "picture": "VHS rewind: the warheads lift off the cities, the tracks fall back into silos and submarines, the lights come back on",
   "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
-  "method": "reuse",
+  "method": "procedural",
   "scene": "t2_war",
   "clip": null,
   "type": null,
@@ -3608,7 +3364,7 @@
   "voice": "B",
   "picture": "Earth whole again",
   "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
-  "method": "reuse",
+  "method": "procedural",
   "scene": "t2_war",
   "clip": null,
   "type": null,
@@ -3633,7 +3389,7 @@
   "picture": "Earth's node on the contact graph lights again",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "procedural",
-  "scene": "t2_graph",
+  "scene": "t2_war",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -3864,7 +3620,7 @@
   "picture": "The contact graph, every node lit (cut rate doubles on the roll: one per beat)",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "procedural",
-  "scene": "t2_graph",
+  "scene": "t2_graph_outro",
   "clip": null,
   "type": "SHOW YOUR LIGHT",
   "lipsync_window": null,
@@ -4175,11 +3931,12 @@
   "timing_section": "Drop",
   "lyric": "alone we never would've made it here Fifty-five",
   "voice": "both",
-  "picture": "The mirror is gone: the two Jades stand side by side and look up, singing",
+  "picture": "The mirror vanishes (t2_mirror): the two Jades stand side by side and look up, singing",
   "era_style": "Mirror: white void; each Jade keeps her own palette (signal-print inks on one side, cool teal and silver on the other)",
   "method": "seedance_sung",
-  "scene": "t2_plate",
+  "scene": "t2_mirror",
   "clip": [
+   "DR06",
    "DR11"
   ],
   "type": null,
@@ -4257,7 +4014,7 @@
   "method": "still",
   "scene": "multi",
   "layers": [
-   "t2_still",
+   "t2_first",
    "t2_tower_bursts"
   ],
   "clip": [
@@ -4338,7 +4095,7 @@
   "picture": "The contact graph of 600-plus worlds over the Milky Way, slow orbit (the Rare Earth finale image)",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "procedural",
-  "scene": "t2_graph",
+  "scene": "t2_graph_outro",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -4362,7 +4119,7 @@
   "picture": "Each world flickers red once, its own near-miss, then holds gold; the near-silences between phrases stay empty",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "procedural",
-  "scene": "t2_graph",
+  "scene": "t2_graph_outro",
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -4377,13 +4134,13 @@
  {
   "id": "OU03",
   "t0": 224.33,
-  "t1": 225.56,
+  "t1": 230.042,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
-  "lyric": null,
-  "voice": "A",
-  "picture": "[ 0 ] DAYS SINCE LAST RESET, factory safety board style: counts up from 1945 and snaps to zero at each near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year small beside the number)",
+  "lyric": "One one two three The count goes higher",
+  "voice": "both",
+  "picture": "[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 2025 entry; then it climbs to the release-date value (534 on 26 Oct 2026; recompute for release), digits rolling up on \"higher\"",
   "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
   "method": "procedural",
   "scene": "t2_counter",
@@ -4399,150 +4156,6 @@
   "notes": null
  },
  {
-  "id": "OU04",
-  "t0": 225.56,
-  "t1": 226.2,
-  "section": "Outro",
-  "edit_section": "OU",
-  "timing_section": "Outro",
-  "lyric": "One",
-  "voice": "A",
-  "picture": "Resets come faster through the whispered count (one); tight on the digits",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_counter",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "hit",
-   "ref": "hit outro_whisper[0] \"One\"",
-   "t": 225.56
-  },
-  "plan": "3:45.56",
-  "notes": null
- },
- {
-  "id": "OU05",
-  "t0": 226.2,
-  "t1": 226.79,
-  "section": "Outro",
-  "edit_section": "OU",
-  "timing_section": "Outro",
-  "lyric": "one",
-  "voice": "A",
-  "picture": "Resets come faster through the whispered count (one); the board with the entry year",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_counter",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "hit",
-   "ref": "hit outro_whisper[1] \"one\"",
-   "t": 226.2
-  },
-  "plan": null,
-  "notes": null
- },
- {
-  "id": "OU06",
-  "t0": 226.79,
-  "t1": 227.48,
-  "section": "Outro",
-  "edit_section": "OU",
-  "timing_section": "Outro",
-  "lyric": "two",
-  "voice": "A",
-  "picture": "Resets come faster through the whispered count (two); tight on the digits",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_counter",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "hit",
-   "ref": "hit outro_whisper[2] \"two\"",
-   "t": 226.79
-  },
-  "plan": null,
-  "notes": null
- },
- {
-  "id": "OU07",
-  "t0": 227.48,
-  "t1": 227.792,
-  "section": "Outro",
-  "edit_section": "OU",
-  "timing_section": "Outro",
-  "lyric": "three",
-  "voice": "A",
-  "picture": "Resets come faster through the whispered count (three); the board with the entry year; the last reset is the 2025 entry",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_counter",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "hit",
-   "ref": "hit outro_whisper[3] \"three\"",
-   "t": 227.48
-  },
-  "plan": null,
-  "notes": null
- },
- {
-  "id": "OU08",
-  "t0": 227.792,
-  "t1": 229.439,
-  "section": "Outro",
-  "edit_section": "OU",
-  "timing_section": "Outro",
-  "lyric": "The count goes",
-  "voice": "B",
-  "picture": "Past the last reset the counter climbs to the release-date value (534 days on 26 Oct 2026; recompute for release)",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_counter",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "word",
-   "ref": "Outro[3] \"The\"",
-   "t": 227.792
-  },
-  "plan": "3:47.79",
-  "notes": null
- },
- {
-  "id": "OU09",
-  "t0": 229.439,
-  "t1": 230.042,
-  "section": "Outro",
-  "edit_section": "OU",
-  "timing_section": "Outro",
-  "lyric": "higher",
-  "voice": "B",
-  "picture": "Digits roll upward on \"higher\" and keep going",
-  "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
-  "method": "procedural",
-  "scene": "t2_counter",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "word",
-   "ref": "Outro[3] \"higher\"",
-   "t": 229.439
-  },
-  "plan": "3:49.44",
-  "notes": null
- },
- {
   "id": "OU10",
   "t0": 230.042,
   "t1": 233.17,
@@ -4551,13 +4164,13 @@
   "timing_section": "Outro",
   "lyric": "One one two three",
   "voice": "A",
-  "picture": "The counter keeps climbing (corner); the ISS crosses the night sky over the dish field",
+  "picture": "The ISS (t2_iss_pass, a steady bright point) crosses the night sky over the dish field",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "video",
   "scene": "multi",
   "layers": [
-   "t2_plate",
-   "t2_counter"
+   "t2_first",
+   "t2_iss_pass"
   ],
   "clip": [
    "OU10"
@@ -4633,7 +4246,7 @@
   "timing_section": "Outro",
   "lyric": "Hold your fire",
   "voice": "A",
-  "picture": "The opening frame itself (CO01 from its first frame), so the post loops cleanly",
+  "picture": "The opening frame itself (CO01's first frame, easing back to the opening framing), so the post loops cleanly",
   "era_style": "Cold open spirals: macro nature photography, true colour; natural colour, gold numerals on black; spiral centre locked at frame centre",
   "method": "video",
   "scene": "t2_plate",
@@ -4659,12 +4272,14 @@
   "timing_section": "Outro",
   "lyric": null,
   "voice": null,
-  "picture": "Title on the final hit, then the end card with credits (incl. ESA/Hubble credit if used)",
+  "picture": "HOLD FIRE lands on the final hit (the opening title's type and place), then the credits; the card clears to the opening frame by the end of the file (loop)",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "procedural",
   "scene": "t2_endcard",
-  "clip": null,
-  "type": "HOLD FIRE (title, final hit)",
+  "clip": [
+   "CO01"
+  ],
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
@@ -4672,6 +4287,6 @@
    "t": 244.05
   },
   "plan": "4:04.05",
-  "notes": null
+  "notes": "no real images are used so far (every picture is generated or drawn): add p.images [{credit: \"ESA/Hubble\"}] / NASA if one is"
  }
 ]

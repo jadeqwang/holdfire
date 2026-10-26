@@ -5,7 +5,7 @@
 // with a node at each end. The edge-on links between them fall away once their neighbours have opened.
 // p: {center [960, 470], radius (360): the disk, as phyllo's p; angle (-0.32 rad: the chain's direction), span (1.75 x radius
 //     each side), links (6 ring links), opens ([times], one per ring link, centre outward; default the words of the line),
-//     t0 (chain draws on; default the shot start), scale (0.3: hands), col (gold), gain (1.25)}
+//     t0 (chain draws on; default the shot start), scale (0.42: hands), col (gold), gain (1.25)}
 import { P, css, mix } from '../../../palette.js';
 import { clamp, lerp, smooth, range, easeOutCubic, easeInOutCubic, hash1 } from '../../../util.js';
 import { clasp } from '../../history/hands.js';
@@ -82,7 +82,7 @@ export default {
       const ha = a0 * morph * (1 - smooth(range(age, 0.6, 1.0)));
       if (ha > 0.01) {
         c.save(); c.translate(x, y); c.translate(-dir[1] * 0, 0);
-        clasp(c, 0, 0, (p.scale ?? 0.3) * s, grip, { col: mix(col, [1, 0.95, 0.85], 0.25), lw: 2.4 / ((p.scale ?? 0.3) * s), fill: 'rgb(0,0,0)', arm: 90, draw: easeOutCubic(range(age, 0, 0.2)), alpha: ha }, ang);
+        clasp(c, 0, 0, (p.scale ?? 0.42) * s, grip, { col: mix(col, [1, 0.95, 0.85], 0.25), lw: 2.4 / ((p.scale ?? 0.42) * s), fill: 'rgb(0,0,0)', arm: 90, draw: easeOutCubic(range(age, 0, 0.2)), alpha: ha }, ang);
         c.restore();
       }
       // the edge: between where the two hands end up, along the chain

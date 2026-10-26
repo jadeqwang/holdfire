@@ -14,6 +14,47 @@
    "verdict": "reject: blinks/half-closes at 0.4-0.8 s and reframes",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_CO01_veo_t2",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_CO01_veo_t2-2d8229acb1",
+   "kf": "media/kf2/CO01_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO01_veo_t2.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_CO01_veo_t2_2d8229acb1.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.8,
+   "verdict": "reject: blinks at 0.4-0.9 s again (Veo ignores no-blink)",
+   "lag": null,
+   "pick": false
+  }
+ ],
+ "V108": [
+  {
+   "tag": "t2_WALK_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_WALK_veo_t1-8f93e107ff",
+   "kf": "media/kf2/WALK_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_WALK_veo_t1.txt",
+   "s0": null,
+   "dur": "8s",
+   "file": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.6,
+   "verdict": "keeper: clean green screen, on model in profile, tracked walk 0-3.6 s then breaks into a run (~3.8 s); keyed + composited over era plates",
+   "lag": null,
+   "pick": true,
+   "serves": [
+    "V108",
+    "V109",
+    "V110",
+    "V118",
+    "V119",
+    "V120",
+    "V121"
+   ]
   }
  ]
 }

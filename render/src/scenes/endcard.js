@@ -52,7 +52,9 @@ export default {
     const n = FIB[Math.max(0, Math.min(FIB.length - 1, 14 + Math.max(0, lit - 2)))];
     // the counter keeps climbing past 610
     ty.text(lit < 0 ? '' : `${Math.max(610, n).toLocaleString('en-US')} WORLDS · HOLDING`, 960, 420 + 290 + 50, { font: 'Plex', size: 18, track: 0.18, align: 'center', color: P.goldPale, alpha: 0.8 * smooth(range(t, p.start + 1, p.start + 2)) });
-    const a = smooth(range(t, p.holdT + 1.2, p.holdT + 2.4));
+    // credits wait for the final hit, so the last "Hold your fire" and the hit land alone
+    const cT = (p.hitT ?? p.holdT + 2) + 0.9;
+    const a = smooth(range(t, cT, cT + 1.2));
     ty.text('HOLD  FIRE', 960, 470, { font: 'Michroma', size: 64, track: 0.5, align: 'center', base: 'middle', color: P.cream, alpha: a * 0, glow: 0 });
     const cr = [
       ['WORDS', 'JADE WANG · FOUND IN HER POEMS · RHYMED WITH CLAUDE'],
@@ -61,10 +63,10 @@ export default {
       ['', 'THE 610 WORLDS ARE FICTIONAL · THE NEAR-MISSES ARE REAL'],
     ];
     cr.forEach(([k, v], i) => {
-      const ai = a * smooth(range(t, p.holdT + 1.6 + i * 0.25, p.holdT + 2.4 + i * 0.25));
+      const ai = a * smooth(range(t, cT + 0.4 + i * 0.25, cT + 1.2 + i * 0.25));
       if (k) ty.label(k, 640, 950 + i * 30, { align: 'right', color: P.bookGold, alpha: ai, size: 13 });
       ty.label(v, 660, 950 + i * 30, { color: P.cream, alpha: ai * 0.85, size: 13 });
     });
-    ty.excerpt('Hyperstition', ['plant all the right words at all the right times', 'and compile this into a universe', 'where not everyone dies'], 110, 110, t, p.start + 0.8, 9999, { size: 30, kicker: 'EXCERPT FROM · DAY ONE' });
+    ty.excerpt('Hyperstition', ['plant all the right words at all the right times', 'and compile this into a universe', 'where not everyone dies'], 110, 110, t, (p.hitT ?? p.start + 0.8) + 0.25, 9999, { size: 30, kicker: 'EXCERPT FROM · DAY ONE' });
   },
 };

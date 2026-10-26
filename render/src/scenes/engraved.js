@@ -10,7 +10,34 @@ const faceCache = new Map();
 async function faceData(clip) {
   if (faceCache.has(clip)) return faceCache.get(clip);
   let f = null; try { const r = await fetch(`work/guides/${clip}/face.json`); if (r.ok) f = await r.json(); } catch (e) { /* none */ }
+  if (f && f.frames) f.frames = smoothFace(f.frames);
   faceCache.set(clip, f); return f;
+}
+
+// zero-phase temporal smoothing of the landmarks (MediaPipe jitters frame to frame, which reads as a rubbery mouth):
+// lips over +-1 frame (keeps the articulation), the rest of the face over +-2 frames; missing frames are skipped
+const FACE_TAPS = { lipsO: [0.25, 0.5, 0.25], lipsI: [0.25, 0.5, 0.25] };
+const FACE_TAPS_DEFAULT = [0.1, 0.2, 0.4, 0.2, 0.1];
+function smoothFace(frames) {
+  return frames.map((fr, i) => {
+    if (!fr) return fr;
+    const out = { ...fr };
+    for (const key of Object.keys(fr)) {
+      const pts = fr[key];
+      if (!Array.isArray(pts) || !pts.length || !Array.isArray(pts[0])) continue;
+      const taps = FACE_TAPS[key] || FACE_TAPS_DEFAULT, h = (taps.length - 1) / 2;
+      out[key] = pts.map((pt, j) => {
+        let x = 0, y = 0, w = 0;
+        for (let k = -h; k <= h; k++) {
+          const o = frames[i + k]; const q = o && o[key] && o[key][j];
+          if (!q) continue;
+          x += q[0] * taps[k + h]; y += q[1] * taps[k + h]; w += taps[k + h];
+        }
+        return w ? [x / w, y / w] : pt;
+      });
+    }
+    return out;
+  });
 }
 
 // smooth closed/open curve through points (Catmull-Rom as quadratic midpoints)

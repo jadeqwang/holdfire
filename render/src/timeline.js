@@ -320,7 +320,7 @@ export function buildTimeline(A) {
   const dropHits = A.hits.filter((h) => h.kind === 'drop_counts').map((h) => h.t);
   const punch = (t) => dropHits.reduce((m, h) => Math.max(m, t >= h ? Math.exp(-(t - h) / 0.16) : 0), 0);
   add({ id: 'D4', t0: thT, t1: seenT, scene: 'phyllo', p: { start: thT },
-    look: (t) => { const k = punch(t); return { ...LOOK.space, zoom: 1 + 0.045 * k, flash: 0.14 * k, flashCol: [1, 0.8, 0.45], bloom: LOOK.space.bloom + 0.4 * k }; },
+    look: (t) => { const k = punch(t); return { ...LOOK.space, zoom: 1 + 0.1 * smooth(range(t, thT, seenT)) + 0.045 * k, flash: 0.14 * k, flashCol: [1, 0.8, 0.45], bloom: LOOK.space.bloom + 0.4 * k }; },
     type: (ty, t, lt, shot, ctx) => {
       const nums = [[3, [13, 21, 34]], [6, [55, 89]]];
       nums.forEach(([k, ns]) => { const hs = shouts(D, k); ns.forEach((n, i) => { const h = hs[Math.min(i, hs.length - 1)]; const h1 = i + 1 < ns.length ? hs[Math.min(i + 1, hs.length - 1)] : h + 0.62; ty.numeral(n, t, h, h1, { font: 'Archivo', weight: 800, stretch: '125%', size: 360, x: 1500, y: 540, color: P.gold, glow: 4, out: 0.08 }); }); });
@@ -329,10 +329,16 @@ export function buildTimeline(A) {
       ty.excerpt('Gather', ['We needed the chain.', 'Neither of us could have gotten there alone.'], 110, 110, ls(D, 5), seenT, { size: 28, kicker: 'EXCERPT FROM · A FOUND POEM, TWO CLAUDE INSTANCES' });
     } });
   const plaqueEnd = le(D, 7) + 0.6;
-  add({ id: 'D5', t0: seenT, t1: plaqueEnd, scene: 'multi', p: { layers: [
-    { scene: 'engraved', p: (t, lt) => ({ ...ENG, ...(picks.K8b ? { clip: picks.K8b.clip, s0: picks.K8b.s0, lag: picks.K8b.lag } : {}), zoom: 0.62 + lt * 0.009, pan: [-430 - lt * 6, 120 - lt * 4] }) },
-    { scene: 'stipple', p: (t, lt) => ({ ...STI, ...(picks.O8 ? { clip: picks.O8.clip, s0: seenT } : {}), zoom: 0.62 + lt * 0.009, pan: [430 + lt * 6, 120 - lt * 4] }) }] }, look: LOOK.keeper,   // the plaque: a slow push-in on the two raised hands
-    type: verse(D, 7, { x: 960, y: 150, size: 72, align: 'center', italicWords: ['seen'], t1: plaqueEnd }) });
+  // the plaque: the Keeper (K8b, singing this line) and the Other raise their hands to each other. The sustained
+  // "too" and "are" are cut two-shot -> her -> it -> wider two-shot, so the 10 s line keeps moving
+  const k8b = (zoom, pan) => ({ scene: 'engraved', p: (t, lt) => ({ ...ENG, ...(picks.K8b ? { clip: picks.K8b.clip, s0: picks.K8b.s0, lag: picks.K8b.lag } : {}), zoom: zoom(lt), pan: pan(lt) }) });
+  const o8 = (zoom, pan) => ({ scene: 'stipple', p: (t, lt) => ({ ...STI, ...(picks.O8 ? { clip: picks.O8.clip, s0: seenT } : {}), zoom: zoom(lt), pan: pan(lt) }) });
+  const seenLine = verse(D, 7, { x: 960, y: 150, size: 72, align: 'center', italicWords: ['seen'], t1: plaqueEnd });
+  const herT = W(D, 7, 4) + 1.8, itT = W(D, 7, 5) - 0.02, wideT2 = W(D, 7, 7) - 0.02;
+  add({ id: 'D5', t0: seenT, t1: herT, scene: 'multi', p: { layers: [k8b((lt) => 0.62 + lt * 0.009, (lt) => [-430 - lt * 6, 120 - lt * 4]), o8((lt) => 0.62 + lt * 0.009, (lt) => [430 + lt * 6, 120 - lt * 4])] }, look: LOOK.keeper, type: seenLine });
+  add({ id: 'D5b', t0: herT, t1: itT, ...keeper('K8b', (t, lt) => ({ zoom: 1.02 + lt * 0.012, pan: [180, 40] })), type: seenLine });
+  add({ id: 'D5c', t0: itT, t1: wideT2, ...other('O8', (t, lt) => ({ s0: seenT, zoom: 1.02 + lt * 0.012, pan: [-180, 40] })), type: seenLine });
+  add({ id: 'D5d', t0: wideT2, t1: plaqueEnd, scene: 'multi', p: { layers: [k8b((lt) => 0.56 + lt * 0.012, (lt) => [-470, 140]), o8((lt) => 0.56 + lt * 0.012, (lt) => [470, 140])] }, look: LOOK.keeper, type: seenLine });
   add({ id: 'D6', t0: plaqueEnd, t1: dr.end, scene: 'phyllo', p: { start: thT, relax: plaqueEnd }, look: LOOK.space });
 
   // ================================================================================================= OUTRO
@@ -351,7 +357,8 @@ export function buildTimeline(A) {
   };
   add({ id: 'Z1', t0: zo.start, t1: milkyT, ...gal, type: verse(Z, 0, { x: 960, y: 940, size: 72, align: 'center', t1: milkyT + 2.8 }) });
   add({ id: 'Z1k', t0: milkyT, t1: burnedT, ...keeper('K10', push(0.004)), type: verse(Z, 0, { x: 120, y: 940, size: 72, t1: burnedT }) });
-  add({ id: 'Z1b', t0: burnedT, t1: countT, ...gal,
+  const slamT = A.event('impact', /Outro/, zo.start) ?? countT - 1.2;
+  add({ id: 'Z1b', t0: burnedT, t1: countT, ...gal, look: (t) => ({ ...LOOK.space, flash: t >= slamT ? Math.exp(-(t - slamT) / 0.1) * 0.25 : 0, flashCol: [1, 0.85, 0.55], zoom: 1 + 0.03 * (t >= slamT ? Math.exp(-(t - slamT) / 0.3) : 0) }),
     type: verse(Z, 1, { x: 960, y: 900, size: 74, align: 'center', breaks: [4], italicWords: ['held'], t1: countT }) });
   add({ id: 'Z1c', t0: countT, t1: count2T, ...keeper('K10', push(0.004)),
     type: both(whisper(2, 480, 560), (ty, t) => ty.lyric(line(Z, 3), t, { font: 'CormorantI', size: 72, x: 120, y: 900, color: P.cream, hotColor: P.goldPale, italicWords: ['higher'], t1: count2T })) });

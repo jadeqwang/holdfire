@@ -138,3 +138,11 @@ Spend at start of this intake pass: $30.46.
 | 04:50 | O7 | kf O7_nbp_3.png | approve → O7_t1 | — | v3: centred, wings folded, seamless sky, ringed giant low behind, top third clear; framed knee-up (not quite full figure) |
 | 04:52 | K8 | K8_t5, K8_t6 | re-prompt submitted | — | per director: ONE pass, 2 takes; same kf/audio, motion = locked camera, steady exposure, sing clearly not belting, labial cues, soft rounded 'too' (text in media/gen/specs/K8_motion_v2.txt). Judge on D3 window 188.36–193.96 only; t2 stays the pick unless one is clean |
 | 04:52 | K8b | K8b_t3, t4 | relay error | — | 2047 credentials (t1/t2 still hung) → resubmitted t5, t6 |
+| 05:04 | O7 | O7_t1_b258188e53 | **PICK** | 0 | opens its great wings wide, arms open palms forward, eye-spots glow and pulse; wings fill the frame by 3 s |
+| 05:04 | K8 | K8_t5_75fcf30a66 | **PICK (swapped in for t2)** | −0.125 | re-prompt worked: locked camera, steady exposure, right half, left half gold fog; on D3 (188.36–193.96) "you/were/You/were" rounded, "counting" opens, "too" soft and rounded with no grin, "but" closing; mouth shapes small but right. Numeric best −0.46 (corr .42) supports a slightly early mouth |
+| 05:04 | K8 | K8_t6_aa0a969bf2 | reject | — | re-prompt: locked/steady, but sobs and wails open on "counting" |
+| 05:05 | K8b | K8b_t5_6b2932c2c0 | alt | — | hand raised, steady, but grins broadly with teeth at 5–9 s |
+| 05:05 | K8b | K8b_t6_495dc1d044 | **PICK** | 0 | palm raised in greeting, sings to camera, neutral/warm (no grin), slow push-in; upper third stars; strips: 0 ≈ +0.125 ("made" closed, "too/you" rounded, "broke" closing) → 0 |
+| 05:05 | C8 | C8_t2 | stuck | — | 'running' 44 min (past the wall) → resubmitted as C8_t3 |
+| 05:13 | C8 | C8_t3_129bb91bf1 | **PICK** | 0 | woman presses the light to the office glass and raises it, looking up; reflection in the window; consistent |
+| 05:28 | ALL | — | wrap | — | 49/49 shots picked, all 49 prepped (work/guides, 2.9 GB). Spend $160.01 (start $30.46). Hung jobs left in manifest: K3_t3, K8b_t1/t2, C8_t2 (may still bill) |

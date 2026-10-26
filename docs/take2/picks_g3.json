@@ -55,5 +55,15 @@
    ]
   ],
   "note": "seedance-2.5 10 s, locked-off (<0.35 px drift); serves V211-V217 on the song clock (clip t = song t - 92.6). Screen face stays empty dark red, no flash. He reaches for the phone at clip ~7.0 s and holds the receiver at his ear from ~8.0 s (song 100.3 'ignored' -> V217 continuity). His head overlaps the screen's lower edge (x ~620-830, y >= 510): the screen overlay needs to go behind it. 'paper' = the protocol sheet on the desk (small, grazing angle)."
+ },
+ "V218": {
+  "dir": "work/plates/V218",
+  "kind": "video",
+  "src": "media/gen/t2_V218_sd25_t1_c95e46c74b.mp4",
+  "in": 1.0,
+  "twos": true,
+  "style": "oil",
+  "styleAmt": 0.25,
+  "note": "seedance-2.5 t1 (bake-off vs veo t1: Veo's eyes turn teal when they open, off model). Clip 1.0-1.94: eyes close and she breathes out, lips part ~1.7 s, brown eyes on model; slow pan right. Face x ~880-1100, y ~380-560 (under WE'RE ALIVE)."
  }
 }

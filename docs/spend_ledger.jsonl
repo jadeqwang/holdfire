@@ -657,3 +657,16 @@
 {"ts": "2026-10-26T04:39:56Z", "model": "bytedance/seedance-2.5", "tag": "K12_t5", "job": "holdfire/K12_t5-b3fd330cf1", "event": "result", "ok": true, "est_usd": 1.8496, "where": "cloud"}
 {"ts": "2026-10-26T04:40:00Z", "model": "bytedance/seedance-2.5", "tag": "H2_t1", "job": "holdfire/H2_t1-519e67d06f", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
 {"ts": "2026-10-26T04:42:08Z", "model": "bytedance/seedance-2.5", "tag": "K12_t6", "job": "holdfire/K12_t6-03fdfd7e69", "event": "result", "ok": true, "est_usd": 1.8496, "where": "cloud"}
+{"ts": "2026-10-26T04:47:30Z", "model": "bytedance/seedance-2.5", "tag": "C10_t2", "job": "holdfire/C10_t2-43d336f737", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T04:47:58Z", "model": "google/nano-banana-pro", "tag": "kf_O7_nbp3", "job": "holdfire/kf_O7_nbp3-ed8b4e2293", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T04:48:35Z", "model": "bytedance/seedance-2.5", "tag": "H6_t3", "job": "holdfire/H6_t3-380fbdacd9", "event": "result", "ok": true, "est_usd": 1.3872, "where": "cloud"}
+{"ts": "2026-10-26T04:48:37Z", "model": "bytedance/seedance-2.5", "tag": "C11_t2", "job": "holdfire/C11_t2-c09590d432", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T04:48:55Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t3", "job": "holdfire/K8b_t3-76f7015258", "event": "submit", "ok": null, "est_usd": 3.2368, "where": "cloud"}
+{"ts": "2026-10-26T04:48:56Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t4", "job": "holdfire/K8b_t4-017782fac7", "event": "submit", "ok": null, "est_usd": 3.2368, "where": "cloud"}
+{"ts": "2026-10-26T04:50:08Z", "model": "bytedance/seedance-2.5", "tag": "O7_t1", "job": "holdfire/O7_t1-b258188e53", "event": "submit", "ok": null, "est_usd": 1.3872, "where": "cloud"}
+{"ts": "2026-10-26T04:51:48Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t3", "job": "holdfire/K8b_t3-76f7015258", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T04:51:48Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t4", "job": "holdfire/K8b_t4-017782fac7", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T04:52:39Z", "model": "bytedance/seedance-2.5", "tag": "K8_t5", "job": "holdfire/K8_t5-75fcf30a66", "event": "submit", "ok": null, "est_usd": 2.5432, "where": "cloud"}
+{"ts": "2026-10-26T04:52:40Z", "model": "bytedance/seedance-2.5", "tag": "K8_t6", "job": "holdfire/K8_t6-aa0a969bf2", "event": "submit", "ok": null, "est_usd": 2.5432, "where": "cloud"}
+{"ts": "2026-10-26T04:52:41Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t5", "job": "holdfire/K8b_t5-6b2932c2c0", "event": "submit", "ok": null, "est_usd": 3.2368, "where": "cloud"}
+{"ts": "2026-10-26T04:52:42Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t6", "job": "holdfire/K8b_t6-495dc1d044", "event": "submit", "ok": null, "est_usd": 3.2368, "where": "cloud"}

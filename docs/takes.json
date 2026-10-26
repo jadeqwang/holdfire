@@ -672,6 +672,32 @@
    "dims": "1280,720,265",
    "sheet": "media/gen/K8_t4_2181c48355_sheet.jpg",
    "pick": false
+  },
+  {
+   "take": 5,
+   "job": "holdfire/K8_t5-75fcf30a66",
+   "kf": "media/kf/K8_nbp_2.jpg",
+   "s0": 183.6,
+   "dur": 11,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:52:39Z",
+   "file": null,
+   "lag": null,
+   "verdict": null,
+   "notes": "re-prompt: K8_motion_v2.txt"
+  },
+  {
+   "take": 6,
+   "job": "holdfire/K8_t6-aa0a969bf2",
+   "kf": "media/kf/K8_nbp_2.jpg",
+   "s0": 183.6,
+   "dur": 11,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:52:40Z",
+   "file": null,
+   "lag": null,
+   "verdict": null,
+   "notes": "re-prompt: K8_motion_v2.txt"
   }
  ],
  "K8b": [
@@ -695,6 +721,56 @@
    "dur": 14,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T03:59:34Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  },
+  {
+   "take": 3,
+   "job": "holdfire/K8b_t3-76f7015258",
+   "kf": "media/kf/K8b_nbp_m.png",
+   "s0": 195.6,
+   "dur": 14,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:48:55Z",
+   "file": null,
+   "lag": null,
+   "verdict": null,
+   "state": "error"
+  },
+  {
+   "take": 4,
+   "job": "holdfire/K8b_t4-017782fac7",
+   "kf": "media/kf/K8b_nbp_m.png",
+   "s0": 195.6,
+   "dur": 14,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:48:56Z",
+   "file": null,
+   "lag": null,
+   "verdict": null,
+   "state": "error"
+  },
+  {
+   "take": 5,
+   "job": "holdfire/K8b_t5-6b2932c2c0",
+   "kf": "media/kf/K8b_nbp_m.png",
+   "s0": 195.6,
+   "dur": 14,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:52:41Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  },
+  {
+   "take": 6,
+   "job": "holdfire/K8b_t6-495dc1d044",
+   "kf": "media/kf/K8b_nbp_m.png",
+   "s0": 195.6,
+   "dur": 14,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T04:52:42Z",
    "file": null,
    "lag": null,
    "verdict": null
@@ -782,7 +858,8 @@
    "lag": null,
    "verdict": null,
    "dims": "1470,630,193",
-   "sheet": "media/gen/K12_t1_c66df4cbc3_sheet.jpg"
+   "sheet": "media/gen/K12_t1_c66df4cbc3_sheet.jpg",
+   "pick": false
   },
   {
    "take": 2,
@@ -796,7 +873,8 @@
    "lag": null,
    "verdict": null,
    "dims": "1470,630,193",
-   "sheet": "media/gen/K12_t2_8c46dd5dac_sheet.jpg"
+   "sheet": "media/gen/K12_t2_8c46dd5dac_sheet.jpg",
+   "pick": false
   },
   {
    "take": 3,
@@ -809,7 +887,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 4,
@@ -822,7 +901,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 5,
@@ -836,7 +916,8 @@
    "lag": null,
    "verdict": null,
    "dims": "1280,720,193",
-   "sheet": "media/gen/K12_t5_b3fd330cf1_sheet.jpg"
+   "sheet": "media/gen/K12_t5_b3fd330cf1_sheet.jpg",
+   "pick": false
   },
   {
    "take": 6,
@@ -847,10 +928,12 @@
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T04:33:52Z",
    "file": "media/gen/K12_t6_03fdfd7e69.mp4",
-   "lag": null,
+   "lag": 0.125,
    "verdict": null,
    "dims": "1284,716,193",
-   "sheet": "media/gen/K12_t6_03fdfd7e69_sheet.jpg"
+   "sheet": "media/gen/K12_t6_03fdfd7e69_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ],
  "L3": [
@@ -1223,7 +1306,8 @@
    "lag": null,
    "verdict": null,
    "dims": "1470,630,145",
-   "sheet": "media/gen/H6_t1_41af78822d_sheet.jpg"
+   "sheet": "media/gen/H6_t1_41af78822d_sheet.jpg",
+   "pick": false
   },
   {
    "take": 2,
@@ -1236,7 +1320,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 3,
@@ -1246,9 +1331,29 @@
    "dur": 6,
    "voc": null,
    "submitted": "2026-10-26T04:38:03Z",
-   "file": null,
+   "file": "media/gen/H6_t3_380fbdacd9.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1470,630,145",
+   "sheet": "media/gen/H6_t3_380fbdacd9_sheet.jpg",
+   "pick": false
+  },
+  {
+   "take": 4,
+   "job": "holdfire/H6_t3-380fbdacd9",
+   "kf": "media/kf/H6_nbp.png",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:38:03Z",
+   "file": "media/gen/H6_t3c_380fbdacd9.mp4",
+   "dims": "1280,720",
+   "lag": 0.0,
+   "verdict": null,
+   "state": "local",
+   "notes": "centre 16:9 crop (1120x630 at x=175 -> 1280x720) of H6_t3, which came back 21:9 (t1 also 21:9)",
+   "pick": true,
+   "kind": "archival"
   }
  ],
  "E7": [
@@ -1281,7 +1386,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 2,
@@ -1291,9 +1397,13 @@
    "dur": 5,
    "voc": null,
    "submitted": "2026-10-26T04:38:00Z",
-   "file": null,
-   "lag": null,
-   "verdict": null
+   "file": "media/gen/C10_t2_43d336f737.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1280,720,121",
+   "sheet": "media/gen/C10_t2_43d336f737_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ],
  "C11": [
@@ -1308,7 +1418,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 2,
@@ -1318,9 +1429,13 @@
    "dur": 5,
    "voc": null,
    "submitted": "2026-10-26T04:38:02Z",
-   "file": null,
-   "lag": null,
-   "verdict": null
+   "file": "media/gen/C11_t2_c09590d432.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1280,720,121",
+   "sheet": "media/gen/C11_t2_c09590d432_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ],
  "C12": [
@@ -1351,10 +1466,12 @@
    "voc": null,
    "submitted": "2026-10-26T04:26:39Z",
    "file": "media/gen/H2_t1_519e67d06f.mp4",
-   "lag": null,
+   "lag": 0.0,
    "verdict": null,
    "dims": "1284,716,121",
-   "sheet": "media/gen/H2_t1_519e67d06f_sheet.jpg"
+   "sheet": "media/gen/H2_t1_519e67d06f_sheet.jpg",
+   "pick": true,
+   "kind": "archival"
   }
  ],
  "O5": [
@@ -1391,6 +1508,20 @@
    "sheet": "media/gen/H5_t1_e345bd8e95_sheet.jpg",
    "pick": true,
    "kind": "archival"
+  }
+ ],
+ "O7": [
+  {
+   "take": 1,
+   "job": "holdfire/O7_t1-b258188e53",
+   "kf": "media/kf/O7_nbp_3.png",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T04:50:08Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
   }
  ]
 }

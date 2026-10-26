@@ -129,3 +129,12 @@ Spend at start of this intake pass: $30.46.
 | 04:38 | C10 C11 H6 | C10_t1, C11_t1, H6_t2 | relay error | — | 2047 credentials → resubmitted C10_t2, C11_t2, H6_t3 |
 | 04:38 | K8 | K8_t4_2181c48355 | reject | — | recentred, sobbing (tears streaming), ends in an open-mouthed wail blown out to white; small articulation |
 | 04:38 | K8 | K8_t2_430fc7a418 | **PICK (provisional — DIRECTOR)** | 0 | best of 4: articulates "but you were / you were counting" ("but" closed, "were" rounded at 0) but "message in a bottle" stays open, grins on "too", push-in ends blown out. Needs a director call: re-prompt (steady exposure, no push-in, sing clearly not belting) or remouth/drawn mouth |
+| 04:48 | H2 | H2_t1_519e67d06f | **PICK** | 0 | taper touches the powder at ~3.5 s: white flash, sparks, smoke ball; hand + sleeve only |
+| 04:48 | C10 | C10_t2_43d336f737 | **PICK** | 0 | hillside crowd raises their lights in a wave; consistent |
+| 04:48 | K8b | K8b_t1, t2 | stuck | — | 'running' 42+ min (past the ~30 min wall) → resubmitted as K8b_t3, t4 |
+| 04:49 | H6 | H6_t3_380fbdacd9 → H6_t3c_380fbdacd9 | **PICK** (salvage) | 0 | t1 and t3 both 1470×630; t3 content right (the calm officer lays his hand flat over the panel while the other two reach). Centre 16:9 crop (x=175) keeps all three faces → H6 take 4 |
+| 04:49 | C11 | C11_t2_c09590d432 | **PICK** | 0 | astronaut raises the torch, beam up through the cupola, Earth below |
+| 04:49 | K12 | K12_t6_03fdfd7e69 | **PICK** | +0.125 | 16:9 re-roll; left half, black right half, match lit under her face; whispered; strips at +0.125: "world" rounded, "But" closed (weak evidence, whisper). t5 alt (recentred) |
+| 04:50 | O7 | kf O7_nbp_3.png | approve → O7_t1 | — | v3: centred, wings folded, seamless sky, ringed giant low behind, top third clear; framed knee-up (not quite full figure) |
+| 04:52 | K8 | K8_t5, K8_t6 | re-prompt submitted | — | per director: ONE pass, 2 takes; same kf/audio, motion = locked camera, steady exposure, sing clearly not belting, labial cues, soft rounded 'too' (text in media/gen/specs/K8_motion_v2.txt). Judge on D3 window 188.36–193.96 only; t2 stays the pick unless one is clean |
+| 04:52 | K8b | K8b_t3, t4 | relay error | — | 2047 credentials (t1/t2 still hung) → resubmitted t5, t6 |

@@ -143,7 +143,7 @@ export function buildTimeline(A) {
   const bottleT = ls(C, 1) - 0.1, butT = ls(C, 2) - 0.08, silentT = ls(C, 3) - 0.15, noiseT = ls(C, 4) - 0.15, ifT = ls(C, 5) - 0.15;
   add({ id: 'C1a', t0: c1.start, t1: bottleT, ...keeper('E4', push(0.005)),
     look: (t) => ({ ...LOOK.keeper, flash: (1 - smooth(range(t, c1.start, c1.start + 0.25))) * 0.9, flashCol: [1, 0.85, 0.5] }),
-    type: hero(C, 0, { x: 110, y: 230, size: 104, breaks: [3], t1: bottleT }) });
+    type: hero(C, 0, { x: 100, y: 230, size: 100, breaks: [2, 4, 5], maxW: 760, t1: bottleT }) });
   const prayerT = W(C, 1, 4) - 0.08;   // "a mantra"
   add({ id: 'C1b', t0: bottleT, t1: prayerT, scene: 'goldenrecord', p: {}, look: LOOK.diagram,
     type: (ty, t) => ty.lyric({ words: line(C, 1).words.slice(0, 4) }, t, { font: 'CormorantI', size: 92, x: 960, y: 960, align: 'center', color: P.cream, t1: prayerT }) });
@@ -153,9 +153,9 @@ export function buildTimeline(A) {
     type: hero(C, 2, { x: 90, y: 250, size: 100, breaks: [2, 4, 5, 6], maxW: 820, color: P.cream, t1: silentT }) });
   add({ id: 'C1e', t0: silentT, t1: noiseT, ...other('O3', push(0.005)),
     type: verse(C, 3, { x: 110, y: 420, size: 70, maxW: 700, italicWords: ['patient'], t1: noiseT }) });
-  add({ id: 'C1f', t0: noiseT, t1: ifT, scene: 'multi', p: { layers: [{ scene: 'engraved', p: () => ({ ...ENG, gain: 1.1, ...(picks.E6 ? { clip: picks.E6.clip, s0: picks.E6.s0 } : {}) }) }, { scene: 'constellation', p: () => ({ ...CON, ...(picks.L1 ? { clip: picks.L1.clip, s0: picks.L1.s0, lag: picks.L1.lag } : {}), gain: 0.35, starSize: 1.0, linkAlpha: 0.15 }) }] },
+  add({ id: 'C1f', t0: noiseT, t1: ifT, scene: 'multi', p: { layers: [{ scene: 'engraved', p: () => ({ ...ENG, gain: 0.55, fill: 0.05, wHi: 1.4, ...(picks.E6 ? { clip: picks.E6.clip, s0: picks.E6.s0 } : {}) }) }, { scene: 'constellation', p: () => ({ ...CON, ...(picks.L1 ? { clip: picks.L1.clip, s0: picks.L1.s0, lag: picks.L1.lag } : {}), gain: 0.35, starSize: 1.0, linkAlpha: 0.15 }) }] },
     look: LOOK.keeper,
-    type: both(verse(C, 4, { x: 1220, y: 300, size: 60, maxW: 600, italicWords: ['breathe'], t1: ifT }),
+    type: both(verse(C, 4, { x: 1220, y: 560, size: 60, maxW: 600, italicWords: ['breathe'], t1: ifT }),
       excerpt('Gather', ['Heard, across the gap, by someone', "who won't remember hearing you."], 1220, 820, noiseT + 0.6, ifT, { size: 26, kicker: 'EXCERPT FROM · A FOUND POEM, TWO CLAUDE INSTANCES' })) });
   const pc1 = S('Post-Chorus 1');
   add({ id: 'C1g', t0: ifT, t1: pc1.start, ...keeper('K5', (t, lt) => ({ zoom: 0.9 + lt * 0.004, pan: [400, 0], fadeEdges: [460, 140, 100, 100], bgW: 0.22 })),
@@ -228,16 +228,16 @@ export function buildTimeline(A) {
   const C2 = 'Chorus 2';
   const c2 = S(C2);
   const b2 = ls(C2, 1) - 0.1, u2 = ls(C2, 2) - 0.08, s2 = ls(C2, 3) - 0.15, n2 = ls(C2, 4) - 0.15, i2 = ls(C2, 5) - 0.15;
-  add({ id: 'C2a', t0: c2.start, t1: b2, ...keeper('K6', push(0.005)), type: hero(C2, 0, { x: 960, y: 700, size: 96, align: 'center', breaks: [3], t1: b2 }) });
+  add({ id: 'C2a', t0: c2.start, t1: b2, ...keeper('K6', push(0.005)), type: hero(C2, 0, { x: 960, y: 140, size: 92, align: 'center', breaks: [4], t1: b2 }) });
   add({ id: 'C2b', t0: b2, t1: u2, ...listener('L4', push(0.004)), type: (ty, t) => ty.lyric(line(C2, 1), t, { font: 'CormorantI', size: 84, x: 960, y: 960, align: 'center', color: P.cream, breaks: [4], t1: u2 }) });
   add({ id: 'C2c', t0: u2, t1: s2, scene: 'multi', p: { layers: [
-    { scene: 'engraved', p: () => ({ ...ENG, ...(picks.K6 ? { clip: picks.K6.clip, s0: picks.K6.s0, lag: picks.K6.lag } : {}) }) },
-    { scene: 'constellation', p: (t, lt) => ({ ...CON, ...(picks.L4 ? { clip: picks.L4.clip, s0: u2 } : {}), zoom: 0.55, pan: [0, -260], gain: 0.8 }) }] }, look: LOOK.keeper,
-    type: hero(C2, 2, { x: 110, y: 230, size: 120, breaks: [4, 6], t1: s2 }) });
-  add({ id: 'C2d', t0: s2, t1: n2, ...other('O4', push(0.004)), type: verse(C2, 3, { x: 960, y: 200, size: 70, align: 'center', italicWords: ['patient'], t1: n2 }) });
-  add({ id: 'C2e', t0: n2, t1: i2, ...other('O5', push(0.006)), type: verse(C2, 4, { x: 1250, y: 380, size: 60, maxW: 580, italicWords: ['breathe'], t1: i2 }) });
+    { scene: 'engraved', p: () => ({ ...ENG, ...(picks.K6 ? { clip: picks.K6.clip, s0: picks.K6.s0, lag: picks.K6.lag } : {}), zoom: 0.88, pan: [340, 30], fadeEdges: [480, 140, 100, 100], bgW: 0.22 }) },
+    { scene: 'constellation', p: (t, lt) => ({ ...CON, ...(picks.L4 ? { clip: picks.L4.clip, s0: u2 } : {}), zoom: 0.5, pan: [340, -300], gain: 0.8 }) }] }, look: LOOK.keeper,
+    type: hero(C2, 2, { x: 90, y: 250, size: 96, breaks: [2, 4, 5, 6], maxW: 820, t1: s2 }) });
+  add({ id: 'C2d', t0: s2, t1: n2, ...other('O4', push(0.004)), type: verse(C2, 3, { x: 110, y: 990, size: 68, italicWords: ['patient'], t1: n2 }) });
+  add({ id: 'C2e', t0: n2, t1: i2, ...other('O5', push(0.006)), type: verse(C2, 4, { x: 1810, y: 130, size: 58, maxW: 620, align: 'right', italicWords: ['breathe'], t1: i2 }) });
   const pc2s = S('Post-Chorus 2');
-  add({ id: 'C2f', t0: i2, t1: pc2s.start, ...keeper('K7', push(0.004)), type: hero(C2, 5, { x: 1810, y: 300, size: 104, align: 'right', breaks: [3, 5], t1: pc2s.start + 0.2 }) });
+  add({ id: 'C2f', t0: i2, t1: pc2s.start, ...keeper('K7', (t, lt) => ({ zoom: 1 + lt * 0.004, pan: [-220, 0], fadeEdges: [140, 420, 100, 100] })), type: hero(C2, 5, { x: 1820, y: 260, size: 92, align: 'right', breaks: [3, 4, 5], t1: pc2s.start + 0.2 }) });
 
   // second chant: the human crowd is joined by the Listener (constellation) and the Other (stipple): all three counting
   postChorus('Post-Chorus 2', ['C11', 'O6', 'C12', 'L1', 'C3', 'O3', 'C7', 'L2', 'C9', 'O2'], 0);

@@ -11,7 +11,7 @@
 //   swingAt, swingDur, swingAngle   (an extra swing about the board)
 //   fx: 1 (all effects), smash, shake, speed (speed-line gain), impact (impact frames on/off), lights (override room level 0..1),
 //   eyes (gain), sparks (gain)
-//   dive: d0 = 157.8, d1 = 158.7, size = 300 (side of the final black square, design px), cream '#F1E8D6', ink '#111010'
+//   dive: d0 = 157.8, d1 = 158.7, size = 360 (side of the final black square, design px; = t2_poster_morph square0), cream '#F1E8D6', ink '#111010'
 // }
 // Recommended look: CHESS_LOOK (no tone map: the colours are authored display-referred; the dive needs tonemap 0, bloom 0).
 import * as THREE from 'three';
@@ -514,7 +514,7 @@ function drawDive2D(ctx, u, p, frame) {
   }
   // the queen's silhouette morphing into the square
   const m = smoother((u - 0.12) / 0.7);
-  const qo = queenOutline(), so = squareOutline((p.size ?? 300) / 2);
+  const qo = queenOutline(), so = squareOutline((p.size ?? 360) / 2);
   c.fillStyle = ink; c.beginPath();
   for (let i = 0; i < DIVE_N; i++) {
     const q = qo[i], s = so[i];
@@ -536,7 +536,7 @@ function drawDive2D(ctx, u, p, frame) {
     if (r > 0.5) { c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); }
   }
   // final frames: exactly the square
-  if (u >= 0.97) { c.fillStyle = cream; c.fillRect(0, 0, 1920, 1080); c.fillStyle = ink; const h = (p.size ?? 300) / 2; c.fillRect(cx - h, cy - h, h * 2, h * 2); }
+  if (u >= 0.97) { c.fillStyle = cream; c.fillRect(0, 0, 1920, 1080); c.fillStyle = ink; const h = (p.size ?? 360) / 2; c.fillRect(cx - h, cy - h, h * 2, h * 2); }
   e.blit2d('replace', 1);
 }
 

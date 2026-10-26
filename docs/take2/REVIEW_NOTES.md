@@ -81,3 +81,12 @@ rule breaks; chess_check OK (42 plies legal, final position as planned).
 - DR11 lag −0.125 not confirmable (metrics disagree); C103L/R metrics disagree, strips agree with −0.25 (left as is).
 - Teal-tips' teal irises in DR03/DR04 and the CO01/OU12 white catchlight disc are not graded (needs a matte or a regen).
 - Plan-time notes: BR01 press at the fill's last 16th, BR13 dive "let"→"go", V218 on "We're" (all deliberate).
+
+## Cold open and verse 1 (from g1)
+- V103: pan [-270,-270] (zoom 1.5): the fin sits near the bottom edge now.
+- V101 "OUT OF THE SEA": cream type barely reads on the pale dawn sky: darker type or a stronger shade.
+- V117 FLOOD sits over the back of Jade's head: y ≈ 700 or smaller.
+- OU12/OU13 reuse of CO01: the clip is 2.88 s, so the outro holds its last frame: play it slower, or ping-pong, or hold on the still `media/kf2/CO01_nbp_v1.jpg` with a JS push so nothing visibly freezes.
+- Blueprint layers (fin bones, foot, egg → jar, seed cross-section, tally wedges, machines): wire the anchors recorded in each g1 pick's note.
+- V122: the bright point barely moves in the plate: draw the ISS crossing with `t2_iss_pass` over it.
+- V107: a stray hand with an object crosses at the end of the window, and the hand peels: trim the window or regenerate.

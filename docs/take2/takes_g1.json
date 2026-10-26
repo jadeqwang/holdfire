@@ -132,6 +132,21 @@
    "verdict": "alt: eyes closed, contemplative, metrics agree at lag -0.125; less open vowels, less hook for muted viewers",
    "lag": -0.125,
    "pick": false
+  },
+  {
+   "tag": "t2_V101_sd25r_t4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25r_t4-43fa6f7d91",
+   "kf": "-",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25r_t4.txt",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25r_t4_43fa6f7d91.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.9248,
+   "verdict": "bake-off (Seedance 2.5 reference mode, refs DOT sheet + V101 frame): same framing, on model, but sings late (best lag +0.417, r .41); t2 kept",
+   "lag": 0.417,
+   "pick": false
   }
  ],
  "CO11": [
@@ -381,6 +396,57 @@
    "dims": "1920x1080",
    "est_usd": 0.8,
    "verdict": "pick: Jade at night lifts her eyes to the bright point; on model, hair in the wind. The point barely moves (Veo held it): the JS should draw the crossing point if it must travel",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "V113": [
+  {
+   "tag": "t2_V113_veof_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113_veof_t1-a076292c94",
+   "kf": "media/kf2/V113_nbp_v5.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V113_veof_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_V113_veof_t1_a076292c94.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "verdict": "pick: the reed presses one plain triangular wedge after another, the row counts up; no glyphs",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "CO16": [
+  {
+   "tag": "t2_CO16_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_CO16_sd20_t1-bd3dce7217",
+   "kf": "media/kf2/CO16S_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO16_sd20_t1.txt",
+   "s0": null,
+   "dur": 4,
+   "file": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.6,
+   "verdict": "pick: first/last-frame pull-back from the catchlight to Jade at the console; her eyes close briefly mid-move; 720p",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "CO17": [
+  {
+   "tag": "t2_CO17_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_CO17_veo_t1-f3cac7dd15",
+   "kf": "media/kf2/CO16E_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO17_veo_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.8,
+   "verdict": "pick: eyes closed -> open at ~0.9-1.1 s, then she looks up; mouth closed, on model",
    "lag": null,
    "pick": true
   }

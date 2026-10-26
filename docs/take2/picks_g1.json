@@ -248,5 +248,12 @@
   "in": 0,
   "twos": false,
   "note": "generated flat illustration of the ISS (8 gold array wings on the truss, radiators, modules) on black, upscaled; baked slow push + 2 deg/s turn like a turning snowflake; the edit applies riso"
+ },
+ "V113": {
+  "dir": "work/plates/V113",
+  "kind": "video",
+  "src": "media/gen/t2_V113_veof_t1_a076292c94.mp4",
+  "in": 0.5,
+  "note": "keyframe media/kf2/V113_nbp_v5.jpg (v1-v4 rejected: copied the style sheet, glyph-like marks, lens vignette). Plate = take 0.3-2.9 s; in = 0.5 s of the take; the wedge row sits at ~(480-820, 600-640)"
  }
 }

@@ -162,9 +162,10 @@ export function buildTimeline(A) {
       hs.forEach((ht, i) => {
         const t1 = i + 1 < hs.length ? hs[i + 1] : line(sec, b).t - 0.02;
         const name = crowd[ci++ % crowd.length];
-        add({ id: `${sec}-x${pi}${i}`, t0: ht, t1, ...keeper(name, push(0.02)),
-          look: (t) => ({ ...LOOK.keeper, flash: (1 - smooth(range(t, ht, ht + 0.12))) * 0.35, zoom: 1 + 0.04 * (1 - smooth(range(t, ht, ht + 0.25))) }),
-          type: numeral(nums[i], ht, t1, { x: 960, y: 560 }) });
+        const who = name[0] === 'L' ? listener(name, push(0.02)) : name[0] === 'O' ? other(name, push(0.02)) : keeper(name, push(0.02));
+        add({ id: `${sec}-x${pi}${i}`, t0: ht, t1, ...who,
+          look: (t) => ({ ...who.look, flash: (1 - smooth(range(t, ht, ht + 0.12))) * 0.35, zoom: 1 + 0.04 * (1 - smooth(range(t, ht, ht + 0.25))) }),
+          type: numeral(nums[i], ht, t1, { x: name[0] === 'L' ? 640 : 960, y: 560 }) });
       });
       const cT = line(sec, b).t - 0.02;
       const cEnd = pi === 0 ? shouts(sec, 2)[0] : s.end;
@@ -220,7 +221,8 @@ export function buildTimeline(A) {
   const pc2s = S('Post-Chorus 2');
   add({ id: 'C2f', t0: i2, t1: pc2s.start, ...keeper('K7', push(0.004)), type: hero(C2, 5, { x: 1810, y: 300, size: 104, align: 'right', breaks: [3, 5], t1: pc2s.start + 0.2 }) });
 
-  postChorus('Post-Chorus 2', ['C11', 'C12', 'C3', 'C7', 'C9', 'C10', 'C2', 'C6', 'C1', 'C11'], 0);
+  // second chant: the human crowd is joined by the Listener (constellation) and the Other (stipple): all three counting
+  postChorus('Post-Chorus 2', ['C11', 'O6', 'C12', 'L1', 'C3', 'O3', 'C7', 'L2', 'C9', 'O2'], 0);
 
   // ================================================================================================= BRIDGE (near silence)
   const B = 'Bridge';

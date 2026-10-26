@@ -23,6 +23,18 @@ mattes, face landmarks) and redraws everything; the footage itself never appears
 | Research | [`docs/research/`](docs/research/): poetry provenance, visual references, facts, pipeline lessons |
 | Dailies | [`docs/DAILIES.md`](docs/DAILIES.md), [`docs/takes.json`](docs/takes.json), [`docs/reviews/`](docs/reviews/) |
 
+![HOLD FIRE title card](media/poster/hold_fire_poster.jpg)
+
+## Deliverables
+
+Rendered locally to `work/out/` (not committed; the files exceed GitHub's 100 MB limit):
+
+| file | what |
+|---|---|
+| `hold_fire_master.mp4` | 1920×1080, 24 fps, 4:09, H.264 CRF 14 (~22 Mb/s), AAC 320k of the sound-design mix. Upload this to YouTube. |
+| `hold_fire_x.mp4` | the same, 2-pass H.264 High@4.1 at 12 Mb/s, AAC 256k (381 MB; PSNR 46 dB against the master). For X. |
+| `hold_fire_hook_31s.mp4` | the cold open and verse 1 (0:00–0:31), faded out on the pre-chorus downbeat. A teaser. |
+
 ## Three listeners
 
 | | who | voice | drawn as |

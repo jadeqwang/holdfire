@@ -33,7 +33,7 @@ export function drawReticle(c, x, y, r, o = {}) {
     c.stroke();
     // four inner arcs, counter-rotating
     const r1 = r * lerp(0.52, 0.4, tight);
-    if (r1 > 10) {
+    if (r1 > 8) {
       c.lineWidth = lw * 1.25;
       for (let i = 0; i < 4; i++) {
         const a0 = i * Math.PI / 2 + Math.PI / 4 - spin;

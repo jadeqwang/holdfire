@@ -251,7 +251,7 @@ export default {
     // the seed: a point of light before the first arms
     const seed = 1 - smooth(range(t, C.g0, C.g0 + 0.5));
     if (seed > 0) hotPoint(c, C.cx, C.cy, seed * 0.9);
-    blitGold(e, 'over', 1.7);
+    blitGold(e, 'over', 1.45);
     ctx.state.snow = C;
   },
 

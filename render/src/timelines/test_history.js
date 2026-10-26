@@ -16,7 +16,7 @@ export function buildTimeline(A) {
   // Bridge B1: the held forest shot
   const br = A.section('Bridge');
   add({ id: 'h_forest', t0: br.start, t1: A.findLine('Bridge', 4).t, scene: 'forestreticles', p: {},
-    look: { bloom: 0.7, bloomThreshold: 0.6, halation: 0.3, halCol: [1.0, 0.2, 0.1], vignette: 0.5, grain: 0.04, exposure: 1.1 } });
+    look: { bloom: 0.35, bloomThreshold: 0.7, halation: 0.45, halCol: [1.0, 0.12, 0.06], vignette: 0.5, grain: 0.04, exposure: 1.1 } });
   add({ id: 'h_v2g', t0: L(28).t - 0.05, t1: L(30).t - 0.1, scene: 'archival', p: (t, lt) => ({ clip: 'hist_test_warm', s0: L(28).t - 0.05, redMask: 1, zoom: 1.04 - lt * 0.01 }), look: PRINT_LOOK });
   shots.sort((a, b) => a.t0 - b.t0);
   return shots;

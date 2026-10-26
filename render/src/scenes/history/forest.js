@@ -16,8 +16,8 @@ import { clamp, lerp, smooth, range, easeOutCubic, easeOutExpo, easeOutBack, has
 import { drawReticle } from './reticle.js';
 
 export const RETICLES = [
-  [1312, 468, 30], [640, 512, 38], [1022, 430, 26], [1532, 566, 46], [418, 604, 54], [826, 612, 30], [1184, 646, 40],
-  [262, 418, 66], [1708, 352, 74], [962, 528, 22], [1446, 380, 28], [560, 334, 42], [1112, 520, 24],
+  [1312, 468, 21], [640, 512, 27], [1022, 432, 18], [1532, 566, 32], [418, 604, 38], [826, 612, 21], [1184, 646, 28],
+  [262, 418, 46], [1708, 352, 52], [962, 528, 16], [1446, 380, 20], [560, 334, 30], [1112, 520, 17],
 ];
 export const MATCH = [906, 694];
 
@@ -103,24 +103,23 @@ export function drawForestReticles(ctx, p = {}) {
   const c = e.c2dBegin();
   // p.view: the plate's slow push, so the eyes stay put among the trees: {zoom, cx, cy}
   if (p.view) { const v = p.view; c.translate(v.cx ?? 960, v.cy ?? 560); c.scale(v.zoom ?? 1, v.zoom ?? 1); c.translate(-(v.cx ?? 960), -(v.cy ?? 560)); }
-  c.globalCompositeOperation = 'lighter';
   const red = P.red, al = p.alpha ?? 1;
   // sight-lines: from where each hunter was to the light, left behind by the snap
   if (p.lines ?? true) {
     for (const s of st) {
       if (s.k <= 0) continue;
       const fade = 1 - smooth(range(t, s.ts + 0.5, s.ts + 2.4)) * (p.linesFade ?? 0);
-      c.strokeStyle = css(red, 0.42 * al * fade * clamp(s.k * 3)); c.lineWidth = 2;
+      c.strokeStyle = css(red, 0.34 * al * fade * clamp(s.k * 3)); c.lineWidth = 2;
       c.beginPath(); c.moveTo(s.x0, s.y0); c.lineTo(s.x, s.y); c.stroke();
     }
   }
   for (const s of st) {
     // far reticles a touch dimmer (atmosphere), all of them hard red
-    const depthA = lerp(0.62, 1, clamp((s.r - 22) / 50));
+    const depthA = lerp(0.6, 1, clamp((s.r - 16) / 36));
     drawReticle(c, s.x, s.y, s.r, { open: s.open, tight: s.tight, lock: s.lock, spin: s.spin, alpha: al * depthA, col: red, lw: 2 });
   }
-  if (p.flame ?? true) drawMatch(c, match[0], match[1], t, T.tMatch, p.matchSize ?? 1);
-  e.blit2d('add', p.gain ?? 1.6);
+  if (p.flame ?? true) drawMatch(c, match[0], match[1], t, T.tMatch, p.matchSize ?? 1.25);
+  e.blit2d('add', p.gain ?? 1.2);
   return st;
 }
 

@@ -151,9 +151,7 @@ export default {
     c.lineCap = 'round'; c.lineJoin = 'round';
     // the cover's face: barely-there gold, so the disc reads before its lines do
     const face = smooth(range(t, t0, t0 + 0.4));
-    const fg = c.createRadialGradient(-120, -160, 20, 0, 0, g.R);
-    fg.addColorStop(0, css(P.gold, 0.07 * face)); fg.addColorStop(1, css(P.goldDeep, 0.025 * face));
-    c.fillStyle = fg; c.beginPath(); c.arc(0, 0, g.R, 0, Math.PI * 2); c.fill();
+    c.fillStyle = css(P.goldDeep, 0.05 * face); c.beginPath(); c.arc(0, 0, g.R, 0, Math.PI * 2); c.fill();
     const heads = [];
     // the rim: one head runs round the cover
     const ur = easeInOutCubic(range(t, t0, t0 + dur * 0.26));
@@ -190,7 +188,7 @@ export default {
       const ca = Math.cos(rot), sa = Math.sin(rot), k = sc * zoom;
       hotPoint(c, cx + (ca * h[0] - sa * h[1]) * k, cy + (sa * h[0] + ca * h[1]) * k, 1.0);
     }
-    blitGold(e, 'over', 2.0);
+    blitGold(e, 'over', 1.4);
     ctx.state.grec = { t0, dur };
   },
   type(ty, t, lt, shot, ctx) {

@@ -1,1 +1,8 @@
-{"L1": {"kf": "media/kf/listener_kf_test.jpg"}}
+{
+ "L1": {
+  "kf": "media/kf/listener_kf_test.jpg"
+ },
+ "O3": {
+  "kf": "media/kf/O3_nbp_2.png"
+ }
+}

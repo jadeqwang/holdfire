@@ -140,7 +140,7 @@ export default {
       }
       ctx.state.pulsarCols = ctx.state.pulsarCols || []; ctx.state.pulsarCols[i] = cx;
     });
-    blitGold(e, 'over', 1.9);
+    blitGold(e, 'over', 1.45);
     ctx.state.pulsar = T;
   },
 

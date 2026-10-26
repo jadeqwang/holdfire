@@ -1197,3 +1197,5 @@
 {"ts": "2026-10-26T22:31:28Z", "model": "google/nano-banana-pro", "tag": "kf_V118_nbp_v1", "job": "holdfire/kf_V118_nbp_v1-ea8625bc9c", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-26T22:34:20Z", "model": "google/nano-banana-pro", "tag": "kf_V118_nbp_v1", "job": "holdfire/kf_V118_nbp_v1-ea8625bc9c", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-26T22:34:21Z", "model": "pruna/p-image-upscale", "tag": "kf_V118_nbp_v1_up", "job": "holdfire/kf_V118_nbp_v1_up-b41253298a", "event": "submit", "ok": null, "est_usd": null, "where": "cloud"}
+{"ts": "2026-10-26T22:37:13Z", "model": "pruna/p-image-upscale", "tag": "kf_V118_nbp_v1_up", "job": "holdfire/kf_V118_nbp_v1_up-b41253298a", "event": "result", "ok": true, "est_usd": null, "where": "cloud"}
+{"ts": "2026-10-26T22:37:14Z", "model": "google/nano-banana-pro", "tag": "kf_V119_nbp_v1", "job": "holdfire/kf_V119_nbp_v1-90fd4f2381", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}

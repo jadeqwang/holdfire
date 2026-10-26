@@ -275,7 +275,7 @@ export default {
     const g = ctx.state.gun; if (!g) return;
     const T = g.T, G = p.glyphs || GLYPHS;
     const blow = 1 - smooth(range(t, T.tBurst, T.tBurst + 0.1));
-    const sepia = [0.36, 0.31, 0.25];
+    const sepia = [0.15, 0.12, 0.09];          // dark enough to read on the lamplit page
     const lab = (pin, en, x, y, a, size = 32, enSize = 14) => {
       if (a <= 0.01) return;
       ty.text(pin, x, y, { font: 'CormorantI', size, color: INK_K, alpha: a, align: 'center' });

@@ -20,3 +20,5 @@ Spend at start of this intake pass: $30.46.
 | 01:22 | C2 | kf C2_nbp.png | approve → C2_t1 | — | girl on a city rooftop raising a flashlight (aimed up-left, motion raises it), hands plausible, no lettering |
 | 01:23 | O1 | kf O1_nbp.jpg | regen | — | TWO moth beings (spec: one); egg held in one hand; gas giant dominates right half → v2 "only one being, both hands, giant smaller" |
 | 01:23 | O2 | kf O2_nbp.jpg | regen | — | eye already OPEN (the motion is the eye opening), head centred so the left third is fur not empty, thin letterbox bars → v2 "closed lid, right two-thirds, full-bleed" |
+| 01:24 | K5 | K5_t1 | relay error | — | 2047 Invalid User Credentials; resubmitted as K5_t3 |
+| 01:25 | O3 | kf O3_nbp_2.png | approve → O3_t1 | — | v2: instrument now matches set ref/O6 (faceted crystal shaft, rusty bronze rings, eyepiece); moth on-model, right half; crystal tip reaches ~1/3 across the top, left third + lower left empty |

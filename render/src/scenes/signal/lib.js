@@ -117,3 +117,21 @@ export function binTicks(c, value, x, y, ang, o = {}) {
 
 // format an integer with thousands separators (deterministic, no locale)
 export function commas(s) { s = String(s); let out = ''; for (let i = 0; i < s.length; i++) { if (i && (s.length - i) % 3 === 0) out += ','; out += s[i]; } return out; }
+
+// ---------------------------------------------------------------- hue-preserving canvas blit
+// engine.blit2d's gain lifts each channel past 0.7 on its own, which turns signal gold orange. This lifts by the brightest
+// channel instead (ratios kept), so gold stays gold when it blooms. mode: 'over' | 'add'.
+let blitMat = null;
+export function blitGold(e, mode = 'over', gain = 1.6, knee = 0.55) {
+  if (!blitMat) {
+    blitMat = e.shader(/* glsl */`
+      uniform sampler2D tSrc; uniform float gain; uniform float knee;
+      void main(){ vec4 c = texture(tSrc, vUv);
+        float m = max(c.r, max(c.g, c.b));
+        float k = 1. + (gain - 1.) * smoothstep(knee, 1., m) * 2.2;
+        fragColor = vec4(c.rgb * k, c.a); }`, { tSrc: { value: null }, gain: { value: 1 }, knee: { value: 0.55 } });
+  }
+  e.c2dTex.needsUpdate = true;
+  blitMat.uniforms.tSrc.value = e.c2dTex; blitMat.uniforms.gain.value = gain; blitMat.uniforms.knee.value = knee;
+  e.passOver(blitMat, e.rtScene, mode === 'add' ? 'add' : 'normal');
+}

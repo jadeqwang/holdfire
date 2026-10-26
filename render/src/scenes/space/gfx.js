@@ -76,7 +76,7 @@ export class SpriteBatch {
         void main(){
           vec4 c = projectionMatrix * modelViewMatrix * vec4(aPos.xyz, 1.);
           float r = aPos.w;
-          float ext = max(max(r * 6., aFx.x * 1.), max(aFx.y + 4., aFx.z * 13. * (r / 2.2 + .6))) + 2.;
+          float ext = max(max(r * 6., aFx.x * 1.), max(aFx.y + 4., aFx.z > 0. ? 13. : 0.)) + 2.;
           vec2 p = toPx(c) + position.xy * ext;
           vQ = position.xy * ext; vC = aCol; vFx = aFx; vR = r; vExt = ext;
           gl_Position = fromPx(p, c);
@@ -95,7 +95,7 @@ export class SpriteBatch {
             // an engraved seed: almond outline (two arcs) with a centre spine, pointing along vFx.w
             float ca = cos(vFx.w), sa = sin(vFx.w);
             vec2 q = vec2(ca * vQ.x + sa * vQ.y, -sa * vQ.x + ca * vQ.y);
-            float L = 11. * (vR / 2.2 + .6), Wd = L * .42;
+            float L = 10.5, Wd = L * .42;
             vec2 u = vec2(q.x / L, q.y / Wd);
             float e = length(vec2(u.x, u.y / (1. - .35 * u.x)));    // teardrop: fuller toward +x
             float px = 1. / L;

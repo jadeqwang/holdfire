@@ -177,6 +177,18 @@
    "file": null,
    "lag": null,
    "verdict": null
+  },
+  {
+   "take": 3,
+   "job": "holdfire/K5_t3-d0e965a72c",
+   "kf": "media/kf/K5_nbp.png",
+   "s0": 61.8,
+   "dur": 11,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T01:24:36Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
   }
  ],
  "K3": [
@@ -256,6 +268,20 @@
    "dur": 5,
    "voc": null,
    "submitted": "2026-10-26T01:22:25Z",
+   "file": null,
+   "lag": null,
+   "verdict": null
+  }
+ ],
+ "O3": [
+  {
+   "take": 1,
+   "job": "holdfire/O3_t1-cf489b17a2",
+   "kf": "media/kf/O3_nbp_2.png",
+   "s0": null,
+   "dur": 6,
+   "voc": null,
+   "submitted": "2026-10-26T01:25:30Z",
    "file": null,
    "lag": null,
    "verdict": null

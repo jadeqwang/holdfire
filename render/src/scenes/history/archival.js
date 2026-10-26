@@ -5,9 +5,10 @@
 // per shot (seed). Footage never appears; only its guides are read.
 //
 // p: {clip, s0, lag, zoom (1), pan [x,y] (design px), seed (paper + registration; default from shot id),
-//     cell (6, design px of the black screen), misreg (2.2 px), rough (0.12),
-//     levels [black, white, gamma] ([0.02, 0.8, 0.85]: tone levels before screening), kMax (0.93), bgInk (0.8: ink on the
-//     background where the matte is 0), edge (0.75: contour ink), edgeLo/edgeHi (0.18/0.55), bgEdge (0.35),
+//     cell (6, design px of the black screen), misreg (2.2 px), rough (0.2),
+//     levels [black, white, gamma] ([0.03, 0.62, 1.3]: tone levels before screening), sharpen (1.2) / sharpR (10 px): the repro
+//     house's unsharp mask, kMax (0.94), bgInk (1: ink on the background where the matte is 0; 0.4-0.5 fades the background
+//     to a vignetted cut-out, the old picture-desk look), edge (0.75: contour ink), edgeLo/edgeHi (0.18/0.55), bgEdge (0.35),
 //     redMask (0: strength of the red spot ink), redLight (0: 1 = the whole scene lit red, e.g. Petrov's room),
 //     redZones [[x, y, rx, ry], ...] (design px, page coords, up to 4: where the red light falls), redSoft (0.5),
 //     redLo/redHi (0.06/0.55: tone range that takes red), redKnock (0.25: black lightened under red light, so the red reads),
@@ -117,13 +118,13 @@ export function drawArchival(ctx, shot, p, key = 'arch', target = null) {
   const e = ctx.engine; build(e);
   const g = ctx.state[key];
   const u = mat.uniforms;
-  setPrint(e, u, { seed: seedFor(shot, p), cell: p.cell ?? 6, cellR: p.cellR, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.12, zoom: p.zoom ?? 1, pan: p.pan || [0, 0], kGain: p.kGain ?? 1, rGain: p.rGain ?? 1, paper: p.paper });
+  setPrint(e, u, { seed: seedFor(shot, p), cell: p.cell ?? 6, cellR: p.cellR, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.2, zoom: p.zoom ?? 1, pan: p.pan || [0, 0], kGain: p.kGain ?? 1, rGain: p.rGain ?? 1, paper: p.paper });
   u.tTone.value = g.tone; u.tEdge.value = g.edge;
   u.tMatte.value = g.matte || blank; u.hasMatte.value = g.matte ? 1 : 0;
   u.tWarm.value = g.warm || blank; u.hasWarm.value = g.warm ? 1 : 0;
-  const lv = p.levels || [0.02, 0.8, 0.85]; u.levels.value.set(lv[0], lv[1], lv[2]);
-  u.sharpen.value = p.sharpen ?? 0.8; u.sharpR.value = p.sharpR ?? 10;
-  u.kMax.value = p.kMax ?? 0.93; u.bgInk.value = p.bgInk ?? 0.8;
+  const lv = p.levels || [0.03, 0.62, 1.3]; u.levels.value.set(lv[0], lv[1], lv[2]);
+  u.sharpen.value = p.sharpen ?? 1.2; u.sharpR.value = p.sharpR ?? 10;
+  u.kMax.value = p.kMax ?? 0.94; u.bgInk.value = p.bgInk ?? 1.0;
   u.edgeK.value = p.edge ?? 0.75; u.edgeLo.value = p.edgeLo ?? 0.18; u.edgeHi.value = p.edgeHi ?? 0.55; u.bgEdge.value = p.bgEdge ?? 0.35;
   u.redMask.value = p.redMask ?? 0; u.redLight.value = p.redLight ?? 0; u.redSoft.value = p.redSoft ?? 0.5;
   u.redLo.value = p.redLo ?? 0.06; u.redHi.value = p.redHi ?? 0.55; u.redKnock.value = p.redKnock ?? 0.25;

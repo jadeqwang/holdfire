@@ -9,7 +9,7 @@
 import * as THREE from 'three';
 import { P, css, mix } from '../../palette.js';
 import { clamp, lerp, smooth, easeOutCubic, easeInOutCubic, range } from '../../util.js';
-import { loadBin, floatTex, lineByText, wordT, strokePartial, arcPts, hotPoint } from './lib.js';
+import { loadBin, floatTex, lineByText, wordT, strokePartial, arcPts, hotPoint , blitGold } from './lib.js';
 
 let field = null, mat = null;
 
@@ -20,7 +20,7 @@ async function loadField() {
   const raw = new Uint16Array(buf, 8, N * N);
   let kMax = 0; for (const v of raw) if (v !== 65535 && v > kMax) kMax = v;
   const f = new Float32Array(N * N);
-  for (let i = 0; i < N * N; i++) f[i] = raw[i] === 65535 ? kMax * 1.3 : raw[i];
+  for (let i = 0; i < N * N; i++) f[i] = raw[i] === 65535 ? 1e5 : raw[i];
   // tip radius (cells)
   const c = (N - 1) / 2; let rmax = 0;
   for (let r = 0; r < N; r++) for (let q = 0; q < N; q++) if (raw[r * N + q] !== 65535) { const x = (q - c) + (r - c) / 2, y = (r - c) * 0.8660254; rmax = Math.max(rmax, Math.hypot(x, y)); }
@@ -34,8 +34,8 @@ function material(e) {
     uniform sampler2D tHex; uniform float N; uniform float k; uniform float kMax; uniform float dLevel;
     uniform vec2 center; uniform float sc; uniform float ang; uniform float S; uniform float rmax;
     uniform float interior; uniform float front; uniform float fillA; uniform float glowTip;
-    uniform float topo; uniform float reveal; uniform vec3 gold; uniform vec3 hot; uniform vec3 bg; uniform float time;
-    float Tat(vec2 ij){ ij += (N - 1.) * .5; if (ij.x < 0. || ij.y < 0. || ij.x > N - 1. || ij.y > N - 1.) return kMax * 1.3;
+    uniform float topo; uniform float reveal; uniform float seaAng; uniform vec3 gold; uniform vec3 hot; uniform vec3 bg; uniform float time;
+    float Tat(vec2 ij){ ij += (N - 1.) * .5; if (ij.x < 0. || ij.y < 0. || ij.x > N - 1. || ij.y > N - 1.) return 1e5;
       return texelFetch(tHex, ivec2(ij), 0).r; }
     float aaLine(float d, float hw){ return 1. - smoothstep(hw - .75, hw + .75, d); }
     void main(){
@@ -44,60 +44,72 @@ function material(e) {
       float ca = cos(ang), sa = sin(ang);
       vec2 w = vec2(ca * v.x + sa * v.y, -sa * v.x + ca * v.y);      // world (cells)
       float rr = w.y / .8660254, qq = w.x - rr * .5;
-      vec2 b = floor(vec2(qq, rr)), f = vec2(qq, rr) - b;
-      float T;
-      if (f.x + f.y < 1.) T = Tat(b) * (1. - f.x - f.y) + Tat(b + vec2(1., 0.)) * f.x + Tat(b + vec2(0., 1.)) * f.y;
-      else T = Tat(b + vec2(1.)) * (f.x + f.y - 1.) + Tat(b + vec2(1., 0.)) * (1. - f.y) + Tat(b + vec2(0., 1.)) * (1. - f.x);
-      vec2 g = vec2(dFdx(T), dFdy(T)); float gl = max(length(g), 1e-4);   // per screen px
+      vec2 b = floor(vec2(qq, rr));
+      // Gaussian gather over the 4x4 axial block: smoothed occupancy at step k (the crystal's outline is its 0.5 iso-line,
+      // so it falls between cells, not along hexagon edges) and a smoothed freeze time over frozen cells (the growth lines)
+      float ws = 0., wo = 0., wt = 0., wf = 0.;
+      for (int j = -1; j <= 2; j++) for (int i = -1; i <= 2; i++) {
+        vec2 c = b + vec2(float(i), float(j));
+        vec2 cp = vec2(c.x + c.y * .5, c.y * .8660254);
+        vec2 dv = w - cp; float wg = exp(-dot(dv, dv) / (2. * .5 * .5));
+        float Ti = Tat(c);
+        ws += wg; wo += wg * smoothstep(k + 9., k - 9., Ti);
+        float fz = step(Ti, kMax + .5); wf += wg * fz; wt += wg * fz * Ti;
+      }
+      float occ = wo / max(ws, 1e-6);
+      float T = wf > 1e-4 ? wt / wf : 1e5;
       float s1 = S;                                                     // design px -> screen px
       vec3 col = bg;
-      float inside = step(T, k);
+      float og = max(length(vec2(dFdx(occ), dFdy(occ))), 1e-4);
+      float inside = smoothstep(.45, .55, occ);
       // faint body
-      col += gold * fillA * inside * (.6 + .4 * exp(-(k - T) / 300.));
-      // growth lines: iso-lines of freeze time (older edges of the crystal), faded where they would crowd (< 6 px)
-      float fl = T / dLevel; float dd = abs(fract(fl + .5) - .5) * dLevel / gl;
-      float spacing = dLevel / gl;
-      float crowd = smoothstep(5.5 * s1, 9. * s1, spacing);
-      float rec = exp(-(k - T) / 220.);
-      float il = aaLine(dd, 1.0 * s1) * crowd * inside * step(T, k - dLevel * .35);
-      col += gold * il * interior * (.42 + .58 * rec);
-      // the growing edge (iso-line T = k): hot, it blooms
-      float df = abs(T - k) / gl;
-      float fr = aaLine(df, 1.25 * s1) * step(T, kMax * 1.2);
-      col += hot * fr * front * (1.25 + 1.1 * glowTip);
+      col += gold * fillA * inside;
+      // growth lines: iso-lines of freeze time (the crystal's earlier edges), faded where they would crowd (< 6 px)
+      float Tc = min(T, kMax);
+      vec2 g = vec2(dFdx(Tc), dFdy(Tc)); float gl = max(length(g), 1e-4);
+      float fl = Tc / dLevel; float dd = abs(fract(fl + .5) - .5) * dLevel / gl;
+      float crowd = smoothstep(5.5 * s1, 9. * s1, dLevel / gl);
+      float rec = exp(-(k - Tc) / 220.);
+      float il = aaLine(dd, 1.0 * s1) * crowd * smoothstep(.6, .8, occ) * step(Tc, k - dLevel * .3);
+      col += gold * il * interior * (.4 + .6 * rec);
+      // the outline at step k (hot: it blooms at the growing tips)
+      float fr = aaLine(abs(occ - .5) / og, 1.2 * s1);
+      float tipHot = exp(-max(k - Tc, 0.) / 70.) * step(T, kMax + 1.) + (1. - step(T, kMax + 1.));
+      col += mix(gold * 1.05, hot * 1.7, clamp(tipHot * (.35 + .65 * glowTip) + .12, 0., 1.)) * fr * front;
       // ---- the survey chart (station phase)
       if (topo > 0.001) {
         float d = length(w);
-        float rv = smoothstep(reveal, reveal - 90., d) * topo;
-        // coastline: x' = coastX(y) in world cells (sea to the right of the station)
-        float coast = rmax * 1.62 + 38. * sin(w.y * .0062 + 1.3) + 22. * sin(w.y * .017 + .4) + 26. * (fbm3(vec2(w.y * .006, 3.1)) - .5);
-        float s = w.x - coast;                      // > 0 sea, < 0 land
+        float rv = smoothstep(reveal, reveal - 240., d) * topo * exp(-pow(max(d - rmax * 1.2, 0.) / (rmax * 2.2), 2.));
+        // coastline: a curve across the sea direction (seaAng, world frame)
+        vec2 sd = vec2(cos(seaAng), sin(seaAng)); vec2 sp = vec2(-sd.y, sd.x);
+        float along = dot(w, sp), across = dot(w, sd);
+        float coast = rmax * 1.55 + 42. * sin(along * .0058 + 1.3) + 18. * sin(along * .016 + .4) + 22. * (vnoise(vec2(along * .009, 3.1)) - .5);
+        float s = across - coast;                   // > 0 sea, < 0 land
         float sgl = max(length(vec2(dFdx(s), dFdy(s))), 1e-4);
         vec3 ink = gold * .72;
         // coastline itself
-        float cl = aaLine(abs(s) / sgl, 1.1 * s1);
-        col += gold * cl * rv * 1.1;
-        // water-lining: lines parallel to the coast, spacing widening seaward
+        col += gold * aaLine(abs(s) / sgl, 1.1 * s1) * rv * 1.1;
+        // water-lining: lines parallel to the coast, spacing widening seaward (the engraver's sea)
         if (s > 0.) {
-          float gw = sqrt(s / 7.); float dw = abs(fract(gw + .5) - .5) / max(length(vec2(dFdx(gw), dFdy(gw))), 1e-4);
-          float fade = exp(-s / 260.);
-          col += ink * aaLine(dw, .95 * s1) * fade * rv * .85;
+          float gw = sqrt(s / 6.); float dw = abs(fract(gw + .5) - .5) / max(length(vec2(dFdx(gw), dFdy(gw))), 1e-4);
+          col += ink * aaLine(dw, .95 * s1) * exp(-s / 300.) * rv * .85 * smoothstep(0., 3., s);
         }
-        // cliff hachures: short strokes down the slope, along the coast
-        float cliffW = 34. + 14. * sin(w.y * .03);
+        // cliff hachures: short strokes down the slope, spaced along the coast
+        float cliffW = 30. + 12. * sin(along * .03);
         if (s < 0. && s > -cliffW) {
-          float u = w.y / 5.2 + .25 * sin(w.y * .1);
+          float u = along / 5.6;
           float du = abs(fract(u + .5) - .5) / max(length(vec2(dFdx(u), dFdy(u))), 1e-4);
-          float len = smoothstep(-cliffW, -cliffW * .55, s) * (.6 + .4 * fbm3(vec2(w.y * .05, 1.)));
+          float len = .55 + .45 * vnoise(vec2(floor(u) * .37, 1.7));
           col += ink * aaLine(du, .95 * s1) * step(-cliffW * len, s) * rv;
         }
-        // land contours from a gentle height field; the station sits on a levelled plateau
-        if (s < -cliffW * .6) {
-          float h = 24. * fbm3(w * .0042 + 7.) + 10. * fbm3(w * .011 + 2.) + s * -.02;
-          h = mix(h, 17., smoothstep(rmax * 1.25, rmax * 1.05, d));
-          float hl = h / 2.6; float dh = abs(fract(hl + .5) - .5) / max(length(vec2(dFdx(hl), dFdy(hl))), 1e-4);
-          float cs = 1. / max(length(vec2(dFdx(hl), dFdy(hl))), 1e-4);
-          col += ink * .8 * aaLine(dh, .95 * s1) * smoothstep(6. * s1, 11. * s1, cs) * rv * smoothstep(rmax * 1.08, rmax * 1.2, d);
+        // land contours: a gentle height field, levelled where the station stands; only a few, widely spaced
+        if (s < -cliffW * .7) {
+          vec2 lw = vec2(along, across);
+          float h = 9. * vnoise(lw * .0030 + 7.) + 3. * vnoise(lw * .0075 + 2.) - s * .010;
+          h = mix(h, 6.2, smoothstep(rmax * 1.35, rmax * 1.08, d));
+          float hl = h / 1.7; vec2 hg = vec2(dFdx(hl), dFdy(hl)); float hgl = max(length(hg), 1e-4);
+          float dh = abs(fract(hl + .5) - .5) / hgl;
+          col += ink * .7 * aaLine(dh, .95 * s1) * smoothstep(7. * s1, 13. * s1, 1. / hgl) * rv * smoothstep(rmax * 1.12, rmax * 1.28, d);
         }
       }
       fragColor = vec4(col, 1.);
@@ -105,7 +117,7 @@ function material(e) {
     tHex: { value: null }, N: { value: 1 }, k: { value: 0 }, kMax: { value: 1 }, dLevel: { value: 20 },
     center: { value: new THREE.Vector2(960, 540) }, sc: { value: 2 }, ang: { value: 0 }, S: { value: e.S }, rmax: { value: 180 },
     interior: { value: 1 }, front: { value: 1 }, fillA: { value: 0.04 }, glowTip: { value: 0 },
-    topo: { value: 0 }, reveal: { value: 0 }, gold: { value: new THREE.Color() }, hot: { value: new THREE.Color() }, bg: { value: new THREE.Color() }, time: { value: 0 },
+    topo: { value: 0 }, reveal: { value: 0 }, seaAng: { value: 0 }, gold: { value: new THREE.Color() }, hot: { value: new THREE.Color() }, bg: { value: new THREE.Color() }, time: { value: 0 },
   });
   return mat;
 }
@@ -132,7 +144,8 @@ function cam(ctx, shot, t, p, F) {
   // growth: fast first (the six arms read at once), slowing as the side branches fill in
   const u = range(t, g0, g1);
   const k = F.kMax * (0.035 + 0.965 * (1 - Math.pow(1 - u, 1.7)));
-  return { g0, g1, r0, r1, rise, zoom, ang, cx, cy, sc, k, u };
+  const angEnd = Math.PI / 2 + (p.ang ?? 0) + 0.05 - 0.16;
+  return { g0, g1, r0, r1, rise, zoom, ang, angEnd, cx, cy, sc, k, u };
 }
 
 export const look = { bloom: 0.75, bloomThreshold: 0.72, halation: 0.25, vignette: 0.3, grain: 0.03, streak: 0.25, streakThreshold: 1.4, streakCol: [1.0, 0.8, 0.5] };
@@ -152,6 +165,7 @@ export default {
     u.glowTip.value = 1 - C.u;
     u.topo.value = smooth(range(C.rise, 0.25, 0.95));
     u.reveal.value = lerp(F.rmax * 0.8, F.rmax * 4.2, easeOutCubic(range(C.rise, 0.2, 1.0)));
+    u.seaAng.value = (p.seaScreen ?? 0.55) - C.angEnd;
     u.gold.value.setRGB(...P.gold); u.hot.value.setRGB(...P.goldPale); u.bg.value.setRGB(...P.void);
     e.pass(m, e.rtScene);
 
@@ -237,7 +251,7 @@ export default {
     // the seed: a point of light before the first arms
     const seed = 1 - smooth(range(t, C.g0, C.g0 + 0.5));
     if (seed > 0) hotPoint(c, C.cx, C.cy, seed * 0.9);
-    e.blit2d('over', 1.8);
+    blitGold(e, 'over', 1.7);
     ctx.state.snow = C;
   },
 
@@ -252,7 +266,6 @@ export default {
     if (p.labels !== false) {
       const a = smooth(range(C.rise, 0.6, 1.0));
       ty.label('SIGNAL STATION · PLAN', 96, 104, { alpha: a * 0.95, size: 14, color: P.bookGold });
-      ty.label('SIX DISHES ON THE CLIFF', 96, 130, { alpha: a * 0.7, size: 12, color: P.bookGold });
       ty.label('N', 1700, 806, { alpha: a * 0.9, size: 13, align: 'center', color: P.bookGold });
       ty.label('0', 1560, 990, { alpha: a * 0.8, size: 11, align: 'center', color: P.bookGold });
       ty.label('200 M', 1720, 990, { alpha: a * 0.8, size: 11, align: 'center', color: P.bookGold });

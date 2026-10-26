@@ -68,7 +68,13 @@ export class TypeLayer {
     c.textBaseline = o.base || 'alphabetic';
     c.globalAlpha = clamp(o.alpha ?? 1);
     const col = o.color || P.cream;
-    if (o.glow) { c.shadowColor = css(o.glowColor || col, 0.9); c.shadowBlur = o.glow; }
+    // shade: a soft dark halo under the glyphs so small type holds contrast over busy plates (phone legibility)
+    if (o.shade) {
+      c.shadowColor = css(P.void, clamp(o.shade)); c.shadowBlur = (o.size || 64) * 0.45;
+      c.fillStyle = css(P.void, clamp(o.shade) * 0.7);
+      c.fillText(str, x, y); c.fillText(str, x, y);
+    }
+    if (o.glow) { c.shadowColor = css(o.glowColor || col, 0.9); c.shadowBlur = o.glow; } else c.shadowBlur = 0;
     c.fillStyle = css(col);
     c.fillText(str, x, y);
     const w = c.measureText(str).width;
@@ -122,8 +128,9 @@ export class TypeLayer {
     if (!L) return 0;
     const words = L.words || [];
     const mode = o.mode || 'fade';
-    const size = o.size || 72, font = o.font || 'Cormorant';
-    const style = { font, size, weight: o.weight || 400, stretch: o.stretch, track: o.track || 0 };
+    // lyric lines never go below minSize (60 px at 1080p, the smallest that survives a phone feed); smaller type is for captions
+    const size = Math.max(o.size || 72, o.minSize ?? 60), font = o.font || 'Cormorant';
+    const style = { font, size, weight: o.weight || 400, stretch: o.stretch, track: o.track || 0, shade: o.shade ?? (o.glow ? 0 : 0.8) };
     const space = this.measure(' ', style) * (o.spaceK || 1);
     const maxW = o.maxW || 1500;
     const rows = [[]]; let rw = 0;
@@ -201,7 +208,7 @@ export class TypeLayer {
     lines.forEach((ln, i) => {
       const ai = a * smooth(range(t, t0 + 0.25 + i * 0.35, t0 + 0.75 + i * 0.35));
       const indent = (ln.match(/^\s*/)[0].length) * size * 0.5;
-      this.text(ln.trim(), x + indent, y + 30 + 54 + i * size * 1.25, { font: 'Cormorant', size, weight: 400, alpha: ai });
+      this.text(ln.trim(), x + indent, y + 30 + 54 + i * size * 1.25, { font: 'Cormorant', size, weight: 400, alpha: ai, shade: 0.8 });
     });
   }
 

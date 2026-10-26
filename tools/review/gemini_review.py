@@ -29,8 +29,8 @@ def texts(x):
     if isinstance(x, dict):
         for k, v in x.items():
             if k == 'text' and isinstance(v, str): yield v
-            elif isinstance(v, (dict, list)): yield from texts(v)
-    elif isinstance(x, list):
+            elif isinstance(v, (dict, list, tuple)): yield from texts(v)
+    elif isinstance(x, (list, tuple)):
         for v in x: yield from texts(v)
 json.dump(res, open(os.path.join(ROOT, 'work', 'logs', 'gemini_last.json'), 'w'))
 txt = ''.join(texts(res))

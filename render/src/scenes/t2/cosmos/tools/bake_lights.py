@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bake the cosmos group's Earth-at-night light map (equirectangular, 4096x2048, 8-bit grey) and city list.
+"""Bake the cosmos group's Earth-at-night light map (equirectangular, 4096x2048, 8-bit grey + land mask in alpha) and city list.
 
 Source data (public domain): Natural Earth 1:50m populated places and the 4k land mask from the Rare Earth renderer
 (rare-earth-techno-remix/render/assets/geo). The map is a model, not a photo: population-weighted metro glows,
@@ -144,8 +144,9 @@ L = blur(L, 0.6) * 0.5 + L * 0.5
 L *= np.clip(landS * 1.4, 0, 1) * 0.92 + 0.08 * (towns > 0)
 img = 1 - np.exp(-L * 2.2)
 img = np.clip(img, 0, 1) ** 0.85
-Image.fromarray((img * 255 + 0.5).astype(np.uint8), 'L').save(f'{OUT}/earth_lights.png', optimize=True)
-Image.fromarray((land * 255 + 0.5).astype(np.uint8), 'L').save(f'{OUT}/earth_land.png', optimize=True)
+# one texture, one fetch: grey = the lights, alpha = the land mask
+la = np.stack([(img * 255 + 0.5).astype(np.uint8), (land * 255 + 0.5).astype(np.uint8)], axis=-1)
+Image.fromarray(la, 'LA').save(f'{OUT}/earth_lights.png', optimize=True)
 big = sorted(cities, key=lambda c: -c[2])
 json.dump({'source': 'Natural Earth 1:50m populated places (public domain)',
            'cities': [[round(c[0], 3), round(c[1], 3), int(c[2]), round(c[3], 2)] for c in big]},

@@ -20,7 +20,7 @@ const expoOut = (x) => (x >= 1 ? 1 : 1 - Math.pow(2, -9 * clamp(x)));
 // a log-altitude zoom out over a target, one jump per shout, a slow creep between
 function scaleCam(t, p, A) {
   const S = p.shouts || shoutTimes(A, 'Post-Chorus 2', [134.06, 134.66, 135.29, 135.89, 136.6, 137.16]);
-  const alts = p.alts || [40, 110, 330, 1100, 3600, 17500];
+  const alts = p.alts || [40, 110, 700, 1600, 4200, 17500];
   const tg = p.target || [30.06, 31.24];
   let la = Math.log(alts[0] * 0.8);
   for (let i = 0; i < S.length; i++) {
@@ -63,7 +63,7 @@ export default {
     // closer than ~600 km the atmosphere is a band at the horizon; the airglow reads; far out it is a hairline
     const altK = smooth(range(Math.log(ec.alt * 6371), Math.log(600), Math.log(12000)));
     drawEarth(ctx, ec, {
-      sun, gain: (p.gain ?? 1.7) * lerp(1.15, 1, altK), detail: p.detail ?? 1, cloudK: p.clouds ?? 0.9,
+      sun, gain: (p.gain ?? 1.7) * (view === 'iss' ? 1.15 : lerp(0.7, 1, altK)), detail: p.detail ?? 1, cloudK: p.clouds ?? 0.9,
       atmoK: lerp(1.2, 1.0, altK), airK: lerp(0.5, 0.25, altK), landK: 1, sweep,
     }, p.over ? 'add' : 'replace');
   },

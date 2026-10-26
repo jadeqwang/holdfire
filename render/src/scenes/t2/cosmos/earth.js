@@ -13,7 +13,7 @@ import { C } from './common.js';
 import { SpriteBatch, LineBatch, setCommon } from './gfx.js';
 
 const D2R = Math.PI / 180, RKM = 6371;
-let mat = null, texL = null, texLand = null, cloudRT = null, CITIES = null, scene3 = null;
+let mat = null, texL = null, cloudRT = null, CITIES = null, scene3 = null;
 
 export const vecLL = (lat, lon, r = 1) => [r * Math.cos(lat * D2R) * Math.sin(lon * D2R), r * Math.sin(lat * D2R), r * Math.cos(lat * D2R) * Math.cos(lon * D2R)];
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -104,16 +104,15 @@ function bakeClouds(e) {
 export async function initEarth(ctx) {
   const e = ctx.engine;
   if (mat) return;
-  const [L, Ld, cj] = await Promise.all([loadTex('assets/t2/earth_lights.png'), loadTex('assets/t2/earth_land.png'),
-    fetch('assets/t2/earth_cities.json').then((r) => r.json())]);
-  texL = L; texLand = Ld; CITIES = cj.cities;
+  const [L, cj] = await Promise.all([loadTex('assets/t2/earth_lights.png'), fetch('assets/t2/earth_cities.json').then((r) => r.json())]);
+  texL = L; CITIES = cj.cities;
   cloudRT = bakeClouds(e);
   mat = e.shader(NOISE3 + /* glsl */`
-    uniform sampler2D tL; uniform sampler2D tLand; uniform sampler2D tCl;
+    uniform sampler2D tL; uniform sampler2D tCl;
     uniform vec3 camPos; uniform vec3 cF; uniform vec3 cR; uniform vec3 cU; uniform float tanH; uniform vec2 off;
     uniform vec3 sunDir; uniform float gain; uniform vec3 colA; uniform vec3 colB; uniform float landK; uniform float cloudK;
     uniform vec3 atmoCol; uniform float atmoK; uniform float airK; uniform float detail; uniform float time;
-    uniform vec4 imp[48]; uniform int nImp; uniform vec4 sweep; uniform float S; uniform float dark; uniform float redK; uniform float flashK; uniform vec2 spin;
+    uniform sampler2D tImp; uniform float useImp; uniform vec4 sweep; uniform float S; uniform float dark; uniform float redK; uniform float flashK; uniform vec2 spin;
     const float PI = 3.14159265;
     vec4 samp(sampler2D t, vec2 uv, vec2 dx, vec2 dy){ return textureGrad(t, uv, dx, dy); }
     void main(){
@@ -146,8 +145,8 @@ export async function initEarth(ctx) {
         vec2 uv = vec2(lon / (2. * PI) + .5, .5 - lat / PI);
         vec2 dx = dFdx(uv), dy = dFdy(uv);
         if (abs(dx.x) > .5) dx.x -= sign(dx.x); if (abs(dy.x) > .5) dy.x -= sign(dy.x);
-        float L = samp(tL, uv, dx, dy).r;
-        float land = samp(tLand, uv, dx, dy).r;
+        vec4 la = samp(tL, uv, dx, dy);
+        float L = la.r, land = la.a;
         float cl = samp(tCl, vec2(uv.x, 1. - uv.y), vec2(dx.x, -dx.y), vec2(dy.x, -dy.y)).r * cloudK;
         float mu = max(dot(n, -rd), 0.);
         float day = smoothstep(-.06, .3, dot(n, sunN));
@@ -157,13 +156,13 @@ export async function initEarth(ctx) {
         if (abs(qx.x) > 20000.) qx.x = 0.; if (abs(qy.x) > 20000.) qy.x = 0.;
         float fw = max(length(qx), length(qy)) * S;   // km per design px (resolution independent)
         float Ld = pow(L, 1.35);
-        if (detail > 0. && fw < 4.) {
+        if (detail > 0. && fw < .2) {
           // magnified, the baked map becomes an urban density (a smoother mip) and the picture is drawn as discrete
           // lights: three octaves of points strung on street lattices (each district its own orientation), every
           // octave mean-preserving, so the city keeps its brightness while it resolves into streets and lamps
           float Ls = textureLod(tL, uv, 2.).r;
           float org = smoothstep(.2, .75, vnoise(qk / 3.3 + 7.) * .7 + vnoise(qk / 1.1 + 2.) * .3);
-          float dens = clamp(Ls * 1.2, 0., 1.) * (.65 + .45 * org);
+          float densM = clamp(Ls * 1.2, 0., 1.), dens = densM * (.65 + .45 * org);
           // districts: each its own street orientation
           vec2 dc = floor(qk / 6.5 + vnoise(qk / 5.) * .7);
           vec2 r = rot(.35 + (hash12(dc) - .5) * .7) * qk;
@@ -180,38 +179,31 @@ export async function initEarth(ctx) {
             float ln = max((1. - smoothstep(0., w, dl.x)) * keep.x, (1. - smoothstep(0., w, dl.y)) * keep.y) * af * lamp;
             float vis = smoothstep(s / 6., s / 11., fw);
             float mean = .09 * (o == 0 ? .7 : .9);
-            acc += mix(mean, ln, vis) * (o == 0 ? 2.2 : 3.2) * (o == 0 ? dens : sqrt(dens));
+            acc += mix(mean * (o == 0 ? densM : sqrt(densM)), ln * (o == 0 ? dens : sqrt(dens)), vis) * (o == 0 ? 2.2 : 3.2);
           }
           // a scatter of bright points: stadiums, yards, towers
           vec2 c2 = floor(qk / .5); vec2 hp = hash22(c2) - .5;
           float pd = length(fract(qk / .5) - .5 - hp * .7) * .5;
           float rp = max(fw * .8, .02);
           acc += step(.93, hash12(c2 + 9.)) * exp(-pd * pd / (rp * rp)) * min(6., .02 / (rp * rp) * .1) * dens;
-          acc += .06 * dens;
+          acc += .06 * densM;
           acc *= .4;
-          float dk = smoothstep(4., 1.2, fw) * detail;
+          float dk = smoothstep(.2, .08, fw) * detail;
           Ld = mix(Ld, acc, dk);
         }
         float kill = 0., fire = 0., flash = 0.;
-        for (int i = 0; i < 48; i++) {
-          if (i >= nImp) break;
-          vec4 m = imp[i]; if (m.w < 0.) continue;
-          float d = distance(g, m.xyz), age = m.w;
-          if (d > .1) continue;                                   // nothing of a detonation reaches past ~600 km
-          float rb = .006 + .022 * (1. - exp(-age / .9));
-          kill = max(kill, smoothstep(rb * 3.2, rb * 1.2, d) * clamp(age / .25, 0., 1.));
-          float fn = vnoise(n.xy * 900. + float(i) * 3.1) * .6 + .4;
-          fire += smoothstep(rb, rb * .3, d) * fn * (.5 + 1.5 * exp(-age / .5)) * (.35 + .65 * exp(-age / 4.));
-          flash += exp(-d * d / pow(.004 + .03 * clamp(age / .18, 0., 1.), 2.)) * exp(-age / .09) * 6.;
+        if (useImp > .5) {
+          vec4 im = texture(tImp, vec2(uv.x, 1. - uv.y));
+          kill = im.r; flash = im.b * 8.;
+          if (im.g > .002) fire = im.g * 4. * (vnoise(g.xy * 900. + g.z * 300.) * .6 + .4);
         }
         float on = 1., front = 0.;
         if (sweep.w > -.5) { float sd = (1. - dot(g, normalize(sweep.xyz))) * .5; on = 1. - smoothstep(sweep.w - .03, sweep.w + .03, sd); front = exp(-pow((sd - sweep.w) / .012, 2.)) * step(sweep.w, 1.); }
         kill = max(kill, 1. - on);
         float lights = Ld * gain * (1. - day * .92) * (1. - .55 * cl) * (1. - kill) * (1. - dark) * (1. + 2.5 * front);
-        vec3 lc = mix(colA, colB, clamp(Ld * 1.1 - .1, 0., 1.) * (1. - .7 * smoothstep(4., 1.2, fw) * detail));
+        vec3 lc = mix(colA, colB, clamp(Ld * 1.1 - .1, 0., 1.) * (1. - .7 * smoothstep(.2, .08, fw) * detail));
         col = lc * lights;
-        // light under cloud scatters wider (a mip-blurred lookup)
-        if (cl > .02) col += colA * texture(tL, uv, 4.).r * gain * .25 * cl * (1. - day) * (1. - kill) * (1. - dark);
+                col += colA * L * gain * .18 * cl * (1. - day) * (1. - kill) * (1. - dark);   // light under cloud scatters
         // moonlit land and cloud, faint; the day side (if any) deep blue
         col += vec3(.03, .042, .065) * land * landK * (.4 + .6 * mu);
         col += vec3(.06, .075, .1) * cl * landK * 1.4;
@@ -226,15 +218,45 @@ export async function initEarth(ctx) {
       }
       fragColor = vec4(col, 1.);
     }`, {
-    tL: { value: texL }, tLand: { value: texLand }, tCl: { value: cloudRT.texture },
+    tL: { value: texL }, tCl: { value: cloudRT.texture },
     camPos: { value: new THREE.Vector3() }, cF: { value: new THREE.Vector3() }, cR: { value: new THREE.Vector3() }, cU: { value: new THREE.Vector3() },
     tanH: { value: 0.4 }, off: { value: new THREE.Vector2() }, sunDir: { value: new THREE.Vector3(0, 0, -1) },
     gain: { value: 1.7 }, colA: { value: new THREE.Color(...C.sodium) }, colB: { value: new THREE.Color(1.0, 0.9, 0.7) },
     landK: { value: 1 }, cloudK: { value: 1 }, atmoCol: { value: new THREE.Color(...C.pale) }, atmoK: { value: 1 }, airK: { value: 0.35 },
-    detail: { value: 1 }, time: { value: 0 }, imp: { value: Array.from({ length: 48 }, () => new THREE.Vector4(0, 0, 0, -1)) }, nImp: { value: 0 },
+    detail: { value: 1 }, time: { value: 0 }, tImp: { value: null }, useImp: { value: 0 },
     S: { value: e.S }, dark: { value: 0 }, sweep: { value: new THREE.Vector4(0, 0, 1, -1) }, redK: { value: 0 }, flashK: { value: 0 }, spin: { value: new THREE.Vector2() },
   });
   scene3 = new THREE.Scene();
+}
+
+// the detonations as an equirect field (r = lights killed, g = fire / 4, b = flash / 8), one pass at 1024x512 per frame:
+// a fraction of the cost of looping every impact for every screen pixel
+let impRT = null, impMat = null;
+function impactField(e, imps) {
+  if (!impRT) {
+    impRT = new THREE.WebGLRenderTarget(1024, 512, { type: THREE.HalfFloatType, depthBuffer: false, minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, wrapS: THREE.RepeatWrapping });
+    impMat = e.shader(/* glsl */`
+      uniform vec4 imp[48]; uniform int nImp;
+      void main(){
+        float lon = (vUv.x - .5) * 6.2831853, lat = (vUv.y - .5) * 3.14159265;
+        vec3 g = vec3(cos(lat) * sin(lon), sin(lat), cos(lat) * cos(lon));
+        float kill = 0., fire = 0., flash = 0.;
+        for (int i = 0; i < 48; i++) {
+          if (i >= nImp) break;
+          vec4 m = imp[i]; float d = distance(g, m.xyz), age = m.w;
+          if (d > .1) continue;
+          float rb = .006 + .022 * (1. - exp(-age / .9));
+          kill = max(kill, smoothstep(rb * 3.2, rb * 1.2, d) * clamp(age / .25, 0., 1.));
+          fire += smoothstep(rb, rb * .3, d) * (.5 + 1.5 * exp(-age / .5)) * (.35 + .65 * exp(-age / 4.));
+          flash += exp(-d * d / pow(.006 + .042 * clamp(age / .2, 0., 1.), 2.)) * exp(-age / .13) * 6.;
+        }
+        fragColor = vec4(kill, fire * .25, flash * .125, 1.);
+      }`, { imp: { value: Array.from({ length: 48 }, () => new THREE.Vector4(0, 0, 0, -1)) }, nImp: { value: 0 } });
+  }
+  const u = impMat.uniforms;
+  for (let i = 0; i < 48; i++) { const m = imps[i]; if (m) u.imp.value[i].set(m[0], m[1], m[2], m[3]); else u.imp.value[i].set(0, 0, 0, -1); }
+  u.nImp.value = Math.min(48, imps.length);
+  e.pass(impMat, impRT);
 }
 
 export const earthCities = () => CITIES;
@@ -250,9 +272,9 @@ export function drawEarth(ctx, ec, o = {}, blend = 'replace') {
   u.detail.value = o.detail ?? 1; u.time.value = ctx.t;
   u.colA.value.setRGB(...(o.colA || C.sodium)); u.colB.value.setRGB(...(o.colB || [1.0, 0.9, 0.7]));
   if (o.atmoCol) u.atmoCol.value.setRGB(...o.atmoCol); else u.atmoCol.value.setRGB(...C.pale);
-  const imps = o.impacts || [];
-  for (let i = 0; i < 48; i++) { const m = imps[i]; if (m) u.imp.value[i].set(m[0], m[1], m[2], m[3]); else u.imp.value[i].set(0, 0, 0, -1); }
-  u.nImp.value = Math.min(48, imps.length);
+  const imps = (o.impacts || []).filter((m) => m[3] >= 0);
+  u.useImp.value = imps.length ? 1 : 0;
+  if (imps.length) { impactField(e, imps); u.tImp.value = impRT.texture; }
   if (o.sweep) u.sweep.value.set(o.sweep[0], o.sweep[1], o.sweep[2], o.sweep[3]); else u.sweep.value.set(0, 0, 1, -1);
   u.dark.value = clamp(o.dark ?? 0); u.redK.value = clamp(o.red ?? 0); u.flashK.value = o.flash ?? 0;
   u.spin.value.set((o.spin ?? 0) * D2R, 0);

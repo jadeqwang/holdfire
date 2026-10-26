@@ -19,6 +19,6 @@ export default {
     if (!p.over) drawSky(ctx, { density: 0.3, band: 0.4, bandAng: 0.9, neb: 0.1, nebCol: [0.01, 0.02, 0.04], nebCol2: [0.02, 0.016, 0.012], seed: 23, exposure: 0.6, ...(p.sky || {}) });
     const fi = p.fadeIn ?? 0.35, fo = p.fadeOut ?? 0;
     const k = smooth(range(t, t0, t0 + fi)) * (fo > 0 ? 1 - smooth(range(t, t1 - fo, t1)) : 1);
-    drawDot(e, x, y, p.r ?? 2.8, (p.I ?? 3.0) * k, p.col || mixc(C.cream, C.goldHot, 0.25), 4);
+    drawDot(e, x, y, p.r ?? 3.0, (p.I ?? 4.5) * k, p.col || mixc(C.cream, C.goldHot, 0.25), 4);
   },
 };

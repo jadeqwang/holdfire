@@ -1,0 +1,19 @@
+{
+ "CO01": [
+  {
+   "tag": "t2_CO01_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_CO01_veo_t1-66747bd17f",
+   "kf": "media/kf2/CO01_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO01_veo_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_CO01_veo_t1_66747bd17f.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.8,
+   "verdict": "reject: blinks/half-closes at 0.4-0.8 s and reframes",
+   "lag": null,
+   "pick": false
+  }
+ ]
+}

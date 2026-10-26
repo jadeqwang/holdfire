@@ -9,6 +9,13 @@
 // Type is one track of cues laid over the cuts (a word can outlive the cut it was sung in); see the TYPE SYSTEM block.
 import { smooth, range, clamp, lerp, easeOutCubic, easeOutExpo, easeInOutCubic } from './util.js';
 import { P } from './palette.js';
+// scene groups' own looks (modules that import cleanly in node, so tools/shots_json.mjs still loads the edit)
+import { CHESS_LOOK, DIVE_LOOK } from './scenes/t2/chess/chess.js';
+import { look as NEARMISS_LOOK } from './scenes/t2/data/nearmiss.js';
+import { look as COIN_LOOK, treeLook as TREE_LOOK } from './scenes/t2/data/coins.js';
+import { look as COUNTER_LOOK } from './scenes/t2/data/counter.js';
+import { look as CRT_LOOK } from './scenes/t2/data/crtmatrix.js';
+import { look as PETROV_LOOK } from './scenes/t2/data/petrov.js';
 
 // ------------------------------------------------------------------------------------------------ type system (take two)
 // HERO    Archivo 900, caps, word-synced slam, fitted inside the centred 4:5 safe area (x 528-1392), upper third by default
@@ -162,11 +169,13 @@ const LK = {
   gouache: { bloom: 0.3, bloomThreshold: 0.9, vignette: 0.25, grain: 0.03 },
   riso: { bloom: 0.25, bloomThreshold: 0.9, vignette: 0.15, grain: 0.045 },
   ink: { bloom: 0.15, bloomThreshold: 0.95, vignette: 0.25, grain: 0.03, typeGlow: 0.1 },
+  inkProc: { tonemap: 0, bloom: 0.45, bloomThreshold: 1.15, halation: 0.2, halCol: [1.0, 0.35, 0.15], streak: 0, grain: 0.018, vignette: 0.18, typeGlow: 0 },   // history group's ink scenes (rice paper, display-referred)
   oil: { bloom: 0.3, bloomThreshold: 0.8, halation: 0.45, halCol: [1.0, 0.15, 0.06], vignette: 0.5, grain: 0.04 },
   newsprint: { bloom: 0.12, bloomThreshold: 0.95, vignette: 0.2, grain: 0.045, typeGlow: 0.1 },
   gold: { bloom: 0.6, bloomThreshold: 0.8, halation: 0.15, vignette: 0.25, grain: 0.02 },
   anime: { bloom: 0.5, bloomThreshold: 0.8, vignette: 0.25, grain: 0.02 },
   poster: { bloom: 0.12, bloomThreshold: 0.95, vignette: 0.2, grain: 0.045, typeGlow: 0.1 },
+  posterProc: { tonemap: 0, bloom: 0.2, bloomThreshold: 1.2, halation: 0.1, streak: 0, grain: 0.02, vignette: 0.12, typeGlow: 0 },   // t2_poster_morph / t2_arkhipov
   war: { bloom: 0.75, bloomThreshold: 0.7, halation: 0.35, halCol: [1.0, 0.12, 0.06], vignette: 0.35, grain: 0.03 },
   mirror: { bloom: 0.3, bloomThreshold: 0.9, vignette: 0.05, grain: 0.015 },
   light: { bloom: 0.8, bloomThreshold: 0.7, halation: 0.2, streak: 0.3, vignette: 0.3, grain: 0.02 },
@@ -257,6 +266,10 @@ export function buildTimeline(A) {
     const s = { id, section: SEC, t0: anchor.t, t1: null, anchor, plan, ...spec, p: subst(spec.p || {}, id) };
     shots.push(s); return s;
   };
+  // reserve(n): skip n shot numbers, so merging shots that one continuous scene draws keeps every later id (picks, keyframes
+  // and takes are keyed by shot id) unchanged
+  const reserve = (n) => { counters[SEC] = (counters[SEC] || 0) + n; };
+  const nextId = (k = 0) => `${SEC}${String((counters[SEC] || 0) + 1 + k).padStart(2, '0')}`;   // the id the k-th next S() gets
   const plate = (p = {}) => ({ scene: 't2_plate', p: { clip: '@', ...p } });
   const still = (p = {}) => ({ scene: 't2_still', p: { img: '@', ...p } });
   const over = (base, ...layers) => ({ scene: 'multi', p: { layers: [base, ...layers] } });
@@ -290,7 +303,9 @@ export function buildTimeline(A) {
   section('CO');
   const subHit = ev('sub_hit', null, 0);
   const intro0 = LN('CO', 0), intro1 = LN('CO', 1);
-  const coEye = S('0:00.0', START, { ...over(plate({ zoom: 1.0, push: 0.02 }), { scene: 't2_seed_spiral', p: { center: [960, 540], settle: intro0.t - 0.4 } }),
+  // the pupil sits at (960, 523) in the CO01 keyframe (media/kf2/CO01_nbp_v1.jpg); the seeds follow the plate's push
+  const EYE = { zoom: 1.0, push: 0.02 }, PUPIL = [960, 523];
+  const coEye = S('0:00.0', START, { ...over(plate(EYE), { scene: 't2_seed_spiral', p: { ...EYE, center: PUPIL, R: 268, t0: subHit.t, settle: intro0.t - 0.4 } }),
     method: 'video', era: ERA.spiral, look: LK.photo,
     want: "Extreme close-up of Jade's eye in the dark, pale-blue dot catchlight; gold seeds drift into the iris and settle into a sunflower spiral; slow push in (thumbnail + loop point)" });
   const spiral = (want, extra = {}) => ({ ...plate({ zoom: 1.0, ...extra }), method: 'video', era: ERA.spiral, look: LK.photo, want: `${want}; spiral centre locked at frame centre` });
@@ -299,7 +314,8 @@ export function buildTimeline(A) {
   co.push(S('0:03.44', wd('CO', 0, 'one', 1), spiral('Pull back to the whole romanesco head: the floret was one of its florets')));
   co.push(S('0:04.08', wd('CO', 0, 'two'), spiral('Artichoke from above (real counts: 5 and 8 bract spirals)')));
   co.push(S('0:04.72', wd('CO', 0, 'three'), spiral('Sunflower head (34/55 or 55/89 spirals if traced)')));
-  co.push(S('0:05.30', wd('CO', 0, 'five'), { ...over(plate(), { scene: 't2_spiral_trace', p: { arms: 5, t0: wd('CO', 0, 'five').t } }), method: 'video', era: ERA.spiral, look: LK.photo,
+  // the aloe's five spiral rows (the one real count in the run); centre locked at frame centre like every spiral cut
+  co.push(S('0:05.30', wd('CO', 0, 'five'), { ...over(plate(), { scene: 't2_spiral_trace', p: { count: 5, hand: 1, center: [960, 540], r0: 60, r1: 480, turns: 0.42, t0: wd('CO', 0, 'five').t + 0.04, dur: 0.42 } }), method: 'video', era: ERA.spiral, look: LK.photo,
     want: 'Spiral aloe (Aloe polyphylla) from above; its five spiral rows of leaves trace in gold (the one real count)' }));
   co.push(S('0:06.00', wd('CO', 0, 'eight', 0), spiral('Hurricane from orbit (log spiral: no golden-rectangle overlay)')));
   const coGal = S('0:06.63', wd('CO', 0, 'eight', 1), spiral('Spiral galaxy, face on (if ESA/Hubble: visible "ESA/Hubble" credit)'));
@@ -399,7 +415,11 @@ export function buildTimeline(A) {
   S('0:35.50', wd('P1', 1, 'a'), { ...plate({ style: 'riso' }), method: 'video', era: ERA.signal, look: LK.riso,
     want: 'The Golden Record flashes in sunlight as Voyager turns away, then the craft speeds off into the dark, shrinking to a point' });
   const countingT = wd('P1', 2, 'counting');
-  S('0:38.07', countingT, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { counts: [1, 1, 2, 3, 5], t0: EIGHTHS.find((e) => e >= countingT.t - 0.02) } }), method: 'still', era: ERA.signal, look: LK.riso,
+  // TOWER_RING: the crown's ring of lamps in design px as the P102 still frames it (a placeholder until the still is picked:
+  // the generation agent should report the ellipse, or compose the tower so its crown sits here)
+  const TOWER_RING = { cx: 960, cy: 250, rx: 330, ry: 46 };
+  const burstT = EIGHTHS.filter((e) => e >= countingT.t - 0.02).slice(0, 5);   // 1, 1, 2, 3, 5 lamps on five eighths
+  S('0:38.07', countingT, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { counts: [1, 1, 2, 3, 5], times: burstT, ring: TOWER_RING } }), method: 'still', era: ERA.signal, look: LK.riso,
     want: 'Echo: the signal tower above the violet clouds (Rare Earth world sheet, panel 04) fires its ring of lights in bursts of 1, 1, 2, 3, 5 on eighths' });
   S('0:40.65', wd('P1', 3, 'a'), { scene: 't2_pulse_ride', p: { ly: 217 }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: 'Ride the pulse across the galaxy toward a small blue point: Echo, 217 light-years away (fictional; never presented as a real exoplanet)', notes: "teal-tips Jade's voice enters, heard not seen" });
@@ -425,12 +445,13 @@ export function buildTimeline(A) {
     want: 'Jade alone on the dish field at night; on the 0:51.82 downbeat every dish swings to the same point in the sky' });
   S('0:54.28', wd('C1', 1, 'message'), { scene: 'goldenrecord', p: {}, method: 'reuse', era: ERA.light, look: LK.diagram, want: "Take one's 0:54 diagram unchanged: the Golden Record cover engraves itself in gold light" });
   S('0:56.67', wd('C1', 2, 'but'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split screen: both Jades sing the line at their own consoles, neither aware of the other (left Jade, right teal-tips)' });
-  const crt = (n, want, extra = {}) => ({ scene: 't2_crt_matrix', p: { n, img: 'C104', ...extra }, method: 'still', era: ERA.crt, look: LK.crt, want });
+  // t2_crt_matrix is one continuous camera (close on one CRT, smash back on the two beats and on "swear"), so it is one shot;
+  // the beats and "swear" are passed in (the scene would otherwise take the beats after its own start)
+  const crt = (silent, sec, want, extra = {}) => ({ scene: 't2_crt_matrix', method: 'procedural', era: ERA.crt, look: CRT_LOOK, want,
+    p: { beats: [beatK(silent.t, 0).t, beatK(silent.t, 1).t], swear: wd(sec, 3, 'swear').t, ...extra } });
   const silent1 = wd('C1', 3, 'silent');
-  S('1:02.15', silent1, crt(1, 'Close on one 1999 CRT in a dark bedroom running the SETI@home screensaver (power-spectrum graph)'));
-  S('1:02.77', beatK(silent1.t, 0, '1st beat after "Silent"'), crt(4, 'Pull back: the screens multiply, 1 to 4'));
-  S('1:03.41', beatK(silent1.t, 1, '2nd beat after "Silent"'), crt(16, 'Pull back: 4 to 16 screens'));
-  S('1:03.99', wd('C1', 3, 'swear'), crt(400, 'A matrix of hundreds of CRTs fills the frame, each glowing in its own dark room (over a million people ran SETI@home)'));
+  S('1:02.15', silent1, crt(silent1, 'C1', 'Close on one 1999 CRT in a dark bedroom running the SETI@home screensaver (power-spectrum graph); on the beats at 1:02.77 and 1:03.41 the camera smashes back, 1 to 4 to 16 screens; on "swear" a matrix of hundreds of CRTs, each in its own dark room (over a million people ran SETI@home)'));
+  reserve(3);                                                                     // the matrix's other three cuts keep their numbers
   S('1:04.59', wd('C1', 4, 'in'), { ...plate({ staticT: wd('C1', 4, 'breathe').t }), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'The studio pose: teal-tips Jade (voice B line) at the console, one hand on her headphones, eyes closed, singing like a recording artist; screen static swells and falls on "breathe"',
     notes: 'plan says "Jade"; the timing tags this line B_belt, so teal-tips Jade sings it (chorus 2 has both in this pose)' });
@@ -465,13 +486,19 @@ export function buildTimeline(A) {
   section('V2');
   const ink = (want, extra = {}, more = {}) => ({ ...plate({ style: 'ink', ...extra }), method: 'video', era: ERA.ink, look: LK.ink, want, ...more });
   S('1:22.55', wd('V2', 0, 'priests'), ink('Ink wash: Daoist alchemists around a bronze cauldron in a mountain grotto, brewing an elixir of life; teal-tips Jade stands among them singing, the only cel-shaded figure', {}, { method: 'seedance_sung' }));
-  S('1:25.00', wd('V2', 1, 'sulfur'), { scene: 't2_ink_characters', p: { chars: '硫黃' }, method: 'procedural', era: ERA.ink, look: LK.ink, want: 'The characters for sulfur, 硫黃, brushed large' });
-  S(null, wd('V2', 1, 'saltpeter'), { scene: 't2_ink_characters', p: { chars: '硝石' }, method: 'procedural', era: ERA.ink, look: LK.ink, want: 'The characters for saltpeter, 硝石, brushed large' });
-  const thunder = wd('V2', 1, 'thunder');
-  S(null, thunder, { scene: 't2_ink_characters', p: { chars: '硫黃硝石', flashT: thunder.t }, method: 'procedural', era: ERA.ink,
-    look: (t, lt) => ({ ...LK.ink, shakeX: 8 * Math.exp(-lt / 0.09), shakeY: -5 * Math.exp(-lt / 0.09) }), want: 'Thunder: the mixture flashes and the ink splatters' });
-  const found = wd('V2', 2, 'found');
-  S('1:27.39', wd('V2', 2, 'looked'), { scene: 't2_scroll_warning', p: { text: '有以硫黃、雄黃合硝石，并蜜燒之，焰起燒手面，及燼屋舍者。', sealT: found.t }, method: 'procedural', era: ERA.ink, look: LK.ink,
+  // the k-th sixteenth after time x (grid times for things the scenes animate between word onsets)
+  const s16 = (x, k = 1) => SIXTEENTHS.filter((y) => y > x + 0.02)[k - 1];
+  const sulfur = wd('V2', 1, 'sulfur'), saltpeter = wd('V2', 1, 'saltpeter'), thunder = wd('V2', 1, 'thunder');
+  // t2_brush_chars: 硫 黃 硝 石 stroke by stroke (each word's second character two sixteenths after it), the flash on "thunder"
+  const charsP = { t: [sulfur.t, s16(sulfur.t, 2), saltpeter.t, s16(saltpeter.t, 2)], tFlash: thunder.t };
+  const inkShake = (t0, k = 1) => (t, lt) => ({ ...LK.inkProc, shakeX: 10 * k * Math.exp(-Math.max(0, t - t0) / 0.09) * Math.sin(t * 97) * (t >= t0 ? 1 : 0), shakeY: -7 * k * Math.exp(-Math.max(0, t - t0) / 0.09) * (t >= t0 ? 1 : 0) });
+  S('1:25.00', sulfur, { scene: 't2_brush_chars', p: charsP, method: 'procedural', era: ERA.ink, look: LK.inkProc, want: 'The characters for sulfur, 硫黃, brushed large' });
+  S(null, saltpeter, { scene: 't2_brush_chars', p: charsP, method: 'procedural', era: ERA.ink, look: LK.inkProc, want: 'The characters for saltpeter, 硝石, brushed large' });
+  S(null, thunder, { scene: 't2_brush_chars', p: charsP, method: 'procedural', era: ERA.ink, look: inkShake(thunder.t), want: 'Thunder: the mixture flashes and the ink splatters' });
+  const found = wd('V2', 2, 'found'), looked = wd('V2', 2, 'looked');
+  // the scroll writes from "looked" to just before "found"; the seal stamps on "found" (89.65 in timing.json; the plan prints 1:29.97)
+  const scrollP = { t0: looked.t + 0.03, t1: found.t - 0.12, tSeal: found.t };
+  S('1:27.39', looked, { scene: 't2_scroll_warning', p: scrollP, method: 'procedural', era: ERA.ink, look: (t) => ({ ...LK.inkProc, shakeY: 5 * (t >= found.t ? Math.exp(-(t - found.t) / 0.09) : 0) }),
     want: 'A brush writes the warning down a scroll in one column (Zhenyuan miaodao yaolüe, 9th c.); a red seal stamps on "found"; characters sharp enough to read when paused' });
   const weapons = [
     ['1:30.00', wd('V2', 3, 'an'), 'A fire lance (first recorded in battle at the siege of De\'an, 1132)', 1132],
@@ -479,48 +506,67 @@ export function buildTimeline(A) {
     ['1:30.92', beat('1:30.92'), 'Ottoman bombards breaking the walls of Constantinople (1453)', 1453],
     ['1:31.61', wd('V2', 3, 'level'), 'The shell-flattened ground of the Somme (1916)', 1916],
   ];
-  weapons.forEach(([pl, an, w]) => S(pl, an, { ...still({ style: 'ink' }), method: 'still', era: ERA.ink, look: LK.ink, want: `${w}; ink wash with harder, mechanical lines; the alchemists' smoke drifts across` }));
   const ground = wd('V2', 3, 'ground');
-  S('1:32.15', ground, { scene: 't2_burn_through', p: { from: 'ink', to: 'oil' }, method: 'procedural', era: ERA.ink, look: withLook(LK.ink, flash([1, 1, 1], 1.0, 0.25)),
+  // t2_ink_weapons draws all five images (procedural ink, or a generated still per image when its plate exists), their brushed
+  // years, the smoke between them and, on "ground", the Trinity flash burning through the paper into Petrov's oil painting:
+  // p.under = the Petrov opening shot's plate held on its first frame (the shot plays it from there), else the umber stand-in
+  const wpIds = weapons.map((w, i) => `work/plates/${nextId(i)}/f_00000.jpg`), petrovId = nextId(weapons.length + 1);
+  const petrovPlate = (extra = {}) => ({ scene: 't2_plate', p: { clip: petrovId, style: 'oil', ...extra } });
+  const backdrop = { scene: 't2_petrov_screen', p: { mode: 'backdrop' } };
+  const weaponsP = { t: [...weapons.map(([, an]) => an.t), ground.t], imgs: wpIds, under: { scene: 't2_first', p: { chain: [petrovPlate({ at: 0 }), backdrop] } } };
+  const shk = (t, t0, k) => (t >= t0 ? k * Math.exp(-(t - t0) / 0.09) : 0);
+  const wShake = (t) => ({ ...LK.inkProc, shakeX: shk(t, ground.t, 8) * Math.sin(t * 91), shakeY: shk(t, weapons[3][1].t, 6) + shk(t, weapons[2][1].t, 5) });
+  weapons.forEach(([pl, an, w]) => S(pl, an, { scene: 't2_ink_weapons', p: weaponsP, method: 'still', era: ERA.ink, look: wShake, want: `${w}; ink wash with harder, mechanical lines; the alchemists' smoke drifts across`, notes: 'still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists' }));
+  S('1:32.15', ground, { scene: 't2_ink_weapons', p: weaponsP, method: 'procedural', era: ERA.ink, look: (t, lt) => ({ ...wShake(t), flash: Math.exp(-Math.max(0, lt) / 0.25), flashCol: [1, 1, 1] }),
     want: "A white flash, the Trinity test (16 July 1945), burns through the paper into Petrov's oil painting; no mushroom cloud" });
   const oil = (want, extra = {}, more = {}) => ({ ...plate({ style: 'oil', ...extra }), method: 'video', era: ERA.oil, look: LK.oil, want, ...more });
-  S('1:32.60', wd('V2', 4, 'eighty-three'), oil('Oil painting: the Serpukhov-15 command post at night, one figure, light from the big screen'));
-  const five = wd('V2', 4, 'five');
-  S(null, wd('V2', 4, 'satellites'), { scene: 't2_petrov_screen', p: { tracks: [{ n: 1, t: wd('V2', 4, 'satellites').t + 0.2 }, { n: 5, t: five.t }] }, method: 'procedural', era: ERA.oil, look: LK.oil,
+  const petrovOpen = S('1:32.60', wd('V2', 4, 'eighty-three'), oil('Oil painting: the Serpukhov-15 command post at night, one figure, light from the big screen'));
+  if (petrovOpen.id !== petrovId) throw new Error(`Petrov opening id ${petrovOpen.id} != ${petrovId}`);
+  // the painting under the screens: the opening plate running on the song clock from its own start, else the umber stand-in
+  const painting = () => ({ scene: 't2_first', p: { chain: [petrovPlate({ at: (lt, t) => t - petrovOpen.t0 }), backdrop] } });
+  const screen = (mode, extra = {}) => ({ scene: 't2_petrov_screen', p: { mode, ...extra } });
+  const sat = wd('V2', 4, 'satellites'), saw = wd('V2', 4, 'saw'), five = wd('V2', 4, 'five');
+  // one track on "satellites", then four more: on "saw", two sixteenths, and "five"
+  S(null, sat, { ...over(painting(), screen('map', { tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'The big screen: one missile track rises from the United States, then four more on "five"' });
-  S('1:35.36', wd('V2', 5, 'every'), { scene: 't2_petrov_screen', p: { start: true, tracks: 5 }, method: 'procedural', era: ERA.oil, look: LK.oil,
+  const every = wd('V2', 5, 'every');
+  S('1:35.36', every, { ...over(painting(), screen('start', { t0: every.t, tRel: wd('V2', 5, 'said').t })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'The wall display lights up in big red letters, СТАРТ (drawn by the scene); reliability rated highest' });
   S(null, wd('V2', 5, 'first'), oil('Petrov sits with his hand near the phone (no launch button in the room)'));
-  S('1:37.88', wd('V2', 6, 'petrov'), { scene: 't2_petrov_screen', p: { tracks: 5, ghosts: true }, method: 'procedural', era: ERA.oil, look: LK.oil,
+  const petrovW = wd('V2', 6, 'petrov');
+  S('1:37.88', petrovW, { ...over(painting(), screen('ghost', { t0: petrovW.t, tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'Over the five tracks, a ghost of a real first strike (hundreds of tracks) fades and leaves five' });
   S('1:40.31', wd('V2', 7, 'ignored'), oil('He picks up the phone and reports a system malfunction'));
-  S(null, wd('V2', 7, 'previous'), { scene: 't2_protocol_strike', p: {}, method: 'procedural', era: ERA.oil, look: LK.oil, want: 'The printed protocol beside him is struck through line by line' });
+  const prev = wd('V2', 7, 'previous');
+  // the protocol sheet beside him, struck through line by line from "previous", one line per sixteenth
+  S(null, prev, { ...over(painting(), screen('protocol', { rect: [1180, 560, 520, 420], quad: [[1190, 610], [1640, 585], [1700, 1010], [1225, 1040]], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
+    want: 'The printed protocol beside him is struck through line by line' });
   S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', {}, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
   hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 150, y: 250, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });
-  const lookedT = wd('V2', 2, 'looked').t;
+  const lookedT = looked.t;
   // the gloss sits on a dark plate just above the years row (y 1000) and holds into the first weapons so it reads at < 3 words/s
   cue({ kind: 'cap', label: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE', t0: lookedT, t1: weapons[2][1].t, x: SAFE.cx, y: 896, lead: 38, band: true, draw: drawCaps,
     lines: [{ text: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES', t: lookedT, size: 26 }, { text: 'c. 850 CE', t: lookedT + 0.4, size: 22, color: [0.86, 0.8, 0.68] }] });
-  const yrs = [...weapons.map(([, an, , y]) => ({ text: String(y), t: an.t })), { text: '1945', t: ground.t }];
-  cue({ kind: 'years', label: '1132 · 1288 · 1453 · 1916 · 1945 (small, brushed, accumulating)', t0: yrs[0].t, t1: LN('V2', 4).t, items: yrs, y: 1000, draw: drawYears });
+  // the weapons' years (1132 · 1288 · 1453 · 1916 · 1945) are brushed by t2_ink_weapons itself, top left of each image
   sub('V2', 7, { to: 4, t1: wd('V2', 7, "we're").t });                                                                    // ignored all previous instructions
   hero(caps(lineWords('V2', 7, 4)), { rows: [2], size: 200, y: 330, t1: LN('P2', 0).t + 0.1, out: 0.1 });                 // WE'RE ALIVE
 
   // ============================================================================================== PRE-CHORUS 2 (102.99 to 113.18)
   section('P2');
-  S('1:42.99', wd('P2', 0, 'secret'), { scene: 't2_nearmiss', p: { phase: 'list', t0: LN('P2', 0).t, t1: LN('P2', 2).t }, method: 'procedural', era: ERA.newsprint, look: LK.newsprint,
-    want: 'The near-miss list scrolls on teletype paper (~5 lines/s, fact-checked list); years big, place and description small', notes: 'take one nearmiss re-skinned to newsprint' });
-  S('1:46.14', wd('P2', 1, 'running'), { scene: 't2_nearmiss', p: { phase: 'counter', t0: LN('P2', 0).t, t1: LN('P2', 2).t }, method: 'procedural', era: ERA.newsprint, look: LK.newsprint,
-    want: 'A counter beside the paper climbs as the entries pass; its digits keep rolling, never settling (no fixed total)' });
-  S('1:48.00', wd('P2', 2, 'coin'), { scene: 'coins', p: {}, method: 'reuse', era: ERA.newsprint, look: LK.gold,
-    want: 'coins.js: 100 gold coins land heads, the first stamped with the list\'s years, filling a 10 x 10 grid; the full 2^100 number types across the bottom', notes: 'plan: first 27 coins carry the fact-checked list\'s years (coins.js uses take one\'s 39: data update needed)' });
+  // t2_nearmiss is one continuous strip (paper and tally together), so the list and the counter are one shot
+  const knew = wd('P2', 1, 'knew');
+  S('1:42.99', wd('P2', 0, 'secret'), { scene: 't2_nearmiss', p: { t0: LN('P2', 0).t + 0.06, t1: knew.t, spin: knew.t }, method: 'procedural', era: ERA.newsprint, look: NEARMISS_LOOK,
+    want: 'The near-miss list scrolls on teletype paper (~5 lines/s, the 27-entry fact-checked list); years big, place and description small; the tally beside it climbs with the entries, then its wheels keep spinning, never settling (no fixed total)' });
+  reserve(1);                                                                                                            // the old counter cut keeps its number
+  const coinW = wd('P2', 2, 'coin');
+  S('1:48.00', coinW, { scene: 't2_coins', p: { t0: coinW.t + 0.12, t1: wd('P2', 2, 'row').t, type0: wd('P2', 2, 'hundred').t }, method: 'procedural', era: ERA.newsprint, look: COIN_LOOK,
+    want: '100 gold coins land heads, the first 27 stamped with the list\'s years, filling a 10 x 10 grid; the full 2^100 number types across the bottom' });
   const theRoad = wd('P2', 3, 'the'), youRoad = wd('P2', 3, 'you');
   const treeBeats = ['1:51.25', '1:51.88', '1:52.52'].map((x) => beat(x).t);
-  const tree = (depth, want) => ({ scene: 't2_coin_tree', p: { depth, t0: theRoad.t, beats: treeBeats, youT: youRoad.t }, method: 'procedural', era: ERA.newsprint, look: LK.gold, want });
-  S('1:50.61', theRoad, tree(1, 'The camera pulls up out of the coin grid: the hundred coins are the forks of a branching tree, one fork per flip'));
-  S('1:51.25', beat('1:51.25'), tree(2, 'Smash zoom out, depth doubles: every tails branch goes dark and ends in a tiny red SIGNAL LOST'));
-  S('1:51.88', beat('1:51.88'), tree(4, 'Depth doubles again: a single gold path threads through all hundred forks'));
-  S('1:52.40', youRoad, tree(8, 'On "you" the gold path leaves the top of the tree as one link toward a far star (depth doubles once more on the 1:52.52 beat); chorus lands at 1:53.15'));
+  // t2_cointree is one continuous camera (pull up out of the grid, the depth doubling on each beat), so it is one shot
+  S('1:50.61', theRoad, { scene: 't2_cointree', p: { beats: treeBeats, you: youRoad.t, end: LN('C2', 0).t }, method: 'procedural', era: ERA.newsprint, look: TREE_LOOK,
+    want: 'The camera pulls up out of the coin grid: the hundred coins are the forks of a branching tree; on each beat (1:51.25, 1:51.88, 1:52.52) the lit depth doubles, every tails branch goes dark and ends in a tiny red SIGNAL LOST, and a single gold path threads all hundred forks; on "you" it leaves the top of the tree as one link toward a far star' });
+  reserve(3);
 
   // ============================================================================================== CHORUS 2 (113.18 to 134.06): the mirror, first
   section('C2');
@@ -531,11 +577,8 @@ export function buildTimeline(A) {
     want: 'Split: the Golden Record cover engraves itself on both sides at once' });
   S(null, wd('C2', 2, 'but'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: both Jades sing "but if you are, I\'m counting on you" at their mirrored consoles' });
   const silent2 = wd('C2', 3, 'silent');
-  const crt2 = (n, want) => crt(n, want, { rooms: n >= 16 ? 2 : 0 });
-  S(null, silent2, crt2(1, 'The single CRT returns (SETI@home screensaver)'));
-  S(null, beatK(silent2.t, 0, '1st beat after "Silent"'), crt2(4, 'Screens multiply, 1 to 4'));
-  S(null, beatK(silent2.t, 1, '2nd beat after "Silent"'), crt2(16, '4 to 16; two of the screens now show the two Jades\' control rooms'));
-  S(null, wd('C2', 3, 'swear'), crt2(400, 'The matrix of hundreds; two screens show the two Jades\' control rooms'));
+  S(null, silent2, crt(silent2, 'C2', 'The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades\' control rooms (procedural stand-ins until the room plates exist)', { variant: 'mirror' }));
+  reserve(3);
   S(null, wd('C2', 4, 'in'), { ...split({}, { flipX: true }, 4), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Both Jades in the studio pose; the two halves match exactly, hard vertical line between them' });
   S(null, wd('C2', 5, 'if'), { ...split(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: each Jade looks at her own screen, singing "If you are"' });

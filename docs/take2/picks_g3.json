@@ -1,0 +1,7 @@
+{
+ "V201": {"dir": "work/plates/V201", "kind": "video", "src": "media/gen/t2_V201_sd25_t2_1e28ea548a.mp4", "s0": 82.247, "lag": -0.125, "twos": true, "style": "ink", "styleAmt": 0.4,
+          "note": "seedance-2.5 t2 on media/kf2/V201_nbp_v1crop.jpg; aref = Kim_Vocal_2 excerpt (RoFormer stem was not ready), S0 82.247, 'you' muted 82.247-82.50; metrics agree at -3 f"},
+ "V211": {"dir": "work/plates/V211", "kind": "video", "src": "media/gen/t2_V211_veo_t1_9a19877318.mp4", "in": 2.0, "twos": true, "style": "oil", "styleAmt": 0.35,
+          "screen": [[496, 176], [1428, 176], [1428, 604], [496, 604]],
+          "note": "veo-3.1 slow push-in throughout (screen corners given at in=2.0; they grow ~3 px per 0.8 s); a red screen flash at 0.6-0.9 s is left out; his head overlaps the screen's lower edge"}
+}

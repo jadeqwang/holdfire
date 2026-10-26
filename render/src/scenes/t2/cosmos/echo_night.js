@@ -29,11 +29,11 @@ function build(ctx) {
   const island = (lat, lon) => { const x = Math.floor((lon / (2 * Math.PI) + 0.5) * W) % W, y = Math.floor((lat / Math.PI + 0.5) * H); return buf[(Math.min(H - 1, y) * W + x) * 4 + 1] / 255; };
   // cities: on the islands, spaced out (fiction)
   const R = rng(203), cities = [{ v: ll(1.36, 0.4), b: 2.2 }];   // the tower's city, near the north pole
-  for (let g = 0; g < 60000 && cities.length < 300; g++) {
+  for (let g = 0; g < 80000 && cities.length < 420; g++) {
     const lat = Math.asin(R() * 2 - 1) * 0.92, lon = (R() * 2 - 1) * Math.PI;
-    if (island(lat, lon) < 0.5) continue;
+    if (island(lat, lon) < 0.3 && R() < 0.75) continue;   // mostly on the islands, some on the open sea (floating cities)
     const v = ll(lat, lon);
-    if (cities.some((c) => dot(c.v, v) > Math.cos(0.07))) continue;
+    if (cities.some((c) => dot(c.v, v) > Math.cos(0.058))) continue;
     cities.push({ v, b: 0.5 + Math.pow(R(), 3) * 1.6 });
   }
   // the constellation: MST + 2 nearest (great-circle), revealed out from the tower city
@@ -164,7 +164,8 @@ export default {
       const on = smooth(range(prog, E.rv[i] - 0.02, E.rv[i] + 0.03)), pop = ad(prog, E.rv[i], 0.01, 0.08);
       const nk = nightK(v), k = smooth(range(fr, 0.02, 0.25)) * (0.3 + 0.7 * nk) * cityK;
       const X = v.map((x) => x * 1.004);
-      S.add(...X, 1.4 + 0.5 * ci.b, ...mixc(mixc(MINT, [0.75, 1, 0.55], 0.3), C.paleHot, 0.3 * pop), (0.65 + 1.0 * on * ci.b + 1.6 * pop) * k, 7 + 7 * ci.b, ci.b > 1.5 ? 5 : 0);
+      if (k < 0.04) return;
+      S.add(...X, 1.3 + 0.4 * ci.b, ...mixc(mixc(MINT, [0.75, 1, 0.55], 0.3), C.paleHot, 0.3 * pop), (0.7 + 1.0 * on * ci.b + 1.6 * pop) * k, 5 + 4 * ci.b, ci.b > 1.5 ? 5 : 0);
     });
     // the spire and the tower's ring
     const top = tv.map((x) => x * 1.36);
@@ -183,7 +184,7 @@ export default {
       const on = smooth(range(t, tj - 0.04, tj + 0.08)), fl = ad(t, tj, 0.02, 0.35);
       const v = vis(P);
       if (prevP && v && prevV) L.add(...prevP, ...P, 2.0, ...mixc([0.8, 0.85, 1], MINT, on), 0.14 + 0.55 * on, 1, 1, 1);
-      if (v && j < NS && j % 2 === 0) S.add(...P, 1.5, ...mixc([0.85, 0.88, 1], j % 4 === 0 ? PINK : MINT, on), 0.35 + 1.4 * on + 2.5 * fl, 7 + 8 * fl, 0);
+      if (v && j < NS && j % 2 === 0) S.add(...P, 1.8, ...mixc([0.85, 0.88, 1], j % 4 === 0 ? PINK : MINT, on), 0.35 + 1.4 * on + 2.5 * fl, 7 + 8 * fl, 0);
       prevP = P; prevV = v;
     }
     for (const m of [L.mat, S.mat]) setCommon(m, e.S, [0, 0]);

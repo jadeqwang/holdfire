@@ -29,6 +29,21 @@
    "verdict": "reject: blinks at 0.4-0.9 s again (Veo ignores no-blink)",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_CO01_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_CO01_sd25_t1-d2d4a6dc2c",
+   "kf": "media/kf2/CO01_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO01_sd25_t1.txt",
+   "s0": null,
+   "dur": 4,
+   "file": null,
+   "dims": null,
+   "est_usd": 0.9248,
+   "verdict": "lost: stuck running >3 h (relay wall limit); counted, resubmitted as t2",
+   "lag": null,
+   "pick": false
   }
  ],
  "V108": [

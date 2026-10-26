@@ -1,4 +1,107 @@
 {
+ "BR13": {
+  "dir": "work/plates/BR13",
+  "kind": "still",
+  "src": "media/kf2/BR14_nbp_v1.jpg",
+  "note": "the Soviet poster the Suprematist morph can assemble into (= BR14's first frame): sea surface ~y 115 (right) to 276 (left), destroyers on it, sub centred ~(900, 830); flat red/black/cream, empty cream band for the dots"
+ },
+ "BR14": {
+  "dir": "work/plates/BR14",
+  "kind": "video",
+  "src": "media/gen/t2_BR14_veo_t1_eb65957989.mp4",
+  "in": 0.0,
+  "twos": true,
+  "style": "newsprint",
+  "note": "veo-3.1, flat poster in motion (destroyers glide, current lines drift, sub creeps); keyframe BR14_nbp_v1 (paper margin cropped by Veo). Optional p.img for t2_arkhipov 'charges'; use style 'newsprint' (red+black), not 'halftone' (grey only)"
+ },
+ "BR15": {
+  "dir": "work/plates/BR15",
+  "kind": "still",
+  "src": "media/kf2/BR15_nbp_v1.jpg",
+  "note": "two officers in red silhouette, one pointing at the torpedo-tube hatch (right); faces featureless; optional t2_arkhipov p.img for 'fire'"
+ },
+ "BR16": {
+  "dir": "work/plates/BR16",
+  "kind": "still",
+  "src": "media/kf2/BR16_nbp_v1.jpg",
+  "note": "open hand, palm out, between two officers; right officer's face partly lit and caps carry a small cockade (soften in halftone or skip); optional p.img for 'hand'"
+ },
+ "BR17": {
+  "dir": "work/plates/BR17",
+  "kind": "still",
+  "src": "media/kf2/BR17_nbp_v1.jpg",
+  "note": "B-59 surfacing at night among destroyers in searchlights; still only (no time in the edit); optional p.img for 'surface'"
+ },
+ "CO01": {
+  "dir": "work/plates/CO01",
+  "kind": "video",
+  "src": "media/gen/t2_CO01_veo_t1_66747bd17f.mp4",
+  "in": 0,
+  "note": "Veo t1 from 1.125 s (after its blink; no blink in the 2.83 s used); pupil recentred to 960,540; slow centred push. Still/thumbnail: media/kf2/CO01_nbp_v1.jpg (pupil at 967,537)"
+ },
+ "CO02": {
+  "dir": "work/plates/CO02",
+  "kind": "video",
+  "src": "media/kf2/CO02_nbp_v2.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [970, 548] (now exactly at 960,540); single romanesco floret, its tip at centre"
+ },
+ "CO03": {
+  "dir": "work/plates/CO03",
+  "kind": "video",
+  "src": "media/kf2/CO03_nbp_v2.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [963, 512] (now exactly at 960,540); whole romanesco head, apex at centre"
+ },
+ "CO04": {
+  "dir": "work/plates/CO04",
+  "kind": "video",
+  "src": "media/kf2/CO04_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [960, 545] (now exactly at 960,540); artichoke from above"
+ },
+ "CO05": {
+  "dir": "work/plates/CO05",
+  "kind": "video",
+  "src": "media/kf2/CO05_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [948, 523] (now exactly at 960,540); sunflower head"
+ },
+ "CO06": {
+  "dir": "work/plates/CO06",
+  "kind": "video",
+  "src": "media/kf2/CO06_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [957, 522] (now exactly at 960,540); spiral aloe, a five-leaf star at the centre (five rows); clockwise rows"
+ },
+ "CO07": {
+  "dir": "work/plates/CO07",
+  "kind": "video",
+  "src": "media/kf2/CO07_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [960, 537] (now exactly at 960,540); hurricane, eye at centre; slow counter-clockwise turn 3 deg/s baked in"
+ },
+ "CO16": {
+  "dir": "work/plates/CO16",
+  "kind": "video",
+  "src": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
+  "in": 0,
+  "rate": 4.0,
+  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot"
+ },
+ "CO17": {
+  "dir": "work/plates/CO17",
+  "kind": "video",
+  "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
+  "in": 0.35,
+  "note": "plate = take 0.5-2.0 s; in 0.35 = take 0.85 s: eyes closed at the 12.50 cut, open by +0.2 s, then she looks up; mouth closed"
+ },
  "TEST_bars": {
   "dir": "work/plates/TEST_bars",
   "kind": "video",
@@ -69,6 +172,30 @@
   "styleAmt": 0.4,
   "note": "seedance-2.5 t2 on media/kf2/V201_nbp_v1crop.jpg; aref = Kim_Vocal_2 excerpt (RoFormer stem was not ready), S0 82.247, 'you' muted 82.247-82.50; metrics agree at -3 f"
  },
+ "V206": {
+  "dir": "work/plates/V206",
+  "kind": "still",
+  "src": "media/kf2/V206_nbp_v1.jpg",
+  "note": "fire lance, siege of De'an 1132; t2_ink_weapons p.imgs[0] (work/plates/V206/f_00000.jpg)"
+ },
+ "V207": {
+  "dir": "work/plates/V207",
+  "kind": "still",
+  "src": "media/kf2/V207_nbp_v2fix.jpg",
+  "note": "bronze hand cannon c.1288 on its tiller; v2, bottom band faded to paper (a leaked fragment of Jade from the style ref); p.imgs[1]"
+ },
+ "V208": {
+  "dir": "work/plates/V208",
+  "kind": "still",
+  "src": "media/kf2/V208_nbp_v2.jpg",
+  "note": "bombard on a timber cradle (no wheels) before Constantinople's double land walls, 1453; v2; p.imgs[2]"
+ },
+ "V209": {
+  "dir": "work/plates/V209",
+  "kind": "still",
+  "src": "media/kf2/V209_nbp_v2.jpg",
+  "note": "the Somme 1916: craters, stumps, wire, duckboards, smoke columns (no cloud, no people); v2 with no image ref; p.imgs[3]"
+ },
  "V211": {
   "dir": "work/plates/V211",
   "kind": "video",
@@ -114,6 +241,26 @@
    ]
   ],
   "note": "seedance-2.5 10 s, locked-off (<0.35 px drift); serves V211-V217 on the song clock (clip t = song t - 92.6). Screen face stays empty dark red, no flash. He reaches for the phone at clip ~7.0 s and holds the receiver at his ear from ~8.0 s (song 100.3 'ignored' -> V217 continuity). His head overlaps the screen's lower edge (x ~620-830, y >= 510): the screen overlay needs to go behind it. 'paper' = the protocol sheet on the desk (small, grazing angle)."
+ },
+ "V214": {
+  "dir": "work/plates/V214",
+  "kind": "video",
+  "src": "media/gen/t2_V214_veo_t1_b2d6dd44b0.mp4",
+  "in": 0.0,
+  "twos": true,
+  "style": "oil",
+  "styleAmt": 0.35,
+  "note": "veo-3.1: his fingers hover over the receiver 0-1.5 s, undecided; from ~0.75 s Veo draws a jagged red line along the screen at the top edge (zoom ~1.12 crops it)"
+ },
+ "V216": {
+  "dir": "work/plates/V216",
+  "kind": "video",
+  "src": "media/gen/t2_V216_veo_t1_dcde9d3494.mp4",
+  "in": 1.0,
+  "twos": true,
+  "style": "oil",
+  "styleAmt": 0.35,
+  "note": "veo-3.1: lifts the receiver 1.0-1.9 s, at his ear 2.2 s+ (calm); face x ~880-1000, y ~150-330 (anonymous, not Petrov)"
  },
  "V218": {
   "dir": "work/plates/V218",

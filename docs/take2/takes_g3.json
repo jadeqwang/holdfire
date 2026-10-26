@@ -1,0 +1,285 @@
+{
+ "_keyframes": [
+  {
+   "tag": "t2g3_V201_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V201_nbp_v1.jpg",
+   "verdict": "good painting, Jade too small; its centre crop V201_nbp_v1crop.jpg is the V201 keyframe"
+  },
+  {
+   "tag": "t2g3_V201_nbp_v2",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V201_nbp_v2.jpg",
+   "verdict": "reject: Jade giant vs alchemists, stray chair handles"
+  },
+  {
+   "tag": "t2g3_11_nbp_v1 (= V211_nbp_v1)",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V211_nbp_v1.jpg",
+   "verdict": "keeper: Petrov wide, empty screen"
+  },
+  {
+   "tag": "t2g3_BR14_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/BR14_nbp_v1.jpg",
+   "verdict": "keeper (BR13/BR14)"
+  },
+  {
+   "tag": "t2g3_V206_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V206_nbp_v1.jpg",
+   "verdict": "pick"
+  },
+  {
+   "tag": "t2g3_V207_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V207_nbp_v1.jpg",
+   "verdict": "reject: gunner cropped at the neck"
+  },
+  {
+   "tag": "t2g3_V208_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V208_nbp_v1.jpg",
+   "verdict": "reject: bombard on a wheeled carriage (anachronism)"
+  },
+  {
+   "tag": "t2g3_V209_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V209_nbp_v1.jpg",
+   "verdict": "reject: copied the grotto style ref, WWI officer + howitzer"
+  },
+  {
+   "tag": "t2g3_V218_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V218_nbp_v1.jpg",
+   "verdict": "keeper"
+  },
+  {
+   "tag": "t2g3_BR15_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/BR15_nbp_v1.jpg",
+   "verdict": "pick (optional plate)"
+  },
+  {
+   "tag": "t2g3_BR16_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/BR16_nbp_v1.jpg",
+   "verdict": "pick (optional plate; face/cockade caveat)"
+  },
+  {
+   "tag": "t2g3_BR17_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/BR17_nbp_v1.jpg",
+   "verdict": "pick (still)"
+  },
+  {
+   "tag": "t2g3_V214_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V214_nbp_v1.jpg",
+   "verdict": "keeper"
+  },
+  {
+   "tag": "t2g3_V216_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V216_nbp_v1.jpg",
+   "verdict": "keeper"
+  },
+  {
+   "tag": "t2g3_V207_nbp_v2",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V207_nbp_v2.jpg",
+   "verdict": "pick after bottom-band fix (V207_nbp_v2fix.jpg)"
+  },
+  {
+   "tag": "t2g3_V208_nbp_v2",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V208_nbp_v2.jpg",
+   "verdict": "pick"
+  },
+  {
+   "tag": "t2g3_V209_nbp_v2",
+   "model": "google/nano-banana-pro",
+   "usd": 0.1344,
+   "file": "media/kf2/V209_nbp_v2.jpg",
+   "verdict": "pick"
+  }
+ ],
+ "V201": [
+  {
+   "tag": "t2_V201_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V201_sd25_t1-c63246c05c",
+   "kf": "media/kf2/V201_nbp_v1crop.jpg",
+   "prompt_file": "media/gen/specs/t2_V201_sd25_t1.json",
+   "s0": 82.247,
+   "dur": 4,
+   "file": "media/gen/t2_V201_sd25_t1_c63246c05c.mp4",
+   "dims": "1280x720",
+   "verdict": "good style lock; sync metrics disagree (-2 f / r .19); alternate",
+   "lag": -0.083,
+   "pick": false,
+   "usd": 0.9248
+  },
+  {
+   "tag": "t2_V201_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V201_sd25_t2-1e28ea548a",
+   "kf": "media/kf2/V201_nbp_v1crop.jpg",
+   "prompt_file": "media/gen/specs/t2_V201_sd25_t2.json",
+   "s0": 82.247,
+   "dur": 4,
+   "file": "media/gen/t2_V201_sd25_t2_1e28ea548a.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: ink painting stays still-ish and alive, smoke drifts; metrics agree -3 f (r .39); eyes lower at the end, no grin",
+   "lag": -0.125,
+   "pick": true,
+   "usd": 0.9248
+  }
+ ],
+ "V211": [
+  {
+   "tag": "t2_V211_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V211_veo_t1-9a19877318",
+   "kf": "media/kf2/V211_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_V211_veo_t1.json",
+   "s0": null,
+   "dur": 8,
+   "file": "media/gen/t2_V211_veo_t1_9a19877318.mp4",
+   "dims": "1920x1080",
+   "verdict": "reject: continuous push-in + red screen flash at 0.6 s; the edit needs a locked 9.5 s plate",
+   "lag": null,
+   "pick": false,
+   "usd": 1.6
+  },
+  {
+   "tag": "t2_V211_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V211_sd25_t2-2e96a6f5b9",
+   "kf": "media/kf2/V211_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_V211_sd25_t2.json",
+   "s0": null,
+   "dur": 10,
+   "file": "media/gen/t2_V211_sd25_t2_2e96a6f5b9.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: locked (<0.35 px), empty screen, picks up phone ~7-8 s",
+   "lag": null,
+   "pick": true,
+   "usd": 2.312
+  },
+  {
+   "tag": "t2_V211_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_V211_sd20_t2-58036b2e96",
+   "kf": "media/kf2/V211_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_V211_sd20_t2.json",
+   "s0": null,
+   "dur": 10,
+   "file": "media/gen/t2_V211_sd20_t2_58036b2e96.mp4",
+   "dims": "1470x630",
+   "verdict": "reject: 21:9",
+   "lag": null,
+   "pick": false,
+   "usd": 1.5
+  }
+ ],
+ "BR14": [
+  {
+   "tag": "t2_BR14_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BR14_veo_t1-eb65957989",
+   "kf": "media/kf2/BR14_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_BR14_veo_t1.json",
+   "s0": null,
+   "dur": 4,
+   "file": "media/gen/t2_BR14_veo_t1_eb65957989.mp4",
+   "dims": "1920x1080",
+   "verdict": "PICK: stays flat",
+   "lag": null,
+   "pick": true,
+   "usd": 0.8
+  }
+ ],
+ "V218": [
+  {
+   "tag": "t2_V218_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V218_sd25_t1-c95e46c74b",
+   "kf": "media/kf2/V218_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_V218_sd25_t1.json",
+   "s0": null,
+   "dur": 4,
+   "file": "media/gen/t2_V218_sd25_t1_c95e46c74b.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: breath-out arc 1.0-2.0 s, brown eyes on model; slow pan",
+   "lag": null,
+   "pick": true,
+   "usd": 0.9248
+  },
+  {
+   "tag": "t2_V218_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V218_veo_t1-3a9c1c3f58",
+   "kf": "media/kf2/V218_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_V218_veo_t1.json",
+   "s0": null,
+   "dur": 4,
+   "file": "media/gen/t2_V218_veo_t1_3a9c1c3f58.mp4",
+   "dims": "1920x1080",
+   "verdict": "bake-off alternate: static, but eyes turn teal when they open (off model); frames 0-23 usable",
+   "lag": null,
+   "pick": false,
+   "usd": 0.8
+  }
+ ],
+ "V214": [
+  {
+   "tag": "t2_V214_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V214_veo_t1-b2d6dd44b0",
+   "kf": "media/kf2/V214_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_V214_veo_t1.json",
+   "s0": null,
+   "dur": 4,
+   "file": "media/gen/t2_V214_veo_t1_b2d6dd44b0.mp4",
+   "dims": "1920x1080",
+   "verdict": "PICK in 0.0; red line on screen from 0.75 s",
+   "lag": null,
+   "pick": true,
+   "usd": 0.8
+  }
+ ],
+ "V216": [
+  {
+   "tag": "t2_V216_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V216_veo_t1-dcde9d3494",
+   "kf": "media/kf2/V216_nbp_v1.jpg",
+   "prompt_file": "media/gen/specs/t2_V216_veo_t1.json",
+   "s0": null,
+   "dur": 4,
+   "file": "media/gen/t2_V216_veo_t1_dcde9d3494.mp4",
+   "dims": "1920x1080",
+   "verdict": "PICK in 1.0",
+   "lag": null,
+   "pick": true,
+   "usd": 0.8
+  }
+ ]
+}

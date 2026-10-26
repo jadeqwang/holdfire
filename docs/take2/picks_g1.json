@@ -1,0 +1,72 @@
+{
+ "CO01": {
+  "dir": "work/plates/CO01",
+  "kind": "video",
+  "src": "media/gen/t2_CO01_veo_t1_66747bd17f.mp4",
+  "in": 0,
+  "note": "Veo t1 from 1.125 s (after its blink; no blink in the 2.83 s used); pupil recentred to 960,540; slow centred push. Still/thumbnail: media/kf2/CO01_nbp_v1.jpg (pupil at 967,537)"
+ },
+ "CO02": {
+  "dir": "work/plates/CO02",
+  "kind": "video",
+  "src": "media/kf2/CO02_nbp_v2.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [970, 548] (now exactly at 960,540); single romanesco floret, its tip at centre"
+ },
+ "CO03": {
+  "dir": "work/plates/CO03",
+  "kind": "video",
+  "src": "media/kf2/CO03_nbp_v2.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [963, 512] (now exactly at 960,540); whole romanesco head, apex at centre"
+ },
+ "CO04": {
+  "dir": "work/plates/CO04",
+  "kind": "video",
+  "src": "media/kf2/CO04_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [960, 545] (now exactly at 960,540); artichoke from above"
+ },
+ "CO05": {
+  "dir": "work/plates/CO05",
+  "kind": "video",
+  "src": "media/kf2/CO05_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [948, 523] (now exactly at 960,540); sunflower head"
+ },
+ "CO06": {
+  "dir": "work/plates/CO06",
+  "kind": "video",
+  "src": "media/kf2/CO06_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [957, 522] (now exactly at 960,540); spiral aloe, a five-leaf star at the centre (five rows); clockwise rows"
+ },
+ "CO07": {
+  "dir": "work/plates/CO07",
+  "kind": "video",
+  "src": "media/kf2/CO07_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [960, 537] (now exactly at 960,540); hurricane, eye at centre; slow counter-clockwise turn 3 deg/s baked in"
+ },
+ "CO16": {
+  "dir": "work/plates/CO16",
+  "kind": "video",
+  "src": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
+  "in": 0,
+  "rate": 4.0,
+  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot"
+ },
+ "CO17": {
+  "dir": "work/plates/CO17",
+  "kind": "video",
+  "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
+  "in": 0.35,
+  "note": "plate = take 0.5-2.0 s; in 0.35 = take 0.85 s: eyes closed at the 12.50 cut, open by +0.2 s, then she looks up; mouth closed"
+ }
+}

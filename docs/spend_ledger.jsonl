@@ -670,3 +670,4 @@
 {"ts": "2026-10-26T04:52:40Z", "model": "bytedance/seedance-2.5", "tag": "K8_t6", "job": "holdfire/K8_t6-aa0a969bf2", "event": "submit", "ok": null, "est_usd": 2.5432, "where": "cloud"}
 {"ts": "2026-10-26T04:52:41Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t5", "job": "holdfire/K8b_t5-6b2932c2c0", "event": "submit", "ok": null, "est_usd": 3.2368, "where": "cloud"}
 {"ts": "2026-10-26T04:52:42Z", "model": "bytedance/seedance-2.5", "tag": "K8b_t6", "job": "holdfire/K8b_t6-495dc1d044", "event": "submit", "ok": null, "est_usd": 3.2368, "where": "cloud"}
+{"ts": "2026-10-26T04:56:11Z", "model": "bytedance/seedance-2.5", "tag": "O7_t1", "job": "holdfire/O7_t1-b258188e53", "event": "result", "ok": true, "est_usd": 1.3872, "where": "cloud"}

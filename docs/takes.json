@@ -1519,9 +1519,11 @@
    "dur": 6,
    "voc": null,
    "submitted": "2026-10-26T04:50:08Z",
-   "file": null,
+   "file": "media/gen/O7_t1_b258188e53.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1284,716,145",
+   "sheet": "media/gen/O7_t1_b258188e53_sheet.jpg"
   }
  ]
 }

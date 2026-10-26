@@ -73,7 +73,7 @@ export default {
     const C = p.center || [960, 1560], R = (p.radius ?? 1250) * (1 + 0.012 * lt);
     const pr = projector(lat0, lon0, C[0], C[1], R);
     drawSky(ctx, { density: 0.3, band: 0.15, neb: 0.12, seed: 23, exposure: 0.5, pan: [lt * 3, 0] });
-    const SC = p.soft ? soft2d(e) : null;
+    const SC = p.soft === false ? null : soft2d(e);
     const c = SC ? SC.begin() : e.c2dBegin();
     c.lineCap = 'round'; c.lineJoin = 'round';
     // the night disc (occludes the sky), limb and airglow
@@ -104,10 +104,9 @@ export default {
     }
     c.stroke();
     // coastlines
-    const dbg = p.dbg || 0;
     c.strokeStyle = css(P.bookGold, 0.3); c.lineWidth = 1.6;
     c.beginPath();
-    if (dbg !== 1) for (const ring of GEO.coast) {
+    for (const ring of GEO.coast) {
       let on = false;
       for (let i = 0; i < ring.length; i += 2) {
         const q = pr(ring[i + 1], ring[i]);
@@ -166,7 +165,7 @@ export default {
     }
     const BL = new Buckets(14);
     const lit = fires.filter((f) => t >= f.ti);
-    if (dbg !== 2) for (const L of LIGHTS) {
+    for (const L of LIGHTS) {
       const q = pr(L.lat, L.lon); if (q[2] <= 0.03 || q[1] < 300 || q[1] > 1085 || q[0] < -5 || q[0] > 1925) continue;
       // is it inside a fire? (cheap dot-product test first)
       let tb = Infinity;

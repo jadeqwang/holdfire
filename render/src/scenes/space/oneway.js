@@ -8,7 +8,7 @@
 import { drawSky } from '../sky.js';
 import { P, css } from '../../palette.js';
 import { clamp, lerp, smooth, smoother, range, easeInOutCubic, easeOutCubic, hash1, hash2, rng } from '../../util.js';
-import { wordT, ad, env, pick, Buckets } from './common.js';
+import { wordT, ad, env, pick, Buckets, soft2d } from './common.js';
 
 const LY_AU = 63241.08, LS_LY = 1 / 31557600, AU_LY = 1 / 63241.08;
 const TILT = Math.cos(63 * Math.PI / 180);             // the ecliptic seen obliquely
@@ -62,7 +62,8 @@ export default {
     const Rpx = D * K;
 
     drawSky(ctx, { density: 0.22, band: 0.2, bandAng: 0.35, bandOff: 140, neb: 0.18, nebCol: [0.02, 0.03, 0.06], seed: 41, exposure: 0.42 });
-    const c = e.c2dBegin();
+    const SC = p.soft === false ? null : soft2d(e);
+    const c = SC ? SC.begin() : e.c2dBegin();
     c.lineCap = 'round'; c.lineJoin = 'round';
     c.globalCompositeOperation = 'lighter';
     const scr = (x, y) => [E[0] + x * K, E[1] + y * K];   // diagram space (ly, screen axes) -> px
@@ -211,7 +212,7 @@ export default {
       c.beginPath(); c.arc(E[0], E[1], Rpx, 0, Math.PI * 2); c.stroke();
     }
     c.globalCompositeOperation = 'source-over';
-    e.blit2d('over', 2.0);
+    if (SC) SC.blit('over', 2.0); else e.blit2d('over', 2.0);
     ctx.state.oneway = { D, label, ta, tSend, tArr, E, TG, W };
   },
   type(ty, t, lt, shot, ctx) {

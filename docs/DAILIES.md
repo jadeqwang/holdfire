@@ -85,3 +85,26 @@ Spend at start of this intake pass: $30.46.
 | 04:11 | K8 | K8_t2_430fc7a418 | weak alt | ~0 | articulates "but/you/were" but "message in a bottle" stays wide open, grins on "too", push-in ends blown-out; re-rolled once as K8_t3 |
 | 04:11 | H5 | kf H5_nbp.jpg | regen | — | a crewman's face shows in a lit porthole on the submarine hull (implausible + extra person); hull reads as a WWII U-boat → v2 "Foxtrot, no portholes, no people" |
 | 04:11 | H6 | kf H6_nbp.png | approve → H6_t1 | — | three sweat-soaked officers in a red-lit control room, the calm one on the right faces the other two; faces fill the top half (the NO will sit over them) |
+| 04:22 | C1 | C1_t1_05896625b9 | **PICK** | 0 | raises the lantern high, looks up; slightly tighter than kf; consistent |
+| 04:22 | E1 | E1_t1_bcb73bb347 | **PICK** | 0 | coelacanth rows up toward the bright surface, light shafts; consistent |
+| 04:22 | E3 | E3_t1_401121939c | **PICK** | 0 | fog rolls over the station, waves; dishes barely turn; top third sky clear |
+| 04:22 | E4 | E4_t1_ba7ab0311f | **PICK** | 0 | beam pulses brighter, clouds glow and part, sea shimmers gold |
+| 04:22 | E5 | E5_t1_d528ada7f3 | **PICK** | 0 | bottle bobs and drifts away, inner glow pulses; top half stars |
+| 04:22 | E6 | E6_t1_4727a5d6d9 | **PICK** | 0 | static shimmers on the monitor wall; right third racks |
+| 04:22 | H1 | H1_t1_1048a8d224 | **PICK** | 0 | powder poured, thick smoke column rises; firelight; consistent faces |
+| 04:22 | H4 | H4_t1_a2bcedf4c2 | **PICK** | 0 | still under red alarm light, then reaches to the receiver at ~5 s (doesn't fully lift it); mouth closed |
+| 04:22 | L4 | L4_t1_0418464ec2 | **PICK** | 0 | arms open wide, coat floats out like wings; void stays black |
+| 04:22 | L5 | L5_t1_6cf6559422 | **PICK** | 0 | right palm raised like an oath, eyes steady, mouth closed; NOTE she drifts to centre, so only the left ~third stays clear for type |
+| 04:22 | K12 | K12_t1, K12_t2 | REJECT | — | both returned 1470×630 (21:9) → re-rolled as K12_t3, t4 |
+| 04:22 | C9 | C9_t1 | REJECT | — | 1470×630 (21:9) → re-rolled as C9_t2 |
+| 04:22 | C7 C8 | C7_t1, C8_t1 | relay error | — | 2047 credentials → resubmitted as C7_t2, C8_t2 |
+| 04:23 | O4 | O4_t1_503af49bed | **PICK** | 0 | slow aerial glide, threads pulse in sequence; ringed giant top-centre (top third partly occupied by the giant) |
+| 04:23 | O8 | O8_t1_95ba41fda1 | **PICK** | 0 | hand stays raised in greeting, antennae lift, gold-ringed eyes catch light; slow push-in; giant planet behind upper middle |
+| 04:23 | L3 | L3_t1_ec2f8df5db | reject | — | small glowing UI labels with glyph-like marks appear on the rack beside her hand (text) |
+| 04:23 | K10 | K10_t1_d7f43cffd4 | **PICK** | −0.125 | whispered, eyes closed, very still, gold rim, left half sea; strips at −0.125: "hundred/across/count/goes" open, "worlds/Way/one" rounded ("Milky" weak); numeric +1.04 spurious. t2 near-identical (alt) |
+| 04:23 | L3 | L3_t2_d898a88627 | **PICK** | 0 | clean (no UI glyphs), hand scrolling an unseen screen, left third; strips at 0: "road/from/a/hundred" fit; FaceMesh only 69 % (face small/dark in first 4 s) |
+| 04:24 | E7 | kf E7_nbp_2.png | approve → E7_t1 | — | v2: empty foggy pine forest, near monochrome, no figures, full-bleed |
+| 04:24 | C10 | kf C10_nbp.png → C10_nbp_c.png | approve → C10_t1 | — | ~100 people on a dark hillside raising small lights; letterbox cropped |
+| 04:24 | C11 | kf C11_nbp.jpg | approve → C11_t1 | — | astronaut in the cupola raising a small torch, Earth below (flight suit, not EVA suit — plausible on station) |
+| 04:24 | C12 | kf C12_nbp.png → C12_nbp_c.png | approve → C12_t1 | — | farmer in straw hat in a rice terrace raising a paper lantern; pillarbox cropped |
+| 04:24 | C5 | C5_t1_e077a1201d | **PICK** | 0 | nurse raises the phone light high with both hands, looks up, hopeful; consistent |

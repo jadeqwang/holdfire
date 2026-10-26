@@ -142,9 +142,9 @@ export class LineBatch {
     this.geo = g;
     this.mat = new THREE.ShaderMaterial({
       glslVersion: THREE.GLSL3, side: THREE.DoubleSide, transparent: true, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending,
-      uniforms: { off: { value: new THREE.Vector2() }, S: { value: 1 }, glow: { value: 0.22 } },
+      uniforms: { off: { value: new THREE.Vector2() }, S: { value: 1 }, glow: { value: 0.22 }, pad: { value: 3.5 } },
       vertexShader: COMMON + /* glsl */`
-        in vec4 aA; in vec4 aB; in vec4 aC; in vec2 aG;
+        in vec4 aA; in vec4 aB; in vec4 aC; in vec2 aG; uniform float pad;
         out vec2 vP; out vec4 vSeg; out vec4 vC; out vec2 vG; out float vW;
         void main(){
           mat4 M = projectionMatrix * modelViewMatrix;
@@ -152,7 +152,7 @@ export class LineBatch {
           vec2 a = toPx(ca), b0 = toPx(cb);
           vec2 b = mix(a, b0, aB.w);
           vec2 d = b - a; float L = max(length(d), 1e-3); vec2 t = d / L; vec2 n = vec2(-t.y, t.x);
-          float hw = aA.w * .5 + 3.5;   // room for the soft glow skirt
+          float hw = aA.w * .5 + pad;   // room for the soft glow skirt
           vec2 p = mix(a, b, position.x) + t * (position.x * 2. - 1.) * hw + n * position.y * hw;
           vP = p; vSeg = vec4(a, b); vC = aC; vW = aA.w;
           vG = vec2(aG.x, mix(aG.x, aG.y, aB.w));

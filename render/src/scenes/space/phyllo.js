@@ -138,7 +138,7 @@ export default {
           const II = I * (0.35 + 0.65 * cf);
           if (!curve) { L.add(PX[a], PY[a], PZ[a], PX[b], PY[b], PZ[b], st.w, st.col[0], st.col[1], st.col[2], II, fr); continue; }
           const a0 = posOf(ch[Math.max(0, j - 1)]), b1 = posOf(ch[Math.min(m - 1, j + 2)]);
-          const NS = q.F <= 21 ? 6 : 4;
+          const NS = q.F <= 21 ? 5 : 3;
           let qx = PX[a], qy = PY[a], qz = PZ[a];
           const segs = Math.max(1, Math.ceil(NS * fr));
           for (let s = 1; s <= segs; s++) {
@@ -198,8 +198,9 @@ export default {
     const hold = p.stars ?? 0.0;
     const sk = lerp(hold, 1, starsK);
     G.lines.mat.uniforms.glow.value = lerp(p.lineGlow ?? 0.1, 0.22, kout);
+    G.lines.mat.uniforms.pad.value = lerp(2.0, 3.5, kout);
     renderGalaxy(ctx, { cam, off, stars: sk, glow: 0.38 * sk, bulge: sk, skyExp: 0.8 });
-    G.lines.mat.uniforms.glow.value = 0.22;
+    G.lines.mat.uniforms.glow.value = 0.22; G.lines.mat.uniforms.pad.value = 3.5;
     ctx.state.phyllo = { T, disk, off, C, Rpx };
   },
   type(ty, t, lt, shot, ctx) {

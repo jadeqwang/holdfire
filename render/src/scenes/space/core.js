@@ -144,7 +144,6 @@ export function renderGalaxy(ctx, V) {
   if (V.sky === false) e.clear(e.rtScene, ...P.void);
   else drawSky(ctx, { density: 0.12, band: 0, neb: 0.18, nebCol: [0.02, 0.03, 0.06], nebCol2: [0.03, 0.025, 0.02], seed: 77, exposure: V.skyExp ?? 1, pan: V.skyPan || [0, 0] });
   setCam(V.cam);
-  if (typeof window !== 'undefined') window.__spaceCam = { cam: V.cam, off: V.off, pos: G.cam.position.toArray(), stars: V.stars };
   // screen offset in NDC-of-design convention: our shaders add off in px with y up
   const offU = [off[0], -off[1]];
   setCommon(G.stars.mat, S, offU); setCommon(G.sprites.mat, S, offU); setCommon(G.lines.mat, S, offU);

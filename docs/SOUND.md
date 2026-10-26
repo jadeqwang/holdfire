@@ -62,6 +62,7 @@ Level rule per cue (which constraint set the gain) is in `work/sfx/cues.json` (`
 | mix peak | -3.04 dBFS, -2.97 dBTP; in cue windows -2.97 dBTP; clipped samples 0 |
 | integrated loudness | song -15.67 LUFS, mix -15.68 LUFS (delta -0.005 LU); ffmpeg ebur128: song -15.7, mix -15.7 LUFS |
 | layer alone | -36.9 LUFS integrated |
+| m4a | AAC-LC 320k (ffmpeg aac), offset vs wav 0 samples, -2.82 dBTP, -15.73 LUFS |
 | lengths | mix and layer 11,961,600 samples = 249.200 s (song 247.160 s + end-card tail) |
 | every cue >= 6 dB under the song (400 ms) and under the vocal where it sounds (50 ms), all cues summed | True |
 

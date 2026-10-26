@@ -752,10 +752,11 @@ def build_cues(T, song_len_s, songM, vocM):
                     "breathy SVF resonance drifting 650-1050 Hz; right channel's gusts 0.6 s late", br["start"], y,
                     med=17, worst=9, cap_db=-24, ride=True))
     # ---- 6b. match strike (flare on the sync point)
-    t_match = matchT + 0.5
+    w_lights = B(2)["words"][3]                       # "lights": the picture strikes the match here too
+    t_match = w_lights.get("t", w_lights.get("start"))
     y = match_strike(rng(7))
     cues.append(Cue("match", "Bridge: a match strike ('any world that lights a spark')",
-                    f"flare at {t_match:.3f} (= Bridge line 2 start {B(2)['t']:.2f} - 0.2 + 0.5; scratch 70 ms before)",
+                    f"flare at {t_match:.3f} (= the word 'lights', Bridge line 2; scratch 70 ms before)",
                     "synth: grainy BP noise scratch; crack (BP 2-9 kHz, 12 ms) + pop (LP 900 Hz); flare = noise through SVF "
                     "low-pass 9 -> 1.5 kHz; flame body LP 600 Hz; flickering burn + 10 crackles", t_match - 0.07, y,
                     med=12, worst=7, cap_db=-18))
@@ -874,6 +875,9 @@ def main(argv):
     t_start = time.time()
     os.makedirs(WORK, exist_ok=True)
     os.makedirs(os.path.join(WORK, "stems"), exist_ok=True)
+    for f in os.listdir(os.path.join(WORK, "stems")):        # stems are rewritten every run (cue ids follow the timing)
+        if f.endswith(".wav"):
+            os.remove(os.path.join(WORK, "stems", f))
     os.makedirs(MEDIA, exist_ok=True)
 
     T = Timing(args.timing)

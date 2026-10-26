@@ -93,7 +93,9 @@ try {
     if (chunks.length) {
       const list = path.join(tmp, 'list.txt');
       fs.writeFileSync(list, chunks.map((c) => `file '${c}'`).join('\n'));
-      const audio = args.audio || path.join(REPO, 'inputs', 'Hold Fire.mp3');
+      // the sound-design mix (song + quiet SFX, loudness-matched) when present, else the song itself
+      const mix = path.join(REPO, 'media', 'audio', 'hold_fire_mix.wav');
+      const audio = args.audio || (fs.existsSync(mix) ? mix : path.join(REPO, 'inputs', 'Hold Fire.mp3'));
       const aArgs = args.noaudio ? [] : ['-ss', String(from), '-t', String(to - from), '-i', audio];
       const r = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, ...aArgs,
         '-map', '0:v', ...(args.noaudio ? [] : ['-map', '1:a', '-c:a', 'aac', '-b:a', args.abitrate || '320k']), '-c:v', 'copy', '-t', String(to - from), '-movflags', '+faststart', out], { stdio: 'inherit' });

@@ -51,13 +51,13 @@ export class Engine {
 
     this.typeCanvas = document.createElement('canvas');
     this.typeCanvas.width = W; this.typeCanvas.height = H;
-    this.typeCtx = this.typeCanvas.getContext('2d');
+    this.typeCtx = this.typeCanvas.getContext('2d', { willReadFrequently: true });   // CPU-backed: SwiftShader 2D is slow for line-heavy drawing
     this.typeTex = this._canvasTex(this.typeCanvas);
 
     // generic 2D drawing surface for canvas-drawn scenes (blit into rtScene with blit2d)
     this.c2dCanvas = document.createElement('canvas');
     this.c2dCanvas.width = W; this.c2dCanvas.height = H;
-    this.c2d = this.c2dCanvas.getContext('2d');
+    this.c2d = this.c2dCanvas.getContext('2d', { willReadFrequently: true });
     this.c2dTex = this._canvasTex(this.c2dCanvas);
 
     this._mkPost();

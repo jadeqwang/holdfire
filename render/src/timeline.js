@@ -239,16 +239,26 @@ export function buildTimeline(A) {
   // ================================================================================================= BRIDGE (near silence)
   const B = 'Bridge';
   const br = S(B);
-  const matchT = ls(B, 2) - 0.2, fearT = ls(B, 4) - 0.1, sixT = ls(B, 6) - 0.1, twoT = ls(B, 7) - 0.08;
+  const lightsT = W(B, 2, 3);   // "lights": the match
+  const fearT = ls(B, 4) - 0.1, sixT = ls(B, 6) - 0.1, twoT = ls(B, 7) - 0.08;
   const noT = W(B, 7, 5) - 0.04;   // "no."
   const quiet = (sec, k, o = {}) => verse(sec, k, { x: 960, y: 1000, size: 46, align: 'center', color: P.steel, hotColor: P.cream, t1: le(sec, k) + 0.6, ...o });
-  add({ id: 'B1', t0: br.start, t1: matchT + 2.3, scene: 'multi', p: { layers: [
-    { scene: 'engraved', p: (t, lt) => ({ ...ENG, gain: 0.9, ...(picks.K11 ? { clip: picks.K11.clip, s0: picks.K11.s0 } : {}) }) },
-    { scene: 'forestreticles', p: { start: br.start, spark: [960, 620], sparkT: matchT + 0.3, snapT: ls(B, 3) } }] },
-    look: { ...LOOK.keeper, vignette: 0.6, exposure: 0.85 },
+  // B1 wide: the Keeper, tiny in the forest, strikes her match (K11 ignites 9.83 s in, at design (960, 755)) on "lights";
+  // the overlay's flame point is forest.MATCH, so the plate is panned onto it. B1b close-up (K12, her face over the flame):
+  // on "its own death" every reticle snaps onto her flame. chainhands then starts from that lock.
+  const MATCH = [906, 694];
+  const wideT = lightsT + 1.25;
+  add({ id: 'B1', t0: br.start, t1: wideT, scene: 'multi', p: { layers: [
+    { scene: 'engraved', p: (t, lt) => ({ ...ENG, gain: 1.0, bgW: 0.75, wLo: 0.06, wHi: 1.0, wGam: 1.3, fill: 0.12, ...(picks.K11 ? { clip: picks.K11.clip, s0: lightsT - 9.83 } : {}), pan: [MATCH[0] - 960, MATCH[1] - 755] }) },
+    { scene: 'forestreticles', p: { backdrop: false, tMatch: lightsT } }] },
+    look: { ...LOOK.keeper, vignette: 0.6, exposure: 0.85, halation: 0.45, halCol: [1.0, 0.12, 0.06] },
     type: both(quiet(B, 0), quiet(B, 1), quiet(B, 2),
-      excerpt('move 37', ['Dark Forest Theory is', 'genocide trauma dressed up in game theory language'], 110, 120, br.start + 1.2, matchT, { size: 28 })) });
-  add({ id: 'B1b', t0: matchT + 2.3, t1: fearT, ...keeper('K12', {}), type: quiet(B, 3, { y: 1000 }) });
+      excerpt('move 37', ['Dark Forest Theory is', 'genocide trauma dressed up in game theory language'], 110, 120, br.start + 1.2, lightsT - 0.4, { size: 28 })) });
+  const K12_FLAME = [700, 760];   // where K12's match flame sits (design px); re-measure when K12 is picked
+  add({ id: 'B1b', t0: wideT, t1: fearT, scene: 'multi', p: { layers: [
+    { scene: 'engraved', p: (t, lt) => ({ ...ENG, ...(picks.K12 ? { clip: picks.K12.clip, s0: picks.K12.s0, lag: picks.K12.lag } : {}), pan: [MATCH[0] - K12_FLAME[0], MATCH[1] - K12_FLAME[1]], zoom: 1 + lt * 0.006 }) },
+    { scene: 'forestreticles', p: { backdrop: false, tMatch: lightsT, flame: false, lines: true } }] },
+    look: { ...LOOK.keeper, halation: 0.45, halCol: [1.0, 0.12, 0.06] }, type: quiet(B, 3, { y: 1000 }) });
   add({ id: 'B2', t0: fearT, t1: sixT, scene: 'chainhands', p: { start: fearT, letGo: W(B, 5, 6) }, look: { bloom: 0.45, bloomThreshold: 0.7, halation: 0.3, halCol: [1.0, 0.45, 0.15], vignette: 0.45, grain: 0.035 }, type: both(quiet(B, 4), quiet(B, 5)) });
   add({ id: 'B3', t0: sixT, t1: twoT, scene: 'sonar', p: { start: sixT },
     look: (t) => { const c = line(B, 6).words.slice(1).reduce((m, w) => Math.max(m, t >= w.t ? Math.exp(-(t - w.t) / 0.1) : 0), 0);   // a charge on "depth", "charges", "falling"

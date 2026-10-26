@@ -107,14 +107,12 @@ export default {
           }
         }
       }
-      const dbg = p.dbg || 0;
-      if (dbg === 2) c.lineCap = 'butt';
       BR.flush(c);
-      if (dbg !== 1) c.globalCompositeOperation = 'lighter';
-      if (dbg !== 4) BT.flush(c);
+      c.globalCompositeOperation = 'lighter';
+      BT.flush(c);
       // the leading edges of the water of light
       const hs = glowSprite(P.goldPale);
-      if (dbg !== 3) for (const h0 of heads) drawGlow(c, hs, h0[0], h0[1], (1.2 + 2.2 * clamp(1 - h0[2] / 30)) * 3, 0.7 * groundA);
+      for (const h0 of heads) drawGlow(c, hs, h0[0], h0[1], (1.2 + 2.2 * clamp(1 - h0[2] / 30)) * 3, 0.7 * groundA);
       c.globalCompositeOperation = 'source-over';
       // dawn on the horizon line, as the flood comes
       const hz = proj(0, 0, 400);

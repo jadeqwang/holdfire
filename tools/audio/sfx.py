@@ -927,7 +927,6 @@ def main(argv):
             j = int(np.argmin(m))
             if m[j] < MIN_MARGIN_DB + 0.45:
                 tw, d = ts[ok][j], MIN_MARGIN_DB + 0.5 - m[j]
-                print(f"  song rule: {c.id} @ {tw:.2f} margin {m[j]:.1f}")
                 for o in dominant(cues, tw, 0.4):
                     trims[o.id] = max(trims.get(o.id, 0.0), d)
             if vocM is not None:
@@ -939,7 +938,6 @@ def main(argv):
                     j = int(np.argmin(mv))
                     if mv[j] < MIN_MARGIN_DB + 0.45:
                         tw, d = ts1[pres][j], MIN_MARGIN_DB + 0.5 - mv[j]
-                        print(f"  vocal rule: {c.id} @ {tw:.2f} margin {mv[j]:.1f} (vocal {vS[pres][j]:.1f})")
                         for o in dominant(cues, tw, VOCAL_WIN):
                             trims[o.id] = max(trims.get(o.id, 0.0), d)
         if not trims:

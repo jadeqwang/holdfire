@@ -7,7 +7,7 @@
 //   radius (1250), targets (26), hud (0..1)
 import { P, css } from '../../palette.js';
 import { clamp, lerp, smooth, range, easeOutCubic, easeInCubic, hash1, hash2, rng } from '../../util.js';
-import { wordT, lineT, ad, env, pick, eighths, Buckets, glowSprite, drawGlow } from './common.js';
+import { wordT, lineT, ad, env, pick, eighths, Buckets, glowSprite, drawGlow, soft2d } from './common.js';
 import { drawSky } from '../sky.js';
 
 const D2R = Math.PI / 180;
@@ -73,7 +73,8 @@ export default {
     const C = p.center || [960, 1560], R = (p.radius ?? 1250) * (1 + 0.012 * lt);
     const pr = projector(lat0, lon0, C[0], C[1], R);
     drawSky(ctx, { density: 0.3, band: 0.15, neb: 0.12, seed: 23, exposure: 0.5, pan: [lt * 3, 0] });
-    const c = e.c2dBegin();
+    const SC = p.soft ? soft2d(e) : null;
+    const c = SC ? SC.begin() : e.c2dBegin();
     c.lineCap = 'round'; c.lineJoin = 'round';
     // the night disc (occludes the sky), limb and airglow
     c.fillStyle = 'rgb(4,6,12)';
@@ -81,25 +82,27 @@ export default {
     const burnAll = smooth(range(t, tBurn, tFall + 0.4));
     c.globalCompositeOperation = 'lighter';
     {
-      const g = c.createRadialGradient(C[0], C[1], R * 0.992, C[0], C[1], R * 1.022);
+      // airglow: a few concentric strokes (a full-dome radial gradient is very slow on this canvas)
       const ac = [lerp(0.62, 0.7, burnAll), lerp(0.74, 0.32, burnAll), lerp(1.0, 0.26, burnAll)];
-      g.addColorStop(0, css(ac, 0)); g.addColorStop(0.35, css(ac, 0.09)); g.addColorStop(1, css(ac, 0));
-      c.fillStyle = g; c.beginPath(); c.arc(C[0], C[1], R * 1.022, 0, Math.PI * 2); c.fill();
+      for (const [k, w, a] of [[1.006, 6, 0.05], [1.012, 10, 0.03], [1.02, 16, 0.015]]) {
+        c.strokeStyle = css(ac, a); c.lineWidth = w; c.beginPath(); c.arc(C[0], C[1], R * k, Math.PI * 1.0, Math.PI * 2.0); c.stroke();
+      }
       c.strokeStyle = css(P.ice, 0.5 * (1 - 0.6 * burnAll)); c.lineWidth = 2;
       c.beginPath(); c.arc(C[0], C[1], R * 1.004, Math.PI * 1.02, Math.PI * 1.98); c.stroke();
     }
     // graticule: the engraver's globe
     c.strokeStyle = css(P.steel, 0.13); c.lineWidth = 1.5;
+    c.lineJoin = 'bevel'; c.lineCap = 'butt';
+    c.beginPath();
     for (let la = -20; la <= 80; la += 10) {
-      c.beginPath(); let on = false;
+      let on = false;
       for (let lo = lon0 - 95; lo <= lon0 + 95; lo += 2) { const q = pr(la, lo); if (q[2] <= 0) { on = false; continue; } if (!on) { c.moveTo(q[0], q[1]); on = true; } else c.lineTo(q[0], q[1]); }
-      c.stroke();
     }
     for (let lo = Math.floor((lon0 - 90) / 15) * 15; lo <= lon0 + 90; lo += 15) {
-      c.beginPath(); let on = false;
+      let on = false;
       for (let la = -30; la <= 88; la += 2) { const q = pr(la, lo); if (q[2] <= 0) { on = false; continue; } if (!on) { c.moveTo(q[0], q[1]); on = true; } else c.lineTo(q[0], q[1]); }
-      c.stroke();
     }
+    c.stroke();
     // coastlines
     const dbg = p.dbg || 0;
     c.strokeStyle = css(P.bookGold, 0.3); c.lineWidth = 1.6;
@@ -113,6 +116,7 @@ export default {
       }
     }
     c.stroke();
+    c.lineCap = 'round'; c.lineJoin = 'round';
     // ---- the fires: targets are the largest cities in view, struck on a 16th-note grid around "burn"
     const vis = [];
     GEO.cities.forEach(([la, lo, pop], i) => { const q = pr(la, lo); if (q[2] > 0.08 && q[0] > 40 && q[0] < 1880 && q[1] > 330 && q[1] < 1060) vis.push(i); });
@@ -211,7 +215,7 @@ export default {
       drawGlow(c, REDG, q0[0], q0[1], rpx * 1.1 + 4, gA, Math.max(0.35, q0[2]));
     }
     c.globalCompositeOperation = 'source-over';
-    e.blit2d('over', 2.0);
+    if (SC) SC.blit('over', 2.0); else e.blit2d('over', 2.0);
     ctx.state.burnworld = { tBurn, tFall };
   },
   type(ty, t, lt, shot, ctx) {

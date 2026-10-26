@@ -698,9 +698,11 @@
    "dur": 17,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T04:01:24Z",
-   "file": null,
+   "file": "media/gen/K10_t1_d7f43cffd4.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1284,716,409",
+   "sheet": "media/gen/K10_t1_d7f43cffd4_sheet.jpg"
   },
   {
    "take": 2,
@@ -710,9 +712,11 @@
    "dur": 17,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T04:01:24Z",
-   "file": null,
+   "file": "media/gen/K10_t2_2f0ad89194.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1284,716,409",
+   "sheet": "media/gen/K10_t2_2f0ad89194_sheet.jpg"
   }
  ],
  "K12": [
@@ -752,9 +756,11 @@
    "dur": 11,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T04:01:29Z",
-   "file": null,
+   "file": "media/gen/L3_t1_ec2f8df5db.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1284,716,265",
+   "sheet": "media/gen/L3_t1_ec2f8df5db_sheet.jpg"
   },
   {
    "take": 2,
@@ -764,9 +770,11 @@
    "dur": 11,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T04:01:30Z",
-   "file": null,
+   "file": "media/gen/L3_t2_d898a88627.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1280,720,265",
+   "sheet": "media/gen/L3_t2_d898a88627_sheet.jpg"
   }
  ],
  "C1": [
@@ -778,9 +786,11 @@
    "dur": 5,
    "voc": null,
    "submitted": "2026-10-26T04:01:31Z",
-   "file": null,
+   "file": "media/gen/C1_t1_05896625b9.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1284,716,121",
+   "sheet": "media/gen/C1_t1_05896625b9_sheet.jpg"
   }
  ],
  "C7": [
@@ -794,7 +804,8 @@
    "submitted": "2026-10-26T04:01:33Z",
    "file": null,
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "state": "error"
   }
  ],
  "C8": [
@@ -808,7 +819,8 @@
    "submitted": "2026-10-26T04:01:34Z",
    "file": null,
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "state": "error"
   }
  ],
  "C9": [

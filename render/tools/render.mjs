@@ -23,6 +23,7 @@ const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..',
 
 async function openPage(browser) {
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+  page.setDefaultTimeout(240000);   // first frames of heavy scenes compile shaders for 20 s+ under load
   page.on('console', (m) => { if (m.type() === 'error' || (m.type() === 'warning' && !/prepare failed/.test(m.text()))) console.error('[page]', m.text().slice(0, 300)); });
   page.on('pageerror', (e) => console.error('[pageerror]', e.message));
   await page.goto(`http://127.0.0.1:${PORT}/index.html?w=${W}&h=${H}${process.env.TL ? '&tl=' + process.env.TL : ''}`);
@@ -33,7 +34,7 @@ async function openPage(browser) {
 
 async function grab(page, t) {
   await page.evaluate((tt) => window.renderAt(tt), t);
-  return page.screenshot({ type: 'jpeg', quality: Number(args.q || 93), clip: { x: 0, y: 0, width: W, height: H } });
+  return page.screenshot({ type: 'jpeg', quality: Number(args.q || 93), clip: { x: 0, y: 0, width: W, height: H }, timeout: 240000 });
 }
 
 const server = await serve(PORT);

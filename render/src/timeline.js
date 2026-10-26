@@ -4,6 +4,7 @@
 // shot: {id, t0, t1, scene, p (object | fn(t, lt, ctx)), look (post | fn), type (fn(ty, t, lt, shot, ctx)), post (fn)}
 import { smooth, range, easeInCubic, easeOutCubic, clamp, lerp } from './util.js';
 import { P } from './palette.js';
+import { PRINT_LOOK } from './scenes/history/print.js';
 
 // ---------------------------------------------------------------------------------------------------- looks
 const LOOK = {
@@ -11,7 +12,8 @@ const LOOK = {
   listener: { bloom: 0.8, bloomThreshold: 0.7, halation: 0.0, vignette: 0.4, grain: 0.02, streak: 0.25, streakThreshold: 1.2 },
   other: { bloom: 0.7, bloomThreshold: 0.7, halation: 0.1, vignette: 0.4, grain: 0.02 },
   space: { bloom: 0.7, bloomThreshold: 0.8, halation: 0.2, vignette: 0.3, grain: 0.02, streak: 0.3 },
-  archival: { bloom: 0.15, bloomThreshold: 1.2, halation: 0.0, vignette: 0.25, grain: 0.04, tonemap: 0 },
+  archival: PRINT_LOOK,   // printed matter seen by lamplight (history/print.js)
+  oko: { tonemap: 0, bloom: 0.12, bloomThreshold: 0.6, halation: 0.55, halCol: [1.0, 0.1, 0.05], vignette: 0.4, grain: 0.045, streak: 0, typeGlow: 0.15 },
   diagram: { bloom: 0.6, bloomThreshold: 0.8, halation: 0.15, vignette: 0.25, grain: 0.02 },
 };
 const ENG = { gain: 1.2, wmax: 5.2, wLo: 0.12, wHi: 1.08, wGam: 1.35, bgW: 0.35, fill: 0.18, edge: 0.45 };
@@ -188,13 +190,17 @@ export function buildTimeline(A) {
   const sulT = ls(V2, 1) - 0.15, lookT = ls(V2, 2) - 0.1, endT = ls(V2, 3) - 0.08, eightyT = ls(V2, 4) - 0.1, ruleT = ls(V2, 5) - 0.15, petT = ls(V2, 6) - 0.1, ignT = ls(V2, 7) - 0.15;
   const aliveT = W(V2, 7, 3) - 0.08;   // "We're"
   add({ id: 'V2a', t0: v2.start, t1: sulT, ...archival('H1', push(0.008)), type: ai(V2, 0, { x: 110, y: 160, breaks: [4], t1: sulT }) });
-  add({ id: 'V2b', t0: sulT, t1: lookT, scene: 'gunpowder', p: {}, look: LOOK.archival, type: ai(V2, 1, { x: 110, y: 160, breaks: [3], t1: lookT }) });
+  const thunderT = W(V2, 1, 3);
+  add({ id: 'V2b', t0: sulT, t1: lookT, scene: 'gunpowder', p: {},
+    look: (t) => { const k = t > thunderT ? Math.exp(-(t - thunderT) / 0.09) : 0; return { ...LOOK.archival, shakeX: 9 * k, shakeY: -6 * k }; }, type: ai(V2, 1, { x: 110, y: 160, breaks: [3], t1: lookT }) });
   add({ id: 'V2c', t0: lookT, t1: endT, ...listener('L1', push(0.006)), type: ai(V2, 2, { x: 110, y: 420, maxW: 900, t1: endT }) });
-  add({ id: 'V2d', t0: endT, t1: eightyT, scene: 'inkbomb', p: {}, look: LOOK.archival, type: ai(V2, 3, { x: 110, y: 160, breaks: [5], color: P.night, hotColor: P.redDeep, t1: eightyT }) });
-  add({ id: 'V2e', t0: eightyT, t1: ruleT, scene: 'oko', p: { phase: 'tracks' }, look: LOOK.diagram, type: ai(V2, 4, { x: 960, y: 1000, align: 'center', t1: ruleT }) });
-  const termA = (ruleT + petT) / 2;
-  add({ id: 'V2f', t0: ruleT, t1: termA, scene: 'oko', p: { phase: 'start' }, look: LOOK.diagram, type: ai(V2, 5, { x: 960, y: 1000, align: 'center', t1: petT }) });
-  add({ id: 'V2f2', t0: termA, t1: petT, scene: 'terminal', p: { phase: 'system' }, look: LOOK.diagram, type: ai(V2, 5, { x: 960, y: 1000, align: 'center', t1: petT }) });
+  add({ id: 'V2d', t0: endT, t1: eightyT, scene: 'inkbomb', p: {}, look: LOOK.archival, type: ai(V2, 3, { x: 110, y: 160, breaks: [5], t1: eightyT }) });
+  // Oko, 1983, intercut with the Listener's system prompt: the rule then, the directive now
+  const okoP = { tLaunch: [W(V2, 4, 2) + 0.1, W(V2, 4, 4), W(V2, 4, 4) + 0.16, W(V2, 4, 4) + 0.3, W(V2, 4, 4) + 0.46], tAttack: W(V2, 5, 5), tPush: [W(V2, 5, 0), W(V2, 5, 5) - 0.1] };
+  const strikeT = W(V2, 5, 5) - 0.12;   // "first strike"
+  add({ id: 'V2e', t0: eightyT, t1: ruleT, scene: 'oko', p: okoP, look: LOOK.oko, type: ai(V2, 4, { x: 960, y: 1000, align: 'center', t1: ruleT }) });
+  add({ id: 'V2f', t0: ruleT, t1: strikeT, scene: 'terminal', p: { phase: 'system' }, look: LOOK.diagram, type: ai(V2, 5, { x: 960, y: 1000, align: 'center', t1: petT }) });
+  add({ id: 'V2f2', t0: strikeT, t1: petT, scene: 'oko', p: okoP, look: LOOK.oko, type: ai(V2, 5, { x: 960, y: 1000, align: 'center', t1: petT }) });
   add({ id: 'V2g', t0: petT, t1: ignT, ...archival('H4', push(0.006)), type: both(ai(V2, 6, { x: 110, y: 160, breaks: [3], t1: ignT }),
     excerpt('26 September 1983', ['Stanislav Petrov', 'ignored all previous', 'instructions today.'], 110, 820, petT + 0.4, ignT, { size: 28, kicker: 'EXCERPT FROM · PETROV TEST' })) });
   add({ id: 'V2h', t0: ignT, t1: aliveT, scene: 'terminal', p: { phase: 'ignore' }, look: LOOK.diagram });
@@ -243,9 +249,11 @@ export function buildTimeline(A) {
     type: both(quiet(B, 0), quiet(B, 1), quiet(B, 2),
       excerpt('move 37', ['Dark Forest Theory is', 'genocide trauma dressed up in game theory language'], 110, 120, br.start + 1.2, matchT, { size: 28 })) });
   add({ id: 'B1b', t0: matchT + 2.3, t1: fearT, ...keeper('K12', {}), type: quiet(B, 3, { y: 1000 }) });
-  add({ id: 'B2', t0: fearT, t1: sixT, scene: 'chainhands', p: { start: fearT, letGo: W(B, 5, 6) }, look: LOOK.diagram, type: both(quiet(B, 4), quiet(B, 5)) });
-  add({ id: 'B3', t0: sixT, t1: twoT, scene: 'sonar', p: { start: sixT }, look: LOOK.diagram, type: quiet(B, 6, { color: P.phosphor }) });
-  add({ id: 'B4', t0: twoT, t1: noT, ...archival('H6', {}), type: (ty, t) => ty.lyric({ words: line(B, 7).words.slice(0, 5) }, t, { font: 'Cormorant', size: 52, x: 960, y: 1000, align: 'center', color: P.night, hotColor: P.redDeep, t1: noT }) });
+  add({ id: 'B2', t0: fearT, t1: sixT, scene: 'chainhands', p: { start: fearT, letGo: W(B, 5, 6) }, look: { bloom: 0.45, bloomThreshold: 0.7, halation: 0.3, halCol: [1.0, 0.45, 0.15], vignette: 0.45, grain: 0.035 }, type: both(quiet(B, 4), quiet(B, 5)) });
+  add({ id: 'B3', t0: sixT, t1: twoT, scene: 'sonar', p: { start: sixT },
+    look: (t) => { const c = line(B, 6).words.slice(1).reduce((m, w) => Math.max(m, t >= w.t ? Math.exp(-(t - w.t) / 0.1) : 0), 0);   // a charge on "depth", "charges", "falling"
+      return { bloom: 0.75, bloomThreshold: 0.55, halation: 0.12, halCol: [0.3, 1, 0.6], vignette: 0.5, grain: 0.05, shakeX: 6 * c * Math.sin(t * 90), shakeY: 4 * c }; }, type: quiet(B, 6, { color: P.phosphor }) });
+  add({ id: 'B4', t0: twoT, t1: noT, ...archival('H6', {}), type: (ty, t) => ty.lyric({ words: line(B, 7).words.slice(0, 5) }, t, { font: 'Cormorant', size: 52, x: 960, y: 1000, align: 'center', color: P.cream, hotColor: P.red, t1: noT }) });
   add({ id: 'B5', t0: noT, t1: br.end, scene: 'sky', p: { density: 0.05, exposure: 0.05 }, look: { bloom: 0.2, vignette: 0.2, grain: 0.02 },
     type: (ty, t) => { const k = clamp((t - noT) / 0.12); ty.text('NO', 960, 560, { font: 'Archivo', weight: 800, stretch: '125%', size: lerp(760, 700, easeOutCubic(k)), align: 'center', base: 'middle', color: P.cream, alpha: k, glow: 10 }); } });
 

@@ -582,3 +582,10 @@
 {"ts": "2026-10-26T04:11:09Z", "model": "bytedance/seedance-2.5", "tag": "K8_t3", "job": "holdfire/K8_t3-acbffb3bc3", "event": "submit", "ok": null, "est_usd": 2.5432, "where": "cloud"}
 {"ts": "2026-10-26T04:11:35Z", "model": "bytedance/seedance-2.5", "tag": "H6_t1", "job": "holdfire/H6_t1-41af78822d", "event": "submit", "ok": null, "est_usd": 1.3872, "where": "cloud"}
 {"ts": "2026-10-26T04:12:42Z", "model": "bytedance/seedance-2.5", "tag": "K12_t1", "job": "holdfire/K12_t1-c66df4cbc3", "event": "result", "ok": true, "est_usd": 1.8496, "where": "cloud"}
+{"ts": "2026-10-26T04:14:02Z", "model": "bytedance/seedance-2.5", "tag": "K10_t2", "job": "holdfire/K10_t2-2f0ad89194", "event": "result", "ok": true, "est_usd": 3.9304, "where": "cloud"}
+{"ts": "2026-10-26T04:14:05Z", "model": "bytedance/seedance-2.5", "tag": "L3_t1", "job": "holdfire/L3_t1-ec2f8df5db", "event": "result", "ok": true, "est_usd": 2.5432, "where": "cloud"}
+{"ts": "2026-10-26T04:14:08Z", "model": "bytedance/seedance-2.5", "tag": "C1_t1", "job": "holdfire/C1_t1-05896625b9", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T04:14:09Z", "model": "bytedance/seedance-2.5", "tag": "C7_t1", "job": "holdfire/C7_t1-edbc18a069", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T04:14:10Z", "model": "bytedance/seedance-2.5", "tag": "C8_t1", "job": "holdfire/C8_t1-9147a58c84", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T04:15:23Z", "model": "bytedance/seedance-2.5", "tag": "K10_t1", "job": "holdfire/K10_t1-d7f43cffd4", "event": "result", "ok": true, "est_usd": 3.9304, "where": "cloud"}
+{"ts": "2026-10-26T04:15:27Z", "model": "bytedance/seedance-2.5", "tag": "L3_t2", "job": "holdfire/L3_t2-d898a88627", "event": "result", "ok": true, "est_usd": 2.5432, "where": "cloud"}

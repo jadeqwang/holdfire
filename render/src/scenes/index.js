@@ -10,5 +10,6 @@ import endcard from './endcard.js';
 import { SCENES as SPACE } from './space/index.js';
 import { SCENES as SIGNAL } from './signal/index.js';
 import { SCENES as HISTORY } from './history/index.js';
+import { SCENES_T2 } from './t2/index.js';
 
-export const SCENES = { sky, coldopen, engraved, constellation, stipple, placeholder, multi, endcard, ...SPACE, ...SIGNAL, ...HISTORY };
+export const SCENES = { sky, coldopen, engraved, constellation, stipple, placeholder, multi, endcard, ...SPACE, ...SIGNAL, ...HISTORY, ...SCENES_T2 };

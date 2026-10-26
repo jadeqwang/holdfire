@@ -2,5 +2,6 @@
 import sky from './sky.js';
 import coldopen from './coldopen.js';
 import engraved from './engraved.js';
+import constellation from './constellation.js';
 
-export const SCENES = { sky, coldopen, engraved };
+export const SCENES = { sky, coldopen, engraved, constellation };

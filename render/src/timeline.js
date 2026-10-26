@@ -13,7 +13,9 @@ export function buildTimeline(A) {
   // style test: the Seedance test take, engraved
   add({ id: 'test_sing', t0: last + 4.5, t1: last + 10.5, scene: 'engraved', p: (t, lt) => ({ clip: 'test_sing', s0: last + 4.5, lag: 0, zoom: 1 + lt * 0.006, wmax: 4.6, gain: 1.6, fill: 0.12, edge: 0.6 }),
     look: { bloom: 0.55, halation: 0.45, vignette: 0.45, grain: 0.03, exposure: 1.0 } });
-  add({ id: 'tail', t0: last + 10.5, t1: 9999, scene: 'sky', p: { density: 0.5, band: 0.4 } });
+  add({ id: 'test_const', t0: last + 10.5, t1: last + 13.5, scene: 'constellation', p: (t, lt) => ({ clip: 'test_const', s0: last + 10.5, lag: 0, zoom: 1 }),
+    look: { bloom: 0.8, bloomThreshold: 0.7, halation: 0.0, vignette: 0.4, grain: 0.02, streak: 0.25, streakThreshold: 1.2 } });
+  add({ id: 'tail', t0: last + 13.5, t1: 9999, scene: 'sky', p: { density: 0.5, band: 0.4 } });
   return shots;
 }
 

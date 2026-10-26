@@ -32,6 +32,40 @@
   "src": "media/kf2/BR17_nbp_v1.jpg",
   "note": "B-59 surfacing at night among destroyers in searchlights; still only (no time in the edit); optional p.img for 'surface'"
  },
+ "BR_LETGO": {
+  "dir": "work/plates/BR_LETGO",
+  "kind": "video",
+  "src": "media/gen/t2_BR_LETGO_veo31_t2_e5a801f702.mp4",
+  "in": 2.0,
+  "rate": 1.0
+ },
+ "BR_clock": {
+  "dir": "work/plates/BR_clock",
+  "kind": "video",
+  "src": "media/gen/t2_BR_clock_veo31_t1_760286b3fa.mp4",
+  "in": 0.0,
+  "rate": 1.0
+ },
+ "BR_faceB": {
+  "dir": "work/plates/BR_faceB",
+  "kind": "video",
+  "src": "media/gen/t2_BR_faceB_veo31_t1_9e384a5af4.mp4",
+  "in": 0.0,
+  "rate": 1.0
+ },
+ "BR_handB": {
+  "dir": "work/plates/BR_handB",
+  "kind": "video",
+  "src": "media/gen/t2_BR_handB_veo31_t1_75a1400d0c.mp4",
+  "in": 0.0
+ },
+ "BR_handW": {
+  "dir": "work/plates/BR_handW",
+  "kind": "video",
+  "src": "media/gen/t2_BR_handW_veo31_t1_98e2d1efa7.mp4",
+  "in": 0.0,
+  "rate": 1.0
+ },
  "BU04": {
   "dir": "work/plates/BU04",
   "kind": "video",
@@ -147,7 +181,14 @@
   "dir": "work/plates/C101",
   "kind": "video",
   "src": "media/gen/t2_C101_veo31_t1_6b65a7b5ee.mp4",
-  "in": 1.17,
+  "in": 1.27,
+  "rate": 1.5
+ },
+ "C201R": {
+  "dir": "work/plates/C201R",
+  "kind": "video",
+  "src": "media/gen/t2_C201R_veo31_t1_d50e877697.mp4",
+  "in": 0.77,
   "rate": 1.5
  },
  "C203L": {
@@ -414,12 +455,38 @@
   "rate": 0.8,
   "note": "reuse g1's CO01 eye plate, played backward so it lands on CO01's first frame when OU13 starts (loop point); not regenerated"
  },
+ "P101": {
+  "dir": "work/plates/P101",
+  "kind": "video",
+  "src": "media/gen/t2_P101_veo31_t1_6d364042d0.mp4",
+  "in": 0.3,
+  "rate": 2.0
+ },
+ "P102": {
+  "dir": "work/plates/P102",
+  "kind": "still",
+  "src": "media/kf2/P102_nbp.jpg",
+  "styleAmt": 0.4
+ },
  "P105": {
   "dir": "work/plates/P105",
   "kind": "video",
   "src": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
   "s0": 45.715,
   "lag": 0.0
+ },
+ "P106": {
+  "dir": "work/plates/P106",
+  "kind": "video",
+  "src": "media/gen/t2_P106_sd25_t3_eb735d9762.mp4",
+  "s0": 47.432,
+  "lag": 1.18
+ },
+ "P107": {
+  "dir": "work/plates/P107",
+  "kind": "video",
+  "src": "work/t2/g2/P107_push.mp4",
+  "in": 0.0
  },
  "TEST_bars": {
   "dir": "work/plates/TEST_bars",
@@ -492,6 +559,42 @@
    "exposure": 0.9,
    "contrast": 1.08
   }
+ },
+ "V102": {
+  "dir": "work/plates/V102",
+  "kind": "video",
+  "src": "media/gen/t2_V102_sd20_t2_b72e2c06c8.mp4",
+  "in": 0,
+  "note": "Seedance 2.0 (Veo t1 drifted). V103 continues it at in 1.92: at that time the near front fin is at (1140,760) in the plate (shoulder 1100,680 to tip 1140,790), head 760-900,560-620. With the edit p zoom 1.5 pan [-120,60] the fin lands at screen ~(1110,930), near the bottom edge; pan [-270,-270] puts it at (960,600)"
+ },
+ "V106": {
+  "dir": "work/plates/V106",
+  "kind": "video",
+  "src": "media/gen/t2_V106_veof_t1_b888017a1a.mp4",
+  "in": 0.16,
+  "rate": 1.5,
+  "note": "plate = take 0.5-1.5 s; in 0.16 (take 0.66 s) at 1.5x: the hand opens across the 0.28 s shot and lands spread (palm centre ~1000,560; fingertips reach y~360)"
+ },
+ "V108": {
+  "dir": "work/plates/V108",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 0.4 s, keyed, over painted era plate media/kf2/V108_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+ },
+ "V109": {
+  "dir": "work/plates/V109",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.046 s, keyed, over painted era plate media/kf2/V109_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+ },
+ "V110": {
+  "dir": "work/plates/V110",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.691 s, keyed, over painted era plate media/kf2/V110_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
  },
  "V201": {
   "dir": "work/plates/V201",
@@ -603,5 +706,32 @@
   "style": "oil",
   "styleAmt": 0.25,
   "note": "seedance-2.5 t1 (bake-off vs veo t1: Veo's eyes turn teal when they open, off model). Clip 1.0-1.94: eyes close and she breathes out, lips part ~1.7 s, brown eyes on model; slow pan right. Face x ~880-1100, y ~380-560 (under WE'RE ALIVE)."
+ },
+ "X201": {
+  "dir": "work/plates/X201",
+  "kind": "still",
+  "src": "media/kf2/X201_nbp.jpg"
+ },
+ "X202": {
+  "dir": "work/plates/X202",
+  "kind": "still",
+  "src": "media/kf2/X202_nbp.jpg"
+ },
+ "X203": {
+  "dir": "work/plates/X203",
+  "kind": "still",
+  "src": "media/kf2/X203_nbp.jpg"
+ },
+ "X204": {
+  "dir": "work/plates/X204",
+  "kind": "still",
+  "src": "media/kf2/X204_nbp.jpg"
+ },
+ "X213": {
+  "dir": "work/plates/X213",
+  "kind": "video",
+  "src": "media/gen/t2_X213_veo31_t2_aad36a3ad5.mp4",
+  "in": 1.6,
+  "rate": 1.5
  }
 }

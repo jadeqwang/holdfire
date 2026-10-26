@@ -119,5 +119,41 @@
   "in": 0,
   "twos": false,
   "note": "city grid through an aircraft window; still with a baked slow push"
+ },
+ "V106": {
+  "dir": "work/plates/V106",
+  "kind": "video",
+  "src": "media/gen/t2_V106_veof_t1_b888017a1a.mp4",
+  "in": 0.16,
+  "rate": 1.5,
+  "note": "plate = take 0.5-1.5 s; in 0.16 (take 0.66 s) at 1.5x: the hand opens across the 0.28 s shot and lands spread (palm centre ~1000,560; fingertips reach y~360)"
+ },
+ "V108": {
+  "dir": "work/plates/V108",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 0.4 s, keyed, over painted era plate media/kf2/V108_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+ },
+ "V109": {
+  "dir": "work/plates/V109",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.046 s, keyed, over painted era plate media/kf2/V109_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+ },
+ "V110": {
+  "dir": "work/plates/V110",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.691 s, keyed, over painted era plate media/kf2/V110_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+ },
+ "V102": {
+  "dir": "work/plates/V102",
+  "kind": "video",
+  "src": "media/gen/t2_V102_sd20_t2_b72e2c06c8.mp4",
+  "in": 0,
+  "note": "Seedance 2.0 (Veo t1 drifted). V103 continues it at in 1.92: at that time the near front fin is at (1140,760) in the plate (shoulder 1100,680 to tip 1140,790), head 760-900,560-620. With the edit p zoom 1.5 pan [-120,60] the fin lands at screen ~(1110,930), near the bottom edge; pan [-270,-270] puts it at (960,600)"
  }
 }

@@ -167,5 +167,90 @@
    "lag": null,
    "pick": true
   }
+ ],
+ "V106": [
+  {
+   "tag": "t2_V106_veof_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V106_veof_t1-b888017a1a",
+   "kf": "media/kf2/V106_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V106_veof_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_V106_veof_t1_b888017a1a.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "verdict": "pick: fist opens to a flat spread palm 0.58-1.0 s, then holds; palm centred x~1000",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "V102": [
+  {
+   "tag": "t2_V102_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V102_veo_t1-7d4eff2e5d",
+   "kf": "media/kf2/V102_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V102_veo_t1.txt",
+   "s0": null,
+   "dur": "6s",
+   "file": "media/gen/t2_V102_veo_t1_7d4eff2e5d.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.2,
+   "verdict": "reject: camera pans right, the fish flips direction and changes shape at ~1 s, Jade leaves frame",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_V102_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_V102_sd20_t2-b72e2c06c8",
+   "kf": "media/kf2/V102_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V102_sd20_t2.txt",
+   "s0": null,
+   "dur": 5,
+   "file": "media/gen/t2_V102_sd20_t2_b72e2c06c8.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.75,
+   "verdict": "pick: locked camera, the fish plants its fins and heaves forward, stays one animal; Jade still in the left foreground; 720p",
+   "lag": null,
+   "pick": true,
+   "serves": [
+    "V102",
+    "V103"
+   ]
+  }
+ ],
+ "V107": [
+  {
+   "tag": "t2_V107_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V107_veo_t1-239358ed15",
+   "kf": "media/kf2/V107_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V107_veo_t1.txt",
+   "s0": null,
+   "dur": "6s",
+   "file": "media/gen/t2_V107_veo_t1_239358ed15.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.2,
+   "verdict": "usable alt: spray 0.5-2.5 s, hand lifts ~3.2 s but leaves a glowing yellow hand (not a rock-coloured stencil), stray object at 5 s",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_V107_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_V107_sd20_t2-326c3861f7",
+   "kf": "media/kf2/V107_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V107_sd20_t2.txt",
+   "s0": null,
+   "dur": 5,
+   "file": "media/gen/t2_V107_sd20_t2_326c3861f7.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.75,
+   "verdict": "reject: no visible ochre spray; faint outline only",
+   "lag": null,
+   "pick": false
+  }
  ]
 }

@@ -1,4 +1,38 @@
 {
+ "BR_LETGO": {
+  "dir": "work/plates/BR_LETGO",
+  "kind": "video",
+  "src": "media/gen/t2_BR_LETGO_veo31_t2_e5a801f702.mp4",
+  "in": 2.0,
+  "rate": 1.0
+ },
+ "BR_clock": {
+  "dir": "work/plates/BR_clock",
+  "kind": "video",
+  "src": "media/gen/t2_BR_clock_veo31_t1_760286b3fa.mp4",
+  "in": 0.0,
+  "rate": 1.0
+ },
+ "BR_faceB": {
+  "dir": "work/plates/BR_faceB",
+  "kind": "video",
+  "src": "media/gen/t2_BR_faceB_veo31_t1_9e384a5af4.mp4",
+  "in": 0.0,
+  "rate": 1.0
+ },
+ "BR_handB": {
+  "dir": "work/plates/BR_handB",
+  "kind": "video",
+  "src": "media/gen/t2_BR_handB_veo31_t1_75a1400d0c.mp4",
+  "in": 0.0
+ },
+ "BR_handW": {
+  "dir": "work/plates/BR_handW",
+  "kind": "video",
+  "src": "media/gen/t2_BR_handW_veo31_t1_98e2d1efa7.mp4",
+  "in": 0.0,
+  "rate": 1.0
+ },
  "C101": {
   "dir": "work/plates/C101",
   "kind": "video",
@@ -38,7 +72,14 @@
   "dir": "work/plates/C101",
   "kind": "video",
   "src": "media/gen/t2_C101_veo31_t1_6b65a7b5ee.mp4",
-  "in": 1.17,
+  "in": 1.27,
+  "rate": 1.5
+ },
+ "C201R": {
+  "dir": "work/plates/C201R",
+  "kind": "video",
+  "src": "media/gen/t2_C201R_veo31_t1_d50e877697.mp4",
+  "in": 0.77,
   "rate": 1.5
  },
  "C203L": {
@@ -102,11 +143,64 @@
   "src": "work/t2/g2/crt/CRT_roomB.mp4",
   "in": 0.0
  },
+ "P101": {
+  "dir": "work/plates/P101",
+  "kind": "video",
+  "src": "media/gen/t2_P101_veo31_t1_6d364042d0.mp4",
+  "in": 0.3,
+  "rate": 2.0
+ },
+ "P102": {
+  "dir": "work/plates/P102",
+  "kind": "still",
+  "src": "media/kf2/P102_nbp.jpg",
+  "styleAmt": 0.4
+ },
  "P105": {
   "dir": "work/plates/P105",
   "kind": "video",
   "src": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
   "s0": 45.715,
   "lag": 0.0
+ },
+ "P106": {
+  "dir": "work/plates/P106",
+  "kind": "video",
+  "src": "media/gen/t2_P106_sd25_t3_eb735d9762.mp4",
+  "s0": 47.432,
+  "lag": 1.18
+ },
+ "P107": {
+  "dir": "work/plates/P107",
+  "kind": "video",
+  "src": "work/t2/g2/P107_push.mp4",
+  "in": 0.0
+ },
+ "X201": {
+  "dir": "work/plates/X201",
+  "kind": "still",
+  "src": "media/kf2/X201_nbp.jpg"
+ },
+ "X202": {
+  "dir": "work/plates/X202",
+  "kind": "still",
+  "src": "media/kf2/X202_nbp.jpg"
+ },
+ "X203": {
+  "dir": "work/plates/X203",
+  "kind": "still",
+  "src": "media/kf2/X203_nbp.jpg"
+ },
+ "X204": {
+  "dir": "work/plates/X204",
+  "kind": "still",
+  "src": "media/kf2/X204_nbp.jpg"
+ },
+ "X213": {
+  "dir": "work/plates/X213",
+  "kind": "video",
+  "src": "media/gen/t2_X213_veo31_t2_aad36a3ad5.mp4",
+  "in": 1.6,
+  "rate": 1.5
  }
 }

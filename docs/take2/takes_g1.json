@@ -1,21 +1,6 @@
 {
  "CO01": [
   {
-   "tag": "t2_CO01_veo_t1",
-   "model": "google/veo-3.1",
-   "job": "holdfire/t2_CO01_veo_t1-66747bd17f",
-   "kf": "media/kf2/CO01_nbp_v1.jpg",
-   "prompt_file": "media/kf2/prompts/t2_CO01_veo_t1.txt",
-   "s0": null,
-   "dur": "4s",
-   "file": "media/gen/t2_CO01_veo_t1_66747bd17f.mp4",
-   "dims": "1920x1080",
-   "est_usd": 0.8,
-   "verdict": "reject: blinks/half-closes at 0.4-0.8 s and reframes",
-   "lag": null,
-   "pick": false
-  },
-  {
    "tag": "t2_CO01_veo_t2",
    "model": "google/veo-3.1",
    "job": "holdfire/t2_CO01_veo_t2-2d8229acb1",
@@ -44,6 +29,36 @@
    "verdict": "lost: stuck running >3 h (relay wall limit); counted, resubmitted as t2",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_CO01_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_CO01_sd25_t2-4408b56f0a",
+   "kf": "media/kf2/CO01_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO01_sd25_t2.txt",
+   "s0": null,
+   "dur": 4,
+   "file": "media/gen/t2_CO01_sd25_t2_4408b56f0a.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.9248,
+   "verdict": "bake-off reject: no blink but pushes in fast (eye grows ~2x) and drifts; 720p soft. Veo t1 post-blink window wins",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_CO01_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_CO01_veo_t1-66747bd17f",
+   "kf": "media/kf2/CO01_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO01_veo_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_CO01_veo_t1_66747bd17f.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.8,
+   "verdict": "pick: post-blink window 1.125-3.96 s is locked on the pupil (967,536 constant), slow push, no blink; recentred",
+   "lag": null,
+   "pick": true
   }
  ],
  "V108": [
@@ -70,6 +85,87 @@
     "V120",
     "V121"
    ]
+  }
+ ],
+ "V101": [
+  {
+   "tag": "t2_V101_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_t1-5b12002a04",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_t1.txt",
+   "s0": null,
+   "dur": 4,
+   "file": null,
+   "dims": null,
+   "est_usd": 0.9248,
+   "verdict": "error 2047 (refunded); resubmitted",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_V101_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_t2-9163d752d3",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_t2.txt",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25_t2_9163d752d3.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.9248,
+   "verdict": "pick: eyes open looking out to sea, clear vowels; lag 0 (strip), r .55 face",
+   "lag": 0.0,
+   "pick": true
+  },
+  {
+   "tag": "t2_V101_sd25_t3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_t3-d1963b865b",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_t3.txt",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25_t3_d1963b865b.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.9248,
+   "verdict": "alt: eyes closed, contemplative, metrics agree at lag -0.125; less open vowels, less hook for muted viewers",
+   "lag": -0.125,
+   "pick": false
+  }
+ ],
+ "CO11": [
+  {
+   "tag": "t2_CO11_veof_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_CO11_veof_t1-5030613986",
+   "kf": "media/kf2/CO11_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO11_veof_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_CO11_veof_t1_5030613986.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "verdict": "pick: strike, sparks and flare at 0.2-0.6 s, flame settles; on photographic look",
+   "lag": null,
+   "pick": true
+  }
+ ],
+ "CO12": [
+  {
+   "tag": "t2_CO12_veof_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_CO12_veof_t1-87f3c4a55b",
+   "kf": "media/kf2/CO12_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_CO12_veof_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_CO12_veof_t1_87f3c4a55b.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "verdict": "pick: beam sweeps through fog toward the lens, flares at centre ~1.6-2.0 s",
+   "lag": null,
+   "pick": true
   }
  ]
 }

@@ -1,0 +1,389 @@
+{
+ "C103L": [
+  {
+   "tag": "t2_C103L_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103L_sd25_t1-d610863352",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C103L_sd25_t1.txt",
+   "s0": 56.371,
+   "dur": 7.042,
+   "file": "media/gen/t2_C103L_sd25_t1_d610863352.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: on model, sings the whole line; strip closes on 'but', open vowels through the held 'are'",
+   "lag": -0.25,
+   "pick": [
+    "C103L"
+   ]
+  },
+  {
+   "tag": "t2_C103L_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103L_sd25_t2-58e5d466fc",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C103L_sd25_t2.txt",
+   "s0": 56.371,
+   "dur": 7.042,
+   "file": "media/gen/t2_C103L_sd25_t2_58e5d466fc.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: fine picture; measured +0.833 opens on the b of 'but' (metrics disagree)",
+   "lag": 0.833,
+   "pick": false
+  }
+ ],
+ "C103R": [
+  {
+   "tag": "t2_C103R_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103R_sd25_t1-b98638e99d",
+   "kf": "media/kf2/C103R_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C103R_sd25_t1.txt",
+   "s0": 56.371,
+   "dur": 7.042,
+   "file": "media/gen/t2_C103R_sd25_t1_b98638e99d.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: pushes in to a big close-up mid-take (face redrawn larger)",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_C103R_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103R_sd25_t2-1584d49648",
+   "kf": "media/kf2/C103R_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C103R_sd25_t2.txt",
+   "s0": 56.371,
+   "dur": 7.042,
+   "file": "media/gen/t2_C103R_sd25_t2_1584d49648.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: stable 3/4, sings through; lag as C103L (Seedance starts early)",
+   "lag": -0.25,
+   "pick": [
+    "C103R"
+   ]
+  }
+ ],
+ "C108": [
+  {
+   "tag": "t2_C108_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_t1-43b72156ba",
+   "kf": "media/kf2/C108_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C108_sd25_t1.txt",
+   "s0": 64.289,
+   "dur": 4.042,
+   "file": "media/gen/t2_C108_sd25_t1_43b72156ba.mp4",
+   "dims": "1470x630",
+   "verdict": "reject: 1470x630 (21:9)",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_C108_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_t2-3721f7f98e",
+   "kf": "media/kf2/C108_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C108_sd25_t2.txt",
+   "s0": 64.289,
+   "dur": 4.042,
+   "file": "media/gen/t2_C108_sd25_t2_3721f7f98e.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: eyes closed throughout, hand on earcup; +0.125 opens 'you'; cascade fails on teal (fixed-box strip)",
+   "lag": 0.125,
+   "pick": [
+    "C108"
+   ]
+  }
+ ],
+ "C208L": [
+  {
+   "tag": "t2_C208L_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208L_sd25_t1-a2e28cf1a0",
+   "kf": "media/kf2/C208L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C208L_sd25_t1.txt",
+   "s0": 125.524,
+   "dur": 4.042,
+   "file": "media/gen/t2_C208L_sd25_t1_a2e28cf1a0.mp4",
+   "dims": "1470x630",
+   "verdict": "reject: 1470x630 (21:9) (sync +0.042 was fine)",
+   "lag": 0.042,
+   "pick": false
+  },
+  {
+   "tag": "t2_C208L_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208L_sd25_t2-6669650da7",
+   "kf": "media/kf2/C208L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C208L_sd25_t2.txt",
+   "s0": 125.524,
+   "dur": 4.042,
+   "file": "media/gen/t2_C208L_sd25_t2_6669650da7.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: r 0.51 metrics agree; strip good",
+   "lag": 0.042,
+   "pick": [
+    "C208L"
+   ]
+  }
+ ],
+ "C208R": [
+  {
+   "tag": "t2_C208R_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208R_sd25_t1-6be191c440",
+   "kf": "media/kf2/C108_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C208R_sd25_t1.txt",
+   "s0": 125.524,
+   "dur": 4.042,
+   "file": "media/gen/t2_C208R_sd25_t1_6be191c440.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: b-closure on 'breathe' at 0; plate is HFLIPPED (edit p flipX:true flips it back to room-B orientation)",
+   "lag": 0.0,
+   "pick": [
+    "C208R"
+   ]
+  },
+  {
+   "tag": "t2_C208R_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208R_sd25_t2-08499f9049",
+   "kf": "media/kf2/C108_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C208R_sd25_t2.txt",
+   "s0": 125.524,
+   "dur": 4.042,
+   "file": "media/gen/t2_C208R_sd25_t2_08499f9049.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: fine picture, not strip-checked",
+   "lag": null,
+   "pick": false
+  }
+ ],
+ "P105": [
+  {
+   "tag": "t2_P105_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P105_sd25_t1-5b90b05d9b",
+   "kf": "media/kf2/P105_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P105_sd25_t1.txt",
+   "s0": 45.715,
+   "dur": 4.042,
+   "file": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: eyes closed, the more active mouth; wide open on 'we're'",
+   "lag": 0.0,
+   "pick": [
+    "P105"
+   ]
+  },
+  {
+   "tag": "t2_P105_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P105_sd25_t2-ad06bf07fe",
+   "kf": "media/kf2/P105_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_P105_sd25_t2.txt",
+   "s0": 45.715,
+   "dur": 4.042,
+   "file": "media/gen/t2_P105_sd25_t2_ad06bf07fe.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: very small mouth movement",
+   "lag": null,
+   "pick": false
+  }
+ ],
+ "C203L": [
+  {
+   "tag": "t2_C203L_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203L_sd25_t1-dcab53c4e0",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C203L_sd25_t1.txt",
+   "s0": 117.637,
+   "dur": 7.042,
+   "file": "media/gen/t2_C203L_sd25_t1_dcab53c4e0.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: metrics agree -0.375",
+   "lag": -0.375,
+   "pick": [
+    "C203L"
+   ]
+  },
+  {
+   "tag": "t2_C203L_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203L_sd25_t2-13aecf53d0",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C203L_sd25_t2.txt",
+   "s0": 117.637,
+   "dur": 7.042,
+   "file": "media/gen/t2_C203L_sd25_t2_13aecf53d0.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics disagree",
+   "lag": 0.333,
+   "pick": false
+  }
+ ],
+ "C203R": [
+  {
+   "tag": "t2_C203R_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_t1-7828c97ddb",
+   "kf": "media/kf2/C103R_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C203R_sd25_t1.txt",
+   "s0": 117.637,
+   "dur": 7.042,
+   "file": "media/gen/t2_C203R_sd25_t1_7828c97ddb.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: metrics agree +0.917 (idles ~0.9 s then sings)",
+   "lag": 0.917,
+   "pick": [
+    "C203R"
+   ]
+  },
+  {
+   "tag": "t2_C203R_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_t2-dbd49f09f8",
+   "kf": "media/kf2/C103R_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C203R_sd25_t2.txt",
+   "s0": 117.637,
+   "dur": 7.042,
+   "file": "media/gen/t2_C203R_sd25_t2_dbd49f09f8.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics agree +0.500, not strip-checked",
+   "lag": 0.5,
+   "pick": false
+  }
+ ],
+ "C209L": [
+  {
+   "tag": "t2_C209L_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209L_sd25_t1-fa99a63cf2",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C209L_sd25_t1.txt",
+   "s0": 128.098,
+   "dur": 5.042,
+   "file": "media/gen/t2_C209L_sd25_t1_fa99a63cf2.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics disagree (+1.208 / +0.542)",
+   "lag": 1.208,
+   "pick": false
+  },
+  {
+   "tag": "t2_C209L_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209L_sd25_t2-22438bdadd",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C209L_sd25_t2.txt",
+   "s0": 128.098,
+   "dur": 5.042,
+   "file": "media/gen/t2_C209L_sd25_t2_22438bdadd.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: metrics agree +0.833, open on if/you/are",
+   "lag": 0.833,
+   "pick": [
+    "C209L"
+   ]
+  }
+ ],
+ "C209R": [
+  {
+   "tag": "t2_C209R_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_t1-3b86d4fe74",
+   "kf": "media/kf2/C103R_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C209R_sd25_t1.txt",
+   "s0": 128.098,
+   "dur": 5.042,
+   "file": "media/gen/t2_C209R_sd25_t1_3b86d4fe74.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: metrics agree -0.167",
+   "lag": -0.167,
+   "pick": [
+    "C209R"
+   ]
+  },
+  {
+   "tag": "t2_C209R_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_t2-74c29bf04e",
+   "kf": "media/kf2/C103R_v3_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C209R_sd25_t2.txt",
+   "s0": 128.098,
+   "dur": 5.042,
+   "file": "media/gen/t2_C209R_sd25_t2_74c29bf04e.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics agree -0.167",
+   "lag": -0.167,
+   "pick": false
+  }
+ ],
+ "C101": [
+  {
+   "tag": "t2_C101_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_C101_veo31_t1-6b65a7b5ee",
+   "kf": "media/kf2/C101_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C101_veo31_t1.txt",
+   "s0": null,
+   "dur": 6.0,
+   "file": "media/gen/t2_C101_veo31_t1_6b65a7b5ee.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick (bake-off winner): every dish swings to the zenith over f31-64, a target star lights; in 1.17 rate 1.5 puts the swing on the 51.82 downbeat; also C201L",
+   "lag": null,
+   "pick": [
+    "C101",
+    "C201L"
+   ]
+  },
+  {
+   "tag": "t2_C101_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C101_sd25_t1-f6c66d3519",
+   "kf": "media/kf2/C101_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C101_sd25_t1.txt",
+   "s0": null,
+   "dur": 6.042,
+   "file": "media/gen/t2_C101_sd25_t1_f6c66d3519.mp4",
+   "dims": "1280x720",
+   "verdict": "bake-off loser: same swing but at 4.0-5.5 s, too late for a 2.6 s shot",
+   "lag": null,
+   "pick": false
+  }
+ ],
+ "C109": [
+  {
+   "tag": "t2_C109_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_C109_veo31_t1-724e10361f",
+   "kf": "media/kf2/C109_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C109_veo31_t1.txt",
+   "s0": null,
+   "dur": 8.0,
+   "file": "media/gen/t2_C109_veo31_t1_724e10361f.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: clean crane from the window over the roof into the sky; rate 2",
+   "lag": null,
+   "pick": [
+    "C109"
+   ]
+  }
+ ],
+ "C210": [
+  {
+   "tag": "t2_C210_veo31_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_C210_veo31_t1-f1e5213b1d",
+   "kf": "media/kf2/C210_nbp.jpg",
+   "prompt_file": "work/t2/g2/prompts/t2_C210_veo31_t1.txt",
+   "s0": null,
+   "dur": 6,
+   "file": null,
+   "dims": null,
+   "verdict": "pending",
+   "lag": null,
+   "pick": false
+  }
+ ]
+}

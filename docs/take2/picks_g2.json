@@ -1,0 +1,112 @@
+{
+ "C101": {
+  "dir": "work/plates/C101",
+  "kind": "video",
+  "src": "media/gen/t2_C101_veo31_t1_6b65a7b5ee.mp4",
+  "in": 1.17,
+  "rate": 1.5
+ },
+ "C103L": {
+  "dir": "work/plates/C103L",
+  "kind": "video",
+  "src": "media/gen/t2_C103L_sd25_t1_d610863352.mp4",
+  "s0": 56.371,
+  "lag": -0.25
+ },
+ "C103R": {
+  "dir": "work/plates/C103R",
+  "kind": "video",
+  "src": "media/gen/t2_C103R_sd25_t2_1584d49648.mp4",
+  "s0": 56.371,
+  "lag": -0.25
+ },
+ "C108": {
+  "dir": "work/plates/C108",
+  "kind": "video",
+  "src": "media/gen/t2_C108_sd25_t2_3721f7f98e.mp4",
+  "s0": 64.289,
+  "lag": 0.125
+ },
+ "C109": {
+  "dir": "work/plates/C109",
+  "kind": "video",
+  "src": "media/gen/t2_C109_veo31_t1_724e10361f.mp4",
+  "in": 0.3,
+  "rate": 2.0
+ },
+ "C201L": {
+  "dir": "work/plates/C101",
+  "kind": "video",
+  "src": "media/gen/t2_C101_veo31_t1_6b65a7b5ee.mp4",
+  "in": 1.17,
+  "rate": 1.5
+ },
+ "C203L": {
+  "dir": "work/plates/C203L",
+  "kind": "video",
+  "src": "media/gen/t2_C203L_sd25_t1_dcab53c4e0.mp4",
+  "s0": 117.637,
+  "lag": -0.375
+ },
+ "C203R": {
+  "dir": "work/plates/C203R",
+  "kind": "video",
+  "src": "media/gen/t2_C203R_sd25_t1_7828c97ddb.mp4",
+  "s0": 117.637,
+  "lag": 0.917
+ },
+ "C208L": {
+  "dir": "work/plates/C208L",
+  "kind": "video",
+  "src": "media/gen/t2_C208L_sd25_t2_6669650da7.mp4",
+  "s0": 125.524,
+  "lag": 0.042
+ },
+ "C208R": {
+  "dir": "work/plates/C208R",
+  "kind": "video",
+  "src": "work/t2/g2/flip/t2_C208R_sd25_t1_hflip.mp4",
+  "s0": 125.524,
+  "lag": 0.0
+ },
+ "C209L": {
+  "dir": "work/plates/C209L",
+  "kind": "video",
+  "src": "media/gen/t2_C209L_sd25_t2_22438bdadd.mp4",
+  "s0": 128.098,
+  "lag": 0.833
+ },
+ "C209R": {
+  "dir": "work/plates/C209R",
+  "kind": "video",
+  "src": "media/gen/t2_C209R_sd25_t1_3b86d4fe74.mp4",
+  "s0": 128.098,
+  "lag": -0.167
+ },
+ "C210": {
+  "dir": "work/plates/C210",
+  "kind": "video",
+  "src": "media/gen/t2_C210_veo31_t1_f1e5213b1d.mp4",
+  "in": 0.0,
+  "rate": 1.5
+ },
+ "CRT_roomA": {
+  "dir": "work/plates/CRT_roomA",
+  "kind": "video",
+  "src": "work/t2/g2/crt/CRT_roomA.mp4",
+  "in": 0.0
+ },
+ "CRT_roomB": {
+  "dir": "work/plates/CRT_roomB",
+  "kind": "video",
+  "src": "work/t2/g2/crt/CRT_roomB.mp4",
+  "in": 0.0
+ },
+ "P105": {
+  "dir": "work/plates/P105",
+  "kind": "video",
+  "src": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
+  "s0": 45.715,
+  "lag": 0.0
+ }
+}

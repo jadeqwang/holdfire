@@ -32,6 +32,173 @@
   "src": "media/kf2/BR17_nbp_v1.jpg",
   "note": "B-59 surfacing at night among destroyers in searchlights; still only (no time in the edit); optional p.img for 'surface'"
  },
+ "BU04": {
+  "dir": "work/plates/BU04",
+  "kind": "video",
+  "src": "media/gen/t2_BU04_sd20_t1_86d0420bbb.mp4",
+  "in": 0.4,
+  "rate": 2.2,
+  "note": "Seedance 2.0 bake-off beat Veo: opens tight on her hand on the jog wheel, pulls back to her face (0.4-3.0 s at 2.2x in the 1.2 s shot); the dead red monitors (top left) are blank for the JS SIGNAL LOST. Hair reads brown under the red light: grade toward black. Veo alt: media/gen/t2_BU04_veo_t1_bfdf52e607.mp4 (1080p, in 0.5 rate 1.6)"
+ },
+ "BU09": {
+  "dir": "work/plates/V214",
+  "kind": "video",
+  "src": "media/gen/t2_V214_veo_t1_b2d6dd44b0.mp4",
+  "in": 0.2,
+  "zoom": 1.12,
+  "style": "oil",
+  "styleAmt": 0.35,
+  "note": "reuse g3's V214 Petrov plate (not regenerated); zoom 1.12 crops Veo's red line"
+ },
+ "BU10": {
+  "dir": "work/plates/BR16",
+  "kind": "still",
+  "src": "media/kf2/BR16_nbp_v1.jpg",
+  "note": "reuse g3's BR16 Arkhipov hand still (not regenerated)"
+ },
+ "BU12L": {
+  "dir": "work/plates/BU12L",
+  "kind": "video",
+  "src": "media/gen/t2_BU12L_veo_t1_41584e9544.mp4",
+  "in": 0.5,
+  "note": "Jade, room A, lamp of gold light held up in her palm; subject sits right of centre, inside the split's centre slice"
+ },
+ "BU12R": {
+  "dir": "work/plates/BU12R",
+  "kind": "video",
+  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "in": 0.5,
+  "note": "teal-tips, room B, mirrored framing of BU12L (keyframe = BU12L flipped + edited, patch moved back to her left sleeve); Veo pushes in and drifts right"
+ },
+ "BU13": {
+  "dir": "work/plates/BU12L",
+  "kind": "video",
+  "src": "media/gen/t2_BU12L_veo_t1_41584e9544.mp4",
+  "in": 0.3,
+  "zoom": 1.6,
+  "pan": [
+   -336,
+   296
+  ],
+  "note": "same take as BU12L, pushed in on her face and the light"
+ },
+ "BU14": {
+  "dir": "work/plates/BU12R",
+  "kind": "video",
+  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "in": 0.3,
+  "zoom": 1.6,
+  "pan": [
+   312,
+   320
+  ],
+  "note": "same take, pushed in on teal-tips and the light"
+ },
+ "BU17L": {
+  "dir": "work/plates/BU12L",
+  "kind": "video",
+  "src": "media/gen/t2_BU12L_veo_t1_41584e9544.mp4",
+  "in": 3.0,
+  "note": "same take, light at its brightest"
+ },
+ "BU17R": {
+  "dir": "work/plates/BU12R",
+  "kind": "video",
+  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "in": 1.8,
+  "note": "same take, the light flares (1.6-2.6 s) for the burn to white"
+ },
+ "C101": {
+  "dir": "work/plates/C101",
+  "kind": "video",
+  "src": "media/gen/t2_C101_veo31_t1_6b65a7b5ee.mp4",
+  "in": 1.17,
+  "rate": 1.5
+ },
+ "C103L": {
+  "dir": "work/plates/C103L",
+  "kind": "video",
+  "src": "media/gen/t2_C103L_sd25_t1_d610863352.mp4",
+  "s0": 56.371,
+  "lag": -0.25
+ },
+ "C103R": {
+  "dir": "work/plates/C103R",
+  "kind": "video",
+  "src": "media/gen/t2_C103R_sd25_t2_1584d49648.mp4",
+  "s0": 56.371,
+  "lag": -0.25
+ },
+ "C108": {
+  "dir": "work/plates/C108",
+  "kind": "video",
+  "src": "media/gen/t2_C108_sd25_t2_3721f7f98e.mp4",
+  "s0": 64.289,
+  "lag": 0.125
+ },
+ "C109": {
+  "dir": "work/plates/C109",
+  "kind": "video",
+  "src": "media/gen/t2_C109_veo31_t1_724e10361f.mp4",
+  "in": 0.3,
+  "rate": 2.0
+ },
+ "C201L": {
+  "dir": "work/plates/C101",
+  "kind": "video",
+  "src": "media/gen/t2_C101_veo31_t1_6b65a7b5ee.mp4",
+  "in": 1.17,
+  "rate": 1.5
+ },
+ "C203L": {
+  "dir": "work/plates/C203L",
+  "kind": "video",
+  "src": "media/gen/t2_C203L_sd25_t1_dcab53c4e0.mp4",
+  "s0": 117.637,
+  "lag": -0.375
+ },
+ "C203R": {
+  "dir": "work/plates/C203R",
+  "kind": "video",
+  "src": "media/gen/t2_C203R_sd25_t1_7828c97ddb.mp4",
+  "s0": 117.637,
+  "lag": 0.917
+ },
+ "C208L": {
+  "dir": "work/plates/C208L",
+  "kind": "video",
+  "src": "media/gen/t2_C208L_sd25_t2_6669650da7.mp4",
+  "s0": 125.524,
+  "lag": 0.042
+ },
+ "C208R": {
+  "dir": "work/plates/C208R",
+  "kind": "video",
+  "src": "work/t2/g2/flip/t2_C208R_sd25_t1_hflip.mp4",
+  "s0": 125.524,
+  "lag": 0.0
+ },
+ "C209L": {
+  "dir": "work/plates/C209L",
+  "kind": "video",
+  "src": "media/gen/t2_C209L_sd25_t2_22438bdadd.mp4",
+  "s0": 128.098,
+  "lag": 0.833
+ },
+ "C209R": {
+  "dir": "work/plates/C209R",
+  "kind": "video",
+  "src": "media/gen/t2_C209R_sd25_t1_3b86d4fe74.mp4",
+  "s0": 128.098,
+  "lag": -0.167
+ },
+ "C210": {
+  "dir": "work/plates/C210",
+  "kind": "video",
+  "src": "media/gen/t2_C210_veo31_t1_f1e5213b1d.mp4",
+  "in": 0.0,
+  "rate": 1.5
+ },
  "CO01": {
   "dir": "work/plates/CO01",
   "kind": "video",
@@ -87,6 +254,44 @@
   "twos": false,
   "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [960, 537] (now exactly at 960,540); hurricane, eye at centre; slow counter-clockwise turn 3 deg/s baked in"
  },
+ "CO08": {
+  "dir": "work/plates/CO08",
+  "kind": "video",
+  "src": "media/kf2/CO08_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "generated grand-design spiral (not a real galaxy, no ESA/Hubble credit needed); core 965,550 moved to centre; push + 1.5 deg/s turn. CO09 continues it (red grade)"
+ },
+ "CO11": {
+  "dir": "work/plates/CO11",
+  "kind": "video",
+  "src": "media/gen/t2_CO11_veof_t1_5030613986.mp4",
+  "in": 0.15,
+  "note": "Veo 3.1 fast; the strike flares on the cut"
+ },
+ "CO12": {
+  "dir": "work/plates/CO12",
+  "kind": "video",
+  "src": "media/gen/t2_CO12_veof_t1_87f3c4a55b.mp4",
+  "in": 0.55,
+  "note": "plate = take 0.8-2.4 s; in 0.55 = take 1.35 s: the beam swings into the lens across the shot"
+ },
+ "CO13": {
+  "dir": "work/plates/CO13",
+  "kind": "video",
+  "src": "media/kf2/CO13_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "city grid through an aircraft window; still with a baked slow push"
+ },
+ "CO14": {
+  "dir": "work/plates/CO14",
+  "kind": "video",
+  "src": "media/kf2/CO14_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "generated still (night side from orbit, not NASA imagery) with a baked slow push + 1.5 deg/s drift. The cosmos group also has procedural t2_earth_night view iss as an alternative"
+ },
  "CO16": {
   "dir": "work/plates/CO16",
   "kind": "video",
@@ -101,6 +306,120 @@
   "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
   "in": 0.35,
   "note": "plate = take 0.5-2.0 s; in 0.35 = take 0.85 s: eyes closed at the 12.50 cut, open by +0.2 s, then she looks up; mouth closed"
+ },
+ "CRT_roomA": {
+  "dir": "work/plates/CRT_roomA",
+  "kind": "video",
+  "src": "work/t2/g2/crt/CRT_roomA.mp4",
+  "in": 0.0
+ },
+ "CRT_roomB": {
+  "dir": "work/plates/CRT_roomB",
+  "kind": "video",
+  "src": "work/t2/g2/crt/CRT_roomB.mp4",
+  "in": 0.0
+ },
+ "DR01": {
+  "dir": "work/plates/DR01",
+  "kind": "video",
+  "src": "work/g4/derived/DR01_mirror_t1.mp4",
+  "in": 0.0,
+  "note": "Veo t1 left half + its flip (paled) = Jade and her reflection either side of the infinite mirror (x 960). Built by work/g4/mirror_comp.py"
+ },
+ "DR02": {
+  "dir": "work/plates/DR02",
+  "kind": "video",
+  "src": "media/gen/t2_DR01_veo_t1_6514fc0a3e.mp4",
+  "in": 5.96,
+  "note": "same Veo take, raw: she stops at the glass and turns to a reflection Veo drew itself (offset, ghostly); last frame 7.92 = the pose the reveal repeats"
+ },
+ "DR03": {
+  "dir": "work/plates/DR03_reveal",
+  "kind": "still",
+  "src": "media/kf2/DR03_nbp_v2.jpg",
+  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)"
+ },
+ "DR03_swing": {
+  "dir": "work/plates/DR03",
+  "kind": "video",
+  "src": "media/gen/t2_DR03_sd20_t1_4659db0750.mp4",
+  "in": 1.6,
+  "rate": 4.5,
+  "note": "alt for DR03: generated swing round the glass (Seedance 2.0 first+last frame)"
+ },
+ "DR04": {
+  "dir": "work/plates/DR04",
+  "kind": "video",
+  "src": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
+  "s0": 188.376,
+  "lag": 0.583,
+  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962"
+ },
+ "DR05": {
+  "dir": "work/plates/DR05",
+  "kind": "video",
+  "src": "work/g4/derived/DR05_mirror_t1.mp4",
+  "in": 1.4,
+  "note": "Veo t1 reversed + mirrored about the glass line (right side teal-graded): two palms approach and meet at x 960; contact at clip 3.40 = song 193.44 (on 'too')"
+ },
+ "DR06": {
+  "dir": "work/plates/DR05",
+  "kind": "video",
+  "src": "work/g4/derived/DR05_mirror_t1.mp4",
+  "in": 3.335,
+  "note": "same plate: palms together; the JS ripple starts from (960, ~420)"
+ },
+ "DR11": {
+  "dir": "work/plates/DR11",
+  "kind": "video",
+  "src": "media/gen/t2_DR11_sd25_t1_9a22600294.mp4",
+  "s0": 198.628,
+  "lag": -0.125,
+  "note": "Seedance 2.5 sung t1: Jade sings in front, teal-tips beside her looks up, mouth closed; lag by the strip (m of 'made' shut at -3f)"
+ },
+ "DR14": {
+  "dir": "work/plates/DR14",
+  "kind": "still",
+  "src": "media/kf2/DR14_nbp.jpg",
+  "note": "Echo's signal tower, ring at (730, 175) of 1366 -> (1026, 246) at 1080p"
+ },
+ "DR16": {
+  "dir": "work/plates/DR16",
+  "kind": "video",
+  "src": "media/gen/t2_DR16_sd25_t2_8e3128f390.mp4",
+  "s0": 207.223,
+  "lag": 0.958,
+  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear"
+ },
+ "OU10": {
+  "dir": "work/plates/OU10",
+  "kind": "video",
+  "src": "media/gen/t2_OU10_veo_t1_eb01a45471.mp4",
+  "in": 0.0,
+  "note": "dish field at night, slow tilt up; upper 2/3 empty sky for the JS ISS; nothing moves in the sky"
+ },
+ "OU11": {
+  "dir": "work/plates/OU11",
+  "kind": "video",
+  "src": "media/gen/t2_OU11_veo_t1_ebb48d72c9.mp4",
+  "in": 0.3,
+  "note": "Jade from behind lowers her headphones (0.3-2.3 s) and looks out at the dawn; face turned away, so the whisper needs no lip sync"
+ },
+ "OU12": {
+  "dir": "work/plates/CO01",
+  "kind": "video",
+  "src": "media/gen/t2_CO01_veo_t1_66747bd17f.mp4",
+  "in": 2.87,
+  "reverse": true,
+  "rate": 0.8,
+  "note": "reuse g1's CO01 eye plate, played backward so it lands on CO01's first frame when OU13 starts (loop point); not regenerated"
+ },
+ "P105": {
+  "dir": "work/plates/P105",
+  "kind": "video",
+  "src": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
+  "s0": 45.715,
+  "lag": 0.0
  },
  "TEST_bars": {
   "dir": "work/plates/TEST_bars",
@@ -160,6 +479,19 @@
   "s0": 5.0,
   "lag": 0.5,
   "twos": false
+ },
+ "V101": {
+  "dir": "work/plates/V101",
+  "kind": "video",
+  "src": "media/gen/t2_V101_sd25_t2_9163d752d3.mp4",
+  "s0": 12.75,
+  "lag": 0.0,
+  "in": 0.3,
+  "note": "Seedance 2.5 sung, vocal-stem slice S0 12.750 (media/aref/V101.mp3); in = 13.05 - S0 + lag. Alt take t3 (eyes closed) lag -0.125",
+  "grade": {
+   "exposure": 0.9,
+   "contrast": 1.08
+  }
  },
  "V201": {
   "dir": "work/plates/V201",

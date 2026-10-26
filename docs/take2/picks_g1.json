@@ -68,5 +68,56 @@
   "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
   "in": 0.35,
   "note": "plate = take 0.5-2.0 s; in 0.35 = take 0.85 s: eyes closed at the 12.50 cut, open by +0.2 s, then she looks up; mouth closed"
+ },
+ "CO11": {
+  "dir": "work/plates/CO11",
+  "kind": "video",
+  "src": "media/gen/t2_CO11_veof_t1_5030613986.mp4",
+  "in": 0.15,
+  "note": "Veo 3.1 fast; the strike flares on the cut"
+ },
+ "CO12": {
+  "dir": "work/plates/CO12",
+  "kind": "video",
+  "src": "media/gen/t2_CO12_veof_t1_87f3c4a55b.mp4",
+  "in": 0.55,
+  "note": "plate = take 0.8-2.4 s; in 0.55 = take 1.35 s: the beam swings into the lens across the shot"
+ },
+ "V101": {
+  "dir": "work/plates/V101",
+  "kind": "video",
+  "src": "media/gen/t2_V101_sd25_t2_9163d752d3.mp4",
+  "s0": 12.75,
+  "lag": 0.0,
+  "in": 0.3,
+  "note": "Seedance 2.5 sung, vocal-stem slice S0 12.750 (media/aref/V101.mp3); in = 13.05 - S0 + lag. Alt take t3 (eyes closed) lag -0.125",
+  "grade": {
+   "exposure": 0.9,
+   "contrast": 1.08
+  }
+ },
+ "CO14": {
+  "dir": "work/plates/CO14",
+  "kind": "video",
+  "src": "media/kf2/CO14_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "generated still (night side from orbit, not NASA imagery) with a baked slow push + 1.5 deg/s drift. The cosmos group also has procedural t2_earth_night view iss as an alternative"
+ },
+ "CO08": {
+  "dir": "work/plates/CO08",
+  "kind": "video",
+  "src": "media/kf2/CO08_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "generated grand-design spiral (not a real galaxy, no ESA/Hubble credit needed); core 965,550 moved to centre; push + 1.5 deg/s turn. CO09 continues it (red grade)"
+ },
+ "CO13": {
+  "dir": "work/plates/CO13",
+  "kind": "video",
+  "src": "media/kf2/CO13_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "city grid through an aircraft window; still with a baked slow push"
  }
 }

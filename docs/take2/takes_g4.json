@@ -1,0 +1,228 @@
+{
+ "DR01": [
+  {
+   "tag": "t2_DR01_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_DR01_veo_t1-6514fc0a3e",
+   "kf": "media/kf2/DR01_nbp_v3.jpg",
+   "prompt_file": "work/g4/p/DR01_veo.txt",
+   "dur": 8,
+   "file": "media/gen/t2_DR01_veo_t1_6514fc0a3e.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick (DR01 via mirror composite, DR02 raw): on model, walks to the line, stops, turns to the glass; Veo drew its own reflection from ~5 s",
+   "pick": true
+  }
+ ],
+ "BU12L": [
+  {
+   "tag": "t2_BU12L_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BU12L_veo_t1-41584e9544",
+   "kf": "media/kf2/BU12L_nbp.jpg",
+   "prompt_file": "work/g4/p/BU12L_veo.txt",
+   "dur": 4,
+   "file": "media/gen/t2_BU12L_veo_t1_41584e9544.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick (BU12L, BU13, BU17L): on model, light swells, subtle lift",
+   "pick": true
+  }
+ ],
+ "DR05": [
+  {
+   "tag": "t2_DR05_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_DR05_veo_t1-1099c66960",
+   "kf": "media/kf2/DR05_nbp.jpg",
+   "prompt_file": "work/g4/p/DR05_veo.txt",
+   "dur": 4,
+   "file": "media/gen/t2_DR05_veo_t1_1099c66960.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick (DR05, DR06), reversed and mirrored; camera drifts right with the line (tracked per frame)",
+   "pick": true
+  }
+ ],
+ "DR03": [
+  {
+   "tag": "t2_DR03_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_DR03_sd20_t1-4659db0750",
+   "kf": "work/g4/DR01_t1_last.jpg -> media/kf2/DR03_nbp_v2.jpg (last frame)",
+   "prompt_file": "work/g4/p/DR03_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_DR03_sd20_t1_4659db0750.mp4",
+   "dims": "1280x720",
+   "verdict": "pick (bake-off vs a pure JS swing): a pan round the glass, messy in the middle (two Jades at ~2 s) but reads as a whip at 4.5x",
+   "pick": true
+  },
+  {
+   "tag": "t2_DR03_h3max_t1",
+   "model": "minimax/h3-max",
+   "job": "holdfire/t2_DR03_h3max_t1-fa473ffcae",
+   "kf": "work/g4/DR01_t1_last.jpg + last media/kf2/DR03_nbp_v2.jpg",
+   "prompt_file": "work/g4/p/DR03_sd20.txt",
+   "dur": 6,
+   "file": null,
+   "dims": null,
+   "verdict": "error 7003 (user input error; refunded): first+last frame not accepted",
+   "pick": false
+  }
+ ],
+ "OU10": [
+  {
+   "tag": "t2_OU10_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_OU10_veo_t1-eb01a45471",
+   "kf": "media/kf2/OU10_nbp.jpg",
+   "prompt_file": "work/g4/p/OU10_veo.txt",
+   "dur": 6,
+   "file": "media/gen/t2_OU10_veo_t1_eb01a45471.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick",
+   "pick": true
+  }
+ ],
+ "OU11": [
+  {
+   "tag": "t2_OU11_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_OU11_veo_t1-ebb48d72c9",
+   "kf": "media/kf2/OU11_nbp.jpg",
+   "prompt_file": "work/g4/p/OU11_veo.txt",
+   "dur": 8,
+   "file": "media/gen/t2_OU11_veo_t1_ebb48d72c9.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick: lowers headphones, sun comes up; small birds appear late",
+   "pick": true
+  }
+ ],
+ "DR11": [
+  {
+   "tag": "t2_DR11_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR11_sd25_t1-9a22600294",
+   "kf": "media/kf2/DR11_gpt.jpg",
+   "prompt_file": "work/g4/p/DR11_sd.txt",
+   "s0": 198.628,
+   "dur": 4,
+   "file": "media/gen/t2_DR11_sd25_t1_9a22600294.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: on model, teal tips hold; background lost the two palettes (white + light rays); closed-eye smile only after the window",
+   "lag": -0.125,
+   "pick": true
+  },
+  {
+   "tag": "t2_DR11_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR11_sd25_t2-56a6c79db3",
+   "kf": "media/kf2/DR11_gpt.jpg",
+   "prompt_file": "work/g4/p/DR11_sd.txt",
+   "s0": 198.628,
+   "dur": 4,
+   "file": "media/gen/t2_DR11_sd25_t2_56a6c79db3.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: teeth grin, teal tips fade to black, light turns warm",
+   "lag": null,
+   "pick": false
+  }
+ ],
+ "DR04": [
+  {
+   "tag": "t2_DR04_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR04_sd25_t1-786a386e79",
+   "kf": "media/kf2/DR04_nbp_v2.jpg",
+   "prompt_file": "work/g4/p/DR04_sd.txt",
+   "s0": 188.376,
+   "dur": 5,
+   "file": "media/gen/t2_DR04_sd25_t1_786a386e79.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: on model, wider mouth (teeth on 'were'), ROI r 0.18 at +0.583",
+   "lag": 0.583,
+   "pick": false
+  },
+  {
+   "tag": "t2_DR04_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR04_sd25_t2-33ea75dea7",
+   "kf": "media/kf2/DR04_nbp_v2.jpg",
+   "prompt_file": "work/g4/p/DR04_sd.txt",
+   "s0": 188.376,
+   "dur": 5,
+   "file": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: on model both sides, hands rise to the glass, softer mouth; ROI r 0.33",
+   "lag": 0.583,
+   "pick": true
+  }
+ ],
+ "BU04": [
+  {
+   "tag": "t2_BU04_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BU04_veo_t1-bfdf52e607",
+   "kf": "media/kf2/BU04_nbp_v2.jpg",
+   "prompt_file": "work/g4/p/BU04_veo.txt",
+   "dur": 4,
+   "file": "media/gen/t2_BU04_veo_t1_bfdf52e607.mp4",
+   "dims": "1920x1080",
+   "verdict": "alt: spin then camera to her face; face drifts (red nose blush, gritted teeth), hair brown",
+   "pick": false
+  },
+  {
+   "tag": "t2_BU04_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_BU04_sd20_t1-86d0420bbb",
+   "kf": "media/kf2/BU04_nbp_v2.jpg",
+   "prompt_file": "work/g4/p/BU04_veo.txt",
+   "dur": 4,
+   "file": "media/gen/t2_BU04_sd20_t1_86d0420bbb.mp4",
+   "dims": "1280x720",
+   "verdict": "pick (bake-off): hand close-up then pull back to her face, closer to the brief",
+   "pick": true
+  }
+ ],
+ "DR16": [
+  {
+   "tag": "t2_DR16_sd25_t1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_t1-837ff390d1",
+   "kf": "media/kf2/DR16_gpt.jpg",
+   "prompt_file": "work/g4/p/DR16_sd.txt",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_t1_837ff390d1.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: closes her mouth and smiles at ~5.5 s, inside the held note",
+   "lag": 0.25,
+   "pick": false
+  },
+  {
+   "tag": "t2_DR16_sd25_t2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_t2-8e3128f390",
+   "kf": "media/kf2/DR16_gpt.jpg",
+   "prompt_file": "work/g4/p/DR16_sd.txt",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_t2_8e3128f390.mp4",
+   "dims": "1280x720",
+   "verdict": "pick: on model, mouth open to the end of the held note",
+   "lag": 0.958,
+   "pick": true
+  }
+ ],
+ "BU12R": [
+  {
+   "tag": "t2_BU12R_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BU12R_veo_t1-939043e1ac",
+   "kf": "media/kf2/BU12R_nbp_v2.jpg",
+   "prompt_file": "work/g4/p/BU12R_veo.txt",
+   "dur": 4,
+   "file": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+   "dims": "1920x1080",
+   "verdict": "pick (BU12R, BU14, BU17R): on model; light flares mid-take; push-in",
+   "pick": true
+  }
+ ]
+}

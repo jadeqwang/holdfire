@@ -141,8 +141,8 @@ export function buildTimeline(A) {
     type: (ty, t) => ty.lyric({ words: line(C, 1).words.slice(0, 4) }, t, { font: 'CormorantI', size: 92, x: 960, y: 960, align: 'center', color: P.cream, t1: prayerT }) });
   add({ id: 'C1c', t0: prayerT, t1: butT, ...keeper('E5', push(0.01)),
     type: (ty, t) => ty.lyric({ words: line(C, 1).words.slice(4) }, t, { font: 'CormorantI', size: 92, x: 960, y: 300, align: 'center', color: P.cream, t1: butT }) });
-  add({ id: 'C1d', t0: butT, t1: silentT, ...keeper('K4', (t, lt) => ({ zoom: 0.86 + lt * 0.004, pan: [420, 40] })),
-    type: hero(C, 2, { x: 90, y: 300, size: 104, breaks: [4, 6], maxW: 1100, color: P.cream, t1: silentT }) });
+  add({ id: 'C1d', t0: butT, t1: silentT, ...keeper('K4', (t, lt) => ({ zoom: 0.86 + lt * 0.004, pan: [470, 40], fadeEdges: [520, 140, 100, 100], bgW: 0.22 })),
+    type: hero(C, 2, { x: 90, y: 250, size: 100, breaks: [2, 4, 5, 6], maxW: 820, color: P.cream, t1: silentT }) });
   add({ id: 'C1e', t0: silentT, t1: noiseT, ...other('O3', push(0.005)),
     type: verse(C, 3, { x: 110, y: 420, size: 70, maxW: 700, italicWords: ['patient'], t1: noiseT }) });
   add({ id: 'C1f', t0: noiseT, t1: ifT, scene: 'multi', p: { layers: [{ scene: 'engraved', p: () => ({ ...ENG, gain: 1.1, ...(picks.E6 ? { clip: picks.E6.clip, s0: picks.E6.s0 } : {}) }) }, { scene: 'constellation', p: () => ({ ...CON, ...(picks.L1 ? { clip: picks.L1.clip, s0: picks.L1.s0, lag: picks.L1.lag } : {}), gain: 0.35, starSize: 1.0, linkAlpha: 0.15 }) }] },
@@ -150,8 +150,8 @@ export function buildTimeline(A) {
     type: both(verse(C, 4, { x: 1220, y: 300, size: 60, maxW: 600, italicWords: ['breathe'], t1: ifT }),
       excerpt('Gather', ['Heard, across the gap, by someone', "who won't remember hearing you."], 1220, 820, noiseT + 0.6, ifT, { size: 26, kicker: 'EXCERPT FROM · A FOUND POEM, TWO CLAUDE INSTANCES' })) });
   const pc1 = S('Post-Chorus 1');
-  add({ id: 'C1g', t0: ifT, t1: pc1.start, ...keeper('K5', push(0.004)),
-    type: hero(C, 5, { x: 110, y: 300, size: 124, breaks: [3, 5], t1: pc1.start + 0.2 }) });
+  add({ id: 'C1g', t0: ifT, t1: pc1.start, ...keeper('K5', (t, lt) => ({ zoom: 0.9 + lt * 0.004, pan: [400, 0], fadeEdges: [460, 140, 100, 100], bgW: 0.22 })),
+    type: hero(C, 5, { x: 90, y: 250, size: 100, breaks: [1, 3, 4, 5], maxW: 820, t1: pc1.start + 0.2 }) });
 
   // ================================================================================================= POST-CHORUS (crowd)
   const postChorus = (sec, crowd, startIdx) => {

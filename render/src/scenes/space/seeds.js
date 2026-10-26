@@ -8,7 +8,7 @@
 import { drawSky } from '../sky.js';
 import { P, css } from '../../palette.js';
 import { clamp, lerp, smooth, smoother, range, easeInOutCubic, easeOutCubic, easeInCubic, hash1, hash2, noise1, rng } from '../../util.js';
-import { wordT, ad, env, pick, Buckets, glowSprite, drawGlow } from './common.js';
+import { wordT, ad, env, pick, Buckets, glowSprite, drawGlow, soft2d } from './common.js';
 
 const F = 1158;                // focal length (design px): ~50 deg vertical fov
 const H = 1.6;                 // camera height above the soil
@@ -65,7 +65,8 @@ export default {
     if (skyA > 0.01) drawSky(ctx, { density: 0.42, band: 0.25, bandAng: -0.5, bandOff: -200, neb: 0.25, nebCol: [0.02, 0.035, 0.07], nebCol2: [0.05, 0.03, 0.015], seed: 31, exposure: skyA * 0.7, pan: [0, -tilt * 260] });
     else e.clear(e.rtScene, ...P.void);
 
-    const c = e.c2dBegin();
+    const SC = p.soft === false ? null : soft2d(e);
+    const c = SC ? SC.begin() : e.c2dBegin();
     c.lineCap = 'round'; c.lineJoin = 'round';
     // ---- the soil: a plowed field. Ridges are lines of constant x running to the vanishing point; width carries tone.
     const groundA = 1 - smooth(range(tilt, 0.55, 0.95));
@@ -106,12 +107,14 @@ export default {
           }
         }
       }
+      const dbg = p.dbg || 0;
+      if (dbg === 2) c.lineCap = 'butt';
       BR.flush(c);
-      c.globalCompositeOperation = 'lighter';
-      BT.flush(c);
+      if (dbg !== 1) c.globalCompositeOperation = 'lighter';
+      if (dbg !== 4) BT.flush(c);
       // the leading edges of the water of light
       const hs = glowSprite(P.goldPale);
-      for (const h0 of heads) drawGlow(c, hs, h0[0], h0[1], (1.2 + 2.2 * clamp(1 - h0[2] / 30)) * 3, 0.7 * groundA);
+      if (dbg !== 3) for (const h0 of heads) drawGlow(c, hs, h0[0], h0[1], (1.2 + 2.2 * clamp(1 - h0[2] / 30)) * 3, 0.7 * groundA);
       c.globalCompositeOperation = 'source-over';
       // dawn on the horizon line, as the flood comes
       const hz = proj(0, 0, 400);
@@ -194,7 +197,7 @@ export default {
     }
     BS.flush(c);
     c.globalCompositeOperation = 'source-over';
-    e.blit2d('over', 2.0);
+    if (SC) SC.blit('over', 2.0); else e.blit2d('over', 2.0);
     ctx.state.seeds = { woke, tilt };
   },
   type(ty, t, lt, shot, ctx) {

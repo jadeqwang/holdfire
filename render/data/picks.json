@@ -103,5 +103,12 @@
   "lag": 0,
   "kind": "keeper",
   "file": "media/gen/C6_t1_c31417843a.mp4"
+ },
+ "K1b": {
+  "clip": "K1b_t2",
+  "s0": 23.1,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/K1b_t2_7d28bc2216.mp4"
  }
 }

@@ -5,7 +5,7 @@
 // Closed form in t: the cloud's geometry is a function of time; turbulence is noise sampled in coordinates that rotate about
 // each lobe's core (the roll) and stretch with the cloud's growth (advection), evaluated at half resolution, then screened.
 // p: {t0 (start of the rise), tLevel (base surge), x (960), ground (870: y of the ground line), height (610), capR (330),
-//     red (0.5: red ink in the cap's core), houses (true), seed, cell (6), misreg}
+//     red (0.5: red ink in the cap's core), houses (true), seed, cell (6), misreg, lamp (print.js setLamp), redGlow (0.6)}
 // Times default to line 25 in timing.json ("an end with no life that could level the ground.").
 import * as THREE from 'three';
 import { clamp, smooth, range, hash1 } from '../../util.js';
@@ -113,6 +113,6 @@ export default {
     e.pass(fieldMat, fieldRT);
     const c = pressBegin(e);
     drawGround(c, p, gx, gy, Wb * 0.92);
-    pressPrint(e, { seed, cell: p.cell ?? 6, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.2, field: fieldRT.texture, zoom: p.zoom ?? 1, pan: p.pan || [0, 0] });
+    pressPrint(e, { seed, cell: p.cell ?? 6, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.2, field: fieldRT.texture, zoom: p.zoom ?? 1, pan: p.pan || [0, 0], lamp: p.lamp ?? { y: 560 }, redGlow: p.redGlow ?? 0.6 });
   },
 };

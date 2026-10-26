@@ -12,7 +12,9 @@
 //     redMask (0: strength of the red spot ink), redLight (0: 1 = the whole scene lit red, e.g. Petrov's room),
 //     redZones [[x, y, rx, ry], ...] (design px, page coords, up to 4: where the red light falls), redSoft (0.5),
 //     redLo/redHi (0.06/0.55: tone range that takes red), redKnock (0.25: black lightened under red light, so the red reads),
-//     warm (true: use warm_k.png from the clip dir when present; see tools/warmguide.py)}
+//     warm (true: use warm_k.png from the clip dir when present; see tools/warmguide.py),
+//     lamp (the page seen by lamplight, print.js setLamp: {x, y, rx, ry, peak 0.44, floor, k}; false = flat daylight page),
+//     redGlow (0.3: the red light glows a little instead of only being printed)}
 // Exports drawArchival / prepareArchival so other history scenes can print over a plate.
 import * as THREE from 'three';
 import { meta, texture, drawingAt } from '../../plates.js';
@@ -118,7 +120,7 @@ export function drawArchival(ctx, shot, p, key = 'arch', target = null) {
   const e = ctx.engine; build(e);
   const g = ctx.state[key];
   const u = mat.uniforms;
-  setPrint(e, u, { seed: seedFor(shot, p), cell: p.cell ?? 6, cellR: p.cellR, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.2, zoom: p.zoom ?? 1, pan: p.pan || [0, 0], kGain: p.kGain ?? 1, rGain: p.rGain ?? 1, paper: p.paper });
+  setPrint(e, u, { seed: seedFor(shot, p), cell: p.cell ?? 6, cellR: p.cellR, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.2, zoom: p.zoom ?? 1, pan: p.pan || [0, 0], kGain: p.kGain ?? 1, rGain: p.rGain ?? 1, paper: p.paper, lamp: p.lamp, redGlow: p.redGlow ?? 0.3 });
   u.tTone.value = g.tone; u.tEdge.value = g.edge;
   u.tMatte.value = g.matte || blank; u.hasMatte.value = g.matte ? 1 : 0;
   u.tWarm.value = g.warm || blank; u.hasWarm.value = g.warm ? 1 : 0;

@@ -51,6 +51,7 @@ MIX_TP_MAX_DB = -0.5       # brief: mix true peak <= -0.5 dBTP (where the song i
 MIN_MARGIN_DB = 6.0        # brief: every cue >= 6 dB under the song (except scope pre-music and the end tail)
 VOCAL_ON_LUFS = -40.0      # a word is sounding where the vocal stem (100 ms windows) is above this ...
 VOCAL_WORD_DB = 12.0       # ... and within 12 dB of the word's own peak (+-0.3 s): onset ramps and tails count as gaps
+VOCAL_WIN = 0.05           # simultaneity window (s) for the vocal rule: short enough that a cut on a word is sequential
 VOCAL_FIT_DB = 7.0         # where the vocal is present the layer sits >= 7 dB under it (rule: >= 6 dB, 1 dB safety)
 
 
@@ -283,6 +284,7 @@ class Timing:
         self.path = path
         d = json.load(open(path))
         self.status = d.get("status", "")
+        self.duration = d.get("duration")            # renderer: A.duration = timing.duration || 247.2
         self.sections = d["sections"]
         self.lines = [dict(l, t=l.get("start", l.get("t")),
                            words=[dict(w, t=w.get("start", w.get("t"))) for w in l.get("words", [])]) for l in d["lines"]]
@@ -298,15 +300,18 @@ class Timing:
         return self.LS(sec)[k]
 
     def counts(self):
-        """render/src/timeline.js: intro.forEach((l, g) => l.words.forEach((w, i) => counts.push({n: [1,1,2,3,5,8][i], t, g})))
-        (a word past the sixth gets n = undefined in the renderer, so it draws no pulse; it gets no ping here either)."""
+        """render/src/timeline.js: numerals follow the words actually whispered (NUM = {one, two, three, five, eight}); a word
+        repeating the previous numeral of the same pass (an echo, n != 1) is not a new numeral."""
+        NUM = {"one": 1, "two": 2, "three": 3, "five": 5, "eight": 8}
         out = []
         for g, l in enumerate(self.LS("Intro")):
-            for i, w in enumerate(l["words"]):
-                if i >= 6:
-                    self.warnings.append(f"Intro line {g} word {i} '{w['w']}' @ {w['t']:.3f}: no count number (renderer draws no pulse)")
-                    continue
-                out.append(dict(n=[1, 1, 2, 3, 5, 8][i], t=float(w["t"]), g=g, w=w["w"]))
+            for w in l["words"]:
+                n = NUM.get("".join(ch for ch in w["w"].lower() if ch.isalpha()))
+                prev = out[-1] if out else None
+                if n and not (prev and prev["g"] == g and prev["n"] == n and n != 1):
+                    out.append(dict(n=n, t=float(w["t"]), g=g, w=w["w"]))
+                else:
+                    self.warnings.append(f"Intro line {g} '{w['w']}' @ {w['t']:.3f}: not a new numeral (as in the renderer), no pings")
         return out
 
 
@@ -401,12 +406,12 @@ def gap_of(n):
 
 def lock_warble(t0, t1, rng):
     """Cue 3: the lock. Fades in with the visual lock (smooth(range(t, g1end + .35, g1end + 1.2))), +2.5 dB over the hold,
-    pitch rising ~70 cents, cut dead (2 ms) on the second count's first word."""
+    pitch rising ~70 cents, cut dead (12 ms, under one frame) on the second count's first word."""
     t = t0 + np.arange(N(t1 - t0)) / SR
     y = warble_tone(t, t0, t1)
     env = smooth(ramp(t, t0, t0 + 0.85)) * (0.75 + 0.25 * ramp(t, t0 + 0.85, t1))
     y = lp(y * env, 5000, 2)
-    return fades(pan(y, 0.0), r=0.002)
+    return fades(pan(y, 0.0), r=0.012)
 
 
 def drop_warble(t0, t_cut, t_state0, rate, lock0, lock1, impulse):
@@ -582,13 +587,13 @@ class Cue:
         k = max(0, min(self.y.shape[1], N(t_end - self.t0)))
         self.y = fades(self.y[:, :k], r=fade_s) if fade_s > 0 else self.y[:, :k]
 
-    def margins(self, songM, gain_db=None, win=0.4):
+    def margins(self, songM, gain_db=None, win=0.4, tail=0.0):
         """Per 10 ms frame (in the cue's active span): song loudness - cue loudness (momentary 400 ms, or 100 ms)."""
         g = self.gain_db if gain_db is None else gain_db
         pad = N(0.5)
         yk = kpow(np.pad(self.y * db2a(g), ((0, 0), (pad, pad))))
         M = Momentary(yk, self.t0 - 0.5)
-        ts = np.arange(self.t0, self.t1, 0.01)
+        ts = np.arange(self.t0, self.t1 + tail, 0.01)
         cM, sM = M(ts, win=win), songM(ts, win=win)
         act = cM > cM.max() - 20
         return ts, cM, sM, act
@@ -615,20 +620,21 @@ def fit_level(cue, songM, vocM=None):
 
 
 def vocal_present(vocM, ts):
-    """Vocal level (100 ms) at ts and where a word is sounding (>= -40 LUFS and within 12 dB of the local peak)."""
+    """Vocal level (50 ms) at ts and where a word is sounding (>= -40 LUFS and within 12 dB of the local peak)."""
     pad = 30
     tp = np.concatenate([ts[0] - 0.01 * np.arange(pad, 0, -1), ts, ts[-1] + 0.01 * np.arange(1, pad + 1)])
-    v = vocM(tp, win=0.1)
+    v = vocM(tp, win=VOCAL_WIN)
     pk = maximum_filter1d(v, 2 * pad + 1)[pad:-pad]
     v = v[pad:-pad]
     return v, (v >= VOCAL_ON_LUFS) & (v >= pk - VOCAL_WORD_DB)
 
 
 def under_vocal(cue, vocM):
-    """Where a word is sounding (vocal stem >= -40 LUFS in 100 ms windows) the cue sits >= 7 dB under the vocal: event
-    cues take a lower fixed gain, continuous cues duck (a smoothed sidechain gain curve on the layer only)."""
+    """Where a word is sounding (vocal stem >= -40 LUFS in 50 ms windows) the cue sits >= 7 dB under the vocal: event
+    cues take a lower fixed gain, continuous cues duck (a smoothed sidechain gain curve on the layer only). Measured in
+    50 ms windows, so a cue cut on a word (the lock) is sequential, not simultaneous."""
     for _ in range(3):
-        ts, cS, vS, act = cue.margins(vocM, win=0.1)
+        ts, cS, vS, act = cue.margins(vocM, win=VOCAL_WIN, tail=VOCAL_WIN / 2)
         vS, word = vocal_present(vocM, ts)
         pres = act & word & ~cue.exempt(ts)
         if not pres.any():
@@ -710,7 +716,7 @@ def build_cues(T, song_len_s, songM, vocM):
     cues.append(Cue("lock", "The lock: two-tone warble 880/990 Hz alternating ~7 Hz, rising ~70 cents, cut dead",
                     f"{lock0:.3f} (first count's last word + 0.35) -> {lock1:.3f} (second count's first word)",
                     "synth: sine (+2nd/3rd harmonic) FM'd by a smoothed square (6.6->7.4 Hz), switch dips, LP 5 kHz; fade-in = "
-                    "the visual lock curve, +2.5 dB over the hold; 2 ms cut", lock0, y, med=12, worst=8, cap_db=-28, ride=True))
+                    "the visual lock curve, +2.5 dB over the hold; 12 ms cut; ducks under the 7th whisper", lock0, y, med=12, worst=8, cap_db=-28, ride=True))
     # ---- 4. release chime
     t_open = last + 0.3
     y = release_chime(rng(4), IR_CHIME)
@@ -821,6 +827,28 @@ def level_end_pings(ends, songM, vocM=None):
 
 
 # ============================================================================================ main
+def level_at(c, t, win):
+    """K-weighted level (dB) of cue c (at its gain) in a window of width win centred on t."""
+    a = N(t - win / 2 - 0.5 - c.t0)
+    b = N(t + win / 2 - c.t0)
+    if b <= 0 or a >= c.y.shape[1]:
+        return -200.0
+    seg = np.zeros((2, b - a))
+    lo, hi = max(0, a), min(c.y.shape[1], b)
+    seg[:, lo - a:hi - a] = c.y[:, lo:hi] * db2a(c.gain_db)
+    p = kpow(seg)[-N(win):]
+    return float(-0.691 + 10 * np.log10(p.mean() + 1e-20))
+
+
+def dominant(cues, t, win, within_db=6.0):
+    """The cues that make up the layer at t (within 6 dB of the loudest there): the ones an overlap trim should touch."""
+    lv = [(level_at(c, t, win), c) for c in cues if c.t0 - win <= t <= c.t1 + win]
+    if not lv:
+        return []
+    top = max(l for l, _ in lv)
+    return [c for l, c in lv if l >= top - within_db]
+
+
 def sum_layer(cues, n_tot):
     layer = np.zeros((2, n_tot))
     for c in cues:
@@ -889,23 +917,24 @@ def main(argv):
             j = int(np.argmin(m))
             if m[j] < MIN_MARGIN_DB + 0.5:
                 tw, d = ts[ok][j], MIN_MARGIN_DB + 0.5 - m[j]
-                for o in cues:
-                    if o.t0 - 0.2 <= tw <= o.t1 + 0.2:
-                        trims[o.id] = max(trims.get(o.id, 0.0), d)
+                print(f"  song rule: {c.id} @ {tw:.2f} margin {m[j]:.1f}")
+                for o in dominant(cues, tw, 0.4):
+                    trims[o.id] = max(trims.get(o.id, 0.0), d)
             if vocM is not None:
-                ts1, cS, vS, act1 = c.margins(vocM, win=0.1)
+                ts1, cS, vS, act1 = c.margins(vocM, win=VOCAL_WIN)
                 vS, word = vocal_present(vocM, ts1)
                 pres = act1 & word & ~c.exempt(ts1)
                 if pres.any():
-                    mv = vS[pres] - layM(ts1[pres], win=0.1)
+                    mv = vS[pres] - layM(ts1[pres], win=VOCAL_WIN)
                     j = int(np.argmin(mv))
                     if mv[j] < MIN_MARGIN_DB + 0.5:
                         tw, d = ts1[pres][j], MIN_MARGIN_DB + 0.5 - mv[j]
-                        for o in cues:
-                            if o.t0 - 0.05 <= tw <= o.t1 + 0.05:
-                                trims[o.id] = max(trims.get(o.id, 0.0), d)
+                        print(f"  vocal rule: {c.id} @ {tw:.2f} margin {mv[j]:.1f} (vocal {vS[pres][j]:.1f})")
+                        for o in dominant(cues, tw, VOCAL_WIN):
+                            trims[o.id] = max(trims.get(o.id, 0.0), d)
         if not trims:
             break
+        print(f"overlap pass {it}: " + ", ".join(f"{k} -{v:.1f} dB" for k, v in trims.items()))
         for o in cues:
             if o.id in trims:
                 o.gain_db -= trims[o.id]
@@ -1009,11 +1038,11 @@ def main(argv):
         m_t = sM[ok] - tot[ok] if ok.any() else np.array([])
         vm_med = vm_worst = None
         if vocM is not None:
-            ts1, cS, vS, act1 = c.margins(vocM, win=0.1)
+            ts1, cS, vS, act1 = c.margins(vocM, win=VOCAL_WIN)
             vS, word = vocal_present(vocM, ts1)
             pres = act1 & word & ~c.exempt(ts1)
             if pres.any():
-                mv = vS[pres] - layM(ts1[pres], win=0.1)
+                mv = vS[pres] - layM(ts1[pres], win=VOCAL_WIN)
                 vm_med, vm_worst = round(float(np.median(mv)), 1), round(float(mv.min()), 1)
         rows.append(dict(
             id=c.id, title=c.title, sync=c.sync, how=c.how, start_s=round(c.t0, 3), end_s=round(c.t1, 3),
@@ -1029,7 +1058,8 @@ def main(argv):
     V["cues_pass_6db_rule"] = all(r["passes"] for r in rows)
     V["song_length_s"] = n_song / SR
     V["timing"] = dict(file=os.path.relpath(T.path, ROOT), status=T.status, warnings=T.warnings,
-                       music_start_s=round(ctx["music_start"], 2), song_tail_s=round(ctx["song_tail"], 2))
+                       music_start_s=round(ctx["music_start"], 2), song_tail_s=round(ctx["song_tail"], 2),
+                       film_end_s=round((T.duration or 247.2) + 2, 3))
     V["checks"] = dict(
         bit_identical_outside_cues=V["null_test"]["bit_identical_outside_cues"],
         layer_peak_ok=V["peaks"]["layer_true_peak_dbtp"] <= LAYER_PEAK_MAX_DB,
@@ -1125,7 +1155,7 @@ def write_doc(rows, V, ctx, T):
              "exempt only: the scope cue before the music starts (song < -40 LUFS, t < "
              f"{V['timing']['music_start_s']:.2f} s) and the end card's tail, after the music has ended (the song falls below the same "
              f"-40 LUFS for good, t >= {V['timing']['song_tail_s']:.2f} s).")
-    L.append("* **Under the vocal.** Wherever a word is sounding (vocal stem >= -40 LUFS in 100 ms windows and within 12 dB of "
+    L.append("* **Under the vocal.** Wherever a word is sounding (vocal stem >= -40 LUFS in 50 ms windows and within 12 dB of "
              "that word's peak, so onset ramps and tails count as gaps) the whole layer sits "
              ">= 6 dB under the vocal (fitted at 7): event cues (pings, thuds, the match) take a lower fixed gain; continuous cues "
              "(scope hum/servo, lock, whoosh, wind, the drop's lock) duck under the words with a smoothed gain curve on the layer "
@@ -1138,7 +1168,7 @@ def write_doc(rows, V, ctx, T):
              "the lock follows `phases().lock`; the chime the reticle's `open`; the end pings `endcard.js` (period 1.15 s from S).")
     L.append("* **All synthesized** (numpy/scipy, seeded, deterministic). No generated audio was used ($0.00).\n")
     L.append("## Cues\n")
-    L.append("| # | cue | window (s) | sync | gain / peak | max momentary | under the song: median / worst (all cues summed) | under the vocal (worst, 100 ms) | how it's made |")
+    L.append("| # | cue | window (s) | sync | gain / peak | max momentary | under the song: median / worst (all cues summed) | under the vocal (worst, 50 ms) | how it's made |")
     L.append("|---|---|---|---|---|---|---|---|---|")
     for i, r in enumerate(rows, 1):
         mg = "exempt" if r["margin_median_db"] is None else f"{r['margin_median_db']:.1f} / {r['margin_worst_total_layer_db']:.1f} dB"
@@ -1175,7 +1205,7 @@ def write_doc(rows, V, ctx, T):
                  f"{m['integrated_lufs']:.2f} LUFS |")
     L.append(f"| lengths | mix and layer {nt['mix_length_samples']:,} samples = {nt['mix_length_s']:.3f} s (song "
              f"{V['song_length_s']:.3f} s + end-card tail) |")
-    L.append(f"| every cue >= 6 dB under the song (400 ms) and under the vocal where it sounds (100 ms), all cues summed | {V['cues_pass_6db_rule']} |\n")
+    L.append(f"| every cue >= 6 dB under the song (400 ms) and under the vocal where it sounds (50 ms), all cues summed | {V['cues_pass_6db_rule']} |\n")
     L.append("## Timing notes\n")
     L.append(f"* Timing file: `{V['timing']['file']}`, status: *{V['timing']['status']}*")
     for w in V["timing"]["warnings"]:
@@ -1185,8 +1215,8 @@ def write_doc(rows, V, ctx, T):
              + ", ".join(f"{k} {v:.3f}" for k, v in ctx["gaps"].items()) + f"; nothing after {ctx['stop']:.2f} ('two said fire').")
     L.append(f"* The match flare is at Bridge line 2 start - 0.2 + 0.5 = {ctx['t_match']:.3f} (the brief); the forest scene's "
              f"`sparkT` is currently `matchT + 0.3` = {ctx['matchT'] + 0.3:.3f}. If the spark is drawn there, move one of them.")
-    L.append("* The mix is 249.2 s: the end card (Z3) runs to `A.duration + 2`, and `A.duration` falls back to 247.2 because "
-             "timing.json has no top-level `duration` (the decoded song is 247.160 s, so the tail is 2.04 s).\n")
+    L.append(f"* The mix is {TOTAL_S} s as briefed (song {V['song_length_s']:.3f} s + {TOTAL_S - V['song_length_s']:.2f} s tail). The end card "
+             f"(Z3) runs to `A.duration + 2` = {V['timing']['film_end_s']:.2f} s; if the picture is cut there, trim the audio with `-t`.\n")
     L.append("## Files\n")
     L.append("* `tools/audio/sfx.py`: this whole layer, re-runnable (`python3 tools/audio/sfx.py [--timing F] [--no-m4a]`).")
     L.append("* `work/sfx/sfx_layer.wav` (float32, 249.2 s), `work/sfx/stems/<cue>.wav` (each cue at final gain; its window start "

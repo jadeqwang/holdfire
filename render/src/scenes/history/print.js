@@ -16,8 +16,9 @@ export const INK_K = [0.085, 0.079, 0.074];   // warm press black (multiplied in
 export const INK_R = P.red;                    // the one red
 export const PAPER = P.cream;
 
-// recommended post block for a printed shot: no tone map (the paper must stay the paper), no bloom on the page
-export const PRINT_LOOK = { tonemap: 0, bloom: 0.0, bloomThreshold: 2.0, halation: 0, streak: 0, grain: 0.012, vignette: 0.22, typeGlow: 0 };
+// recommended post block for a printed shot: no tone map (the lamp grade is done in the print), bloom only for the red that
+// burns (emissive red ink climbs over the threshold; the lamp-lit paper, peaking ~0.44, never does), the lamp is the vignette
+export const PRINT_LOOK = { tonemap: 0, bloom: 0.35, bloomThreshold: 0.55, halation: 0.25, halCol: [1.0, 0.25, 0.1], streak: 0, grain: 0.02, vignette: 0.0, typeGlow: 0 };
 
 export const PRINT_GLSL = /* glsl */`
 uniform sampler2D tPaper;      // baked paper: rgb = stock colour, a = tooth (fine fibre height)
@@ -27,6 +28,9 @@ uniform vec2 offK; uniform vec2 offR;          // misregistration of each plate 
 uniform float rough;           // ink edge roughness (dot edges eaten by the paper's tooth)
 uniform float kGain; uniform float rGain;      // overall ink densities
 uniform float pageZoom; uniform vec2 pagePan;  // rostrum camera over the page (zoom about the centre, pan in design px)
+// "seen by lamplight": the page is lit by one warm lamp (screen space), peaking ~0.44 luma, falling warm into near-black
+uniform float lampOn; uniform vec2 lampC; uniform vec2 lampR; uniform float lampGain; uniform float lampFloor; uniform float lampK;
+uniform vec3 lampCore; uniform vec3 lampEdge; uniform float rGlow;   // rGlow: red ink that burns (fire) glows instead of being lit
 // design px of this fragment, and its page coordinate under the rostrum camera
 vec2 fragDesign(){ return vec2(vUv.x * 1920., (1. - vUv.y) * 1080.); }
 vec2 toPage(vec2 d){ return (d - vec2(960., 540.) - pagePan) / pageZoom + vec2(960., 540.); }
@@ -45,6 +49,11 @@ float screenAM(vec2 page, float v, float cell, float ang, float n){
   float w = max(fwidth(s), 1e-4) * .75;     // derivatives before any branch
   return v < .004 ? 0. : 1. - smoothstep(v - w, v + w, s);
 }
+vec3 lampLight(){
+  vec2 d = (fragDesign() - lampC) / lampR;
+  float fall = exp(-dot(d, d) * lampK);
+  return mix(lampEdge, lampCore, fall) * (lampFloor + (1. - lampFloor) * fall) * lampGain;
+}
 // lay the inks on the paper. page = page coord of this pixel (content must already be sampled with offK / offR applied)
 vec3 printPixel(vec2 page, float kTone, float kSolid, float rTone, float rSolid){
   vec4 pp = paperAt(page);
@@ -57,6 +66,10 @@ vec3 printPixel(vec2 page, float kTone, float kSolid, float rTone, float rSolid)
   vec3 col = pp.rgb;
   col *= mix(vec3(1.), inkR, cr);
   col *= mix(vec3(1.), inkK, ck);
+  if (lampOn > .5) {
+    col *= lampLight();
+    col += rGlow * cr * (1. - ck) * inkR * .95;      // fire is its own light: it doesn't fade with the lamp
+  }
   return col;
 }
 // the same inks as a multiply factor (for overprinting onto an existing image)
@@ -75,11 +88,28 @@ export function printUniforms() {
     cellK: { value: 6 }, cellR: { value: 6 }, angK: { value: Math.PI / 4 }, angR: { value: 75 * Math.PI / 180 },
     offK: { value: new THREE.Vector2() }, offR: { value: new THREE.Vector2() }, rough: { value: 0.12 },
     kGain: { value: 1 }, rGain: { value: 1 }, pageZoom: { value: 1 }, pagePan: { value: new THREE.Vector2() },
+    lampOn: { value: 1 }, lampC: { value: new THREE.Vector2(960, 520) }, lampR: { value: new THREE.Vector2(1100, 760) }, lampGain: { value: 0.5 },
+    lampFloor: { value: 0.03 }, lampK: { value: 2.6 }, lampCore: { value: new THREE.Color(1, 0.9, 0.72) }, lampEdge: { value: new THREE.Color(1, 0.66, 0.36) }, rGlow: { value: 0 },
   };
 }
 
-// set the common print uniforms. o: {seed, cell, cellR, angK, angR (deg), misreg (design px), rough, kGain, rGain, zoom, pan, paper}
+// the lamp: o.lamp = false (daylight page) or {x, y, rx, ry, peak (0.44: paper luma at the lamp), floor (0.03), k (2.6: falloff),
+//   core [r,g,b] (warm), edge [r,g,b] (warmer, as the light dies)}; o.redGlow 0..1 (red ink that burns glows: sparks, alarms)
+export function setLamp(u, lamp, paper = PAPER, redGlow = 0) {
+  const L = lamp === false ? null : (lamp || {});
+  u.lampOn.value = L ? 1 : 0; u.rGlow.value = L ? redGlow : 0;
+  if (!L) return;
+  u.lampC.value.set(L.x ?? 960, L.y ?? 520); u.lampR.value.set(L.rx ?? 1100, L.ry ?? 760);
+  u.lampFloor.value = L.floor ?? 0.03; u.lampK.value = L.k ?? 2.6;
+  const core = L.core || [1, 0.9, 0.72]; u.lampCore.value.setRGB(...core); u.lampEdge.value.setRGB(...(L.edge || [1, 0.66, 0.36]));
+  const lum = 0.2126 * paper[0] * core[0] + 0.7152 * paper[1] * core[1] + 0.0722 * paper[2] * core[2];
+  u.lampGain.value = (L.peak ?? 0.44) / lum;
+}
+
+// set the common print uniforms. o: {seed, cell, cellR, angK, angR (deg), misreg (design px), rough, kGain, rGain, zoom, pan, paper,
+//   lamp (see setLamp), redGlow}
 export function setPrint(e, u, o = {}) {
+  setLamp(u, o.lamp, o.paper || PAPER, o.redGlow ?? 0);
   const seed = o.seed ?? 1;
   u.tPaper.value = paperTexture(e, seed, o.paper);
   if (o.paper) u.paperCol.value.setRGB(...o.paper); else u.paperCol.value.setRGB(...PAPER);

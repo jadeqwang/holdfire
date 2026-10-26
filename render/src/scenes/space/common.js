@@ -82,17 +82,47 @@ export class Buckets {
     this.m.clear();
   }
 }
-// a soft radial glow, pre-rendered once per colour; draw with c.globalAlpha and drawImage(s, x - r, y - r, 2r, 2r)
+// a soft radial glow. drawImage from a sprite canvas, and every fresh createRadialGradient, are slow on the
+// SwiftShader-backed 2D canvas (an upload/flush per call), so a glow is one cached unit gradient (per canvas and colour)
+// placed with a transform. glowSprite(col) returns a handle; drawGlow(c, handle, x, y, r, a) draws it (design px).
 const SPR = new Map();
-export function glowSprite(col, core = 0.0) {
-  const key = col.join(',') + core;
-  if (SPR.has(key)) return SPR.get(key);
-  const cv = document.createElement('canvas'); cv.width = cv.height = 64;
-  const g2 = cv.getContext('2d');
-  const g = g2.createRadialGradient(32, 32, 0, 32, 32, 32);
-  g.addColorStop(0, cssP(col, 1)); if (core > 0) g.addColorStop(core, cssP(col, 0.45)); g.addColorStop(1, cssP(col, 0));
-  g2.fillStyle = g; g2.fillRect(0, 0, 64, 64);
-  SPR.set(key, cv);
-  return cv;
+export function glowSprite(col, core = 0.0) { return { col, core, key: col.join(',') + '|' + core }; }
+export function drawGlow(c, h, x, y, r, a) {
+  if (a <= 0.004 || r <= 0.3) return;
+  let m = SPR.get(c); if (!m) { m = new Map(); SPR.set(c, m); }
+  let g = m.get(h.key);
+  if (!g) {
+    g = c.createRadialGradient(0, 0, 0, 0, 0, 1);
+    g.addColorStop(0, cssP(h.col, 1)); if (h.core > 0) g.addColorStop(h.core, cssP(h.col, 0.45)); g.addColorStop(1, cssP(h.col, 0));
+    m.set(h.key, g);
+  }
+  const T = c.getTransform();
+  c.translate(x, y); c.scale(r, r);
+  c.globalAlpha = Math.min(1, a); c.fillStyle = g;
+  c.beginPath(); c.arc(0, 0, 1, 0, Math.PI * 2); c.fill();
+  c.globalAlpha = 1; c.setTransform(T);
 }
-export function drawGlow(c, spr, x, y, r, a) { if (a <= 0.004 || r <= 0.3) return; c.globalAlpha = Math.min(1, a); c.drawImage(spr, x - r, y - r, 2 * r, 2 * r); c.globalAlpha = 1; }
+
+// A software-rasterised 2D canvas (willReadFrequently keeps it on the CPU): for path-heavy engraving, Skia's CPU raster
+// is much cheaper than the GPU-accelerated canvas on SwiftShader. begin() mirrors engine.c2dBegin(); blit() mirrors
+// engine.blit2d() through the engine's own blit material.
+import * as THREE_ from 'three';
+let SOFT = null;
+export function soft2d(e) {
+  if (SOFT && SOFT.W === e.W && SOFT.H === e.H) return SOFT;
+  const cv = document.createElement('canvas'); cv.width = e.W; cv.height = e.H;
+  const c = cv.getContext('2d', { willReadFrequently: true });
+  const tex = new THREE_.CanvasTexture(cv);
+  tex.colorSpace = THREE_.NoColorSpace; tex.premultiplyAlpha = false; tex.generateMipmaps = false;
+  tex.minFilter = THREE_.LinearFilter; tex.magFilter = THREE_.LinearFilter;
+  SOFT = {
+    W: e.W, H: e.H, cv, c, tex,
+    begin() { c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.globalCompositeOperation = 'source-over'; c.clearRect(0, 0, e.W, e.H); c.setTransform(e.S, 0, 0, e.S, 0, 0); return c; },
+    blit(mode = 'over', gain = 1) {
+      tex.needsUpdate = true;
+      const u = e.matBlit.uniforms; u.tSrc.value = tex; u.gain.value = gain;
+      if (mode === 'replace') e.pass(e.matBlit, e.rtScene); else e.passOver(e.matBlit, e.rtScene, mode === 'add' ? 'add' : 'normal');
+    },
+  };
+  return SOFT;
+}

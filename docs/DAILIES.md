@@ -78,3 +78,10 @@ Spend at start of this intake pass: $30.46.
 | 04:02 | O7 | kf O7_nbp.png | regen | — | figure at the far left edge (spec: centre; wings will open off-frame), giant fills the top → v2 |
 | 04:02 | O8 | kf O8_nbp.jpg | approve → O8_t1 | — | waist-up centre, right hand raised in greeting, gold-ringed eyes; giant planet behind upper middle |
 | 04:02 | C4 | C4_t2_2beb25a557 | **PICK** | 0 | grandmother raises the candle high out of the stone window, looks up; consistent |
+| 04:09 | K6 K7 | K6_t1,t2 K7_t1,t2 | relay error | — | 2047 Invalid User Credentials ×4; resubmitted as K6_t3,t4 and K7_t3,t4 |
+| 04:11 | K1b | K1b_t1_c6bdfc3ed0 | alt | — | best composition (left third, dishes) but face small: FaceMesh found it in only 57 % of frames (bad for sync + face guides) |
+| 04:11 | K1b | K1b_t2_7d28bc2216 | **PICK** | 0 | medium close, left ~40 %, dishes in fog right; face found 100 %; strips at 0: "mud" closed, "waking" rounded, "egg" open, "seeds" teeth (numeric −0.58 spurious) |
+| 04:11 | K8 | K8_t1_d2d673c54f | reject | — | second half ("prayer, but you were… counting too") mouth frozen wide open at every lag — no closures on p/b/w |
+| 04:11 | K8 | K8_t2_430fc7a418 | weak alt | ~0 | articulates "but/you/were" but "message in a bottle" stays wide open, grins on "too", push-in ends blown-out; re-rolled once as K8_t3 |
+| 04:11 | H5 | kf H5_nbp.jpg | regen | — | a crewman's face shows in a lit porthole on the submarine hull (implausible + extra person); hull reads as a WWII U-boat → v2 "Foxtrot, no portholes, no people" |
+| 04:11 | H6 | kf H6_nbp.png | approve → H6_t1 | — | three sweat-soaked officers in a red-lit control room, the calm one on the right faces the other two; faces fill the top half (the NO will sit over them) |

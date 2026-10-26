@@ -11,7 +11,7 @@ export function buildTimeline(A) {
   // V2c is the Listener; here the archival test plate (stand-in for the Tang alchemists / Petrov / Arkhipov plates)
   // V2d: the ink mushroom cloud
   add({ id: 'h_bomb', t0: L(25).t - 0.04, t1: L(26).t - 0.1, scene: 'inkbomb', p: (t, lt) => ({ zoom: 1 + lt * 0.01 }), look: PRINT_LOOK });
-  add({ id: 'h_arch', t0: L(24).t, t1: L(25).t - 0.04, scene: 'archival', p: (t, lt) => ({ clip: 'test_sing', s0: L(24).t, zoom: 1.0 + lt * 0.012 }), look: PRINT_LOOK });
+  add({ id: 'h_arch', t0: L(24).t, t1: L(25).t - 0.04, scene: 'archival', p: (t, lt) => ({ clip: 'test_sing', s0: L(24).t, zoom: 1.0 + lt * 0.012, redMask: 1, redLight: 1 }), look: PRINT_LOOK });   // 'Petrov in red light' mode
   // V2e/V2f: Oko. "Eighty-three, the satellites saw five, / every rule said call it first strike;"
   const l26 = 26, l27 = 27;
   const t1 = W(l26, 2) + 0.1;                         // "satellites": the first report
@@ -24,12 +24,14 @@ export function buildTimeline(A) {
   add({ id: 'h_forest', t0: br.start, t1: A.findLine('Bridge', 4).t, scene: 'forestreticles', p: {},
     look: { bloom: 0.35, bloomThreshold: 0.7, halation: 0.45, halCol: [1.0, 0.12, 0.06], vignette: 0.5, grain: 0.04, exposure: 1.1 } });
   add({ id: 'h_v2g', t0: L(28).t - 0.05, t1: L(30).t - 0.1, scene: 'archival', p: (t, lt) => ({ clip: 'hist_test_warm', s0: L(28).t - 0.05, redMask: 1, zoom: 1.04 - lt * 0.01 }), look: PRINT_LOOK });
-  // B3: sonar ("sixty-two, depth charges falling,")
   const l50 = A.lines.find((l) => /^sixty-two/.test(l.text)), l51 = A.lines.find((l) => /^two said fire/.test(l.text));
+  // B2: the chain of sight-lines becomes hands ("But fear's a chain, and chains are links, / and every link's a hand that can let go:")
+  add({ id: 'h_chain', t0: A.findLine('Bridge', 4).t, t1: l50.t - 0.02, scene: 'chainhands', p: {},
+    look: { bloom: 0.45, bloomThreshold: 0.7, halation: 0.3, halCol: [1.0, 0.45, 0.15], vignette: 0.45, grain: 0.035 } });
+  // B3: sonar ("sixty-two, depth charges falling,")
   add({ id: 'h_sonar', t0: l50.t - 0.02, t1: l51.t - 0.02, scene: 'sonar', p: {},
     look: (t) => { const c = [159.6, 160.0, 160.56, 160.88].reduce((m, x) => Math.max(m, t >= x ? Math.exp(-(t - x) / 0.1) : 0), 0);
       return { bloom: 0.75, bloomThreshold: 0.55, halation: 0.12, halCol: [0.3, 1, 0.6], vignette: 0.5, grain: 0.05, shakeX: 6 * c * Math.sin(t * 90), shakeY: 4 * c }; } });
-  add({ id: 'h_handtest', t0: 240, t1: 241, scene: '_handtest', p: {}, look: { bloom: 0.2, vignette: 0, grain: 0 } });
   shots.sort((a, b) => a.t0 - b.t0);
   return shots;
 }

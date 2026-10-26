@@ -5,6 +5,6 @@ import forestreticles from './forest.js';
 import gunpowder from './gunpowder.js';
 import inkbomb from './inkbomb.js';
 import sonar from './sonar.js';
-import _handtest from './_handtest.js';
+import chainhands from './chainhands.js';
 
-export const SCENES = { archival, oko, forestreticles, gunpowder, inkbomb, sonar, _handtest };
+export const SCENES = { archival, oko, forestreticles, gunpowder, inkbomb, sonar, chainhands };

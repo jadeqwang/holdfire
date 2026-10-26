@@ -1,7 +1,7 @@
 // ENGRAVED PLATE: a redrawn performance/environment plate in engraved light (the Keeper's material).
 // Lines (tools/roto/engrave.py streamlines) are drawn as anti-aliased variable-width capsules in one instanced draw,
 // additively, over a faint tone fill and XDoG contours. Footage never appears: only its guide maps are read.
-// p: {clip, s0, lag, zoom, pan:[x,y], color:[r,g,b], hot:[r,g,b], wmax, gain, fill, edge, bg:[r,g,b], bgLines (0..1 dim for background)}
+// p: {clip, s0, lag, zoom, pan:[x,y], fadeEdges:[l,r,t,b] (plate-border fade widths, plate px), color:[r,g,b], hot:[r,g,b], wmax, gain, fill, edge, bg:[r,g,b], bgLines (0..1 dim for background)}
 import * as THREE from 'three';
 import { meta, texture, lines, drawingAt } from '../plates.js';
 import { P, css } from '../palette.js';
@@ -36,17 +36,17 @@ function build(e) {
   base.instanceCount = 0;
   const mat = new THREE.ShaderMaterial({
     glslVersion: THREE.GLSL3,
-    uniforms: { tMatte: { value: null }, hasMatte: { value: 0 }, wLo: { value: 0.1 }, wHi: { value: 0.95 }, wGam: { value: 1.2 }, bgW: { value: 0.45 }, S: { value: e.S }, wmax: { value: 3.4 }, zoom: { value: 1 }, pan: { value: new THREE.Vector2() }, color: { value: new THREE.Color() }, hot: { value: new THREE.Color() }, gain: { value: 1 }, minW: { value: 0.05 }, wmaxU: { value: 3.4 } },
+    uniforms: { tMatte: { value: null }, hasMatte: { value: 0 }, wLo: { value: 0.1 }, wHi: { value: 0.95 }, wGam: { value: 1.2 }, bgW: { value: 0.45 }, S: { value: e.S }, wmax: { value: 3.4 }, zoom: { value: 1 }, pan: { value: new THREE.Vector2() }, color: { value: new THREE.Color() }, hot: { value: new THREE.Color() }, gain: { value: 1 }, minW: { value: 0.05 }, wmaxU: { value: 3.4 }, efw: { value: new THREE.Vector4(140, 140, 100, 100) } },
     vertexShader: /* glsl */`
       in vec4 seg; in vec2 wid;
       uniform float S; uniform float wmax; uniform float zoom; uniform vec2 pan;
-      uniform sampler2D tMatte; uniform float hasMatte; uniform float wLo; uniform float wHi; uniform float wGam; uniform float bgW;
+      uniform sampler2D tMatte; uniform float hasMatte; uniform float wLo; uniform float wHi; uniform float wGam; uniform float bgW; uniform vec4 efw;
       out vec2 vP; out vec4 vSeg; out vec2 vW;
       vec2 remap(vec2 w, vec2 mid){
         float m = hasMatte > .5 ? texture(tMatte, vec2(mid.x / 1920., 1. - mid.y / 1080.)).r : 1.;
         vec2 r = pow(clamp((w - wLo) / (wHi - wLo), 0., 1.), vec2(wGam));
-        vec2 e = min(mid, vec2(1920., 1080.) - mid);              // distance to the plate border
-        float ef = smoothstep(0., 140., min(e.x, e.y * 1.4));
+        // fade to the plate border; efw = widths (left, right, top, bottom) in plate px
+        float ef = smoothstep(0., efw.x, mid.x) * smoothstep(0., efw.y, 1920. - mid.x) * smoothstep(0., efw.z, mid.y) * smoothstep(0., efw.w, 1080. - mid.y);
         return r * mix(bgW, 1., m) * ef;
       }
       void main(){
@@ -85,20 +85,20 @@ function build(e) {
   cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   fillMat = e.shader(/* glsl */`
     uniform sampler2D tTone; uniform sampler2D tEdge; uniform sampler2D tMatte; uniform float zoom; uniform vec2 pan; uniform vec3 color; uniform vec3 bg;
-    uniform float fill; uniform float edge; uniform float hasMatte;
+    uniform float fill; uniform float edge; uniform float hasMatte; uniform vec4 efw;
     void main(){
       vec2 px = vec2(vUv.x * 1920., (1. - vUv.y) * 1080.);
       vec2 q = (px - vec2(960., 540.) - pan) / zoom + vec2(960., 540.);
       vec2 uv = vec2(q.x / 1920., 1. - q.y / 1080.);
       vec3 col = bg;
       if (uv.x >= 0. && uv.x <= 1. && uv.y >= 0. && uv.y <= 1.) {
-        vec2 bd = min(q, vec2(1920., 1080.) - q); float ef = smoothstep(0., 140., min(bd.x, bd.y * 1.4));
+        float ef = smoothstep(0., efw.x, q.x) * smoothstep(0., efw.y, 1920. - q.x) * smoothstep(0., efw.z, q.y) * smoothstep(0., efw.w, 1080. - q.y);
         float t = texture(tTone, uv).r * ef; float e = texture(tEdge, uv).r * ef; float m = hasMatte > .5 ? texture(tMatte, uv).r : 1.;
         col += color * pow(t, 3.5) * fill * (.25 + .75 * m);
         col += color * e * edge * (.4 + .6 * m) * 1.6;
       }
       fragColor = vec4(col, 1.);
-    }`, { tTone: { value: null }, tEdge: { value: null }, tMatte: { value: null }, zoom: { value: 1 }, pan: { value: new THREE.Vector2() }, color: { value: new THREE.Color() }, bg: { value: new THREE.Color() }, fill: { value: 0.08 }, edge: { value: 0.5 }, hasMatte: { value: 0 } });
+    }`, { tTone: { value: null }, tEdge: { value: null }, tMatte: { value: null }, zoom: { value: 1 }, pan: { value: new THREE.Vector2() }, color: { value: new THREE.Color() }, bg: { value: new THREE.Color() }, fill: { value: 0.08 }, edge: { value: 0.5 }, hasMatte: { value: 0 }, efw: { value: new THREE.Vector4(140, 140, 100, 100) } });
 }
 
 const pad = (k) => String(k).padStart(4, '0');
@@ -123,6 +123,8 @@ export default {
     const fu = fillMat.uniforms;
     fu.tTone.value = tone; fu.tEdge.value = edge; fu.tMatte.value = matte; fu.hasMatte.value = matte ? 1 : 0;
     fu.zoom.value = zoom; fu.pan.value.set(pan[0], pan[1]); fu.color.value.setRGB(...col); fu.bg.value.setRGB(...(p.bg || P.void));
+    const fe = p.fadeEdges || [140, 140, 100, 100];
+    fu.efw.value.set(...fe);
     fu.fill.value = p.fill ?? 0.10; fu.edge.value = p.edge ?? 0.45;
     if (!p.over) e.pass(fillMat, e.rtScene);
     // lines
@@ -132,7 +134,7 @@ export default {
     g.attributes.seg.needsUpdate = true; g.attributes.wid.needsUpdate = true; g.instanceCount = n;
     const u = mesh.material.uniforms;
     u.wmax.value = p.wmax ?? 6.0; u.wmaxU.value = (p.wmax ?? 6.0) * zoom;
-    u.tMatte.value = matte; u.hasMatte.value = matte ? 1 : 0;
+    u.tMatte.value = matte; u.hasMatte.value = matte ? 1 : 0; u.efw.value.set(...fe);
     u.wLo.value = p.wLo ?? 0.12; u.wHi.value = p.wHi ?? 0.95; u.wGam.value = p.wGam ?? 1.25; u.bgW.value = p.bgW ?? 0.4; u.zoom.value = zoom; u.pan.value.set(pan[0], pan[1]); u.color.value.setRGB(...col); u.hot.value.setRGB(...hot); u.gain.value = p.gain ?? 1.15;
     e.renderer.autoClear = false; e.renderer.setRenderTarget(e.rtScene); e.renderer.render(scene, cam); e.renderer.autoClear = true;
     // facial features from landmarks: the mouth opening carved dark, lips, lids, irises, brows (crisp, so expression and lip sync read)

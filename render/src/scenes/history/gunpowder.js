@@ -8,7 +8,7 @@
 // drawGunpowder(ctx, shot, t, p) overprints onto rtScene (multiply), so it can sit on an archival plate; the 'gunpowder' scene
 // prints its own paper first (or p.plate: {clip, s0, ...archival params} to print over a redrawn plate).
 // p: {glyphs (layout, see GLYPHS), tLife: [t0, step], tSulfur, tSaltpeter, tBurst, tFire, burst: [x, y], smoke (1: incense),
-//     smokeSrc [x, y], sparks (110), gloss (true), seed, cell (6), misreg}
+//     smokeSrc [x, y], sparks (110), gloss (true), seed, cell (6), misreg, lamp (print.js setLamp), redGlow (0.9: sparks burn)}
 // Times default to the word onsets of lines 22-23 in timing.json.
 import * as THREE from 'three';
 import { P } from '../../palette.js';
@@ -235,7 +235,7 @@ export function drawGunpowder(ctx, shot, t, p, mode = 'multiply') {
   const T = gunTimes(ctx.audio, p);
   const G = p.glyphs || GLYPHS;
   const u = mat.uniforms;
-  setPrint(e, u, { seed: seedFor(shot, p), cell: p.cell ?? 6, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.2, zoom: p.zoom ?? 1, pan: p.pan || [0, 0] });
+  setPrint(e, u, { seed: seedFor(shot, p), cell: p.cell ?? 6, misreg: p.misreg ?? 2.2, rough: p.rough ?? 0.2, zoom: p.zoom ?? 1, pan: p.pan || [0, 0], lamp: p.lamp, redGlow: p.redGlow ?? 0.9 });
   u.tGlyph0.value = bakeGlyphs(e, G, 0); u.tGlyph1.value = bakeGlyphs(e, G, 1);
   const st = glyphState(G, T, t);
   G.forEach((g, i) => {

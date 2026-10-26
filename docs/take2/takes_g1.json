@@ -367,5 +367,22 @@
    "lag": null,
    "pick": true
   }
+ ],
+ "V122": [
+  {
+   "tag": "t2_V122_veo_t1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_V122_veo_t1-1323c08c37",
+   "kf": "media/kf2/V122_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V122_veo_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_V122_veo_t1_1323c08c37.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.8,
+   "verdict": "pick: Jade at night lifts her eyes to the bright point; on model, hair in the wind. The point barely moves (Veo held it): the JS should draw the crossing point if it must travel",
+   "lag": null,
+   "pick": true
+  }
  ]
 }

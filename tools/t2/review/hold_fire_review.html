@@ -1,0 +1,756 @@
+<title>Hold Fire Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a control-room console. The film on top, a gold monitor timecode under it, the song as a signal strip, then the note log.
+   Palette from the film: gold light on black, signal-print inks (Klein blue, beacon orange, pale blue). Restraint everywhere except the title's misregistered print. */
+:root {
+  --ground: #edf0f5;     /* page: cool signal-print paper */
+  --card: #ffffff;       /* raised surfaces */
+  --ink: #0b1024;        /* text */
+  --dim: #535a70;        /* secondary text */
+  --rule: #d5d9e3;       /* hairlines */
+  --signal: #002fa7;     /* accent: Klein blue */
+  --on-signal: #ffffff;
+  --signal-soft: #e3e9f8;
+  --beacon: #c2410c;     /* notes: beacon orange */
+  --beacon-soft: #fff0e5;
+  --tc: #0b1024;         /* the timecode readout */
+  --strip: #c3cde2;      /* section blocks */
+  --screen: #05060a;     /* letterbox behind the film */
+  --on-screen: #ece9e1;
+  --danger: #b42318;
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --r: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #07080b; --card: #12141b; --ink: #ece9e1; --dim: #9ba0ae; --rule: #262a36;
+    --signal: #8ec5ff; --on-signal: #001a5e; --signal-soft: #121d33; --beacon: #ff7a33; --beacon-soft: #2a1609;
+    --tc: #f2c14e; --strip: #283044; --screen: #000000; --on-screen: #ece9e1; --danger: #ff8a7a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #07080b; --card: #12141b; --ink: #ece9e1; --dim: #9ba0ae; --rule: #262a36;
+  --signal: #8ec5ff; --on-signal: #001a5e; --signal-soft: #121d33; --beacon: #ff7a33; --beacon-soft: #2a1609;
+  --tc: #f2c14e; --strip: #283044; --screen: #000000; --on-screen: #ece9e1; --danger: #ff8a7a; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { background: var(--ground); color: var(--ink); }
+body {
+  font-family: var(--f-body); font-size: 15px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px 48px;
+  -webkit-text-size-adjust: 100%;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 18px; }
+@media (min-width: 1080px) {
+  .wrap { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); align-items: start; }
+  .side { position: sticky; top: max(12px, env(safe-area-inset-top, 0px)); max-height: calc(100vh - 24px); overflow: auto; padding-right: 2px; }
+}
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; }
+.name { margin: 0; display: flex; align-items: baseline; gap: 10px; }
+.name b {
+  font-family: var(--f-display); font-weight: 800; font-size: 2.1rem; line-height: .9; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--signal); text-shadow: 2px 1px 0 var(--beacon);   /* signal print, slightly off register */
+}
+.name span { font-family: var(--f-mono); font-size: .78rem; font-weight: 500; color: var(--dim); letter-spacing: .14em; text-transform: uppercase; }
+.meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-family: var(--f-mono); font-size: .72rem; color: var(--dim); }
+.ver { font-family: var(--f-mono); font-size: .74rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: var(--signal); color: var(--on-signal); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* player */
+.player { display: grid; gap: 12px; min-width: 0; }
+.screen { position: relative; background: var(--screen); border-radius: var(--r); overflow: hidden; aspect-ratio: 16 / 9; max-width: 100%; }
+.screen video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--screen); }
+@media (max-width: 640px) and (orientation: portrait) {
+  .screen { margin-inline: -16px; border-radius: 0; max-width: none; }
+}
+.status {
+  position: absolute; left: 10px; top: 10px; max-width: calc(100% - 20px);
+  font-family: var(--f-mono); font-size: .72rem; color: var(--on-screen); background: var(--screen);
+  padding: 4px 8px; border-radius: 4px; pointer-events: none; opacity: .85;
+}
+.status.err { color: var(--on-screen); background: var(--danger); opacity: 1; pointer-events: auto; }
+
+.readout { display: flex; align-items: flex-end; justify-content: space-between; gap: 6px 14px; flex-wrap: wrap; }
+.tc { font-family: var(--f-mono); font-weight: 600; font-size: clamp(2.5rem, 12vw, 3.5rem); line-height: .95; letter-spacing: -.03em; color: var(--tc); font-variant-numeric: tabular-nums; }
+.where { display: grid; justify-items: end; text-align: right; gap: 3px; min-width: 0; }
+.chap { font-family: var(--f-display); font-weight: 800; font-size: 1.55rem; line-height: 1; letter-spacing: .03em; text-transform: uppercase; }
+.bar { font-family: var(--f-mono); font-size: .74rem; color: var(--dim); font-variant-numeric: tabular-nums; }
+
+/* song strip */
+.strip-wrap { display: grid; gap: 4px; }
+.strip { position: relative; height: 50px; touch-action: none; cursor: pointer; user-select: none; -webkit-user-select: none; }
+.strip .blk { position: absolute; bottom: 0; background: var(--strip); border-radius: 2px 2px 0 0; }
+.strip .blk.on { background: var(--signal); }
+.strip .pin { position: absolute; top: 0; width: 3px; height: 12px; margin-left: -1px; border-radius: 2px; background: var(--beacon); }
+.strip .pin.old { background: none; border: 1px solid var(--beacon); }
+.strip .head { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--ink); }
+.strip-scale { position: relative; height: 1.1em; font-family: var(--f-mono); font-size: .66rem; color: var(--dim); font-variant-numeric: tabular-nums; }
+.strip-scale span { position: absolute; top: 0; transform: translateX(-50%); }
+.strip-scale span:first-child { transform: none; }
+.strip-scale span:last-child { transform: translateX(-100%); }
+
+/* transport */
+.transport { display: flex; gap: 6px; flex-wrap: wrap; align-items: stretch; }
+.tbtn {
+  min-height: 44px; min-width: 50px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--rule);
+  background: var(--card); font-family: var(--f-mono); font-size: .86rem; font-weight: 500; cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+.tbtn:active { transform: translateY(1px); }
+.tbtn.play { min-width: 68px; font-family: var(--f-body); font-weight: 600; }
+.tbtn[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.seg { display: flex; margin-left: auto; }
+.seg .tbtn { border-radius: 0; min-width: 52px; }
+.seg .tbtn:first-child { border-radius: 6px 0 0 6px; }
+.seg .tbtn:last-child { border-radius: 0 6px 6px 0; border-left: 0; }
+@media (max-width: 440px) {
+  .transport { display: grid; grid-template-columns: repeat(5, 1fr); }
+  .tbtn { min-width: 0; padding: 0 4px; }
+  .seg { grid-column: 1 / -1; margin-left: 0; }
+  .seg .tbtn { flex: 1; }
+}
+
+.note-btn {
+  min-height: 54px; border: 0; border-radius: var(--r); background: var(--beacon); color: var(--card);
+  font-family: var(--f-body); font-weight: 600; font-size: 1.08rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: .5em;
+}
+.note-btn b { font-family: var(--f-mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* composer */
+.composer { background: var(--card); border: 1px solid var(--beacon); border-radius: var(--r); padding: 12px; display: grid; gap: 8px; }
+.c-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.c-head label { font-size: .88rem; color: var(--dim); }
+.c-head label b { font-family: var(--f-mono); color: var(--beacon); font-variant-numeric: tabular-nums; font-size: 1.05rem; }
+.nudge { display: flex; gap: 4px; }
+.nudge .btn { min-height: 36px; padding: 0 10px; font-family: var(--f-mono); font-size: .82rem; }
+.composer textarea, .note textarea {
+  width: 100%; min-height: 76px; resize: vertical; border: 1px solid var(--rule); border-radius: 6px; padding: 10px;
+  font: inherit; font-size: 16px; background: var(--ground); color: var(--ink);
+}
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.btn { min-height: 40px; padding: 0 14px; border-radius: 6px; border: 1px solid var(--rule); background: var(--card); cursor: pointer; font-weight: 500; }
+.btn.primary { background: var(--signal); border-color: var(--signal); color: var(--on-signal); font-weight: 600; }
+.btn.danger { color: var(--danger); }
+.btn:disabled { opacity: .5; cursor: default; }
+.hint { font-size: .78rem; color: var(--dim); }
+.warn { font-size: .85rem; color: var(--danger); margin: 0; }
+
+/* tabs + panels */
+.side { display: grid; gap: 12px; min-width: 0; align-content: start; }
+.tabs { display: flex; border-bottom: 1px solid var(--rule); gap: 4px; }
+.tab { border: 0; background: none; padding: 10px 12px; min-height: 44px; cursor: pointer; font-weight: 600; color: var(--dim); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--signal); }
+.tab .n { font-family: var(--f-mono); font-weight: 500; font-size: .8em; }
+[role="tabpanel"] { display: grid; gap: 10px; min-width: 0; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.panel-head p { margin: 0; flex: 1 1 14em; min-width: 0; }
+.copybox { width: 100%; min-height: 120px; font-family: var(--f-mono); font-size: 13px; border: 1px solid var(--rule); border-radius: 6px; padding: 8px; background: var(--card); color: var(--ink); }
+
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.note { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 10px 12px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; cursor: pointer; }
+.note.near { border-color: var(--beacon); background: var(--beacon-soft); }
+.note.old { border-style: dashed; }
+.note .t { font-family: var(--f-mono); font-weight: 600; color: var(--beacon); font-variant-numeric: tabular-nums; padding-top: 1px; }
+.note .body { min-width: 0; display: grid; gap: 4px; }
+.note .text { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.note.old .text { color: var(--dim); }
+.note .sub { font-size: .76rem; color: var(--dim); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+.vchip { font-family: var(--f-mono); font-size: .68rem; padding: 1px 6px; border-radius: 3px; border: 1px dashed var(--dim); color: var(--dim); white-space: nowrap; }
+.note .acts { grid-column: 2; display: flex; gap: 6px; flex-wrap: wrap; }
+.note .acts .btn { min-height: 34px; padding: 0 10px; font-size: .85rem; }
+.empty { border: 1px dashed var(--rule); border-radius: var(--r); padding: 16px; color: var(--dim); }
+.empty b { color: var(--ink); }
+
+.jump {
+  width: 100%; text-align: left; border: 1px solid var(--rule); background: var(--card); border-radius: var(--r);
+  padding: 9px 12px; cursor: pointer; display: grid; grid-template-columns: 4.4em minmax(0, 1fr); gap: 2px 10px; align-items: baseline;
+}
+.jump .t { font-family: var(--f-mono); font-weight: 500; font-size: .84rem; color: var(--signal); font-variant-numeric: tabular-nums; }
+.jump .h { font-family: var(--f-display); font-weight: 800; font-size: 1.2rem; line-height: 1.05; letter-spacing: .03em; text-transform: uppercase; }
+.jump .d { grid-column: 2; font-size: .84rem; color: var(--dim); }
+.jump.on { border-color: var(--signal); background: var(--signal-soft); }
+.eye .jump { grid-template-columns: 6.4em minmax(0, 1fr); }
+.eye .jump .h { font-family: var(--f-body); font-weight: 500; font-size: .92rem; line-height: 1.35; letter-spacing: 0; text-transform: none; }
+.unfinished { margin: 0; padding: 10px 12px; border-left: 3px solid var(--beacon); background: var(--card); border-radius: 0 6px 6px 0; font-size: .88rem; }
+.unfinished b { color: var(--beacon); font-weight: 600; }
+
+@media (max-width: 400px) { .tab { padding: 10px 8px; } }
+
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink); color: var(--ground); padding: 8px 14px; border-radius: 999px; font-size: .88rem; z-index: 20; max-width: calc(100% - 32px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .note, .jump, .tbtn { transition: border-color .15s, background-color .15s; }
+}
+</style>
+
+<div class="wrap">
+  <section class="player" aria-label="Film">
+    <header class="top">
+      <h1 class="name"><b>Hold Fire</b><span>Review</span></h1>
+      <div class="meta"><span class="ver" id="verLabel">v2</span><span>4:07 · film time = song time</span></div>
+    </header>
+
+    <div class="screen">
+      <video id="film" controls playsinline webkit-playsinline preload="auto" disableremoteplayback></video>
+      <div id="status" class="status">Loading the film…</div>
+    </div>
+
+    <div class="readout">
+      <div class="tc" id="tc" aria-live="off">0:00.0</div>
+      <div class="where">
+        <span class="chap" id="chap">Intro</span>
+        <span class="bar" id="bar">count-in</span>
+      </div>
+    </div>
+
+    <div class="strip-wrap">
+      <div class="strip" id="strip" role="slider" aria-label="Song map: tap or drag to jump" aria-valuemin="0" aria-valuemax="247" aria-valuenow="0" tabindex="0"></div>
+      <div class="strip-scale" id="scale"></div>
+    </div>
+
+    <div class="transport" role="group" aria-label="Playback">
+      <button class="tbtn" id="bM5" type="button" aria-label="Back 5 seconds">−5s</button>
+      <button class="tbtn" id="bM1" type="button" aria-label="Back 1 second">−1s</button>
+      <button class="tbtn play" id="bPlay" type="button">Play</button>
+      <button class="tbtn" id="bP1" type="button" aria-label="Forward 1 second">+1s</button>
+      <button class="tbtn" id="bP5" type="button" aria-label="Forward 5 seconds">+5s</button>
+      <div class="seg" role="group" aria-label="Speed">
+        <button class="tbtn" id="sp05" type="button" aria-pressed="false">0.5×</button>
+        <button class="tbtn" id="sp1" type="button" aria-pressed="true">1×</button>
+      </div>
+    </div>
+
+    <button class="note-btn" id="noteBtn" type="button">Note at <b id="noteAt">0:00</b></button>
+
+    <form class="composer" id="composer" hidden>
+      <div class="c-head">
+        <label for="noteText">Note at <b id="cAt">0:00.0</b> · <span id="cChap">Intro</span></label>
+        <div class="nudge" role="group" aria-label="Move the pin">
+          <button class="btn" id="cM1" type="button" aria-label="Move the pin back 1 second">−1 s</button>
+          <button class="btn" id="cP1" type="button" aria-label="Move the pin forward 1 second">+1 s</button>
+        </div>
+      </div>
+      <textarea id="noteText" enterkeyhint="done" placeholder="What should change here?" autocomplete="off"></textarea>
+      <div class="row">
+        <button class="btn primary" id="cSave" type="submit">Save note</button>
+        <button class="btn" id="cCancel" type="button">Cancel</button>
+        <span class="hint">Enter saves · Shift+Enter for a new line</span>
+      </div>
+      <p class="warn" id="cWarn" hidden></p>
+    </form>
+  </section>
+
+  <aside class="side" aria-label="Notes, chapters and checks">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-notes" aria-controls="p-notes" aria-selected="true" type="button">Notes <span class="n" id="nCount">0</span></button>
+      <button class="tab" role="tab" id="tab-chapters" aria-controls="p-chapters" aria-selected="false" type="button">Chapters</button>
+      <button class="tab" role="tab" id="tab-eye" aria-controls="p-eye" aria-selected="false" type="button">Eyeball</button>
+    </div>
+
+    <section id="p-notes" role="tabpanel" aria-labelledby="tab-notes">
+      <div class="panel-head">
+        <p class="hint" id="dbState">Connecting to saved notes…</p>
+        <button class="btn" id="copyAll" type="button">Copy all notes</button>
+      </div>
+      <textarea class="copybox" id="copyBox" aria-label="All notes as text" readonly hidden></textarea>
+      <ul class="list" id="notes"></ul>
+      <div class="empty" id="notesEmpty">
+        <b>No notes yet.</b> Play the film and tap <b>Note at …</b> wherever something should change. Notes land here in film order, and Claude reads them from this page.
+      </div>
+    </section>
+
+    <section id="p-chapters" role="tabpanel" aria-labelledby="tab-chapters" hidden>
+      <ul class="list chapters" id="chapters"></ul>
+    </section>
+
+    <section id="p-eye" role="tabpanel" aria-labelledby="tab-eye" hidden>
+      <p class="unfinished"><b>Not finished in v2:</b> the cold open and verse 1 still have placeholder beats (the cave wall, the machines, the ISS), and there’s no sound design yet.</p>
+      <p class="hint">Things to check in this cut. Each one starts 2 seconds before the moment.</p>
+      <ul class="list eye" id="eye"></ul>
+    </section>
+  </aside>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.20/hls.min.js"></script>
+<script>
+(() => {
+  'use strict';
+  // ---------------------------------------------------------------- this cut
+  // One cut at a time. To publish v3: re-encode into media/, update VERSION, SEGS and FILM_LEN. Notes keep the version they were made on.
+  const VERSION = 'v2 · 26 Oct · 540p';
+
+  // ---------------------------------------------------------------- film data
+  // media/init.mp4 + media/s000.mp4 … s041.mp4: fMP4 HLS, H.264 main (no B-frames), keyframe at every 6 s segment start, AAC copied from the cut.
+  const SEGS = [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1.166667];
+  // The segments carry media time = film time + 1024/48000 s on both tracks (the AAC encoder delay, kept as real samples; no edit lists,
+  // so every player keeps A/V sync). The merge page's 2-frame offset came from B-frame reordering; this encode has no B-frames, so only
+  // the AAC priming remains. hls.js keeps those timestamps; a native HLS player may re-base each segment to the playlist (seen in video.buffered).
+  const MEDIA_OFFSET = 1024 / 48000;
+  let OFFSET = MEDIA_OFFSET, offsetKnown = false;
+  const FILM = SEGS.reduce((a, b) => a + b, 0) || 247.16;
+
+  // Song timing (render/data/timing.json): the tempo drifts 92.8–95.6 BPM, so bar·beat comes from the beat list, 4 beats a bar from 0.268 s.
+  const BEATS = [0.268,0.912,1.556,2.199,2.843,3.487,4.131,4.775,5.419,6.063,6.706,7.35,7.994,8.638,9.282,9.926,10.57,11.213,11.857,12.501,13.145,13.789,14.433,15.068,15.706,16.346,16.988,17.631,18.276,18.921,19.567,20.214,20.86,21.507,22.153,22.798,23.444,24.09,24.735,25.38,26.025,26.67,27.315,27.959,28.604,29.249,29.893,30.538,31.182,31.827,32.472,33.116,33.761,34.406,35.051,35.696,36.341,36.986,37.632,38.277,38.923,39.568,40.214,40.859,41.505,42.15,42.795,43.441,44.086,44.731,45.376,46.021,46.666,47.311,47.956,48.6,49.244,49.888,50.532,51.176,51.819,52.463,53.106,53.749,54.393,55.036,55.68,56.324,56.967,57.611,58.256,58.9,59.545,60.189,60.834,61.478,62.122,62.766,63.41,64.053,64.697,65.34,65.982,66.624,67.266,67.909,68.553,69.197,69.842,70.486,71.127,71.767,72.406,73.043,73.681,74.32,74.959,75.599,76.24,76.881,77.523,78.165,78.806,79.448,80.089,80.729,81.368,82.007,82.645,83.283,83.92,84.557,85.194,85.831,86.467,87.103,87.739,88.376,89.012,89.649,90.285,90.922,91.56,92.197,92.834,93.471,94.108,94.744,95.38,96.016,96.651,97.286,97.92,98.555,99.189,99.823,100.457,101.091,101.726,102.36,102.995,103.63,104.264,104.899,105.534,106.169,106.804,107.439,108.074,108.709,109.344,109.979,110.614,111.249,111.883,112.518,113.152,113.787,114.421,115.055,115.689,116.324,116.958,117.592,118.226,118.86,119.494,120.128,120.762,121.397,122.031,122.665,123.299,123.933,124.567,125.202,125.836,126.47,127.105,127.739,128.373,129.008,129.642,130.276,130.911,131.545,132.179,132.813,133.447,134.081,134.715,135.349,135.983,136.617,137.25,137.884,138.517,139.15,139.784,140.417,141.05,141.683,142.316,142.949,143.581,144.214,144.846,145.479,146.111,146.744,147.376,148.008,148.64,149.272,149.904,150.536,151.168,151.799,152.431,153.063,153.694,154.326,154.957,155.589,156.22,156.851,157.483,158.114,158.745,159.376,160.007,160.638,161.269,161.9,162.531,163.162,163.793,164.423,165.054,165.685,166.315,166.946,167.576,168.206,168.837,169.467,170.097,170.727,171.357,171.987,172.616,173.246,173.876,174.505,175.135,175.764,176.393,177.023,177.652,178.281,178.91,179.539,180.167,180.796,181.425,182.054,182.684,183.313,183.943,184.573,185.203,185.834,186.464,187.095,187.726,188.357,188.989,189.62,190.251,190.883,191.514,192.146,192.778,193.409,194.041,194.672,195.304,195.935,196.566,197.197,197.828,198.459,199.089,199.72,200.35,200.98,201.609,202.238,202.867,203.496,204.124,204.752,205.38,206.007,206.635,207.262,207.89,208.517,209.145,209.773,210.401,211.03,211.659,212.288,212.918,213.549,214.18,214.812,215.445,216.077,216.71,217.344,217.978,218.612,219.246,219.881,220.515,221.15,221.785,222.42,223.055,223.69,224.325,224.96,225.595,226.23,226.864,227.499,228.133,228.767,229.401,230.035,230.669,231.303,231.937,232.571,233.206,233.84,234.475,235.11,235.745,236.381,237.017,237.654,238.291,238.928,239.566,240.205,240.844,241.484,242.124,242.765,243.407,244.05,244.694,245.332,245.971,246.61];
+
+  // Sections (timing.json sections[]): start, name, what happens (docs/PLAN_TAKE_TWO.md), mean RMS energy (render/data/audio.json, 0–1).
+  const CH = [
+    [0, 'Intro', 'Cold open: the eye, the whispered count 1 1 2 3 5 8, the red flash and rewind', .394],
+    [13.145, 'Verse 1', 'Out of the sea: Jade walks through deep time, fin to foot to hand to the flood', .551],
+    [31.182, 'Pre-Chorus 1', 'Machines and the ISS, then the signal: Voyager, Echo’s tower, the pulsar; teal-tips Jade wakes', .652],
+    [51.819, 'Chorus 1', 'The dish field, the CRT wall, the studio pose', .721],
+    [72.406, 'Post-Chorus 1', 'The graph grows: one, one, two, three, five links, then the 8', .743],
+    [82.645, 'Verse 2', 'Fire: the alchemists, Petrov', .663],
+    [102.995, 'Pre-Chorus 2', 'The list: teletype near-misses, a hundred coins, the gold path', .750],
+    [113.152, 'Chorus 2', 'Split screen: both Jades in mirrored rooms', .735],
+    [133.447, 'Post-Chorus 2', 'Earth’s lights scale up, then the chessboard sets itself', .752],
+    [143.581, 'Bridge', 'The game and the submarine: Fischer–Tal, then Arkhipov says no', .631],
+    [163.793, 'Build', 'First strike and rewind; hold your fire, show your light', .814],
+    [183.943, 'Drop', 'The mirror: the two Jades meet; 13, 21, 34, 55, 89', .790],
+    [214.18, 'Outro', 'The count goes higher: 600 worlds, the reset counter, the end card', .533],
+  ].map(([t, name, sub, rms]) => ({ t, name, sub, e: Math.min(1, Math.max(0, (rms - .35) / .5)) }));
+
+  // Eyeball list: [moment (s), label, what to look at]. Each jump starts 2 s before.
+  const EYE = [
+    [46.0, '0:46.0', 'Teal-tips Jade on “Hear it, and you’ll know we’re awake.” Does her mouth match, and do her eyes open on “awake” (0:47.7)?'],
+    [64.6, '1:04.6', 'The studio pose on “in the white noise”: hand on the headphones, eyes closed.'],
+    [92.6, '1:32.6–1:42', 'The Petrov screen: five missile tracks, the red СТАРТ, the ghost tracks fading. Does it sit right on the screen?'],
+    [117.9, '1:57.9', 'Lip sync: teal-tips Jade on “but if you are, I’m counting on you” in chorus 2.'],
+    [125.8, '2:05.8', 'The studio pose again on “in the white noise”, split screen. Do the two halves match?'],
+    [150.3, '2:30.3', 'Chess: the queen takes on g7 (9.Qxg7) right on “spark”.'],
+    [158.1, '2:38.1', 'Chess: both take their hands off the pieces on “let go”, and the clocks stop.'],
+    [188.4, '3:08.4', 'The drop impact: the camera swings around the mirror to teal-tips Jade.'],
+    [188.7, '3:08.7', '“But you were. You were counting too.” at the mirror: lip sync and the palms meeting.'],
+    [207.5, '3:27.5', 'The held note on “wherever you are”: does her mouth hold it?'],
+    [224, '3:44–3:53', 'The reset counter: does it snap to zero at each near-miss and read when paused?'],
+    [244, '4:04', 'The end card credits: names, spelling, how long they stay up.'],
+  ];
+
+  // ---------------------------------------------------------------- helpers
+  const $ = (s) => document.querySelector(s);
+  const video = $('#film');
+  const clamp = (t) => Math.min(Math.max(t, 0), FILM - 0.05);
+  const r1 = (t) => Math.round(t * 10) / 10;
+  const fmt1 = (t) => { const d = Math.round(Math.max(0, t) * 10), m = Math.floor(d / 600), s = d - m * 600; return m + ':' + String(Math.floor(s / 10)).padStart(2, '0') + '.' + (s % 10); };
+  const fmt0 = (t) => { const s = Math.floor(Math.max(0, t) + 1e-6), m = Math.floor(s / 60); return m + ':' + String(s - m * 60).padStart(2, '0'); };
+  const filmTime = () => Math.max(0, (video.currentTime || 0) - OFFSET);
+  const chapterAt = (t) => { let c = CH[0]; for (const x of CH) if (t >= x.t - 1e-6) c = x; return c; };
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  let toastTimer = 0;
+  const toast = (msg) => { const el = $('#toast'); el.textContent = msg; el.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { el.hidden = true; }, 2200); };
+  const statusEl = $('#status');
+  const setStatus = (msg, err) => { statusEl.textContent = msg || ''; statusEl.hidden = !msg; statusEl.classList.toggle('err', !!err); };
+  $('#verLabel').textContent = VERSION;
+
+  function seek(t, opts) {
+    const ft = clamp(t);
+    video.currentTime = ft + OFFSET;
+    paint(ft);
+    if (opts && opts.top) { try { document.querySelector('.screen').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} }
+  }
+
+  // ---------------------------------------------------------------- playback engine (from the merge review page)
+  const BASE = new URL('media/', document.baseURI);
+  const PL_URL = new URL('film.m3u8', BASE).href;
+  const segName = (i) => 's' + String(i).padStart(3, '0') + '.mp4';
+  function playlist(abs) {
+    const u = (n) => abs ? new URL(n, BASE).href : n;
+    const out = ['#EXTM3U', '#EXT-X-VERSION:7', '#EXT-X-TARGETDURATION:' + Math.round(Math.max.apply(null, SEGS) + 0.4999), '#EXT-X-MEDIA-SEQUENCE:0',
+      '#EXT-X-PLAYLIST-TYPE:VOD', '#EXT-X-INDEPENDENT-SEGMENTS', '#EXT-X-MAP:URI="' + u('init.mp4') + '"'];
+    SEGS.forEach((d, i) => { out.push('#EXTINF:' + d.toFixed(6) + ',', u(segName(i))); });
+    out.push('#EXT-X-ENDLIST');
+    return out.join('\n') + '\n';
+  }
+  let engine = '', hls = null, switched = false;
+
+  function loadScript(src) {
+    return new Promise((res) => { const s = document.createElement('script'); s.src = src; s.onload = () => res(true); s.onerror = () => res(false); document.head.appendChild(s); });
+  }
+  async function ensureHls() {
+    if (window.Hls) return true;
+    for (const src of ['https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js', 'https://unpkg.com/hls.js@1.5.20/dist/hls.min.js']) {
+      if (await loadScript(src) && window.Hls) return true;
+    }
+    return false;
+  }
+
+  async function startPlayback() {
+    const forced = (location.hash === '#native') ? 'native' : '';
+    if (!forced && await ensureHls() && window.Hls.isSupported()) startHls();
+    else startNative('');
+  }
+
+  function startHls() {
+    engine = 'hls';
+    const TEXT = playlist(true);
+    const Base = Hls.DefaultConfig.loader;
+    class Loader extends Base {
+      load(context, config, callbacks) {
+        if (context.url === PL_URL) {            // the playlist lives in this page, not on the server
+          const st = this.stats, now = performance.now();
+          st.loading.start = st.loading.first = st.loading.end = now;
+          st.loaded = st.total = TEXT.length;
+          this.context = context;
+          setTimeout(() => callbacks.onSuccess({ url: context.url, data: TEXT }, st, context, null), 0);
+          return;
+        }
+        super.load(context, config, callbacks);
+      }
+    }
+    hls = new Hls({ pLoader: Loader, enableWorker: false, maxBufferLength: 30, maxMaxBufferLength: 90, backBufferLength: 90, startFragPrefetch: true });
+    let attached = false, netTries = 0, mediaTries = 0;
+    hls.on(Hls.Events.MEDIA_ATTACHED, () => { attached = true; hls.loadSource(PL_URL); });
+    hls.on(Hls.Events.ERROR, (ev, d) => {
+      console.warn('hls.js', d.fatal ? 'fatal' : 'recoverable', d.type, d.details, (d.error && d.error.message) || d.reason || '');
+      if (!d.fatal) return;
+      if (d.type === Hls.ErrorTypes.NETWORK_ERROR && netTries++ < 4) { setStatus('Connection dropped. Retrying…'); setTimeout(() => hls && hls.startLoad(Math.max(0, video.currentTime)), 1500); return; }
+      if (d.type === Hls.ErrorTypes.MEDIA_ERROR && mediaTries++ < 2) { hls.recoverMediaError(); return; }
+      if (!video.currentTime) return fallback('hls:' + d.details);
+      setStatus('Playback stopped (' + d.details + '). Reload the page to continue.', true);
+    });
+    hls.attachMedia(video);
+    setTimeout(() => { if (engine === 'hls' && !attached) fallback('mse-timeout'); }, 7000);
+  }
+
+  function fallback(why) {
+    if (switched) return; switched = true;
+    if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
+    startNative(why);
+  }
+
+  function detectNativeOffset() {
+    if (engine !== 'native' || offsetKnown) return;
+    const b = video.buffered;
+    for (let i = 0; i < b.length; i++) {
+      const s0 = b.start(i); let acc = 0;
+      for (const d of SEGS) { const diff = s0 - acc; if (diff > -0.03 && diff < 0.12) { OFFSET = Math.min(Math.max(diff, 0), MEDIA_OFFSET); offsetKnown = true; paint(); return; } acc += d; }
+    }
+  }
+  function startNative(why) {
+    engine = 'native'; OFFSET = 0;
+    ['progress', 'canplay', 'seeked'].forEach((e) => video.addEventListener(e, detectNativeOffset));
+    if (!video.canPlayType('application/vnd.apple.mpegurl')) {
+      setStatus('This browser can’t stream the film' + (why ? ' (' + why + ')' : '') + '. Open the page in Chrome or Safari.', true);
+      return;
+    }
+    // The host serves the playlist only as a .txt file (Chrome's own HLS player sniffs it); the page also builds it in memory for Safari.
+    const text = playlist(true);
+    const tries = [new URL('film.txt', BASE).href, 'data:application/vnd.apple.mpegurl;base64,' + btoa(text), () => URL.createObjectURL(new Blob([text], { type: 'application/vnd.apple.mpegurl' }))];
+    let k = 0;
+    const next = () => { const src = tries[k++]; try { video.src = typeof src === 'function' ? src() : src; } catch (e) { if (k < tries.length) next(); } };
+    video.addEventListener('error', () => {
+      if (engine !== 'native' || video.currentTime) return;
+      if (k < tries.length) next(); else setStatus('The film didn’t load in this browser' + (why ? ' (' + why + ')' : '') + '. Try Chrome.', true);
+    });
+    next();
+  }
+
+  // ---------------------------------------------------------------- readout + strip
+  const tcEl = $('#tc'), chapEl = $('#chap'), barEl = $('#bar'), noteAtEl = $('#noteAt'), strip = $('#strip');
+  const composer = $('#composer'), ta = $('#noteText'), cWarn = $('#cWarn');
+  let lastTc = '', lastChap = null, lastBar = '', lastAt = '', headEl, blocks = [];
+  function buildStrip() {
+    CH.forEach((c, i) => {
+      const end = i + 1 < CH.length ? CH[i + 1].t : FILM;
+      const b = document.createElement('div');
+      b.className = 'blk';
+      b.style.left = (c.t / FILM * 100) + '%';
+      b.style.width = 'calc(' + ((end - c.t) / FILM * 100) + '% - 1px)';
+      b.style.height = Math.round(12 + c.e * 32) + 'px';
+      b.title = c.name;
+      strip.appendChild(b); blocks.push(b);
+    });
+    headEl = document.createElement('div'); headEl.className = 'head'; strip.appendChild(headEl);
+    const sc = $('#scale');
+    [0, 60, 120, 180, 240].concat([FILM]).forEach((t, i, a) => {
+      if (i === a.length - 2 && FILM - t < 20) return;   // 4:00 would crowd 4:07
+      const s = document.createElement('span'); s.textContent = fmt0(t); s.style.left = (t / FILM * 100) + '%'; sc.appendChild(s);
+    });
+  }
+  function barBeat(t) {
+    if (t < BEATS[0] - 0.02) return 'count-in';
+    let lo = 0, hi = BEATS.length - 1;               // last beat at or before t
+    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (BEATS[mid] <= t + 0.02) lo = mid; else hi = mid - 1; }
+    return 'bar ' + (Math.floor(lo / 4) + 1) + ' · beat ' + (lo % 4 + 1);
+  }
+  function paint(tOverride) {
+    const t = tOverride != null ? tOverride : filmTime();
+    const tc = fmt1(t);
+    if (tc !== lastTc) { tcEl.textContent = tc; lastTc = tc; if (!composer.hidden && video.paused) setComposerTime(t); }
+    const c = chapterAt(t);
+    if (c !== lastChap) {
+      chapEl.textContent = c.name; lastChap = c;
+      blocks.forEach((b, i) => b.classList.toggle('on', CH[i] === c));
+      document.querySelectorAll('#chapters .jump').forEach((el, i) => el.classList.toggle('on', CH[i] === c));
+    }
+    const bb = barBeat(t); if (bb !== lastBar) { barEl.textContent = bb; lastBar = bb; }
+    const at = fmt0(t); if (at !== lastAt) { noteAtEl.textContent = at; lastAt = at; }
+    headEl.style.left = (t / FILM * 100) + '%';
+    strip.setAttribute('aria-valuenow', String(Math.round(t)));
+    markNear(t);
+  }
+  let raf = 0;
+  const loop = () => { paint(); raf = video.paused ? 0 : requestAnimationFrame(loop); };
+  video.addEventListener('play', () => { if (!raf) raf = requestAnimationFrame(loop); });
+  ['timeupdate', 'seeked', 'seeking', 'loadedmetadata'].forEach((e) => video.addEventListener(e, () => paint()));
+  video.addEventListener('playing', () => setStatus(''));
+  video.addEventListener('waiting', () => setStatus('Buffering…'));
+  video.addEventListener('canplay', () => { if (statusEl.textContent === 'Loading the film…' || statusEl.textContent === 'Buffering…') setStatus(''); });
+  video.addEventListener('play', syncPlay); video.addEventListener('pause', syncPlay);
+  function syncPlay() { $('#bPlay').textContent = video.paused ? 'Play' : 'Pause'; }
+
+  // strip: tap or drag to jump
+  let dragging = false;
+  const stripSeek = (e) => { const r = strip.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * FILM); };
+  strip.addEventListener('pointerdown', (e) => { dragging = true; try { strip.setPointerCapture(e.pointerId); } catch (x) {} stripSeek(e); });
+  strip.addEventListener('pointermove', (e) => { if (dragging) stripSeek(e); });
+  strip.addEventListener('pointerup', () => { dragging = false; });
+  strip.addEventListener('pointercancel', () => { dragging = false; });
+  strip.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { seek(filmTime() - 5); e.preventDefault(); } if (e.key === 'ArrowRight') { seek(filmTime() + 5); e.preventDefault(); } });
+
+  // ---------------------------------------------------------------- transport
+  const nudge = (d) => seek(filmTime() + d);
+  $('#bM5').addEventListener('click', () => nudge(-5));
+  $('#bM1').addEventListener('click', () => nudge(-1));
+  $('#bP1').addEventListener('click', () => nudge(1));
+  $('#bP5').addEventListener('click', () => nudge(5));
+  $('#bPlay').addEventListener('click', () => { if (video.paused) video.play().catch(() => {}); else video.pause(); });
+  const setRate = (r) => { video.playbackRate = r; video.defaultPlaybackRate = r; };
+  $('#sp05').addEventListener('click', () => setRate(0.5));
+  $('#sp1').addEventListener('click', () => setRate(1));
+  video.addEventListener('ratechange', () => { $('#sp05').setAttribute('aria-pressed', String(video.playbackRate === 0.5)); $('#sp1').setAttribute('aria-pressed', String(video.playbackRate === 1)); });
+
+  // remember where she was (this browser only)
+  const POS_KEY = 'holdfire-review-pos';
+  let lastSaved = 0;
+  video.addEventListener('timeupdate', () => { const t = filmTime(); if (Math.abs(t - lastSaved) > 2) { lastSaved = t; store.set(POS_KEY, String(r1(t))); } });
+
+  // ---------------------------------------------------------------- notes (db capability: collection "notes", docs {t, text, version, by, at})
+  const NEED_CLAUDE = 'Notes need this page opened on claude.ai while signed in. The film still plays here.';
+  let notesCol = null, me = null, owner = false, notes = [], dbFailed = false;
+  const dbState = $('#dbState');
+  const dbPromise = (async () => {
+    let db = null, user = null;
+    const use = (n) => (window.claude && typeof window.claude.use === 'function') ? window.claude.use(n).catch(() => null) : Promise.resolve(null);
+    [db, user] = await Promise.all([use('db'), use('user')]);
+    if (user) { try { me = await user.id(); owner = await user.isOwner(); } catch (e) {} }
+    if (!db) {
+      dbFailed = true; dbState.textContent = NEED_CLAUDE; dbState.className = 'warn';
+      return null;
+    }
+    notesCol = db.collection('notes');
+    notesCol.onSnapshot((snap) => {
+      notes = snap.docs.map((d) => Object.assign({ id: d.id }, d.data()));
+      dbState.textContent = me ? 'Saved with the page. Claude reads them from here.' : 'Saved with the page. Sign in on claude.ai to edit your own notes.';
+      dbState.className = 'hint';
+      renderNotes();
+    }, (err) => { dbState.textContent = 'Notes stopped syncing (' + ((err && err.code) || 'error') + '). Reload the page.'; dbState.className = 'warn'; });
+    return db;
+  })();
+
+  const isOld = (n) => (n.version || '') !== VERSION;
+  const shortVer = (v) => String(v || 'an earlier cut').split(' · ').slice(0, 2).join(' · ');
+  const canModify = (n) => !!notesCol && ((me != null && n.by === me) || owner || (!n.by && me == null));
+  const sortedNotes = () => notes.slice().sort((a, b) => ((Number(a.t) || 0) - (Number(b.t) || 0)) || String(a.at).localeCompare(String(b.at)));
+  let editing = null, confirmDel = null;
+  function mk(tag, cls, text) { const el = document.createElement(tag); el.className = cls; el.type = 'button'; el.textContent = text; return el; }
+  function renderNotes() {
+    const ul = $('#notes');
+    const sorted = sortedNotes();
+    $('#nCount').textContent = String(sorted.length);
+    $('#notesEmpty').hidden = sorted.length > 0;
+    ul.textContent = '';
+    for (const n of sorted) {
+      const li = document.createElement('li');
+      li.className = 'note' + (isOld(n) ? ' old' : ''); li.dataset.id = n.id;
+      const t = document.createElement('span'); t.className = 't'; t.textContent = fmt1(Number(n.t) || 0);
+      const body = document.createElement('div'); body.className = 'body';
+      if (editing === n.id) {
+        const et = document.createElement('textarea'); et.value = n.text || ''; et.id = 'edit-' + n.id; et.setAttribute('aria-label', 'Edit note');
+        const row = document.createElement('div'); row.className = 'row';
+        const save = mk('button', 'btn primary', 'Save');
+        const repin = mk('button', 'btn', 'Move to ' + fmt1(filmTime()));
+        const cancel = mk('button', 'btn', 'Cancel');
+        save.addEventListener('click', (e) => { e.stopPropagation(); saveEdit(n, et.value, null); });
+        repin.addEventListener('click', (e) => { e.stopPropagation(); saveEdit(n, et.value, r1(filmTime())); });
+        cancel.addEventListener('click', (e) => { e.stopPropagation(); editing = null; renderNotes(); });
+        et.addEventListener('click', (e) => e.stopPropagation());
+        et.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); saveEdit(n, et.value, null); } if (e.key === 'Escape') { editing = null; renderNotes(); } });
+        row.append(save, repin, cancel);
+        body.append(et, row);
+        setTimeout(() => et.focus(), 0);
+      } else {
+        const p = document.createElement('p'); p.className = 'text'; p.textContent = n.text || '';
+        const sub = document.createElement('span'); sub.className = 'sub';
+        const ch = document.createElement('span'); ch.textContent = chapterAt(Number(n.t) || 0).name; sub.append(ch);
+        if (isOld(n)) { const v = document.createElement('span'); v.className = 'vchip'; v.textContent = 'on ' + shortVer(n.version); v.title = 'Made on ' + (n.version || 'an earlier cut') + '. The time may not match this cut.'; sub.append(v); }
+        body.append(p, sub);
+      }
+      li.append(t, body);
+      if (editing !== n.id && canModify(n)) {
+        const acts = document.createElement('div'); acts.className = 'acts';
+        if (confirmDel === n.id) {
+          const yes = mk('button', 'btn danger', 'Delete this note'); const no = mk('button', 'btn', 'Keep');
+          yes.addEventListener('click', (e) => { e.stopPropagation(); removeNote(n); });
+          no.addEventListener('click', (e) => { e.stopPropagation(); confirmDel = null; renderNotes(); });
+          acts.append(yes, no);
+        } else {
+          const ed = mk('button', 'btn', 'Edit'); const del = mk('button', 'btn danger', 'Delete');
+          ed.addEventListener('click', (e) => { e.stopPropagation(); editing = n.id; confirmDel = null; renderNotes(); });
+          del.addEventListener('click', (e) => { e.stopPropagation(); confirmDel = n.id; renderNotes(); });
+          acts.append(ed, del);
+        }
+        li.append(acts);
+      }
+      li.addEventListener('click', () => { if (editing === n.id) return; seek(Number(n.t) || 0, { top: true }); });
+      ul.appendChild(li);
+    }
+    pinStrip(sorted);
+    lastNear = undefined; markNear(filmTime());
+  }
+  function pinStrip(sorted) {
+    strip.querySelectorAll('.pin').forEach((p) => p.remove());
+    for (const n of sorted) { const p = document.createElement('div'); p.className = 'pin' + (isOld(n) ? ' old' : ''); p.style.left = ((Number(n.t) || 0) / FILM * 100) + '%'; strip.insertBefore(p, headEl); }
+  }
+  let lastNear;
+  function markNear(t) {
+    let near = null, best = 1.5;
+    for (const n of notes) { const d = Math.abs((Number(n.t) || 0) - t); if (d <= best) { best = d; near = n.id; } }
+    if (near === lastNear) return; lastNear = near;
+    document.querySelectorAll('#notes .note').forEach((el) => el.classList.toggle('near', el.dataset.id === near));
+  }
+  async function saveEdit(n, text, newT) {
+    text = (text || '').trim();
+    if (!text) { toast('A note needs some text. Use Delete to remove it.'); return; }
+    const patch = { text };
+    if (newT != null) patch.t = newT;
+    try { await notesCol.doc(n.id).update(patch); editing = null; renderNotes(); toast('Note updated'); }
+    catch (e) { toast('Couldn’t save the edit (' + ((e && e.code) || 'error') + ')'); }
+  }
+  async function removeNote(n) {
+    try { await notesCol.doc(n.id).delete(); confirmDel = null; toast('Note deleted'); }
+    catch (e) { toast('Couldn’t delete (' + ((e && e.code) || 'error') + ')'); }
+  }
+
+  // copy all notes as "m:ss.s — text" lines, film order
+  $('#copyAll').addEventListener('click', () => {
+    const list = sortedNotes();
+    if (!list.length) { toast(notesCol ? 'No notes to copy yet' : NEED_CLAUDE); return; }
+    const text = list.map((n) => fmt1(Number(n.t) || 0) + ' — ' + String(n.text || '').replace(/\s*\n\s*/g, ' / ') + (isOld(n) ? ' (on ' + shortVer(n.version) + ')' : '')).join('\n');
+    const box = $('#copyBox');
+    const showBox = () => { box.value = text; box.hidden = false; box.focus(); box.select(); try { box.setSelectionRange(0, text.length); } catch (e) {} toast('Selected. Copy it from the box.'); };
+    try {
+      navigator.clipboard.writeText(text).then(() => { box.hidden = true; toast('Copied ' + list.length + (list.length === 1 ? ' note' : ' notes')); }, showBox);
+    } catch (e) { showBox(); }
+  });
+
+  // ---------------------------------------------------------------- composer
+  let cT = 0, resumeAfter = false, saving = false;
+  function setComposerTime(t) { cT = r1(clamp(t)); $('#cAt').textContent = fmt1(cT); $('#cChap').textContent = chapterAt(cT).name; }
+  function openComposer() {
+    resumeAfter = !video.paused;
+    video.pause();
+    setComposerTime(filmTime());
+    composer.hidden = false;
+    cWarn.hidden = !dbFailed; cWarn.textContent = dbFailed ? NEED_CLAUDE : '';
+    ta.focus({ preventScroll: true });
+    try { composer.scrollIntoView({ block: 'nearest' }); } catch (e) {}
+  }
+  function closeComposer(resume) {
+    composer.hidden = true; ta.value = ''; ta.blur();
+    if (resume && resumeAfter) video.play().catch(() => {});
+    resumeAfter = false;
+  }
+  async function saveNote() {
+    if (saving) return;
+    const text = ta.value.trim();
+    if (!text) { ta.focus(); return; }
+    saving = true; $('#cSave').disabled = true;
+    try {
+      await dbPromise;
+      if (!notesCol) throw { code: 'unavailable' };
+      await notesCol.add({ t: cT, text, version: VERSION, by: me, at: new Date().toISOString() });
+      toast('Saved at ' + fmt1(cT));
+      closeComposer(true);
+    } catch (e) {
+      cWarn.hidden = false;
+      cWarn.textContent = (e && e.code === 'unavailable' && dbFailed) ? NEED_CLAUDE + ' Your text is still here.' : 'Couldn’t save the note (' + ((e && e.code) || 'error') + '). Your text is still here.';
+    } finally { saving = false; $('#cSave').disabled = false; }
+  }
+  const movePin = (d) => { const t = clamp(cT + d); seek(t); setComposerTime(t); ta.focus({ preventScroll: true }); };   // focus back, so Enter saves
+  $('#cM1').addEventListener('click', () => movePin(-1));
+  $('#cP1').addEventListener('click', () => movePin(1));
+  $('#noteBtn').addEventListener('click', openComposer);
+  $('#cCancel').addEventListener('click', () => closeComposer(false));
+  composer.addEventListener('submit', (e) => { e.preventDefault(); saveNote(); });
+  ta.addEventListener('keydown', (e) => {
+    composer._shift = e.shiftKey;
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); saveNote(); }
+    if (e.key === 'Escape') { e.preventDefault(); closeComposer(false); }
+  });
+  ta.addEventListener('keyup', () => { composer._shift = false; });
+  ta.addEventListener('beforeinput', (e) => {   // Android keyboards send Enter as an input event
+    if ((e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph') && !composer._shift) { e.preventDefault(); saveNote(); }
+  });
+
+  // keyboard shortcuts on a laptop
+  document.addEventListener('keydown', (e) => {
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'TEXTAREA' || tag === 'INPUT' || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'n' || e.key === 'N') { e.preventDefault(); openComposer(); }
+    else if (e.key === ' ' && tag !== 'BUTTON' && tag !== 'VIDEO') { e.preventDefault(); $('#bPlay').click(); }
+    else if (e.key === ',') nudge(-1);
+    else if (e.key === '.') nudge(1);
+  });
+
+  // ---------------------------------------------------------------- chapters + eyeball lists
+  function jumpItem(t, label, head, desc) {
+    const li = document.createElement('li');
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'jump';
+    const a = document.createElement('span'); a.className = 't'; a.textContent = label;
+    const h = document.createElement('span'); h.className = 'h'; h.textContent = head;
+    b.append(a, h);
+    if (desc) { const d = document.createElement('span'); d.className = 'd'; d.textContent = desc; b.append(d); }
+    b.addEventListener('click', () => seek(t, { top: true }));
+    li.append(b); return li;
+  }
+  CH.forEach((c) => $('#chapters').append(jumpItem(c.t, fmt1(c.t), c.name, c.sub)));
+  EYE.forEach(([t, label, what]) => $('#eye').append(jumpItem(Math.max(0, t - 2), label, what)));
+
+  // tabs
+  const TABS = ['notes', 'chapters', 'eye'];
+  const TAB_KEY = 'holdfire-review-tab';
+  function showTab(name) {
+    TABS.forEach((n) => { $('#tab-' + n).setAttribute('aria-selected', String(n === name)); $('#p-' + n).hidden = n !== name; });
+    store.set(TAB_KEY, name);
+  }
+  TABS.forEach((n) => $('#tab-' + n).addEventListener('click', () => showTab(n)));
+  const hashTab = { '#notes': 'notes', '#chapters': 'chapters', '#eyeball': 'eye' }[location.hash];
+  showTab(hashTab || (TABS.includes(store.get(TAB_KEY)) ? store.get(TAB_KEY) : 'notes'));
+
+  // ---------------------------------------------------------------- boot
+  buildStrip();
+  renderNotes();
+  paint(0);
+  const resumeAt = parseFloat(store.get(POS_KEY) || '');
+  if (resumeAt > 3 && resumeAt < FILM - 3) {
+    video.addEventListener('loadedmetadata', function once() { video.removeEventListener('loadedmetadata', once); if (filmTime() < 0.5) { seek(resumeAt); toast('Resumed at ' + fmt1(resumeAt)); } });
+  }
+  window.__review = { seek, filmTime, barBeat, get engine() { return engine; }, get notes() { return notes; }, get offset() { return OFFSET; }, FILM, VERSION };
+  startPlayback();
+})();
+</script>

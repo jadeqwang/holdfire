@@ -66,8 +66,8 @@
   "dir": "work/plates/CO17",
   "kind": "video",
   "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
-  "in": 0.35,
-  "note": "plate = take 0.5-2.0 s; in 0.35 = take 0.85 s: eyes closed at the 12.50 cut, open by +0.2 s, then she looks up; mouth closed"
+  "in": 0.85,
+  "note": "plate = take 0.5-2.0 s; in = 0.85 s of the take (plate starts at 0.5 s)"
  },
  "CO11": {
   "dir": "work/plates/CO11",
@@ -80,8 +80,8 @@
   "dir": "work/plates/CO12",
   "kind": "video",
   "src": "media/gen/t2_CO12_veof_t1_87f3c4a55b.mp4",
-  "in": 0.55,
-  "note": "plate = take 0.8-2.4 s; in 0.55 = take 1.35 s: the beam swings into the lens across the shot"
+  "in": 1.35,
+  "note": "plate = take 0.8-2.4 s; in = 1.35 s of the take (plate starts at 0.8 s)"
  },
  "V101": {
   "dir": "work/plates/V101",
@@ -124,9 +124,9 @@
   "dir": "work/plates/V106",
   "kind": "video",
   "src": "media/gen/t2_V106_veof_t1_b888017a1a.mp4",
-  "in": 0.16,
+  "in": 0.66,
   "rate": 1.5,
-  "note": "plate = take 0.5-1.5 s; in 0.16 (take 0.66 s) at 1.5x: the hand opens across the 0.28 s shot and lands spread (palm centre ~1000,560; fingertips reach y~360)"
+  "note": "plate = take 0.5-1.5 s; in = 0.66 s of the take (plate starts at 0.5 s); rate 1.5: the hand opens across the 0.28 s shot (palm centre ~1000,560)"
  },
  "V108": {
   "dir": "work/plates/V108",
@@ -160,23 +160,23 @@
   "dir": "work/plates/V107",
   "kind": "video",
   "src": "media/gen/t2_V107_veo_t3_624affc89f.mp4",
-  "in": 0.17,
+  "in": 1.17,
   "rate": 1.2,
-  "note": "plate = take 1.0-3.6 s; in 0.17 (take 1.17 s) at 1.2x: mist settles, hand lifts at ~+0.5 s, the stencil shows from ~+0.9 s. Do not use take time < 1.0 s (anachronistic spray can)"
+  "note": "plate = take 1.0-3.6 s; in = 1.17 s of the take (plate starts at 1.0 s); rate 1.2: mist settles, hand lifts at ~+0.5 s, stencil shows from ~+0.9 s. Take time < 1.0 s is excluded (anachronistic spray can)"
  },
  "V111": {
   "dir": "work/plates/V111",
   "kind": "video",
   "src": "media/gen/t2_V111_veo_t1_f767e336bc.mp4",
-  "in": 0.2,
-  "note": "plate = take 0.3-2.1 s; the grain jar on the woman's shoulder sits at ~(1120-1280, 80-320) design px (centre ~1200,200), the anchor for the blueprint egg outline; Jade at x~600, walking toward camera"
+  "in": 0.5,
+  "note": "plate = take 0.3-2.1 s; the grain jar on the woman's shoulder sits at ~(1120-1280, 80-320) design px (centre ~1200,200), the anchor for the blueprint egg outline; Jade at x~600, walking toward camera; in = 0.5 s of the take (plate starts at 0.3 s)"
  },
  "V112": {
   "dir": "work/plates/V112",
   "kind": "video",
   "src": "media/gen/t2_V112_veof_t1_495586925d.mp4",
-  "in": 0,
-  "note": "plate = take 0.3-1.5 s"
+  "in": 0.3,
+  "note": "plate = take 0.3-1.5 s; in = 0.3 s of the take (plate starts at 0.3 s)"
  },
  "V115": {
   "dir": "work/plates/V115",
@@ -195,9 +195,9 @@
   "dir": "work/plates/V116",
   "kind": "video",
   "src": "media/gen/t2_V116_veo_t1_91f61bb415.mp4",
-  "in": 0.4,
+  "in": 1.9,
   "rate": 1.5,
-  "note": "plate = take 1.5-3.9 s; in 0.4 (take 1.9 s) at 1.5x: the ditch fills with silver water and lilies open across the 0.9 s shot."
+  "note": "plate = take 1.5-3.9 s; in = 1.9 s of the take (plate starts at 1.5 s); rate 1.5: the ditch fills and lilies open"
  },
  "V118": {
   "dir": "work/plates/V118",
@@ -231,7 +231,22 @@
   "dir": "work/plates/V117",
   "kind": "video",
   "src": "media/gen/t2_V117_veof_t1_46220d7a56.mp4",
-  "in": 0.2,
-  "note": "plate = take 0.3-1.3 s"
+  "in": 0.5,
+  "note": "plate = take 0.3-1.3 s; in = 0.5 s of the take (plate starts at 0.3 s)"
+ },
+ "V122": {
+  "dir": "work/plates/V122",
+  "kind": "video",
+  "src": "media/gen/t2_V122_veo_t1_1323c08c37.mp4",
+  "in": 0.4,
+  "note": "plate = take 0.3-1.9 s; face ~(960,330); the bright point sits at ~(1400,180) and barely moves; in = 0.4 s of the take (plate starts at 0.3 s)"
+ },
+ "V123": {
+  "dir": "work/plates/V123",
+  "kind": "video",
+  "src": "media/kf2/V123_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "generated flat illustration of the ISS (8 gold array wings on the truss, radiators, modules) on black, upscaled; baked slow push + 2 deg/s turn like a turning snowflake; the edit applies riso"
  }
 }

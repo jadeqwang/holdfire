@@ -1225,3 +1225,10 @@
 {"ts": "2026-10-26T23:10:53Z", "model": "pruna/p-image-upscale", "tag": "kf_V113_nbp_v5_up", "job": "holdfire/kf_V113_nbp_v5_up-ae46d8df4f", "event": "submit", "ok": null, "est_usd": null, "where": "cloud"}
 {"ts": "2026-10-26T23:13:45Z", "model": "pruna/p-image-upscale", "tag": "kf_V113_nbp_v5_up", "job": "holdfire/kf_V113_nbp_v5_up-ae46d8df4f", "event": "result", "ok": true, "est_usd": null, "where": "cloud"}
 {"ts": "2026-10-26T23:13:46Z", "model": "google/nano-banana-pro", "tag": "kf_V123_nbp_v1", "job": "holdfire/kf_V123_nbp_v1-de01d6a462", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T23:15:17Z", "model": "google/veo-3.1", "tag": "t2_V122_veo_t1", "job": "holdfire/t2_V122_veo_t1-1323c08c37", "event": "result", "ok": true, "est_usd": 0.8, "where": "cloud"}
+{"ts": "2026-10-26T23:16:21Z", "model": "google/nano-banana-pro", "tag": "kf_V123_nbp_v1", "job": "holdfire/kf_V123_nbp_v1-de01d6a462", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T23:16:59Z", "model": "pruna/p-image-upscale", "tag": "kf_V123_nbp_v1_up", "job": "holdfire/kf_V123_nbp_v1_up-f04b7f8518", "event": "submit", "ok": null, "est_usd": null, "where": "cloud"}
+{"ts": "2026-10-26T23:19:00Z", "model": "pruna/p-image-upscale", "tag": "kf_V123_nbp_v1_up", "job": "holdfire/kf_V123_nbp_v1_up-f04b7f8518", "event": "result", "ok": true, "est_usd": null, "where": "cloud"}
+{"ts": "2026-10-26T23:19:01Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_t1", "job": "holdfire/t2_V113_veof_t1-a076292c94", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-26T23:19:48Z", "model": "bytedance/seedance-2.5", "tag": "t2_V101_sd25r_t4", "job": "holdfire/t2_V101_sd25r_t4-43fa6f7d91", "event": "submit", "ok": null, "est_usd": 0.9248, "where": "cloud"}
+{"ts": "2026-10-26T23:24:14Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_t1", "job": "holdfire/t2_V113_veof_t1-a076292c94", "event": "result", "ok": true, "est_usd": 0.4, "where": "cloud"}

@@ -350,5 +350,22 @@
    "lag": null,
    "pick": false
   }
+ ],
+ "V117": [
+  {
+   "tag": "t2_V117_veof_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V117_veof_t1-46220d7a56",
+   "kf": "media/kf2/V117_nbp_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V117_veof_t1.txt",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_V117_veof_t1_46220d7a56.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "verdict": "pick: Jade wades into the flood from behind, ripples, lilies; head under the FLOOD type's left letters (back of head, not face)",
+   "lag": null,
+   "pick": true
+  }
  ]
 }

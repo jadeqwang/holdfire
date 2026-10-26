@@ -646,6 +646,41 @@
   "rate": 1.5,
   "note": "plate = take 1.5-3.9 s; in 0.4 (take 1.9 s) at 1.5x: the ditch fills with silver water and lilies open across the 0.9 s shot."
  },
+ "V117": {
+  "dir": "work/plates/V117",
+  "kind": "video",
+  "src": "media/gen/t2_V117_veof_t1_46220d7a56.mp4",
+  "in": 0.2,
+  "note": "plate = take 0.3-1.3 s"
+ },
+ "V118": {
+  "dir": "work/plates/V118",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite: the walk take from 3.5 s (she breaks into a run at ~3.6 s), keyed, over painted plate media/kf2/V118_nbp_v1.jpg; plate mirrored so the locomotive (cowcatcher right) runs left to right with her; 1.25x, scroll 700 px/s; loco boiler ~(1150-1820, 470-800)"
+ },
+ "V119": {
+  "dir": "work/plates/V119",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite: the walk take from 3.823 s (she breaks into a run at ~3.6 s), keyed, over painted plate media/kf2/V119_nbp_v1.jpg; 1.25x, scroll 700 px/s; flyer spans ~(0-1300, 90-640), Jade lower right x~1290"
+ },
+ "V120": {
+  "dir": "work/plates/V120",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite: the walk take from 4.146 s (she breaks into a run at ~3.6 s), keyed, over painted plate media/kf2/V120_nbp_v1.jpg; 1.4x, scroll 700 px/s; jet upper left ~(0-800, 720-880 of the lower half), Jade x~1150"
+ },
+ "V121": {
+  "dir": "work/plates/V121",
+  "kind": "video",
+  "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
+  "in": 0,
+  "note": "composite: the walk take from 4.469 s (she breaks into a run at ~3.6 s), keyed, over painted plate media/kf2/V121_nbp_v1.jpg; 1.2x, scroll 400 px/s; Saturn V vertical at x~920, tower x~800, Jade small lower left x~760"
+ },
  "V201": {
   "dir": "work/plates/V201",
   "kind": "video",

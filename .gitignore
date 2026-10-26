@@ -4,3 +4,4 @@ node_modules/
 *.pyc
 __pycache__/
 render/out/
+render/data/picks2.json.lock

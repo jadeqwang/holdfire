@@ -724,9 +724,11 @@
    "dur": 8,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T04:01:26Z",
-   "file": null,
+   "file": "media/gen/K12_t1_c66df4cbc3.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1470,630,193",
+   "sheet": "media/gen/K12_t1_c66df4cbc3_sheet.jpg"
   },
   {
    "take": 2,

@@ -7,11 +7,12 @@
 //   radius (1250), targets (26), hud (0..1)
 import { P, css } from '../../palette.js';
 import { clamp, lerp, smooth, range, easeOutCubic, easeInCubic, hash1, hash2, rng } from '../../util.js';
-import { wordT, lineT, ad, env, pick, eighths, Buckets } from './common.js';
+import { wordT, lineT, ad, env, pick, eighths, Buckets, glowSprite, drawGlow } from './common.js';
 import { drawSky } from '../sky.js';
 
 const D2R = Math.PI / 180;
 let GEO = null, LIGHTS = null, THREADS = null;
+const HOT = glowSprite([1, 0.62, 0.48], 0.3), WHITE = glowSprite([1, 0.96, 0.9]), REDG = glowSprite(P.red);
 
 const unit = (o) => { const a = o.lat * D2R, b = o.lon * D2R; o.u = [Math.cos(a) * Math.cos(b), Math.cos(a) * Math.sin(b), Math.sin(a)]; return o; };
 async function loadGeo() {
@@ -100,9 +101,10 @@ export default {
       c.stroke();
     }
     // coastlines
+    const dbg = p.dbg || 0;
     c.strokeStyle = css(P.bookGold, 0.3); c.lineWidth = 1.6;
     c.beginPath();
-    for (const ring of GEO.coast) {
+    if (dbg !== 1) for (const ring of GEO.coast) {
       let on = false;
       for (let i = 0; i < ring.length; i += 2) {
         const q = pr(ring[i + 1], ring[i]);
@@ -160,7 +162,7 @@ export default {
     }
     const BL = new Buckets(14);
     const lit = fires.filter((f) => t >= f.ti);
-    for (const L of LIGHTS) {
+    if (dbg !== 2) for (const L of LIGHTS) {
       const q = pr(L.lat, L.lon); if (q[2] <= 0.03 || q[1] < 300 || q[1] > 1085 || q[0] < -5 || q[0] > 1925) continue;
       // is it inside a fire? (cheap dot-product test first)
       let tb = Infinity;
@@ -192,11 +194,7 @@ export default {
       const q0 = pr(f.lat, f.lon); if (q0[2] <= 0.03) continue;
       const age = t - f.ti;
       const flash = ad(t, f.ti, 0.02, 0.12);
-      if (flash > 0.01) {
-        const g = c.createRadialGradient(q0[0], q0[1], 0, q0[0], q0[1], 46);
-        g.addColorStop(0, css([1, 0.96, 0.9], flash)); g.addColorStop(0.3, css([1, 0.6, 0.45], 0.5 * flash)); g.addColorStop(1, css(P.red, 0));
-        c.fillStyle = g; c.beginPath(); c.arc(q0[0], q0[1], 46, 0, Math.PI * 2); c.fill();
-      }
+      if (flash > 0.01) { drawGlow(c, HOT, q0[0], q0[1], 46, flash * 0.8); drawGlow(c, WHITE, q0[0], q0[1], 12, flash); }
       // the front: a red ring on the ground, dimming as it slows
       const ringA = 0.32 * Math.exp(-age / 0.45) * (1 - range(t, tEnd - 0.3, tEnd));
       c.strokeStyle = css(P.red, ringA); c.lineWidth = 2;
@@ -210,9 +208,7 @@ export default {
       c.stroke();
       const rpx = rf * D2R * R * Math.max(0.3, q0[2]);
       const gA = 0.3 * Math.exp(-age / 1.4) + 0.06;
-      const g = c.createRadialGradient(q0[0], q0[1], 0, q0[0], q0[1], rpx * 1.1 + 4);
-      g.addColorStop(0, css(P.red, gA)); g.addColorStop(1, css(P.red, 0));
-      c.fillStyle = g; c.beginPath(); c.ellipse(q0[0], q0[1], rpx * 1.1 + 4, (rpx * 1.1 + 4) * Math.max(0.35, q0[2]), 0, 0, Math.PI * 2); c.fill();
+      drawGlow(c, REDG, q0[0], q0[1], rpx * 1.1 + 4, gA, Math.max(0.35, q0[2]));
     }
     c.globalCompositeOperation = 'source-over';
     e.blit2d('over', 2.0);

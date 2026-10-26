@@ -615,6 +615,14 @@ def fit_level(cue, songM, vocM=None):
         cue.fit_note = "absolute (exempt)" if g != cap else "peak cap"
     cue.gain_db = g
     if vocM is not None:
+        if cue.ride and ok.sum() >= 3:
+            g_song = min(g_med, g_worst)
+            for _ in range(4):           # duck at this gain, then let the cap apply to the ducked cue
+                under_vocal(cue, vocM)
+                g_new = min(g_song, cue.cap_db - peak_db(cue.y))
+                if g_new <= cue.gain_db + 0.1:
+                    break
+                cue.gain_db = g_new
         under_vocal(cue, vocM)
     return cue.gain_db
 
@@ -701,15 +709,17 @@ def build_cues(T, song_len_s, songM, vocM):
                     "synth: band-passed noise tick; 2.6->7.4 kHz sine sweep; D2 (73.4 Hz) + 5 harmonics, LP 700 Hz, spin-up; servo = "
                     "gear-whine sine (620->1720 Hz with speed) + motor buzz (BP noise gated at 45-155 Hz), speed = d/dt of "
                     "easeOutCubic settle, panned with the drift", 0.0, y, med=14, worst=8, cap_db=-30, exempt=pre_music, ride=True))
-    # ---- 2. the counts (two passes)
+    # ---- 2. the counts: one cue per whispered number (each sits under its own word)
     for g, grp in ((0, g1), (1, g2)):
-        y = count_pass(grp, grp[0]["t"], rng(10 + g), IR_PING)
-        times = ", ".join(f"{c['n']}@{c['t']:.2f}" for c in grp)
-        cues.append(Cue(f"count{g + 1}", f"Count pass {g + 1}: n glassy pings per whispered number (gold pulses)",
-                        f"pings at t + i*gap (0.15 / 0.10 / 0.075 s): {times}",
-                        "synth: sine + free-bar partials (x2.756, x5.404, x8.933) + 4-cent twin, 5 ms raised-cosine attack, "
-                        "tau 70-90 ms; notes A6 A6 C7 D7 F7 A7 (D minor) for 1 1 2 3 5 8; burst gain n^-0.3; panned to the dot "
-                        "(+0.08); light reverb (RT60 1.3 s, -13 dB)", grp[0]["t"], y, med=15, worst=10, cap_db=-27))
+        for j, c in enumerate(grp):
+            y = count_pass([c], c["t"], rng(100 + 10 * g + j), IR_PING)
+            ping_ts = ", ".join(f"{c['t'] + i * gap_of(c['n']):.3f}" for i in range(c["n"]))
+            cues.append(Cue(f"count{g + 1}.{j + 1}", f"Count {g + 1}, '{c['w']}' = {c['n']}: {c['n']} glassy ping{'s' if c['n'] > 1 else ''} "
+                            "(the dot's gold pulses)", f"word {c['t']:.3f}; pings {ping_ts}",
+                            "synth: sine + free-bar partials (x2.756, x5.404, x8.933) + 4-cent twin, 5 ms raised-cosine attack, "
+                            f"tau {'90' if c['n'] < 5 else '70'} ms; note {['A6', 'C7', 'D7', 'F7', 'A7'][[1, 2, 3, 5, 8].index(c['n'])]} "
+                            "(D minor; the notes rise with the count); burst gain n^-0.3; panned to the dot (+0.08); light reverb "
+                            "(RT60 1.3 s, -13 dB)", c["t"], y, med=15, worst=10, cap_db=-27, group=f"count{g + 1}"))
     # ---- 3. the lock
     lock0, lock1 = g1end + 0.35, g2start
     y = lock_warble(lock0, lock1, rng(3))
@@ -723,8 +733,8 @@ def build_cues(T, song_len_s, songM, vocM):
     cues.append(Cue("chime", "Reticle opens into a ring of light: soft open-D chime + shimmer",
                     f"{t_open:.3f} (second count's last word + 0.3; visual open {t_open:.2f}-{last + 1.5:.2f}, title {last + 0.45:.2f})",
                     "synth: glass tones D6 A6 D7 E7 A7 staggered 50 ms, spread L/R, 30 ms attacks, tau 0.42 s; four high "
-                    "sines (4.7-7.0 kHz) with random 18 Hz flutter; air noise; reverb RT60 2.2 s at -7 dB", t_open, y,
-                    med=12, worst=8, cap_db=-21))
+                    "sines (4.7-7.0 kHz) with random 18 Hz flutter; air noise; reverb RT60 2.2 s at -7 dB; ducks under the "
+                    "whispered 'eight', so it blooms as the word ends", t_open, y, med=12, worst=8, cap_db=-21, ride=True))
     # ---- 5. whoosh into Verse 1
     wd = 0.6
     y = whoosh_in(wd, rng(5))
@@ -915,7 +925,7 @@ def main(argv):
                 continue
             m = sM[ok] - layM(ts[ok])
             j = int(np.argmin(m))
-            if m[j] < MIN_MARGIN_DB + 0.5:
+            if m[j] < MIN_MARGIN_DB + 0.45:
                 tw, d = ts[ok][j], MIN_MARGIN_DB + 0.5 - m[j]
                 print(f"  song rule: {c.id} @ {tw:.2f} margin {m[j]:.1f}")
                 for o in dominant(cues, tw, 0.4):
@@ -927,7 +937,7 @@ def main(argv):
                 if pres.any():
                     mv = vS[pres] - layM(ts1[pres], win=VOCAL_WIN)
                     j = int(np.argmin(mv))
-                    if mv[j] < MIN_MARGIN_DB + 0.5:
+                    if mv[j] < MIN_MARGIN_DB + 0.45:
                         tw, d = ts1[pres][j], MIN_MARGIN_DB + 0.5 - mv[j]
                         print(f"  vocal rule: {c.id} @ {tw:.2f} margin {mv[j]:.1f} (vocal {vS[pres][j]:.1f})")
                         for o in dominant(cues, tw, VOCAL_WIN):

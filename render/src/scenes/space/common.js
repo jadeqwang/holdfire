@@ -87,7 +87,7 @@ export class Buckets {
 // placed with a transform. glowSprite(col) returns a handle; drawGlow(c, handle, x, y, r, a) draws it (design px).
 const SPR = new Map();
 export function glowSprite(col, core = 0.0) { return { col, core, key: col.join(',') + '|' + core }; }
-export function drawGlow(c, h, x, y, r, a) {
+export function drawGlow(c, h, x, y, r, a, sy = 1) {
   if (a <= 0.004 || r <= 0.3) return;
   let m = SPR.get(c); if (!m) { m = new Map(); SPR.set(c, m); }
   let g = m.get(h.key);
@@ -97,7 +97,7 @@ export function drawGlow(c, h, x, y, r, a) {
     m.set(h.key, g);
   }
   const T = c.getTransform();
-  c.translate(x, y); c.scale(r, r);
+  c.translate(x, y); c.scale(r, r * sy);
   c.globalAlpha = Math.min(1, a); c.fillStyle = g;
   c.beginPath(); c.arc(0, 0, 1, 0, Math.PI * 2); c.fill();
   c.globalAlpha = 1; c.setTransform(T);

@@ -84,7 +84,7 @@ export function buildTimeline(A) {
     look: (t) => ({ ...LOOK.keeper, flash: (1 - smooth(range(t, v1, v1 + 0.35))) * 0.8, flashCol: [1, 0.86, 0.55] }),
     type: verse(V, 0, { x: 130, y: 470, size: 82, breaks: [3], italicWords: ['sea'], t1: finT }) });
   const fishT = le(V, 1) + 0.25;
-  add({ id: 'V1c', t0: finT, t1: fishT, ...keeper('E2', push(0.01)),
+  add({ id: 'V1c', t0: finT, t1: fishT, ...keeper('E2', (t, lt) => ({ zoom: 0.94 + lt * 0.01, pan: [60, -60], gain: 0.95, wHi: 1.25, fadeEdges: [140, 360, 160, 100] })),
     type: (ty, t) => {
       const L = line(V, 1); const ww = L.words;           // fin into foot into hand, we were young;
       const big = [[0, 'FIN'], [2, 'FOOT'], [4, 'HAND']];
@@ -92,9 +92,9 @@ export function buildTimeline(A) {
         const t0 = ww[j].t, t1 = i < 2 ? ww[big[i + 1][0]].t : fishT;
         if (t < t0 || t > t1) return;
         const k = clamp((t - t0) / 0.14);
-        ty.text(txt, 130, 560, { font: 'Archivo', weight: 800, stretch: '125%', size: lerp(250, 220, easeOutCubic(k)), color: P.cream, alpha: k * (1 - smooth(range(t, t1 - 0.08, t1))), glow: 12 });
+        ty.text(txt, 110, 930, { font: 'Archivo', weight: 800, stretch: '125%', size: lerp(200, 176, easeOutCubic(k)), color: P.cream, alpha: k * (1 - smooth(range(t, t1 - 0.08, t1))), glow: 8 });
       });
-      ty.lyric({ words: ww.slice(5) }, t, { font: 'CormorantI', size: 54, x: 136, y: 700, color: P.goldPale, t1: fishT });
+      ty.lyric({ words: ww.slice(5) }, t, { font: 'CormorantI', size: 50, x: 120, y: 1030, color: P.goldPale, t1: fishT });
     } });
   const eggT = ls(V, 2) - 0.2;
   add({ id: 'V1b', t0: fishT, t1: eggT, ...keeper('E1', push(0.012)),

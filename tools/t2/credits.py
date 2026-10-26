@@ -20,8 +20,10 @@ NAMES = {
 KF = [('nbp', 'google/nano-banana-pro'), ('nano', 'google/nano-banana-pro'), ('gpt', 'openai/gpt-image-2.5-sunburst'),
       ('seedream', 'bytedance/seedream-5-pro'), ('sdr', 'bytedance/seedream-5-pro'), ('krea', 'krea/krea-3'),
       ('grok', 'xai/grok-imagine-image-2.0'), ('nb2', 'google/nano-banana-2.1')]
-# the tools behind the picture and the sound, always in the credit (they are in every frame or every cut)
-SUPPORT = ['BS-RoFormer', 'MediaPipe', 'Whisper', 'three.js', 'Chromium', 'FFmpeg']
+# the models behind the picture: the vocal stem (BS-RoFormer) every lip-sync take was cued from, the timing map's
+# transcription passes (analysis/timing.md: Whisper, Parakeet, GPT-4o Transcribe, Grok STT) and the face tracking that
+# measured the lip-sync lags (MediaPipe). Add a reviewer model here if one watched the cut.
+SUPPORT = ['BS-RoFormer', 'Whisper', 'Parakeet', 'GPT-4o Transcribe', 'Grok STT', 'MediaPipe']
 
 
 def kf_model(path):

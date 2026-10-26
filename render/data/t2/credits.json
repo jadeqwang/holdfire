@@ -9,11 +9,11 @@
  ],
  "support": [
   "BS-RoFormer",
-  "MediaPipe",
   "Whisper",
-  "three.js",
-  "Chromium",
-  "FFmpeg"
+  "Parakeet",
+  "GPT-4o Transcribe",
+  "Grok STT",
+  "MediaPipe"
  ],
  "shots": {
   "Nano Banana Pro": [

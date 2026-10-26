@@ -8,7 +8,7 @@ const server = await serve(PORT);
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome', args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const page = await b.newPage({ viewport: { width: W, height: H } });
 page.on('pageerror', (e) => console.error('[pageerror]', e.message));
-await page.goto(`http://127.0.0.1:${PORT}/index.html?w=${W}&h=${H}`);
+await page.goto(`http://127.0.0.1:${PORT}/index.html?w=${W}&h=${H}${process.env.TL ? '&tl=' + process.env.TL : ''}`);
 await page.evaluate(() => window.__ready);
 if (process.env.NOSKY) await page.evaluate(() => { window.__nosky = 1; }); if (process.env.NOPOST) await page.evaluate(() => { window.__nopost = 1; });
 for (const t of [...times, ...times]) {

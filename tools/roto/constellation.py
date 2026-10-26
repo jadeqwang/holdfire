@@ -3,7 +3,7 @@
 inside the matte), carried between drawings by optical flow with stable ids (so links persist), plus k-nearest links.
 Output per drawing (design space): stars_NNNN.bin = int32 n, n*(float32 x, float32 y, float32 b, int32 id),
 then int32 m, m*(int32 i, int32 j) links; meta.json.
-  constellation.py SRC OUTDIR [--start=S] [--dur=D] [--n=2600] [--k=3] [--twos=1]"""
+  constellation.py SRC OUTDIR [--start=S] [--dur=D] [--n=2600] [--k=3] [--twos=1] [--color=1]"""
 import json, os, sys, struct, time
 import numpy as np, cv2
 from scipy.spatial import cKDTree
@@ -99,6 +99,8 @@ for k, (fi, bgr) in enumerate(frames(src, start, dur, step)):
     buf += struct.pack('<i', len(L)) + L.tobytes()
     open(os.path.join(outdir, f'stars_{k:04d}.bin'), 'wb').write(buf)
     cv2.imwrite(os.path.join(outdir, f'matte_{k:04d}.png'), (m * 255).astype(np.uint8))
+    if o.get('color') == '1':   # a small colour guide (only to classify warm light vs body colour in the renderer)
+        cv2.imwrite(os.path.join(outdir, f'color_{k:04d}.jpg'), cv2.resize(cv2.bilateralFilter(bgr, 7, 40, 7), (640, 360), interpolation=cv2.INTER_AREA), [cv2.IMWRITE_JPEG_QUALITY, 88])
     meta['drawings'].append({'k': k, 'frame': fi, 'n': int(len(pts)), 'links': int(len(L))})
 meta['n'] = len(meta['drawings'])
 json.dump(meta, open(os.path.join(outdir, 'meta.json'), 'w'), indent=1)

@@ -121,7 +121,7 @@ export default {
     fu.tTone.value = tone; fu.tEdge.value = edge; fu.tMatte.value = matte; fu.hasMatte.value = matte ? 1 : 0;
     fu.zoom.value = zoom; fu.pan.value.set(pan[0], pan[1]); fu.color.value.setRGB(...col); fu.bg.value.setRGB(...(p.bg || P.void));
     fu.fill.value = p.fill ?? 0.10; fu.edge.value = p.edge ?? 0.45;
-    e.pass(fillMat, e.rtScene);
+    if (!p.over) e.pass(fillMat, e.rtScene);
     // lines
     const g = mesh.geometry; const A = g.attributes.seg.array, B = g.attributes.wid.array;
     const n = Math.min(MAXSEG, ln.count);

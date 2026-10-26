@@ -3,7 +3,7 @@
 import { Engine } from './engine.js';
 import { AudioMap } from './audio.js';
 import { TypeLayer, loadFonts } from './type.js';
-import { buildTimeline, buildGlobalPost } from './timeline.js';
+import * as mainTimeline from './timeline.js';
 import { SCENES } from './scenes/index.js';
 
 const qs = new URLSearchParams(location.search);
@@ -19,14 +19,19 @@ async function boot() {
     fetch('data/timing.json').then((r) => r.json()),
     fetch('data/audio.json').then((r) => r.json()).catch(() => null),
   ]);
+  // picks: plate name -> {clip, s0, lag, kind} (written by tools/sd/picks.py from docs/takes.json)
+  const picks = await fetch('data/picks.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
   await loadFonts();
   const engine = new Engine(canvas, W, H);
   const audio = new AudioMap(timing, feats);
+  audio.picks = picks;
   const type = new TypeLayer(engine, audio);
-  const shots = buildTimeline(audio);
+  // ?tl=NAME loads src/timelines/NAME.js instead of the edit (scene authors' test timelines)
+  const TL = qs.get('tl') ? await import(`./timelines/${qs.get('tl')}.js`) : mainTimeline;
+  const shots = TL.buildTimeline(audio);
   const ctx = { engine, audio, type, W, H, S: engine.S, state: {} };
   for (const s of Object.values(SCENES)) if (s.init) await s.init(ctx);
-  Object.assign(state, { engine, audio, type, shots, ctx, globalPost: buildGlobalPost(audio) });
+  Object.assign(state, { engine, audio, type, shots, ctx, globalPost: TL.buildGlobalPost ? TL.buildGlobalPost(audio) : null });
   window.__shots = shots.map((s) => ({ id: s.id, t0: s.t0, t1: s.t1, scene: s.scene }));
 }
 
@@ -43,14 +48,17 @@ async function renderAt(t) {
     const shot = shotAt(t);
     const lt = t - shot.t0;
     const T0 = performance.now();
-    const scene = SCENES[shot.scene];
-    if (!scene) throw new Error('no scene ' + shot.scene);
+    let scene = SCENES[shot.scene];
+    if (!scene) { scene = SCENES.placeholder; shot.want = shot.scene; }
     ctx.t = t; ctx.lt = lt; ctx.shot = shot;
     let p = typeof shot.p === 'function' ? shot.p(t, lt, ctx) : (shot.p || {});
     if (window.__pOverride) p = { ...p, ...window.__pOverride };   // look-dev (tools/lookdev.mjs)
     ctx.p = p;
     // scenes may need assets: prepare() resolves them, so cache timing never changes pixels
-    if (scene.prepare) await scene.prepare(ctx, shot, t, lt, p);
+    if (scene.prepare) {
+      try { await scene.prepare(ctx, shot, t, lt, p); }
+      catch (err) { if (qs.get('strict')) throw err; console.warn('prepare failed', shot.id, String(err)); scene = SCENES.placeholder; shot.want = `${shot.scene} (${p.clip || 'asset'} missing)`; }
+    }
     await scene.draw(ctx, shot, t, lt, p);
     const T1 = performance.now();
     type.begin();

@@ -102,7 +102,7 @@ export default {
   },
   draw(ctx, shot, t, lt, p) {
     const e = ctx.engine; build(e);
-    if (p.sky !== false) drawSky(ctx, { density: 0.35, band: 0.15, neb: 0.25, nebCol: [0.02, 0.04, 0.08], seed: 21, ...(p.skyP || {}) });
+    if (p.over) { /* layered: draw on top */ } else if (p.sky !== false) drawSky(ctx, { density: 0.35, band: 0.15, neb: 0.25, nebCol: [0.02, 0.04, 0.08], seed: 21, ...(p.skyP || {}) });
     else e.clear(e.rtScene, ...P.void);
     const { st, fr } = ctx.state.const;
     const zoom = p.zoom ?? 1, pan = p.pan || [0, 0];

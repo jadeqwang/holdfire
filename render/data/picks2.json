@@ -72,29 +72,47 @@
  "V211": {
   "dir": "work/plates/V211",
   "kind": "video",
-  "src": "media/gen/t2_V211_veo_t1_9a19877318.mp4",
-  "in": 2.0,
+  "src": "media/gen/t2_V211_sd25_t2_2e96a6f5b9.mp4",
+  "in": 0.0,
   "twos": true,
   "style": "oil",
   "styleAmt": 0.35,
   "screen": [
    [
-    496,
-    176
+    358,
+    164
    ],
    [
-    1428,
-    176
+    1530,
+    164
    ],
    [
-    1428,
-    604
+    1530,
+    652
    ],
    [
-    496,
-    604
+    358,
+    652
    ]
   ],
-  "note": "veo-3.1 slow push-in throughout (screen corners given at in=2.0; they grow ~3 px per 0.8 s); a red screen flash at 0.6-0.9 s is left out; his head overlaps the screen's lower edge"
+  "paper": [
+   [
+    1485,
+    964
+   ],
+   [
+    1634,
+    975
+   ],
+   [
+    1565,
+    1032
+   ],
+   [
+    1395,
+    1012
+   ]
+  ],
+  "note": "seedance-2.5 10 s, locked-off (<0.35 px drift); serves V211-V217 on the song clock (clip t = song t - 92.6). Screen face stays empty dark red, no flash. He reaches for the phone at clip ~7.0 s and holds the receiver at his ear from ~8.0 s (song 100.3 'ignored' -> V217 continuity). His head overlaps the screen's lower edge (x ~620-830, y >= 510): the screen overlay needs to go behind it. 'paper' = the protocol sheet on the desk (small, grazing angle)."
  }
 }

@@ -13,7 +13,8 @@
   "Parakeet",
   "GPT-4o Transcribe",
   "Grok STT",
-  "MediaPipe"
+  "MediaPipe",
+  "P-Image Upscale"
  ],
  "shots": {
   "Nano Banana Pro": [

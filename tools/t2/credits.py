@@ -22,8 +22,8 @@ KF = [('nbp', 'google/nano-banana-pro'), ('nano', 'google/nano-banana-pro'), ('g
       ('grok', 'xai/grok-imagine-image-2.0'), ('nb2', 'google/nano-banana-2.1')]
 # the models behind the picture: the vocal stem (BS-RoFormer) every lip-sync take was cued from, the timing map's
 # transcription passes (analysis/timing.md: Whisper, Parakeet, GPT-4o Transcribe, Grok STT) and the face tracking that
-# measured the lip-sync lags (MediaPipe). Add a reviewer model here if one watched the cut.
-SUPPORT = ['BS-RoFormer', 'Whisper', 'Parakeet', 'GPT-4o Transcribe', 'Grok STT', 'MediaPipe']
+# measured the lip-sync lags (MediaPipe), and the upscaler that took 1K keyframes to 2K (Pruna P-Image Upscale). Add a reviewer model here if one watched the cut.
+SUPPORT = ['BS-RoFormer', 'Whisper', 'Parakeet', 'GPT-4o Transcribe', 'Grok STT', 'MediaPipe', 'P-Image Upscale']
 
 
 def kf_model(path):

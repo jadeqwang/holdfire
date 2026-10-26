@@ -57,7 +57,7 @@ function geometry() {
     const b = hbin(3600); const st = 5.6;
     for (let i = 0; i < b.length; i++) { const x = x0 + 2 + i * st; if (b[i] === '1') ul.push([[x, y + 20], [x, y + 32]]); else ul.push([[x - 2, y + 26], [x + 2, y + 26]]); } }
   // ---- UR: decoding a picture
-  { const x0 = 62, x1 = 330, by = -292;
+  { const x0 = 26, x1 = 272, by = -256;
     // the signal: three lines, each opening with a sync pulse (marked 1, 10, 11 in binary above)
     const sig = []; const per = (x1 - x0) / 3;
     for (let k = 0; k < 3; k++) { const xs = x0 + k * per;
@@ -70,20 +70,20 @@ function geometry() {
     ur.push([[x0 + 11, by + 10], [x0 + 11, by + 16], [x0 + per, by + 16], [x0 + per, by + 10]]);
     { const b = hbin(0.008); for (let i = 0; i < b.length; i++) { const x = x0 + per + 14 + i * 5.6; if (b[i] === '1') ur.push([[x, by + 10], [x, by + 22]]); else ur.push([[x - 2, by + 16], [x + 2, by + 16]]); } }
     // interlace: vertical lines drawn top to bottom, staggered
-    const iy0 = -238, iy1 = -176, ix0 = 92, ix1 = 300;
+    const iy0 = -212, iy1 = -152, ix0 = 70, ix1 = 278;
     ur.push([[ix0, iy0], [ix1, iy0], [ix1, iy1], [ix0, iy1], [ix0, iy0]]);
     for (let i = 0; i < 8; i++) { const x = ix0 + 14 + i * 25; ur.push([[x, iy0 + 6], [x, iy1 - 6]]); if (i < 7) ur.push([[x, iy1 - 6], [x + 12.5, iy0 + 6]]); }
     // the raster: 512 vertical lines (drawn as a field), with 512 in binary
-    const ry0 = -160, ry1 = -96, rx0 = 112, rx1 = 280;
+    const ry0 = -136, ry1 = -74, rx0 = 90, rx1 = 258;
     ur.push([[rx0, ry0], [rx1, ry0], [rx1, ry1], [rx0, ry1], [rx0, ry0]]);
     for (let x = rx0 + 7; x < rx1 - 3; x += 7) ur.push([[x, ry0 + 4], [x, ry1 - 4]]);
     { const b = (512).toString(2); for (let i = 0; i < b.length; i++) { const x = rx0 + 30 + i * 11; if (b[i] === '1') ur.push([[x, ry1 + 9], [x, ry1 + 21]]); else ur.push([[x - 3, ry1 + 15], [x + 3, ry1 + 15]]); } }
     // the first picture: a circle in its frame
-    const cy0 = -62, cy1 = 2, cx0 = 150, cx1 = 242;
+    const cy0 = -42, cy1 = 22, cx0 = 128, cx1 = 220;
     ur.push([[cx0, cy0], [cx1, cy0], [cx1, cy1], [cx0, cy1], [cx0, cy0]]);
     ur.push(arcPts((cx0 + cx1) / 2, (cy0 + cy1) / 2, 24, -Math.PI / 2, Math.PI * 1.5, 40)); }
   // ---- LL: the pulsar map
-  { const sx = -170, sy = 200;
+  { const sx = -150, sy = 205;
     ll.push([[sx, sy], [sx + 300, sy]]);                         // to the galactic centre (l = 0)
     PULSARS.forEach(([, per, l], i) => {
       const a = -l * Math.PI / 180; const ux = Math.cos(a), uy = Math.sin(a), nx = -uy, ny = ux;

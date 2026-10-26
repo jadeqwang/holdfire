@@ -19,5 +19,68 @@
   "lag": -0.125,
   "kind": "listener",
   "file": "media/gen/L2_t1_aa50df6837.mp4"
+ },
+ "K1": {
+  "clip": "K1_t3",
+  "s0": 12.75,
+  "lag": 0.25,
+  "kind": "keeper",
+  "file": "media/gen/K1_t3_1348e18150.mp4"
+ },
+ "K5": {
+  "clip": "K5_t2",
+  "s0": 61.8,
+  "lag": 0.25,
+  "kind": "keeper",
+  "file": "media/gen/K5_t2_125863904e.mp4"
+ },
+ "K3": {
+  "clip": "K3_t2",
+  "s0": 37.7,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/K3_t2_e6b4ac693d.mp4"
+ },
+ "O6": {
+  "clip": "O6_t1",
+  "s0": 0,
+  "lag": 0,
+  "kind": "other",
+  "file": "media/gen/O6_t1_ed753c97a7.mp4"
+ },
+ "K11": {
+  "clip": "K11_t1",
+  "s0": 0,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/K11_t1_241c7345d1.mp4"
+ },
+ "C3": {
+  "clip": "C3_t2",
+  "s0": 0,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/C3_t2_10bf8b3bd1.mp4"
+ },
+ "C2": {
+  "clip": "C2_t1",
+  "s0": 0,
+  "lag": 0,
+  "kind": "keeper",
+  "file": "media/gen/C2_t1_790f62ff80.mp4"
+ },
+ "O3": {
+  "clip": "O3_t1",
+  "s0": 0,
+  "lag": 0,
+  "kind": "other",
+  "file": "media/gen/O3_t1_cf489b17a2.mp4"
+ },
+ "E2": {
+  "clip": "E2_t1",
+  "s0": 0,
+  "lag": 0,
+  "kind": "env",
+  "file": "media/gen/E2_t1_d3de414e16.mp4"
  }
 }

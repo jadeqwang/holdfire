@@ -21,7 +21,10 @@ SUNG = [
     (38, False, None, ''),
     (37, True, COUNT5, 'post-chorus count repeated (no "Eight!")'),
     (38, True, None, 'repeated'),
-    *[(i, False, None, '') for i in range(39, 65)],
+    *[(i, False, None, '') for i in range(39, 51)],
+    (51, False, ['out', 'there', 'at', 'all'], '"are" is not sung: "fire" is one held D4 note 172.57-173.21 straight into "out" (173.29); '
+     'every ASR pass hears "...held their fire out there at all"'),
+    *[(i, False, None, '') for i in range(52, 65)],
     (65, False, None, ''),
     (64, True, None, 'whispered count repeated after "The count goes higher."'),
     (66, False, None, ''),

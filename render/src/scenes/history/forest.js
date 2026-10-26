@@ -41,6 +41,9 @@ export function forestState(t, p, T) {
   const match = p.match || MATCH;
   const stag = p.stagger ?? 0.045;
   const hold = smooth(range(t, T.tHold - 0.1, T.tHold + 0.35));
+  // on the flame they nest as one target: the far (small) ones inside, the near ones outside, >= 7 px apart
+  const order = ret.map((q, i) => [q[2], i]).sort((a, b) => a[0] - b[0]).map((q) => q[1]);
+  const rank = new Array(n); order.forEach((i, k) => { rank[i] = k; });
   const out = [];
   for (let i = 0; i < n; i++) {
     const [x0, y0, r0] = ret[i];
@@ -56,13 +59,14 @@ export function forestState(t, p, T) {
     const d = Math.hypot(x0 - match[0], y0 - match[1]);
     const ts = T.tSnap + stag * (i % 7) + d * 0.00012;
     const k = t < ts ? 0 : easeOutBack(clamp((t - ts) / 0.3), 1.2);
-    const jit = [(hash1(i * 1.3) - 0.5) * 6, (hash1(i * 2.9) - 0.5) * 5];
-    const x = lerp(x0 + drift[0], match[0] + jit[0], k), y = lerp(y0 + drift[1], match[1] + jit[1], k);
+    const x = lerp(x0 + drift[0], match[0], k), y = lerp(y0 + drift[1], match[1] - 6, k);
     const tight = smooth(range(t, ts + 0.15, T.tDeath + 0.25));
     const lock = smooth(range(t, T.tDeath, T.tDeath + 0.12));
-    const r = r0 * (1 + br) * lerp(1, 0.86, tight);
+    const rNest = lerp(20 + 10.5 * rank[i], 15 + 7 * rank[i], tight);
+    const r = lerp(r0 * (1 + br), rNest, clamp(k));
+    const master = rank[i] === n - 1;
     const spin = (Math.min(t, T.tHold) * 0.12 + i) * (i % 2 ? 1 : -1);
-    out.push({ i, x0, y0, x, y, r, open, tight, lock, spin, k, ts });
+    out.push({ i, x0, y0, x, y, r, open, tight, lock: master ? lock : 0, spin, k, ts, detail: master ? 1 : 1 - 0.92 * clamp(k) });
   }
   return out;
 }
@@ -116,7 +120,7 @@ export function drawForestReticles(ctx, p = {}) {
   for (const s of st) {
     // far reticles a touch dimmer (atmosphere), all of them hard red
     const depthA = lerp(0.6, 1, clamp((s.r - 16) / 36));
-    drawReticle(c, s.x, s.y, s.r, { open: s.open, tight: s.tight, lock: s.lock, spin: s.spin, alpha: al * depthA, col: red, lw: 2 });
+    drawReticle(c, s.x, s.y, s.r, { open: s.open, tight: s.tight, lock: s.lock, spin: s.spin * (1 - clamp(s.k)), alpha: al * lerp(depthA, 0.9, clamp(s.k)), col: red, lw: 2, detail: s.detail });
   }
   if (p.flame ?? true) drawMatch(c, match[0], match[1], t, T.tMatch, p.matchSize ?? 1.25);
   e.blit2d('add', p.gain ?? 1.2);

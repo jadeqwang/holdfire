@@ -83,6 +83,22 @@ for l in L:
         for k in LOC: ctc_all.append(LOC[k][str(l['id'])]['words'][wi]['start'])
 diffs = [t - n for t in ctc_all if t is not None for n in [nearest(t)] if n is not None]
 BIAS = float(np.median(diffs)); print(f'CTC start bias vs nearest onset: median {BIAS*1000:+.0f} ms over {len(diffs)}')
+# fricative/sibilant-initial words: CTC + energy onsets tend to lock onto the vowel; move the start to the beginning of the
+# contiguous high-band (> 3.5 kHz) plateau when it starts 20-200 ms earlier and stands >= 6 dB over the preceding context
+# (adapted from merge-me-back-to-main fuse.py fric_onset). Uses the BS-RoFormer stem.
+_y, _sr = sf.read(os.path.join(ROOT, STEMS.get('rf', STEMS.get('kim')))); _y = librosa.resample(_y.mean(1), orig_sr=_sr, target_sr=16000)
+_S = np.abs(librosa.stft(_y, n_fft=512, hop_length=80)); _f = librosa.fft_frequencies(sr=16000, n_fft=512)
+HF = np.convolve(10 * np.log10((_S[_f > 3500] ** 2).sum(0) + 1e-9), np.ones(4) / 4, 'same'); THF = np.arange(len(HF)) * 0.005
+def fric_onset(c, prev):
+    m = (THF >= max(c - 0.22, prev + 0.08)) & (THF <= c + 0.06); idx = np.where(m)[0]
+    if not len(idx): return None
+    pk = idx[np.argmax(HF[idx])]; ref = HF[pk]
+    ctx = HF[(THF >= c - 0.6) & (THF < c - 0.25)]
+    if not len(ctx) or ref - np.median(ctx) < 6: return None
+    j = pk
+    while j - 1 >= idx[0] and HF[j - 1] > ref - 8: j -= 1
+    return float(THF[j])
+FRIC = ('s', 'f', 'z', 'c', 'th', 'sh', 'ch')
 ov = jl('../tools/audio/overrides.json') or {}
 out = []
 for l in L:
@@ -107,6 +123,12 @@ for l in L:
         sn = nearest(est, -0.12, 0.08)
         st = sn if sn is not None else est
         if sn is None: flags.append('no_onset')
+        lw = w.lower()
+        if lw.startswith(FRIC) and not lw.startswith(('ca', 'co', 'cl', 'cr', 'cu')):
+            prev = words[-1]['start'] if words else st - 0.6
+            fo = fric_onset(st, prev)
+            if fo is not None and st - 0.2 <= fo < st - 0.02:
+                flags.append(f'fricative_onset{fo - st:+.3f}'); st = fo
         words.append(dict(w=w, start=round(st, 3), est=round(est, 3), src=srcs, ctc=[round(float(c), 3) for c in C],
                           parakeet=None if pk is None else round(pk, 3), whisper=None if wh is None else round(wh, 3), flags=flags))
     for wi in range(1, len(words)):

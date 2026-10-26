@@ -1,5 +1,5 @@
 {
- "status": "interim - line/word times from a first-pass global CTC alignment on the Kim_Vocal_2 stem, NOT yet onset-snapped or verified; sections/beats/bars are close to final. Will be refined in place.",
+ "status": "final - verified (see analysis/timing.md \"Verification\"); per-word confidence in words[].conf where not high",
  "audio": {
   "file": "inputs/Hold Fire.mp3",
   "duration_s": 247.16,
@@ -2021,7 +2021,20 @@
    "end": 13.145,
    "start_bar": 1,
    "end_bar": 5,
-   "start_on_bar_line": false
+   "start_on_bar_line": false,
+   "notes": "Pad fade-in, piano + sub swells; whispered count #1 2.80-6.9 (one whisper per beat), 16th perc roll + sub riser 7.0-7.97 into bar 4, count #2 8.60-11.4. Intro piano hits sit on the 8th off-beats of the grid (see tempo notes).",
+   "parts": [
+    {
+     "name": "Intro A - piano + whispered count #1",
+     "start": 0.0,
+     "end": 7.994
+    },
+    {
+     "name": "Intro B - perc roll into count #2",
+     "start": 7.994,
+     "end": 13.145
+    }
+   ]
   },
   {
    "name": "Verse 1",
@@ -2030,7 +2043,8 @@
    "end": 31.182,
    "start_bar": 6,
    "end_bar": 12,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Breathy close-mic lead, sparse 808/snare (first snare 16.99). Vocal pickup \"Out\" at 13.05."
   },
   {
    "name": "Pre-Chorus 1",
@@ -2039,7 +2053,8 @@
    "end": 51.819,
    "start_bar": 13,
    "end_bar": 20,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Stacked vocals from bar 13; \"Snowflake\" enters 32.69 after the held \"flood\"; \"awake\" held 47.7-51.6."
   },
   {
    "name": "Chorus 1",
@@ -2048,7 +2063,8 @@
    "end": 72.406,
    "start_bar": 21,
    "end_bar": 28,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Full stacked choir + belted lead, hard drums. Pickup \"Can't\" 51.70."
   },
   {
    "name": "Post-Chorus 1",
@@ -2057,7 +2073,8 @@
    "end": 82.645,
    "start_bar": 29,
    "end_bar": 32,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Gang shouts One!One!Two!Three!Five! + Counting on you! twice (no Eight!)."
   },
   {
    "name": "Verse 2",
@@ -2066,7 +2083,8 @@
    "end": 102.995,
    "start_bar": 33,
    "end_bar": 40,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Second, harder lead over full trap drums. Pickup \"Priests\" 82.55."
   },
   {
    "name": "Pre-Chorus 2",
@@ -2075,7 +2093,8 @@
    "end": 113.152,
    "start_bar": 41,
    "end_bar": 44,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Shorter (4 bars). \"you\" held into the chorus."
   },
   {
    "name": "Chorus 2",
@@ -2084,7 +2103,8 @@
    "end": 133.447,
    "start_bar": 45,
    "end_bar": 52,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Same phrasing as Chorus 1 (word positions agree to +-0.25 beat)."
   },
   {
    "name": "Post-Chorus 2",
@@ -2093,7 +2113,8 @@
    "end": 143.581,
    "start_bar": 53,
    "end_bar": 56,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Same as Post-Chorus 1, twice, no Eight!."
   },
   {
    "name": "Bridge",
@@ -2102,7 +2123,20 @@
    "end": 163.793,
    "start_bar": 57,
    "end_bar": 64,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Drums/808s out 143.6-153.69 (bars 57-60: the near-silence; vocal sung softly, centred), drums back on bar 61 under \"But fear's a chain\".",
+   "parts": [
+    {
+     "name": "Bridge A - drums out (near silence)",
+     "start": 143.581,
+     "end": 153.694
+    },
+    {
+     "name": "Bridge B - drums back",
+     "start": 153.694,
+     "end": 163.793
+    }
+   ]
   },
   {
    "name": "Build",
@@ -2111,7 +2145,8 @@
    "end": 183.943,
    "start_bar": 65,
    "end_bar": 72,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Full drums, choir rising (stacked from bar 65); \"Hold your fire / Show your light\" sustained choir 175.06 and 180.09; 16th snare/808 roll 180.80-183.94."
   },
   {
    "name": "Drop",
@@ -2120,7 +2155,20 @@
    "end": 214.18,
    "start_bar": 73,
    "end_bar": 84,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Bars 73-74 (183.94-188.35) drums-out break with held pad under \"Couldn't be sure...\"; DROP IMPACT 188.355 (bar 74 beat 4), full 808 groove from bar 75 (188.99). Gang numbers Thirteen/Twenty-one/Thirty-four 194.0-195.3, Fifty-five/Eighty-nine 201.56-202.26.",
+   "parts": [
+    {
+     "name": "Drop A - drums-out break before the impact",
+     "start": 183.943,
+     "end": 188.355
+    },
+    {
+     "name": "Drop B - full drop from the 188.355 impact",
+     "start": 188.355,
+     "end": 214.18
+    }
+   ]
   },
   {
    "name": "Outro",
@@ -2129,7 +2177,30 @@
    "end": 247.16,
    "start_bar": 85,
    "end_bar": 97,
-   "start_on_bar_line": true
+   "start_on_bar_line": true,
+   "notes": "Drums stop 214.175; near-silences between phrases 218-223 (bars 86-88); drums + 808 slam back at bar 89 (224.33) under whispered count, \"The count goes higher\" (227.79), count again, \"Hold your fire\" (233.17); drums cut 234.3; held vocal + piano decay; last whisper \"Hold your fire\" 242.08-243.9; FINAL HIT 244.05 (bar 96 beat 4), 808 tail to 246.4.",
+   "parts": [
+    {
+     "name": "Outro A - drums out, sparse",
+     "start": 214.18,
+     "end": 224.325
+    },
+    {
+     "name": "Outro B - drums back: counts, \"The count goes higher\", \"Hold your fire\"",
+     "start": 224.325,
+     "end": 234.475
+    },
+    {
+     "name": "Outro C - drums cut, decay, last whisper",
+     "start": 234.475,
+     "end": 244.05
+    },
+    {
+     "name": "Outro D - final hit + tail",
+     "start": 244.05,
+     "end": 247.16
+    }
+   ]
   }
  ],
  "lines": [
@@ -2141,6 +2212,8 @@
    "text": "(One... one... two... three... five... eight...)",
    "kind": "whisper",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": false,
    "start": 2.799,
    "end": 6.934,
@@ -2180,10 +2253,16 @@
     {
      "w": "eight",
      "start": 6.63,
-     "end": 6.934
+     "end": 6.934,
+     "extra": true
     }
    ],
-   "note": "whispered count #1: 7 whispers on 7 consecutive beats, the last \"eight\" doubled (ASR: \"...five, eight, eight\")"
+   "note": "whispered count #1: 7 whispers on 7 consecutive beats, the last \"eight\" doubled (ASR: \"...five, eight, eight\")",
+   "verify": {
+    "whisper": "One, two, three, five, hey, hey.",
+    "parakeet": "One, two, three, five, eight, eight.",
+    "match": 0.86
+   }
   },
   {
    "n": 1,
@@ -2193,6 +2272,8 @@
    "text": "(One... one... two... three... five... eight...)",
    "kind": "whisper",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": true,
    "start": 8.6,
    "end": 11.848,
@@ -2212,14 +2293,12 @@
     {
      "w": "three",
      "start": 9.86,
-     "end": 10.541,
-     "flags": [
-      "manual_start"
-     ]
+     "end": 10.43,
+     "conf": "medium"
     },
     {
      "w": "five",
-     "start": 10.546,
+     "start": 10.435,
      "end": 11.16
     },
     {
@@ -2231,7 +2310,12 @@
    "unsung_words": [
     "One"
    ],
-   "note": "whispered count #2: the second \"one\" is not whispered (isolated-syllable ASR: why/two/three/five/hey), followed by a short extra whisper heard as \"yeah\" at ~11.5 s (not a lyric word, listed in hits only)"
+   "note": "whispered count #2: the second \"one\" is not whispered (isolated-syllable ASR: why/two/three/five/hey), followed by a short extra whisper heard as \"yeah\" at ~11.5 s (not a lyric word, listed in hits only)",
+   "verify": {
+    "whisper": "One, two, three, five, eight.",
+    "parakeet": "One, two, three, size, eight down.",
+    "match": 1.0
+   }
   },
   {
    "n": 2,
@@ -2241,6 +2325,8 @@
    "text": "Out of the sea with salt in our lungs,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "low",
+   "delivery": "sung",
    "repeat": false,
    "start": 13.05,
    "end": 15.899,
@@ -2255,11 +2341,11 @@
     {
      "w": "of",
      "start": 13.35,
-     "end": 13.564
+     "end": 13.425
     },
     {
      "w": "the",
-     "start": 13.569,
+     "start": 13.43,
      "end": 13.774
     },
     {
@@ -2270,11 +2356,11 @@
     {
      "w": "with",
      "start": 14.178,
-     "end": 14.412
+     "end": 14.255
     },
     {
      "w": "salt",
-     "start": 14.417,
+     "start": 14.26,
      "end": 14.821
     },
     {
@@ -2285,17 +2371,19 @@
     {
      "w": "our",
      "start": 14.879,
-     "end": 15.116,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 15.116
     },
     {
      "w": "lungs",
      "start": 15.121,
      "end": 15.899
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Out of the sea with salt in our lungs",
+    "parakeet": "Out of the sea we're sobbing our lungs",
+    "match": 1.0
+   }
   },
   {
    "n": 3,
@@ -2305,6 +2393,8 @@
    "text": "fin into foot into hand, we were young;",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 18.074,
    "end": 21.162,
@@ -2344,20 +2434,19 @@
     {
      "w": "were",
      "start": 20.019,
-     "end": 20.294,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 20.294
     },
     {
      "w": "young",
      "start": 20.299,
-     "end": 21.162,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 21.162
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Fit into foot into hand, we were young",
+    "parakeet": "Feeling to foot into hand and we were young",
+    "match": 0.88
+   }
   },
   {
    "n": 4,
@@ -2367,6 +2456,8 @@
    "text": "carried the egg through the dust and the mud,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 23.407,
    "end": 27.298,
@@ -2376,29 +2467,26 @@
     {
      "w": "carried",
      "start": 23.407,
-     "end": 23.861
+     "end": 23.67
     },
     {
      "w": "the",
-     "start": 23.866,
+     "start": 23.675,
      "end": 24.034
     },
     {
      "w": "egg",
      "start": 24.039,
-     "end": 24.3,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 24.3
     },
     {
      "w": "through",
      "start": 24.305,
-     "end": 24.619
+     "end": 24.53
     },
     {
      "w": "the",
-     "start": 24.624,
+     "start": 24.535,
      "end": 24.694
     },
     {
@@ -2414,17 +2502,19 @@
     {
      "w": "the",
      "start": 25.239,
-     "end": 25.367,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 25.367
     },
     {
      "w": "mud",
      "start": 25.372,
      "end": 27.298
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Carried the egg through the dust and the mud See",
+    "parakeet": "Carried the egg through the dust and the mud",
+    "match": 1.0
+   }
   },
   {
    "n": 5,
@@ -2434,9 +2524,11 @@
    "text": "seeds in the dark for the waking flood.",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "low",
+   "delivery": "sung",
    "repeat": false,
    "start": 27.318,
-   "end": 32.157,
+   "end": 32.162,
    "bar": 11,
    "beat": 3.01,
    "words": [
@@ -2458,11 +2550,11 @@
     {
      "w": "dark",
      "start": 28.635,
-     "end": 29.528
+     "end": 29.385
     },
     {
      "w": "for",
-     "start": 29.533,
+     "start": 29.39,
      "end": 29.782
     },
     {
@@ -2473,14 +2565,19 @@
     {
      "w": "waking",
      "start": 30.062,
-     "end": 31.134
+     "end": 30.955
     },
     {
      "w": "flood",
-     "start": 31.139,
-     "end": 32.157
+     "start": 30.96,
+     "end": 32.162
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Seeds in the dark for the waking flood",
+    "parakeet": "Seeds in the dark for the waking flood.",
+    "match": 1.0
+   }
   },
   {
    "n": 6,
@@ -2490,15 +2587,17 @@
    "text": "Snowflake in the boundless night,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "low",
+   "delivery": "sung",
    "repeat": false,
-   "start": 32.686,
+   "start": 32.625,
    "end": 35.479,
    "bar": 13,
-   "beat": 3.33,
+   "beat": 3.24,
    "words": [
     {
      "w": "Snowflake",
-     "start": 32.686,
+     "start": 32.625,
      "end": 33.404
     },
     {
@@ -2521,7 +2620,12 @@
      "start": 34.397,
      "end": 35.479
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Snowflake in the ground last night",
+    "parakeet": "Snowflake in the boundless night",
+    "match": 1.0
+   }
   },
   {
    "n": 7,
@@ -2531,6 +2635,8 @@
    "text": "a chord that's searching through the fog,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 35.499,
    "end": 38.053,
@@ -2550,11 +2656,11 @@
     {
      "w": "that's",
      "start": 35.998,
-     "end": 36.312
+     "end": 36.12
     },
     {
      "w": "searching",
-     "start": 36.317,
+     "start": 36.125,
      "end": 36.951
     },
     {
@@ -2572,7 +2678,12 @@
      "start": 37.595,
      "end": 38.053
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "A cord that's searching through the fog Coming in",
+    "parakeet": "A cord that's searching through the fog coming in.",
+    "match": 0.86
+   }
   },
   {
    "n": 8,
@@ -2582,6 +2693,8 @@
    "text": "counting out in bursts of light,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 38.073,
    "end": 40.628,
@@ -2617,11 +2730,14 @@
      "w": "light",
      "start": 39.54,
      "end": 40.628,
-     "flags": [
-      "ctc_spread0.26"
-     ]
+     "conf": "medium"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Coming out in bursts of light",
+    "parakeet": "Coming out in births of light",
+    "match": 0.83
+   }
   },
   {
    "n": 9,
@@ -2630,7 +2746,9 @@
    "line_in_section": 3,
    "text": "a one-way dialogue:",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 40.648,
    "end": 43.247,
@@ -2652,7 +2770,12 @@
      "start": 42.154,
      "end": 43.247
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "A one-way dialogue",
+    "parakeet": "A runway dialogue",
+    "match": 1.0
+   }
   },
   {
    "n": 10,
@@ -2661,7 +2784,9 @@
    "line_in_section": 4,
    "text": "a pattern no dead star could make.",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 43.267,
    "end": 45.995,
@@ -2703,7 +2828,12 @@
      "start": 45.402,
      "end": 45.995
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "A pattern, no death, star couldn't lay",
+    "parakeet": "A pattern no death couldn't lay hearing",
+    "match": 0.57
+   }
   },
   {
    "n": 11,
@@ -2712,7 +2842,9 @@
    "line_in_section": 5,
    "text": "Hear it, and you'll know we're awake.",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 46.015,
    "end": 51.678,
@@ -2723,9 +2855,7 @@
      "w": "Hear",
      "start": 46.015,
      "end": 46.295,
-     "flags": [
-      "ctc_spread0.24"
-     ]
+     "conf": "medium"
     },
     {
      "w": "it",
@@ -2740,10 +2870,7 @@
     {
      "w": "you'll",
      "start": 46.509,
-     "end": 46.784,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 46.784
     },
     {
      "w": "know",
@@ -2759,11 +2886,14 @@
      "w": "awake",
      "start": 47.732,
      "end": 51.678,
-     "flags": [
-      "ctc_spread0.62"
-     ]
+     "conf": "low"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Hear it and you'll know we're awake",
+    "parakeet": "And you'll know where it works.",
+    "match": 1.0
+   }
   },
   {
    "n": 12,
@@ -2772,7 +2902,9 @@
    "line_in_section": 0,
    "text": "Can't be sure that anyone is there,",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 51.698,
    "end": 54.259,
@@ -2787,11 +2919,11 @@
     {
      "w": "be",
      "start": 52.221,
-     "end": 52.456
+     "end": 52.3
     },
     {
      "w": "sure",
-     "start": 52.461,
+     "start": 52.305,
      "end": 52.785
     },
     {
@@ -2812,12 +2944,14 @@
     {
      "w": "there",
      "start": 53.809,
-     "end": 54.259,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 54.259
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Can't be sure that anyone is there",
+    "parakeet": "They can't be sure that anyone is there",
+    "match": 1.0
+   }
   },
   {
    "n": 13,
@@ -2826,7 +2960,9 @@
    "line_in_section": 1,
    "text": "message in a bottle, a mantra, a prayer,",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "A_breathy",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 54.279,
    "end": 56.651,
@@ -2836,10 +2972,7 @@
     {
      "w": "message",
      "start": 54.279,
-     "end": 54.85,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 54.85
     },
     {
      "w": "in",
@@ -2849,10 +2982,7 @@
     {
      "w": "a",
      "start": 54.919,
-     "end": 55.07,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 55.07
     },
     {
      "w": "bottle",
@@ -2862,18 +2992,12 @@
     {
      "w": "a",
      "start": 55.504,
-     "end": 55.539,
-     "flags": [
-      "ctc_spread0.20"
-     ]
+     "end": 55.539
     },
     {
      "w": "mantra",
      "start": 55.544,
-     "end": 56.053,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 56.053
     },
     {
      "w": "a",
@@ -2885,7 +3009,12 @@
      "start": 56.307,
      "end": 56.651
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "A message in a bottle of mantra, a prayer book.",
+    "parakeet": "Messaging a boy mantra, a prayer.",
+    "match": 0.88
+   }
   },
   {
    "n": 14,
@@ -2894,7 +3023,9 @@
    "line_in_section": 2,
    "text": "but if you are, I'm counting on you.",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 56.671,
    "end": 62.134,
@@ -2920,17 +3051,13 @@
      "w": "are",
      "start": 58.307,
      "end": 60.488,
-     "flags": [
-      "ctc_spread0.58"
-     ]
+     "conf": "low"
     },
     {
      "w": "I'm",
      "start": 60.493,
      "end": 60.757,
-     "flags": [
-      "ctc_spread2.20"
-     ]
+     "conf": "low"
     },
     {
      "w": "counting",
@@ -2940,20 +3067,19 @@
     {
      "w": "on",
      "start": 61.509,
-     "end": 61.784,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 61.784
     },
     {
      "w": "you",
      "start": 61.789,
-     "end": 62.134,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 62.134
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "But if you are, I'm counting on you.",
+    "parakeet": "But if you are I'm counting on your silence",
+    "match": 1.0
+   }
   },
   {
    "n": 15,
@@ -2962,7 +3088,9 @@
    "line_in_section": 3,
    "text": "Silent and patient, but I swear",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 62.154,
    "end": 64.569,
@@ -2973,17 +3101,13 @@
      "w": "Silent",
      "start": 62.154,
      "end": 62.573,
-     "flags": [
-      "ctc_spread0.22"
-     ]
+     "conf": "medium"
     },
     {
      "w": "and",
      "start": 62.578,
      "end": 62.792,
-     "flags": [
-      "ctc_spread0.30"
-     ]
+     "conf": "medium"
     },
     {
      "w": "patient",
@@ -2999,16 +3123,19 @@
      "w": "I",
      "start": 63.7,
      "end": 63.985,
-     "flags": [
-      "ctc_spread0.28"
-     ]
+     "conf": "medium"
     },
     {
      "w": "swear",
      "start": 63.99,
      "end": 64.569
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "You're silent and patient, but I swear.",
+    "parakeet": "",
+    "match": 1.0
+   }
   },
   {
    "n": 16,
@@ -3018,6 +3145,8 @@
    "text": "in the white noise I can hear you breathe somewhere.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 64.589,
    "end": 67.287,
@@ -3027,10 +3156,7 @@
     {
      "w": "in",
      "start": 64.589,
-     "end": 64.808,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 64.808
     },
     {
      "w": "the",
@@ -3071,16 +3197,19 @@
      "w": "breathe",
      "start": 66.43,
      "end": 66.654,
-     "flags": [
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "somewhere",
      "start": 66.659,
      "end": 67.287
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "In the white noise, I can hear you breathe somewhere.",
+    "parakeet": "And the white noise, I can hear somewhere if",
+    "match": 1.0
+   }
   },
   {
    "n": 17,
@@ -3089,7 +3218,9 @@
    "line_in_section": 5,
    "text": "If you are, I'm counting on you.",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 67.307,
    "end": 73.014,
@@ -3100,9 +3231,7 @@
      "w": "If",
      "start": 67.307,
      "end": 67.866,
-     "flags": [
-      "ctc_spread0.22"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
@@ -3113,9 +3242,7 @@
      "w": "are",
      "start": 68.594,
      "end": 70.744,
-     "flags": [
-      "ctc_spread0.66"
-     ]
+     "conf": "low"
     },
     {
      "w": "I'm",
@@ -3137,7 +3264,12 @@
      "start": 71.991,
      "end": 73.014
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "If you are, I'm counting on you",
+    "parakeet": "And if you are I'm counting on you",
+    "match": 1.0
+   }
   },
   {
    "n": 18,
@@ -3147,6 +3279,8 @@
    "text": "(One! One! Two! Three! Five! Eight!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": false,
    "start": 73.034,
    "end": 75.977,
@@ -3157,17 +3291,13 @@
      "w": "One",
      "start": 73.034,
      "end": 73.653,
-     "flags": [
-      "ctc_spread0.72"
-     ]
+     "conf": "low"
     },
     {
      "w": "One",
      "start": 73.658,
      "end": 74.276,
-     "flags": [
-      "ctc_spread0.24"
-     ]
+     "conf": "medium"
     },
     {
      "w": "Two",
@@ -3188,7 +3318,12 @@
    "unsung_words": [
     "Eight"
    ],
-   "note": "sung without \"Eight!\" - the \"Counting on you!\" shout takes its place"
+   "note": "sung without \"Eight!\" - the \"Counting on you!\" shout takes its place",
+   "verify": {
+    "whisper": "One, one, two, three, five.",
+    "parakeet": "One, one, two, three, side.",
+    "match": 1.0
+   }
   },
   {
    "n": 19,
@@ -3198,6 +3333,8 @@
    "text": "(Counting on you!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "shouted",
    "repeat": false,
    "start": 76.247,
    "end": 78.157,
@@ -3208,28 +3345,26 @@
      "w": "Counting",
      "start": 76.247,
      "end": 76.994,
-     "flags": [
-      "ctc_spread0.60"
-     ]
+     "conf": "low"
     },
     {
      "w": "on",
      "start": 76.999,
      "end": 77.2,
-     "flags": [
-      "ctc_spread0.44",
-      "no_onset"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
      "start": 77.205,
      "end": 78.157,
-     "flags": [
-      "ctc_spread0.44"
-     ]
+     "conf": "medium"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Pounding on you, what?",
+    "parakeet": "Counting on you",
+    "match": 1.0
+   }
   },
   {
    "n": 20,
@@ -3239,6 +3374,8 @@
    "text": "(One! One! Two! Three! Five! Eight!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": true,
    "start": 78.177,
    "end": 81.375,
@@ -3249,17 +3386,13 @@
      "w": "One",
      "start": 78.177,
      "end": 78.811,
-     "flags": [
-      "ctc_spread1.30"
-     ]
+     "conf": "low"
     },
     {
      "w": "One",
      "start": 78.816,
      "end": 79.385,
-     "flags": [
-      "ctc_spread1.88"
-     ]
+     "conf": "low"
     },
     {
      "w": "Two",
@@ -3270,23 +3403,24 @@
      "w": "Three",
      "start": 80.043,
      "end": 80.687,
-     "flags": [
-      "ctc_spread1.64"
-     ]
+     "conf": "low"
     },
     {
      "w": "Five",
      "start": 80.692,
      "end": 81.375,
-     "flags": [
-      "ctc_spread1.10"
-     ]
+     "conf": "low"
     }
    ],
    "unsung_words": [
     "Eight"
    ],
-   "note": "post-chorus count repeated (no \"Eight!\")"
+   "note": "post-chorus count repeated (no \"Eight!\")",
+   "verify": {
+    "whisper": "One, one, two, three, five.",
+    "parakeet": "One, one, two, three, five, count.",
+    "match": 1.0
+   }
   },
   {
    "n": 21,
@@ -3296,6 +3430,8 @@
    "text": "(Counting on you!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "shouted",
    "repeat": true,
    "start": 81.395,
    "end": 82.527,
@@ -3306,29 +3442,27 @@
      "w": "Counting",
      "start": 81.395,
      "end": 82.014,
-     "flags": [
-      "ctc_spread0.66"
-     ]
+     "conf": "low"
     },
     {
      "w": "on",
      "start": 82.019,
      "end": 82.274,
-     "flags": [
-      "ctc_spread0.50"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
      "start": 82.279,
      "end": 82.527,
-     "flags": [
-      "ctc_spread0.30",
-      "no_onset"
-     ]
+     "conf": "medium"
     }
    ],
-   "note": "repeated"
+   "note": "repeated",
+   "verify": {
+    "whisper": "Pounding on you",
+    "parakeet": "How do I know it'd be",
+    "match": 0.67
+   }
   },
   {
    "n": 22,
@@ -3338,9 +3472,11 @@
    "text": "Priests in the smoke wanted never to die,",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 82.547,
-   "end": 85.141,
+   "end": 84.975,
    "bar": 32,
    "beat": 4.85,
    "words": [
@@ -3382,9 +3518,14 @@
     {
      "w": "die",
      "start": 84.528,
-     "end": 85.141
+     "end": 84.975
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Be soon to smoke one and never to die",
+    "parakeet": "Usually to smoke one and never to die",
+    "match": 0.5
+   }
   },
   {
    "n": 23,
@@ -3394,28 +3535,27 @@
    "text": "sulfur and saltpeter, thunder in the sky;",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
-   "start": 85.161,
+   "start": 84.995,
    "end": 87.369,
    "bar": 33,
-   "beat": 4.95,
+   "beat": 4.69,
    "words": [
     {
      "w": "sulfur",
-     "start": 85.161,
+     "start": 84.995,
      "end": 85.624
     },
     {
      "w": "and",
      "start": 85.629,
-     "end": 85.8,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 85.73
     },
     {
      "w": "saltpeter",
-     "start": 85.805,
+     "start": 85.735,
      "end": 86.419
     },
     {
@@ -3426,22 +3566,24 @@
     {
      "w": "in",
      "start": 86.893,
-     "end": 87.057
+     "end": 86.97
     },
     {
      "w": "the",
-     "start": 87.062,
-     "end": 87.097
+     "start": 86.975,
+     "end": 87.057
     },
     {
      "w": "sky",
-     "start": 87.102,
-     "end": 87.369,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "start": 87.062,
+     "end": 87.369
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Sulfur and Salpita, thunder in the sky",
+    "parakeet": "Sulphur and salped, thunder in the sky.",
+    "match": 0.75
+   }
   },
   {
    "n": 24,
@@ -3451,6 +3593,8 @@
    "text": "looked for a life with no end, and they found",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 87.389,
    "end": 89.975,
@@ -3460,10 +3604,7 @@
     {
      "w": "looked",
      "start": 87.389,
-     "end": 87.935,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 87.935
     },
     {
      "w": "for",
@@ -3478,10 +3619,7 @@
     {
      "w": "life",
      "start": 88.289,
-     "end": 88.539,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 88.539
     },
     {
      "w": "with",
@@ -3506,17 +3644,19 @@
     {
      "w": "they",
      "start": 89.429,
-     "end": 89.641,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 89.641
     },
     {
      "w": "found",
      "start": 89.646,
      "end": 89.975
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "For a life with no end and they found",
+    "parakeet": "For a life with no end and they found it.",
+    "match": 0.9
+   }
   },
   {
    "n": 25,
@@ -3526,6 +3666,8 @@
    "text": "an end with no life that could level the ground.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 89.995,
    "end": 92.58,
@@ -3582,7 +3724,12 @@
      "start": 92.151,
      "end": 92.58
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "And end with no life that could level the ground",
+    "parakeet": "And men with no life that could level the ground",
+    "match": 0.9
+   }
   },
   {
    "n": 26,
@@ -3592,6 +3739,8 @@
    "text": "Eighty-three, the satellites saw five,",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 92.6,
    "end": 95.343,
@@ -3607,30 +3756,30 @@
      "w": "the",
      "start": 93.29,
      "end": 93.425,
-     "flags": [
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "satellites",
      "start": 93.43,
      "end": 94.116,
-     "flags": [
-      "monotonic_fix",
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "saw",
      "start": 94.121,
-     "end": 94.71
+     "end": 94.62
     },
     {
      "w": "five",
-     "start": 94.715,
+     "start": 94.625,
      "end": 95.343
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "E3, the satellite saw five every-",
+    "parakeet": "the satellite spa five every",
+    "match": 0.5
+   }
   },
   {
    "n": 27,
@@ -3639,7 +3788,9 @@
    "line_in_section": 5,
    "text": "every rule said call it first strike;",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 95.363,
    "end": 97.833,
@@ -3654,10 +3805,7 @@
     {
      "w": "rule",
      "start": 95.649,
-     "end": 96.012,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 96.012
     },
     {
      "w": "said",
@@ -3677,17 +3825,19 @@
     {
      "w": "first",
      "start": 96.719,
-     "end": 97.229,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 97.229
     },
     {
      "w": "strike",
      "start": 97.234,
      "end": 97.833
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Every rule said call it first Stride",
+    "parakeet": "Try every rule, said colour first.",
+    "match": 0.86
+   }
   },
   {
    "n": 28,
@@ -3697,6 +3847,8 @@
    "text": "Petrov knew that's not what the end looks like,",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 97.883,
    "end": 100.292,
@@ -3707,18 +3859,16 @@
      "w": "Petrov",
      "start": 97.883,
      "end": 98.212,
-     "flags": [
-      "ctc_spread0.30"
-     ]
+     "conf": "medium"
     },
     {
      "w": "knew",
      "start": 98.217,
-     "end": 98.446
+     "end": 98.36
     },
     {
      "w": "that's",
-     "start": 98.451,
+     "start": 98.365,
      "end": 98.576
     },
     {
@@ -3751,7 +3901,12 @@
      "start": 99.893,
      "end": 100.292
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Chuck knew that's not what the end looks like Ignore",
+    "parakeet": "True, that's not what the end looks like.",
+    "match": 0.89
+   }
   },
   {
    "n": 29,
@@ -3761,6 +3916,8 @@
    "text": "ignored all previous instructions. We're alive.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 100.312,
    "end": 102.966,
@@ -3771,9 +3928,7 @@
      "w": "ignored",
      "start": 100.312,
      "end": 100.756,
-     "flags": [
-      "ctc_spread0.26"
-     ]
+     "conf": "medium"
     },
     {
      "w": "all",
@@ -3800,7 +3955,12 @@
      "start": 102.238,
      "end": 102.966
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Like ignored all previous instructions were a lie.",
+    "parakeet": "Ignored all previous instructions were a lie.",
+    "match": 0.83
+   }
   },
   {
    "n": 30,
@@ -3810,6 +3970,8 @@
    "text": "Secret list of every near-miss and disaster,",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 102.986,
    "end": 106.119,
@@ -3851,7 +4013,12 @@
      "start": 105.341,
      "end": 106.119
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Secret list of every nearness and disaster running",
+    "parakeet": "Secret list of every nearness and disaster running",
+    "match": 0.75
+   }
   },
   {
    "n": 31,
@@ -3861,6 +4028,8 @@
    "text": "running total no one ever knew:",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 106.139,
    "end": 107.985,
@@ -3897,7 +4066,12 @@
      "start": 107.416,
      "end": 107.985
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "The running total no one ever knew.",
+    "parakeet": "Running total, no one ever knew.",
+    "match": 1.0
+   }
   },
   {
    "n": 32,
@@ -3907,6 +4081,8 @@
    "text": "coin flips, all heads, a hundred in a row,",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "low",
+   "delivery": "sung",
    "repeat": false,
    "start": 108.005,
    "end": 110.589,
@@ -3956,12 +4132,14 @@
     {
      "w": "row",
      "start": 109.959,
-     "end": 110.589,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 110.589
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Coin, flip, saw, hit the hundred in a row The old",
+    "parakeet": "Coin flips all had a hundred in a row",
+    "match": 0.89
+   }
   },
   {
    "n": 33,
@@ -3971,6 +4149,8 @@
    "text": "the only road from here to you.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 110.609,
    "end": 113.158,
@@ -3981,62 +4161,50 @@
      "w": "the",
      "start": 110.609,
      "end": 110.703,
-     "flags": [
-      "ctc_spread0.36"
-     ]
+     "conf": "medium"
     },
     {
      "w": "only",
      "start": 110.708,
      "end": 111.134,
-     "flags": [
-      "ctc_spread0.50"
-     ]
+     "conf": "medium"
     },
     {
      "w": "road",
      "start": 111.139,
      "end": 111.556,
-     "flags": [
-      "ctc_spread0.58",
-      "no_onset"
-     ]
+     "conf": "low"
     },
     {
      "w": "from",
      "start": 111.561,
      "end": 111.751,
-     "flags": [
-      "ctc_spread0.46"
-     ]
+     "conf": "medium"
     },
     {
      "w": "here",
      "start": 111.756,
      "end": 112.22,
-     "flags": [
-      "ctc_spread0.30"
-     ]
+     "conf": "medium"
     },
     {
      "w": "to",
      "start": 112.225,
      "end": 112.395,
-     "flags": [
-      "ctc_spread1.58"
-     ]
+     "conf": "low"
     },
     {
      "w": "you",
      "start": 112.4,
      "end": 113.158,
-     "flags": [
-      "ctc_spread0.36",
-      "parakeet_diff-0.72",
-      "no_onset"
-     ]
+     "conf": "medium"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "The only road from here to here.",
+    "parakeet": "The only route from here to you",
+    "match": 0.86
+   }
   },
   {
    "n": 34,
@@ -4045,7 +4213,9 @@
    "line_in_section": 0,
    "text": "Can't be sure that anyone is there,",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 113.178,
    "end": 115.637,
@@ -4056,21 +4226,17 @@
      "w": "Can't",
      "start": 113.178,
      "end": 113.432,
-     "flags": [
-      "ctc_spread0.36"
-     ]
+     "conf": "medium"
     },
     {
      "w": "be",
      "start": 113.437,
-     "end": 113.746,
-     "flags": [
-      "ctc_spread0.26"
-     ]
+     "end": 113.58,
+     "conf": "medium"
     },
     {
      "w": "sure",
-     "start": 113.751,
+     "start": 113.585,
      "end": 114.111
     },
     {
@@ -4086,14 +4252,19 @@
     {
      "w": "is",
      "start": 114.959,
-     "end": 115.153
+     "end": 115.045
     },
     {
      "w": "there",
-     "start": 115.158,
+     "start": 115.05,
      "end": 115.637
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Be sure that anyone is there.",
+    "parakeet": "I can't be sure that anyone is there",
+    "match": 1.0
+   }
   },
   {
    "n": 35,
@@ -4102,7 +4273,9 @@
    "line_in_section": 1,
    "text": "message in a bottle, a mantra, a prayer,",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 115.657,
    "end": 117.917,
@@ -4122,19 +4295,12 @@
     {
      "w": "a",
      "start": 116.189,
-     "end": 116.224,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 116.224
     },
     {
      "w": "bottle",
      "start": 116.229,
-     "end": 116.75,
-     "flags": [
-      "ctc_spread0.20",
-      "monotonic_fix"
-     ]
+     "end": 116.75
     },
     {
      "w": "a",
@@ -4156,7 +4322,12 @@
      "start": 117.553,
      "end": 117.917
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "A message in a bottle, a mantra, a prayer book",
+    "parakeet": "Message in a bottle, a mantra, a prayer book.",
+    "match": 1.0
+   }
   },
   {
    "n": 36,
@@ -4165,7 +4336,9 @@
    "line_in_section": 2,
    "text": "but if you are, I'm counting on you.",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 117.937,
    "end": 123.3,
@@ -4181,11 +4354,7 @@
      "w": "if",
      "start": 118.26,
      "end": 118.825,
-     "flags": [
-      "parakeet_diff+0.41",
-      "monotonic_fix",
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
@@ -4196,9 +4365,7 @@
      "w": "are",
      "start": 119.568,
      "end": 121.678,
-     "flags": [
-      "ctc_spread0.62"
-     ]
+     "conf": "low"
     },
     {
      "w": "I'm",
@@ -4220,7 +4387,12 @@
      "start": 122.861,
      "end": 123.3
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "But if you are, I'm counting on your silence.",
+    "parakeet": "But if you are I'm counting on your silent",
+    "match": 0.88
+   }
   },
   {
    "n": 37,
@@ -4229,7 +4401,9 @@
    "line_in_section": 3,
    "text": "Silent and patient, but I swear",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "low",
+   "delivery": "sung",
    "repeat": false,
    "start": 123.32,
    "end": 125.804,
@@ -4240,9 +4414,7 @@
      "w": "Silent",
      "start": 123.32,
      "end": 123.878,
-     "flags": [
-      "ctc_spread0.38"
-     ]
+     "conf": "medium"
     },
     {
      "w": "and",
@@ -4252,10 +4424,7 @@
     {
      "w": "patient",
      "start": 123.949,
-     "end": 124.692,
-     "flags": [
-      "monotonic_fix"
-     ]
+     "end": 124.692
     },
     {
      "w": "but",
@@ -4266,17 +4435,19 @@
      "w": "I",
      "start": 124.879,
      "end": 125.175,
-     "flags": [
-      "ctc_spread0.22",
-      "no_onset"
-     ]
+     "conf": "medium"
     },
     {
      "w": "swear",
      "start": 125.18,
      "end": 125.804
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "I'm impatient, but I swear in the",
+    "parakeet": "Silent and impatient, but I swear in the",
+    "match": 0.83
+   }
   },
   {
    "n": 38,
@@ -4285,7 +4456,9 @@
    "line_in_section": 4,
    "text": "in the white noise I can hear you breathe somewhere.",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 125.824,
    "end": 128.378,
@@ -4342,7 +4515,12 @@
      "start": 127.75,
      "end": 128.378
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "In the white noise, I can hear you breathe somewhere.",
+    "parakeet": "And the white noise, I think you breathe somewhere there.",
+    "match": 1.0
+   }
   },
   {
    "n": 39,
@@ -4351,7 +4529,9 @@
    "line_in_section": 5,
    "text": "If you are, I'm counting on you.",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 128.398,
    "end": 134.035,
@@ -4362,9 +4542,7 @@
      "w": "If",
      "start": 128.398,
      "end": 128.967,
-     "flags": [
-      "ctc_spread0.22"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
@@ -4375,9 +4553,7 @@
      "w": "are",
      "start": 129.705,
      "end": 131.84,
-     "flags": [
-      "ctc_spread0.54"
-     ]
+     "conf": "low"
     },
     {
      "w": "I'm",
@@ -4393,20 +4569,20 @@
      "w": "on",
      "start": 132.839,
      "end": 133.137,
-     "flags": [
-      "ctc_spread0.38",
-      "no_onset"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
      "start": 133.142,
      "end": 134.035,
-     "flags": [
-      "ctc_spread0.42"
-     ]
+     "conf": "medium"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "If you are, I'm counting on you",
+    "parakeet": "I'm counting on you.",
+    "match": 1.0
+   }
   },
   {
    "n": 40,
@@ -4416,6 +4592,8 @@
    "text": "(One! One! Two! Three! Five! Eight!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": false,
    "start": 134.055,
    "end": 137.188,
@@ -4426,9 +4604,7 @@
      "w": "One",
      "start": 134.055,
      "end": 134.649,
-     "flags": [
-      "ctc_spread0.88"
-     ]
+     "conf": "low"
     },
     {
      "w": "One",
@@ -4454,7 +4630,12 @@
    "unsung_words": [
     "Eight"
    ],
-   "note": "sung without \"Eight!\""
+   "note": "sung without \"Eight!\"",
+   "verify": {
+    "whisper": "One, one, two, three, five, count",
+    "parakeet": "One, one, two, three, five, count.",
+    "match": 1.0
+   }
   },
   {
    "n": 41,
@@ -4464,6 +4645,8 @@
    "text": "(Counting on you!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "shouted",
    "repeat": false,
    "start": 137.208,
    "end": 139.089,
@@ -4474,9 +4657,7 @@
      "w": "Counting",
      "start": 137.208,
      "end": 137.882,
-     "flags": [
-      "ctc_spread0.34"
-     ]
+     "conf": "medium"
     },
     {
      "w": "on",
@@ -4488,7 +4669,12 @@
      "start": 138.206,
      "end": 139.089
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Coming on you",
+    "parakeet": "Charming on you",
+    "match": 0.67
+   }
   },
   {
    "n": 42,
@@ -4498,6 +4684,8 @@
    "text": "(One! One! Two! Three! Five! Eight!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "shouted",
    "repeat": true,
    "start": 139.109,
    "end": 142.112,
@@ -4533,7 +4721,12 @@
    "unsung_words": [
     "Eight"
    ],
-   "note": "post-chorus count repeated (no \"Eight!\")"
+   "note": "post-chorus count repeated (no \"Eight!\")",
+   "verify": {
+    "whisper": "One, two, three, five.",
+    "parakeet": "One, one, two, three, five,",
+    "match": 1.0
+   }
   },
   {
    "n": 43,
@@ -4543,6 +4736,8 @@
    "text": "(Counting on you!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "shouted",
    "repeat": true,
    "start": 142.187,
    "end": 143.723,
@@ -4558,21 +4753,21 @@
      "w": "on",
      "start": 142.915,
      "end": 143.194,
-     "flags": [
-      "ctc_spread0.50"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
      "start": 143.199,
      "end": 143.723,
-     "flags": [
-      "ctc_spread0.74",
-      "no_onset"
-     ]
+     "conf": "low"
     }
    ],
-   "note": "repeated"
+   "note": "repeated",
+   "verify": {
+    "whisper": "Coming in on you",
+    "parakeet": "Shiny Maya",
+    "match": 0.67
+   }
   },
   {
    "n": 44,
@@ -4582,6 +4777,8 @@
    "text": "They say the forest's dark,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 143.843,
    "end": 146.362,
@@ -4591,11 +4788,11 @@
     {
      "w": "They",
      "start": 143.843,
-     "end": 144.167
+     "end": 143.98
     },
     {
      "w": "say",
-     "start": 144.172,
+     "start": 143.985,
      "end": 144.536
     },
     {
@@ -4613,7 +4810,12 @@
      "start": 145.489,
      "end": 146.362
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "They say the forest's dark",
+    "parakeet": "They say the forest's dark.",
+    "match": 1.0
+   }
   },
   {
    "n": 45,
@@ -4623,6 +4825,8 @@
    "text": "every hunter holds its breath,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 146.407,
    "end": 148.907,
@@ -4654,7 +4858,12 @@
      "start": 147.979,
      "end": 148.907
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Every hunter holds its breath And he",
+    "parakeet": "Every hunter holds its breath.",
+    "match": 1.0
+   }
   },
   {
    "n": 46,
@@ -4664,9 +4873,11 @@
    "text": "any world that lights a spark",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 148.927,
-   "end": 151.62,
+   "end": 150.96,
    "bar": 59,
    "beat": 1.45,
    "words": [
@@ -4678,10 +4889,7 @@
     {
      "w": "world",
      "start": 149.279,
-     "end": 149.56,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 149.56
     },
     {
      "w": "that",
@@ -4696,14 +4904,19 @@
     {
      "w": "a",
      "start": 150.244,
-     "end": 150.493
+     "end": 150.32
     },
     {
      "w": "spark",
-     "start": 150.498,
-     "end": 151.62
+     "start": 150.325,
+     "end": 150.96
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Any world that lights a spark is like",
+    "parakeet": "Any world that lights a spark is a",
+    "match": 1.0
+   }
   },
   {
    "n": 47,
@@ -4712,7 +4925,9 @@
    "line_in_section": 3,
    "text": "is lighting its own death.",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 151.64,
    "end": 153.342,
@@ -4727,10 +4942,7 @@
     {
      "w": "lighting",
      "start": 151.859,
-     "end": 152.508,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 152.508
     },
     {
      "w": "its",
@@ -4747,7 +4959,12 @@
      "start": 153.037,
      "end": 153.342
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Is lighting its own death But",
+    "parakeet": "is lighting its own death but",
+    "match": 1.0
+   }
   },
   {
    "n": 48,
@@ -4756,7 +4973,9 @@
    "line_in_section": 4,
    "text": "But fear's a chain, and chains are links,",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "low",
+   "delivery": "sung",
    "repeat": false,
    "start": 153.376,
    "end": 155.881,
@@ -4776,11 +4995,11 @@
     {
      "w": "a",
      "start": 154.07,
-     "end": 154.19
+     "end": 154.145
     },
     {
      "w": "chain",
-     "start": 154.195,
+     "start": 154.15,
      "end": 154.663
     },
     {
@@ -4803,7 +5022,12 @@
      "start": 155.452,
      "end": 155.881
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "But fear's a chain and chains are links and",
+    "parakeet": "But fears a chain and chains are links and",
+    "match": 1.0
+   }
   },
   {
    "n": 49,
@@ -4812,7 +5036,9 @@
    "line_in_section": 5,
    "text": "and every link's a hand that can let go:",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 155.901,
    "end": 158.744,
@@ -4864,7 +5090,12 @@
      "start": 158.405,
      "end": 158.744
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "And every link's a hand that can let go.",
+    "parakeet": "And every link so Hannah can let go six",
+    "match": 1.0
+   }
   },
   {
    "n": 50,
@@ -4874,6 +5105,8 @@
    "text": "sixty-two, depth charges falling,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "low",
+   "delivery": "sung",
    "repeat": false,
    "start": 158.764,
    "end": 161.214,
@@ -4888,11 +5121,11 @@
     {
      "w": "depth",
      "start": 159.642,
-     "end": 160.006
+     "end": 159.93
     },
     {
      "w": "charges",
-     "start": 160.011,
+     "start": 159.935,
      "end": 160.47
     },
     {
@@ -4900,7 +5133,12 @@
      "start": 160.475,
      "end": 161.214
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "62 depth charges falling too",
+    "parakeet": "62 death charges falling to",
+    "match": 1.0
+   }
   },
   {
    "n": 51,
@@ -4909,7 +5147,9 @@
    "line_in_section": 7,
    "text": "two said fire. Arkhipov said no.",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 161.234,
    "end": 163.648,
@@ -4934,14 +5174,11 @@
     {
      "w": "Arkhipov",
      "start": 162.189,
-     "end": 162.81,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 162.715
     },
     {
      "w": "said",
-     "start": 162.815,
+     "start": 162.72,
      "end": 163.339
     },
     {
@@ -4949,7 +5186,12 @@
      "start": 163.344,
      "end": 163.648
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Bang 2 said fire, Kipoff said no",
+    "parakeet": "Two said fire can pop set no",
+    "match": 0.83
+   }
   },
   {
    "n": 52,
@@ -4958,7 +5200,9 @@
    "line_in_section": 0,
    "text": "Hunters never make it very far,",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 163.668,
    "end": 166.911,
@@ -4969,9 +5213,7 @@
      "w": "Hunters",
      "start": 163.668,
      "end": 164.411,
-     "flags": [
-      "ctc_spread0.50"
-     ]
+     "conf": "medium"
     },
     {
      "w": "never",
@@ -4998,7 +5240,12 @@
      "start": 166.302,
      "end": 166.911
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Hunters never make it very far.",
+    "parakeet": "No hunters never make it very far",
+    "match": 1.0
+   }
   },
   {
    "n": 53,
@@ -5007,7 +5254,9 @@
    "line_in_section": 1,
    "text": "fire at the dark, at every star,",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 166.931,
    "end": 169.42,
@@ -5022,10 +5271,7 @@
     {
      "w": "at",
      "start": 167.239,
-     "end": 167.38,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 167.38
     },
     {
      "w": "the",
@@ -5041,9 +5287,7 @@
      "w": "at",
      "start": 168.038,
      "end": 168.233,
-     "flags": [
-      "ctc_spread0.26"
-     ]
+     "conf": "medium"
     },
     {
      "w": "every",
@@ -5055,7 +5299,12 @@
      "start": 168.816,
      "end": 169.42
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Fire up the dark at every star Burn",
+    "parakeet": "Fire in the dark at every star",
+    "match": 0.86
+   }
   },
   {
    "n": 54,
@@ -5065,6 +5314,8 @@
    "text": "burn, and fall.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 169.44,
    "end": 170.812,
@@ -5086,7 +5337,12 @@
      "start": 170.073,
      "end": 170.812
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Burn and fall",
+    "parakeet": "I'm burning far.",
+    "match": 1.0
+   }
   },
   {
    "n": 55,
@@ -5096,9 +5352,11 @@
    "text": "Only the ones who held their fire",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 170.832,
-   "end": 172.969,
+   "end": 173.231,
    "bar": 67,
    "beat": 4.17,
    "words": [
@@ -5106,9 +5364,7 @@
      "w": "Only",
      "start": 170.832,
      "end": 171.166,
-     "flags": [
-      "ctc_spread0.34"
-     ]
+     "conf": "medium"
     },
     {
      "w": "the",
@@ -5138,9 +5394,14 @@
     {
      "w": "fire",
      "start": 172.608,
-     "end": 172.969
+     "end": 173.231
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Only the ones who held their fire",
+    "parakeet": "Only the ones who held their fire.",
+    "match": 1.0
+   }
   },
   {
    "n": 56,
@@ -5150,28 +5411,22 @@
    "text": "are out there at all.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
-   "start": 172.989,
+   "start": 173.251,
    "end": 175.037,
    "bar": 68,
-   "beat": 3.59,
+   "beat": 4.01,
    "words": [
-    {
-     "w": "are",
-     "start": 172.989,
-     "end": 173.246,
-     "flags": [
-      "no_onset"
-     ]
-    },
     {
      "w": "out",
      "start": 173.251,
-     "end": 173.481
+     "end": 173.33
     },
     {
      "w": "there",
-     "start": 173.486,
+     "start": 173.335,
      "end": 173.64
     },
     {
@@ -5184,7 +5439,16 @@
      "start": 173.99,
      "end": 175.037
     }
-   ]
+   ],
+   "unsung_words": [
+    "are"
+   ],
+   "note": "\"are\" is not sung: \"fire\" is one held D4 note 172.57-173.21 straight into \"out\" (173.29); every ASR pass hears \"...held their fire out there at all\"",
+   "verify": {
+    "whisper": "I'm there at all",
+    "parakeet": "I'm the red wolf.",
+    "match": 0.6
+   }
   },
   {
    "n": 57,
@@ -5194,6 +5458,8 @@
    "text": "(Hold your fire! Show your light!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 175.057,
    "end": 180.066,
@@ -5209,9 +5475,7 @@
      "w": "your",
      "start": 175.476,
      "end": 175.741,
-     "flags": [
-      "parakeet_diff+1.32"
-     ]
+     "conf": "medium"
     },
     {
      "w": "fire",
@@ -5222,24 +5486,25 @@
      "w": "Show",
      "start": 177.636,
      "end": 177.711,
-     "flags": [
-      "parakeet_diff+2.52"
-     ]
+     "conf": "medium"
     },
     {
      "w": "your",
      "start": 177.716,
      "end": 177.99,
-     "flags": [
-      "parakeet_diff+2.68"
-     ]
+     "conf": "medium"
     },
     {
      "w": "light",
      "start": 177.995,
      "end": 180.066
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Hold your fire, show your eyes",
+    "parakeet": "Hold your fire so you can hold your fire.",
+    "match": 0.83
+   }
   },
   {
    "n": 58,
@@ -5249,6 +5514,8 @@
    "text": "(Hold your fire! Show your light!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 180.086,
    "end": 183.862,
@@ -5268,27 +5535,29 @@
     {
      "w": "fire",
      "start": 180.789,
-     "end": 182.66
+     "end": 182.475
     },
     {
      "w": "Show",
-     "start": 182.665,
+     "start": 182.48,
      "end": 182.894
     },
     {
      "w": "your",
      "start": 182.899,
-     "end": 183.039,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 183.039
     },
     {
      "w": "light",
      "start": 183.044,
      "end": 183.862
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Hold your fire, show your life.",
+    "parakeet": "Hold your fire sell your life",
+    "match": 0.83
+   }
   },
   {
    "n": 59,
@@ -5298,6 +5567,8 @@
    "text": "Couldn't be sure that anyone was there,",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 183.882,
    "end": 186.396,
@@ -5312,11 +5583,11 @@
     {
      "w": "be",
      "start": 184.341,
-     "end": 184.556
+     "end": 184.42
     },
     {
      "w": "sure",
-     "start": 184.561,
+     "start": 184.425,
      "end": 184.955
     },
     {
@@ -5339,7 +5610,12 @@
      "start": 185.972,
      "end": 186.396
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Couldn't be sure that anyone was there",
+    "parakeet": "Couldn't be sure that anyone was there.",
+    "match": 1.0
+   }
   },
   {
    "n": 60,
@@ -5349,6 +5625,8 @@
    "text": "message in a bottle, a mantra, a prayer,",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 186.416,
    "end": 188.656,
@@ -5378,10 +5656,7 @@
     {
      "w": "a",
      "start": 187.479,
-     "end": 187.589,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 187.589
     },
     {
      "w": "mantra",
@@ -5391,17 +5666,19 @@
     {
      "w": "a",
      "start": 188.149,
-     "end": 188.282,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 188.282
     },
     {
      "w": "prayer",
      "start": 188.287,
      "end": 188.656
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Message in a bottle of mantra Prayer by",
+    "parakeet": "Message in a bottle of mantra, prayer by",
+    "match": 0.75
+   }
   },
   {
    "n": 61,
@@ -5411,6 +5688,8 @@
    "text": "but you were. You were counting too.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 188.676,
    "end": 193.99,
@@ -5421,61 +5700,49 @@
      "w": "but",
      "start": 188.676,
      "end": 189.025,
-     "flags": [
-      "ctc_spread0.24"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
      "start": 189.03,
      "end": 189.405,
-     "flags": [
-      "ctc_spread0.44",
-      "parakeet_diff+0.78",
-      "manual_start"
-     ]
+     "conf": "low"
     },
     {
      "w": "were",
      "start": 189.41,
      "end": 189.925,
-     "flags": [
-      "ctc_spread0.36",
-      "manual_start"
-     ]
+     "conf": "low"
     },
     {
      "w": "You",
      "start": 189.93,
      "end": 190.425,
-     "flags": [
-      "ctc_spread1.52",
-      "manual_start"
-     ]
+     "conf": "low"
     },
     {
      "w": "were",
      "start": 190.43,
      "end": 191.44,
-     "flags": [
-      "ctc_spread2.12",
-      "manual_start"
-     ]
+     "conf": "low"
     },
     {
      "w": "counting",
      "start": 191.445,
      "end": 193.375,
-     "flags": [
-      "ctc_spread0.36"
-     ]
+     "conf": "medium"
     },
     {
      "w": "too",
      "start": 193.38,
      "end": 193.99
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "you are, you are counting to",
+    "parakeet": "",
+    "match": 0.43
+   }
   },
   {
    "n": 62,
@@ -5485,6 +5752,8 @@
    "text": "(Thirteen! Twenty-one! Thirty-four!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": false,
    "start": 194.01,
    "end": 195.82,
@@ -5495,10 +5764,7 @@
      "w": "Thirteen",
      "start": 194.01,
      "end": 194.673,
-     "flags": [
-      "ctc_spread0.48",
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "Twenty-one",
@@ -5510,7 +5776,12 @@
      "start": 195.281,
      "end": 195.82
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "T21-34",
+    "parakeet": "13 21 34 lead",
+    "match": 1.0
+   }
   },
   {
    "n": 63,
@@ -5520,6 +5791,8 @@
    "text": "Link by link, we broke the chain of fear;",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 195.84,
    "end": 198.908,
@@ -5554,11 +5827,11 @@
     {
      "w": "the",
      "start": 197.506,
-     "end": 197.84
+     "end": 197.685
     },
     {
      "w": "chain",
-     "start": 197.845,
+     "start": 197.69,
      "end": 198.175
     },
     {
@@ -5571,7 +5844,12 @@
      "start": 198.469,
      "end": 198.908
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Link by link, we broke the chain of fear",
+    "parakeet": "For link by link we broke the chain of fear along",
+    "match": 1.0
+   }
   },
   {
    "n": 64,
@@ -5580,7 +5858,9 @@
    "line_in_section": 5,
    "text": "alone, we never would've made it here.",
    "kind": "lead",
-   "voice": "B_belt",
+   "voice": "both",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 198.928,
    "end": 201.532,
@@ -5622,7 +5902,12 @@
      "start": 200.963,
      "end": 201.532
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "We never would have made it here.",
+    "parakeet": "We never would have made it here.",
+    "match": 0.88
+   }
   },
   {
    "n": 65,
@@ -5632,6 +5917,8 @@
    "text": "(Fifty-five! Eighty-nine!)",
    "kind": "gang",
    "voice": "choir",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": false,
    "start": 201.552,
    "end": 202.87,
@@ -5642,16 +5929,19 @@
      "w": "Fifty-five",
      "start": 201.552,
      "end": 202.255,
-     "flags": [
-      "ctc_spread0.42"
-     ]
+     "conf": "medium"
     },
     {
      "w": "Eighty-nine",
      "start": 202.26,
      "end": 202.87
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "55, 89.",
+    "parakeet": "5589.",
+    "match": 1.0
+   }
   },
   {
    "n": 66,
@@ -5661,6 +5951,8 @@
    "text": "And you were seen too, wherever you are.",
    "kind": "lead",
    "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 202.89,
    "end": 213.016,
@@ -5671,19 +5963,12 @@
      "w": "And",
      "start": 202.89,
      "end": 203.014,
-     "flags": [
-      "ctc_spread0.24",
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "you",
      "start": 203.019,
-     "end": 203.203,
-     "flags": [
-      "ctc_spread0.20",
-      "monotonic_fix"
-     ]
+     "end": 203.203
     },
     {
      "w": "were",
@@ -5709,19 +5994,20 @@
      "w": "you",
      "start": 208.446,
      "end": 209.15,
-     "flags": [
-      "ctc_spread3.90"
-     ]
+     "conf": "low"
     },
     {
      "w": "are",
      "start": 209.155,
      "end": 213.016,
-     "flags": [
-      "ctc_spread3.22"
-     ]
+     "conf": "low"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "You were seen too Wherever you are Six",
+    "parakeet": "You were saints there six.",
+    "match": 0.88
+   }
   },
   {
    "n": 67,
@@ -5731,6 +6017,8 @@
    "text": "Six hundred worlds across the Milky Way,",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 213.036,
    "end": 218.094,
@@ -5772,7 +6060,12 @@
      "start": 217.6,
      "end": 218.094
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Six hundred worlds across the Milky Way",
+    "parakeet": "Six hundred worlds across the Milky Way",
+    "match": 1.0
+   }
   },
   {
    "n": 68,
@@ -5782,6 +6075,8 @@
    "text": "every one could've burned. Every one held its fire.",
    "kind": "lead",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "sung",
    "repeat": false,
    "start": 218.868,
    "end": 225.188,
@@ -5796,10 +6091,7 @@
     {
      "w": "one",
      "start": 219.139,
-     "end": 219.456,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 219.456
     },
     {
      "w": "could've",
@@ -5819,18 +6111,13 @@
     {
      "w": "one",
      "start": 221.759,
-     "end": 222.935,
-     "flags": [
-      "no_onset"
-     ]
+     "end": 222.935
     },
     {
      "w": "held",
      "start": 222.94,
      "end": 223.642,
-     "flags": [
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "its",
@@ -5841,11 +6128,14 @@
      "w": "fire",
      "start": 223.94,
      "end": 225.188,
-     "flags": [
-      "manual_start"
-     ]
+     "conf": "medium"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "everyone could have burned, everyone held its fire.",
+    "parakeet": "Everyone could have burned Everyone held its fire",
+    "match": 1.0
+   }
   },
   {
    "n": 69,
@@ -5855,6 +6145,8 @@
    "text": "(One... one... two... three...)",
    "kind": "whisper",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": false,
    "start": 225.56,
    "end": 227.703,
@@ -5865,40 +6157,32 @@
      "w": "One",
      "start": 225.56,
      "end": 226.195,
-     "flags": [
-      "ctc_spread0.36",
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "one",
      "start": 226.2,
      "end": 226.785,
-     "flags": [
-      "ctc_spread0.92",
-      "parakeet_diff+5.16",
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "two",
      "start": 226.79,
      "end": 227.475,
-     "flags": [
-      "parakeet_diff+5.09",
-      "manual_start"
-     ]
+     "conf": "medium"
     },
     {
      "w": "three",
      "start": 227.48,
      "end": 227.703,
-     "flags": [
-      "parakeet_diff+5.05",
-      "manual_start"
-     ]
+     "conf": "medium"
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "One, two, three, four, two.",
+    "parakeet": "Two, three, one, two.",
+    "match": 0.75
+   }
   },
   {
    "n": 70,
@@ -5907,7 +6191,9 @@
    "line_in_section": 3,
    "text": "The count goes higher.",
    "kind": "lead",
-   "voice": "A_breathy",
+   "voice": "B_belt",
+   "voice_conf": "high",
+   "delivery": "sung",
    "repeat": false,
    "start": 227.792,
    "end": 230.022,
@@ -5934,7 +6220,12 @@
      "start": 229.439,
      "end": 230.022
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "The count goes high",
+    "parakeet": "The cam goes high.",
+    "match": 0.75
+   }
   },
   {
    "n": 71,
@@ -5944,6 +6235,8 @@
    "text": "(One... one... two... three...)",
    "kind": "whisper",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": true,
    "start": 230.042,
    "end": 232.84,
@@ -5954,34 +6247,33 @@
      "w": "One",
      "start": 230.042,
      "end": 230.596,
-     "flags": [
-      "ctc_spread0.30",
-      "parakeet_diff+2.42"
-     ]
+     "conf": "low"
     },
     {
      "w": "one",
      "start": 230.601,
      "end": 231.264,
-     "flags": [
-      "ctc_spread0.66"
-     ]
+     "conf": "low"
     },
     {
      "w": "two",
      "start": 231.269,
-     "end": 231.883
+     "end": 231.883,
+     "conf": "low"
     },
     {
      "w": "three",
      "start": 231.888,
      "end": 232.84,
-     "flags": [
-      "ctc_spread0.80"
-     ]
+     "conf": "low"
     }
    ],
-   "note": "whispered count repeated after \"The count goes higher.\""
+   "note": "whispered count repeated after \"The count goes higher.\"",
+   "verify": {
+    "whisper": "Why would I do it?",
+    "parakeet": "Why not do any more?",
+    "match": 0.0
+   }
   },
   {
    "n": 72,
@@ -5991,6 +6283,8 @@
    "text": "(Hold your fire.)",
    "kind": "whisper",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": false,
    "start": 233.17,
    "end": 238.493,
@@ -6012,7 +6306,12 @@
      "start": 234.487,
      "end": 238.493
     }
-   ]
+   ],
+   "verify": {
+    "whisper": "Hold your fire.",
+    "parakeet": "Hold your thing",
+    "match": 1.0
+   }
   },
   {
    "n": 73,
@@ -6022,6 +6321,8 @@
    "text": "(Hold your fire.)",
    "kind": "whisper",
    "voice": "A_breathy",
+   "voice_conf": "medium",
+   "delivery": "whispered",
    "repeat": true,
    "start": 242.08,
    "end": 243.921,
@@ -6044,13 +6345,19 @@
      "end": 243.921
     }
    ],
-   "note": "repeated at the very end"
+   "note": "repeated at the very end",
+   "verify": {
+    "whisper": "Hold your fire.",
+    "parakeet": "On your fire.",
+    "match": 1.0
+   }
   }
  ],
  "hits": {
   "intro_whisper": [
    {
     "t": 2.799,
+    "t_attack": 2.78,
     "word": "One",
     "line_n": 0,
     "word_idx": 0,
@@ -6065,6 +6372,7 @@
    },
    {
     "t": 3.437,
+    "t_attack": 3.415,
     "word": "one",
     "line_n": 0,
     "word_idx": 1,
@@ -6079,6 +6387,7 @@
    },
    {
     "t": 4.076,
+    "t_attack": 4.075,
     "word": "two",
     "line_n": 0,
     "word_idx": 2,
@@ -6093,6 +6402,7 @@
    },
    {
     "t": 4.719,
+    "t_attack": 4.735,
     "word": "three",
     "line_n": 0,
     "word_idx": 3,
@@ -6107,6 +6417,7 @@
    },
    {
     "t": 5.298,
+    "t_attack": 5.29,
     "word": "five",
     "line_n": 0,
     "word_idx": 4,
@@ -6121,6 +6432,7 @@
    },
    {
     "t": 6.001,
+    "t_attack": 6.025,
     "word": "eight",
     "line_n": 0,
     "word_idx": 5,
@@ -6135,6 +6447,7 @@
    },
    {
     "t": 6.63,
+    "t_attack": 6.655,
     "word": "eight",
     "line_n": 0,
     "word_idx": 6,
@@ -6150,6 +6463,7 @@
    },
    {
     "t": 8.6,
+    "t_attack": 8.58,
     "word": "One",
     "line_n": 1,
     "word_idx": 0,
@@ -6164,6 +6478,7 @@
    },
    {
     "t": 9.234,
+    "t_attack": 9.24,
     "word": "two",
     "line_n": 1,
     "word_idx": 1,
@@ -6178,6 +6493,7 @@
    },
    {
     "t": 9.86,
+    "t_attack": 9.9,
     "word": "three",
     "line_n": 1,
     "word_idx": 2,
@@ -6192,6 +6508,7 @@
    },
    {
     "t": 10.546,
+    "t_attack": 10.68,
     "word": "five",
     "line_n": 1,
     "word_idx": 3,
@@ -6206,6 +6523,7 @@
    },
    {
     "t": 11.165,
+    "t_attack": 11.185,
     "word": "eight",
     "line_n": 1,
     "word_idx": 4,
@@ -6220,6 +6538,7 @@
    },
    {
     "t": 11.51,
+    "t_attack": 11.53,
     "word": "(yeah)",
     "line_n": 1,
     "word_idx": null,
@@ -6235,6 +6554,7 @@
   "post_chorus_1": [
    {
     "t": 73.034,
+    "t_attack": 73.025,
     "word": "One",
     "line_n": 18,
     "word_idx": 0,
@@ -6249,6 +6569,7 @@
    },
    {
     "t": 73.67,
+    "t_attack": 73.675,
     "word": "One",
     "line_n": 18,
     "word_idx": 1,
@@ -6263,6 +6584,7 @@
    },
    {
     "t": 74.28,
+    "t_attack": 74.28,
     "word": "Two",
     "line_n": 18,
     "word_idx": 2,
@@ -6277,6 +6599,7 @@
    },
    {
     "t": 74.98,
+    "t_attack": 74.99,
     "word": "Three",
     "line_n": 18,
     "word_idx": 3,
@@ -6291,6 +6614,7 @@
    },
    {
     "t": 75.585,
+    "t_attack": 75.6,
     "word": "Five",
     "line_n": 18,
     "word_idx": 4,
@@ -6305,6 +6629,7 @@
    },
    {
     "t": 78.177,
+    "t_attack": 78.19,
     "word": "One",
     "line_n": 20,
     "word_idx": 0,
@@ -6319,6 +6644,7 @@
    },
    {
     "t": 78.815,
+    "t_attack": 78.855,
     "word": "One",
     "line_n": 20,
     "word_idx": 1,
@@ -6333,6 +6659,7 @@
    },
    {
     "t": 79.39,
+    "t_attack": 79.4,
     "word": "Two",
     "line_n": 20,
     "word_idx": 2,
@@ -6347,6 +6674,7 @@
    },
    {
     "t": 80.1,
+    "t_attack": 80.095,
     "word": "Three",
     "line_n": 20,
     "word_idx": 3,
@@ -6361,6 +6689,7 @@
    },
    {
     "t": 80.725,
+    "t_attack": 80.725,
     "word": "Five",
     "line_n": 20,
     "word_idx": 4,
@@ -6377,6 +6706,7 @@
   "post_chorus_2": [
    {
     "t": 134.055,
+    "t_attack": 134.07,
     "word": "One",
     "line_n": 40,
     "word_idx": 0,
@@ -6391,6 +6721,7 @@
    },
    {
     "t": 134.655,
+    "t_attack": 134.65,
     "word": "One",
     "line_n": 40,
     "word_idx": 1,
@@ -6405,6 +6736,7 @@
    },
    {
     "t": 135.285,
+    "t_attack": 135.28,
     "word": "Two",
     "line_n": 40,
     "word_idx": 2,
@@ -6419,6 +6751,7 @@
    },
    {
     "t": 135.89,
+    "t_attack": 135.93,
     "word": "Three",
     "line_n": 40,
     "word_idx": 3,
@@ -6433,6 +6766,7 @@
    },
    {
     "t": 136.595,
+    "t_attack": 136.605,
     "word": "Five",
     "line_n": 40,
     "word_idx": 4,
@@ -6447,6 +6781,7 @@
    },
    {
     "t": 139.109,
+    "t_attack": 139.13,
     "word": "One",
     "line_n": 42,
     "word_idx": 0,
@@ -6461,6 +6796,7 @@
    },
    {
     "t": 139.715,
+    "t_attack": 139.735,
     "word": "One",
     "line_n": 42,
     "word_idx": 1,
@@ -6475,6 +6811,7 @@
    },
    {
     "t": 140.36,
+    "t_attack": 140.365,
     "word": "Two",
     "line_n": 42,
     "word_idx": 2,
@@ -6489,6 +6826,7 @@
    },
    {
     "t": 141.015,
+    "t_attack": 141.015,
     "word": "Three",
     "line_n": 42,
     "word_idx": 3,
@@ -6503,6 +6841,7 @@
    },
    {
     "t": 141.67,
+    "t_attack": 141.68,
     "word": "Five",
     "line_n": 42,
     "word_idx": 4,
@@ -6519,6 +6858,7 @@
   "drop_counts": [
    {
     "t": 194.01,
+    "t_attack": 194.095,
     "word": "Thirteen",
     "line_n": 62,
     "word_idx": 0,
@@ -6533,6 +6873,7 @@
    },
    {
     "t": 194.615,
+    "t_attack": 194.695,
     "word": "Twenty-one",
     "line_n": 62,
     "word_idx": 1,
@@ -6547,6 +6888,7 @@
    },
    {
     "t": 195.27,
+    "t_attack": 195.26,
     "word": "Thirty-four",
     "line_n": 62,
     "word_idx": 2,
@@ -6561,6 +6903,7 @@
    },
    {
     "t": 201.56,
+    "t_attack": 201.58,
     "word": "Fifty-five",
     "line_n": 65,
     "word_idx": 0,
@@ -6575,6 +6918,7 @@
    },
    {
     "t": 202.255,
+    "t_attack": 202.24,
     "word": "Eighty-nine",
     "line_n": 65,
     "word_idx": 1,
@@ -6591,6 +6935,7 @@
   "outro_whisper": [
    {
     "t": 225.56,
+    "t_attack": 225.565,
     "word": "One",
     "line_n": 69,
     "word_idx": 0,
@@ -6605,6 +6950,7 @@
    },
    {
     "t": 226.2,
+    "t_attack": 226.185,
     "word": "one",
     "line_n": 69,
     "word_idx": 1,
@@ -6619,6 +6965,7 @@
    },
    {
     "t": 226.79,
+    "t_attack": 226.82,
     "word": "two",
     "line_n": 69,
     "word_idx": 2,
@@ -6633,6 +6980,7 @@
    },
    {
     "t": 227.48,
+    "t_attack": 227.49,
     "word": "three",
     "line_n": 69,
     "word_idx": 3,
@@ -6647,6 +6995,7 @@
    },
    {
     "t": 230.042,
+    "t_attack": 230.13,
     "word": "One",
     "line_n": 71,
     "word_idx": 0,
@@ -6661,6 +7010,7 @@
    },
    {
     "t": 230.601,
+    "t_attack": 230.705,
     "word": "one",
     "line_n": 71,
     "word_idx": 1,
@@ -6675,6 +7025,7 @@
    },
    {
     "t": 231.269,
+    "t_attack": 231.275,
     "word": "two",
     "line_n": 71,
     "word_idx": 2,
@@ -6689,6 +7040,7 @@
    },
    {
     "t": 231.888,
+    "t_attack": 231.95,
     "word": "three",
     "line_n": 71,
     "word_idx": 3,
@@ -6705,6 +7057,7 @@
   "counting_on_you": [
    {
     "t": 76.235,
+    "t_attack": 76.245,
     "word": "Counting on you",
     "line_n": 19,
     "word_idx": 0,
@@ -6719,6 +7072,7 @@
    },
    {
     "t": 81.345,
+    "t_attack": 81.34,
     "word": "Counting on you",
     "line_n": 21,
     "word_idx": 0,
@@ -6733,6 +7087,7 @@
    },
    {
     "t": 137.16,
+    "t_attack": 137.155,
     "word": "Counting on you",
     "line_n": 41,
     "word_idx": 0,
@@ -6747,6 +7102,7 @@
    },
    {
     "t": 142.19,
+    "t_attack": 142.21,
     "word": "Counting on you",
     "line_n": 43,
     "word_idx": 0,
@@ -6761,5 +7117,1477 @@
    }
   ],
   "_doc": "Count hits -> work/audio/hits.json. Every shouted count word (post-chorus 'One! One! Two! Three! Five!', drop Times in seconds; off_ms = onset minus nearest beat."
+ },
+ "events": [
+  {
+   "t": 0.0,
+   "type": "start",
+   "desc": "file start: pad fade-in (mix below -40 dBFS until 0.92 s)",
+   "bar": 1,
+   "beat": 0.58
+  },
+  {
+   "t": 0.195,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 1,
+   "beat": 0.89,
+   "low_jump_db": 38.4
+  },
+  {
+   "t": 2.799,
+   "type": "vocal",
+   "desc": "first vocal: whispered \"One...\"",
+   "bar": 1,
+   "beat": 4.93
+  },
+  {
+   "t": 7.16,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 3,
+   "beat": 3.7,
+   "low_jump_db": 46.7
+  },
+  {
+   "t": 13.14,
+   "type": "impact",
+   "desc": "sub/808 slide on the Verse 1 downbeat (bar 6)",
+   "bar": 5,
+   "beat": 4.99,
+   "strength": 0.23,
+   "low_jump_db": 10.9
+  },
+  {
+   "t": 13.145,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -19.5 dB)",
+   "bar": 6,
+   "beat": 1.0,
+   "side_mid_db": -19.5
+  },
+  {
+   "t": 16.99,
+   "type": "impact",
+   "desc": "first snare/clap hit (bar 7 beat 3)",
+   "bar": 7,
+   "beat": 3.0,
+   "strength": 2.11,
+   "low_jump_db": 9.1
+  },
+  {
+   "t": 22.475,
+   "type": "impact",
+   "desc": "deep 808 hit (verse 1)",
+   "bar": 9,
+   "beat": 3.5,
+   "strength": 1.76,
+   "low_jump_db": 44.0
+  },
+  {
+   "t": 26.98,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 11,
+   "beat": 2.48,
+   "low_jump_db": 32.7
+  },
+  {
+   "t": 30.515,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 12,
+   "beat": 3.96,
+   "low_jump_db": 45.6
+  },
+  {
+   "t": 31.182,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -8.7 dB, was -22.0)",
+   "bar": 13,
+   "beat": 1.0,
+   "side_mid_db": -8.7
+  },
+  {
+   "t": 41.505,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -16.6 dB)",
+   "bar": 17,
+   "beat": 1.0,
+   "side_mid_db": -16.6
+  },
+  {
+   "t": 49.244,
+   "type": "snare_roll",
+   "desc": "16th-note drum/808 fill (4 beats, until 51.819)",
+   "bar": 20,
+   "beat": 1.0,
+   "until": 51.819
+  },
+  {
+   "t": 49.244,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -9.9 dB, was -15.4)",
+   "bar": 20,
+   "beat": 1.0,
+   "side_mid_db": -9.9
+  },
+  {
+   "t": 55.035,
+   "type": "impact",
+   "desc": "808 + hit, chorus 1",
+   "bar": 22,
+   "beat": 2.0,
+   "strength": 2.5,
+   "low_jump_db": 33.7
+  },
+  {
+   "t": 59.53,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 23,
+   "beat": 4.98,
+   "low_jump_db": 49.2
+  },
+  {
+   "t": 65.335,
+   "type": "impact",
+   "desc": "808 + hit, chorus 1 second half",
+   "bar": 26,
+   "beat": 1.99,
+   "strength": 2.48,
+   "low_jump_db": 37.5
+  },
+  {
+   "t": 69.835,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 27,
+   "beat": 4.99,
+   "low_jump_db": 48.9
+  },
+  {
+   "t": 72.295,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 28,
+   "beat": 4.83,
+   "low_jump_db": 50.2
+  },
+  {
+   "t": 74.96,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 30,
+   "beat": 1.0,
+   "low_jump_db": 59.2
+  },
+  {
+   "t": 77.46,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 30,
+   "beat": 4.9,
+   "low_jump_db": 44.0
+  },
+  {
+   "t": 80.089,
+   "type": "snare_roll",
+   "desc": "16th-note drum/808 fill (4 beats, until 82.645)",
+   "bar": 32,
+   "beat": 1.0,
+   "until": 82.645
+  },
+  {
+   "t": 87.739,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -17.8 dB)",
+   "bar": 35,
+   "beat": 1.0,
+   "side_mid_db": -17.8
+  },
+  {
+   "t": 96.0,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 38,
+   "beat": 1.98,
+   "low_jump_db": 59.6
+  },
+  {
+   "t": 101.08,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 40,
+   "beat": 1.98,
+   "low_jump_db": 59.1
+  },
+  {
+   "t": 102.995,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -9.0 dB, was -18.7)",
+   "bar": 41,
+   "beat": 1.0,
+   "side_mid_db": -9.0
+  },
+  {
+   "t": 106.804,
+   "type": "snare_roll",
+   "desc": "16th-note drum/808 fill (4 beats, until 109.344)",
+   "bar": 42,
+   "beat": 3.0,
+   "until": 109.344
+  },
+  {
+   "t": 110.614,
+   "type": "snare_roll",
+   "desc": "16th-note drum/808 fill (4 beats, until 113.152)",
+   "bar": 44,
+   "beat": 1.0,
+   "until": 113.152
+  },
+  {
+   "t": 113.152,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -5.5 dB, was -12.9)",
+   "bar": 45,
+   "beat": 1.0,
+   "side_mid_db": -5.5
+  },
+  {
+   "t": 125.835,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 49,
+   "beat": 5.0,
+   "low_jump_db": 31.1
+  },
+  {
+   "t": 135.975,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 53,
+   "beat": 4.99,
+   "low_jump_db": 67.0
+  },
+  {
+   "t": 138.505,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 54,
+   "beat": 4.98,
+   "low_jump_db": 49.7
+  },
+  {
+   "t": 141.05,
+   "type": "snare_roll",
+   "desc": "16th-note drum/808 fill (4 beats, until 143.581)",
+   "bar": 56,
+   "beat": 1.0,
+   "until": 143.581
+  },
+  {
+   "t": 143.581,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -17.5 dB)",
+   "bar": 57,
+   "beat": 1.0,
+   "side_mid_db": -17.5
+  },
+  {
+   "t": 143.595,
+   "type": "drums_out",
+   "desc": "drums/808s stop: last hit 143.595 (silent from bar 58 on)",
+   "bar": 57,
+   "beat": 1.02,
+   "level_db": -65.6
+  },
+  {
+   "t": 148.64,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 59,
+   "beat": 1.0,
+   "low_jump_db": 34.2
+  },
+  {
+   "t": 153.375,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 60,
+   "beat": 4.49,
+   "low_jump_db": 30.4
+  },
+  {
+   "t": 153.694,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -9.1 dB, was -25.6)",
+   "bar": 61,
+   "beat": 1.0,
+   "side_mid_db": -9.1
+  },
+  {
+   "t": 153.695,
+   "type": "impact",
+   "desc": "drums + 808 return inside the Bridge (\"But fear's a chain\")",
+   "bar": 61,
+   "beat": 1.0,
+   "strength": 1.4,
+   "low_jump_db": 23.7
+  },
+  {
+   "t": 158.42,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 62,
+   "beat": 4.48,
+   "low_jump_db": 30.8
+  },
+  {
+   "t": 163.793,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -5.6 dB, was -10.8)",
+   "bar": 65,
+   "beat": 1.0,
+   "side_mid_db": -5.6
+  },
+  {
+   "t": 173.876,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -9.3 dB, was -11.6)",
+   "bar": 69,
+   "beat": 1.0,
+   "side_mid_db": -9.3
+  },
+  {
+   "t": 180.796,
+   "type": "snare_roll",
+   "desc": "BUILD snare/808 roll: 16th notes for 5 beats into the drums-out gap at 183.943 (density rises from 2 to 4 hits per beat over bars 68-72)",
+   "bar": 71,
+   "beat": 4.0,
+   "until": 183.943
+  },
+  {
+   "t": 183.785,
+   "type": "drums_out",
+   "desc": "PRE-DROP GAP: drums/808s and bass cut on bar 73 (183.94); only a held pad + the lead vocal (\"Couldn't be sure ... a prayer\") until the drop impact at 188.35; last hit 183.785",
+   "bar": 72,
+   "beat": 4.75
+  },
+  {
+   "t": 183.943,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -20.2 dB)",
+   "bar": 73,
+   "beat": 1.0,
+   "side_mid_db": -20.2
+  },
+  {
+   "t": 188.355,
+   "type": "impact",
+   "desc": "DROP IMPACT: full-spectrum slam on bar 74 beat 4 after the 4.4 s drums-out gap, 16th-note fill into bar 75 (188.99) where the full 808/drum groove starts",
+   "bar": 74,
+   "beat": 4.0,
+   "strength": 2.38,
+   "low_jump_db": 47.0
+  },
+  {
+   "t": 191.51,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 75,
+   "beat": 4.99,
+   "low_jump_db": 72.9
+  },
+  {
+   "t": 194.041,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -7.6 dB, was -12.9)",
+   "bar": 77,
+   "beat": 1.0,
+   "side_mid_db": -7.6
+  },
+  {
+   "t": 201.609,
+   "type": "snare_roll",
+   "desc": "16th-note drum/808 fill (4 beats, until 204.124)",
+   "bar": 80,
+   "beat": 1.0,
+   "until": 204.124
+  },
+  {
+   "t": 204.124,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -10.4 dB)",
+   "bar": 81,
+   "beat": 1.0,
+   "side_mid_db": -10.4
+  },
+  {
+   "t": 214.175,
+   "type": "drums_out",
+   "desc": "drums/808s stop: last hit 214.175 (silent from bar 86 on)",
+   "bar": 84,
+   "beat": 4.99,
+   "level_db": -67.8
+  },
+  {
+   "t": 218.085,
+   "type": "silence",
+   "desc": "near-silence: mix below -40 dBFS for 0.48 s",
+   "bar": 86,
+   "beat": 3.17,
+   "until": 218.56
+  },
+  {
+   "t": 220.215,
+   "type": "silence",
+   "desc": "near-silence: mix below -40 dBFS for 0.95 s",
+   "bar": 87,
+   "beat": 2.53,
+   "until": 221.16
+  },
+  {
+   "t": 222.3,
+   "type": "silence",
+   "desc": "near-silence: mix below -40 dBFS for 0.68 s",
+   "bar": 88,
+   "beat": 1.81,
+   "until": 222.97
+  },
+  {
+   "t": 223.11,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 88,
+   "beat": 3.09,
+   "low_jump_db": 43.3
+  },
+  {
+   "t": 224.075,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 88,
+   "beat": 4.61,
+   "low_jump_db": 41.9
+  },
+  {
+   "t": 224.33,
+   "type": "impact",
+   "desc": "Outro: drums + 808 slam back in (bar 89) under the whispered count",
+   "bar": 89,
+   "beat": 1.01,
+   "strength": 0.57,
+   "low_jump_db": 17.7
+  },
+  {
+   "t": 226.86,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 89,
+   "beat": 4.99,
+   "low_jump_db": 51.4
+  },
+  {
+   "t": 226.864,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -14.1 dB)",
+   "bar": 90,
+   "beat": 1.0,
+   "side_mid_db": -14.1
+  },
+  {
+   "t": 229.075,
+   "type": "sub_hit",
+   "desc": "sub-bass / 808 entry from a quiet low end",
+   "bar": 90,
+   "beat": 4.49,
+   "low_jump_db": 42.0
+  },
+  {
+   "t": 234.315,
+   "type": "drums_out",
+   "desc": "drums/808s cut after the last full \"Hold your fire\" (bar 93); held vocal + piano decay; last hit 234.315",
+   "bar": 92,
+   "beat": 4.75
+  },
+  {
+   "t": 237.017,
+   "type": "choir_wide",
+   "desc": "stacked/choir vocals enter (vocal side/mid -3.3 dB, was -11.2)",
+   "bar": 94,
+   "beat": 1.0,
+   "side_mid_db": -3.3
+  },
+  {
+   "t": 238.493,
+   "type": "vocal_gap",
+   "desc": "no vocals for 3.59 s",
+   "bar": 94,
+   "beat": 3.32,
+   "until": 242.08
+  },
+  {
+   "t": 240.25,
+   "type": "silence",
+   "desc": "near-silence: mix below -40 dBFS for 0.58 s",
+   "bar": 95,
+   "beat": 2.07,
+   "until": 240.82
+  },
+  {
+   "t": 241.41,
+   "type": "silence",
+   "desc": "near-silence: mix below -40 dBFS for 0.69 s",
+   "bar": 95,
+   "beat": 3.88,
+   "until": 242.095
+  },
+  {
+   "t": 242.124,
+   "type": "mono_lead",
+   "desc": "vocals collapse to a single centred lead (side/mid -23.0 dB)",
+   "bar": 96,
+   "beat": 1.0,
+   "side_mid_db": -23.0
+  },
+  {
+   "t": 243.921,
+   "type": "vocal",
+   "desc": "last vocal ends (whispered \"fire\")",
+   "bar": 96,
+   "beat": 3.8
+  },
+  {
+   "t": 244.05,
+   "type": "impact",
+   "desc": "FINAL HIT: 808 + crash on bar 96 beat 4 (strongest onset and largest low-end jump of the song), 16th hits to 244.69, sub decays to silence",
+   "bar": 96,
+   "beat": 4.0,
+   "strength": 3.06,
+   "low_jump_db": 62.0
+  },
+  {
+   "t": 245.86,
+   "type": "end",
+   "desc": "final 808 decays below -40 dBFS",
+   "bar": 97,
+   "beat": 2.83
+  },
+  {
+   "t": 245.865,
+   "type": "silence",
+   "desc": "near-silence: mix below -40 dBFS for 1.29 s",
+   "bar": 97,
+   "beat": 2.83,
+   "until": 247.155
+  },
+  {
+   "t": 246.41,
+   "type": "end",
+   "desc": "last audible sound (mix below -60 dBFS after this)",
+   "bar": 97,
+   "beat": 3.69
+  },
+  {
+   "t": 247.16,
+   "type": "end",
+   "desc": "end of file",
+   "bar": 97,
+   "beat": 4.86
+  }
+ ],
+ "deviations": [
+  {
+   "where": "Intro",
+   "t": 2.8,
+   "canonical": "(One... one... two... three... five... eight...)",
+   "sung": "whispered twice: #1 'One... one... two... three... five... eight... eight...' (2.80-6.9 s, one whisper per beat, the 'eight' doubled); #2 'One... two... three... five... eight...' (8.60-11.4 s, the second 'one' is NOT whispered) plus a short extra whisper heard as 'yeah' at 11.51",
+   "confidence": "high for the syllable count and times; medium for which word each whisper is (isolated-syllable ASR: two/three/five/'hey'(=eight) are clear, the 'one's are not)"
+  },
+  {
+   "where": "Post-Chorus 1 and 2",
+   "t": 73.03,
+   "canonical": "(One! One! Two! Three! Five! Eight!) (Counting on you!)",
+   "sung": "'One! One! Two! Three! Five!' then 'Counting on you!' - NO 'Eight!' (the 'Counting' shout lands where 'Eight!' would be) - and the pair is sung TWICE in each post-chorus",
+   "confidence": "high (5 shouts per pass on beats 2-3-4-1-2, all ASR systems)"
+  },
+  {
+   "where": "Build",
+   "t": 173.25,
+   "canonical": "are out there at all.",
+   "sung": "'out there at all' - 'are' not sung: 'fire' is one held D4 note (172.57-173.21) straight into 'out' (173.29)",
+   "confidence": "medium-high (pitch track + every ASR pass: '...held their fire out there at all')"
+  },
+  {
+   "where": "Drop",
+   "t": 188.68,
+   "canonical": "but you were. You were counting too.",
+   "sung": "probably 'but you ARE, you ARE counting too' - all five independent ASR systems (Whisper on two stems, parakeet, gpt-4o-transcribe, grok-stt) hear 'are' twice; a belted 'were' can sound like 'are', so not certain",
+   "confidence": "medium"
+  },
+  {
+   "where": "Outro",
+   "t": 225.56,
+   "canonical": "(One... one... two... three...) The count goes higher. (Hold your fire.)",
+   "sung": "whispered count twice (225.56-227.5, then 230.04-232.0 layered under the held 'higher'); '(Hold your fire.)' twice: sung at 233.17 and whispered at 242.08 (the last vocal). ASR reads the whispered counts as 'one, two, three, one' / 'one, two, three, four': the four-whisper count matches the lyric but the word order is unconfirmed",
+   "confidence": "high for times and repeats, low for whispered word identity"
+  },
+  {
+   "where": "Bridge",
+   "t": 143.84,
+   "canonical": "[Bridge: near silence, whispered]",
+   "sung": "sung softly with pitch (pyin voiced on most frames), not whispered; the near-silence is the arrangement: drums/808s out 143.6-153.69 (bars 57-60), back in on bar 61",
+   "confidence": "high"
+  },
+  {
+   "where": "Build",
+   "t": 175.06,
+   "canonical": "(Hold your fire! Show your light!) x2",
+   "sung": "two sustained choir phrases (175.06, 180.09), sung, not shouted gang hits",
+   "confidence": "high"
+  },
+  {
+   "where": "ASR mishearings (NOT deviations)",
+   "t": null,
+   "canonical": "counting out / Priests in the smoke wanted / saltpeter / Petrov / Arkhipov / no dead star could make / We're alive / Show your light",
+   "sung": "ASR consistently hears 'coming out', '...the smoke, one and/wanting...', 'salt, Peter', 'Chuck/Choke', 'Kipoff', 'no death star couldn't make', 'were a lie', 'show your life'. These are the usual mishearings of sung consonants (ASR also turns the certain 'Counting on you' into 'Pounding/Coming on you'); no evidence the words differ. 'Priests' is the least clear - diction is soft",
+   "confidence": "n/a"
+  }
+ ],
+ "voices": {
+  "lines": {
+   "2": {
+    "voice": "A_breathy",
+    "voice_conf": "low",
+    "f0_med": 62.25,
+    "f0_p90": 76.5,
+    "voiced": 0.71,
+    "breath_db": -11.08,
+    "flatness": 0.0,
+    "rms_db": -26.34,
+    "width_db": -19.11
+   },
+   "3": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 62.05,
+    "f0_p90": 65.05,
+    "voiced": 0.76,
+    "breath_db": -10.3,
+    "flatness": 0.0,
+    "rms_db": -26.72,
+    "width_db": -19.25
+   },
+   "4": {
+    "voice": "A_breathy",
+    "voice_conf": "high",
+    "f0_med": 66.15,
+    "f0_p90": 67.15,
+    "voiced": 0.74,
+    "breath_db": -6.97,
+    "flatness": 0.0,
+    "rms_db": -26.76,
+    "width_db": -11.85
+   },
+   "5": {
+    "voice": "A_breathy",
+    "voice_conf": "low",
+    "f0_med": 57.05,
+    "f0_p90": 59.95,
+    "voiced": 0.88,
+    "breath_db": -9.97,
+    "flatness": 0.0,
+    "rms_db": -25.89,
+    "width_db": -19.39
+   },
+   "6": {
+    "voice": "A_breathy",
+    "voice_conf": "low",
+    "f0_med": 62.05,
+    "f0_p90": 68.95,
+    "voiced": 0.85,
+    "breath_db": -9.04,
+    "flatness": 0.0,
+    "rms_db": -25.18,
+    "width_db": -6.79
+   },
+   "7": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 64.8,
+    "f0_p90": 69.05,
+    "voiced": 0.61,
+    "breath_db": -10.76,
+    "flatness": 0.0,
+    "rms_db": -24.93,
+    "width_db": -16.54
+   },
+   "8": {
+    "voice": "A_breathy",
+    "voice_conf": "high",
+    "f0_med": 62.15,
+    "f0_p90": 69.1,
+    "voiced": 0.74,
+    "breath_db": -9.52,
+    "flatness": 0.0,
+    "rms_db": -25.29,
+    "width_db": -6.01
+   },
+   "9": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 67.1,
+    "f0_p90": 69.38,
+    "voiced": 0.77,
+    "breath_db": -13.06,
+    "flatness": 0.0,
+    "rms_db": -24.3,
+    "width_db": -17.58
+   },
+   "10": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 65.05,
+    "f0_p90": 67.79,
+    "voiced": 0.79,
+    "breath_db": -11.67,
+    "flatness": 0.0,
+    "rms_db": -25.09,
+    "width_db": -17.43
+   },
+   "11": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 64.15,
+    "f0_p90": 67.05,
+    "voiced": 0.98,
+    "breath_db": -12.67,
+    "flatness": 0.0,
+    "rms_db": -23.37,
+    "width_db": -12.32
+   },
+   "12": {
+    "voice": "both",
+    "voice_conf": "medium",
+    "f0_med": 62.15,
+    "f0_p90": 69.69,
+    "voiced": 0.75,
+    "breath_db": -10.59,
+    "flatness": 0.0,
+    "rms_db": -23.77,
+    "width_db": -5.26
+   },
+   "13": {
+    "voice": "A_breathy",
+    "voice_conf": "high",
+    "f0_med": 65.05,
+    "f0_p90": 66.95,
+    "voiced": 0.69,
+    "breath_db": -7.87,
+    "flatness": 0.0,
+    "rms_db": -24.51,
+    "width_db": -4.3
+   },
+   "14": {
+    "voice": "both",
+    "voice_conf": "high",
+    "f0_med": 65.15,
+    "f0_p90": 70.17,
+    "voiced": 0.82,
+    "breath_db": -12.46,
+    "flatness": 0.0,
+    "rms_db": -24.26,
+    "width_db": -5.52
+   },
+   "15": {
+    "voice": "both",
+    "voice_conf": "high",
+    "f0_med": 62.25,
+    "f0_p90": 69.57,
+    "voiced": 0.79,
+    "breath_db": -10.18,
+    "flatness": 0.0,
+    "rms_db": -22.44,
+    "width_db": -6.12
+   },
+   "16": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 65.05,
+    "f0_p90": 67.02,
+    "voiced": 0.84,
+    "breath_db": -10.28,
+    "flatness": 0.0,
+    "rms_db": -23.97,
+    "width_db": -9.11
+   },
+   "17": {
+    "voice": "both",
+    "voice_conf": "high",
+    "f0_med": 64.25,
+    "f0_p90": 69.05,
+    "voiced": 0.8,
+    "breath_db": -13.72,
+    "flatness": 0.0,
+    "rms_db": -24.28,
+    "width_db": -6.11
+   },
+   "22": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 62.05,
+    "f0_p90": 62.25,
+    "voiced": 0.88,
+    "breath_db": -12.36,
+    "flatness": 0.0,
+    "rms_db": -23.99,
+    "width_db": -18.46
+   },
+   "23": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 62.05,
+    "f0_p90": 62.15,
+    "voiced": 0.82,
+    "breath_db": -12.97,
+    "flatness": 0.0,
+    "rms_db": -22.14,
+    "width_db": -8.18
+   },
+   "24": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 61.95,
+    "f0_p90": 62.15,
+    "voiced": 0.82,
+    "breath_db": -13.21,
+    "flatness": 0.0,
+    "rms_db": -24.16,
+    "width_db": -13.88
+   },
+   "25": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 62.05,
+    "f0_p90": 62.15,
+    "voiced": 0.92,
+    "breath_db": -11.24,
+    "flatness": 0.0,
+    "rms_db": -24.24,
+    "width_db": -10.39
+   },
+   "26": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 62.8,
+    "f0_p90": 68.85,
+    "voiced": 0.73,
+    "breath_db": -12.65,
+    "flatness": 0.0,
+    "rms_db": -23.92,
+    "width_db": -13.56
+   },
+   "27": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 62.15,
+    "f0_p90": 67.95,
+    "voiced": 0.56,
+    "breath_db": -9.43,
+    "flatness": 0.0,
+    "rms_db": -23.63,
+    "width_db": -13.52
+   },
+   "28": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 62.45,
+    "f0_p90": 68.82,
+    "voiced": 0.87,
+    "breath_db": -9.91,
+    "flatness": 0.0,
+    "rms_db": -23.9,
+    "width_db": -18.61
+   },
+   "29": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 64.05,
+    "f0_p90": 65.05,
+    "voiced": 0.96,
+    "breath_db": -10.47,
+    "flatness": 0.0,
+    "rms_db": -23.4,
+    "width_db": -18.69
+   },
+   "30": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 62.35,
+    "f0_p90": 65.05,
+    "voiced": 0.77,
+    "breath_db": -9.51,
+    "flatness": 0.0,
+    "rms_db": -23.42,
+    "width_db": -9.17
+   },
+   "31": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 64.95,
+    "f0_p90": 67.15,
+    "voiced": 0.96,
+    "breath_db": -9.29,
+    "flatness": 0.0,
+    "rms_db": -22.62,
+    "width_db": -9.68
+   },
+   "32": {
+    "voice": "B_belt",
+    "voice_conf": "low",
+    "f0_med": 62.05,
+    "f0_p90": 64.95,
+    "voiced": 0.71,
+    "breath_db": -10.15,
+    "flatness": 0.0,
+    "rms_db": -23.27,
+    "width_db": -9.38
+   },
+   "33": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 69.05,
+    "f0_p90": 69.95,
+    "voiced": 0.89,
+    "breath_db": -9.64,
+    "flatness": 0.0,
+    "rms_db": -22.83,
+    "width_db": -12.87
+   },
+   "34": {
+    "voice": "both",
+    "voice_conf": "high",
+    "f0_med": 62.15,
+    "f0_p90": 69.59,
+    "voiced": 0.87,
+    "breath_db": -11.25,
+    "flatness": 0.0,
+    "rms_db": -23.2,
+    "width_db": -5.52
+   },
+   "35": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 65.05,
+    "f0_p90": 66.65,
+    "voiced": 0.67,
+    "breath_db": -8.01,
+    "flatness": 0.0,
+    "rms_db": -23.87,
+    "width_db": -6.1
+   },
+   "36": {
+    "voice": "both",
+    "voice_conf": "high",
+    "f0_med": 64.85,
+    "f0_p90": 69.67,
+    "voiced": 0.77,
+    "breath_db": -10.9,
+    "flatness": 0.0,
+    "rms_db": -24.19,
+    "width_db": -6.16
+   },
+   "37": {
+    "voice": "both",
+    "voice_conf": "low",
+    "f0_med": 68.85,
+    "f0_p90": 81.35,
+    "voiced": 0.67,
+    "breath_db": -9.44,
+    "flatness": 0.0,
+    "rms_db": -22.42,
+    "width_db": -5.52
+   },
+   "38": {
+    "voice": "both",
+    "voice_conf": "medium",
+    "f0_med": 65.05,
+    "f0_p90": 67.05,
+    "voiced": 0.7,
+    "breath_db": -9.26,
+    "flatness": 0.0,
+    "rms_db": -23.24,
+    "width_db": -6.88
+   },
+   "39": {
+    "voice": "both",
+    "voice_conf": "high",
+    "f0_med": 64.2,
+    "f0_p90": 71.9,
+    "voiced": 0.77,
+    "breath_db": -11.34,
+    "flatness": 0.0,
+    "rms_db": -23.64,
+    "width_db": -6.17
+   },
+   "44": {
+    "voice": "A_breathy",
+    "voice_conf": "high",
+    "f0_med": 62.15,
+    "f0_p90": 65.29,
+    "voiced": 0.45,
+    "breath_db": -5.92,
+    "flatness": 0.0,
+    "rms_db": -25.9,
+    "width_db": -17.91
+   },
+   "45": {
+    "voice": "A_breathy",
+    "voice_conf": "high",
+    "f0_med": 62.3,
+    "f0_p90": 67.04,
+    "voiced": 0.57,
+    "breath_db": -8.37,
+    "flatness": 0.0,
+    "rms_db": -27.07,
+    "width_db": -26.81
+   },
+   "46": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 64.95,
+    "f0_p90": 67.25,
+    "voiced": 0.76,
+    "breath_db": -9.34,
+    "flatness": 0.0,
+    "rms_db": -26.31,
+    "width_db": -26.7
+   },
+   "47": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 67.05,
+    "f0_p90": 69.45,
+    "voiced": 0.91,
+    "breath_db": -10.1,
+    "flatness": 0.0,
+    "rms_db": -24.34,
+    "width_db": -27.74
+   },
+   "48": {
+    "voice": "B_belt",
+    "voice_conf": "low",
+    "f0_med": 67.05,
+    "f0_p90": 68.97,
+    "voiced": 0.79,
+    "breath_db": -5.33,
+    "flatness": 0.0,
+    "rms_db": -22.73,
+    "width_db": -9.84
+   },
+   "49": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 67.05,
+    "f0_p90": 69.53,
+    "voiced": 0.75,
+    "breath_db": -7.32,
+    "flatness": 0.0,
+    "rms_db": -22.61,
+    "width_db": -8.42
+   },
+   "50": {
+    "voice": "A_breathy",
+    "voice_conf": "low",
+    "f0_med": 67.05,
+    "f0_p90": 67.52,
+    "voiced": 0.52,
+    "breath_db": -7.69,
+    "flatness": 0.0,
+    "rms_db": -22.75,
+    "width_db": -8.57
+   },
+   "51": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 68.8,
+    "f0_p90": 69.86,
+    "voiced": 0.83,
+    "breath_db": -10.19,
+    "flatness": 0.0,
+    "rms_db": -24.45,
+    "width_db": -11.17
+   },
+   "52": {
+    "voice": "both",
+    "voice_conf": "high",
+    "f0_med": 62.05,
+    "f0_p90": 67.48,
+    "voiced": 0.74,
+    "breath_db": -10.44,
+    "flatness": 0.0,
+    "rms_db": -21.82,
+    "width_db": -5.61
+   },
+   "53": {
+    "voice": "both",
+    "voice_conf": "medium",
+    "f0_med": 60.05,
+    "f0_p90": 66.95,
+    "voiced": 0.74,
+    "breath_db": -11.06,
+    "flatness": 0.0,
+    "rms_db": -21.1,
+    "width_db": -7.29
+   },
+   "54": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 67.05,
+    "f0_p90": 70.03,
+    "voiced": 0.91,
+    "breath_db": -10.83,
+    "flatness": 0.0,
+    "rms_db": -21.12,
+    "width_db": -9.15
+   },
+   "55": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 62.2,
+    "f0_p90": 69.95,
+    "voiced": 0.83,
+    "breath_db": -9.41,
+    "flatness": 0.0,
+    "rms_db": -21.52,
+    "width_db": -11.21
+   },
+   "56": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 65.05,
+    "f0_p90": 65.05,
+    "voiced": 0.99,
+    "breath_db": -9.99,
+    "flatness": 0.0,
+    "rms_db": -21.47,
+    "width_db": -12.63
+   },
+   "59": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 62.85,
+    "f0_p90": 69.06,
+    "voiced": 0.87,
+    "breath_db": -9.16,
+    "flatness": 0.0,
+    "rms_db": -24.01,
+    "width_db": -18.64
+   },
+   "60": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 64.95,
+    "f0_p90": 65.95,
+    "voiced": 0.94,
+    "breath_db": -6.66,
+    "flatness": 0.0,
+    "rms_db": -23.99,
+    "width_db": -19.96
+   },
+   "61": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 69.3,
+    "f0_p90": 72.15,
+    "voiced": 0.91,
+    "breath_db": -11.64,
+    "flatness": 0.0,
+    "rms_db": -21.18,
+    "width_db": -10.46
+   },
+   "63": {
+    "voice": "B_belt",
+    "voice_conf": "medium",
+    "f0_med": 62.05,
+    "f0_p90": 69.45,
+    "voiced": 0.79,
+    "breath_db": -8.13,
+    "flatness": 0.0,
+    "rms_db": -21.2,
+    "width_db": -8.11
+   },
+   "64": {
+    "voice": "both",
+    "voice_conf": "medium",
+    "f0_med": 62.15,
+    "f0_p90": 69.67,
+    "voiced": 0.69,
+    "breath_db": -9.27,
+    "flatness": 0.0,
+    "rms_db": -20.3,
+    "width_db": -7.67
+   },
+   "66": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 64.25,
+    "f0_p90": 67.05,
+    "voiced": 0.91,
+    "breath_db": -11.19,
+    "flatness": 0.0,
+    "rms_db": -22.21,
+    "width_db": -11.03
+   },
+   "67": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 60.7,
+    "f0_p90": 63.1,
+    "voiced": 0.7,
+    "breath_db": -4.95,
+    "flatness": 0.0,
+    "rms_db": -24.65,
+    "width_db": -19.29
+   },
+   "68": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 55.05,
+    "f0_p90": 80.52,
+    "voiced": 0.66,
+    "breath_db": -1.17,
+    "flatness": 0.0,
+    "rms_db": -29.46,
+    "width_db": -21.05
+   },
+   "70": {
+    "voice": "B_belt",
+    "voice_conf": "high",
+    "f0_med": 69.15,
+    "f0_p90": 70.05,
+    "voiced": 0.75,
+    "breath_db": -12.38,
+    "flatness": 0.0,
+    "rms_db": -22.6,
+    "width_db": -15.15
+   },
+   "0": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 82.35,
+    "f0_p90": 83.25,
+    "voiced": 0.36,
+    "breath_db": -6.13,
+    "flatness": 0.0,
+    "rms_db": -37.51,
+    "width_db": -11.32
+   },
+   "1": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 83.0,
+    "f0_p90": 84.02,
+    "voiced": 0.21,
+    "breath_db": -8.13,
+    "flatness": 0.0,
+    "rms_db": -36.53,
+    "width_db": -6.73
+   },
+   "18": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 69.65,
+    "f0_p90": 69.75,
+    "voiced": 0.05,
+    "breath_db": -7.76,
+    "flatness": 0.0,
+    "rms_db": -27.87,
+    "width_db": -5.7
+   },
+   "19": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 69.45,
+    "f0_p90": 70.05,
+    "voiced": 0.81,
+    "breath_db": -10.56,
+    "flatness": 0.0,
+    "rms_db": -24.33,
+    "width_db": -2.6
+   },
+   "20": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 67.15,
+    "f0_p90": 67.16,
+    "voiced": 0.06,
+    "breath_db": -7.69,
+    "flatness": 0.0,
+    "rms_db": -27.82,
+    "width_db": -4.74
+   },
+   "21": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 68.95,
+    "f0_p90": 69.95,
+    "voiced": 0.98,
+    "breath_db": -12.11,
+    "flatness": 0.0,
+    "rms_db": -22.87,
+    "width_db": -9.82
+   },
+   "40": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 69.5,
+    "f0_p90": 69.95,
+    "voiced": 0.33,
+    "breath_db": -8.09,
+    "flatness": 0.0,
+    "rms_db": -25.99,
+    "width_db": -7.03
+   },
+   "41": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 69.05,
+    "f0_p90": 69.85,
+    "voiced": 0.96,
+    "breath_db": -9.79,
+    "flatness": 0.0,
+    "rms_db": -22.86,
+    "width_db": -3.23
+   },
+   "42": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 69.25,
+    "f0_p90": 69.76,
+    "voiced": 0.53,
+    "breath_db": -8.74,
+    "flatness": 0.0,
+    "rms_db": -26.33,
+    "width_db": -6.53
+   },
+   "43": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 65.05,
+    "f0_p90": 69.73,
+    "voiced": 0.95,
+    "breath_db": -9.45,
+    "flatness": 0.0,
+    "rms_db": -24.23,
+    "width_db": -7.31
+   },
+   "57": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 71.95,
+    "f0_p90": 74.05,
+    "voiced": 0.73,
+    "breath_db": -11.26,
+    "flatness": 0.0,
+    "rms_db": -19.98,
+    "width_db": -8.98
+   },
+   "58": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 69.75,
+    "f0_p90": 74.15,
+    "voiced": 0.88,
+    "breath_db": -14.02,
+    "flatness": 0.0,
+    "rms_db": -19.95,
+    "width_db": -7.37
+   },
+   "62": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": 69.15,
+    "f0_p90": 70.35,
+    "voiced": 0.22,
+    "breath_db": -11.95,
+    "flatness": 0.0,
+    "rms_db": -21.72,
+    "width_db": -7.05
+   },
+   "65": {
+    "voice": "choir",
+    "voice_conf": "medium",
+    "f0_med": null,
+    "f0_p90": null,
+    "voiced": 0.08,
+    "breath_db": -9.85,
+    "flatness": 0.0,
+    "rms_db": -22.77,
+    "width_db": -6.48
+   },
+   "69": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 81.85,
+    "f0_p90": 82.53,
+    "voiced": 0.25,
+    "breath_db": 0.35,
+    "flatness": 0.0,
+    "rms_db": -32.03,
+    "width_db": -7.09
+   },
+   "71": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 69.05,
+    "f0_p90": 69.85,
+    "voiced": 0.44,
+    "breath_db": -13.86,
+    "flatness": 0.0,
+    "rms_db": -26.94,
+    "width_db": -9.22
+   },
+   "72": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 69.05,
+    "f0_p90": 70.05,
+    "voiced": 0.9,
+    "breath_db": -16.91,
+    "flatness": 0.0,
+    "rms_db": -24.35,
+    "width_db": -8.69
+   },
+   "73": {
+    "voice": "A_breathy",
+    "voice_conf": "medium",
+    "f0_med": 81.6,
+    "f0_p90": 82.35,
+    "voiced": 0.2,
+    "breath_db": -11.79,
+    "flatness": 0.0,
+    "rms_db": -32.51,
+    "width_db": -23.05
+   }
+  },
+  "cluster_centres": {
+   "A_breathy": {
+    "f0_med": 62.56,
+    "f0_p90": 68.0,
+    "breath_db": -8.15,
+    "rms_db": -25.58,
+    "voiced": 0.68
+   },
+   "B_belt": {
+    "f0_med": 64.43,
+    "f0_p90": 68.21,
+    "breath_db": -10.53,
+    "rms_db": -23.07,
+    "voiced": 0.82
+   }
+  },
+  "doc": "Which voice sings each line (best effort) -> work/audio/voices.json.\nPer line, on the BS-RoFormer vocal stem inside the line's word spans: median and 90th-percentile pyin f0 (semitones),\nvoiced fraction, breathiness (energy 4-8 kHz / 0.3-4 kHz, dB), spectral flatness, loudness (RMS dB) and stereo width\n(side/mid dB: stacked/choir parts are wide, a single lead is centred). Lead lines are split into two clusters with a\n2-means on the standardised features, seeded with Verse 1 (tagged \"breathy, close-mic\" = A_breathy) and Chorus 1\n(\"full choir\" = B_belt). Wide lines (side/mid > -8 dB) with a belted lead are reported as 'both' (lead + stack);\ngang/whisper count lines keep 'choir' / 'A_breathy' (whispered). Confidence = margin between the two cluster distances."
  }
 }

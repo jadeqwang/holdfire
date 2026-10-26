@@ -2,5 +2,6 @@
 import archival from './archival.js';
 import oko from './oko.js';
 import forestreticles from './forest.js';
+import gunpowder from './gunpowder.js';
 
-export const SCENES = { archival, oko, forestreticles };
+export const SCENES = { archival, oko, forestreticles, gunpowder };

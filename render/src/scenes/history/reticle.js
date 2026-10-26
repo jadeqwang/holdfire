@@ -4,7 +4,7 @@
 import { css } from '../../palette.js';
 import { clamp, lerp, smooth, easeOutCubic } from '../../util.js';
 
-// o: {open 0..1 (eyelid), tight 0..1, lock 0..1, alpha, col [r,g,b], spin (rad), lw (design px)}
+// o: {open 0..1 (eyelid), tight 0..1, lock 0..1, alpha, col [r,g,b], spin (rad), lw (design px), detail 0..1 (ticks, arcs, cross)}
 export function drawReticle(c, x, y, r, o = {}) {
   const open = clamp(o.open ?? 1), tight = clamp(o.tight ?? 0), lock = clamp(o.lock ?? 0);
   const a = o.alpha ?? 1; if (a <= 0.003 || open <= 0.001) return;
@@ -19,7 +19,7 @@ export function drawReticle(c, x, y, r, o = {}) {
   const ry = Math.max(0.5, r * lid), rx = r * lerp(0.82, 1, lid);
   c.lineWidth = lw;
   c.beginPath(); c.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2); c.stroke();
-  const inner = smooth(range01(open, 0.45, 1));
+  const inner = smooth(range01(open, 0.45, 1)) * (o.detail ?? 1);
   if (inner > 0) {
     // ticks every 30 deg, the quarters longer
     c.globalAlpha = inner;

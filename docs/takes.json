@@ -110,7 +110,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 2,
@@ -123,7 +124,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 3,
@@ -134,10 +136,12 @@
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T01:13:56Z",
    "file": "media/gen/K1_t3_1348e18150.mp4",
-   "lag": null,
+   "lag": 0.25,
    "verdict": null,
    "dims": "1280,720,217",
-   "sheet": "media/gen/K1_t3_1348e18150_sheet.jpg"
+   "sheet": "media/gen/K1_t3_1348e18150_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   },
   {
    "take": 4,
@@ -147,9 +151,27 @@
    "dur": 9,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T01:13:57Z",
-   "file": null,
+   "file": "media/gen/K1_t4_b4ede83f36.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "dims": "1470,630,217",
+   "sheet": "media/gen/K1_t4_b4ede83f36_sheet.jpg",
+   "pick": false
+  },
+  {
+   "take": 5,
+   "job": "holdfire/K1_t5-8280a3bad7",
+   "kf": "media/kf/K1_nbp.png",
+   "s0": 12.75,
+   "dur": 9,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T01:27:05Z",
+   "file": "media/gen/K1_t5_8280a3bad7.mp4",
+   "lag": null,
+   "verdict": null,
+   "pick": false,
+   "dims": "1284,716,217",
+   "sheet": "media/gen/K1_t5_8280a3bad7_sheet.jpg"
   }
  ],
  "K5": [
@@ -164,7 +186,8 @@
    "file": null,
    "lag": null,
    "verdict": null,
-   "state": "error"
+   "state": "error",
+   "pick": false
   },
   {
    "take": 2,
@@ -174,9 +197,13 @@
    "dur": 11,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T01:11:40Z",
-   "file": null,
-   "lag": null,
-   "verdict": null
+   "file": "media/gen/K5_t2_125863904e.mp4",
+   "lag": 0.25,
+   "verdict": null,
+   "dims": "1280,720,265",
+   "sheet": "media/gen/K5_t2_125863904e_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   },
   {
    "take": 3,
@@ -186,9 +213,12 @@
    "dur": 11,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T01:24:36Z",
-   "file": null,
+   "file": "media/gen/K5_t3_d0e965a72c.mp4",
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "pick": false,
+   "dims": "1280,720,265",
+   "sheet": "media/gen/K5_t3_d0e965a72c_sheet.jpg"
   }
  ],
  "K3": [
@@ -202,7 +232,9 @@
    "submitted": "2026-10-26T01:18:02Z",
    "file": null,
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "state": "error",
+   "pick": false
   },
   {
    "take": 2,
@@ -212,9 +244,26 @@
    "dur": 11,
    "voc": "work/stems/vocals.wav",
    "submitted": "2026-10-26T01:18:03Z",
+   "file": "media/gen/K3_t2_e6b4ac693d.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1280,720,265",
+   "sheet": "media/gen/K3_t2_e6b4ac693d_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
+  },
+  {
+   "take": 3,
+   "job": "holdfire/K3_t3-283173c239",
+   "kf": "media/kf/K3_nbp.png",
+   "s0": 37.7,
+   "dur": 11,
+   "voc": "work/stems/vocals.wav",
+   "submitted": "2026-10-26T01:28:40Z",
    "file": null,
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "pick": false
   }
  ],
  "O6": [
@@ -226,9 +275,13 @@
    "dur": 8,
    "voc": null,
    "submitted": "2026-10-26T01:18:05Z",
-   "file": null,
-   "lag": null,
-   "verdict": null
+   "file": "media/gen/O6_t1_ed753c97a7.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1284,716,193",
+   "sheet": "media/gen/O6_t1_ed753c97a7_sheet.jpg",
+   "pick": true,
+   "kind": "other"
   }
  ],
  "K11": [
@@ -240,9 +293,13 @@
    "dur": 15,
    "voc": null,
    "submitted": "2026-10-26T01:18:36Z",
-   "file": null,
-   "lag": null,
-   "verdict": null
+   "file": "media/gen/K11_t1_241c7345d1.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1284,716,361",
+   "sheet": "media/gen/K11_t1_241c7345d1_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ],
  "C3": [
@@ -256,7 +313,25 @@
    "submitted": "2026-10-26T01:21:24Z",
    "file": null,
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "state": "error",
+   "pick": false
+  },
+  {
+   "take": 2,
+   "job": "holdfire/C3_t2-10bf8b3bd1",
+   "kf": "media/kf/C3_nbp.jpg",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T01:29:34Z",
+   "file": "media/gen/C3_t2_10bf8b3bd1.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1284,716,121",
+   "sheet": "media/gen/C3_t2_10bf8b3bd1_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ],
  "C2": [
@@ -268,9 +343,13 @@
    "dur": 5,
    "voc": null,
    "submitted": "2026-10-26T01:22:25Z",
-   "file": null,
-   "lag": null,
-   "verdict": null
+   "file": "media/gen/C2_t1_790f62ff80.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1280,720,121",
+   "sheet": "media/gen/C2_t1_790f62ff80_sheet.jpg",
+   "pick": true,
+   "kind": "keeper"
   }
  ],
  "O3": [
@@ -282,9 +361,78 @@
    "dur": 6,
    "voc": null,
    "submitted": "2026-10-26T01:25:30Z",
+   "file": "media/gen/O3_t1_cf489b17a2.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1280,720,145",
+   "sheet": "media/gen/O3_t1_cf489b17a2_sheet.jpg",
+   "pick": true,
+   "kind": "other"
+  }
+ ],
+ "E2": [
+  {
+   "take": 1,
+   "job": "holdfire/E2_t1-d3de414e16",
+   "kf": "media/kf/E2_nbp_2.jpg",
+   "s0": null,
+   "dur": 8,
+   "voc": null,
+   "submitted": "2026-10-26T01:27:03Z",
+   "file": "media/gen/E2_t1_d3de414e16.mp4",
+   "lag": 0.0,
+   "verdict": null,
+   "dims": "1280,720,193",
+   "sheet": "media/gen/E2_t1_d3de414e16_sheet.jpg",
+   "pick": true,
+   "kind": "env"
+  }
+ ],
+ "C4": [
+  {
+   "take": 1,
+   "job": "holdfire/C4_t1-c099cfd759",
+   "kf": "media/kf/C4_nbp.png",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T01:28:38Z",
    "file": null,
    "lag": null,
-   "verdict": null
+   "verdict": null,
+   "state": "error"
+  }
+ ],
+ "O2": [
+  {
+   "take": 1,
+   "job": "holdfire/O2_t1-42228c89db",
+   "kf": "media/kf/O2_nbp_2c.png",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T01:32:09Z",
+   "file": "media/gen/O2_t1_42228c89db.mp4",
+   "lag": null,
+   "verdict": null,
+   "dims": "1280,720,121",
+   "sheet": "media/gen/O2_t1_42228c89db_sheet.jpg"
+  }
+ ],
+ "C6": [
+  {
+   "take": 1,
+   "job": "holdfire/C6_t1-c31417843a",
+   "kf": "media/kf/C6_nbp_2c.png",
+   "s0": null,
+   "dur": 5,
+   "voc": null,
+   "submitted": "2026-10-26T01:39:18Z",
+   "file": "media/gen/C6_t1_c31417843a.mp4",
+   "lag": null,
+   "verdict": null,
+   "dims": "1280,720,121",
+   "sheet": "media/gen/C6_t1_c31417843a_sheet.jpg"
   }
  ]
 }

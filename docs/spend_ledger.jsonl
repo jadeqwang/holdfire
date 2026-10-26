@@ -270,3 +270,255 @@
 {"ts": "2026-10-26T01:24:36Z", "model": "bytedance/seedance-2.5", "tag": "K5_t3", "job": "holdfire/K5_t3-d0e965a72c", "event": "submit", "ok": null, "est_usd": 2.5432, "where": "cloud"}
 {"ts": "2026-10-26T01:25:15Z", "model": "google/nano-banana-pro", "tag": "kf_O3_nbp2", "job": "holdfire/kf_O3_nbp2-8eddb4803e", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-26T01:25:30Z", "model": "bytedance/seedance-2.5", "tag": "O3_t1", "job": "holdfire/O3_t1-cf489b17a2", "event": "submit", "ok": null, "est_usd": 1.3872, "where": "cloud"}
+{"ts": "2026-10-26T01:26:07Z", "model": "bytedance/seedance-2.5", "tag": "K1_t4", "job": "holdfire/K1_t4-b4ede83f36", "event": "result", "ok": true, "est_usd": 2.0808, "where": "cloud"}
+{"ts": "2026-10-26T01:26:41Z", "model": "google/nano-banana-pro", "tag": "kf_E2_nbp2", "job": "holdfire/kf_E2_nbp2-93d94362f3", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:27:03Z", "model": "bytedance/seedance-2.5", "tag": "E2_t1", "job": "holdfire/E2_t1-d3de414e16", "event": "submit", "ok": null, "est_usd": 1.8496, "where": "cloud"}
+{"ts": "2026-10-26T01:27:05Z", "model": "bytedance/seedance-2.5", "tag": "K1_t5", "job": "holdfire/K1_t5-8280a3bad7", "event": "submit", "ok": null, "est_usd": 2.0808, "where": "cloud"}
+{"ts": "2026-10-26T01:27:16Z", "model": "bytedance/seedance-2.5", "tag": "K3_t1", "job": "holdfire/K3_t1-c009e28512", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T01:28:12Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:12Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:13Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:13Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:13Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:14Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:14Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:14Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:15Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:15Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:15Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:16Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:17Z", "model": "google/nano-banana-pro", "tag": "kf_C4_nbp", "job": "holdfire/kf_C4_nbp-abd417af1e", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:28:17Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.4e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:17Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:18Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:18Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:20Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:20Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:20Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:20Z", "model": "google/nano-banana-pro", "tag": "kf_K6_nbp", "job": "holdfire/kf_K6_nbp-4a90d8a497", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:28:20Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:21Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.4e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:21Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:21Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:22Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:22Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:23Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:23Z", "model": "bytedance/seedance-2.5", "tag": "K5_t2", "job": "holdfire/K5_t2-125863904e", "event": "result", "ok": true, "est_usd": 2.5432, "where": "cloud"}
+{"ts": "2026-10-26T01:28:23Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:23Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:24Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:25Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:25Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:25Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:25Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:27Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:27Z", "model": "bytedance/seedance-2.5", "tag": "K3_t2", "job": "holdfire/K3_t2-e6b4ac693d", "event": "result", "ok": true, "est_usd": 2.5432, "where": "cloud"}
+{"ts": "2026-10-26T01:28:27Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:28Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:28Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:29Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:29Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:30Z", "model": "bytedance/seedance-2.5", "tag": "O6_t1", "job": "holdfire/O6_t1-ed753c97a7", "event": "result", "ok": true, "est_usd": 1.8496, "where": "cloud"}
+{"ts": "2026-10-26T01:28:31Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:31Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:32Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:32Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:32Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:33Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:33Z", "model": "bytedance/seedance-2.5", "tag": "C3_t1", "job": "holdfire/C3_t1-3c39614d81", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T01:28:34Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:34Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:34Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:35Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:36Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:36Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:36Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:37Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:37Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:38Z", "model": "bytedance/seedance-2.5", "tag": "C4_t1", "job": "holdfire/C4_t1-c099cfd759", "event": "submit", "ok": null, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:28:39Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:39Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:40Z", "model": "bytedance/seedance-2.5", "tag": "K3_t3", "job": "holdfire/K3_t3-283173c239", "event": "submit", "ok": null, "est_usd": 2.5432, "where": "cloud"}
+{"ts": "2026-10-26T01:28:40Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:40Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:41Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:41Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:42Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:43Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:44Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:45Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:45Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:45Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:46Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:46Z", "model": "google/nano-banana-pro", "tag": "kf_C5_nbp", "job": "holdfire/kf_C5_nbp-4ed049631e", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T01:28:47Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:47Z", "model": "google/nano-banana-pro", "tag": "kf_C5_nbp", "job": "holdfire/kf_C5_nbp-6a538f38c0", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:28:47Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:47Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:48Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:49Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:49Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:28:49Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:29:34Z", "model": "bytedance/seedance-2.5", "tag": "C3_t2", "job": "holdfire/C3_t2-10bf8b3bd1", "event": "submit", "ok": null, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:30:14Z", "model": "google/nano-banana-pro", "tag": "kf_C6_nbp", "job": "holdfire/kf_C6_nbp-96a5c4c99d", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:30:16Z", "model": "google/nano-banana-pro", "tag": "kf_K7_nbp", "job": "holdfire/kf_K7_nbp-43688a17fb", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:30:43Z", "model": "bytedance/seedance-2.5", "tag": "K11_t1", "job": "holdfire/K11_t1-241c7345d1", "event": "result", "ok": true, "est_usd": 3.468, "where": "cloud"}
+{"ts": "2026-10-26T01:30:47Z", "model": "google/nano-banana-pro", "tag": "kf_C6_nbp2", "job": "holdfire/kf_C6_nbp2-86897fc742", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:31:05Z", "model": "google/nano-banana-pro", "tag": "kf_K1b_nbp", "job": "holdfire/kf_K1b_nbp-5465e722a9", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:31:07Z", "model": "google/nano-banana-pro", "tag": "kf_K8_nbp", "job": "holdfire/kf_K8_nbp-a9ee1b03f0", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:31:26Z", "model": "google/nano-banana-pro", "tag": "kf_O2_nbp2", "job": "holdfire/kf_O2_nbp2-13e5d3f3d6", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:31:42Z", "model": "google/nano-banana-pro", "tag": "kf_K1b_nbp2", "job": "holdfire/kf_K1b_nbp2-f590c60f22", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:31:50Z", "model": "bytedance/seedance-2.5", "tag": "C2_t1", "job": "holdfire/C2_t1-790f62ff80", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:32:09Z", "model": "bytedance/seedance-2.5", "tag": "O2_t1", "job": "holdfire/O2_t1-42228c89db", "event": "submit", "ok": null, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:34:01Z", "model": "bytedance/seedance-2.5", "tag": "O3_t1", "job": "holdfire/O3_t1-cf489b17a2", "event": "result", "ok": true, "est_usd": 1.3872, "where": "cloud"}
+{"ts": "2026-10-26T01:36:10Z", "model": "bytedance/seedance-2.5", "tag": "K5_t3", "job": "holdfire/K5_t3-d0e965a72c", "event": "result", "ok": true, "est_usd": 2.5432, "where": "cloud"}
+{"ts": "2026-10-26T01:36:16Z", "model": "bytedance/seedance-2.5", "tag": "E2_t1", "job": "holdfire/E2_t1-d3de414e16", "event": "result", "ok": true, "est_usd": 1.8496, "where": "cloud"}
+{"ts": "2026-10-26T01:36:23Z", "model": "google/nano-banana-pro", "tag": "kf_K6_nbp", "job": "holdfire/kf_K6_nbp-4a90d8a497", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:36:27Z", "model": "google/nano-banana-pro", "tag": "kf_K8b_nbp", "job": "holdfire/kf_K8b_nbp-69be95d8ed", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:37:04Z", "model": "google/nano-banana-pro", "tag": "kf_K6_nbp2", "job": "holdfire/kf_K6_nbp2-ec831c555d", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:37:21Z", "model": "bytedance/seedance-2.5", "tag": "K1_t5", "job": "holdfire/K1_t5-8280a3bad7", "event": "result", "ok": true, "est_usd": 2.0808, "where": "cloud"}
+{"ts": "2026-10-26T01:37:40Z", "model": "google/nano-banana-pro", "tag": "kf_C5_nbp", "job": "holdfire/kf_C5_nbp-6a538f38c0", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:37:42Z", "model": "google/nano-banana-pro", "tag": "kf_K10_nbp", "job": "holdfire/kf_K10_nbp-5e14aebda9", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:38:18Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:19Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:20Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:20Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:20Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:21Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:22Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:22Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:22Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:23Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:24Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:25Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:26Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.4e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:26Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:26Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:27Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:28Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:28Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:28Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:29Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:29Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:31Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.4e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:31Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:32Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:32Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.4e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:33Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:33Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:33Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:34Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:35Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:36Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:36Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:37Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:37Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:37Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:39Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:39Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:39Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:39Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:40Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.1e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:41Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:42Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:43Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:44Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:44Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:44Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:45Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:46Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:46Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:46Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:48Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:48Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:48Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:48Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:49Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:50Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:50Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:50Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:51Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:51Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:51Z", "model": "google/nano-banana-pro", "tag": "kf_C6_nbp2", "job": "holdfire/kf_C6_nbp2-86897fc742", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:38:51Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:52Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:53Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.6e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:53Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 1.5e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:53Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:54Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 5.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:55Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:57Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:58Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.7e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:58Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.3e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:58Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:38:58Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2.8e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:39:00Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 4.9e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:39:00Z", "model": "@cf/openai/whisper-large-v3-turbo", "tag": "hf-verify-line", "ok": true, "est_usd": 2e-05, "where": "cloud"}
+{"ts": "2026-10-26T01:39:02Z", "model": "google/nano-banana-pro", "tag": "kf_C5_nbp2", "job": "holdfire/kf_C5_nbp2-be872b922d", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:39:12Z", "model": "google/nano-banana-pro", "tag": "kf_K7_nbp", "job": "holdfire/kf_K7_nbp-43688a17fb", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:39:14Z", "model": "google/nano-banana-pro", "tag": "kf_K12_nbp", "job": "holdfire/kf_K12_nbp-c9cc0c9d8e", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:39:18Z", "model": "bytedance/seedance-2.5", "tag": "C6_t1", "job": "holdfire/C6_t1-c31417843a", "event": "submit", "ok": null, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:39:30Z", "model": "bytedance/seedance-2.5", "tag": "C3_t2", "job": "holdfire/C3_t2-10bf8b3bd1", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:40:04Z", "model": "google/nano-banana-pro", "tag": "kf_K8_nbp", "job": "holdfire/kf_K8_nbp-a9ee1b03f0", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:40:06Z", "model": "google/nano-banana-pro", "tag": "kf_L3_nbp", "job": "holdfire/kf_L3_nbp-0dc8a4474d", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:40:41Z", "model": "google/nano-banana-pro", "tag": "kf_K1b_nbp2", "job": "holdfire/kf_K1b_nbp2-f590c60f22", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:40:55Z", "model": "google/nano-banana-pro", "tag": "kf_K7_nbp2", "job": "holdfire/kf_K7_nbp2-5b22bf1909", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:41:02Z", "model": "google/nano-banana-pro", "tag": "kf_K8b_nbp", "job": "holdfire/kf_K8b_nbp-69be95d8ed", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:41:04Z", "model": "google/nano-banana-pro", "tag": "kf_L4_nbp", "job": "holdfire/kf_L4_nbp-3202121dc2", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:42:33Z", "model": "google/nano-banana-pro", "tag": "kf_K6_nbp2", "job": "holdfire/kf_K6_nbp2-ec831c555d", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T01:42:35Z", "model": "google/nano-banana-pro", "tag": "kf_K6_nbp2", "job": "holdfire/kf_K6_nbp2-6891308eb3", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:42:41Z", "model": "bytedance/seedance-2.5", "tag": "C4_t1", "job": "holdfire/C4_t1-c099cfd759", "event": "result", "ok": false, "est_usd": 0, "where": "cloud"}
+{"ts": "2026-10-26T01:43:08Z", "model": "google/nano-banana-pro", "tag": "kf_K10_nbp", "job": "holdfire/kf_K10_nbp-5e14aebda9", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:43:11Z", "model": "google/nano-banana-pro", "tag": "kf_L5_nbp", "job": "holdfire/kf_L5_nbp-3f30939ddb", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:43:39Z", "model": "google/nano-banana-pro", "tag": "kf_C5_nbp2", "job": "holdfire/kf_C5_nbp2-be872b922d", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:43:42Z", "model": "google/nano-banana-pro", "tag": "kf_K8_nbp2", "job": "holdfire/kf_K8_nbp2-f87449ffda", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:43:49Z", "model": "google/nano-banana-pro", "tag": "kf_K12_nbp", "job": "holdfire/kf_K12_nbp-c9cc0c9d8e", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:43:51Z", "model": "google/nano-banana-pro", "tag": "kf_O4_nbp", "job": "holdfire/kf_O4_nbp-b3f9fab012", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:44:43Z", "model": "google/nano-banana-pro", "tag": "kf_L3_nbp", "job": "holdfire/kf_L3_nbp-0dc8a4474d", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:44:46Z", "model": "google/nano-banana-pro", "tag": "kf_O5_nbp", "job": "holdfire/kf_O5_nbp-2745735947", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:44:47Z", "model": "bytedance/seedance-2.5", "tag": "O2_t1", "job": "holdfire/O2_t1-42228c89db", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:45:36Z", "model": "google/nano-banana-pro", "tag": "kf_L4_nbp", "job": "holdfire/kf_L4_nbp-3202121dc2", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:45:38Z", "model": "google/nano-banana-pro", "tag": "kf_O7_nbp", "job": "holdfire/kf_O7_nbp-a877e8f731", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:47:04Z", "model": "google/nano-banana-pro", "tag": "kf_K6_nbp2", "job": "holdfire/kf_K6_nbp2-6891308eb3", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:47:30Z", "model": "google/nano-banana-pro", "tag": "kf_O4_nbp", "job": "holdfire/kf_O4_nbp-b3f9fab012", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:47:34Z", "model": "google/nano-banana-pro", "tag": "kf_O8_nbp", "job": "holdfire/kf_O8_nbp-290b8dd01c", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:47:42Z", "model": "google/nano-banana-pro", "tag": "kf_L5_nbp", "job": "holdfire/kf_L5_nbp-3f30939ddb", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:47:43Z", "model": "google/nano-banana-pro", "tag": "kf_E1_nbp", "job": "holdfire/kf_E1_nbp-95f995fc4c", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:48:06Z", "model": "google/nano-banana-pro", "tag": "kf_K7_nbp2", "job": "holdfire/kf_K7_nbp2-5b22bf1909", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:48:17Z", "model": "google/nano-banana-pro", "tag": "kf_K8_nbp2", "job": "holdfire/kf_K8_nbp2-f87449ffda", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:48:55Z", "model": "bytedance/seedance-2.5", "tag": "C6_t1", "job": "holdfire/C6_t1-c31417843a", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-26T01:49:18Z", "model": "google/nano-banana-pro", "tag": "kf_O7_nbp", "job": "holdfire/kf_O7_nbp-a877e8f731", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:49:19Z", "model": "google/nano-banana-pro", "tag": "kf_O5_nbp", "job": "holdfire/kf_O5_nbp-2745735947", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:49:21Z", "model": "google/nano-banana-pro", "tag": "kf_E3_nbp", "job": "holdfire/kf_E3_nbp-180b0e83bf", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:49:22Z", "model": "google/nano-banana-pro", "tag": "kf_E4_nbp", "job": "holdfire/kf_E4_nbp-98d8e09176", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:50:22Z", "model": "google/nano-banana-pro", "tag": "kf_O8_nbp", "job": "holdfire/kf_O8_nbp-290b8dd01c", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:50:23Z", "model": "google/nano-banana-pro", "tag": "kf_E5_nbp", "job": "holdfire/kf_E5_nbp-4c90bbc042", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:50:31Z", "model": "google/nano-banana-pro", "tag": "kf_E1_nbp", "job": "holdfire/kf_E1_nbp-95f995fc4c", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:50:32Z", "model": "google/nano-banana-pro", "tag": "kf_E6_nbp", "job": "holdfire/kf_E6_nbp-e6761dc41d", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:53:01Z", "model": "google/nano-banana-pro", "tag": "kf_E3_nbp", "job": "holdfire/kf_E3_nbp-180b0e83bf", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:53:01Z", "model": "google/nano-banana-pro", "tag": "kf_E4_nbp", "job": "holdfire/kf_E4_nbp-98d8e09176", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:53:03Z", "model": "google/nano-banana-pro", "tag": "kf_E7_nbp", "job": "holdfire/kf_E7_nbp-b968fa859f", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:53:04Z", "model": "google/nano-banana-pro", "tag": "kf_H1_nbp", "job": "holdfire/kf_H1_nbp-5869a5c6d5", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:53:29Z", "model": "google/nano-banana-pro", "tag": "kf_O1_nbp2", "job": "holdfire/kf_O1_nbp2-e12f1784b0", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:54:01Z", "model": "google/nano-banana-pro", "tag": "kf_E5_nbp", "job": "holdfire/kf_E5_nbp-4c90bbc042", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:54:02Z", "model": "google/nano-banana-pro", "tag": "kf_C1_nbp", "job": "holdfire/kf_C1_nbp-43824a15ac", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:54:03Z", "model": "google/nano-banana-pro", "tag": "kf_H2_nbp", "job": "holdfire/kf_H2_nbp-5838465139", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:55:02Z", "model": "google/nano-banana-pro", "tag": "kf_E6_nbp", "job": "holdfire/kf_E6_nbp-e6761dc41d", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:55:05Z", "model": "google/nano-banana-pro", "tag": "kf_H4_nbp", "job": "holdfire/kf_H4_nbp-6dcada2621", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:56:41Z", "model": "google/nano-banana-pro", "tag": "kf_E7_nbp", "job": "holdfire/kf_E7_nbp-b968fa859f", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:56:42Z", "model": "google/nano-banana-pro", "tag": "kf_H1_nbp", "job": "holdfire/kf_H1_nbp-5869a5c6d5", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:56:44Z", "model": "google/nano-banana-pro", "tag": "kf_H5_nbp", "job": "holdfire/kf_H5_nbp-de56c4bd8f", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:56:45Z", "model": "google/nano-banana-pro", "tag": "kf_H6_nbp", "job": "holdfire/kf_H6_nbp-2f7f65ce8c", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:57:41Z", "model": "google/nano-banana-pro", "tag": "kf_C1_nbp", "job": "holdfire/kf_C1_nbp-43824a15ac", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:57:42Z", "model": "google/nano-banana-pro", "tag": "kf_C7_nbp", "job": "holdfire/kf_C7_nbp-39bcb2fbea", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:57:59Z", "model": "google/nano-banana-pro", "tag": "kf_O1_nbp2", "job": "holdfire/kf_O1_nbp2-e12f1784b0", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:58:33Z", "model": "google/nano-banana-pro", "tag": "kf_H2_nbp", "job": "holdfire/kf_H2_nbp-5838465139", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:58:35Z", "model": "google/nano-banana-pro", "tag": "kf_C8_nbp", "job": "holdfire/kf_C8_nbp-b4c4527136", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:58:42Z", "model": "google/nano-banana-pro", "tag": "kf_H4_nbp", "job": "holdfire/kf_H4_nbp-6dcada2621", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T01:58:44Z", "model": "google/nano-banana-pro", "tag": "kf_C9_nbp", "job": "holdfire/kf_C9_nbp-4d0dcefdc6", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T02:00:28Z", "model": "google/nano-banana-pro", "tag": "kf_C7_nbp", "job": "holdfire/kf_C7_nbp-39bcb2fbea", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T02:00:30Z", "model": "google/nano-banana-pro", "tag": "kf_C10_nbp", "job": "holdfire/kf_C10_nbp-59184f7499", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T02:01:42Z", "model": "google/nano-banana-pro", "tag": "kf_C9_nbp", "job": "holdfire/kf_C9_nbp-4d0dcefdc6", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T02:01:43Z", "model": "google/nano-banana-pro", "tag": "kf_C11_nbp", "job": "holdfire/kf_C11_nbp-56dc30a176", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T02:01:43Z", "model": "google/nano-banana-pro", "tag": "kf_C8_nbp", "job": "holdfire/kf_C8_nbp-b4c4527136", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-26T02:01:46Z", "model": "google/nano-banana-pro", "tag": "kf_C12_nbp", "job": "holdfire/kf_C12_nbp-64a58b78fa", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}

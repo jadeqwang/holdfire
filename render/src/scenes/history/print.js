@@ -37,9 +37,10 @@ float spotE(vec2 q){ vec2 f = abs(fract(q) - .5) * 2.;
   return (f.x + f.y <= 1.) ? (f.x * f.x + f.y * f.y) * .5 : 1. - ((1. - f.x) * (1. - f.x) + (1. - f.y) * (1. - f.y)) * .5; }
 float screenAM(vec2 page, float v, float cell, float ang, float n){
   vec2 q = rot(ang) * page / cell;
-  float s = spotE(q) + n;
-  float w = max(fwidth(s), 1e-4) * .75;     // derivatives before any branch
   v = clamp(v, 0., 1.);
+  // the paper's tooth eats dot edges, but never decides whether a light dot exists at all (no speckle in the highlights)
+  float s = spotE(q) + n * smoothstep(0., .35, v) * smoothstep(1., .65, v);
+  float w = max(fwidth(s), 1e-4) * .75;     // derivatives before any branch
   return v < .004 ? 0. : 1. - smoothstep(v - w, v + w, s);
 }
 // lay the inks on the paper. page = page coord of this pixel (content must already be sampled with offK / offR applied)
@@ -159,6 +160,9 @@ export function pressBegin(e) {
   c.setTransform(e.S, 0, 0, e.S, 0, 0);
   return c;
 }
+
+// the press canvas as a texture (marked for upload), for scenes that sample it in their own print shader
+export function pressTexture() { if (pressTex) pressTex.needsUpdate = true; return pressTex; }
 
 // screen the press canvas onto paper. o: setPrint options + {mode:'replace'|'multiply', field: texture (RGBA densities kTone,kSolid,rTone,rSolid added), fieldGain}
 export function pressPrint(e, o = {}) {

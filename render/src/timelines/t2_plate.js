@@ -62,6 +62,7 @@ export const TESTS = [
   ['red', 't2_plate', { clip: 'TEST_vista', grade: { red: 1 } }],
   ['rewind', 't2_vhs_rewind', (t, lt) => { const t0 = t - lt; return { clips: ['TEST_vista', 'TEST_echo_tower', 'TEST_dot_faces', 'TEST_missing'],
     steps: [t0, t0 + 0.25, t0 + 0.5, t0 + 0.75], blackAt: t0 + 1.5 }; }],
+  ['split_proc', 't2_split', { left: { scene: 'sky', p: {} }, right: { scene: 't2_plate', p: { clip: 'TEST_dot_faces', style: 'halftone' } }, x: 1100, line: 2 }],
   ['bp_over_sub', 'multi', { layers: [
     { scene: 't2_plate', p: { clip: 'TEST_vista', style: 'blueprint', styleP: { tone: 'sepia', grid: 0 }, styleAmt: 0.8 } },
     { scene: 't2_blueprint', p: { subject: 'fin_bones', over: true, pos: [900, 560], stageT: null } }] }],

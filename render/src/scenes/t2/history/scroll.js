@@ -5,13 +5,13 @@
 // The paper is ruled in cinnabar like a manuscript, laid on the calligrapher's dark felt; the camera tilts down with the brush, which
 // stays at about y 560 so the lower third is always blank paper (room for the editor's English line). On "found" (1:29.97) a square
 // cinnabar seal stamps beside the end of the column: white-text (carved) seal reading 真元妙道, the first four characters of the
-// text's title (right column 真元, left column 妙道), cut procedurally (ink.js bakeSeal) in the brush face, not in seal script.
+// text's title (right column 真元, left column 妙道), cut procedurally (ink.js bakeSeal) in Ma Shan Zheng's brush forms, not in seal script.
 // Characters are baked at 1.5x and revealed stroke by stroke; on a paused frame they are as sharp as type.
 // p: {t0 (87.42: first stroke), t1 (89.82: last stroke), tSeal (89.97), colX (1200), size (64), cell (72), brushY (560: screen y the
 //     camera keeps the brush at), seal ('真元妙道'), sealSize (118), brush (true), zoom (1), seed}
 import * as THREE from 'three';
 import { clamp, smooth, range, easeOutCubic, easeInOutCubic, easeInCubic } from '../../../util.js';
-import { loadT2HistoryFonts, BRUSH } from './fonts.js';
+import { loadT2HistoryFonts, BRUSH, SEAL } from './fonts.js';
 import { INK_GLSL, ricePaper, glyphUniforms, setGlyphUniforms, bakeGlyphs, tipAt, drawBrush, bakeSeal } from './ink.js';
 
 export const WARNING = '有以硫黃、雄黃合硝石，并蜜燒之，焰起燒手面，及燼屋舍者。';
@@ -132,7 +132,7 @@ export default {
     const last = bake.meta[bake.meta.length - 2];          // 者 (the 。 sits after it)
     const ss = p.sealSize ?? 132;
     const sx = L.colX - L.cell * 0.75 - ss - 12, sy = last.y - ss * 0.35;
-    u.tSeal.value = bakeSeal(p.seal || '真元妙道', 256, 7, BRUSH);
+    u.tSeal.value = bakeSeal(p.seal || '真元妙道', 256, 7, SEAL);
     u.sealR.value.set(sx, sy, ss, ss);
     u.sealOn.value = t >= T.tSeal ? 1 : 0;
     u.sealShadow.value = t >= T.tSeal - 0.2 && t < T.tSeal ? Math.max(0.001, 1 - easeInCubic(range(t, T.tSeal - 0.2, T.tSeal))) : 0;

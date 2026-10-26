@@ -4,7 +4,7 @@
 // onormal (welded smooth normals for the inverted-hull outline). PROFILES are also used flat for the dive's 2D silhouette.
 import * as THREE from 'three';
 
-const SEG = 40;
+const SEG = 32;
 
 function arc(cx, cy, r, a0, a1, n) {
   const out = [];

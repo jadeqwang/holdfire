@@ -144,14 +144,16 @@ export const SUBJECTS = {
   locomotive: () => locomotive(), wright_flyer: () => wrightFlyer(), jet_airliner: () => jetAirliner(), saturn_v: () => saturnV(),
 };
 
-// place a subject's paths (pos, scale, rot) and give each a draw-on window. stageT: [song time per stage]; dur: per-stage draw time.
-export function subjectPaths(name, time, { stageT, dur = 0.5, pos = [960, 540], scale = 1, rot = 0, morph } = {}) {
+// place a subject's paths (pos, scale, rot, flipX: mirrored left-right before the rotation) and give each a draw-on window.
+// stageT: [song time per stage]; dur: per-stage draw time.
+export function subjectPaths(name, time, { stageT, dur = 0.5, pos = [960, 540], scale = 1, rot = 0, flipX = false, morph } = {}) {
   const f = SUBJECTS[name]; if (!f) return [];
   const u = morph !== undefined ? morph : 0;
   const paths = f(u);
   scale *= ({ saturn_v: 0.82, hand: 1.1 })[name] || 1;
   const c = Math.cos(rot), s = Math.sin(rot);
-  const X = (p) => [pos[0] + scale * (c * p[0] - s * p[1]), pos[1] + scale * (s * p[0] + c * p[1])];
+  const F = flipX ? -1 : 1;
+  const X = (p) => [pos[0] + scale * (c * F * p[0] - s * p[1]), pos[1] + scale * (s * F * p[0] + c * p[1])];
   const byStage = {};
   paths.forEach((P) => { (byStage[P.stage || 0] = byStage[P.stage || 0] || []).push(P); });
   const out = [];
@@ -162,6 +164,7 @@ export function subjectPaths(name, time, { stageT, dur = 0.5, pos = [960, 540], 
       const q = { ...P, t0: a, t1: a + dur * 0.45 };
       for (const key of ['a', 'b', 'c', 'at', 'to']) if (q[key]) q[key] = X(q[key]);
       if (q.pts) q.pts = q.pts.map(X);
+      if (flipX) { if (q.off) q.off = -q.off; if (q.a0 !== undefined) q.a0 = 180 - q.a0; if (q.a1 !== undefined) { q.a1 = 180 - q.a1; [q.a0, q.a1] = [q.a1, q.a0]; } if (q.type === 'circle') q.dir = -(q.dir ?? 1); }
       if (q.r) q.r *= scale; if (q.off) q.off *= scale; if (q.size) q.size *= scale; if (q.len) q.len *= scale;
       if (q.type === 'arc' || q.type === 'circle') { if (q.a0 !== undefined) q.a0 += rot / D2R; if (q.a1 !== undefined) q.a1 += rot / D2R; }
       out.push(q);

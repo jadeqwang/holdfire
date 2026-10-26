@@ -13,7 +13,7 @@
 //   ticks   {a, b, n (10), len (10), major (5)}                  (a ruler / scale)
 // Labels (numbers, dates, a few names only; plan "Text on screen") type on at the end of their path's window.
 // subject: a named drawing from subjects.js (fin_bones fin foot hand egg_to_jar egg jar seed_section locomotive wright_flyer jet_airliner
-//   saturn_v), placed by pos ([960,540]) / scale (1; 1.35 when full) / subjectRot, drawn in stages from t0 (SONG time, default the shot
+//   saturn_v), placed by pos ([960,540]) / scale (1; 1.35 when full) / subjectRot / subjectFlip (mirror left-right), drawn in stages from t0 (SONG time, default the shot
 //   start) on the following snares (stages: one entry per stage, e.g. ['one bone', 'two bones', 'the wrist']; stageT: explicit song
 //   times; drawDur per stage; morphAt / morphDur for egg_to_jar). full: true = the drawing alone, full frame on cyanotype ground.
 //   p.paths still adds to a subject (dims, callouts with numbers).
@@ -212,13 +212,14 @@ export default {
       const dur = p.drawDur ?? Math.min(0.6, Math.max(0.22, len * 0.6));
       const mAt = p.morphAt ?? (base + len * 0.4);
       const morph = EASES.inOut(clamp((t - mAt) / (p.morphDur ?? Math.min(0.6, len * 0.4))));
-      const sub = subjectPaths(p.subject, t, { stageT, dur, pos: p.pos || [960, 540], scale: p.scale ?? (p.full ? 1.35 : 1), rot: p.subjectRot || 0, morph });
+      const sub = subjectPaths(p.subject, t, { stageT, dur, pos: p.pos || [960, 540], scale: p.scale ?? (p.full ? 1.35 : 1), rot: p.subjectRot || 0, flipX: !!p.subjectFlip, morph });
       const off = p.abs ? 0 : shot.t0;
       paths = [...sub.map((q) => ({ ...q, t0: q.t0 - off, t1: q.t1 - off })), ...paths];
     }
     let grid = p.grid;
     if (p.full) grid = cyanotypeGround(c, p.grid);
-    drawBlueprint(c, paths, time, { ...p, grid, alpha: A });
+    const fx = (v) => (typeof v === 'function' ? v(t, lt) : v);
+    drawBlueprint(c, paths, time, { ...p, zoom: fx(p.zoom), pan: fx(p.pan), rot: fx(p.rot), grid, alpha: A });
     if (p.full) { e.blit2d('replace', p.gain ?? 1.3); return; }
     if (!p.over) e.clear(e.rtScene, ...(p.bg || [0.03, 0.08, 0.16]));
     e.blit2d('over', p.gain ?? 1.3);

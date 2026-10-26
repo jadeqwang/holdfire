@@ -44,7 +44,7 @@ export function drawLayers(ctx, shot, t, layers, base, pat) {
     const flat = i === 0 && !over;
     drawLayer(e, target, {
       tex: L.tex, matte: L.matte, key: p.key, keyLoHi: p.keyLoHi, w: L.w, h: L.h, fit: p.fit, zoom: xf.zoom, pan: xf.pan, rot: xf.rot,
-      flipX: p.flipX, grade: p.grade, alpha: p.alpha, bg: flat ? (base.bg || [0, 0, 0]) : null,
+      flipX: p.flipX, grade: p.grade, alpha: p.alpha, f: L.f, bg: flat ? (base.bg || [0, 0, 0]) : null,
     }, i > 0 || (direct && over));
   });
   if (direct) return;

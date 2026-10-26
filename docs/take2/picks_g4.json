@@ -67,7 +67,28 @@
   "dir": "work/plates/DR03_reveal",
   "kind": "still",
   "src": "media/kf2/DR03_nbp_v2.jpg",
-  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)"
+  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)",
+  "grade": {
+   "fix": [
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "c": [
+      697,
+      260
+     ],
+     "r": [
+      11,
+      16
+     ],
+     "note": "teal-tips' iris teal -> brown (canon)"
+    }
+   ]
+  }
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -118,7 +139,34 @@
   "in": 2.87,
   "reverse": true,
   "rate": 0.8,
-  "note": "reuse g1's CO01 eye plate, played backward so it lands on CO01's first frame when OU13 starts (loop point); not regenerated"
+  "note": "reuse g1's CO01 eye plate, played backward so it lands on CO01's first frame when OU13 starts (loop point); not regenerated",
+  "grade": {
+   "fix": [
+    {
+     "mode": "dot",
+     "col": [
+      0.501,
+      0.696,
+      0.9
+     ],
+     "track": [
+      [
+       0,
+       1099.3,
+       410.8,
+       80
+      ],
+      [
+       68,
+       1117.0,
+       395.5,
+       90
+      ]
+     ],
+     "note": "Jade's catchlight: the white disc becomes the pale-blue dot (#8EC5FF on screen; col is set 0.9x so the photo look's bloom does not clip it to white), tracked on the plate"
+    }
+   ]
+  }
  },
  "DR04": {
   "dir": "work/plates/DR04",
@@ -126,7 +174,106 @@
   "src": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
   "s0": 188.376,
   "lag": 0.583,
-  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962"
+  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962",
+  "grade": {
+   "fix": [
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "r": [
+      16,
+      23
+     ],
+     "track": [
+      [
+       0,
+       571,
+       420
+      ],
+      [
+       8,
+       570,
+       426
+      ],
+      [
+       16,
+       573,
+       427
+      ],
+      [
+       24,
+       577,
+       419
+      ],
+      [
+       32,
+       577,
+       411
+      ],
+      [
+       40,
+       577,
+       411
+      ],
+      [
+       48,
+       580,
+       411
+      ],
+      [
+       56,
+       582,
+       411
+      ],
+      [
+       64,
+       582,
+       411
+      ],
+      [
+       72,
+       585,
+       411
+      ],
+      [
+       80,
+       587,
+       411
+      ],
+      [
+       88,
+       588,
+       411
+      ],
+      [
+       96,
+       589,
+       411
+      ],
+      [
+       104,
+       590,
+       411
+      ],
+      [
+       112,
+       591,
+       411
+      ],
+      [
+       120,
+       591,
+       411
+      ]
+     ],
+     "note": "teal-tips' iris teal -> brown (canon), teal catchlight kept; tracked by template match on the plate"
+    }
+   ]
+  }
  },
  "BU12R": {
   "dir": "work/plates/BU12R",

@@ -56,9 +56,10 @@ function drawHero(ty, t, c) {
       const ww = ty.measure(w.text, st);
       const k = clamp((t - w.t + 0.02) / (c.mode === 'fade' ? 0.5 : 0.12));
       if (k > 0) {
-        const hot = 1 - easeOutCubic(range(t, w.t, w.t + 0.3));
+        const tH = c.hotT ?? w.t;   // hotT: the title is already up (frame 0) and lands later (hot flash + a small pop)
+        const hot = t < tH - 1e-4 ? 0 : 1 - easeOutCubic(range(t, tH, tH + 0.3));
         const col = mixc(c.color || P.cream, c.hot || P.goldPale, hot);
-        const sc = c.mode === 'fade' ? 1 : lerp(1.18, 1, easeOutExpo(k));
+        const sc = c.mode === 'fade' ? (c.hotT != null && t >= c.hotT ? 1 + 0.05 * Math.exp(-(t - c.hotT) / 0.14) : 1) : lerp(1.18, 1, easeOutExpo(k));
         cx.save(); cx.translate(x + ww / 2, y - size * 0.35); cx.scale(sc, sc); cx.translate(-(x + ww / 2), -(y - size * 0.35));
         ty.text(w.text, x, y, { ...st, color: col, alpha: (c.mode === 'fade' ? easeOutCubic(k) : k) * fade * (c.alpha ?? 1), glow: c.glow ?? 3, shade: c.shade ?? 0.55 });
         cx.restore();
@@ -87,6 +88,12 @@ function drawSub(ty, t, c) {
     const rowW = row.reduce((s, w, i) => s + w.wd + (i ? space : 0), 0);
     let x = SAFE.cx - rowW / 2;
     const y = yLast - (rows.length - 1 - ri) * lead;
+    if (c.band) {   // a soft dark band behind the sung part of the row, so the line reads on a phone over a pale painting
+      let xe = x, ab = 0;
+      row.forEach((w, i) => { const a = easeOutCubic(range(t, w.t - 0.06, w.t + 0.14)); if (a > 0) { xe = x + row.slice(0, i + 1).reduce((s2, v, j) => s2 + v.wd + (j ? space : 0), 0); ab = Math.max(ab, a); } });
+      if (ab > 0) { const cx = ty.ctx; cx.save(); cx.globalAlpha = 0.5 * fade * Math.min(1, ab * 2); cx.fillStyle = 'rgb(8,10,16)';
+        cx.beginPath(); cx.roundRect(x - 22, y - st.size * 0.98, xe - x + 44, st.size * 1.3, 12); cx.fill(); cx.restore(); }
+    }
     for (const w of row) {
       const a = easeOutCubic(range(t, w.t - 0.06, w.t + 0.14));
       if (a > 0) ty.text(w.text, x, y, { ...st, color: c.color || P.cream, alpha: a * fade, shade: 0.9 });
@@ -334,7 +341,8 @@ export function buildTimeline(A) {
   const sub716 = ev('sub_hit', null, 7.0);
   const blackT = A.bars.find((b) => b > sub716.t);           // bar 4 downbeat: the rewind reaches black
   const rewSteps = SIXTEENTHS.filter((x) => x >= sub716.t - 0.01 && x < blackT);
-  S('0:07.16', sub716, { scene: 't2_vhs_rewind', p: { clips: co.slice().reverse().map((s) => s.id), steps: rewSteps, blackAt: blackT }, method: 'procedural', era: ERA.spiral, look: LK.photo,
+  S('0:07.16', sub716, { scene: 't2_vhs_rewind', p: { clips: co.slice().reverse().map((s) => s.id), steps: rewSteps, blackAt: blackT }, method: 'procedural', era: ERA.spiral,
+    look: (t, lt) => ({ ...LK.photo, flash: 0.5 * Math.exp(-lt / 0.09), flashCol: [1.0, 0.12, 0.05] }),   // the red flash's tail runs into the rewind
     want: 'The count scrubs backward in VHS rewind lines, one spiral per 16th (galaxy to romanesco), down to black on the bar line', notes: 'no text: the red does the work' });
   const lightShot = (want, extra = {}) => ({ ...plate(extra), method: 'video', era: ERA.lights, look: LK.night, want });
   S('0:08.60', wd('CO', 1, 'one'), lightShot('Two hands strike a match in the dark'));
@@ -353,8 +361,9 @@ export function buildTimeline(A) {
   S('0:12.50', beat('0:12.50'), { ...plate(), method: 'video', era: ERA.room, look: LK.room, want: 'Jade opens her eyes and looks up (on the beat before the verse)' });
 
   // type: title, then the two counts collecting along the bottom third
-  cue({ kind: 'hero', label: 'HOLD FIRE (title)', t0: subHit.t, t1: intro0.t - 0.2, mode: 'fade', size: 150, y: 590, out: 0.5, glow: 10,
-    font: { stretch: '125%', weight: 800, track: 0.14 }, rows: [{ words: [{ text: 'HOLD', t: subHit.t }, { text: 'FIRE', t: subHit.t }] }], draw: drawHero });
+  // the title is in frame zero (the thumbnail, and the end card's last frame, so the post loops) and lands on the 0:00.2 sub
+  cue({ kind: 'hero', label: 'HOLD FIRE (title)', t0: 0, t1: intro0.t - 0.2, mode: 'fade', size: 150, y: 590, out: 0.5, glow: 10, hotT: subHit.t,
+    font: { stretch: '125%', weight: 800, track: 0.14 }, rows: [{ words: [{ text: 'HOLD', t: -0.5 }, { text: 'FIRE', t: -0.5 }] }], draw: drawHero });
   const NUMS = { one: 1, two: 2, three: 3, five: 5, eight: 8 };
   const countItems = (L, giant = true) => {
     const items = []; const slotOf = {};
@@ -379,46 +388,79 @@ export function buildTimeline(A) {
   section('V1');
   const v1 = (want, extra = {}, more = {}) => ({ ...plate(extra), method: 'video', era: ERA.v1, look: LK.blueprint, want, ...more });
   const bp = (subject, extra = {}) => ({ scene: 't2_blueprint', p: { subject, ...extra } });
+  const e8 = (x, k = 1) => EIGHTHS.filter((e) => e > x + 0.02)[k - 1];   // the k-th eighth after x
+  // a plate that scrolls v px per plate frame (the walk composites: the painted era plate slides left under the keyed walk), as the
+  // blueprint's pan: whole plate frames on twos, the same clock t2_plate uses, so the lines stay glued to the painting
+  const scrollPan = (vx, vy = 0) => (t, lt) => { const ff = Math.floor(lt * 24 + 1e-3); const f = ff - (ff % 2); return [-vx * f, -vy * f]; };
   const out = S('0:13.05', wd('V1', 0, 'out'), { ...v1('Hard cut to surf at dawn: Jade stands knee-deep at the shoreline and sings, close-mic', {}, { method: 'seedance_sung' }),
     look: withLook(LK.blueprint, flash([1, 0.9, 0.7], 0.5, 0.15)), notes: 'verse downbeat 13.14 with a sub slide lands 0.09 s in' });
   const fish = S('0:15.07', beat('0:15.07'), v1('Over her shoulder, a lobe-finned fish noses out of the water onto a mudflat (painted plate)'));
   const snare1 = ev('impact', /first snare/);
-  S('0:16.99', snare1, { ...over({ scene: 't2_plate', p: { clip: fish.id, in: snare1.t - fish.t0, zoom: 1.5, pan: [-120, 60] } }, bp('fin_bones', { t0: snare1.t, stages: ['one bone', 'two bones', 'the wrist'] })),
+  // V103: punch in on the near front fin (plate ~(1100, 735) at clip 1.92, g1's note) so it sits at frame centre; the bones lie along
+  // the fin (shoulder up-left in the body, wrist at the fin's tip), drawn on the snare, the next snare (17.32) and the beat after
+  S('0:16.99', snare1, { ...over({ scene: 't2_plate', p: { clip: fish.id, in: snare1.t - fish.t0, zoom: 1.8, pan: [-252, -351] } },
+    bp('fin_bones', { t0: snare1.t, stages: ['one bone', 'two bones', 'the wrist'], stageT: [snare1.t, e8(snare1.t), beatsAfter(snare1.t, 1)[0]], drawDur: 0.32, pos: [965, 532], scale: 0.7, subjectRot: 0.938, w: 3 })),
     method: 'video', era: ERA.v1, look: LK.blueprint, want: "Punch in on the fin: white blueprint lines draw the fin's bones over the painting, one bone, then two, then the wrist (on the snares)" });
-  S('0:18.07', wd('V1', 1, 'fin'), { ...bp('fin', { full: true }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'The fin schematic, full frame (white line on cyanotype)' });
-  S('0:18.89', wd('V1', 1, 'foot'), { ...bp('foot', { full: true }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'An early tetrapod foot in the same line style' });
-  S('0:19.56', wd('V1', 1, 'hand'), { ...over(plate(), bp('hand', { over: true })), method: 'video', era: ERA.v1, look: LK.blueprint, want: "Match cut: Jade's hand opens in the same silhouette as the foot schematic" });
-  S('0:19.84', wd('V1', 1, 'we'), v1('She presses the hand to a cave wall; red ochre sprays around it and leaves a stencil among much older ones'));
+  S('0:18.07', wd('V1', 1, 'fin'), { ...bp('fin', { full: true, stageT: [wd('V1', 1, 'fin').t, e8(wd('V1', 1, 'fin').t), e8(wd('V1', 1, 'fin').t, 2)] }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'The fin schematic, full frame (white line on cyanotype)' });
+  S('0:18.89', wd('V1', 1, 'foot'), { ...bp('foot', { full: true, stageT: [wd('V1', 1, 'foot').t, e8(wd('V1', 1, 'foot').t), e8(wd('V1', 1, 'foot').t) + 0.16], drawDur: 0.3 }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'An early tetrapod foot in the same line style' });
+  const handT = wd('V1', 1, 'hand').t;
+  S('0:19.56', wd('V1', 1, 'hand'), { ...over(plate(), bp('hand', { over: true, pos: [948, 488], subjectFlip: true, stageT: [handT, handT + 0.07, handT + 0.14], drawDur: 0.13 })), method: 'video', era: ERA.v1, look: LK.blueprint, want: "Match cut: Jade's hand opens in the same silhouette as the foot schematic" });
+  S('0:19.84', wd('V1', 1, 'we'), v1('She presses the hand to a cave wall; red ochre sprays around it and leaves a stencil among much older ones', { in: 1.46, rate: 0.45 },
+    { notes: 'plate frames 11-22 only: before 10 a spray can shows, after 23 the hand picks up a stone' }));
+  S(null, beat('0:20.86'), { ...plate({ clip: 'V107', in: 3.22, rate: 0.52, zoom: 1.7, pan: [-17, 102] }), method: 'video', era: ERA.v1, look: LK.blueprint, sub: 'b',
+    want: 'Push in on the stencil the hand left among the older ones (the plate\'s last frames; the hand leaving at the bottom stays out of frame)' });
   S('0:21.51', beat('0:21.51'), v1('Jade walks side-on, left to right; behind her: knapped flint', {}, { notes: 'one continuous walk cycle across the three era beats' }));
   S('0:22.15', beat('0:22.15'), v1('Walk continues; behind her: a solid wooden wheel in a mud rut', {}, { notes: 'deep 808 at 22.48 inside this shot' }));
   S('0:22.80', beat('0:22.80'), v1('Walk continues; behind her: a mud-brick city wall'));
-  S('0:23.41', wd('V1', 2, 'carried'), { ...over(plate(), bp('egg_to_jar', { over: true })), method: 'video', era: ERA.v1, look: LK.blueprint,
+  // the egg outline sits on the woman's jar (V111 plate: jar ~(1200, 190), drifting ~(+20, -20) px across the shot) and becomes it
+  const carried = wd('V1', 2, 'carried'), dustT = wd('V1', 2, 'dust').t;
+  S('0:23.41', carried, { ...over(plate(), bp('egg_to_jar', { over: true, pos: [1200, 190], scale: 0.62, stageT: [carried.t, beatsAfter(carried.t, 2)[1]],
+    pan: (t, lt) => [20 * lt / (dustT - carried.t), -20 * lt / (dustT - carried.t)] })), method: 'video', era: ERA.v1, look: LK.blueprint,
     want: "An egg outline in blueprint line becomes a clay jar of grain on a woman's shoulder as Jade passes her" });
   S('0:24.70', wd('V1', 2, 'dust'), v1('Cart ruts in dust'));
-  S('0:25.37', wd('V1', 2, 'mud'), v1('A reed stylus presses tally wedges into wet clay; the wedges count while "mud" holds (to 27.3)', { }, { notes: 'writing began as counting grain' }));
+  const mudT = wd('V1', 2, 'mud').t;
+  const WEDGES = [[513, 700], [589, 673], [660, 647], [731, 620], [803, 600], [867, 585]];   // V113's tally row (the 6th is pressed late)
+  const tallyT = [mudT, ...[1, 2, 3, 4, 5].map((k) => e8(mudT, k))];
+  const tallyPaths = (t) => {
+    const out = WEDGES.map(([x, y], i) => ({ type: 'poly', closed: true, pts: [[x - 30, y + 8], [x + 18, y - 22], [x + 30, y + 20]], t0: tallyT[i], t1: tallyT[i] + 0.16, w: 2.5 }));
+    const k = tallyT.filter((x) => t >= x).length;   // the running count, as a dimension under the row
+    if (k > 1) out.push({ type: 'dim', a: [WEDGES[0][0] - 30, WEDGES[0][1] + 24], b: [WEDGES[k - 1][0] + 30, WEDGES[k - 1][1] + 24], off: 44, label: String(k), t0: tallyT[k - 1], t1: tallyT[k - 1] + 0.14, w: 2 });
+    return out;
+  };
+  S('0:25.37', wd('V1', 2, 'mud'), { ...over(plate(), { scene: 't2_blueprint', p: { over: true, abs: true, paths: (t) => tallyPaths(t), size: 30 } }), method: 'video', era: ERA.v1, look: LK.blueprint,
+    want: 'A reed stylus presses tally wedges into wet clay; the wedges count while "mud" holds (to 27.3): blueprint outlines count them one per eighth', notes: 'writing began as counting grain' });
   S('0:27.32', wd('V1', 3, 'seeds'), v1('A hand presses seeds into dark soil beside a dry irrigation channel'));
-  S('0:28.64', wd('V1', 3, 'dark'), { ...over(still(), bp('seed_section', { over: true })), method: 'still', era: ERA.v1, look: LK.blueprint,
+  // the cross-section on V115's painted cutaway (surface y ~500, seed ~(950, 630), the dry canal at the right): a slow push, the
+  // lines ride it; stages on "dark", the beat, the snare
+  const darkT = wd('V1', 3, 'dark').t, wakingT = wd('V1', 3, 'waking').t;
+  const seedZoom = (t, lt) => 1 + 0.06 * easeInOutCubic(clamp(lt / (wakingT - darkT)));
+  S('0:28.64', wd('V1', 3, 'dark'), { ...over(still({ zoom: [1, 1.06] }), bp('seed_section', { over: true, pos: [1294, 596], scale: 1.72, zoom: seedZoom, stageT: [darkT, ...beatsAfter(darkT, 2)], drawDur: 0.5 })), method: 'still', era: ERA.v1, look: LK.blueprint,
     want: 'Blueprint cross-section: the seed underground and the canal running to the field' });
   S('0:30.06', wd('V1', 3, 'waking'), { ...plate({ style: 'gouache' }), method: 'video', era: ERA.flood, look: LK.gouache,
     want: 'The Okavango flood arrives across dry grassland (painted-over documentary frames): channels fill, lilies open, the dry irrigation channel fills' });
   S('0:30.96', wd('V1', 3, 'flood'), { ...plate({ style: 'gouache' }), method: 'video', era: ERA.flood, look: LK.gouache, want: 'Jade walks into the flood water' });
-  const machines = [['0:31.18', 'locomotive', 'Steam locomotive'], ['0:31.51', 'wright_flyer', 'Wright Flyer'], ['0:31.83', 'jet_airliner', 'Jet airliner'], ['0:32.15', 'saturn_v', 'Saturn V lifting off']];
-  machines.forEach(([pl, subj, name], i) => S(pl, eighth(pl), { ...over(plate(), bp(subj, { over: true })), method: 'video', era: ERA.v1, look: LK.blueprint,
+  const machines = [['0:31.18', 'locomotive', 'Steam locomotive', { pos: [1706, 625], scale: 1.09, pan: scrollPan(20) }],
+    ['0:31.51', 'wright_flyer', 'Wright Flyer', { pos: [777, 389], scale: 1.6, subjectRot: 0.17, pan: scrollPan(20, -1) }],
+    ['0:31.83', 'jet_airliner', 'Jet airliner', { pos: [565, 485], scale: 0.85, subjectRot: -0.23, pan: scrollPan(20) }],
+    ['0:32.15', 'saturn_v', 'Saturn V lifting off', { pos: [1030, 246], scale: 0.73, pan: scrollPan(14.5) }]];
+  machines.forEach(([pl, subj, name, at], i) => S(pl, eighth(pl), { ...over(plate(), bp(subj, { over: true, ...at, stageT: [eighth(pl).t, eighth(pl).t + 0.08, eighth(pl).t + 0.16], drawDur: 0.16 })), method: 'video', era: ERA.v1, look: LK.blueprint,
     want: `${name}, blueprint linework over it; the flood becomes a flood of machines; Jade's walk breaks into a run`, notes: i === 0 ? 'bar 13 downbeat; stacked choir enters' : 'eighth-note cut' }));
-  S('0:32.62', wd('P1', 0, 'snowflake'), { ...over(plate(), { scene: 't2_iss_pass', p: {} }), method: 'video', era: ERA.v1, look: LK.night, want: 'Jade stops at night and looks up at a bright point crossing the sky' });
+  S('0:32.62', wd('P1', 0, 'snowflake'), { ...over(plate(), { scene: 't2_iss_pass', p: { over: true, from: [1400, 175], to: [1800, 92], bend: 26, fadeIn: 0.04, I: 3.6 } }), method: 'video', era: ERA.v1, look: LK.night, want: 'Jade stops at night and looks up at a bright point crossing the sky' });
   S(null, wd('P1', 0, 'boundless'), { ...plate({ style: 'riso' }), method: 'video', era: ERA.signal, look: LK.riso,
     want: 'The ISS against black, its solar arrays spread like the arms of a snowflake; the technology run ends here', notes: 'cut placed on "boundless" (plan gives no time for the cut to the ISS)' });
 
-  hero(caps(lineWords('V1', 0, 0, 4)), { rows: [2, 2], size: 190, y: 250, align: 'left', t1: fish.t0, out: 0.12 });     // OUT OF / THE SEA
-  sub('V1', 0, { from: 4 });                                                                                              // with salt in our lungs
+  // OUT OF / THE SEA in cyanotype ink: cream vanished on the pale dawn sky
+  hero(caps(lineWords('V1', 0, 0, 4)), { rows: [2, 2], size: 190, y: 250, align: 'left', t1: fish.t0, out: 0.12, color: [0.05, 0.12, 0.3], hot: [0.13, 0.36, 0.86], glow: 0, shade: 0 });
+  sub('V1', 0, { from: 4, band: true });                                                                                              // with salt in our lungs
   ['fin', 'foot', 'hand'].forEach((w, i, arr) => {
     const a = wd('V1', 1, w).t, b = i < 2 ? wd('V1', 1, arr[i + 1]).t : a + 0.6;
     hero([{ text: w.toUpperCase(), t: a }], { size: 260, y: 330, t1: b, out: 0.06 });
   });
   sub('V1', 1, { from: 5 });                                                                                              // we were young
-  sub('V1', 2, { cap: wd('V1', 3, 'seeds').t });                                                                         // carried the egg ...
-  sub('V1', 3, { to: 7, t1: wd('V1', 3, 'flood').t });                                                                    // seeds ... waking
-  hero([{ text: 'FLOOD', t: wd('V1', 3, 'flood').t }], { size: 280, y: 360, t1: wd('V1', 3, 'flood').t + 0.6, out: 0.1 });
+  sub('V1', 2, { cap: wd('V1', 3, 'seeds').t, band: true });                                                             // carried the egg ...
+  sub('V1', 3, { to: 7, t1: wd('V1', 3, 'flood').t, band: true });                                                        // seeds ... waking
+  // FLOOD right of Jade's head in V117 (she walks in at x ~560-720) and over the locomotive's smoke in V118
+  hero([{ text: 'FLOOD', t: wd('V1', 3, 'flood').t }], { size: 185, x: 1110, maxW: 560, y: 330, t1: wd('V1', 3, 'flood').t + 0.6, out: 0.1 });
   sub('P1', 0, { cap: LN('P1', 1).t });                                                                                    // Snowflake in the boundless night
 
   // ============================================================================================== PRE-CHORUS 1 (35.50 to 51.70)
@@ -801,9 +843,12 @@ export function buildTimeline(A) {
   // card then lays the title and credits over that same frame and gives it back clean at the end of the file (= frame 0)
   const finalHit = ev('impact', /FINAL HIT/);
   const holdLast = wd('OU', 6, 'hold');
-  const z0 = 1.04, back = (1 - 1 / z0) / (finalHit.t - holdLast.t);
+  // one linear pull back from 4:02.08 to the last frame of the file (under the end card too), so the held first frame never sits
+  // still: it reaches the opening framing (zoom 1) exactly at the end, which is frame 0 again
+  const z0 = 1.06, back = (1 - 1 / z0) / (A.duration - holdLast.t);
+  const zHit = z0 * (1 - back * (finalHit.t - holdLast.t)), backHit = (1 - 1 / zHit) / (A.duration - finalHit.t);
   S('4:02.08', holdLast, { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: z0, push: -back }, method: 'video', era: ERA.spiral, look: LK.photo, want: "The opening frame itself (CO01's first frame, easing back to the opening framing), so the post loops cleanly" });
-  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t, endT: A.duration, under: { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: 1 } } }, method: 'procedural', era: ERA.light,
+  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t, endT: A.duration, under: { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: zHit, push: -backHit } } }, method: 'procedural', era: ERA.light,
     look: withLook(LK.photo, flash([1, 0.85, 0.55], 0.35, 0.08)),
     want: 'HOLD FIRE lands on the final hit (the opening title\'s type and place), then the credits; the card clears to the opening frame by the end of the file (loop)',
     notes: 'no real images are used so far (every picture is generated or drawn): add p.images [{credit: "ESA/Hubble"}] / NASA if one is' });

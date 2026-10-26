@@ -251,7 +251,34 @@
   "kind": "video",
   "src": "media/gen/t2_CO01_veo_t1_66747bd17f.mp4",
   "in": 0,
-  "note": "Veo t1 from 1.125 s (after its blink; no blink in the 2.83 s used); pupil recentred to 960,540; slow centred push. Still/thumbnail: media/kf2/CO01_nbp_v1.jpg (pupil at 967,537)"
+  "note": "Veo t1 from 1.125 s (after its blink; no blink in the 2.83 s used); pupil recentred to 960,540; slow centred push. Still/thumbnail: media/kf2/CO01_nbp_v1.jpg (pupil at 967,537)",
+  "grade": {
+   "fix": [
+    {
+     "mode": "dot",
+     "col": [
+      0.501,
+      0.696,
+      0.9
+     ],
+     "track": [
+      [
+       0,
+       1099.3,
+       410.8,
+       80
+      ],
+      [
+       68,
+       1117.0,
+       395.5,
+       90
+      ]
+     ],
+     "note": "Jade's catchlight: the white disc becomes the pale-blue dot (#8EC5FF on screen; col is set 0.9x so the photo look's bloom does not clip it to white), tracked on the plate"
+    }
+   ]
+  }
  },
  "CO02": {
   "dir": "work/plates/CO02",
@@ -320,8 +347,8 @@
   "dir": "work/plates/CO12",
   "kind": "video",
   "src": "media/gen/t2_CO12_veof_t1_87f3c4a55b.mp4",
-  "in": 1.35,
-  "note": "plate = take 0.8-2.4 s; in = 1.35 s of the take (plate starts at 0.8 s)"
+  "in": 0.8,
+  "note": "plate = take 0.8-2.4 s; in = 1.35 s of the take (plate starts at 0.8 s) | polish 2: in 0.8 (the plate's first frame): the beam sweeps through the fog and turns into the lens by the cut (from 1.35 it was glare only)"
  },
  "CO13": {
   "dir": "work/plates/CO13",
@@ -351,8 +378,8 @@
   "dir": "work/plates/CO17",
   "kind": "video",
   "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
-  "in": 0.85,
-  "note": "plate = take 0.5-2.0 s; in = 0.85 s of the take (plate starts at 0.5 s)"
+  "in": 0.958,
+  "note": "plate = take 0.5-2.0 s; in = 0.85 s of the take (plate starts at 0.5 s) | polish 2: in 0.958 (plate frame 11): her eyes start to open on the 12.50 beat cut, open 3 frames later"
  },
  "CRT_roomA": {
   "dir": "work/plates/CRT_roomA",
@@ -384,7 +411,28 @@
   "dir": "work/plates/DR03_reveal",
   "kind": "still",
   "src": "media/kf2/DR03_nbp_v2.jpg",
-  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)"
+  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)",
+  "grade": {
+   "fix": [
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "c": [
+      697,
+      260
+     ],
+     "r": [
+      11,
+      16
+     ],
+     "note": "teal-tips' iris teal -> brown (canon)"
+    }
+   ]
+  }
  },
  "DR03_swing": {
   "dir": "work/plates/DR03",
@@ -400,7 +448,106 @@
   "src": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
   "s0": 188.376,
   "lag": 0.583,
-  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962"
+  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962",
+  "grade": {
+   "fix": [
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "r": [
+      16,
+      23
+     ],
+     "track": [
+      [
+       0,
+       571,
+       420
+      ],
+      [
+       8,
+       570,
+       426
+      ],
+      [
+       16,
+       573,
+       427
+      ],
+      [
+       24,
+       577,
+       419
+      ],
+      [
+       32,
+       577,
+       411
+      ],
+      [
+       40,
+       577,
+       411
+      ],
+      [
+       48,
+       580,
+       411
+      ],
+      [
+       56,
+       582,
+       411
+      ],
+      [
+       64,
+       582,
+       411
+      ],
+      [
+       72,
+       585,
+       411
+      ],
+      [
+       80,
+       587,
+       411
+      ],
+      [
+       88,
+       588,
+       411
+      ],
+      [
+       96,
+       589,
+       411
+      ],
+      [
+       104,
+       590,
+       411
+      ],
+      [
+       112,
+       591,
+       411
+      ],
+      [
+       120,
+       591,
+       411
+      ]
+     ],
+     "note": "teal-tips' iris teal -> brown (canon), teal catchlight kept; tracked by template match on the plate"
+    }
+   ]
+  }
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -459,7 +606,34 @@
   "in": 2.87,
   "reverse": true,
   "rate": 0.8,
-  "note": "reuse g1's CO01 eye plate, played backward so it lands on CO01's first frame when OU13 starts (loop point); not regenerated"
+  "note": "reuse g1's CO01 eye plate, played backward so it lands on CO01's first frame when OU13 starts (loop point); not regenerated",
+  "grade": {
+   "fix": [
+    {
+     "mode": "dot",
+     "col": [
+      0.501,
+      0.696,
+      0.9
+     ],
+     "track": [
+      [
+       0,
+       1099.3,
+       410.8,
+       80
+      ],
+      [
+       68,
+       1117.0,
+       395.5,
+       90
+      ]
+     ],
+     "note": "Jade's catchlight: the white disc becomes the pale-blue dot (#8EC5FF on screen; col is set 0.9x so the photo look's bloom does not clip it to white), tracked on the plate"
+    }
+   ]
+  }
  },
  "P101": {
   "dir": "work/plates/P101",
@@ -693,7 +867,28 @@
   "kind": "video",
   "src": "media/gen/t2_V122_veo_t1_1323c08c37.mp4",
   "in": 0.4,
-  "note": "plate = take 0.3-1.9 s; face ~(960,330); the bright point sits at ~(1400,180) and barely moves; in = 0.4 s of the take (plate starts at 0.3 s)"
+  "note": "plate = take 0.3-1.9 s; face ~(960,330); the bright point sits at ~(1400,180) and barely moves; in = 0.4 s of the take (plate starts at 0.3 s)",
+  "grade": {
+   "fix": [
+    {
+     "mode": "erase",
+     "c": [
+      1400,
+      175
+     ],
+     "r": [
+      48,
+      36
+     ],
+     "col": [
+      0.055,
+      0.35,
+      0.57
+     ],
+     "note": "the plate's static bright point is painted back to sky: the ISS is t2_iss_pass, which starts there and crosses"
+    }
+   ]
+  }
  },
  "V123": {
   "dir": "work/plates/V123",

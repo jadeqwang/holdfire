@@ -12,6 +12,7 @@ function build(e) {
     uniform float zoom; uniform vec2 pan; uniform float rotA; uniform float flipX;
     uniform float exposure; uniform float sat; uniform vec3 lift; uniform vec3 gammaV; uniform vec3 gain; uniform vec3 tint;
     uniform float contrast; uniform float alpha; uniform vec4 bg; uniform vec2 keyLoHi; uniform float redK;
+    uniform int fixN; uniform vec4 fixA[4]; uniform vec4 fixB[4];   // plate-space fixes: A = (cx, cy, rx, ry) image px, B = (rgb, mode)
     void main(){
       vec2 q = vec2(vUv.x * 1920., (1. - vUv.y) * 1080.);           // design px, y down
       vec2 c = vec2(960., 540.);
@@ -24,6 +25,28 @@ function build(e) {
       float inside = clamp(min(edge.x, edge.y) + .5, 0., 1.);
       vec2 tuv = vec2(st.x, 1. - st.y);
       vec3 col = texture(tImg, tuv).rgb;
+      // fixes in image px (they ride the plate's zoom/pan/rot): mode 1 = a catchlight recoloured (the bright pixels inside the ellipse
+      // take the colour, shading kept); mode 2 = an iris recoloured (teal/green pixels inside the ellipse turn to the colour at the
+      // same luma; the bright catchlight stays)
+      vec2 ipx = st * imgSize;
+      for (int i = 0; i < 4; i++) {
+        if (i >= fixN) break;
+        vec2 d = (ipx - fixA[i].xy) / fixA[i].zw;
+        float m = 1. - smoothstep(.82, 1.08, length(d));
+        if (m <= 0.) continue;
+        float l = luma(col);
+        if (fixB[i].w < 1.5) {
+          float w = smoothstep(.42, .72, l) * m;
+          col = mix(col, fixB[i].rgb * min(1.15, l / .86), w);
+        } else if (fixB[i].w > 2.5) {
+          float lk = luma(fixB[i].rgb);
+          col = mix(col, fixB[i].rgb, smoothstep(lk + .02, lk + .14, l) * m);
+        } else {
+          float teal = min(col.g - col.r, col.b - col.r * .92);
+          float w = smoothstep(.015, .09, teal) * (1. - smoothstep(.66, .8, l)) * m;
+          col = mix(col, fixB[i].rgb * (l / max(.05, luma(fixB[i].rgb))), w);
+        }
+      }
       float a = inside * alpha;
       if (keyMode > .5 && keyMode < 1.5) a *= texture(tMatte, tuv).r;
       else if (keyMode > 1.5) {
@@ -47,12 +70,31 @@ function build(e) {
     zoom: { value: 1 }, pan: { value: [0, 0] }, rotA: { value: 0 }, flipX: { value: 0 },
     exposure: { value: 1 }, sat: { value: 1 }, lift: { value: [0, 0, 0] }, gammaV: { value: [1, 1, 1] }, gain: { value: [1, 1, 1] }, tint: { value: [1, 1, 1] },
     contrast: { value: 1 }, alpha: { value: 1 }, bg: { value: [0, 0, 0, 1] }, keyLoHi: { value: [0.06, 0.2] }, redK: { value: 0 },
+    fixN: { value: 0 }, fixA: { value: new Float32Array(16).fill(1) }, fixB: { value: new Float32Array(16).fill(1) },
   });
   return mat;
 }
 
 // o: {tex, matte (texture | null), key ('green' | null), w, h (image px), fit, zoom, pan, rot, flipX, grade {exposure, contrast, sat, lift,
-//     gamma, gain, tint, red (0..1: re-lit in alarm red)}, alpha, bg ([r,g,b] | null = keep alpha)}; over = alpha-blend into target instead of overwriting
+//     gamma, gain, tint, red (0..1: re-lit in alarm red), fix [FIX]}, alpha, bg ([r,g,b] | null = keep alpha), f (the plate frame shown,
+//     for tracked fixes)}; over = alpha-blend into target instead of overwriting
+// FIX (image px, so it rides the plate's own framing): {mode 'dot' | 'iris', c [x, y], r (number | [rx, ry]), col [r,g,b] (0..1),
+//     track [[f, x, y, r?]...] (keyframes by plate frame, linear between, held past the ends; overrides c / r)}
+//     'dot': the catchlight's bright pixels take col (Jade's pale-blue dot); 'iris': teal/green iris pixels take col at their luma;
+//     'erase': pixels brighter than col (a star, a glint) are painted back to col (the local sky), darker strokes kept.
+function fixAt(F, f) {
+  let c = F.c || [0, 0], r = F.r ?? 10;
+  const K = F.track;
+  if (K && K.length) {
+    let i = 0; while (i + 1 < K.length && K[i + 1][0] <= f) i++;
+    const a = K[i], b = K[Math.min(K.length - 1, i + 1)];
+    const u = b[0] > a[0] ? Math.max(0, Math.min(1, (f - a[0]) / (b[0] - a[0]))) : 0;
+    c = [a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
+    if (a[3] !== undefined) r = a[3] + ((b[3] ?? a[3]) - a[3]) * u;
+  }
+  const rr = Array.isArray(r) ? r : [r, r];
+  return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3 })[F.mode] || 1]];
+}
 export function drawLayer(e, target, o, over = false) {
   const m = build(e); const u = m.uniforms; const g = o.grade || {};
   u.tImg.value = o.tex; u.tMatte.value = o.matte || o.tex;
@@ -65,5 +107,8 @@ export function drawLayer(e, target, o, over = false) {
   u.alpha.value = o.alpha ?? 1; u.redK.value = g.red || 0;
   u.keyLoHi.value = o.keyLoHi || [0.06, 0.2];
   u.bg.value = o.bg ? [o.bg[0], o.bg[1], o.bg[2], 1] : [0, 0, 0, 0];
+  const fx = (g.fix || []).slice(0, 4);
+  u.fixN.value = fx.length;
+  fx.forEach((F, i) => { const [A, B] = fixAt(F, o.f ?? 0); u.fixA.value.set(A, i * 4); u.fixB.value.set(B, i * 4); });
   if (over) e.passOver(m, target, 'normal'); else e.pass(m, target);
 }

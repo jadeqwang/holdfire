@@ -90,3 +90,6 @@ rule breaks; chess_check OK (42 plies legal, final position as planned).
 - Blueprint layers (fin bones, foot, egg → jar, seed cross-section, tally wedges, machines): wire the anchors recorded in each g1 pick's note.
 - V122: the bright point barely moves in the plate: draw the ISS crossing with `t2_iss_pass` over it.
 - V107: a stray hand with an object crosses at the end of the window, and the hand peels: trim the window or regenerate.
+
+## Jade's notes
+- (26 Oct, on preview v2) Cold open: the whispered "eight" is echoed (sung twice). Don't show a second 8 on screen; cut to the next image (the galaxy) on the beat instead. Same for the second count's echo.

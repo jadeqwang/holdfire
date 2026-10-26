@@ -12,6 +12,10 @@ export function buildTimeline(A) {
   add({ id: 'h2_weapons', t0: 90.0, t1: 92.6, scene: 't2_ink_weapons',
     p: { under: { scene: 'oko', p: { tLaunch: [93.5, 94.62, 94.78, 94.92, 95.08], tAttack: 96.5, tPush: [95.36, 96.4], caption: false, gloss: false } } },
     look: (t) => ({ ...INK_LOOK, shakeX: 8 * shake(t, 92.15) * Math.sin(t * 91), shakeY: 6 * shake(t, 91.61) + 5 * shake(t, 90.92) }) });
+  const POSTER_LOOK = { tonemap: 0, bloom: 0.2, bloomThreshold: 1.2, halation: 0.1, streak: 0, grain: 0.02, vignette: 0.12, typeGlow: 0 };
+  add({ id: 'h2_morph', t0: 157.8, t1: 158.76, scene: 't2_poster_morph', p: {}, look: POSTER_LOOK });
+  add({ id: 'h2_ark', t0: 158.76, t1: 164.4, scene: 't2_arkhipov', p: {},
+    look: (t) => ({ ...POSTER_LOOK, shakeX: 7 * [159.38, 159.64, 159.94, 160.17, 160.47, 160.64, 160.86, 161.02].reduce((m, x) => Math.max(m, shake(t, x + 0.7)), 0) * Math.sin(t * 83), shakeY: 10 * shake(t, 163.34) }) });
   shots.sort((a, b) => a.t0 - b.t0);
   return shots;
 }

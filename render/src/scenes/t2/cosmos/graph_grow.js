@@ -10,6 +10,8 @@
 //
 // p (all optional): shouts [12 times] (timing.json post_chorus_1 hits), tFlash (= shouts[11]), smoke [t0, t1]
 //   (81.55, 82.64), phase 'near' | 'arm' | 'galaxy' | 'auto', cam (overrides), off, smokeCol [r,g,b], stars, glow
+//   mode 'first_line' (chorus 1, "I'm counting on you": Earth alone among the near stars, one faint line leaving it over
+//   the shot) | 'eight' (= t2_graph_flash). The edit's {stage, scale} are accepted and ignored: the picture follows t.
 import * as THREE from 'three';
 import { initCore, renderGalaxy, G, W3 } from './core.js';
 import { MW, LY } from './mw.js';
@@ -17,6 +19,7 @@ import { StarCloud, setCommon } from './gfx.js';
 import { drawWeb, drawLink } from './web.js';
 import { C, mixc, shoutTimes, ad, env } from './common.js';
 import { clamp, lerp, smooth, smoother, range, easeOutCubic, easeInOutCubic } from '../../../util.js';
+import graph_flash from './graph_flash.js';
 
 const SETS_NEAR = [0, 1, 2, 3, 5, 8];
 let LOCAL = null, smokeMat = null;
@@ -27,7 +30,7 @@ function localCloud() {
   const a = new Float32Array(n * 8);
   st.forEach((s, i) => { const o = i * 8; a[o] = sun[0] + s.x * LY; a[o + 1] = s.h * LY; a[o + 2] = -(sun[1] + s.y * LY); a[o + 3] = 1.0; a[o + 4] = s.col[0]; a[o + 5] = s.col[1]; a[o + 6] = s.col[2]; a[o + 7] = s.b; });
   LOCAL = new StarCloud(a, n);
-  LOCAL.mesh.renderOrder = 2.5;
+  LOCAL.mesh.renderOrder = 2.5; LOCAL.mesh.visible = false;   // shown only by this scene's draw
   G.scene.add(LOCAL.mesh);
   return LOCAL;
 }
@@ -96,10 +99,27 @@ function smoke(e, k, t, col, puff) {
   e.passOver(smokeMat, e.rtScene, 'normal');
 }
 
+// chorus 1's last line: Earth among the near stars, one faint line leaving it (the graph's first link, not yet arrived)
+function firstLine(ctx, shot, t, p) {
+  const e = ctx.engine;
+  G.sprites.reset(); G.lines.reset();
+  const sunP = lpos(-1), l = MW.local.links[0], b = lpos(l.b);
+  const f = 0.62 * easeInOutCubic(range(t, shot.t0 + 0.15, shot.t1 + 0.2));
+  G.lines.add(sunP[0], sunP[1], sunP[2], b[0], b[1], b[2], 2.0, ...C.gold, 0.55, f, 0.9, 0.2);
+  G.sprites.add(...sunP, 2.3, ...C.pale, 1.5, 12, 6);
+  for (let i = 0; i < 70; i++) { const s = MW.local.stars[i]; if (s.r > 90) continue; const q = lpos(i); G.sprites.add(q[0], q[1], q[2], 1.5, ...mixc(s.col, C.cream, 0.4), 0.7 + 0.4 * Math.min(1.5, s.b), 5); }
+  const cam = p.cam || { target: [lerp(sunP[0], b[0], 0.3), 0, lerp(sunP[2], b[2], 0.3)], dist: Math.pow(10, -1.72 + 0.05 * (t - shot.t0)), el: 0.44, az: 3.2 + (t - shot.t0) * 0.03, fov: 30 };
+  const L = localCloud(); L.mat.uniforms.gain.value = 1; L.mesh.visible = true; L.mat.uniforms.refDist.value = 0.08; L.mat.uniforms.tint.value.set(1, 1, 1); setCommon(L.mat, e.S, [0, 0]);
+  renderGalaxy(ctx, { cam, off: [0, 0], stars: 0.35, glow: 0, bulge: 0, sky: true, skyExp: 0.6, refDist: 0.15 });
+  L.mesh.visible = false;
+}
+
 export default {
   async init(ctx) { await initCore(ctx); localCloud(); },
   draw(ctx, shot, t, lt, p) {
+    if (p.mode === 'eight') return graph_flash.draw(ctx, shot, t, lt, p);
     const e = ctx.engine, A = ctx.audio;
+    if (p.mode === 'first_line') return firstLine(ctx, shot, t, p);
     const S = p.shouts || shoutTimes(A, 'Post-Chorus 1', [73.03, 73.67, 74.28, 74.98, 75.59, 76.24, 78.18, 78.82, 79.39, 80.1, 80.73, 81.35]);
     const tFlash = p.tFlash ?? S[11];
     const [s0, s1] = p.smoke || [S[11] + 0.2, 82.64];

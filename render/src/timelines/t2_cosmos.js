@@ -6,6 +6,7 @@ export function buildTimeline(A) {
   const LOOK = { bloom: 0.7, bloomThreshold: 0.75, halation: 0.12, halCol: [1.0, 0.55, 0.25], vignette: 0.28, grain: 0.03, streak: 0.12, streakThreshold: 2.0, streakCol: [0.7, 0.8, 1.0] };
   const EARTH = { bloom: 0.6, bloomThreshold: 0.7, halation: 0.18, halCol: [1.0, 0.5, 0.2], vignette: 0.3, grain: 0.03 };
   add({ id: 'gap', t0: 0, t1: 9999, scene: 'placeholder', p: {}, look: {} });
+  add({ id: 'C1_first_line', t0: 68.6, t1: 70.4, scene: 't2_graph_grow', p: { mode: 'first_line' }, look: LOOK });
   add({ id: 'I5_earth_iss', t0: 10.44, t1: 11.16, scene: 't2_earth_night', p: { view: 'iss' }, look: EARTH });
   add({ id: 'I6_graph_flash', t0: 11.16, t1: 13.05, scene: 't2_graph_flash', p: {}, look: LOOK });
   add({ id: 'P1c_iss', t0: 32.62, t1: 35.5, scene: 't2_iss_pass', p: {}, look: LOOK });

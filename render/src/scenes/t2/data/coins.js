@@ -98,8 +98,9 @@ function build(yrs) {
         if (abs(vFace) > .5) {
           vec2 uv = vec2(vUv.y, vUv.x);
           if (vFace < 0.) uv.x = 1. - uv.x;
-          float tl = vFace > 0. ? vTile : ${NY + 1}.;
-          vec2 cell = vec2(mod(tl, 8.), floor(tl / 8.));
+          float tl = floor((vFace > 0. ? vTile : ${NY + 1}.) + .5);
+          float cy = floor((tl + .5) / 8.);
+          vec2 cell = vec2(tl - cy * 8., cy);              // exact cell (interpolated tile ids sit a hair off integers)
           lines = texture(tAtlas, (cell + clamp(uv, .004, .996)) / 8.).r;
         } else {
           lines = (.5 + .5 * sin(vUv.x * 6.2831853 * 110.)) * .35;

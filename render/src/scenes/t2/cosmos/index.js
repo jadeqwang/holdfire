@@ -7,4 +7,9 @@ import graph_outro from './graph_outro.js';
 import graph_flash from './graph_flash.js';
 import graph_grow from './graph_grow.js';
 import pulse from './pulse.js';
-export const SCENES = { t2_earth_night: earth_night, t2_graph_outro: graph_outro, t2_graph_flash: graph_flash, t2_graph_grow: graph_grow, t2_pulse: pulse };
+import war from './war.js';
+import echo_night from './echo_night.js';
+import iss_pass from './iss_pass.js';
+import { t2_graph, t2_pulse_ride } from './aliases.js';
+export const SCENES = { t2_earth_night: earth_night, t2_graph_outro: graph_outro, t2_graph_flash: graph_flash, t2_graph_grow: graph_grow, t2_pulse: pulse, t2_war: war, t2_echo_night: echo_night, t2_iss_pass: iss_pass,
+  t2_graph, t2_pulse_ride };   // the edit's working names (aliases.js)

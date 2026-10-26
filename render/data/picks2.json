@@ -1,72 +1,61 @@
 {
  "TEST_bars": {
   "dir": "work/plates/TEST_bars",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "video",
   "src": "work/t2/plate/src/bars25.mp4"
  },
  "TEST_dot": {
   "dir": "work/plates/TEST_dot",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "still",
   "src": "refs/dot_character_sheet.jpg"
  },
  "TEST_dot_faces": {
   "dir": "work/plates/TEST_dot_faces",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "still",
   "src": "work/t2/plate/src/dot_faces.png"
  },
  "TEST_dot_turn": {
   "dir": "work/plates/TEST_dot_turn",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "still",
   "src": "work/t2/plate/src/dot_turn.png"
  },
  "TEST_echo": {
   "dir": "work/plates/TEST_echo",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "still",
   "src": "refs/world_echo_sheet.jpg"
  },
  "TEST_echo_field": {
   "dir": "work/plates/TEST_echo_field",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "still",
   "src": "work/t2/plate/src/echo_field.png"
  },
  "TEST_echo_tower": {
   "dir": "work/plates/TEST_echo_tower",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "still",
   "src": "work/t2/plate/src/echo_tower.png"
  },
  "TEST_green": {
   "dir": "work/plates/TEST_green",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "video",
   "src": "work/t2/plate/src/green24.mp4"
  },
  "TEST_vista": {
   "dir": "work/plates/TEST_vista",
-  "in": 0.0,
-  "lag": 0.0,
   "kind": "video",
   "src": "work/t2/plate/src/vista30.mp4"
  },
  "TEST_vista_mid": {
   "dir": "work/plates/TEST_vista_mid",
   "in": 1.0,
-  "lag": 0.0,
   "kind": "video",
   "src": "work/t2/plate/src/vista30.mp4"
+ },
+ "TEST_vista_s0": {
+  "dir": "work/plates/TEST_vista",
+  "kind": "video",
+  "src": "work/t2/plate/src/vista30.mp4",
+  "s0": 5.0,
+  "lag": 0.5,
+  "twos": false
  }
 }

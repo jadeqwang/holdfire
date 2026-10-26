@@ -49,18 +49,24 @@ function turned(ln, wa, A, B, prof, o = {}) {
 // cinnabar fire jet in the painters' manner: tongues with curling ink outlines; from M along direction u
 function fireJet(ln, wa, M, u, L, W, seed, o = {}) {
   const n = [-u[1], u[0]], R = rng(seed);
-  for (let k = 0; k < (o.tongues ?? 5); k++) {
-    const off = (R() - 0.5) * W * 0.6, len = L * (0.55 + 0.45 * R()), w = W * (0.35 + 0.4 * R()), ph = R() * 6;
+  const NT = o.tongues ?? 5;
+  for (let k = 0; k < NT; k++) {
+    // outer tongues first (full cinnabar), then smaller, hotter ones inside: the core is paler, as fire is drawn
+    const inner = k / Math.max(1, NT - 1);
+    const off = (R() - 0.5) * W * 0.5 * (1 - inner * 0.6), len = L * (0.95 - 0.5 * inner) * (0.85 + 0.15 * R()), w = W * (0.55 - 0.32 * inner) * (0.85 + 0.3 * R()), ph = R() * 6;
     const side = [], other = [];
-    for (let i = 0; i <= 24; i++) {
-      const f = i / 24, wid = w * Math.sin(Math.PI * Math.pow(f, 0.7)) * (1 - 0.3 * f);
-      const wv = Math.sin(f * 9 + ph) * W * 0.12 * f;
+    for (let i = 0; i <= 28; i++) {
+      const f = i / 28, wid = w * Math.sin(Math.PI * Math.pow(f, 0.62)) * (1 - 0.35 * f);
+      const wv = Math.sin(f * 8 + ph) * W * 0.14 * f;
       const c0 = add(add(M, u, f * len), n, off * f + wv);
-      side.push(add(c0, n, wid)); other.push(add(c0, n, -wid));
+      side.push(add(c0, n, wid * (1 + 0.15 * Math.sin(f * 23 + ph)))); other.push(add(c0, n, -wid * (1 + 0.15 * Math.cos(f * 19 + ph))));
     }
     const pts = [...side, ...other.reverse()];
-    fill(ln, pts, RD(0.55 + 0.4 * k / Math.max(1, (o.tongues ?? 5) - 1)));
-    if (k === 0) { ln.strokeStyle = LN(0.85); ln.lineWidth = 2; path(ln, pts, true); ln.stroke(); }
+    ln.save(); ln.globalCompositeOperation = k === 0 ? 'darken' : 'source-over';
+    fill(ln, pts, RD(0.95 - 0.62 * inner));
+    ln.restore();
+    if (k === 0) { ln.strokeStyle = LN(0.9); ln.lineWidth = 2.5; path(ln, pts, true); ln.stroke(); }
+    else if (k === 1) { ln.strokeStyle = LN(0.7); ln.lineWidth = 2; path(ln, side, false); ln.stroke(); }
   }
   // curls at the tips
   for (let k = 0; k < 4; k++) {
@@ -153,7 +159,7 @@ function bombard(ln, wa) {
     stroke(ln, [[x + 60, 450], [x + 60, 490], [x + 80, 490], [x + 80, 450]], 2.5);   // arrow slit
   }
   // the breach: erase a jagged bite out of the wall and a tower, then rubble and falling blocks
-  const bite = [[1060, 330], [1110, 420], [1150, 470], [1185, 520], [1230, 560], [1290, 590], [1350, 560], [1400, 500], [1440, 430], [1470, 330]];
+  const bite = [[1060, 330], [1090, 372], [1074, 404], [1118, 430], [1132, 470], [1170, 488], [1176, 530], [1222, 548], [1240, 580], [1290, 596], [1318, 572], [1352, 566], [1366, 528], [1402, 506], [1396, 470], [1436, 440], [1430, 396], [1470, 330]];
   for (const c of [ln, wa]) { c.save(); c.globalCompositeOperation = 'source-over'; fill(c, [...bite, [1470, 300], [1060, 300]], '#fff'); c.restore(); }
   stroke(ln, bite, 3);
   for (let i = 0; i < 26; i++) {                     // rubble heap and flying blocks
@@ -313,7 +319,7 @@ function build(e) {
       if (bAge >= 0.) {
         float rr = length(d - bC);
         vec2 dir = (d - bC) / max(rr, 1.);
-        float R = 1350. * easeOut(clamp((bAge - .02) / bDur, 0., 1.));
+        float bx = clamp((bAge - .02) / bDur, 0., 1.); float R = 1350. * (1. - (1. - bx) * (1. - bx));
         float edgeN = (fbm3(dir * 2.2 + seed + 3.) - .5) * .5 + (fbm3(d * .012 + seed) - .5) * .35;
         float e = rr - R * (1. + edgeN) - 30.;
         vec3 under = texture(tUnder, vUv).rgb;

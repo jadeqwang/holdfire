@@ -18,9 +18,14 @@ const r = await page.evaluate(async () => {
   const sync = () => { e.renderer.setRenderTarget(null); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px); };
   const tex = await L.loadTex('work/plates/TEST_vista/f_00030.jpg');
   const A = L.rt(e, 'benchA');
+  const THREE = await import('three');
+  const A8 = new THREE.WebGLRenderTarget(1920, 1080, { depthBuffer: false, magFilter: THREE.LinearFilter, minFilter: THREE.LinearFilter });
   const out = {};
   const time = async (name, fn) => { fn(); sync(); const t0 = performance.now(); for (let i = 0; i < 3; i++) fn(); sync(); out[name] = Math.round((performance.now() - t0) / 3); };
   await time('layer', () => Ly.drawLayer(e, A, { tex }));
+  await time('layer8', () => Ly.drawLayer(e, A8, { tex }));
+  await time('copyHalf', () => L.copy(e, A.texture, e.rtScene));
+  await time('riso_from8', () => S.applyStyle(e, 'riso', A8.texture, e.rtScene, { seed: 3 }));
   for (const s of S.STYLES) await time(s, () => S.applyStyle(e, s, A.texture, e.rtScene, { seed: 3 }));
   await time('composite', () => e.composite({}, 1));
   await time('composite_plate', () => e.composite({ tonemap: 0, bloom: 0.18, halation: 0.12 }, 1));

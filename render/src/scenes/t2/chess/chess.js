@@ -180,7 +180,7 @@ function build(e, audio) {
 
   // dome: the hall, then the dark; battle tint
   const dome = new THREE.Mesh(new THREE.SphereGeometry(120, 32, 16), new THREE.ShaderMaterial({
-    glslVersion: THREE.GLSL3, side: THREE.BackSide, depthWrite: false,
+    glslVersion: THREE.GLSL3, side: THREE.BackSide, depthWrite: false, depthFunc: THREE.LessEqualDepth,
     uniforms: { room: sh.room, uFlat: sh.uFlat, battle: { value: 0 }, flatCol: { value: C3(CREAM) }, seed: { value: 0 } },
     vertexShader: `out vec3 vD; void main(){ vD = position; vec4 c = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.); gl_Position = c.xyww; }`,
     fragmentShader: `precision highp float; uniform float room, uFlat, battle, seed; uniform vec3 flatCol; in vec3 vD; out vec4 fragColor;
@@ -194,7 +194,7 @@ function build(e, audio) {
         col = mix(col, bat, battle);
         fragColor = vec4(mix(col, flatCol, uFlat), 1.); }`,
   }));
-  dome.frustumCulled = false; dome.renderOrder = -10; scene.add(dome);
+  dome.frustumCulled = false; dome.renderOrder = 3; scene.add(dome);   // drawn after the opaque geometry, at the far plane: only uncovered pixels shade
 
   // table: dark wood disc under the board, lit by the spot
   // the hall: our table, the floor, and rows of other tables (each under its own lamp) that go dark with the lights
@@ -407,7 +407,8 @@ function build(e, audio) {
   }
 
   const S = buildSchedule(audio);
-  G = { sh, scene, cam, pieces, links, linksHull, linkMat, clock, btnW, btnB, lcd, cc, sheet, sc, bb, bbP, bbC, bbS, rings, ringA, shadowMesh, shadowA,
+  const dbg = { dome, table, floor, tables, boards2, top, frameMesh, clock, sheet, bb, rings, shadowMesh, links, linksHull };   // PROFTMP
+  G = { dbg, sh, scene, cam, pieces, links, linksHull, linkMat, clock, btnW, btnB, lcd, cc, sheet, sc, bb, bbP, bbC, bbS, rings, ringA, shadowMesh, shadowA,
     topMat, dome, post, lamps, S, tmp: new THREE.Object3D(), m4: new THREE.Matrix4(), q: new THREE.Quaternion(), v: new THREE.Vector3() };
   return G;
 }
@@ -553,6 +554,12 @@ export default {
   async init(ctx) { build(ctx.engine, ctx.audio); },
   draw(ctx, shot, t, lt, p) {
     const e = ctx.engine; const S = G.S;
+    if (window.__chessProf) { const b = new Uint16Array(4); e.renderer.readRenderTargetPixels(e.rtScene, 0, 0, 1, 1, b); const T0 = performance.now(); drawImpl(ctx, shot, t, lt, p); e.renderer.readRenderTargetPixels(e.rtScene, 0, 0, 1, 1, b); window.__chessMs = performance.now() - T0; return; }   // PROFTMP
+    drawImpl(ctx, shot, t, lt, p);
+  },
+};
+function drawImpl(ctx, shot, t, lt, p) {
+    const e = ctx.engine; const S = G.S;
     const mode = p.mode || 'game';
     const d0 = p.d0 ?? 157.8, d1 = p.d1 ?? 158.7;
     // camera (the chain flights need it; it needs the mover's position: resolve twice)
@@ -674,20 +681,22 @@ export default {
     for (const ply of S.plies) { const a = t - ply.t; if (nr < 40 && a >= 0 && a < 0.4 && (ply.capId >= 0 || ply.check)) { const q = sqPos(ply.to); RA.set([q[0], q[2], a, 0.8], nr * 4); nr++; } }
     G.rings.count = nr; G.ringA.needsUpdate = true;
 
-    // render 3D into rtTmp, then speed lines / impact frames into rtScene
+    // speed lines / impact frames need a post pass (3D -> rtTmp -> rtScene); otherwise the 3D goes straight into rtScene
+    const sp = mode === 'dive' ? { r: 0, l: 0 } : speedAt(S, t, p);
+    let imp = 0;
+    if ((p.impact ?? true) && mode !== 'dive') for (const ti of impactList(S)) { const f = Math.floor((t - ti) * 24 + 1e-3); if (f === 0) imp = 1; else if (f === 1) imp = 2; }
+    const needPost = sp.r > 0.001 || sp.l > 0.001 || imp > 0;
     const r = e.renderer;
-    r.setRenderTarget(e.rtTmp); r.setClearColor(0x000000, 1); r.clear(true, true, false);
+    r.setRenderTarget(needPost ? e.rtTmp : e.rtScene); r.setClearColor(0x000000, 1); r.clear(true, true, false);
+    if (window.__chessHide) { const H = window.__chessHide; G.pieces.forEach((m) => { if (H.includes('pieces')) m.visible = false; if (H.includes('hulls')) m.userData.hull.visible = false; }); for (const [k, o] of Object.entries(G.dbg)) o.visible = !H.includes(k); }   // PROFTMP
     r.autoClear = false; r.render(G.scene, cam); r.autoClear = true;
+    if (!needPost) return;
     const pu = G.post.uniforms;
     pu.tSrc.value = e.rtTmp.texture;
-    const sp = mode === 'dive' ? { r: 0, l: 0 } : speedAt(S, t, p);
     pu.speedR.value = sp.r; pu.speedL.value = sp.l; pu.seed.value = Math.floor(t * 12 + 1e-4) % 97;
     pu.lineAng.value = 0.08;
     // focus: the last move's square on screen
     if (st.last) { const q = sqPos(st.last.to); G.v.set(q[0], 0.5, q[2]).project(cam); pu.focus.value.set(clamp((G.v.x * 0.5 + 0.5) * 1920, 300, 1620), clamp((0.5 - G.v.y * 0.5) * 1080, 200, 880)); }
-    let imp = 0;
-    if ((p.impact ?? true) && mode !== 'dive') for (const ti of impactList(S)) { const f = Math.floor((t - ti) * 24 + 1e-3); if (f === 0) imp = 1; else if (f === 1) imp = 2; }
     pu.impact.value = imp;
     e.pass(G.post, e.rtScene);
-  },
-};
+}

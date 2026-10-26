@@ -24,8 +24,11 @@ export const PRESETS = {
   // establishing: board, clock and scoresheet, from White's side and above
   wide: (t, p) => ({ pos: [7.0, 9.6, 12.4], target: [0.3, -0.6, 0.2], fov: 37 }),
   // straight down, White at the bottom: every square, the clock (right) and the scoresheet (left) readable
-  top: () => ({ pos: [0, 26, 0.0001], target: [0, 0, 0], fov: 25.5, up: [0, 0, -1] }),
-  topB: () => ({ pos: [0, 26, -0.0001], target: [0, 0, 0], fov: 25.5, up: [0, 0, 1] }),
+  // (top/topB tilt 11° so the pieces' profiles read; topFlat/topFlatB are exactly vertical)
+  top: () => ({ pos: [0, 25.5, 5.0], target: [0, -0.3, 0.2], fov: 25.5, up: [0, 0, -1] }),
+  topB: () => ({ pos: [0, 25.5, -5.0], target: [0, -0.3, -0.2], fov: 25.5, up: [0, 0, 1] }),
+  topFlat: () => ({ pos: [0, 26, 0.0001], target: [0, 0, 0], fov: 25.5, up: [0, 0, -1] }),
+  topFlatB: () => ({ pos: [0, 26, -0.0001], target: [0, 0, 0], fov: 25.5, up: [0, 0, 1] }),
   // three-quarter views, ~50° down: every square readable
   threeq: () => ({ pos: [0, 11.6, 9.6], target: [0, -0.4, 0.55], fov: 40 }),
   threeqB: () => ({ pos: [0, 11.6, -9.6], target: [0, -0.4, -0.55], fov: 40 }),

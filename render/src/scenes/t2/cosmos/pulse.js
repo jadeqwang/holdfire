@@ -44,7 +44,7 @@ export default {
     const e = ctx.engine, A = ctx.audio;
     const tS = pick(p.tSend, wordT(A, 'a one-way dialogue', 'one-way', 40.86));
     const tA = pick(p.tArrive, 43.0);
-    const D = p.dist ?? 217;
+    const D = p.dist ?? p.ly ?? 217;
     const toEcho = (p.dir || 'toEcho') === 'toEcho';
     const colFrom = toEcho ? C.pale : mixc(C.mint, C.pink, 0.35), colTo = toEcho ? mixc(C.pale, C.mint, 0.3) : C.pale;
     const END = [1.6, -0.9, -D];
@@ -56,8 +56,8 @@ export default {
     // camera: starts beside Earth; rides behind and above the head; at the end settles close on the far world
     const ride = smooth(range(t, tS - 0.05, tS + 0.35));
     const settle = smoother(range(t, tA - 0.7, tA + 0.25));
-    const back = lerp(7, 4.2, ride) * (1 - settle) + 2.2 * settle;
-    const cpos = [lerp(2.2, xh + 0.8, ride) * (1 - settle) + (END[0] + 0.45) * settle, lerp(1.2, yh + 1.1, ride) * (1 - settle) + (END[1] + 0.25) * settle, (zh + back) * (1 - settle) + (END[2] + back) * settle];
+    const back = lerp(7, 3.4, ride) * (1 - settle) + 2.2 * settle;
+    const cpos = [lerp(2.2, xh + 0.45, ride) * (1 - settle) + (END[0] + 0.45) * settle, lerp(1.2, yh + 0.62, ride) * (1 - settle) + (END[1] + 0.25) * settle, (zh + back) * (1 - settle) + (END[2] + back) * settle];
     const look = [lerp(0, xh, ride) * (1 - settle) + END[0] * settle, lerp(0, yh, ride) * (1 - settle) + END[1] * settle, (zh - 10) * (1 - settle) + END[2] * settle];
     const cam = Q.cam; cam.fov = lerp(52, 40, settle); cam.position.set(...cpos); cam.up.set(0, 1, 0); cam.lookAt(...look);
     cam.rotateZ(0.06 * Math.sin((t - tS) * 1.3)); cam.updateProjectionMatrix(); cam.updateMatrixWorld();
@@ -68,16 +68,19 @@ export default {
     const G0 = C.gold, GH = C.goldHot;
     if (s > 0) {
       Q.lines.add(0, 0, 0, xh, yh, zh, 2.0, G0[0], G0[1], G0[2], 0.55, 1, 0.15, 1.0);
+      // the near wake, brighter, so the light trail reads from just behind the head
+      const wl = Math.min(-zh, 26), f0 = (zh + wl) / Math.min(-1e-3, zh);
+      Q.lines.add(xh * f0, yh * f0, zh + wl, xh, yh, zh, 2.6, GH[0], GH[1], GH[2], 1.1 * (1 - 0.7 * settle), 1, 0, 1);
       // the beads: 1, 1, 2, 3, 5 behind the head along the path
       for (let k = 0; k < BEADS.length; k++) {
-        const b = BEADS[k] * 0.55 * Math.min(1, -zh / 12);
+        const b = BEADS[k] * 0.42 * Math.min(1, -zh / 12);
         const bz = zh + b; if (bz > 0) continue;
         const f = bz / Math.min(-1e-3, zh);
-        Q.sprites.add(xh * f, yh * f, bz, k === 0 ? 2.8 : 2.0, GH[0], GH[1], GH[2], (k === 0 ? 4.0 : 2.2) * (1 - 0.6 * settle * (k > 0)), k === 0 ? 22 : 12, 0);
+        Q.sprites.add(xh * f, yh * f, bz, k === 0 ? 3.6 : 2.3, GH[0], GH[1], GH[2], (k === 0 ? 5.0 : 2.6) * (1 - (k > 0 ? 0.6 : 0.85) * settle), k === 0 ? 34 : 14, 0);
       }
     }
     // near stars streak with the camera's motion (a 180-degree shutter)
-    const sh = (p.shutter ?? 1 / 48) * Math.abs(dzdt) * ride * (1 - settle);
+    const sh = (p.shutter ?? 1 / 64) * Math.abs(dzdt) * ride * (1 - settle);
     if (sh > 0.05) {
       for (const [x, y, z, b] of Q.near) {
         const dz = z - cpos[2]; if (dz > 2 || dz < -45) continue;
@@ -89,7 +92,10 @@ export default {
     // the two worlds
     Q.sprites.add(0, 0, 0, 2.6, ...colFrom, 2.2, 14, 6);
     const arr = ad(t, tA - 0.05, 0.04, 0.6);
-    Q.sprites.add(...END, lerp(2.0, 4.2, settle), ...colTo, 1.6 + 1.6 * settle + 3 * arr, 14 + 18 * settle, 6 + 30 * arr * settle);
+    Q.sprites.add(...END, lerp(2.0, 4.2, settle), ...colTo, 1.6 + 1.6 * settle + 2.5 * arr, 14 + 18 * settle, 0);
+    // the arrival: a thin ring running out from the point
+    const ra = t - (tA - 0.05);
+    if (ra > 0 && ra < 0.8) Q.sprites.add(...END, 0.01, ...colTo, 0.9 * (1 - ra / 0.8), 0, 8 + 150 * easeOutCubic(ra / 0.8));
     // Echo's star, an orange dwarf, close beside it at the end (fiction)
     if (toEcho) Q.sprites.add(END[0] - 0.55, END[1] + 0.12, END[2] - 0.6, 2.0, 1.0, 0.68, 0.36, 1.3 * smooth(range(t, tA - 0.9, tA - 0.2)), 12, 0);
     for (const m of [Q.stars.mat, Q.lines.mat, Q.sprites.mat]) setCommon(m, e.S, [0, 0]);

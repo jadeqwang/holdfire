@@ -2,5 +2,7 @@
 import brushchars from './brushchars.js';
 import scroll from './scroll.js';
 import weapons from './weapons.js';
+import arkhipov from './arkhipov.js';
+import postermorph from './postermorph.js';
 
-export const SCENES = { t2_brush_chars: brushchars, t2_scroll_warning: scroll, t2_ink_weapons: weapons };
+export const SCENES = { t2_brush_chars: brushchars, t2_scroll_warning: scroll, t2_ink_weapons: weapons, t2_arkhipov: arkhipov, t2_poster_morph: postermorph };

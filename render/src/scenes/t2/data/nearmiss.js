@@ -222,7 +222,7 @@ export default {
     const cw = tw / 3 - 8;
     for (let k = 0; k < 3; k++) {
       const wx = tx + (2 - k) * (cw + 12) - 2, wy = ty + 8, wh = th - 16;
-      let pos = odoPos(vCont, k), blur = k === 0 ? (roll < 1 ? 0.5 : 0) : 0;
+      let pos = odoPos(vCont, k), blur = k === 0 ? (roll < 1 ? 0.25 : 0) : 0;
       if (spinT > 0) {
         // free-running: each wheel at its own (accelerating) rate, never coming to rest
         const rate = [11.3, 6.7, 3.9][k];

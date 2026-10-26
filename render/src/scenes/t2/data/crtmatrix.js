@@ -71,12 +71,12 @@ function drawSaver(c, t, seed, o = {}) {
     const row = Math.floor(scroll) - r;
     const dim = 0.35 + 0.65 * sk;
     for (let b = 0; b < BARS; b++) {
-      let pw = Math.pow(hash2(row * 0.37 + seed, b * 1.91), 3.2) * 0.75;
-      if (hash2(row + 0.5 + seed, b * 0.13) > 0.985) pw = 0.85 + 0.15 * hash1(row + b);       // spikes
-      const base = 0.12 + 0.08 * Math.sin(b * 0.21 + row * 0.07);
+      let pw = Math.pow(hash2(row * 0.37 + seed, b * 1.91), 6) * 0.55;
+      if (hash2(row + 0.5 + seed, b * 0.13) > 0.988) pw = 0.75 + 0.25 * hash1(row + b);       // spikes
+      const base = 0.05 + 0.04 * Math.sin(b * 0.21 + row * 0.07);
       const hgt = clamp(base + pw);
       const col = rainbow(hgt);
-      const H = hgt * 300 * (0.4 + 0.6 * sk);
+      const H = 6 + hgt * 330 * (0.4 + 0.6 * sk);
       c.fillStyle = `rgba(${Math.round(col[0] * 255 * dim)},${Math.round(col[1] * 255 * dim)},${Math.round(col[2] * 255 * dim)},1)`;
       c.fillRect(x0 + b * bw, a.y - H, Math.max(1.2, bw * 0.62), H);
     }
@@ -223,7 +223,9 @@ uniform vec4 inA; uniform vec4 inB;      // (col, row, hasTexture, atlas fallbac
 uniform vec2 center; uniform float zoom; uniform float t; uniform float seed; uniform vec2 res;
 uniform vec4 mon[8];
 float sdRound(vec2 p, vec2 b, float r){ vec2 q = abs(p) - b + r; return length(max(q, 0.)) + min(max(q.x, q.y), 0.) - r; }
-vec3 roomTap(sampler2D tx, float v, vec2 luv){ vec2 cell = vec2(mod(v, 4.), floor(v / 4.)); return texture(tx, (cell + vec2(luv.x, 1. - luv.y) * vec2(1., 1.)) / vec2(4., 2.) * vec2(1., 1.) + vec2(0., 0.)).rgb; }
+// atlas cell (col, row from the canvas top) of a flipY canvas texture, local uv y down
+vec2 cellUv(float slot, vec2 luv){ vec2 cell = vec2(mod(slot, 4.), floor(slot / 4.)); return vec2((cell.x + luv.x) / 4., 1. - (cell.y + luv.y) / 2.); }
+vec3 roomTap(sampler2D tx, float v, vec2 luv){ return texture(tx, cellUv(v, clamp(luv, .002, .998))).rgb; }
 void main(){
   vec2 f = vec2(vUv.x, 1. - vUv.y);                       // 0..1, y down
   vec2 P = center + (f - .5) * zoom;                       // tile units (one tile = one frame at zoom 1)
@@ -234,21 +236,21 @@ void main(){
   float h = hash12(tile + seed * 1.31);
   float v = hero > .5 ? 0. : floor(hash12(tile * 1.7 + 4.2 + seed) * 8.);
   vec4 M = mon[int(v)];
-  vec2 sc = M.xy; float hw = M.z, hh = M.z * .75, b = M.z * .17, chin = b * 1.9, foot = M.z * .11, desk = M.w;
+  vec2 sc = M.xy + vec2(hero > .5 ? 0. : (hash12(tile + 9.1) - .5) * 160., 0.); float hw = M.z, hh = M.z * .75, b = M.z * .17, chin = b * 1.9, foot = M.z * .11, desk = M.w;
   // which screen content
   float isA = (tile.x == inA.x && tile.y == inA.y && inA.w >= 0.) ? 1. : 0.;
   float isB = (tile.x == inB.x && tile.y == inB.y && inB.w >= 0.) ? 1. : 0.;
-  vec3 tint = (isA > .5) ? vec3(.35, .3, .9) : (isB > .5 ? vec3(.25, .8, .75) : vec3(.3, .38, .95));
+  vec3 tint = (isA > .5) ? vec3(.35, .3, .9) : (isB > .5 ? vec3(.25, .8, .75) : mix(vec3(.3, .38, .95), vec3(.42, .32, .9), hash12(tile + 3.3)));
   float bright = .75 + .5 * h;                             // each tube its own brightness
   float flick = 1. + .03 * sin(t * (50. + 20. * h) + h * 40.);
   // ---- room: albedo lit by the tube, plus its own emissive light (window, city)
-  vec3 alb = roomTap(tAlb, v, luv) * (1. / .45);
+  vec3 alb = roomTap(tAlb, v, luv) * mix(vec3(1.), vec3(1.15, .95, .85), hash12(tile + 6.6) * .7);
   vec3 emi = roomTap(tEmi, v, luv);
   vec2 dl = (lp - sc) / vec2(hw * 2.2, hw * 1.6);
   float glow = 1. / (1. + dot(dl, dl) * 2.4) * bright * flick;
   float below = smoothstep(sc.y + hh, desk + 20., lp.y);   // the desk catches more of the screen light
-  vec3 light = vec3(.016, .018, .026) + tint * glow * (.34 + .25 * below) + emi * .25;
-  vec3 col = alb * .45 * light + emi * .7;
+  vec3 light = vec3(.02, .022, .03) + tint * glow * (.75 + .5 * below) + emi * .3;
+  vec3 col = alb * light + emi * .7;
   // keyboard on the desk
   float kb = sdRound(lp - vec2(sc.x, desk + 70.), vec2(hw * .95, 34.), 10.);
   vec3 beige = vec3(.80, .76, .65);
@@ -262,8 +264,8 @@ void main(){
   vec2 bc = sc + vec2(0., (chin - b) * .5);
   vec2 bh = vec2(hw + b, hh + (b + chin) * .5);
   float dB = sdRound(lp - bc, bh, b * .55);
-  float inB = smoothstep(px, -px, dB);
-  if (inB > 0.) {
+  float inBz = smoothstep(px, -px, dB);
+  if (inBz > 0.) {
     float edge = clamp(-dB / (b * .5), 0., 1.);            // 0 at the outer edge .. 1 inside
     float rim = smoothstep(0., .35, edge) * (1. - .25 * smoothstep(.35, 1., edge));
     vec2 n = normalize(lp - bc + 1e-3);
@@ -276,7 +278,7 @@ void main(){
     bez += vec3(.3, 1., .35) * smoothstep(9. + px, 9. - px, dl2) * 1.4 + vec3(.3, 1., .35) * exp(-dl2 / 18.) * .15;
     bez *= 1. - .35 * smoothstep(px, -px, sdRound(lp - vec2(sc.x + hw * .62, led.y), vec2(18., 8.), 4.));
     bez *= 1. - .3 * smoothstep(px, -px, sdRound(lp - vec2(sc.x, led.y), vec2(46., 9.), 3.));   // badge (blank)
-    col = mix(col, bez, inB);
+    col = mix(col, bez, inBz);
   }
   // ---- the tube
   vec2 q = (lp - sc) / vec2(hw, hh);
@@ -293,8 +295,7 @@ void main(){
     else if (isB > .5 && inB.z > .5) s = texture(tInB, vec2(su.x, 1. - su.y)).rgb;
     else {
       float slot = isA > .5 ? inA.w : (isB > .5 ? inB.w : floor(h * 6.));
-      vec2 cell = vec2(mod(slot, 4.), floor(slot / 4.));
-      s = texture(tScr, (cell + vec2(su.x, 1. - su.y)) / vec2(4., 2.)).rgb;
+      s = texture(tScr, cellUv(slot, clamp(su, .002, .998))).rgb;
     }
     // scanlines (fade out when a line is under ~2 screen px) and an aperture mask up close
     float lines = su.y * 288.;
@@ -303,7 +304,7 @@ void main(){
     float mx = su.x * 640.; float mw = fwidth(mx);
     vec3 mask = mix(vec3(1.), vec3(.82) + .36 * vec3(step(mod(mx, 3.), 1.), step(1., mod(mx, 3.)) * step(mod(mx, 3.), 2.), step(2., mod(mx, 3.))), clamp(1. - mw * 2., 0., 1.) * .6);
     float vig = 1. - .35 * smoothstep(.35, 1.4, dot(q, q));
-    vec3 scr = vec3(.012, .014, .02) + s * 1.9 * scan * mask * vig * bright * flick;
+    vec3 scr = vec3(.012, .014, .02) + s * (hero > .5 ? 1.7 : 1.25) * scan * mask * vig * bright * flick;
     // glass: a soft reflection of the room's window and a highlight
     scr += vec3(.03, .035, .045) * smoothstep(1., 0., length(qc - vec2(-.55, -.6))) + roomTap(tEmi, v, luv) * .05;
     col = mix(col, scr, inS);

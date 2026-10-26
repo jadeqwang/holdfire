@@ -216,9 +216,9 @@ export async function initEarth(ctx) {
         col += vec3(.06, .075, .1) * cl * landK * 1.4;
         col += mix(vec3(.004, .012, .03), vec3(.03, .04, .045), land) * day * 1.6 + vec3(.5, .55, .6) * cl * day * .6;
         // the self-destruct look: the night side reddens, the fires burn
-        col = mix(col, vec3(1., .1, .06) * (land * .35 + cl * .2 + .05) * (.6 + .4 * mu), redK);
+        col = mix(col, vec3(1., .07, .04) * (land * .2 + cl * .08 + .03) * (.6 + .4 * mu), redK);
         col += vec3(1., .2, .08) * fire * 1.6 + vec3(1., .9, .75) * flash;
-        col += vec3(1., .5, .3) * flashK * (land * .5 + .2);
+        col += vec3(1., .35, .2) * flashK * (land * .5 + .2);
         // atmosphere seen through, toward the limb
         float rim = pow(1. - mu, 5.);
         col += atmoCol * rim * atmoK * .5 * (.08 + 1.4 * pow(clamp(dot(n, sunN) * .5 + .5, 0., 1.), 4.)) * (1. - redK * .7);

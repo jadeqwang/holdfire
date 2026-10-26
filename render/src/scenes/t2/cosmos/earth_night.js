@@ -49,6 +49,7 @@ export default {
   async init(ctx) { await initEarth(ctx); },
   draw(ctx, shot, t, lt, p) {
     const A = ctx.audio;
+    if (p.view === 'cities_on') p = { ...p, view: 'whole', on: p.on ?? [p.t0 ?? shot.t0, (p.t0 ?? shot.t0) + 1.5] };
     const view = p.view || (t < 20 ? 'iss' : (t > 133 && t < 139.1) ? 'scale' : 'whole');
     const c = p.cam || (view === 'iss' ? issCam(t, p) : view === 'scale' ? scaleCam(t, p, A) : wholeCam(t, p));
     const ec = earthCam(c);

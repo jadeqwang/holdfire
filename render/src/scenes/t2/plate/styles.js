@@ -114,6 +114,7 @@ void main(){
   col *= mix(vec3(1.), ink0 / paperC, clamp(i0, 0., 1.));
   col *= mix(vec3(1.), ink1 / paperC, clamp(i1, 0., 1.));
   col *= mix(vec3(1.), ink2 / paperC, clamp(i2, 0., 1.));
+  if (amt > .999) { fragColor = vec4(col, s.a); return; }
   // light touch: the plate's own colour, its channels a little out of register, on the same stock, with a whisper of the screen
   vec3 light = vec3(srcAt(q + o1 * .6).r, s.g, srcAt(q + o0 * .6).b) * mix(1., pa.r, .8);
   float scr = screenDot(pp, 1. - luma(s.rgb), cell, angles.x, rough);
@@ -265,12 +266,12 @@ void main(){
   float len = stroke * (.55 + .9 * vnoise(pp * .02 + so)) * amt;
   // LIC: colour smeared along the stroke; paper noise smeared the same way becomes the dab (broad) and bristle (fine) texture
   vec3 acc = vec3(0.); float ws = 0., br = 0., dab = 0.;
-  for (int i = -5; i <= 5; i++) {
-    float u = float(i) / 5.; float w = 1. - abs(u) * .55;
+  for (int i = -3; i <= 3; i++) {
+    float u = float(i) / 3.; float w = 1. - abs(u) * .55;
     vec2 o = dir * u * len; vec2 od = vec2(o.x, -o.y);
     acc += texture(tSrc, vUv + o / vec2(1920., 1080.)).rgb * w; ws += w;
-    br += paperAt(pp + od * 1.4).g * w;
-    dab += paperAt(pp * .45 + od * .9 + 211.).a * w;
+    vec4 pv = paperAt(pp + od * 1.2);
+    br += pv.g * w; dab += pv.a * w;
   }
   vec3 col = acc / ws;
   br /= ws; dab /= ws;
@@ -305,8 +306,9 @@ uniform sampler2D tSrc; uniform vec2 texel; uniform float sp;
 void main(){
   vec3 m[4]; vec3 v[4];
   for (int k = 0; k < 4; k++) { m[k] = vec3(0.); v[k] = vec3(0.); }
-  for (int j = -2; j <= 2; j++) for (int i = -2; i <= 2; i++) {
-    vec3 c = texture(tSrc, vUv + vec2(float(i), float(j)) * texel * sp).rgb;
+  // 3x3 bilinear taps 1.5 texels apart: each quadrant is a 2x2 of them (each tap already averages 4 texels)
+  for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+    vec3 c = texture(tSrc, vUv + vec2(float(i), float(j)) * texel * sp * 1.5).rgb;
     vec3 c2 = c * c;
     if (i <= 0 && j <= 0) { m[0] += c; v[0] += c2; }
     if (i >= 0 && j <= 0) { m[1] += c; v[1] += c2; }
@@ -315,7 +317,7 @@ void main(){
   }
   vec3 acc = vec3(0.); float ws = 0.;
   for (int k = 0; k < 4; k++) {
-    vec3 mu = m[k] / 9.; vec3 va = abs(v[k] / 9. - mu * mu);
+    vec3 mu = m[k] / 4.; vec3 va = abs(v[k] / 4. - mu * mu);
     float s2 = va.r + va.g + va.b;
     float w = 1. / (1. + s2 * 260.);                       // generalised Kuwahara: smooth sector weights
     acc += mu * w; ws += w;

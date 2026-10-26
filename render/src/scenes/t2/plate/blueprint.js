@@ -12,8 +12,14 @@
 //   callout {at, to, shelf (110: signed horizontal shelf length), label, r (7: ring at the anchor)}
 //   ticks   {a, b, n (10), len (10), major (5)}                  (a ruler / scale)
 // Labels (numbers, dates, a few names only; plan "Text on screen") type on at the end of their path's window.
+// subject: a named drawing from subjects.js (fin_bones fin foot hand egg_to_jar egg jar seed_section locomotive wright_flyer jet_airliner
+//   saturn_v), placed by pos ([960,540]) / scale (1; 1.35 when full) / subjectRot, drawn in stages from t0 (SONG time, default the shot
+//   start) on the following snares (stages: one entry per stage, e.g. ['one bone', 'two bones', 'the wrist']; stageT: explicit song
+//   times; drawDur per stage; morphAt / morphDur for egg_to_jar). full: true = the drawing alone, full frame on cyanotype ground.
+//   p.paths still adds to a subject (dims, callouts with numbers).
 // drawBlueprint(c2d, paths, time, opts) is exported for scenes that draw on their own canvas.
 import { EASES } from './lib.js';
+import { subjectPaths } from './subjects.js';
 import { clamp } from '../../../util.js';
 
 const D2R = Math.PI / 180;
@@ -173,14 +179,47 @@ export function drawBlueprint(c, paths, time, o = {}) {
   c.restore();
 }
 
+// stage times: t0, then the next snares (strength >= snareMin, >= 0.15 s apart), then beats, then every 0.5 s
+function stageTimes(audio, t0, n, p) {
+  if (p.stageT) return p.stageT;
+  const out = [t0];
+  const sn = (audio && audio.snares) || [];
+  for (const [t, s] of sn) { if (out.length >= n) break; if (t > out[out.length - 1] + 0.15 && s >= (p.snareMin ?? 0.35)) out.push(t); }
+  const bt = (audio && audio.beats) || [];
+  for (const t of bt) { if (out.length >= n) break; if (t > out[out.length - 1] + 0.15) out.push(t); }
+  while (out.length < n) out.push(out[out.length - 1] + 0.5);
+  return out;
+}
+
+function cyanotypeGround(c, o) {
+  const g = c.createRadialGradient(960, 520, 100, 960, 540, 1150);
+  g.addColorStop(0, 'rgb(26,64,128)'); g.addColorStop(1, 'rgb(8,24,58)');
+  c.fillStyle = g; c.fillRect(0, 0, 1920, 1080);
+  return { step: 60, alpha: 0.09, major: 5, ...(o || {}) };
+}
+
 export default {
   draw(ctx, shot, t, lt, p) {
     const e = ctx.engine;
     const time = p.abs ? t : lt;
     const c = e.c2dBegin();
     const A = typeof p.alpha === 'function' ? p.alpha(t, lt) : (p.alpha ?? 1);
-    const paths = typeof p.paths === 'function' ? p.paths(t, lt) : p.paths;
-    drawBlueprint(c, paths, time, { ...p, alpha: A });
+    let paths = (typeof p.paths === 'function' ? p.paths(t, lt) : p.paths) || [];
+    if (p.subject) {
+      const base = p.t0 ?? shot.t0;
+      const len = Math.max(0.2, (shot.t1 ?? shot.t0 + 1) - shot.t0);
+      const stageT = stageTimes(ctx.audio, base, p.stages ? p.stages.length : 3, p);
+      const dur = p.drawDur ?? Math.min(0.6, Math.max(0.22, len * 0.6));
+      const mAt = p.morphAt ?? (base + len * 0.4);
+      const morph = EASES.inOut(clamp((t - mAt) / (p.morphDur ?? Math.min(0.6, len * 0.4))));
+      const sub = subjectPaths(p.subject, t, { stageT, dur, pos: p.pos || [960, 540], scale: p.scale ?? (p.full ? 1.35 : 1), rot: p.subjectRot || 0, morph });
+      const off = p.abs ? 0 : shot.t0;
+      paths = [...sub.map((q) => ({ ...q, t0: q.t0 - off, t1: q.t1 - off })), ...paths];
+    }
+    let grid = p.grid;
+    if (p.full) grid = cyanotypeGround(c, p.grid);
+    drawBlueprint(c, paths, time, { ...p, grid, alpha: A });
+    if (p.full) { e.blit2d('replace', p.gain ?? 1.3); return; }
     if (!p.over) e.clear(e.rtScene, ...(p.bg || [0.03, 0.08, 0.16]));
     e.blit2d('over', p.gain ?? 1.3);
   },

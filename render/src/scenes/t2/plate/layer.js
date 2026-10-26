@@ -11,7 +11,7 @@ function build(e) {
     uniform vec2 imgSize; uniform float fitMode;   // 0 cover, 1 contain
     uniform float zoom; uniform vec2 pan; uniform float rotA; uniform float flipX;
     uniform float exposure; uniform float sat; uniform vec3 lift; uniform vec3 gammaV; uniform vec3 gain; uniform vec3 tint;
-    uniform float contrast; uniform float alpha; uniform vec4 bg; uniform vec2 keyLoHi;
+    uniform float contrast; uniform float alpha; uniform vec4 bg; uniform vec2 keyLoHi; uniform float redK;
     void main(){
       vec2 q = vec2(vUv.x * 1920., (1. - vUv.y) * 1080.);           // design px, y down
       vec2 c = vec2(960., 540.);
@@ -37,6 +37,8 @@ function build(e) {
       col = pow(max(col * gain + lift * (1. - col), 0.), 1. / gammaV);
       float l = luma(col);
       col = mix(vec3(l), col, sat) * tint;
+      // red: the Rare Earth self-destruct look - the image re-lit in alarm red (lights stay hot, shadows go to oxblood)
+      if (redK > 0.) { float lr = luma(col); vec3 rd = vec3(1.25, .16, .07) * pow(lr, .8) * 1.3 + vec3(.05, 0., 0.); col = mix(col, rd, redK); }
       col = max(col, 0.);
       if (bg.a > .5) { col = mix(bg.rgb, col, a); a = 1.; }
       fragColor = vec4(col, a);
@@ -44,13 +46,13 @@ function build(e) {
     tImg: { value: null }, tMatte: { value: null }, keyMode: { value: 0 }, imgSize: { value: [1920, 1080] }, fitMode: { value: 0 },
     zoom: { value: 1 }, pan: { value: [0, 0] }, rotA: { value: 0 }, flipX: { value: 0 },
     exposure: { value: 1 }, sat: { value: 1 }, lift: { value: [0, 0, 0] }, gammaV: { value: [1, 1, 1] }, gain: { value: [1, 1, 1] }, tint: { value: [1, 1, 1] },
-    contrast: { value: 1 }, alpha: { value: 1 }, bg: { value: [0, 0, 0, 1] }, keyLoHi: { value: [0.06, 0.2] },
+    contrast: { value: 1 }, alpha: { value: 1 }, bg: { value: [0, 0, 0, 1] }, keyLoHi: { value: [0.06, 0.2] }, redK: { value: 0 },
   });
   return mat;
 }
 
 // o: {tex, matte (texture | null), key ('green' | null), w, h (image px), fit, zoom, pan, rot, flipX, grade {exposure, contrast, sat, lift,
-//     gamma, gain, tint}, alpha, bg ([r,g,b] | null = keep alpha)}; over = alpha-blend into target instead of overwriting
+//     gamma, gain, tint, red (0..1: re-lit in alarm red)}, alpha, bg ([r,g,b] | null = keep alpha)}; over = alpha-blend into target instead of overwriting
 export function drawLayer(e, target, o, over = false) {
   const m = build(e); const u = m.uniforms; const g = o.grade || {};
   u.tImg.value = o.tex; u.tMatte.value = o.matte || o.tex;
@@ -60,7 +62,7 @@ export function drawLayer(e, target, o, over = false) {
   u.zoom.value = o.zoom ?? 1; u.pan.value = o.pan || [0, 0]; u.rotA.value = o.rot || 0; u.flipX.value = o.flipX ? 1 : 0;
   u.exposure.value = g.exposure ?? 1; u.contrast.value = g.contrast ?? 1; u.sat.value = g.sat ?? 1;
   u.lift.value = v3(g.lift, 0); u.gammaV.value = v3(g.gamma, 1); u.gain.value = v3(g.gain, 1); u.tint.value = v3(g.tint, 1);
-  u.alpha.value = o.alpha ?? 1;
+  u.alpha.value = o.alpha ?? 1; u.redK.value = g.red || 0;
   u.keyLoHi.value = o.keyLoHi || [0.06, 0.2];
   u.bg.value = o.bg ? [o.bg[0], o.bg[1], o.bg[2], 1] : [0, 0, 0, 0];
   if (over) e.passOver(m, target, 'normal'); else e.pass(m, target);

@@ -55,8 +55,23 @@ export const TESTS = [
   ['halftone_vista', 't2_plate', { clip: 'TEST_vista', style: 'halftone' }],
   ['news_tower', 't2_plate', { clip: 'TEST_echo_tower', style: 'newsprint', styleP: { redAll: 0.0 } }],
   ['oil_light', 't2_plate', { clip: 'TEST_echo_tower', style: 'oil', styleAmt: 0.4 }],
+  // blueprint subjects (full frame); stills at 2i + 1.9 show them complete
+  ...['fin', 'foot', 'hand', 'egg_to_jar', 'seed_section', 'locomotive', 'wright_flyer', 'jet_airliner', 'saturn_v']
+    .map((sub) => [`bp_${sub}`, 't2_blueprint', { subject: sub, full: true, stageT: null }]),
+  ['s0', 't2_plate', (t, lt) => ({ clip: 'TEST_vista_s0', s0: t - lt - 1 })],          // clipT = t - s0 + lag(0.5) = lt + 1.5
+  ['red', 't2_plate', { clip: 'TEST_vista', grade: { red: 1 } }],
+  ['rewind', 't2_vhs_rewind', (t, lt) => { const t0 = t - lt; return { clips: ['TEST_vista', 'TEST_echo_tower', 'TEST_dot_faces', 'TEST_missing'],
+    steps: [t0, t0 + 0.25, t0 + 0.5, t0 + 0.75], blackAt: t0 + 1.5 }; }],
+  ['bp_over_sub', 'multi', { layers: [
+    { scene: 't2_plate', p: { clip: 'TEST_vista', style: 'blueprint', styleP: { tone: 'sepia', grid: 0 }, styleAmt: 0.8 } },
+    { scene: 't2_blueprint', p: { subject: 'fin_bones', over: true, pos: [900, 560], stageT: null } }] }],
 ];
 
 export function buildTimeline() {
-  return TESTS.map(([id, scene, p], i) => ({ id: `t2p_${id}`, t0: 2 * i, t1: 2 * i + 2, scene, p, look: PLATE_LOOK }));
+  return TESTS.map(([id, scene, p], i) => {
+    // subject tests: three stages 0.4 s apart from the shot start
+    if (p && p.stageT === null) p = { ...p, stageT: [2 * i + 0.1, 2 * i + 0.5, 2 * i + 0.9], drawDur: 0.5 };
+    if (p && p.layers) p = { ...p, layers: p.layers.map((L) => (L.p && L.p.stageT === null ? { ...L, p: { ...L.p, stageT: [2 * i + 0.1, 2 * i + 0.5, 2 * i + 0.9], drawDur: 0.5 } } : L)) };
+    return { id: `t2p_${id}`, t0: 2 * i, t1: 2 * i + 2, scene, p, look: PLATE_LOOK };
+  });
 }

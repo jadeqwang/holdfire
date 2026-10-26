@@ -18,12 +18,12 @@ function move(p, shot, lt) {
 
 export default {
   async prepare(ctx, shot, t, lt, p) {
-    const base = await prepareLayer(p.img ?? p.clip ?? p.dir, { ...p, twos: true }, lt);
-    const par = p.parallax ? await prepareLayer(p.parallax.img, p.parallax, lt) : null;
+    const base = await prepareLayer(p.img ?? p.clip ?? p.dir, p, lt, t);
+    const par = p.parallax ? await prepareLayer(p.parallax.img, p.parallax, lt, t) : null;
     ctx.state.t2still = { base, par };
   },
-  draw(ctx, shot, t, lt, p) {
-    const { base, par } = ctx.state.t2still;
+  draw(ctx, shot, t, lt) {
+    const { base, par } = ctx.state.t2still; const p = base.q;
     const m = move(p, shot, lt);
     const layers = [{ L: base, p, xf: m }];
     if (par) {
@@ -31,7 +31,7 @@ export default {
       const z0 = animNum(p.zoom, 0, 1);
       const pz = animNum(q.zoom, m.u, 1);
       const pp = animVec(q.pan, m.u, [0, 0]);
-      layers.push({ L: par, p: { key: q.key, grade: q.grade, alpha: q.alpha, fit: q.fit, flipX: q.flipX },
+      layers.push({ L: par, p: { key: par.q.key, grade: q.grade, alpha: q.alpha, fit: q.fit, flipX: q.flipX },
         xf: { zoom: pz * (1 + (m.zoom / z0 - 1) * k) * z0, pan: [m.pan[0] * k + pp[0], m.pan[1] * k + pp[1]], rot: m.rot * k } });
     }
     const pat = p.printSpace === 'screen' ? null : m;

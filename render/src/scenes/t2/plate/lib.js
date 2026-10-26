@@ -58,23 +58,34 @@ export const pad5 = (k) => String(k).padStart(5, '0');
 export const BLACK = (() => { const t = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1); t.needsUpdate = true; return t; })();
 export const WHITE = (() => { const t = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1); t.needsUpdate = true; return t; })();
 
+// ---------- pick defaults ----------
+// picks2.json entries carry per-shot plate settings (written by generation agents, docs/take2/picks_<group>.json): they are
+// DEFAULTS; the shot's p overrides every key it sets (undefined keys do not override).
+const NOT_PARAMS = new Set(['dir', 'kind', 'src', 'file', 'notes', 'take', 'model']);
+export function withPick(src, p) {
+  const out = {};
+  for (const k in src) if (!NOT_PARAMS.has(k) && src[k] !== undefined) out[k] = src[k];
+  for (const k in p) if (p[k] !== undefined) out[k] = p[k];
+  out.__explicitIn = p.in !== undefined;
+  return out;
+}
+
 // ---------- plate time ----------
-// Film frame of the shot on twos (MGP drawingAt: count twos in FILM frames, so retimed clips hold evenly), then clip time.
-// in: source-clip seconds at the shot start (picks2 `in`, or p.in); lag adds; rate scales; reverse runs backward.
-// p.at (source seconds, number or fn(lt)) overrides everything (scrubs, rewinds). Returns a frame index clamped to [0, n-1].
-export function plateFrame(meta, src, p, lt) {
-  if ((meta.n || 1) <= 1) return 0;
+// q: effective params (withPick). Returns a frame index clamped to [0, n-1] (never loops).
+//   q.at (source-clip seconds, number | fn(lt, t)) overrides everything (scrubs, rewinds);
+//   q.s0 (lip-synced take: its audio ref started at song time s0) -> clipT = t - s0 + lag, unless the shot set p.in explicitly;
+//   else clipT = (in ?? meta.start) + lt * rate (reverse: minus).
+// Twos (default for video unless twos === false) count FILM frames (MGP drawingAt: retimed clips then hold evenly): the song frame
+// for s0 clips, the shot frame otherwise.
+export function plateFrame(meta, q, lt, t = lt) {
+  if ((meta.n || 1) <= 1 || meta.kind === 'still') return 0;
   const fps = meta.fps || 24;
+  const twos = q.twos !== false;
+  const hold = (x) => { let ff = Math.floor(x * 24 + 1e-3); if (twos) ff -= ((ff % 2) + 2) % 2; return ff / 24; };
   let clipT;
-  if (p.at !== undefined && p.at !== null) clipT = typeof p.at === 'function' ? p.at(lt) : p.at;
-  else {
-    let ff = Math.floor(lt * 24 + 1e-3);
-    if (p.twos !== false) ff -= ((ff % 2) + 2) % 2;
-    const lt2 = ff / 24;
-    const inT = (p.in ?? src.in ?? meta.start ?? 0) + (p.lag ?? src.lag ?? 0);
-    const rate = p.rate ?? 1;
-    clipT = inT + (p.reverse ? -1 : 1) * lt2 * rate;
-  }
+  if (q.at !== undefined && q.at !== null) clipT = typeof q.at === 'function' ? q.at(lt, t) : q.at;
+  else if (q.s0 !== undefined && q.s0 !== null && !q.__explicitIn) clipT = hold(t) - q.s0 + (q.lag || 0);
+  else clipT = (q.in ?? meta.start ?? 0) + (q.reverse ? -1 : 1) * hold(lt) * (q.rate ?? 1);
   const f = Math.floor((clipT - (meta.start || 0)) * fps + 1e-3);
   return Math.max(0, Math.min(meta.n - 1, f));
 }

@@ -1,0 +1,10 @@
+import pw from '/opt/node-tools/node_modules/playwright/index.js'; const { chromium } = pw;
+import { serve } from './serve.mjs';
+const PORT = 8500 + Math.floor(Math.random() * 90);
+const server = await serve(PORT);
+const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome', args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+const page = await b.newPage({ viewport: { width: 640, height: 360 } });
+await page.goto(`http://127.0.0.1:${PORT}/index.html?w=640&h=360&tl=${process.env.TL}`);
+await page.evaluate(() => window.__ready);
+console.log(JSON.stringify((await page.evaluate(() => window.__shots)).map((s) => [s.id, s.scene, +((s.t0 + s.t1) / 2).toFixed(2)])));
+await b.close(); server.close();

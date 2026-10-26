@@ -41,7 +41,7 @@ export function ricePaper(e, seed = 1, col = RICE) {
         for (int i = 0; i < 2; i++) { float fi = float(i); fd += fib(d * 1.3, fi * 2.1 - seed, o - fi * 5.3, .88); }  // a few darker ones
         float sp = step(.9993, hash12(floor(d / 2.) + o)) * (.4 + .6 * hash12(floor(d / 2.) + 3.));            // bark specks
         float tooth = vnoise(d * .7 + o) * .6 + vnoise(d * 1.9 - o) * .4;
-        vec3 c = paper * (1. + m * .05 + cl * .035 + fl * .018 - fd * .03 - sp * .35);
+        vec3 c = paper * (1. + m * .05 + cl * .035 + fl * .011 - fd * .022 - sp * .35);
         c *= mix(vec3(1.), vec3(1., .97, .91), smoothstep(0., .4, m) * .6);    // warm age
         fragColor = vec4(c, tooth);
       }`, { seed: { value: 0 }, paper: { value: new THREE.Color() } });

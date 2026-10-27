@@ -128,3 +128,11 @@ Sources (not opened): https://www.stimson.org/2025/four-days-in-may-the-india-pa
 Since Nagasaki (9 Aug 1945): day 29,663 on 26 Oct 2026, and day 29,664 on 27 Oct 2026.
 
 If the release slips to 27 Oct with no new entry, the counter should read 535, not 534.
+
+## Second pass (27 Oct): Jade ran the search in regular Claude with open web access; results pasted back
+Not re-verified from this container (the news hosts are blocked here); the sources below are the ones that answer cited.
+- **AI misidentified cargo, US nearly boards a Chinese ship** — CNN (Lillis & Cohen), 18 Sep 2026, https://www.cnn.com/2026/09/18/politics/us-military-ai-false-intelligence-china-ship ; re-reported by Times of Israel. Spring 2026, "the Middle East", day unknown; four anonymous sources; no official confirmation. Not tied to Hormuz.
+- **India–Pakistan warships collide, North Arabian Sea, 15 Sep 2026** — both governments summoned diplomats; Bloomberg 16 Sep, Japan Times 17 Sep, The Diplomat. Minor damage; ship names disputed.
+- **NATO jets shoot down Russian drones over Poland, 9–10 Sep 2025** — Arms Control Association (Oct 2025), NPR.
+- Left off as signalling/threats or not near-misses: US nuclear-sub repositioning order (1 Aug 2025), Russia's Kaliningrad nuclear memo (30 Sep 2026), US strikes on Iran (June 2025) and the 2026 Iran war, the Tu-95 crash (no weapons aboard), USS Charleston shadowing (no collision).
+- Director's recommendation: add the collision (confirmed by both governments; becomes the last reset → the counter reads 41 on 26 Oct, 42 on 27 Oct) and the Poland drones; add the AI-cargo story only worded as reported ("2026 · Middle East · AI false alarm nearly sends troops aboard a Chinese ship (reported)") with a "spring 2026" date marked approximate, or leave it off — Jade decides.

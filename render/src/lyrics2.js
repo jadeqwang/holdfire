@@ -93,7 +93,7 @@ export const PLAN = [
     C209: { x: 960, y: 770, align: 'center', only: [0, 1, 2] },
     C210: { style: 'light', size: 84, col: GOLD, shade: 0.8, x: 960, y: 230, align: 'center', only: [3, 4, 5, 6] } } },
   // ---------------------------------------------------------------- POST-CHORUS 2
-  { n: 41, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 150, align: 'center' },
+  { n: 41, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 150, align: 'center', segs: { X206: {} } },   // ends at the cut to the chess board (no lyric over the set-up)
   // n 42, the shouted "One, one, two, three, five" over the chess board setting itself: no lyric (Jade, sung reel v4); the shouts
   // stay unsubtitled and the edit's numerals stay off the board
   { n: 43, style: 'impact', size: 108, texts: ['Counting', 'on', 'you!'], x: 960, yLast: 1020, align: 'center', maxW: 1000 },

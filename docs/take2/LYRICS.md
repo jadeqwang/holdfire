@@ -6,6 +6,30 @@ set into the world of the shot (the approach Rewind take two used: signs, corner
 reading rules still hold. Every word stays up at least 0.6 s, a line is never up for less time than 3 words/s needs, and each
 line stays readable until the next one replaces it.
 
+## Jade's text rules
+
+Jade's notes on v3 and sung reel v4 (REVIEW_NOTES.md, 27 Oct). They hold for this layer and for the edit's hero cards.
+
+- **No punctuation.** On-screen lyrics carry no commas, periods, semicolons, colons, ellipses, question marks or quotes.
+  Apostrophes and hyphens stay (`Can't`, `one-way`, `Eighty-three`). `noPunct()` in `lyrics2.js` strips every token at
+  init, so the lyric sheet in `timing.json` keeps its punctuation. The hero cards are built from the timed words through
+  `clean()` in `timeline.js`, which already strips it.
+- **Break where the punctuation was.** A mid-line comma or period becomes a row break (`br`) when the line takes more than
+  one row: "Eighty-three / the satellites saw five", "fire at the dark / at every star", "burn / and fall", "Silent and
+  patient / but I swear", "Link by link / we broke the chain of fear", "alone / we never would've made it here".
+- **No exclamation marks**, on the shouts too: "Counting on you", "Hold your fire", "Show your light".
+- **No comma after "if you are".**
+- **"If you are" and "I'm counting on you" are never on screen together.** In the chorus' last line (n 17 at 1:07.3, n 39
+  at 2:08.4) "If you are" is on C109 / C209 and "I'm counting on you" on C110 / C210, because the cut lands on "I'm". This
+  is done with `only` per segment. In the chorus' third line (n 14, n 36) the layer's "but if you are" ends on the onset of
+  "I'm" (`handover: 0`), where the hero I'M COUNTING ON YOU lands.
+- **"And you were seen too" and "wherever you are" go on two clips** (n 66, 3:22.9 to 3:33). The first phrase is on DR14
+  and DR15, and "wherever you are" is on DR16 from the cut on "wherever". The whole sentence is never up at once.
+- **No count lyrics over the chess board** in post-chorus 2 (n 42, 2:19.1 to 2:22.2). The shouts there have no subtitles, and
+  the edit's numerals stay off the board, because its count cue ends at the first chess cut. "Counting on you" at 2:17.2
+  (n 41) ends at the cut to the board.
+- The reading rules are unchanged: at least 0.6 s per word and no more than 3 words/s, for each phrase on its own clip.
+
 ## How it works
 
 - **Code.** `render/src/lyrics2.js` holds the plan, one entry per timing line, and the runtime. The toolkit and treatments are
@@ -47,10 +71,10 @@ line stays readable until the next one replaces it.
 | Verse 1 | **blueprint**: drafting caps, white or cyanotype navy. Unsung words are dashed construction outlines; each word is inked left to right under a pen point; a running dimension line under the row grows and ticks at every word | in the sky beside Jade under OUT OF THE SEA; a callout over the lobe-finned fish; the full "fin into foot into hand, we were young" as the spec line beside the schematics and on the cave wall; in the sky over the mud-brick street; a label in the seed cross-section; the Okavango sky |
 | Verse 1 (dust, clay) | **incise**: letters pressed into the surface (dark recess, lit lip), a reed wedge before each word on the tablet | corner-pinned onto the cart road in the dust (V112) and onto the clay tablet beside the tally (V113) |
 | ISS, pre-chorus 1, Echo | **riso**: two inks off register (a screened light ink, a mottled key ink); each word prints in two frames | on the black under the ISS, the Klein-blue Voyager print, over Echo's clouds, under the tower (DR14) |
-| Starlight | **light**: a thin serif in gold that ignites with a four-point flare. On the graph, words hang on nodes joined edge to edge | the night skies (V122, C101, C109, C210), the pulse flight, the pulsar diagram, "Counting on you!" over the graph and the Earth, the outro graph, "Show your light!" / "Hold your fire!" |
+| Starlight | **light**: a thin serif in gold that ignites with a four-point flare. On the graph, words hang on nodes joined edge to edge | the night skies (V122, C101, C109, C210), the pulse flight, the pulsar diagram, "Counting on you" over the graph and the Earth, the outro graph, "Show your light" / "Hold your fire" |
 | Control rooms, CRTs | **crt**: VT323 phosphor typed character by character across the sung length, a block cursor, scanlines, sometimes a dark screen face | on teal-tips' window glass (P105), a shared readout across the split, the SETI CRT matrix, across C108's monitor bank, the studio split, the last room (DR16) |
 | Verse 2, ink | **brush**: English in Ma Shan Zheng's brush Latin. A soaked blot for one frame, settling on the next, then dry-brush gaps | in the smoke over the cauldron, beside 硫黃 · 硝石, on the scroll beside the warning, under the weapons |
-| Petrov | **terminal**: Plex Mono caps with a `>` prompt, amber phosphor, typed as sung, on a console readout panel. "ignored all previous instructions." is typed in green like a command | the bottom of the command-post frame, under 26 SEP 1983 |
+| Petrov | **terminal**: Plex Mono caps with a `>` prompt, amber phosphor, typed as sung, on a console readout panel. "ignored all previous instructions" is typed in green like a command | the bottom of the command-post frame, under 26 SEP 1983 |
 | Near-miss list | **typewriter** on a strip of ticker tape (`tape`): red ribbon ink, uneven strikes | under the teletype paper |
 | Coins, the tree, the record | **engrave**: Roman caps in gold, with a glint sweeping each word | the coin legend split either side of the grid (like an obverse legend), over the tree, beside the golden record, under the split records |
 | Bridge, opening | **chalk**: Reenie Beanie written in chalk in the dark, with a soft smudge ground | the dark above the board and around the faces |
@@ -58,14 +82,15 @@ line stays readable until the next one replaces it.
 | Arkhipov | **poster**: Anton caps stamped on a black banner that wipes in, on the poster's diagonal | under the submarine and the officers (NO is the poster's own lettering) |
 | Build | **terminal** in war-display red; then **osd**, the VCR's own lettering (white pixel caps, drop shadow, chroma fringes, ◀◀) over the rewind | above the globe; the rewind |
 | Drop | **glass**: marker on the mirror glass in Klein ink on Jade's side and **mirrored** in teal on teal-tips' side. After the mirror is gone, ink on the white void | either side of the glass |
-| Outro | **light** on the graph; **board** (an enamel plate under the safety board: "ONE… ONE… TWO… THREE…", "THE COUNT GOES HIGHER."); **whisper** (a light italic breathing in) | over the galaxy, under the counter, the night sky, the dawn sky, under the eye |
+| Outro | **light** on the graph; **board** (an enamel plate under the safety board: "ONE ONE TWO THREE", "THE COUNT GOES HIGHER"); **whisper** (a light italic breathing in) | over the galaxy, under the counter, the night sky, the dawn sky, under the eye |
 
 The cold open's whispered counts are carried by the edit's numerals, so the layer draws nothing there (no echoed 8). The
 post-chorus counts over the graph and the lights are the edit's numerals too. The layer adds the shouted "Counting on
-you!" and the counts over the chessboard, where the edit shows none.
+you". Over the chessboard there are no counts at all (Jade's text rules).
 
 ## Checking it
 
+- Stills at each line Jade's text rules changed (27 Oct): `work/t2/lyrfix/`.
 - Stills of every line at mid-line, plus frames across cuts: `work/t2/lyr/final/` and its sheets
   `work/t2/lyr/sheet_lyrics_00.jpg` to `_07.jpg`. 1080p samples are in `work/t2/lyr/hd/`, and 12-frame motion strips in
   `work/t2/lyr/strip_0.jpg` to `strip_3.jpg` (clay tablet, CRT typing, impact slams, mirror glass).

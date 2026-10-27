@@ -1091,16 +1091,17 @@
   "timing_section": "Pre-Chorus 1",
   "lyric": "boundless night",
   "voice": "A",
-  "picture": "The ISS against black, its solar arrays spread like the arms of a snowflake (hero view + blueprint outline + ISS callout); the technology run ends here",
+  "picture": "The ISS against black, its solar arrays spread like the arms of a snowflake: the hero view + blueprint outline + ISS callout on the cut, then the camera pulls back until it is a small white snowflake in a vast starfield; the technology run ends here",
   "era_style": "Space and signals: Rare Earth \"signal print\" (risograph inks, halftone, slight misregistration); Klein blue, beacon orange, pale blue; Echo in fluo pink and mint",
   "method": "still",
   "scene": "multi",
   "layers": [
-   "t2_first",
+   "sky",
+   "t2_still",
    "t2_blueprint"
   ],
   "clip": [
-   "work/plates/V123/f_00000.jpg"
+   "V123K"
   ],
   "type": "Snowflake in the boundless night",
   "lipsync_window": null,
@@ -1110,7 +1111,7 @@
    "t": 33.723
   },
   "plan": null,
-  "notes": "cut placed on \"boundless\" (plan gives no time for the cut to the ISS)"
+  "notes": "cut placed on \"boundless\" (plan gives no time for the cut to the ISS); Jade v3: the pull-back"
  },
  {
   "id": "P101",
@@ -1383,7 +1384,7 @@
   "timing_section": "Chorus 1",
   "lyric": "but if you are I'm counting on you",
   "voice": "both",
-  "picture": "Split screen: both Jades sing the line at their own consoles, neither aware of the other (left Jade, right teal-tips)",
+  "picture": "Split screen at their own consoles, neither aware of the other: Jade (left) sings \"but if you are\" while teal-tips (right) listens; on \"I'm\" teal-tips sings \"I'm counting on you\" while Jade listens",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
   "scene": "t2_split",
@@ -1393,6 +1394,8 @@
   ],
   "clip": [
    "C103L",
+   "C103L_LS",
+   "C103R_LS",
    "C103R"
   ],
   "type": "I'M COUNTING ON YOU",
@@ -1406,7 +1409,7 @@
    "t": 56.671
   },
   "plan": "0:56.67",
-  "notes": null
+  "notes": "Jade v3: one phrase per half; both halves cut on the onset of \"I'm\" (phraseSplit)"
  },
  {
   "id": "C104",
@@ -2418,7 +2421,7 @@
   "timing_section": "Chorus 2",
   "lyric": "but if you are I'm counting on you",
   "voice": "both",
-  "picture": "Split: both Jades sing \"but if you are, I'm counting on you\" at their mirrored consoles",
+  "picture": "Split at their mirrored consoles: Jade (left) sings \"but if you are\" while teal-tips listens; on \"I'm\" teal-tips sings \"I'm counting on you\" while Jade listens",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
   "scene": "t2_split",
@@ -2428,6 +2431,8 @@
   ],
   "clip": [
    "C203L",
+   "C203L_LS",
+   "C203R_LS",
    "C203R"
   ],
   "type": "I'M COUNTING ON YOU",
@@ -2441,7 +2446,7 @@
    "t": 117.937
   },
   "plan": null,
-  "notes": null
+  "notes": "Jade v3: one phrase per half; both halves cut on the onset of \"I'm\" (phraseSplit)"
  },
  {
   "id": "C204",
@@ -2513,7 +2518,7 @@
   "timing_section": "Chorus 2",
   "lyric": "If you are",
   "voice": "both",
-  "picture": "Split: each Jade looks at her own screen, singing \"If you are\"",
+  "picture": "Split: each Jade looks at her own screen; Jade (left) sings \"If you are\", teal-tips (right) listens, mouth closed",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
   "scene": "t2_split",
@@ -2523,7 +2528,7 @@
   ],
   "clip": [
    "C209L",
-   "C209R"
+   "C209R_LS"
   ],
   "type": null,
   "lipsync_window": [
@@ -2893,13 +2898,11 @@
   "timing_section": "Post-Chorus 2",
   "lyric": "They",
   "voice": "both",
-  "picture": "Teal-tips Jade slaps the clock on the fill's last sixteenth (BR_clock: her finger comes down on the button from clip 0.3 s, on the cut; out before 2 s)",
+  "picture": "Teal-tips Jade slaps the clock on the fill's last sixteenth (starting White's clock); Jade's hand slaps back on 1.e4",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
-  "method": "video",
-  "scene": "t2_plate",
-  "clip": [
-   "BR_clock"
-  ],
+  "method": "procedural",
+  "scene": "t2_chess",
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -2908,7 +2911,7 @@
    "t": 143.423
   },
   "plan": "2:23.58",
-  "notes": null
+  "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR01b",
@@ -2943,13 +2946,11 @@
   "timing_section": "Bridge",
   "lyric": "every",
   "voice": "A",
-  "picture": "Black's hand hovers a full beat over the bishop, then grips it (BR_handB; 5...Ba5 lands on the cut back to the board)",
+  "picture": "Teal-tips Jade's hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 (5...Ba5 lands on the cut back to the board)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
-  "method": "video",
-  "scene": "t2_plate",
-  "clip": [
-   "BR_handB"
-  ],
+  "method": "procedural",
+  "scene": "t2_chess",
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -2958,7 +2959,7 @@
    "t": 146.111
   },
   "plan": "2:26.1",
-  "notes": null
+  "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR02b",
@@ -2993,7 +2994,7 @@
   "timing_section": "Bridge",
   "lyric": "holds its",
   "voice": "A",
-  "picture": "Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW)",
+  "picture": "Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW; framed above the plate's board edge)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "video",
   "scene": "t2_plate",
@@ -3019,7 +3020,7 @@
   "timing_section": "Bridge",
   "lyric": "breath",
   "voice": "A",
-  "picture": "Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB)",
+  "picture": "Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB; framed above the plate's board edge)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "video",
   "scene": "t2_plate",
@@ -3261,13 +3262,11 @@
   "timing_section": "Bridge",
   "lyric": "that can",
   "voice": "B",
-  "picture": "Both Jades take their hands off the pieces (\"that can let go\"); neither one wins",
+  "picture": "Both Jades take their hands off the pieces (\"that can let go\"): teal-tips Jade lets go of the checking queen, Jade pulls back from her king; neither one wins",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
-  "method": "video",
-  "scene": "t2_plate",
-  "clip": [
-   "BR_LETGO"
-  ],
+  "method": "procedural",
+  "scene": "t2_chess",
+  "clip": null,
   "type": null,
   "lipsync_window": null,
   "anchor": {
@@ -3276,7 +3275,7 @@
    "t": 157.786
   },
   "plan": null,
-  "notes": null
+  "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR12",

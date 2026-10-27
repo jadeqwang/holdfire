@@ -297,19 +297,22 @@ export function buildTimeline(A) {
   // Jade (v3, 0:57.4): in the splits each Jade sings one phrase: Jade (left) "but if you are", teal-tips (right) "I'm counting on you";
   // the half that isn't singing listens, mouth closed (a Seedance 2.0 listening plate, <ID>L_LS / <ID>R_LS, on the same keyframe;
   // teal-tips' is generated unflipped and flipped by its pick). Both halves cut on the same film frame, the first at or after the
-  // onset of "I'm". The left listening plate's first frame is the drawing the sung take shows on that frame; the right one's last
-  // frame is the drawing the sung take showed just before it (generated with that as its last frame, ending at LS_END[id] clip s),
-  // so each half's cut is matched. Listening plates run on the song clock on twos, like the sung picks (hold2).
+  // onset of "I'm". The listening plates were generated to meet the sung takes there (the left one starts on the sung drawing at the
+  // cut, the right one ends on it), but those ends are mid-word (her mouth closing / opening into "I'm"), so the edit uses only the
+  // shut-mouth stretch, LS[id] (clip s): the left plate from `from` (lips just closed) on the song clock; the right plate's frames
+  // 0..`to` (lips still closed) stretched over the window up to the cut (rate ~0.85: breathing, a blink). The pose is the same, so
+  // each half's cut reads as the mouth starting / stopping, on the word. Both on twos like the sung picks (hold2).
   const hold2 = (t) => { let ff = Math.floor(t * 24 + 1e-3); ff -= ((ff % 2) + 2) % 2; return ff / 24; };
   const onFrame = (t) => Math.ceil(t * 24 - 1e-6) / 24;
-  const LS_END = { C103: 4.0, C203: 4.0 };
+  const LS = { C103: { from: 14 / 24, to: 78 / 24 }, C203: { from: 10 / 24, to: 78 / 24 } };
   const phraseSplit = (id, cut, l = {}, r = {}) => {
-    const c = onFrame(cut);
+    const c = onFrame(cut), q = LS[id];   // c - 1e-4: a still asked for at c rounded down still shows the cut
+    const rightAt = (t, lt) => { const a = hold2(t - lt), b = hold2(c - 1 / 24); return q.to * clamp((hold2(t) - a) / Math.max(1e-3, b - a)); };
     return { scene: 't2_split', p: { x: 960, line: 2,
       left: { scene: 't2_plate', clips: [{ clip: `${id}L` }, { clip: `${id}L_LS` }],
-        p: (t) => (t < c ? { clip: `${id}L`, ...l } : { clip: `${id}L_LS`, at: hold2(t) - hold2(c), ...l }) },
+        p: (t) => (t < c - 1e-4 ? { clip: `${id}L`, ...l } : { clip: `${id}L_LS`, at: q.from + hold2(t) - hold2(c), ...l }) },
       right: { scene: 't2_plate', clips: [{ clip: `${id}R_LS` }, { clip: `${id}R` }],
-        p: (t) => (t < c ? { clip: `${id}R_LS`, at: LS_END[id] - (hold2(c - 1 / 24) - hold2(t)), ...r } : { clip: `${id}R`, ...r }) } } };
+        p: (t, lt) => (t < c - 1e-4 ? { clip: `${id}R_LS`, at: rightAt(t, lt), ...r } : { clip: `${id}R`, ...r }) } } };
   };
   const flash = (col = [1, 0.86, 0.6], k = 0.6, dec = 0.12) => (t, lt) => ({ flash: Math.exp(-Math.max(0, lt) / dec) * k, flashCol: col });
   const withLook = (L, f) => (t, lt, ctx) => ({ ...L, ...f(t, lt, ctx) });
@@ -515,7 +518,7 @@ export function buildTimeline(A) {
   };
   S(null, bnd, { scene: 'multi', p: { layers: [
     { scene: 'sky', p: (t) => ({ density: 0.55, band: 0.3, bandAng: 0.55, neb: 0.05, seed: 31, exposure: 0.85, zoom: lerp(1.2, 1, pbU(t)) }) },
-    { scene: 't2_still', p: (t, lt) => ({ img: 'V123K', key: 'green', zoom: issZoom(t), rot: issRot(t, lt), pan: issPan(t), style: 'riso', alpha: 1 - 0.8 * issSmall(t) }) },
+    { scene: 't2_still', clips: [{ img: 'V123K' }], p: (t, lt) => ({ img: 'V123K', key: 'green', zoom: issZoom(t), rot: issRot(t, lt), pan: issPan(t), style: 'riso', alpha: 1 - 0.8 * issSmall(t) }) },
     { scene: 't2_blueprint', p: (t, lt) => ({ paths: issPaths(t), arrive: { from: 0.88, frames: 3 }, size: 54, w: 2.5, glow: lerp(1, 0.6, issSmall(t)),
       col: mixc([0.94, 0.98, 1], [1, 1, 1], issSmall(t)), zoom: issZoom(t), rot: issRot(t, lt), pan: issPan(t) }) }] },
     method: 'still', era: ERA.signal, look: LK.riso,
@@ -776,16 +779,21 @@ export function buildTimeline(A) {
   const tB1 = beat('2:26.1').t, tB2 = beat('2:28.6').t, tB3 = eighth('2:30.5').t;
   const pressT = SIXTEENTHS.filter((x) => x < br0.t - 0.02).pop();                                // Black presses the clock (143.42)
   const chess = (want, extra = {}, look = CHESS_LOOK) => ({ scene: 't2_chess', p: { mode: 'game', cam: 'auto', ...extra }, method: 'procedural', era: ERA.chess, look, want });
-  // the g2 bridge plates cut in (Veo; their model boards are not the game position, so each is a close insert, never a board view)
+  // the g2 face plates cut in (Veo; their model boards are not the game position, so they are framed above the board's edge)
   const brPlate = (clip, extra, want) => ({ scene: 't2_plate', p: { clip, ...extra }, method: 'video', era: ERA.chess, look: LK.room, want });
+  // Jade's note (2:26.5): every frame that shows the board shows the game's true position, and the hands make the real moves. The hand
+  // shots are t2_chess on twos with cut-out arm sprites (scenes/t2/chess/hands.js, render/assets/t2/hands/) on the true board
+  const handShot = (want, cam, handTracks, extra = {}) => ({ ...chess(want, { cam, handTracks, twos: true, smear: 0, ...extra }), notes: 'hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)' });
   S('2:23.58', { t: pressT, kind: 'sixteenth', ref: 'last 16th before the drums-out beat (Black presses the clock; 1.e4 on the beat)' },
-    brPlate('BR_clock', { in: 0.3 }, 'Teal-tips Jade slaps the clock on the fill\'s last sixteenth (BR_clock: her finger comes down on the button from clip 0.3 s, on the cut; out before 2 s)'));
+    handShot('Teal-tips Jade slaps the clock on the fill\'s last sixteenth (starting White\'s clock); Jade\'s hand slaps back on 1.e4',
+      { pos: [1.45, 3.1, 0.0], target: [5.8, 0.8, 0.0], fov: 36 }, [{ side: 'b', press: 'start' }, { side: 'w', press: '1.e4' }]));
   S(null, eighth('2:23.9'), { ...chess('Premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit'), sub: 'b' });
   const brBa5 = nearest(BEATS, tB1 + 0.62), holdsW = wd('BR', 1, 'holds'), breathW = wd('BR', 1, 'breath');
-  S('2:26.1', beat('2:26.1'), brPlate('BR_handB', { in: 0.4 }, 'Black\'s hand hovers a full beat over the bishop, then grips it (BR_handB; 5...Ba5 lands on the cut back to the board)'));
+  S('2:26.1', beat('2:26.1'), handShot('Teal-tips Jade\'s hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 (5...Ba5 lands on the cut back to the board)',
+    { pos: [-8.6, 3.0, 0.3], target: [-2.8, 1.3, 0.0], fov: 30 }, [{ side: 'b', move: '5...Ba5' }]));
   S(null, { t: brBa5, kind: 'beat', ref: 'beat after 2:26.1 (5...Ba5)' }, { ...chess('Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)'), sub: 'b' });
-  S(null, holdsW, { ...brPlate('BR_faceW', { in: 0.3 }, 'Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW)'), sub: 'c' });
-  S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3 }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB)'), sub: 'd' });
+  S(null, holdsW, { ...brPlate('BR_faceW', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW; framed above the plate\'s board edge)'), sub: 'c' });
+  S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB; framed above the plate\'s board edge)'), sub: 'd' });
   S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));
   S('2:30.32', wd('BR', 2, 'spark'), chess('The first capture, 9.Qxg7 on "spark": impact frame, sparks off the clock', {}, withLook(CHESS_LOOK, flash([1, 1, 1], 0.9, 0.05))));
   S('2:30.5', eighth('2:30.5'), chess('9...Rg8 to 13.O-O on eighths'));
@@ -795,8 +803,11 @@ export function buildTimeline(A) {
   S(null, wd('BR', 4, 'chains'), chess('Each captured piece is knocked off the board; the captured pieces fly past the lens joined like links of a chain'));
   S('2:35.90', wd('BR', 5, 'and'), chess('19.Kh1 Qe5 20.Rxf1 Qxe6 21.Kxg2 as a sixteenth-note flurry'));
   S('2:37.48', wd('BR', 5, 'hand'), chess('21...Qg4+ on "hand": the black queen gives check, White has one legal move: perpetual (Fischer-Tal · Leipzig 1960 · ½-½ on the scoresheet)'));
-  // hands off the pieces (BR_LETGO, usable from clip 2.0 s): cut on "that", so the hands open into "let go" before the dive
-  S(null, wd('BR', 5, 'that'), { ...brPlate('BR_LETGO', { in: 2.0, rate: 1.5 }, 'Both Jades take their hands off the pieces ("that can let go"); neither one wins'), sub: 'b' });
+  // hands off the pieces: cut on "that", so the hands open into "let go" before the dive (Black's fingers still on the queen that gave
+  // check, Jade's hand over her king with its one legal move)
+  { const relT = wd('BR', 5, 'let').t - 0.17;
+    S(null, wd('BR', 5, 'that'), { ...handShot('Both Jades take their hands off the pieces ("that can let go"): teal-tips Jade lets go of the checking queen, Jade pulls back from her king; neither one wins',
+      { pos: [8.6, 3.3, 1.05], target: [2.3, 0.7, 1.0], fov: 33 }, [{ side: 'b', hold: 'g4', release: relT }, { side: 'w', hold: 'g2', hover: true, release: relT + 0.03 }]), sub: 'b' }); }
   // the dive into the black queen ends on a flat 360 px #101010 square on #F1E8D6, the frame t2_poster_morph opens on: the dive's
   // window ends exactly on the poster shot's cut ("go"), and the poster's square0 matches the dive's size
   const letW = wd('BR', 5, 'let'), goW = wd('BR', 5, 'go'), sixty2 = wd('BR', 6, 'sixty-two');

@@ -20,6 +20,7 @@ import { GAME } from './pgn.js';
 import { buildSchedule } from './schedule.js';
 import { boardState, sqPos, FALL } from './state.js';
 import { cameraAt, cameraFx, CLOCK_POS, SHEET_POS } from './camera.js';
+import { loadHands, handsAt, drawHands, handShadowOf } from './hands.js';
 import { borderTexture, clockCanvas, drawClock, sheetCanvas, drawSheet, BORDER } from './textures.js';
 import { clamp, lerp, smooth, smoother, hash1, hash2, noise1, easeOutCubic, easeInCubic, easeInOutCubic } from '../../../util.js';
 
@@ -568,7 +569,7 @@ function diveCam(S, t, p, st, d0, d1) {
 }
 
 export default {
-  async init(ctx) { build(ctx.engine, ctx.audio); },
+  async init(ctx) { build(ctx.engine, ctx.audio); await loadHands(); },
   draw(ctx, shot, t, lt, p) {
     drawImpl(ctx, shot, t, lt, p);
   },
@@ -576,6 +577,9 @@ export default {
 
 function drawImpl(ctx, shot, t, lt, p) {
     const e = ctx.engine; const S = G.S;
+    // hand shots run on twos (the hands are drawings; the board holds with them so the grip never slips)
+    // (phase locked to the shot's first frame, so the cut frame is a drawing and a press on the cut shows on it)
+    if (p.twos) { const f0 = Math.ceil((shot?.t0 ?? 0) * 24 - 1e-6), f = Math.floor(t * 24 + 1e-6); t = (f0 + 2 * Math.floor((f - f0) / 2)) / 24 + 1e-4; }
     const mode = p.mode || 'game';
     const d0 = p.d0 ?? 157.8, d1 = p.d1 ?? 158.7;
     // camera (the chain flights need it; it needs the mover's position: resolve twice)
@@ -605,7 +609,8 @@ function drawImpl(ctx, shot, t, lt, p) {
     sh.spotGain.value = 1 + 0.08 * battle;
     const flat = dive ? smooth((dive.u - 0.26) / 0.15) : 0;
     sh.uFlat.value = flat;
-    const hd = st.hand;
+    const hands = p.handTracks ? handsAt(S, p.handTracks, t, st) : [];
+    const hd = p.handTracks ? handShadowOf(hands) : st.hand;
     sh.hand.value.set(hd ? hd.x : 0, hd ? hd.z : 0, hd ? hd.amt * (p.hands ?? 1) : 0, hd ? (hd.side === 'w' ? 1 : -1) : 1);
 
     // pieces
@@ -619,7 +624,7 @@ function drawImpl(ctx, shot, t, lt, p) {
       const sp = Math.hypot(...ps.vel);
       const sm = m.material.uniforms.smear.value;
       m.material.uniforms.smearJag.value = (ps.pos[1] > 1.2 && !ps.flying) ? 0 : 1;
-      if (sp > 2.5) { const k = Math.min(0.03, (ps.pos[1] > 1.2 && !ps.flying ? 0.4 : 0.75) / sp); sm.set(ps.vel[0] * k, ps.vel[1] * k, ps.vel[2] * k); } else sm.set(0, 0, 0);
+      if (sp > 2.5 && (p.smear ?? 1) > 0) { const k = Math.min(0.03, (ps.pos[1] > 1.2 && !ps.flying ? 0.4 : 0.75) / sp); sm.set(ps.vel[0] * k, ps.vel[1] * k, ps.vel[2] * k); } else sm.set(0, 0, 0);
       // glow: the checked king, the black queen giving the last check
       let glow = 0;
       if (st.check && st.check.sq !== undefined && GAME.boards[st.k + 1][st.check.sq] === ps.id) glow = 0.6 + 0.4 * Math.exp(-st.check.age / 0.25);
@@ -705,7 +710,11 @@ function drawImpl(ctx, shot, t, lt, p) {
     const r = e.renderer;
     r.setRenderTarget(needPost ? e.rtTmp : e.rtScene); r.setClearColor(0x000000, 1); r.clear(true, true, false);
     r.autoClear = false; r.render(G.scene, cam); r.autoClear = true;
-    if (!needPost) return;
+    if (needPost) postPass(e, st, sp, imp, t, cam);
+    if (hands.length) drawHands(e, hands, cam, G.v, p.handLook || {});
+}
+
+function postPass(e, st, sp, imp, t, cam) {
     const pu = G.post.uniforms;
     pu.tSrc.value = e.rtTmp.texture;
     pu.speedR.value = sp.r; pu.speedL.value = sp.l; pu.seed.value = Math.floor(t * 12 + 1e-4) % 97;

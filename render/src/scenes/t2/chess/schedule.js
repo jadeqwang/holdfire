@@ -12,7 +12,7 @@
 //   plies 27-36 14.Bg5 .. 18...Rxg2+   one per eighth from the drums returning (2:33.69)
 //   plies 37-42 19.Kh1 .. 21...Qg4+    sixteenth-note flurry; 21...Qg4+ on "hand"
 //   stop        clocks stop on "let" of "let go"
-// The set (post-chorus 2): pieces slam down on the shouts, 1, 1, 2, 3, 5 of them, and "Counting on you!" lands the other 20.
+// The set (post-chorus 2): pieces slam down on the shouts, 1, 1, 2, 3, 5 of them, and "Counting" lands the other 20 (done by "on").
 import { GAME, sqOf } from './pgn.js';
 
 const clean = (w) => (w || '').toLowerCase().replace(/[^a-z0-9']/g, '');
@@ -98,8 +98,11 @@ export function buildSchedule(audio) {
   const set = [];
   groups.forEach((g, i) => g.forEach((n, j) => set.push({ sq: S(n), t: (shouts[i] ?? (139.13 + i * 0.63)) + j * 0.06, shout: i })));
   ['b1', 'g1', 'b8', 'g8'].forEach((n, j) => set.push({ sq: S(n), t: count + j * 0.05, shout: 5 }));
-  'abcdefgh'.split('').forEach((f, j) => set.push({ sq: S(f + '2'), t: count + 0.26 + j * ((on - 0.04 - count - 0.26) / 7), shout: 5 }));
-  'hgfedcba'.split('').forEach((f, j) => set.push({ sq: S(f + '7'), t: on + j * ((you - on) / 7), shout: 5 }));
+  // both pawn ranks land on "Counting" (interleaved, a2 h7 b2 g7 ...), so the board is whole before the cut on "on" to the plate of
+  // the two Jades sitting down at the set board (X213): the plate never shows a position the board has not reached
+  const pd = (on - 0.04 - count - 0.26) / 7;
+  'abcdefgh'.split('').forEach((f, j) => set.push({ sq: S(f + '2'), t: count + 0.26 + j * pd, shout: 5 }));
+  'hgfedcba'.split('').forEach((f, j) => set.push({ sq: S(f + '7'), t: count + 0.26 + (j + 0.5) * pd, shout: 5 }));
   const setBySq = new Map(set.map((x) => [x.sq, x]));
 
   return { plies, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };

@@ -61,6 +61,18 @@
   "lipsync": "lip round 2 (27 Oct): n3 at -0.125 (-3 f), scored as played (work/t2/lips2/C103L_strip.jpg, C103L_n3.mouthline.jpg): b closed, open on but, f on if, rounded you, held are open to the stem's own breath at ~60.0, I'm open + m closed, counting/on/you articulated (t4 closed mid-are and never closed the m). Was t2_C103L_sd25_t4_62f94118e2.mp4 lag -0.375.",
   "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
+ "C103L_LS": {
+  "dir": "work/plates/C103L_LS",
+  "kind": "video",
+  "src": "media/gen/t2_C103L_LS_sd20_t1_99bc3b9e1b.mp4",
+  "in": 0.0,
+  "zoom": 1.0066,
+  "pan": [
+   8.9,
+   -5.9
+  ],
+  "note": "listening plate (Jade v3: one phrase per half): Seedance 2.0 t1 from C103L n3 f96 (the drawing C103L shows on the first frame of \"I'm\"); she closes her mouth by ~frame 14 and listens. zoom/pan align its frame 0 to f96 (ECC, resid 3.7). The edit plays it on the song clock from that frame (phraseSplit)"
+ },
  "C103R": {
   "dir": "work/plates/C103R",
   "kind": "video",
@@ -70,6 +82,19 @@
   "flipX": true,
   "lipsync": "lip round 2 (27 Oct): n3 at -0.083 (-2 f), scored as played (work/t2/lips2/C103R_strip.jpg, C103R_n3.mouthline.jpg): b closed, f on if, rounded you, held are open, I'm open + m closed, counting/on/you articulated; mirrors C103L n3 on the same 1.35x crop. Was t2_C103R_sd25_m6_03f90610a1.mp4 lag 0.0.",
   "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
+ },
+ "C103R_LS": {
+  "dir": "work/plates/C103R_LS",
+  "kind": "video",
+  "src": "media/gen/t2_C103R_LS_sd20_t2_0f9803f544.mp4",
+  "in": 0.0,
+  "zoom": 1.0108,
+  "pan": [
+   13.4,
+   -12.7
+  ],
+  "flipX": true,
+  "note": "listening plate: Seedance 2.0 t2, first frame media/kf2/C103R_mir_v3_crop.jpg (room-A geometry, cool, canon jacket), last frame = C103R n3 f95 (the drawing just before \"I'm\"); mouth closed, opens into the sung pose over the last ~0.5 s. Flipped like C103R; zoom/pan (x negated for the flip) align its last frame to f95 (resid 6.9). The edit ends it on the frame before the cut (phraseSplit, LS_END 4.0)"
  },
  "C108": {
   "dir": "work/plates/C108",
@@ -113,6 +138,18 @@
   "lipsync": "lip round 2 (27 Oct): n2 at +0.250 (+6 f), scored as played (work/t2/lips2/C203L_strip.jpg, C203L_n2.mouthline.jpg): b closed, open on but, rounded you, held are open throughout, m of I'm closed, counting open; r 0.33 (rms 0.49) at +0.25 (t3 closed mid-are, m open). Was t2_C203L_sd25_t3_6c8ad4c084.mp4 lag -0.042.",
   "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
+ "C203L_LS": {
+  "dir": "work/plates/C203L_LS",
+  "kind": "video",
+  "src": "media/gen/t2_C203L_LS_sd20_t2_88597e003b.mp4",
+  "in": 0.0,
+  "zoom": 1.0088,
+  "pan": [
+   8.8,
+   -6.0
+  ],
+  "note": "listening plate: Seedance 2.0 t2 from C203L n2 f104 (the drawing after \"I'm\"); closes by ~frame 15, no blink in the window. zoom/pan align frame 0 to f104 (resid 4.5)"
+ },
  "C203R": {
   "dir": "work/plates/C203R",
   "kind": "video",
@@ -122,6 +159,19 @@
   "flipX": true,
   "lipsync": "lip round 2 (27 Oct): n1 at -0.167 (-4 f), scored as played (work/t2/lips2/C203R_strip.jpg, C203R_n1.mouthline.jpg): b closed, f on if, rounded you, held are open throughout, I'm open + m closed, counting/on/you articulated (m8 idled 1 s and its are opened early, closed before its end). Was t2_C203R_sd25_m8_02a2f13a41.mp4 lag 1.0.",
   "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
+ },
+ "C203R_LS": {
+  "dir": "work/plates/C203R_LS",
+  "kind": "video",
+  "src": "media/gen/t2_C203R_LS_sd20_t1_cfd73d912c.mp4",
+  "in": 0.0,
+  "zoom": 1.0096,
+  "pan": [
+   -8.1,
+   -10.1
+  ],
+  "flipX": true,
+  "note": "listening plate: Seedance 2.0 t1, first frame C103R_mir_v3_crop, last frame = C203R n1 f92 (the drawing on the cut); mouth closed, eyes close and lips part into the sung pose at the end. Flipped; zoom/pan (x negated for the flip) align the last frame to f92 (resid 4.5)"
  },
  "C208L": {
   "dir": "work/plates/C208L",
@@ -158,6 +208,14 @@
   "flipX": true,
   "lipsync": "lip round 2 (27 Oct): n1 at +1.333 (+32 f), scored as played (work/t2/lips2/C209R_strip.jpg, C209R_n1.mouthline.jpg): idles ~1.3 s; you opens on the stem's peak, held are open to the cut (m8 opened are 0.45 s late after a closure); the quiet If pickup stays nearly shut; sub-window lags all +1.33..+1.38; last 2 plate frames held (take end). Was C209R_m8_graded.mp4 lag 0.958.",
   "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
+ },
+ "C209R_LS": {
+  "dir": "work/plates/C209R_LS",
+  "kind": "video",
+  "src": "media/gen/t2_C209R_LS_sd20_t1_c9051faf5d.mp4",
+  "in": 0.0,
+  "flipX": true,
+  "note": "listening plate: Seedance 2.0 t1 from C103R_mir_v3_crop; teal-tips listens, mouth closed, through Jade's \"If you are\" (C209). Flipped"
  },
  "C210": {
   "dir": "work/plates/C210",

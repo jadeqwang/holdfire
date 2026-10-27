@@ -1533,5 +1533,146 @@
     "P107"
    ]
   }
+ ],
+ "C103L_LS": [
+  {
+   "tag": "t2_C103L_LS_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C103L_LS_sd20_t1-99bc3b9e1b",
+   "kf": "media/kf2/C103L_lis_f096.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103L_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C103L_LS_sd20_t1_99bc3b9e1b.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: closes her mouth by ~frame 14 from the sung pose and listens; first frame aligned to C103L n3 f96 (resid 3.7 after zoom 1.0066)",
+   "pick": [
+    "C103L_LS"
+   ],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  },
+  {
+   "tag": "t2_C103L_LS_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C103L_LS_sd20_t2-7e9fd495b9",
+   "kf": "media/kf2/C103L_lis_f096.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103L_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C103L_LS_sd20_t2_7e9fd495b9.mp4",
+   "dims": "1280x720",
+   "verdict": "ok (closes by ~frame 19, blink at 6); t1 matches the cut frame better",
+   "pick": [],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  }
+ ],
+ "C203L_LS": [
+  {
+   "tag": "t2_C203L_LS_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C203L_LS_sd20_t1-a6ccd8437e",
+   "kf": "media/kf2/C203L_lis_f104.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203L_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C203L_LS_sd20_t1_a6ccd8437e.mp4",
+   "dims": "1280x720",
+   "verdict": "ok, blink at ~25 inside the 1.6 s window; t2 picked",
+   "pick": [],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  },
+  {
+   "tag": "t2_C203L_LS_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C203L_LS_sd20_t2-88597e003b",
+   "kf": "media/kf2/C203L_lis_f104.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203L_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C203L_LS_sd20_t2_88597e003b.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: closes by ~frame 15, no blink inside the window; first frame aligned to C203L n2 f104 (resid 4.5)",
+   "pick": [
+    "C203L_LS"
+   ],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  }
+ ],
+ "C103R_LS": [
+  {
+   "tag": "t2_C103R_LS_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C103R_LS_sd20_t1-112c40e641",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103R_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C103R_LS_sd20_t1_112c40e641.mp4",
+   "dims": "1280x720",
+   "verdict": "ok (closed, opens from ~83 into the last frame); last frame resid 10.0 vs t2 6.9",
+   "pick": [],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame + last-frame, camera_fixed, $0.60",
+   "last_frame": "media/kf2/C103R_lis_end_f095.jpg"
+  },
+  {
+   "tag": "t2_C103R_LS_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C103R_LS_sd20_t2-0f9803f544",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103R_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C103R_LS_sd20_t2_0f9803f544.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: closed through, blink at 12, opens from ~83 into the sung pose; last frame aligned to C103R n3 f95 (zoom 1.0108, resid 6.9)",
+   "pick": [
+    "C103R_LS"
+   ],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame + last-frame, camera_fixed, $0.60",
+   "last_frame": "media/kf2/C103R_lis_end_f095.jpg"
+  }
+ ],
+ "C203R_LS": [
+  {
+   "tag": "t2_C203R_LS_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C203R_LS_sd20_t1-cfd73d912c",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203R_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C203R_LS_sd20_t1_cfd73d912c.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: closed, blink ~38, eyes close and lips part into the sung pose at the end; last frame aligned to C203R n1 f92 (zoom 1.0096, resid 4.5)",
+   "pick": [
+    "C203R_LS"
+   ],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame + last-frame, camera_fixed, $0.60",
+   "last_frame": "media/kf2/C203R_lis_end_f092.jpg"
+  },
+  {
+   "tag": "t2_C203R_LS_sd20_t2",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C203R_LS_sd20_t2-aef6e04ff3",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203R_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C203R_LS_sd20_t2_aef6e04ff3.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: last frame eyes open (the sung frame has them closed), zoom off 5%",
+   "pick": [],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame + last-frame, camera_fixed, $0.60",
+   "last_frame": "media/kf2/C203R_lis_end_f092.jpg"
+  }
+ ],
+ "C209R_LS": [
+  {
+   "tag": "t2_C209R_LS_sd20_t1",
+   "model": "bytedance/seedance-2.0",
+   "job": "holdfire/t2_C209R_LS_sd20_t1-c9051faf5d",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209R_LS_sd20.txt",
+   "dur": 4,
+   "file": "media/gen/t2_C209R_LS_sd20_t1_c9051faf5d.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: mouth closed throughout, breathing, eyes on the screen",
+   "pick": [
+    "C209R_LS"
+   ],
+   "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  }
  ]
 }

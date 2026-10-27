@@ -144,6 +144,8 @@ export const LYRIC_LINES = new Set(PLAN.map((e) => e.n));
 // ================================================================================================ runtime
 let RT = null;
 const NUMW = { one: 1, two: 2, three: 3, five: 5, eight: 8, thirteen: 13, 'twenty-one': 21, 'thirty-four': 34, 'fifty-five': 55, 'eighty-nine': 89 };
+// Jade's text rules: on-screen lyrics carry no punctuation and never an exclamation mark (apostrophes and hyphens stay)
+export const noPunct = (s) => String(s).replace(/[.,;:!?\u2026\u201c\u201d"]+/g, '').trim();
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9'-]/g, '');
 
 export async function init(ctx, shots) {
@@ -171,11 +173,12 @@ export async function init(ctx, shots) {
   const entries = [];
   for (const e of PLAN) {
     const L = A.lines.find((l) => (l.n ?? l.i) === e.n); if (!L) continue;
-    // display tokens: the lyric sheet's punctuation when its tokens line up with the timed words
+    // display tokens: the lyric sheet's spelling (apostrophes, hyphens, capitals) when its tokens line up with the timed
+    // words, with no punctuation (Jade's text rules, LYRICS.md): no commas, periods, semicolons, colons, ellipses, question or
+    // exclamation marks anywhere; where the sheet had a mid-line comma or period the plan breaks the row there instead (br)
     const toks = String(L.text).replace(/[()]/g, '').split(/\s+/).filter(Boolean);
     const words = L.words.map((w, i) => {
-      let text = e.texts ? e.texts[i] : toks.length === L.words.length ? toks[i] : w.w;
-      if (i === L.words.length - 1) text = text.replace(/[,;:]+$/, '');
+      const text = noPunct(e.texts ? e.texts[i] : toks.length === L.words.length ? toks[i] : w.w);
       return { i, w: w.w, t: w.t, end: w.end, text, carried: carried(w) };
     });
     const segs = {};
@@ -193,7 +196,7 @@ export async function init(ctx, shots) {
     x.t0 = e.startAt ?? Math.max(first.t - 0.22, s0.t0 - 1e-4);
     let t1 = e.endAt ?? (last.end + (e.hold ?? 1.1));
     const after = words.find((w) => w.t > last.t && w.carried && !e.all);
-    if (after) t1 = Math.min(t1, after.t + 0.4);
+    if (after) t1 = Math.min(t1, after.t + (e.handover ?? 0.4));
     if (Object.keys(segs).length) {
       const cut = shotList.find((s) => s.t0 > last.t + 0.05 && s.t0 < t1 && !(s.id in segs));
       if (cut) t1 = cut.t0;

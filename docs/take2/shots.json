@@ -166,11 +166,11 @@
  {
   "id": "CO07",
   "t0": 6.001,
-  "t1": 6.63,
+  "t1": 6.706,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
-  "lyric": "eight",
+  "lyric": "eight eight",
   "voice": "A",
   "picture": "Hurricane from orbit (log spiral: no golden-rectangle overlay); spiral centre locked at frame centre",
   "era_style": "Cold open spirals: macro nature photography, true colour; natural colour, gold numerals on black; spiral centre locked at frame centre",
@@ -191,14 +191,14 @@
  },
  {
   "id": "CO08",
-  "t0": 6.63,
+  "t0": 6.706,
   "t1": 7.028,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
-  "lyric": "eight",
+  "lyric": null,
   "voice": "A",
-  "picture": "Spiral galaxy, face on (if ESA/Hubble: visible \"ESA/Hubble\" credit); spiral centre locked at frame centre",
+  "picture": "Spiral galaxy, face on (if ESA/Hubble: visible \"ESA/Hubble\" credit); no numeral (the echoed \"eight\"); spiral centre locked at frame centre",
   "era_style": "Cold open spirals: macro nature photography, true colour; natural colour, gold numerals on black; spiral centre locked at frame centre",
   "method": "video",
   "scene": "t2_plate",
@@ -208,12 +208,12 @@
   "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
   "lipsync_window": null,
   "anchor": {
-   "kind": "word",
-   "ref": "Intro[0] \"eight\"",
-   "t": 6.63
+   "kind": "beat",
+   "ref": "beat after the echoed \"eight\" (Jade's note: cut on the beat, no numeral)",
+   "t": 6.706
   },
-  "plan": "0:06.63",
-  "notes": null
+  "plan": null,
+  "notes": "plan prints 0:06.63 (the echo); Jade: cut on the next beat instead"
  },
  {
   "id": "CO09",
@@ -372,7 +372,7 @@
  {
   "id": "CO15",
   "t0": 11.165,
-  "t1": 11.51,
+  "t1": 11.857,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -395,13 +395,13 @@
  },
  {
   "id": "CO16",
-  "t0": 11.51,
+  "t0": 11.857,
   "t1": 12.501,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
   "lyric": null,
-  "voice": "A",
+  "voice": null,
   "picture": "The graph's light gathers into one point; pull back: it is the catchlight in Jade's eye; she is at her console in headphones, waterfall spectrograms behind",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
@@ -412,12 +412,12 @@
   "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
   "anchor": {
-   "kind": "hit",
-   "ref": "hit \"(yeah)\"",
-   "t": 11.51
+   "kind": "beat",
+   "ref": "beat after the echo whisper (Jade's note)",
+   "t": 11.857
   },
-  "plan": "0:11.51",
-  "notes": null
+  "plan": null,
+  "notes": "plan prints 0:11.5 (the echo whisper); Jade: the pull-back carries it on the next beat. rate 6.15: the whole pull-back (take 0 to 3.96 s) inside the 0.64 s shot"
  },
  {
   "id": "CO17",
@@ -611,7 +611,7 @@
  {
   "id": "V107",
   "t0": 19.84,
-  "t1": 21.507,
+  "t1": 20.86,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -632,6 +632,32 @@
    "t": 19.84
   },
   "plan": "0:19.84",
+  "notes": "plate frames 11-22 only: before 10 a spray can shows, after 23 the hand picks up a stone"
+ },
+ {
+  "id": "V107b",
+  "t0": 20.86,
+  "t1": 21.507,
+  "section": "Verse 1",
+  "edit_section": "V1",
+  "timing_section": "Verse 1",
+  "lyric": null,
+  "voice": "A",
+  "picture": "Push in on the stencil the hand left among the older ones (the plate's last frames; the hand leaving at the bottom stays out of frame)",
+  "era_style": "Verse 1, deep time to spaceflight: painted plates with white blueprint linework drawn over them; sepia and cyanotype blue; schematics draw on with the snare",
+  "method": "video",
+  "scene": "t2_plate",
+  "clip": [
+   "V107"
+  ],
+  "type": "we were young",
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "beat",
+   "ref": "beat nearest 0:20.86",
+   "t": 20.86
+  },
+  "plan": null,
   "notes": null
  },
  {
@@ -777,10 +803,14 @@
   "timing_section": "Verse 1",
   "lyric": "mud",
   "voice": "A",
-  "picture": "A reed stylus presses tally wedges into wet clay; the wedges count while \"mud\" holds (to 27.3)",
+  "picture": "A reed stylus presses tally wedges into wet clay; the wedges count while \"mud\" holds (to 27.3): blueprint outlines count them one per eighth",
   "era_style": "Verse 1, deep time to spaceflight: painted plates with white blueprint linework drawn over them; sepia and cyanotype blue; schematics draw on with the snare",
   "method": "video",
-  "scene": "t2_plate",
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_blueprint"
+  ],
   "clip": [
    "V113"
   ],
@@ -1061,12 +1091,16 @@
   "timing_section": "Pre-Chorus 1",
   "lyric": "boundless night",
   "voice": "A",
-  "picture": "The ISS against black, its solar arrays spread like the arms of a snowflake; the technology run ends here",
+  "picture": "The ISS against black, its solar arrays spread like the arms of a snowflake (hero view + blueprint outline + ISS callout); the technology run ends here",
   "era_style": "Space and signals: Rare Earth \"signal print\" (risograph inks, halftone, slight misregistration); Klein blue, beacon orange, pale blue; Echo in fluo pink and mint",
-  "method": "video",
-  "scene": "t2_plate",
+  "method": "still",
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_blueprint"
+  ],
   "clip": [
-   "V123"
+   "work/plates/V123/f_00000.jpg"
   ],
   "type": "Snowflake in the boundless night",
   "lipsync_window": null,
@@ -1243,7 +1277,7 @@
  {
   "id": "P107",
   "t0": 49.244,
-  "t1": 51.698,
+  "t1": 50.21,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1253,9 +1287,7 @@
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
   "scene": "t2_plate",
-  "clip": [
-   "P107"
-  ],
+  "clip": null,
   "type": "WE'RE AWAKE",
   "lipsync_window": null,
   "anchor": {
@@ -1265,6 +1297,32 @@
   },
   "plan": "0:49.24",
   "notes": null
+ },
+ {
+  "id": "P107b",
+  "t0": 50.21,
+  "t1": 51.698,
+  "section": "Pre-chorus 1",
+  "edit_section": "P1",
+  "timing_section": "Pre-Chorus 1",
+  "lyric": null,
+  "voice": "B",
+  "picture": "Teal-tips Jade's eye fills the frame (the crisp still), the roll still pushing in",
+  "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
+  "method": "video",
+  "scene": "t2_plate",
+  "clip": [
+   "P107"
+  ],
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "eighth",
+   "ref": "roll eighth 3 (before her lips part)",
+   "t": 50.21
+  },
+  "plan": null,
+  "notes": "insert: the eye still, so P107 ends before her lips part"
  },
  {
   "id": "C101",
@@ -3402,7 +3460,7 @@
   "method": "procedural",
   "scene": "t2_war",
   "clip": null,
-  "type": null,
+  "type": "NUCLEAR DETONATIONS",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3415,18 +3473,18 @@
  {
   "id": "BU03",
   "t0": 169.44,
-  "t1": 170.832,
+  "t1": 170.073,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
-  "lyric": "burn and fall",
+  "lyric": "burn and",
   "voice": "B",
-  "picture": "Back on Earth the warheads land and the lights go out",
+  "picture": "Back on Earth the warheads land and the lights go out (tightened: dark by ~170.3)",
   "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
   "method": "procedural",
   "scene": "t2_war",
   "clip": null,
-  "type": "NUCLEAR DETONATIONS / SIGNAL LOST",
+  "type": "NUCLEAR DETONATIONS",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3438,12 +3496,12 @@
  },
  {
   "id": "BU04",
-  "t0": 170.832,
-  "t1": 172.029,
+  "t0": 170.073,
+  "t1": 170.832,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
-  "lyric": "Only the ones who",
+  "lyric": "fall",
   "voice": "B",
   "picture": "Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
@@ -3456,22 +3514,22 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
-   "ref": "Build[3] \"Only\"",
-   "t": 170.832
+   "ref": "Build[2] \"fall\"",
+   "t": 170.073
   },
   "plan": "2:50.83",
-  "notes": null
+  "notes": "moved from \"Only\" (2:50.83) to \"fall\" so the rewind gets 3 s; rate 3.0: hand on the wheel to her face in 0.76 s"
  },
  {
   "id": "BU05",
-  "t0": 172.029,
-  "t1": 173.251,
+  "t0": 170.832,
+  "t1": 173.876,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
-  "lyric": "held their fire",
+  "lyric": "Only the ones who held their fire out there at",
   "voice": "B",
-  "picture": "VHS rewind: the warheads lift off the cities, the tracks fall back into silos and submarines, the lights come back on",
+  "picture": "VHS rewind (3 s): the lights flicker back, the warheads lift off the cities, the galaxy's dark worlds relight, the tracks fall back into silos and submarines",
   "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
   "method": "procedural",
   "scene": "t2_war",
@@ -3480,46 +3538,22 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
-   "ref": "Build[3] \"held\"",
-   "t": 172.029
+   "ref": "Build[3] \"Only\"",
+   "t": 170.832
   },
   "plan": null,
-  "notes": null
+  "notes": "starts on \"Only\" (the plan's console time); the war clock is piecewise so Earth and the galaxy each get their share"
  },
  {
   "id": "BU06",
-  "t0": 173.251,
-  "t1": 173.99,
-  "section": "Build",
-  "edit_section": "BU",
-  "timing_section": "Build",
-  "lyric": "out there at",
-  "voice": "B",
-  "picture": "Earth whole again",
-  "era_style": "First strike and rewind: the Rare Earth war scene with a VHS rewind pass; red on the night side",
-  "method": "procedural",
-  "scene": "t2_war",
-  "clip": null,
-  "type": null,
-  "lipsync_window": null,
-  "anchor": {
-   "kind": "word",
-   "ref": "Build[4] \"out\"",
-   "t": 173.251
-  },
-  "plan": "2:53.25",
-  "notes": null
- },
- {
-  "id": "BU07",
-  "t0": 173.99,
+  "t0": 173.876,
   "t1": 175.057,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
   "lyric": "all",
   "voice": "B",
-  "picture": "Earth's node on the contact graph lights again",
+  "picture": "Earth whole again; the camera pulls out and Earth's node on the contact graph lights again (through \"all\")",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
   "method": "procedural",
   "scene": "t2_war",
@@ -3527,12 +3561,12 @@
   "type": null,
   "lipsync_window": null,
   "anchor": {
-   "kind": "word",
-   "ref": "Build[4] \"all\"",
-   "t": 173.99
+   "kind": "beat",
+   "ref": "beat before \"all\": Earth whole (the rewind stops)",
+   "t": 173.876
   },
-  "plan": null,
-  "notes": null
+  "plan": "2:53.25",
+  "notes": "moved from \"out\" (173.25) to the beat before \"all\": the rewind runs through \"out there\""
  },
  {
   "id": "BU08",

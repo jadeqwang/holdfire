@@ -167,3 +167,45 @@ No paid generation in this pass ($0 of the $30).
 - C209: grade the right half like C103's right half (it's lit hotter than C209L).
 - P107: her lips part slightly at ~1.3× into the push; end the push before that or hold the eye still sooner.
 - Weak lip sync still: C209R, C209L, DR04, C103R (low/medium); C203R, DR16 medium.
+
+## Polish pass 3 (finishing editor, 27 Oct)
+Preview: `work/out/preview_540p_v3.mp4`; sung-shot reel for Jade: `work/out/sung_reel_v3.mp4` (every shot that uses an s0 pick,
+window ±0.5 s cut from v3 with the song, labelled shot · time · lyric). Sheets: `work/t2/polish3_sheets/` (`full_sheet_00…13`:
+the whole film every 0.5 s at 960×540; `lyrics_sheet_00…05`: every lyric line at 960×540 at its start, middle and end;
+`catchlight.jpg`, `p107.jpg`). check_cuts: 0 cuts off onset, coverage OK, no type rule breaks; chess_check OK; lipcheck: 16 picks,
+0 mismatches (no lag changed); plate_windows: C103L (1 held frame, the take's head; as LIPSYNC.md) and DR11's vanish hold
+(deliberate). $0 generation.
+
+**Fixed**
+- CO01/OU12 catchlight: the `dot` fix now recolours only the plate's own white disc, inside its measured edge (centre and radius
+  measured every 4 plate frames, r 75→84 px through the push), to #8EC5FF on screen (measured 144,200,252), with a tiny white core
+  (0.12 r) and the plate's soft halo tinted to the same hue. No disc is added; size and shape are the plate's. (`layer.js`: `core`,
+  `glow`.) The small secondary glint beside it is the plate's own drawing, left as painted; if it still reads as a double bubble,
+  an `erase`-style fix on it is the next step.
+- Lyric layer (director's first look): V101 WITH SALT / IN OUR LUNGS has its own block under the hero, left of her hair; the
+  dusty-road words (V112) and the clay tablet (V113) are ink-filled recesses with a deeper shadow and a dark ground (they read on a
+  phone); SEEDS IN THE DARK on V114 lifted to y 760; on V116/V117 it sits above her head.
+- Legibility pass, every line at 540p: bigger type on the one-way dialogue, the pulsar line (lifted off the bottom), the C101
+  sky, the record legend, the Petrov terminal, the ticker tape, the chalk, the war display, Link by link (moved to the top,
+  clear of the edit's 13 21 34); the C103/C203/C209 CRT readout moved to chest height (it sat beside both mouths); the C108
+  monitor-bank text moved off her headphones; V201 brush on a paper halo; BURN, AND FALL on a dark panel (the console is lit
+  red); BR01/BR02 chalk moved off teal-tips' head, BR02c/d on one row above the face; DR01's glass copies moved outside each
+  walker (they crossed both heads; outside the 4:5 area, like DR02's); DR02's mirrored copy off the ghost's head; DR04 on a
+  white halo; DR14 lifted above the edit's 55 89 with a stronger ground; HOLD YOUR FIRE (BU12) given a ground. Lines that leaked
+  into the next picture now end at the cut (29 → WE'RE ALIVE, 33 → chorus 2, 56 → the HOLD shot, 72 → the eye). The edit's
+  heroes too: 26 SEP 1983 raised so the terminal no longer covers SERPUKHOV-15; WE'RE AWAKE on one row above her brow (it sat on
+  her forehead).
+- C209: right half graded exactly as C103's right half (RM 1.18 / 1.02, was 1.25 / 1.18).
+- P107: plays the plate's frames 0–17 only (her lips stay shut; they part on frame 18) with a JS push about her near eye, and
+  cuts on the roll's third eighth (50.21) to the new insert P107b, the crisp eye still (the plate's last frame) pushing in to
+  the downbeat. No later id changes.
+- Full-film check (495 stills): every flipped teal-tips shot (P105–P107, C103R, C108, V201, V218, C201R, C203R, C208R, C209R,
+  BR_handB/faceB/clock, BU12R/14/17R) shows dot and patch on her right with reversed lettering and the mirrored room; DR03/DR04/
+  DR16 unflipped. No placeholders, black frames (except the cold open's rewind-to-black, by design) or freezes.
+- `plate_windows.mjs`: P106's usable window was the old take's (its tail was the P107 push); the m5 take is clean to its end.
+
+**Left**
+- **DR11 (3:19–3:21) breaks the mirror rule**: both Jades wear the canon jacket (teal-tips' dot and 1420 patch on HER LEFT,
+  lettering readable). It is a two-shot (not flipped, like DR03/DR04/DR16), but its keyframe was never repainted. Needs the
+  keyframe's teal-tips repainted with the mirrored jacket and a new Seedance take on the same aref (≈ $1.5), or accept it.
+- Weak lip sync still as listed after the mirror regeneration (C209R/L, DR04, C103R; C203R, DR16): no lag changed in this pass.

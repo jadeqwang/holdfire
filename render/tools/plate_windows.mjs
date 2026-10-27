@@ -15,7 +15,7 @@ const { A, shots } = await loadEdit();
 const picks = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'picks2.json'), 'utf8'));
 // usable windows in SOURCE-clip seconds (pick notes / take verdicts); a pick not listed may use its whole plate
 const USABLE = {
-  P106: [0, 3.01],          // its tail (2.99-4.04, slowed) is the P107 push: the cut may reach 3.0 (P107 opens on that drawing)
+  P106: [0, 4.04],          // mirror regen (m5): the take's held note runs clean to its end (the old take's tail was the P107 push)
   V214: [0, 1.58],          // red line from 0.75 s: needs zoom >= 1.12 (checked separately)
   BU09: [0, 1.58],
   V216: [1.0, 2.38],

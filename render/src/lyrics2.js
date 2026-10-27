@@ -34,17 +34,17 @@ export const PLAN = [
   // ---------------------------------------------------------------- VERSE 1: white blueprint lettering, dimension lines
   // OUT OF THE SEA is the edit's hero (cyanotype ink, top left): the rest of the line continues under it in the same ink
   { n: 2, style: 'blueprint', ink: INK.navy, size: 50, segs: {
-    V101: { x: 1095, y: 515, align: 'left', br: [6, 8], maxW: 300, halo: NAVY_HALO, haloA: 0.35 },     // in the sky beside her, under the hero
+    V101: { x: 548, y: 560, align: 'left', size: 52, br: [6], maxW: 400, halo: NAVY_HALO, haloA: 0.5 },     // its own block under the hero, left of her hair (polish 3)
     V102: { x: 1640, y: 430, align: 'center', maxW: 560, br: [6], halo: NAVY_HALO, haloA: 0.3 } } },                 // a callout over the lobe-finned fish
   { n: 3, style: 'blueprint', all: true, size: 54, x: 548, y: 790, align: 'left', maxW: 430, br: [3, 5], halo: 'rgba(8,16,40,0.9)', haloA: 0.5 },
   { n: 4, style: 'blueprint', size: 50, segs: {
     V111: { ink: INK.navy, x: 560, y: 150, align: 'left', maxW: 500, br: [3, 6], halo: NAVY_HALO, haloA: 0.3 },     // in the pale sky over the mud-brick street
-    V112: { style: 'incise', size: 72, quad: [[690, 630], [1230, 630], [1390, 960], [530, 960]], br: [3, 6], dark: 'rgba(40,24,10,0.95)', core: 'rgba(88,60,32,0.95)', lite: 'rgba(255,236,200,0.8)', ghost: 0.35 },   // drawn in the dust of the cart road
-    V113: { style: 'incise', size: 64, maxW: 1500, quad: [[400, 745], [1270, 625], [1360, 790], [470, 935]], br: [6], wedges: true, ghost: 0.4, dark: 'rgba(30,18,8,0.97)', core: 'rgba(70,46,24,0.95)', lite: 'rgba(255,236,200,0.85)' } } },   // pressed into the clay tablet beside the tally
+    V112: { style: 'incise', size: 72, weight: 700, quad: [[640, 600], [1280, 600], [1440, 990], [480, 990]], br: [3, 6], dark: 'rgba(28,14,4,1)', core: 'rgba(48,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', ghost: 0.45, shade: 0.9, shadeCol: 'rgba(60,36,14,1)' },   // drawn in the dust of the cart road: ink-filled recess, deeper shadow (polish 3: phone legibility)
+    V113: { style: 'incise', size: 64, maxW: 1500, quad: [[400, 745], [1270, 625], [1360, 790], [470, 935]], br: [6], wedges: true, ghost: 0.45, dark: 'rgba(24,12,4,1)', core: 'rgba(46,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', shade: 0.6, shadeCol: 'rgba(60,36,14,1)' } } },   // pressed into the clay tablet beside the tally
   { n: 5, style: 'blueprint', size: 52, segs: {
-    V114: { x: 1385, y: 930, align: 'right', maxW: 560, halo: 'rgba(24,14,6,0.9)', haloA: 0.5 },   // on the dark soil by the furrow
+    V114: { x: 1385, y: 760, align: 'right', maxW: 560, halo: 'rgba(24,14,6,0.9)', haloA: 0.6 },   // on the dark soil by the furrow, inside the safe area (polish 3)
     V115: { x: 600, y: 790, align: 'left', maxW: 760 },                                  // a label in the blueprint cross-section
-    'V116,V117': { ink: INK.navy, x: 560, y: 150, align: 'left', maxW: 640, halo: NAVY_HALO, haloA: 0.35 } } },
+    'V116,V117': { ink: INK.navy, x: 560, y: 100, align: 'left', maxW: 640, halo: NAVY_HALO, haloA: 0.35 } } },
   // ---------------------------------------------------------------- the ISS: starlight, then the signal print
   { n: 6, style: 'light', size: 72, col: [0.92, 0.95, 1], segs: {
     V122: { x: 1385, y: 330, align: 'right', maxW: 380, br: [1, 3] },
@@ -52,16 +52,16 @@ export const PLAN = [
   // ---------------------------------------------------------------- PRE-CHORUS 1: riso type on the signal prints
   { n: 7, style: 'riso', size: 66, inks: [INK.paper, INK.orange], x: 960, y: 830, align: 'center', maxW: 820, br: [3] },
   { n: 8, style: 'riso', size: 68, inks: [INK.paper, INK.violet], mis: [5, 4], x: 960, y: 880, align: 'center', maxW: 820, br: [3] },
-  { n: 9, style: 'light', size: 74, col: GOLD, x: 960, y: 900, align: 'center', italic: false },
-  { n: 10, style: 'light', size: 60, col: [0.96, 0.9, 0.78], x: 960, y: 1045, align: 'center', maxW: 860, flare: false },
+  { n: 9, style: 'light', size: 86, col: GOLD, shade: 0.8, x: 960, y: 900, align: 'center', italic: false },
+  { n: 10, style: 'light', size: 72, col: [0.96, 0.9, 0.78], shade: 0.8, x: 960, y: 1010, align: 'center', maxW: 1000, flare: false },
   // WE'RE AWAKE is the edit's hero: "Hear it, and you'll know" glows on the dark window glass beside her
   { n: 11, style: 'crt', size: 66, col: '#9fe8ff', x: 548, y: 330, align: 'left', maxW: 250, br: [2, 4] },
   // ---------------------------------------------------------------- CHORUS 1: light in the sky, the screens
-  { n: 12, style: 'light', size: 72, col: GOLD, shade: 1.2, x: 560, y: 540, align: 'left', maxW: 420, br: [2] },             // in the dark sky left of the Milky Way
-  { n: 13, style: 'engrave', size: 54, x: 770, y: 400, align: 'right', maxW: 620, br: [4, 6] },    // the record's own legend, beside the disc
-  { n: 14, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 615, align: 'center' },   // a shared readout across the split
+  { n: 12, style: 'light', size: 80, col: GOLD, shade: 1.2, x: 560, y: 540, align: 'left', maxW: 420, br: [2] },             // in the dark sky left of the Milky Way
+  { n: 13, style: 'engrave', size: 62, x: 770, y: 400, align: 'right', maxW: 620, br: [4, 6] },    // the record's own legend, beside the disc
+  { n: 14, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 770, align: 'center' },   // a shared readout across the split, at chest height (clear of both mouths)
   { n: 15, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, y: 985, align: 'center', maxW: 860 },
-  { n: 16, style: 'crt', size: 58, col: '#a8f0ff', quad: [[1075, 150], [1585, 120], [1600, 540], [1085, 545]], br: [4, 8], panel: 'rgba(2,10,20,1)', panelA: 0.55 },   // across the monitor bank
+  { n: 16, style: 'crt', size: 58, col: '#a8f0ff', quad: [[1250, 170], [1850, 140], [1860, 560], [1255, 575]], br: [4, 8], panel: 'rgba(2,10,20,1)', panelA: 0.55 },   // across the monitor bank
   { n: 17, style: 'light', size: 84, col: GOLD, shade: 0.8, br: [3], segs: {
     C109: { x: 960, y: 280, align: 'center' },
     C110: { x: 960, y: 760, align: 'center', nodes: true } } },
@@ -69,73 +69,73 @@ export const PLAN = [
   { n: 19, style: 'light', size: 86, col: GOLD, x: 960, y: 210, align: 'center', nodes: true },
   { n: 21, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 110, align: 'center' },
   // ---------------------------------------------------------------- VERSE 2: brushed into the ink painting
-  { n: 22, style: 'brush', size: 84, x: 1060, y: 150, align: 'left', maxW: 640, br: [4] },          // in the smoke over the cauldron
+  { n: 22, style: 'brush', size: 88, shade: 1.6, shadeCol: 'rgba(246,242,232,1)', x: 1060, y: 150, align: 'left', maxW: 640, br: [4] },          // in the smoke over the cauldron
   { n: 23, style: 'brush', size: 84, x: 1330, y: 420, align: 'left', maxW: 560, br: [2, 3, 4] },     // on the bare paper beside the characters
   { n: 24, style: 'brush', size: 86, x: 590, y: 300, align: 'left', maxW: 560, br: [4, 7] },      // on the scroll beside the warning
   { n: 25, style: 'brush', size: 80, yLast: 1045, x: 960, align: 'center', maxW: 1100, br: [5] },
   // ---------------------------------------------------------------- Petrov: the console readout (Plex Mono, phosphor)
-  { n: 26, style: 'terminal', size: 40, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1052, align: 'center', maxW: 860, br: [2] },
-  { n: 27, style: 'terminal', size: 44, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 860, br: [3] },
-  { n: 28, style: 'terminal', size: 44, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 860, br: [4] },
-  { n: 29, style: 'terminal', size: 48, col: '#8dffb0', panel: 'rgba(3,10,6,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 900, br: [2] },
+  { n: 26, style: 'terminal', size: 46, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1052, align: 'center', maxW: 860, br: [2] },
+  { n: 27, style: 'terminal', size: 52, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 860, br: [3] },
+  { n: 28, style: 'terminal', size: 52, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 860, br: [4] },
+  { n: 29, style: 'terminal', size: 54, col: '#8dffb0', panel: 'rgba(3,10,6,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 900, br: [2], segs: { 'V216,V217': {} } },   // ends at the cut to WE'RE ALIVE
   // ---------------------------------------------------------------- PRE-CHORUS 2: ticker tape among the near-misses, the coin legend
-  { n: 30, style: 'typewriter', tape: true, size: 44, x: 960, yLast: 1000, align: 'center', maxW: 1400 },
-  { n: 31, style: 'typewriter', tape: true, size: 44, x: 960, yLast: 1000, align: 'center', maxW: 1400 },
+  { n: 30, style: 'typewriter', tape: true, size: 54, x: 960, yLast: 1000, align: 'center', maxW: 1400 },
+  { n: 31, style: 'typewriter', tape: true, size: 54, x: 960, yLast: 1000, align: 'center', maxW: 1400 },
   { n: 32, style: 'engrave', size: 54, copies: [{ only: [0, 1, 2, 3], x: 505, y: 420, align: 'right', br: [2] }, { only: [4, 5, 6, 7, 8], x: 1415, y: 420, align: 'left', br: [6] }] },
-  { n: 33, style: 'engrave', size: 56, x: 960, y: 160, align: 'center', maxW: 860, br: [3] },
+  { n: 33, style: 'engrave', size: 56, x: 960, y: 160, align: 'center', maxW: 860, br: [3], segs: { P204: {} } },   // ends at the cut to chorus 2 (CAN'T BE SURE)
   // ---------------------------------------------------------------- CHORUS 2: the mirror, first (as chorus 1, both rooms)
   { n: 34, style: 'light', size: 74, col: GOLD, shade: 1.4, x: 960, yLast: 1015, align: 'center' },
   { n: 35, style: 'engrave', size: 50, x: 960, y: 925, align: 'center', maxW: 860, br: [4] },
-  { n: 36, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 615, align: 'center' },
+  { n: 36, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 770, align: 'center' },
   { n: 37, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, y: 985, align: 'center', maxW: 860 },
   { n: 38, style: 'crt', size: 58, col: '#a8f0ff', panel: 'rgba(2,10,20,1)', x: 960, y: 960, align: 'center', maxW: 860, br: [4] },
   { n: 39, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', br: [3], segs: {
-    C209: { x: 960, y: 615, align: 'center' },
+    C209: { x: 960, y: 770, align: 'center' },
     C210: { style: 'light', size: 84, col: GOLD, shade: 0.8, x: 960, y: 230, align: 'center' } } },
   // ---------------------------------------------------------------- POST-CHORUS 2
   { n: 41, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 150, align: 'center' },
   { n: 42, style: 'impact', size: 100, texts: ['One!', 'One!', 'Two!', 'Three!', 'Five!'], x: 960, yLast: 1020, align: 'center', maxW: 1100 },
   { n: 43, style: 'impact', size: 108, texts: ['Counting', 'on', 'you!'], x: 960, yLast: 1020, align: 'center', maxW: 1000 },
   // ---------------------------------------------------------------- BRIDGE: chalk in the dark, then the battle's impact type
-  { n: 44, style: 'chalk', size: 80, shade: 1.6, segs: {
-    BR01: { x: 1385, y: 150, align: 'right', maxW: 520 },
+  { n: 44, style: 'chalk', size: 96, shade: 1.6, segs: {
+    BR01: { x: 560, y: 170, align: 'left', maxW: 600 },   // left, clear of her head (polish 3)
     BR01b: { x: 960, y: 125, align: 'center', maxW: 1300 },
-    BR02: { x: 1385, y: 150, align: 'right', maxW: 600 } } },
-  { n: 45, style: 'chalk', size: 80, shade: 1.6, segs: {
-    BR02: { x: 1385, y: 150, align: 'right', maxW: 600 },
+    BR02: { x: 560, y: 170, align: 'left', maxW: 600 } } },
+  { n: 45, style: 'chalk', size: 96, shade: 1.6, segs: {
+    BR02: { x: 560, y: 170, align: 'left', maxW: 600 },
     BR02b: { x: 960, y: 125, align: 'center', maxW: 1300 },
-    'BR02c,BR02d': { x: 960, y: 125, align: 'center', maxW: 860 },
+    'BR02c,BR02d': { x: 960, y: 110, align: 'center', maxW: 1240, size: 88 },   // one row above her head
     BR03: { x: 960, y: 125, align: 'center', maxW: 1300 } } },
-  { n: 46, style: 'chalk', size: 80, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { 'BR03,BR05': {}, BR04: { style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center' } } },
-  { n: 47, style: 'chalk', size: 80, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { BR05: {}, BR06: { style: 'impact', size: 104, x: 960, yLast: 1025, align: 'center' } } },
+  { n: 46, style: 'chalk', size: 96, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { 'BR03,BR05': {}, BR04: { style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center' } } },
+  { n: 47, style: 'chalk', size: 96, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { BR05: {}, BR06: { style: 'impact', size: 104, x: 960, yLast: 1025, align: 'center' } } },
   { n: 48, style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center', maxW: 1000, br: [4] },
   { n: 49, style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center', maxW: 1000, br: [4] },
   // ---------------------------------------------------------------- Arkhipov: poster banners (NO is the poster's own lettering)
   { n: 50, style: 'poster', size: 92, band: '#111111', ink: INK.cream, x: 960, yLast: 1030, align: 'center', rot: -4, br: [1], maxW: 1100 },
   { n: 51, style: 'poster', size: 92, band: '#111111', ink: INK.cream, x: 960, yLast: 1030, align: 'center', rot: -4, only: [0, 1, 2, 3, 4], br: [3], segs: { 'BR15,BR16': {}, BR17: false } },
   // ---------------------------------------------------------------- BUILD: the war display, then the VCR's OSD over the rewind
-  { n: 52, style: 'terminal', size: 56, col: '#ff4a36', x: 960, y: 140, align: 'center', maxW: 900, scanA: 0.3 },
-  { n: 53, style: 'terminal', size: 56, col: '#ff4a36', x: 960, y: 140, align: 'center', maxW: 900, scanA: 0.3 },
-  { n: 54, style: 'terminal', size: 84, col: '#ff6a52', shade: 1.5, x: 960, y: 170, align: 'center', maxW: 860, scanA: 0.3 },
+  { n: 52, style: 'terminal', size: 64, col: '#ff5a44', shade: 1, x: 960, y: 140, align: 'center', maxW: 1000, scanA: 0.25 },
+  { n: 53, style: 'terminal', size: 64, col: '#ff5a44', shade: 1, x: 960, y: 140, align: 'center', maxW: 1000, scanA: 0.25 },
+  { n: 54, style: 'terminal', size: 84, col: '#ff7a62', panel: 'rgba(12,2,2,1)', panelA: 0.82, x: 960, y: 170, align: 'center', maxW: 860, scanA: 0.25 },   // a dark war-display panel: the console is lit red (polish 3)
   { n: 55, style: 'osd', size: 80, x: 640, yLast: 960, align: 'left', maxW: 760, br: [4] },
-  { n: 56, style: 'osd', size: 80, x: 640, yLast: 960, align: 'left', maxW: 760 },
+  { n: 56, style: 'osd', size: 80, x: 640, yLast: 960, align: 'left', maxW: 760, segs: { 'BU05,BU06,BU07': {} } },   // the OSD leaves with the rewind
   { n: 57, style: 'light', size: 120, caps: true, track: 0.06, col: GOLD, x: 960, y: 200, align: 'center', maxW: 900 },
-  { n: 58, style: 'light', size: 110, caps: true, track: 0.06, col: GOLD, x: 960, y: 150, align: 'center', maxW: 900 },
+  { n: 58, style: 'light', size: 110, caps: true, track: 0.06, col: GOLD, shade: 1.3, x: 960, y: 150, align: 'center', maxW: 900 },
   // ---------------------------------------------------------------- DROP: marker on the mirror glass (mirrored on teal-tips' side)
-  { n: 59, style: 'glass', size: 64, ink: INK.klein, br: [3, 5], copies: [{ x: 930, y: 170, align: 'right', maxW: 390 }, { x: 990, y: 170, align: 'right', maxW: 390, mirror: true, ink: INK.teal }] },
-  { n: 60, style: 'glass', size: 64, ink: INK.klein, br: [4, 6], segs: { 'DR02,DR03': { copies: [{ x: 600, y: 300, align: 'right', maxW: 420 }, { x: 1320, y: 300, align: 'right', maxW: 420, mirror: true, ink: INK.teal }] } } },
-  { n: 61, style: 'glass', size: 70, ink: INK.klein, copies: [{ x: 930, y: 1010, align: 'right', maxW: 390 }, { x: 990, y: 1010, align: 'right', maxW: 390, mirror: true, ink: INK.teal }] },
-  { n: 63, style: 'light', size: 52, col: GOLD, shade: 0.6, x: 960, y: 1050, align: 'center', maxW: 1100 },
+  { n: 59, style: 'glass', size: 64, ink: INK.klein, br: [3], copies: [{ x: 530, y: 330, align: 'right', maxW: 460 }, { x: 1390, y: 330, align: 'right', maxW: 460, mirror: true, ink: INK.teal }] },   // on the white outside each walker, clear of both heads (polish 3)
+  { n: 60, style: 'glass', size: 64, ink: INK.klein, br: [4, 6], segs: { 'DR02,DR03': { copies: [{ x: 600, y: 300, align: 'right', maxW: 420 }, { x: 1000, y: 300, align: 'right', maxW: 420, mirror: true, ink: INK.teal }] } } },
+  { n: 61, style: 'glass', size: 70, ink: INK.klein, halo: 'rgba(250,250,255,1)', copies: [{ x: 930, y: 1010, align: 'right', maxW: 390 }, { x: 990, y: 1010, align: 'right', maxW: 390, mirror: true, ink: INK.teal }] },
+  { n: 63, style: 'light', size: 64, col: GOLD, shade: 0.9, x: 960, y: 150, align: 'center', maxW: 1200 },   // top: the edit's 13 21 34 hold at the bottom (polish 3)
   { n: 64, style: 'glass', size: 70, ink: INK.klein, halo: 'rgba(250,250,255,1)', x: 960, yLast: 1030, align: 'center', maxW: 1000, segs: { DR11: {} } },
   { n: 66, style: 'riso', size: 62, shade: 1, inks: [INK.paper, INK.pink], x: 960, yLast: 990, align: 'center', maxW: 1100, br: [4], segs: {
-    DR14: {}, DR15: { style: 'light', col: [0.75, 1, 0.92], nodes: true, size: 66 }, DR16: { style: 'crt', col: '#a8f0ff', panel: 'rgba(2,10,20,1)', size: 70, shade: 0 } } },
+    DR14: { yLast: 780, shade: 1.8 }, DR15: { style: 'light', col: [0.75, 1, 0.92], nodes: true, size: 66 }, DR16: { style: 'crt', col: '#a8f0ff', panel: 'rgba(2,10,20,1)', size: 70, shade: 0 } } },
   // ---------------------------------------------------------------- OUTRO: starlight on the graph, the safety board, whispers
   { n: 67, style: 'light', size: 74, col: GOLD, x: 960, y: 150, align: 'center', maxW: 1100, br: [3], nodes: true },
   { n: 68, style: 'light', size: 70, col: GOLD, x: 960, y: 160, align: 'center', maxW: 900, br: [4], segs: { OU02: {}, OU03: false } },
   { n: 69, style: 'board', size: 64, panel: '#1d5a35', x: 960, y: 985, align: 'center' },
   { n: 70, style: 'board', size: 72, panel: '#1d5a35', x: 960, y: 985, align: 'center' },
   { n: 71, style: 'whisper', size: 72, x: 960, y: 260, align: 'center' },
-  { n: 72, style: 'whisper', size: 76, col: [0.22, 0.24, 0.36], x: 960, y: 190, align: 'center' },
+  { n: 72, style: 'whisper', size: 76, col: [0.22, 0.24, 0.36], x: 960, y: 190, align: 'center', segs: { OU11: {} } },
   { n: 73, style: 'whisper', size: 64, col: [0.9, 0.93, 1], x: 960, y: 1015, align: 'center' },
 ];
 export const LYRIC_LINES = new Set(PLAN.map((e) => e.n));

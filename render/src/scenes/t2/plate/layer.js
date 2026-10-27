@@ -12,7 +12,7 @@ function build(e) {
     uniform float zoom; uniform vec2 pan; uniform float rotA; uniform float flipX;
     uniform float exposure; uniform float sat; uniform vec3 lift; uniform vec3 gammaV; uniform vec3 gain; uniform vec3 tint;
     uniform float contrast; uniform float alpha; uniform vec4 bg; uniform vec2 keyLoHi; uniform float redK;
-    uniform int fixN; uniform vec4 fixA[4]; uniform vec4 fixB[4];   // plate-space fixes: A = (cx, cy, rx, ry) image px, B = (rgb, mode)
+    uniform int fixN; uniform vec4 fixA[4]; uniform vec4 fixB[4]; uniform vec4 fixC[4];   // plate-space fixes: A = (cx, cy, rx, ry) image px, B = (rgb, mode), C = (core, glow, 0, 0)
     void main(){
       vec2 q = vec2(vUv.x * 1920., (1. - vUv.y) * 1080.);           // design px, y down
       vec2 c = vec2(960., 540.);
@@ -32,13 +32,26 @@ function build(e) {
       for (int i = 0; i < 4; i++) {
         if (i >= fixN) break;
         vec2 d = (ipx - fixA[i].xy) / fixA[i].zw;
-        float m = 1. - smoothstep(.82, 1.08, length(d));
-        if (m <= 0.) continue;
         float l = luma(col);
         if (fixB[i].w < 1.5) {
+          // dot: the catchlight recoloured in place - only inside its own measured disc (r = the disc's edge, 1.5 image px soft),
+          // so its size and shape are the plate's; a tiny white core of radius core * r stays at its centre
+          float rr = length(d), rpx = rr * min(fixA[i].z, fixA[i].w);
+          float r0 = min(fixA[i].z, fixA[i].w);
+          float m = 1. - smoothstep(r0 - 1.5, r0 + 1.5, rpx);
+          float glow = fixC[i].y;   // the plate's soft glow just outside the disc takes the dot's hue at its own luma
+          if (glow > 0.) col = mix(col, fixB[i].rgb * (l / luma(fixB[i].rgb)), (1. - m) * (1. - smoothstep(r0, r0 * (1. + glow), rpx)) * .9);
+          if (m <= 0.) continue;
           float w = smoothstep(.42, .72, l) * m;
-          col = mix(col, fixB[i].rgb * min(1.15, l / .86), w);
-        } else if (fixB[i].w > 2.5) {
+          vec3 dotc = fixB[i].rgb;
+          float core = fixC[i].x;
+          if (core > 0.) dotc = mix(dotc, vec3(1.), 1. - smoothstep(core - .045, core + .045, rr));
+          col = mix(col, dotc, w);
+          continue;
+        }
+        float m = 1. - smoothstep(.82, 1.08, length(d));
+        if (m <= 0.) continue;
+        if (fixB[i].w > 2.5) {
           float lk = luma(fixB[i].rgb);
           col = mix(col, fixB[i].rgb, smoothstep(lk + .02, lk + .14, l) * m);
         } else {
@@ -71,6 +84,7 @@ function build(e) {
     exposure: { value: 1 }, sat: { value: 1 }, lift: { value: [0, 0, 0] }, gammaV: { value: [1, 1, 1] }, gain: { value: [1, 1, 1] }, tint: { value: [1, 1, 1] },
     contrast: { value: 1 }, alpha: { value: 1 }, bg: { value: [0, 0, 0, 1] }, keyLoHi: { value: [0.06, 0.2] }, redK: { value: 0 },
     fixN: { value: 0 }, fixA: { value: new Float32Array(16).fill(1) }, fixB: { value: new Float32Array(16).fill(1) },
+    fixC: { value: new Float32Array(16).fill(0) },
   });
   return mat;
 }
@@ -80,7 +94,8 @@ function build(e) {
 //     for tracked fixes)}; over = alpha-blend into target instead of overwriting
 // FIX (image px, so it rides the plate's own framing): {mode 'dot' | 'iris', c [x, y], r (number | [rx, ry]), col [r,g,b] (0..1),
 //     track [[f, x, y, r?]...] (keyframes by plate frame, linear between, held past the ends; overrides c / r)}
-//     'dot': the catchlight's bright pixels take col (Jade's pale-blue dot); 'iris': teal/green iris pixels take col at their luma;
+//     'dot': the catchlight's bright pixels inside r (its own measured edge) take col, flat (Jade's pale-blue dot), with a white
+//     core of radius core * r (core 0..1, default none); glow g tints the plate's halo out to r * (1 + g) to the dot's hue; 'iris': teal/green iris pixels take col at their luma;
 //     'erase': pixels brighter than col (a star, a glint) are painted back to col (the local sky), darker strokes kept.
 function fixAt(F, f) {
   let c = F.c || [0, 0], r = F.r ?? 10;
@@ -93,7 +108,7 @@ function fixAt(F, f) {
     if (a[3] !== undefined) { const ra = [].concat(a[3]), rb = [].concat(b[3] ?? a[3]); r = [0, 1].map((j) => (ra[j] ?? ra[0]) + ((rb[j] ?? rb[0]) - (ra[j] ?? ra[0])) * u); }
   }
   const rr = Array.isArray(r) ? r : [r, r];
-  return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3 })[F.mode] || 1]];
+  return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3 })[F.mode] || 1], [F.core || 0, F.glow || 0, 0, 0]];
 }
 export function drawLayer(e, target, o, over = false) {
   const m = build(e); const u = m.uniforms; const g = o.grade || {};
@@ -109,6 +124,6 @@ export function drawLayer(e, target, o, over = false) {
   u.bg.value = o.bg ? [o.bg[0], o.bg[1], o.bg[2], 1] : [0, 0, 0, 0];
   const fx = (g.fix || []).slice(0, 4);
   u.fixN.value = fx.length;
-  fx.forEach((F, i) => { const [A, B] = fixAt(F, o.f ?? 0); u.fixA.value.set(A, i * 4); u.fixB.value.set(B, i * 4); });
+  fx.forEach((F, i) => { const [A, B, C] = fixAt(F, o.f ?? 0); u.fixA.value.set(A, i * 4); u.fixB.value.set(B, i * 4); u.fixC.value.set(C, i * 4); });
   if (over) e.passOver(m, target, 'normal'); else e.pass(m, target);
 }

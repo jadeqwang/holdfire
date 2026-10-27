@@ -10,25 +10,123 @@
     {
      "mode": "dot",
      "col": [
-      0.501,
-      0.696,
-      0.9
+      0.497,
+      0.7,
+      0.97
      ],
      "track": [
       [
        0,
        1099.3,
        410.8,
-       80
+       75.2
+      ],
+      [
+       4,
+       1100.5,
+       409.9,
+       75.6
+      ],
+      [
+       8,
+       1101.7,
+       408.6,
+       76.3
+      ],
+      [
+       12,
+       1102.9,
+       407.6,
+       76.9
+      ],
+      [
+       16,
+       1104.0,
+       406.6,
+       77.4
+      ],
+      [
+       20,
+       1105.1,
+       405.6,
+       77.9
+      ],
+      [
+       24,
+       1106.2,
+       404.7,
+       78.5
+      ],
+      [
+       28,
+       1107.2,
+       403.7,
+       79.0
+      ],
+      [
+       32,
+       1108.2,
+       402.9,
+       79.5
+      ],
+      [
+       36,
+       1109.2,
+       402.0,
+       80.0
+      ],
+      [
+       40,
+       1110.2,
+       401.1,
+       80.5
+      ],
+      [
+       44,
+       1111.1,
+       400.3,
+       80.9
+      ],
+      [
+       48,
+       1112.2,
+       399.5,
+       81.4
+      ],
+      [
+       52,
+       1113.2,
+       398.6,
+       81.9
+      ],
+      [
+       56,
+       1114.2,
+       397.8,
+       82.3
+      ],
+      [
+       60,
+       1115.2,
+       397.0,
+       82.8
+      ],
+      [
+       64,
+       1116.1,
+       396.2,
+       83.2
       ],
       [
        68,
        1117.0,
-       395.5,
-       90
+       395.4,
+       83.7
       ]
      ],
-     "note": "Jade's catchlight: the white disc becomes the pale-blue dot (#8EC5FF on screen; col is set 0.9x so the photo look's bloom does not clip it to white), tracked on the plate"
+     "note": "Jade's catchlight: the plate's own white disc recoloured in place to the pale-blue dot (#8EC5FF on screen), its measured edge every 4 plate frames (same size and shape), a tiny white core; the small secondary glint is the plate's own (polish 3)",
+     "core": 0.12,
+     "glow": 0.22
     }
    ]
   }

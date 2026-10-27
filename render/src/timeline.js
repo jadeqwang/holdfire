@@ -88,12 +88,6 @@ function drawSub(ty, t, c) {
     const rowW = row.reduce((s, w, i) => s + w.wd + (i ? space : 0), 0);
     let x = SAFE.cx - rowW / 2;
     const y = yLast - (rows.length - 1 - ri) * lead;
-    if (c.band) {   // a soft dark band behind the sung part of the row, so the line reads on a phone over a pale painting
-      let xe = x, ab = 0;
-      row.forEach((w, i) => { const a = easeOutCubic(range(t, w.t - 0.06, w.t + 0.14)); if (a > 0) { xe = x + row.slice(0, i + 1).reduce((s2, v, j) => s2 + v.wd + (j ? space : 0), 0); ab = Math.max(ab, a); } });
-      if (ab > 0) { const cx = ty.ctx; cx.save(); cx.globalAlpha = 0.5 * fade * Math.min(1, ab * 2); cx.fillStyle = 'rgb(8,10,16)';
-        cx.beginPath(); cx.roundRect(x - 22, y - st.size * 0.98, xe - x + 44, st.size * 1.3, 12); cx.fill(); cx.restore(); }
-    }
     for (const w of row) {
       const a = easeOutCubic(range(t, w.t - 0.06, w.t + 0.14));
       if (a > 0) ty.text(w.text, x, y, { ...st, color: c.color || P.cream, alpha: a * fade, shade: 0.9 });
@@ -458,14 +452,14 @@ export function buildTimeline(A) {
 
   // OUT OF / THE SEA in cyanotype ink: cream vanished on the pale dawn sky
   hero(caps(lineWords('V1', 0, 0, 4)), { rows: [2, 2], size: 190, y: 250, align: 'left', t1: fish.t0, out: 0.12, color: [0.05, 0.12, 0.3], hot: [0.13, 0.36, 0.86], glow: 0, shade: 0 });
-  sub('V1', 0, { from: 4, band: true });                                                                                              // with salt in our lungs
+  sub('V1', 0, { from: 4 });                                                                                              // with salt in our lungs
   ['fin', 'foot', 'hand'].forEach((w, i, arr) => {
     const a = wd('V1', 1, w).t, b = i < 2 ? wd('V1', 1, arr[i + 1]).t : a + 0.6;
     hero([{ text: w.toUpperCase(), t: a }], { size: 260, y: 330, t1: b, out: 0.06 });
   });
   sub('V1', 1, { from: 5 });                                                                                              // we were young
-  sub('V1', 2, { cap: wd('V1', 3, 'seeds').t, band: true });                                                             // carried the egg ...
-  sub('V1', 3, { to: 7, t1: wd('V1', 3, 'flood').t, band: true });                                                        // seeds ... waking
+  sub('V1', 2, { cap: wd('V1', 3, 'seeds').t });                                                             // carried the egg ...
+  sub('V1', 3, { to: 7, t1: wd('V1', 3, 'flood').t });                                                        // seeds ... waking
   // FLOOD right of Jade's head in V117 (she walks in at x ~560-720) and over the locomotive's smoke in V118
   // (cyanotype ink like OUT OF THE SEA, with a pale halo: it crosses the pale Okavango sky and the locomotive's dark smoke)
   hero([{ text: 'FLOOD', t: wd('V1', 3, 'flood').t }], { size: 185, x: 1110, maxW: 560, y: 330, t1: wd('V1', 3, 'flood').t + 0.6, out: 0.1,

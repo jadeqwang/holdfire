@@ -30,6 +30,13 @@
   "in": 0.5,
   "note": "Jade, room A, lamp of gold light held up in her palm; subject sits right of centre, inside the split's centre slice"
  },
+ "BU12R": {
+  "dir": "work/plates/BU12R",
+  "kind": "video",
+  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "in": 0.5,
+  "note": "teal-tips, room B, mirrored framing of BU12L (keyframe = BU12L flipped + edited, patch moved back to her left sleeve); Veo pushes in and drifts right"
+ },
  "BU13": {
   "dir": "work/plates/BU12L",
   "kind": "video",
@@ -42,12 +49,31 @@
   ],
   "note": "same take as BU12L, pushed in on her face and the light"
  },
+ "BU14": {
+  "dir": "work/plates/BU12R",
+  "kind": "video",
+  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "in": 0.3,
+  "zoom": 1.6,
+  "pan": [
+   312,
+   320
+  ],
+  "note": "same take, pushed in on teal-tips and the light"
+ },
  "BU17L": {
   "dir": "work/plates/BU12L",
   "kind": "video",
   "src": "media/gen/t2_BU12L_veo_t1_41584e9544.mp4",
   "in": 3.0,
   "note": "same take, light at its brightest"
+ },
+ "BU17R": {
+  "dir": "work/plates/BU12R",
+  "kind": "video",
+  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "in": 1.8,
+  "note": "same take, the light flares (1.6-2.6 s) for the burn to white"
  },
  "DR01": {
   "dir": "work/plates/DR01",
@@ -67,28 +93,23 @@
   "dir": "work/plates/DR03_reveal",
   "kind": "still",
   "src": "media/kf2/DR03_nbp_v2.jpg",
-  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)",
-  "grade": {
-   "fix": [
-    {
-     "mode": "iris",
-     "col": [
-      0.4,
-      0.26,
-      0.17
-     ],
-     "c": [
-      697,
-      260
-     ],
-     "r": [
-      11,
-      16
-     ],
-     "note": "teal-tips' iris teal -> brown (canon)"
-    }
-   ]
-  }
+  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)"
+ },
+ "DR03_swing": {
+  "dir": "work/plates/DR03",
+  "kind": "video",
+  "src": "media/gen/t2_DR03_sd20_t1_4659db0750.mp4",
+  "in": 1.6,
+  "rate": 4.5,
+  "note": "alt for DR03: generated swing round the glass (Seedance 2.0 first+last frame)"
+ },
+ "DR04": {
+  "dir": "work/plates/DR04",
+  "kind": "video",
+  "src": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
+  "s0": 188.376,
+  "lag": 0.583,
+  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962"
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -117,6 +138,14 @@
   "kind": "still",
   "src": "media/kf2/DR14_nbp.jpg",
   "note": "Echo's signal tower, ring at (730, 175) of 1366 -> (1026, 246) at 1080p"
+ },
+ "DR16": {
+  "dir": "work/plates/DR16",
+  "kind": "video",
+  "src": "media/gen/t2_DR16_sd25_t2_8e3128f390.mp4",
+  "s0": 207.223,
+  "lag": 0.958,
+  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear"
  },
  "OU10": {
   "dir": "work/plates/OU10",
@@ -167,154 +196,5 @@
     }
    ]
   }
- },
- "DR04": {
-  "dir": "work/plates/DR04",
-  "kind": "video",
-  "src": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
-  "s0": 188.376,
-  "lag": 0.583,
-  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962",
-  "grade": {
-   "fix": [
-    {
-     "mode": "iris",
-     "col": [
-      0.4,
-      0.26,
-      0.17
-     ],
-     "r": [
-      16,
-      23
-     ],
-     "track": [
-      [
-       0,
-       571,
-       420
-      ],
-      [
-       8,
-       570,
-       426
-      ],
-      [
-       16,
-       573,
-       427
-      ],
-      [
-       24,
-       577,
-       419
-      ],
-      [
-       32,
-       577,
-       411
-      ],
-      [
-       40,
-       577,
-       411
-      ],
-      [
-       48,
-       580,
-       411
-      ],
-      [
-       56,
-       582,
-       411
-      ],
-      [
-       64,
-       582,
-       411
-      ],
-      [
-       72,
-       585,
-       411
-      ],
-      [
-       80,
-       587,
-       411
-      ],
-      [
-       88,
-       588,
-       411
-      ],
-      [
-       96,
-       589,
-       411
-      ],
-      [
-       104,
-       590,
-       411
-      ],
-      [
-       112,
-       591,
-       411
-      ],
-      [
-       120,
-       591,
-       411
-      ]
-     ],
-     "note": "teal-tips' iris teal -> brown (canon), teal catchlight kept; tracked by template match on the plate"
-    }
-   ]
-  }
- },
- "BU12R": {
-  "dir": "work/plates/BU12R",
-  "kind": "video",
-  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
-  "in": 0.5,
-  "note": "teal-tips, room B, mirrored framing of BU12L (keyframe = BU12L flipped + edited, patch moved back to her left sleeve); Veo pushes in and drifts right"
- },
- "BU14": {
-  "dir": "work/plates/BU12R",
-  "kind": "video",
-  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
-  "in": 0.3,
-  "zoom": 1.6,
-  "pan": [
-   312,
-   320
-  ],
-  "note": "same take, pushed in on teal-tips and the light"
- },
- "BU17R": {
-  "dir": "work/plates/BU12R",
-  "kind": "video",
-  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
-  "in": 1.8,
-  "note": "same take, the light flares (1.6-2.6 s) for the burn to white"
- },
- "DR03_swing": {
-  "dir": "work/plates/DR03",
-  "kind": "video",
-  "src": "media/gen/t2_DR03_sd20_t1_4659db0750.mp4",
-  "in": 1.6,
-  "rate": 4.5,
-  "note": "alt for DR03: generated swing round the glass (Seedance 2.0 first+last frame)"
- },
- "DR16": {
-  "dir": "work/plates/DR16",
-  "kind": "video",
-  "src": "media/gen/t2_DR16_sd25_t2_8e3128f390.mp4",
-  "s0": 207.223,
-  "lag": 0.958,
-  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear"
  }
 }

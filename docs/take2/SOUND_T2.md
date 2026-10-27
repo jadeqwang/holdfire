@@ -76,7 +76,7 @@ Margins in dB: *song* = song momentary minus cue (median / worst, the worst on t
 | 50 | **thud3**: Arkhipov: depth charge 3 goes off (its ring through the water; the boat shudders) | 160.841-161.184 (2:40.841) | 160.841 = drop 160.007 + detAt(2) (arkhipov.js), x 191 px -> pan -0.56 | -24.2 dB | -22.7 dBFS | -34.0 LUFS | 17.1 / 15.9 | 16.5 / 9.1 | under the vocal |
 | 51 | **vhs_build**: Build: VHS rewind of the war (BU05-BU06), whir and squeal tracking the scrub speed, stop on 'Earth whole' | 170.832-174.126 (2:50.832) | 170.832 ('Only', rewind starts) -> brake 173.736 -> stop 173.876 (the beat before 'all'; smear off) | -19.3 dB | -18.5 dBFS | -26.6 LUFS | 15.8 / 13.0 | 12.8 / 9.1 | median margin; ducks under the vocal (max -8.8 dB) |
 | 52 | **counter_resets**: Outro: DAYS SINCE LAST RESET snaps to zero 29 times (heavier clunk each), days ticking between | 224.351-228.522 (3:44.351) | resets 224.801 -> 228.212 (counter.js schedule(): 32nd grid from 224.325); 18 day ticks (whole counts on twos) | -22.4 dB | -18.0 dBFS | -30.7 LUFS | 21.0 / 13.5 | 12.5 / 9.0 | peak cap; ducks under the vocal (max -16.1 dB) |
-| 53 | **counter_roll**: Outro: the roll-up to 42 on 'higher', a ratchet tooth per day, settling on the value | 228.272-229.779 (3:48.272) | 228.272 (last reset + 0.06) -> 229.479 (climbEnd; 'higher' 229.439); 42 teeth, accelerating (v = target * f^2.6), carries at 10/20/30/40 | -20.4 dB | -18.0 dBFS | -32.4 LUFS | 21.4 / 18.7 | 17.7 / 9.2 | peak cap; ducks under the vocal (max -0.9 dB) |
+| 53 | **counter_roll**: Outro: the roll-up to 47 on 'higher', a ratchet tooth per day, settling on the value | 228.272-229.779 (3:48.272) | 228.272 (last reset + 0.06) -> 229.479 (climbEnd; 'higher' 229.439); 47 teeth, accelerating (v = target * f^2.6), carries at 10/20/30/40 | -19.9 dB | -18.0 dBFS | -31.7 LUFS | 20.6 / 18.1 | 17.0 / 9.1 | peak cap; ducks under the vocal (max -1.0 dB) |
 
 ### How each is made
 
@@ -106,11 +106,11 @@ Margins in dB: *song* = song momentary minus cue (median / worst, the worst on t
 * Cold open: the rewind starts on the sub hit 7.160 and runs to the stop on the floret 8.316 (`t2_vhs_rewind` rewind 1 -> 0.12); the transport brakes over the last 110 ms so the squeal's pitch falls into the stop clunk; then silence until the match (scratch in the gap, flare on the CO11 cut).
 * Build: the whir follows the war clock's scrub speed (peak 8.7x) and stops on 'Earth whole' 173.876; the slow drift after it (no smear) is silent.
 * Sonar: pings in the quietest vocal 20 ms near the BR14 cut and 'sixty-two|depth': 158.604, 159.637. Thuds on the drawn detonations (drop + detAt): 160.176, 160.422, 160.841; skipped (they go off after the cut to 'two said fire' or too close to it): 161.151, 161.293, 161.596. Everything ends by 161.18.
-* Counter: 29 resets 224.801-228.212, roll 228.272-229.479 up to 42 ('higher' 229.439). The value depends on the release date (counter.js `release`): re-run after changing it.
+* Counter: 29 resets 224.801-228.212, roll 228.272-229.479 up to 47 ('higher' 229.439). The value depends on the release date (counter.js `release`): re-run after changing it.
 
 ## Files
 
 * `tools/audio/sfx_t2.py` (this layer; imports `tools/audio/sfx.py`), `tools/audio/t2_events.mjs` (the picture's events, read-only).
 * `media/audio/hold_fire_t2_mix.wav`: PCM 24-bit, 48 kHz stereo, the song's length. For take two render with `node render/tools/render.mjs ... --audio media/audio/hold_fire_t2_mix.wav` (without `--audio` render.mjs picks `media/audio/hold_fire_mix.wav`, take one's mix, if it exists).
 * `work/sfx_t2/`: `events.json`, `sfx_t2_layer.wav`, `stems/<cue>.wav`, `cues.json`, `verify.json`, `cue_levels.png` (ear proxy).
-* `work/out/sfx_audition.mp4`: audition, 37.8 s = `work/out/preview_540p_v6.mp4` with this mix, cut to the cue windows +-1 s (merged where they overlap: 6.12-10.29, 142.42-162.21, 169.79-175.17, 223.33-230.79), 0.3 s black between.
+* `work/out/sfx_audition.mp4`: audition, 37.8 s = `work/out/preview_540p_v7.mp4` with this mix, cut to the cue windows +-1 s (merged where they overlap: 6.12-10.29, 142.42-162.21, 169.79-175.17, 223.33-230.79), 0.3 s black between.

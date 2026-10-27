@@ -979,7 +979,7 @@ export function buildTimeline(A) {
   // the 29 resets (30 entries; two share 27 Oct 1962) run through the whispered count and end (the 15 Sep 2026 entry, with its own
   // flash) on "count" of "The count goes higher"; the climb then lands on the release-date value (RELEASE: 42 on 27 Oct 2026) just after "higher" begins, digits rolling upward into it, and holds it to the cut
   // the days counter's release date (a parameter: Jade may move it; 15 Sep 2026 -> 27 Oct 2026 reads 42)
-  const RELEASE = '2026-10-27';
+  const RELEASE = '2026-11-01';   // Jade: release on 1 Nov 2026 (also the 66th anniversary of Fischer–Tal) -> the board reads 47
   const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: RELEASE, gaps: [6, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, ...Array(17).fill(1)], climbEnd: higher.t + 0.04 };
   S('3:44.33', drumsZ, { scene: 't2_counter', p: counterP, method: 'procedural', era: ERA.newsprint, look: COUNTER_LOOK,
     want: '[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 15 Sep 2026 entry; then it climbs to the release-date value (RELEASE: 42 on 27 Oct 2026; recompute if the date moves), digits rolling up on "higher"' });

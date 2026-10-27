@@ -663,7 +663,9 @@ def write_doc(rows, V, ctx, T, aud):
          f"{ctx['clock']['n']} presses, one per clock press of `render/src/scenes/t2/chess/schedule.js` (the start press "
          f"{ctx['clock']['first']:.3f}, then every ply to 21...Qg4+ on 'hand' {ctx['clock']['last']:.3f}; the clocks stop on 'let' "
          f"{ctx['clock']['stop']:.3f} without a press). Drums out until {ctx['clock']['back']:.3f}: there the slaps are the rhythm "
-         "(one level for the phase, about 12 dB under the song); once the drums return they drop to about 18 dB under. "
+         "(one level for the phase; measured median "
+         f"{np.median([r['margin_median_db'] for r in rows if r['group'] == 'clock_out']):.1f} dB under the song); once the drums "
+         f"return they drop back (median {np.median([r['margin_median_db'] for r in rows if r['group'] == 'clock_back']):.1f} dB under). "
          "Jade (White) is panned left and a little rounder; teal-tips (Black) right, harder and brighter. 9.Qxg7 on 'spark' gets +2 dB "
          "and a few spark ticks (the sparks off the clock). Every slap is also held 7 dB under the sung bridge vocal where it lands "
          "in a word, so the levels below vary press by press.\n",

@@ -1430,3 +1430,11 @@
 {"ts": "2026-10-27T06:51:08Z", "model": "bytedance/seedance-2.5", "tag": "t2_C203L_sd25_n2", "job": "holdfire/t2_C203L_sd25_n2-a7e2c27f56", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
 {"ts": "2026-10-27T07:58:20Z", "model": "google/nano-banana-pro", "tag": "t2_BR_hand_reach_nbp", "job": "holdfire/t2_BR_hand_reach_nbp-2d518e4db0", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-27T07:59:23Z", "model": "bytedance/seedance-2.0", "tag": "t2_C103L_LS_sd20_t1", "job": "holdfire/t2_C103L_LS_sd20_t1-99bc3b9e1b", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:24Z", "model": "bytedance/seedance-2.0", "tag": "t2_C103R_LS_sd20_t1", "job": "holdfire/t2_C103R_LS_sd20_t1-112c40e641", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:25Z", "model": "bytedance/seedance-2.0", "tag": "t2_C203L_LS_sd20_t1", "job": "holdfire/t2_C203L_LS_sd20_t1-a6ccd8437e", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:26Z", "model": "bytedance/seedance-2.0", "tag": "t2_C203R_LS_sd20_t1", "job": "holdfire/t2_C203R_LS_sd20_t1-cfd73d912c", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:26Z", "model": "bytedance/seedance-2.0", "tag": "t2_C209R_LS_sd20_t1", "job": "holdfire/t2_C209R_LS_sd20_t1-c9051faf5d", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:27Z", "model": "bytedance/seedance-2.0", "tag": "t2_C103L_LS_sd20_t2", "job": "holdfire/t2_C103L_LS_sd20_t2-7e9fd495b9", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:28Z", "model": "bytedance/seedance-2.0", "tag": "t2_C103R_LS_sd20_t2", "job": "holdfire/t2_C103R_LS_sd20_t2-0f9803f544", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:29Z", "model": "bytedance/seedance-2.0", "tag": "t2_C203L_LS_sd20_t2", "job": "holdfire/t2_C203L_LS_sd20_t2-88597e003b", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}
+{"ts": "2026-10-27T07:59:30Z", "model": "bytedance/seedance-2.0", "tag": "t2_C203R_LS_sd20_t2", "job": "holdfire/t2_C203R_LS_sd20_t2-aef6e04ff3", "event": "submit", "ok": null, "est_usd": 0.6, "where": "cloud"}

@@ -155,3 +155,9 @@ No paid generation in this pass ($0 of the $30).
 
 ## Director, after polish pass 2
 - CO01/OU12 catchlight: the new pale-blue disc sits on top of the plate's white catchlight and reads as a big double bubble. Recolour the existing white catchlight to pale blue #8EC5FF in place (same size and shape, keep a tiny white core), no extra disc.
+
+## Director, on the lyric layer (first look)
+- V101: "WITH SALT IN OUR LUNGS" tucks under THE SEA; give it its own clear line below the hero.
+- 24.0–25.4 the words pressed into the dusty road read low-contrast on a phone; deepen the emboss/shadow or add a faint ink fill.
+- 27.9 "SEEDS I…" sits on the bottom edge; lift it into the safe area.
+- Check every lyric line at 540p on the next full render: legible in under a second, never over a face.

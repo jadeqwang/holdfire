@@ -203,9 +203,12 @@ const brush = {
     const ink = o.ink || '#16120e';
     for (const it of items) {
       const s = it.st;
-      if (s.pre) { if (o.ghost) { g.globalAlpha = o.ghost * E.line; g.fillStyle = ink; fillWord(g, it); } continue; }
+      const gh = o.ghost ?? 0.13;
+      if (s.write < 1 && gh) { g.globalAlpha = gh * E.line; g.fillStyle = ink; fillWord(g, it); }
+      if (s.pre) continue;
       g.save(); clipWrite(g, it, s.write, size, 8);
       g.globalAlpha = E.line; g.fillStyle = ink; g.strokeStyle = ink;
+      g.lineWidth = size * 0.035; g.lineJoin = 'round'; g.strokeText(it.w.text, it.ax, it.ay);
       if (s.f < 2) {   // soaked blot, then settling
         g.filter = `blur(${((s.f === 0 ? 2.6 : 0.9) * E.res).toFixed(2)}px)`; g.lineWidth = s.f === 0 ? 3 : 1.2; g.strokeText(it.w.text, it.ax, it.ay);
       }
@@ -243,7 +246,7 @@ const terminal = {
     let cursor = null;
     for (const it of items) {
       const s = it.st, txt = it.w.text;
-      if ((o.ghost ?? 0) > 0 && s.write < 1) { g.globalAlpha = o.ghost * E.line; g.fillStyle = col; fillWord(g, it); }
+      if ((o.ghost ?? 0.22) > 0 && s.write < 1) { g.globalAlpha = (o.ghost ?? 0.22) * E.line; g.fillStyle = col; fillWord(g, it); }
       if (s.pre) continue;
       const n = Math.ceil(s.write * txt.length), shown = txt.slice(0, n);
       g.globalAlpha = E.line; g.fillStyle = s.hot > 0.6 && o.hotCol ? o.hotCol : col; g.fillText(shown, it.ax, it.ay);
@@ -267,6 +270,17 @@ const typewriter = {
   draw(E) {
     const { g, size, o, items } = E;
     const ink = o.ink || '#b0261c';
+    if (o.tape) {   // a strip of teletype paper behind the rows, torn at both ends
+      g.save(); g.globalAlpha = E.line; g.fillStyle = o.paper || '#ece6d6';
+      for (const r of E.rows) {
+        const x0 = r.x0 - size * 0.6, x1 = r.x0 + r.width + size * 0.6, y0 = r.y - size * 0.95, y1 = r.y + size * 0.42;
+        g.beginPath(); g.moveTo(x0, y0);
+        for (let k = 0; k <= 8; k++) g.lineTo(x1 + (hash2(k, r.y) - 0.5) * size * 0.25, y0 + (y1 - y0) * k / 8);
+        for (let k = 8; k >= 0; k--) g.lineTo(x0 + (hash2(k + 20, r.y) - 0.5) * size * 0.25, y0 + (y1 - y0) * k / 8);
+        g.closePath(); g.fill();
+      }
+      g.restore();
+    }
     for (const it of items) {
       const s = it.st;
       if (s.pre) { if (o.ghost) { g.globalAlpha = o.ghost * E.line; g.fillStyle = ink; fillWord(g, it); } continue; }
@@ -323,7 +337,7 @@ const chalk = {
     g.lineJoin = 'round'; g.lineWidth = size * 0.035; g.strokeStyle = col; g.fillStyle = col;
     for (const it of items) {
       const s = it.st;
-      if (s.write < 1) { g.globalAlpha = (o.ghost ?? 0.16) * E.line; fillWord(g, it); }
+      if (s.write < 1) { g.globalAlpha = (o.ghost ?? 0.24) * E.line; fillWord(g, it); }
       if (s.pre) continue;
       g.save(); clipWrite(g, it, s.write, size, 6); g.globalAlpha = E.line; g.strokeText(it.w.text, it.ax, it.ay); fillWord(g, it); g.restore();
     }
@@ -373,7 +387,7 @@ const poster = {
     if (band !== 'none') for (const r of rows) {
       const x0 = r.x0 - size * 0.32, w = (r.width + size * 0.64) * wipe, y0 = r.y - size * 0.95, h = size * 1.18, sk = size * 0.22;
       g.save(); g.globalAlpha = E.line; g.fillStyle = band; g.beginPath(); g.moveTo(x0 + sk, y0); g.lineTo(x0 + w + sk, y0); g.lineTo(x0 + w, y0 + h); g.lineTo(x0, y0 + h); g.closePath(); g.fill();
-      g.clip(); g.globalAlpha = E.line * 0.22; g.fillStyle = g.createPattern(dotsTile(6), 'repeat'); g.fillStyle = 'rgba(0,0,0,0.25)'; g.restore();
+      g.restore();
     }
     for (const it of items) {
       const s = it.st;
@@ -421,6 +435,7 @@ const glass = {
   draw(E) {
     const { g, size, o, items } = E;
     const ink = o.ink || '#1f2bd1';
+    if (o.halo) { g.save(); g.lineJoin = 'round'; g.strokeStyle = o.halo; g.lineWidth = size * 0.3; g.globalAlpha = 0.85 * E.line; for (const it of items) g.strokeText(it.w.text, it.ax, it.ay); g.restore(); }
     for (const it of items) {
       const s = it.st;
       if (s.write < 1) { g.globalAlpha = (o.ghost ?? 0.22) * E.line; g.fillStyle = ink; fillWord(g, it); }

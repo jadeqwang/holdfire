@@ -5,6 +5,7 @@ import { AudioMap } from './audio.js';
 import { TypeLayer, loadFonts } from './type.js';
 import * as mainTimeline from './timeline.js';
 import { SCENES } from './scenes/index.js';
+import * as lyrics2 from './lyrics2.js';   // [lyrics2 hook] the in-world lyric layer (docs/take2/LYRICS.md)
 
 const qs = new URLSearchParams(location.search);
 const W = Number(qs.get('w') || 1920), H = Number(qs.get('h') || 1080);
@@ -31,6 +32,9 @@ async function boot() {
   const shots = TL.buildTimeline(audio);
   const ctx = { engine, audio, type, W, H, S: engine.S, state: {} };
   for (const s of Object.values(SCENES)) if (s.init) await s.init(ctx);
+  // [lyrics2 hook] the in-world lyric layer: ?lyrics2=0 (or window.__lyrics2 = false) turns it off and gives the edit's subtitles back
+  if (qs.get('lyrics2') === '0') window.__lyrics2 = false;
+  await lyrics2.init(ctx, shots);
   Object.assign(state, { engine, audio, type, shots, ctx, globalPost: TL.buildGlobalPost ? TL.buildGlobalPost(audio) : null });
   window.__shots = shots.map((s) => ({ id: s.id, t0: s.t0, t1: s.t1, scene: s.scene }));
 }
@@ -64,6 +68,7 @@ async function renderAt(t) {
     type.begin();
     if (scene.type) scene.type(type, t, lt, shot, ctx);
     if (shot.type) shot.type(type, t, lt, shot, ctx);
+    if (window.__lyrics2 !== false) lyrics2.draw(type, t, ctx);   // [lyrics2 hook] after the shot's own type
     const look = typeof shot.look === 'function' ? shot.look(t, lt, ctx) : (shot.look || {});
     const g = state.globalPost ? state.globalPost(t, shot) : {};
     const post = { ...look };

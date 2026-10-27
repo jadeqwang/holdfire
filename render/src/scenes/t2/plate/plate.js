@@ -24,6 +24,7 @@ export async function prepareLayer(ref, p, lt, t = lt) {
   }
   const meta = await plateMeta(src.dir);
   const f = plateFrame(meta, q, lt, t);
+  if (globalThis.__plateLog) globalThis.__plateLog.push({ dir: src.dir, f, t, lt });   // render/tools/lipcheck.mjs: the frame shown
   const [tex, matte] = await Promise.all([
     loadTex(`${src.dir}/f_${pad5(f)}.jpg`),
     q.key && meta.key ? loadTex(`${src.dir}/m_${pad5(f)}.png`) : Promise.resolve(null),

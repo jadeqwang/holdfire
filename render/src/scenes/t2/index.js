@@ -5,5 +5,6 @@ import { SCENES as CHESS } from './chess/index.js';
 import { SCENES as DATA } from './data/index.js';
 import { SCENES as HISTORY } from './history/index.js';
 import { SCENES as FX } from './fx/index.js';
+import { SCENES as LYRIC } from './lyric/index.js';
 
-export const SCENES_T2 = { ...PLATE, ...COSMOS, ...CHESS, ...DATA, ...HISTORY, ...FX };
+export const SCENES_T2 = { ...PLATE, ...COSMOS, ...CHESS, ...DATA, ...HISTORY, ...FX, ...LYRIC };

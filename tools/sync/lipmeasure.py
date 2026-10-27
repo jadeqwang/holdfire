@@ -129,9 +129,10 @@ def measure(pick, take, s0, win, outdir):
            'open': [round(float(x), 4) for x in o], 'boxes': [[round(float(x), 1) for x in b] for b in boxes]}
     os.makedirs(outdir, exist_ok=True)
     json.dump(res, open(os.path.join(outdir, f'{pick}.measure.json'), 'w'))
+    fmt = lambda pk: '  none ' if pk[0] is None else f'{pk[0]:+.3f}/{pk[1]:.2f}'
     subs = '  '.join(f"{s['win'][0]:.1f}:{'%+.3f' % s['best'][0] if s['best'][0] is not None else '  .  '}" for s in sub)
-    print(f"{pick:7} {os.path.basename(take)[:34]:34} best {best[0]:+.3f} (r {best[1]:.2f})  rms {res['rms'][0]:+.3f}/{res['rms'][1]:.2f}"
-          f"  voice {res['voice'][0]:+.3f}/{res['voice'][1]:.2f}\n        drift  {subs}", flush=True)
+    print(f"{pick:7} {os.path.basename(take)[:34]:34} best {fmt(best)}  rms {fmt(res['rms'])}  voice {fmt(res['voice'])}"
+          f"\n        drift  {subs}", flush=True)
     return res
 
 

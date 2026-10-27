@@ -43,7 +43,15 @@
   "styleAmt": 0.4,
   "note": "seedance-2.5 t2 on media/kf2/V201_nbp_v1crop.jpg; aref = Kim_Vocal_2 excerpt (RoFormer stem was not ready), S0 82.247, 'you' muted 82.247-82.50; metrics agree at -3 f",
   "flipX": true,
-  "mirror": "mirror rule (27 Oct): take is canon (dot on her left chest, un-mirrored) -> flipX in the renderer; world mirrored with her"
+  "mirror": "mirror rule (27 Oct): take is canon (dot on her left chest, un-mirrored) -> flipX in the renderer; world mirrored with her",
+  "lag_history": [
+   {
+    "from": -0.125,
+    "to": -0.125,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": 0
+   }
+  ]
  },
  "V206": {
   "dir": "work/plates/V206",

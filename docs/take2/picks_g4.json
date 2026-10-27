@@ -115,9 +115,17 @@
   "kind": "video",
   "src": "media/gen/t2_DR04_sd25_n3_b61e7967fa.mp4",
   "s0": 188.376,
-  "lag": 0.542,
+  "lag": 0.125,
   "lipsync": "lip round 2 (27 Oct): n3 at +0.542 (+13 f), scored as played (work/t2/lips2/DR04_strip.jpg, DR04_n3.mouthline.jpg): reframed keyframe (3/4 front, face ~21%): you / were open, the second you rounded, the long were held open to its end; Jade silent; (m6 was a profile that barely opened). Was t2_DR04_sd25_m6_ee9a78bbe4.mp4 lag -0.125.",
-  "note": "keyframe media/kf2/DR04_lip_v1.jpg (reframed: both girls 3/4 front across the glass, teal-tips in the mirrored jacket); two-shot, not flipped"
+  "note": "keyframe media/kf2/DR04_lip_v1.jpg (reframed: both girls 3/4 front across the glass, teal-tips in the mirrored jacket); two-shot, not flipped",
+  "lag_history": [
+   {
+    "from": 0.542,
+    "to": 0.125,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": 10
+   }
+  ]
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -138,10 +146,18 @@
   "kind": "video",
   "src": "media/gen/t2_DR11_sd25_m6_2dab1c396c.mp4",
   "s0": 198.628,
-  "lag": -0.167,
+  "lag": 0.5,
   "note": "mirror rule: two-shot, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR11_mir_v3.jpg (DR11_gpt.jpg with teal-tips repainted in the mirrored jacket: dot on HER right chest, the left-chest dot and left-sleeve 1420 patch erased; her right sleeve is hidden behind Jade's arm, so no patch shows), aref media/aref/DR11_v2.mp3 ('Fifty-five' choir muted). Jade sings in front, teal-tips beside her looks up, mouth closed. Was t4 (canon jacket on both).",
   "lipsync": "lag -0.167 (-4 f) as played (work/t2/lips/DR11_m6.mouthline.jpg): open on 'alone', closure before 'we', rest closure before 'never', closures between 'never'/'would've' and on the m of 'made', open on 'made' and 'here'; lipmeasure best -0.167 (rms/voice curves +0.417/+0.292 are twin peaks: at +0.292 the mouth opens before every vowel). lipcheck confirms the renderer's frames.",
-  "mirror": "two-shot exception (as DR03/DR04/DR16): teal-tips' pale-blue dot on her right chest holds through the take; no patch appears on her left sleeve"
+  "mirror": "two-shot exception (as DR03/DR04/DR16): teal-tips' pale-blue dot on her right chest holds through the take; no patch appears on her left sleeve",
+  "lag_history": [
+   {
+    "from": -0.167,
+    "to": 0.5,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -16
+   }
+  ]
  },
  "DR14": {
   "dir": "work/plates/DR14",
@@ -154,9 +170,17 @@
   "kind": "video",
   "src": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
   "s0": 207.223,
-  "lag": 1.25,
+  "lag": 0.25,
   "note": "mirror rule: two-shot at one console, NOT flipped (Jade is in it); teal-tips' dot repainted on her right chest (mirrored jacket) in media/kf2/DR16_mir_v3.jpg; Seedance 2.5 m6, lag 0.958 (you / held are open to the end, eyes open near the end)",
-  "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\""
+  "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\"",
+  "lag_history": [
+   {
+    "from": 1.25,
+    "to": 0.25,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": 24
+   }
+  ]
  },
  "OU10": {
   "dir": "work/plates/OU10",

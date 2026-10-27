@@ -206,7 +206,15 @@
   "s0": 56.371,
   "lag": -0.125,
   "lipsync": "lip round 2 (27 Oct): n3 at -0.125 (-3 f), scored as played (work/t2/lips2/C103L_strip.jpg, C103L_n3.mouthline.jpg): b closed, open on but, f on if, rounded you, held are open to the stem's own breath at ~60.0, I'm open + m closed, counting/on/you articulated (t4 closed mid-are and never closed the m). Was t2_C103L_sd25_t4_62f94118e2.mp4 lag -0.375.",
-  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
+  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror",
+  "lag_history": [
+   {
+    "from": -0.125,
+    "to": -0.125,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": 0
+   }
+  ]
  },
  "C103L_LS": {
   "dir": "work/plates/C103L_LS",
@@ -225,10 +233,18 @@
   "kind": "video",
   "src": "media/gen/t2_C103R_sd25_n3_9e6dc9fe64.mp4",
   "s0": 56.371,
-  "lag": -0.083,
+  "lag": 0.0833,
   "flipX": true,
   "lipsync": "lip round 2 (27 Oct): n3 at -0.083 (-2 f), scored as played (work/t2/lips2/C103R_strip.jpg, C103R_n3.mouthline.jpg): b closed, f on if, rounded you, held are open, I'm open + m closed, counting/on/you articulated; mirrors C103L n3 on the same 1.35x crop. Was t2_C103R_sd25_m6_03f90610a1.mp4 lag 0.0.",
-  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
+  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror",
+  "lag_history": [
+   {
+    "from": -0.083,
+    "to": 0.0833,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -4
+   }
+  ]
  },
  "C103R_LS": {
   "dir": "work/plates/C103R_LS",
@@ -248,10 +264,18 @@
   "kind": "video",
   "src": "media/gen/t2_C108_sd25_m8_6811637e11.mp4",
   "s0": 64.289,
-  "lag": 0.125,
+  "lag": 0.375,
   "flipX": true,
   "note": "mirror rule: Seedance 2.5 m8 on media/kf2/C108_mir_nbp_v2.jpg (canon, right side to camera: dot on the far side, no patch visible; room A cool), flipped; lag 0.042 (best = rms) by mouthline: white / noise / breathe / somewhere open on the voiced peaks",
-  "lipsync": "lip round 2: +0.125 (was +0.042) on the corrected mouth box: somewhere opens on its vowel, b of breathe and m of somewhere shut; ties -> larger"
+  "lipsync": "lip round 2: +0.125 (was +0.042) on the corrected mouth box: somewhere opens on its vowel, b of breathe and m of somewhere shut; ties -> larger",
+  "lag_history": [
+   {
+    "from": 0.125,
+    "to": 0.375,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -6
+   }
+  ]
  },
  "C109": {
   "dir": "work/plates/C109",
@@ -281,9 +305,17 @@
   "kind": "video",
   "src": "media/gen/t2_C203L_sd25_n2_a7e2c27f56.mp4",
   "s0": 117.637,
-  "lag": 0.25,
+  "lag": 0.5,
   "lipsync": "lip round 2 (27 Oct): n2 at +0.250 (+6 f), scored as played (work/t2/lips2/C203L_strip.jpg, C203L_n2.mouthline.jpg): b closed, open on but, rounded you, held are open throughout, m of I'm closed, counting open; r 0.33 (rms 0.49) at +0.25 (t3 closed mid-are, m open). Was t2_C203L_sd25_t3_6c8ad4c084.mp4 lag -0.042.",
-  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
+  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror",
+  "lag_history": [
+   {
+    "from": 0.25,
+    "to": 0.5,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -6
+   }
+  ]
  },
  "C203L_LS": {
   "dir": "work/plates/C203L_LS",
@@ -302,10 +334,18 @@
   "kind": "video",
   "src": "media/gen/t2_C203R_sd25_n1_e8e3c679cc.mp4",
   "s0": 117.637,
-  "lag": -0.167,
+  "lag": 0.25,
   "flipX": true,
   "lipsync": "lip round 2 (27 Oct): n1 at -0.167 (-4 f), scored as played (work/t2/lips2/C203R_strip.jpg, C203R_n1.mouthline.jpg): b closed, f on if, rounded you, held are open throughout, I'm open + m closed, counting/on/you articulated (m8 idled 1 s and its are opened early, closed before its end). Was t2_C203R_sd25_m8_02a2f13a41.mp4 lag 1.0.",
-  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
+  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror",
+  "lag_history": [
+   {
+    "from": -0.167,
+    "to": 0.25,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -10
+   }
+  ]
  },
  "C203R_LS": {
   "dir": "work/plates/C203R_LS",
@@ -325,26 +365,50 @@
   "kind": "video",
   "src": "media/gen/t2_C208L_sd25_t2_6669650da7.mp4",
   "s0": 125.524,
-  "lag": 0.042,
-  "lipsync": "lipsync pass 27 Oct: +0.042 confirmed (closures on the b of \"breathe\" and the m of \"somewhere\"); regens t3/t4 not better"
+  "lag": 0.2083,
+  "lipsync": "lipsync pass 27 Oct: +0.042 confirmed (closures on the b of \"breathe\" and the m of \"somewhere\"); regens t3/t4 not better",
+  "lag_history": [
+   {
+    "from": 0.042,
+    "to": 0.2083,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -4
+   }
+  ]
  },
  "C208R": {
   "dir": "work/plates/C208R",
   "kind": "video",
   "src": "media/gen/t2_C208R_sd25_m6_ac2e706ee6.mp4",
   "s0": 125.524,
-  "lag": -0.25,
+  "lag": 0.0,
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m6 on media/kf2/C208R_mir_nbp_v2.jpg = Jade's C208L_v2 studio pose, teal-tips swapped in, cool; flipped (the edit's own p also sets flipX: true); lag -0.25 (voice r .58, strip)"
+  "note": "mirror rule: Seedance 2.5 m6 on media/kf2/C208R_mir_nbp_v2.jpg = Jade's C208L_v2 studio pose, teal-tips swapped in, cool; flipped (the edit's own p also sets flipX: true); lag -0.25 (voice r .58, strip)",
+  "lag_history": [
+   {
+    "from": -0.25,
+    "to": 0.0,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -6
+   }
+  ]
  },
  "C209L": {
   "dir": "work/plates/C209L",
   "kind": "video",
   "src": "media/gen/t2_C209L_sd25_n1_5992390d36.mp4",
   "s0": 128.098,
-  "lag": 0.5,
+  "lag": 0.75,
   "lipsync": "lip round 2 (27 Oct): n1 at +0.500 (+12 f), scored as played (work/t2/lips2/C209L_strip.jpg, C209L_n1.mouthline.jpg): opens on If and shuts before you, you rounded on the stem's peak, are opens on its onset and stays open to the cut (t2 closed three times inside are). Was t2_C209L_sd25_t2_22438bdadd.mp4 lag 0.833.",
-  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
+  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror",
+  "lag_history": [
+   {
+    "from": 0.5,
+    "to": 0.75,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -6
+   }
+  ]
  },
  "C209R": {
   "dir": "work/plates/C209R",
@@ -650,9 +714,17 @@
   "kind": "video",
   "src": "media/gen/t2_DR04_sd25_n3_b61e7967fa.mp4",
   "s0": 188.376,
-  "lag": 0.542,
+  "lag": 0.125,
   "lipsync": "lip round 2 (27 Oct): n3 at +0.542 (+13 f), scored as played (work/t2/lips2/DR04_strip.jpg, DR04_n3.mouthline.jpg): reframed keyframe (3/4 front, face ~21%): you / were open, the second you rounded, the long were held open to its end; Jade silent; (m6 was a profile that barely opened). Was t2_DR04_sd25_m6_ee9a78bbe4.mp4 lag -0.125.",
-  "note": "keyframe media/kf2/DR04_lip_v1.jpg (reframed: both girls 3/4 front across the glass, teal-tips in the mirrored jacket); two-shot, not flipped"
+  "note": "keyframe media/kf2/DR04_lip_v1.jpg (reframed: both girls 3/4 front across the glass, teal-tips in the mirrored jacket); two-shot, not flipped",
+  "lag_history": [
+   {
+    "from": 0.542,
+    "to": 0.125,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": 10
+   }
+  ]
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -673,10 +745,18 @@
   "kind": "video",
   "src": "media/gen/t2_DR11_sd25_m6_2dab1c396c.mp4",
   "s0": 198.628,
-  "lag": -0.167,
+  "lag": 0.5,
   "note": "mirror rule: two-shot, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR11_mir_v3.jpg (DR11_gpt.jpg with teal-tips repainted in the mirrored jacket: dot on HER right chest, the left-chest dot and left-sleeve 1420 patch erased; her right sleeve is hidden behind Jade's arm, so no patch shows), aref media/aref/DR11_v2.mp3 ('Fifty-five' choir muted). Jade sings in front, teal-tips beside her looks up, mouth closed. Was t4 (canon jacket on both).",
   "lipsync": "lag -0.167 (-4 f) as played (work/t2/lips/DR11_m6.mouthline.jpg): open on 'alone', closure before 'we', rest closure before 'never', closures between 'never'/'would've' and on the m of 'made', open on 'made' and 'here'; lipmeasure best -0.167 (rms/voice curves +0.417/+0.292 are twin peaks: at +0.292 the mouth opens before every vowel). lipcheck confirms the renderer's frames.",
-  "mirror": "two-shot exception (as DR03/DR04/DR16): teal-tips' pale-blue dot on her right chest holds through the take; no patch appears on her left sleeve"
+  "mirror": "two-shot exception (as DR03/DR04/DR16): teal-tips' pale-blue dot on her right chest holds through the take; no patch appears on her left sleeve",
+  "lag_history": [
+   {
+    "from": -0.167,
+    "to": 0.5,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -16
+   }
+  ]
  },
  "DR14": {
   "dir": "work/plates/DR14",
@@ -689,9 +769,17 @@
   "kind": "video",
   "src": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
   "s0": 207.223,
-  "lag": 1.25,
+  "lag": 0.25,
   "note": "mirror rule: two-shot at one console, NOT flipped (Jade is in it); teal-tips' dot repainted on her right chest (mirrored jacket) in media/kf2/DR16_mir_v3.jpg; Seedance 2.5 m6, lag 0.958 (you / held are open to the end, eyes open near the end)",
-  "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\""
+  "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\"",
+  "lag_history": [
+   {
+    "from": 1.25,
+    "to": 0.25,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": 24
+   }
+  ]
  },
  "OU10": {
   "dir": "work/plates/OU10",
@@ -859,23 +947,39 @@
   "kind": "video",
   "src": "media/gen/t2_P105_sd25_m6_5c9b5e216f.mp4",
   "s0": 45.715,
-  "lag": 0.333,
+  "lag": 0.4167,
   "lipsync": "lip round 2: +0.333 (was 0) on the corrected mouth box (the old box sat on her chin): rms/voice/sub-windows all +0.333, r 0.56; Hear / know / we're / awake open on the stem's peaks, a frame early at most",
   "flipX": true,
-  "note": "mirror rule (27 Oct): Seedance 2.5 m6 on media/kf2/P105_mir_v2.jpg (canon jacket, room A geometry, cool), flipped; lag 0 (know / we're peaks on the voiced curve; m5's +1.25 was the pre-roll)"
+  "note": "mirror rule (27 Oct): Seedance 2.5 m6 on media/kf2/P105_mir_v2.jpg (canon jacket, room A geometry, cool), flipped; lag 0 (know / we're peaks on the voiced curve; m5's +1.25 was the pre-roll)",
+  "lag_history": [
+   {
+    "from": 0.333,
+    "to": 0.4167,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -2
+   }
+  ]
  },
  "P106": {
   "dir": "work/plates/P106",
   "kind": "video",
   "src": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4",
   "s0": 47.432,
-  "lag": 1.958,
+  "lag": 2.375,
   "note": "mirror rule: Seedance 2.5 m5 on media/kf2/P106_mir_v2.jpg, flipped; she idles eyes-closed ~2 s, opens her eyes with the held note at clip 2.33 s: lag 1.958 puts the eyes opening 2 frames after the cut on awake (47.73); mouth open on the held note to the shot end (clip 3.76)",
   "flipX": true,
   "zoom": 1.3,
   "pan": [
    0.0,
    160.0
+  ],
+  "lag_history": [
+   {
+    "from": 1.958,
+    "to": 2.375,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": -10
+   }
   ]
  },
  "P107": {
@@ -1167,7 +1271,15 @@
   "styleAmt": 0.4,
   "note": "seedance-2.5 t2 on media/kf2/V201_nbp_v1crop.jpg; aref = Kim_Vocal_2 excerpt (RoFormer stem was not ready), S0 82.247, 'you' muted 82.247-82.50; metrics agree at -3 f",
   "flipX": true,
-  "mirror": "mirror rule (27 Oct): take is canon (dot on her left chest, un-mirrored) -> flipX in the renderer; world mirrored with her"
+  "mirror": "mirror rule (27 Oct): take is canon (dot on her left chest, un-mirrored) -> flipX in the renderer; world mirrored with her",
+  "lag_history": [
+   {
+    "from": -0.125,
+    "to": -0.125,
+    "by": "Jade lip-sync picker 27 Oct",
+    "k": 0
+   }
+  ]
  },
  "V206": {
   "dir": "work/plates/V206",

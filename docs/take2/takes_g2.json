@@ -1494,6 +1494,20 @@
    "verdict": "alt: a barely-open 'a' for ~0.7 s, 'wake' opens late (frame ~82); irises read grey-green",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "up_P106_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_P106_fluxp-1872248ff9",
+   "src": "media/gen/t2_P106_sd25_w2_de406600dc.mp4",
+   "file": "media/gen/up_P106_fluxp_1872248ff9.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "P106"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C201R": [

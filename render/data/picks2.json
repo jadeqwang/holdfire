@@ -1032,7 +1032,9 @@
     "by": "retake w2 (Jade v6: lips read 'awaawake'), 27 Oct",
     "take_was": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4"
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_P106_fluxp_1872248ff9.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "P107": {
   "dir": "work/plates/P107",

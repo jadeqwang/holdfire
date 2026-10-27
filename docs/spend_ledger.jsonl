@@ -1428,3 +1428,4 @@
 {"ts": "2026-10-27T06:49:00Z", "model": "bytedance/seedance-2.5", "tag": "t2_C203R_sd25_n1", "job": "holdfire/t2_C203R_sd25_n1-e8e3c679cc", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
 {"ts": "2026-10-27T06:50:05Z", "model": "bytedance/seedance-2.5", "tag": "t2_C203L_sd25_n3", "job": "holdfire/t2_C203L_sd25_n3-d1c6eed33f", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
 {"ts": "2026-10-27T06:51:08Z", "model": "bytedance/seedance-2.5", "tag": "t2_C203L_sd25_n2", "job": "holdfire/t2_C203L_sd25_n2-a7e2c27f56", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T07:58:20Z", "model": "google/nano-banana-pro", "tag": "t2_BR_hand_reach_nbp", "job": "holdfire/t2_BR_hand_reach_nbp-2d518e4db0", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}

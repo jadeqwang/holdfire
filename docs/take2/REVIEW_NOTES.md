@@ -215,8 +215,8 @@ Source: `docs/reviews/t2_v3_review_summary.md` (DR11 was already fixed there). S
 `work/t2/polish4_sheets/fixed_0…1.jpg` (every fixed moment, 960×540, laid out at 480 px wide = a phone); every lyric line at a
 quarter and at 70 % of its window (134 stills, phone-width sheets); full pass every 1 s (247 stills, sheets of 36); 12-frame motion
 strips `work/t2/polish4_sheets/m_225.0 … m_227.6.jpg` (counter) and `m_110.0 … m_111.9.jpg` (coins / tree). check_cuts: 0 cuts off
-onset, coverage OK, no type rule breaks; chess_check OK; plate_windows: C103L (1 frame) and DR11's vanish hold, as before; lipcheck
-below. No lag changed, $0 generation.
+onset, coverage OK, no type rule breaks; chess_check OK; plate_windows: C103L (1 frame) and DR11's vanish hold, as before; lipcheck:
+16 picks, 0 mismatches. No lag changed, $0 generation.
 
 **Fixed**
 - Lyric legibility (systemic, `lyric/styles.js`): unsung words now wait at ≥ 50 % in the line's own ink (`GHOST`; was 13–32 %, or

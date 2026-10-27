@@ -2940,13 +2940,13 @@
  {
   "id": "BR02",
   "t0": 146.111,
-  "t1": 146.744,
+  "t1": 146.902,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
-  "lyric": "every",
+  "lyric": "every hunter",
   "voice": "A",
-  "picture": "Teal-tips Jade's hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 (5...Ba5 lands on the cut back to the board)",
+  "picture": "Teal-tips Jade's hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 on the beat, lets go, and the cut back to the board comes a sixteenth later",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -2963,12 +2963,12 @@
  },
  {
   "id": "BR02b",
-  "t0": 146.744,
+  "t0": 146.902,
   "t1": 147.365,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
-  "lyric": "hunter",
+  "lyric": null,
   "voice": "A",
   "picture": "Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
@@ -2978,9 +2978,9 @@
   "type": null,
   "lipsync_window": null,
   "anchor": {
-   "kind": "beat",
-   "ref": "beat after 2:26.1 (5...Ba5)",
-   "t": 146.744
+   "kind": "sixteenth",
+   "ref": "a sixteenth after 5...Ba5 lands (the hand lets go of the bishop first)",
+   "t": 146.902
   },
   "plan": null,
   "notes": null

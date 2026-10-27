@@ -789,9 +789,9 @@ export function buildTimeline(A) {
       { pos: [1.45, 3.1, 0.0], target: [5.8, 0.8, 0.0], fov: 36 }, [{ side: 'b', press: 'start' }, { side: 'w', press: '1.e4' }]));
   S(null, eighth('2:23.9'), { ...chess('Premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit'), sub: 'b' });
   const brBa5 = nearest(BEATS, tB1 + 0.62), holdsW = wd('BR', 1, 'holds'), breathW = wd('BR', 1, 'breath');
-  S('2:26.1', beat('2:26.1'), handShot('Teal-tips Jade\'s hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 (5...Ba5 lands on the cut back to the board)',
+  S('2:26.1', beat('2:26.1'), handShot('Teal-tips Jade\'s hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 on the beat, lets go, and the cut back to the board comes a sixteenth later',
     { pos: [-8.6, 3.0, 0.3], target: [-2.8, 1.3, 0.0], fov: 30 }, [{ side: 'b', move: '5...Ba5' }]));
-  S(null, { t: brBa5, kind: 'beat', ref: 'beat after 2:26.1 (5...Ba5)' }, { ...chess('Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)'), sub: 'b' });
+  S(null, { t: SIXTEENTHS.find((x) => x > brBa5 + 0.05), kind: 'sixteenth', ref: 'a sixteenth after 5...Ba5 lands (the hand lets go of the bishop first)' }, { ...chess('Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)'), sub: 'b' });
   S(null, holdsW, { ...brPlate('BR_faceW', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW; framed above the plate\'s board edge)'), sub: 'c' });
   S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB; framed above the plate\'s board edge)'), sub: 'd' });
   S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));
@@ -807,7 +807,7 @@ export function buildTimeline(A) {
   // check, Jade's hand over her king with its one legal move)
   { const relT = wd('BR', 5, 'let').t - 0.17;
     S(null, wd('BR', 5, 'that'), { ...handShot('Both Jades take their hands off the pieces ("that can let go"): teal-tips Jade lets go of the checking queen, Jade pulls back from her king; neither one wins',
-      { pos: [8.6, 3.3, 1.05], target: [2.3, 0.7, 1.0], fov: 33 }, [{ side: 'b', hold: 'g4', release: relT }, { side: 'w', hold: 'g2', hover: true, release: relT + 0.03 }]), sub: 'b' }); }
+      { pos: [7.6, 6.6, 1.0], target: [1.9, 0.9, 1.0], fov: 36 }, [{ side: 'b', hold: 'g4', release: relT }, { side: 'w', hold: 'g2', hover: true, release: relT + 0.03 }]), sub: 'b' }); }
   // the dive into the black queen ends on a flat 360 px #101010 square on #F1E8D6, the frame t2_poster_morph opens on: the dive's
   // window ends exactly on the poster shot's cut ("go"), and the poster's square0 matches the dive's size
   const letW = wd('BR', 5, 'let'), goW = wd('BR', 5, 'go'), sixty2 = wd('BR', 6, 'sixty-two');

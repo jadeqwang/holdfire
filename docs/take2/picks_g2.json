@@ -45,6 +45,38 @@
   "in": 0.0,
   "rate": 1.0
  },
+ "BR_hand_pinch": {
+  "dir": "render/assets/t2/hands",
+  "kind": "sprite",
+  "src": "media/gen/t2_BR_hand_pinch_nbp_8baef4445c.jpg",
+  "file": "render/assets/t2/hands/pinch.png",
+  "key": "green (keyed to RGBA; anchors in render/assets/t2/hands/hands.json)",
+  "use": "BR01 / BR02 / BR11b hand shots (t2_chess handTracks)"
+ },
+ "BR_hand_press": {
+  "dir": "render/assets/t2/hands",
+  "kind": "sprite",
+  "src": "media/gen/t2_BR_hand_press_nbp_47cf7f8328.jpg",
+  "file": "render/assets/t2/hands/press.png",
+  "key": "green (keyed to RGBA; anchors in render/assets/t2/hands/hands.json)",
+  "use": "BR01 / BR02 / BR11b hand shots (t2_chess handTracks)"
+ },
+ "BR_hand_reach": {
+  "dir": "render/assets/t2/hands",
+  "kind": "sprite",
+  "src": "media/gen/t2_BR_hand_reach_nbp_v2_fab39e8697.jpg",
+  "file": "render/assets/t2/hands/reach.png",
+  "key": "green (keyed to RGBA; anchors in render/assets/t2/hands/hands.json)",
+  "use": "BR01 / BR02 / BR11b hand shots (t2_chess handTracks)"
+ },
+ "BR_hand_release": {
+  "dir": "render/assets/t2/hands",
+  "kind": "sprite",
+  "src": "media/gen/t2_BR_hand_release_nbp_v2_99de39d389.jpg",
+  "file": "render/assets/t2/hands/release.png",
+  "key": "green (keyed to RGBA; anchors in render/assets/t2/hands/hands.json)",
+  "use": "BR01 / BR02 / BR11b hand shots (t2_chess handTracks)"
+ },
  "C101": {
   "dir": "work/plates/C101",
   "kind": "video",

@@ -1,62 +1,7 @@
 {
- "pinch": {
-  "file": "pinch.png",
-  "grip": [
-   1125,
-   432
-  ],
-  "wrist": [
-   790,
-   310
-  ],
-  "cut": [
-   0,
-   300
-  ]
- },
- "reach": {
-  "file": "pinch.png",
-  "grip": [
-   1125,
-   432
-  ],
-  "wrist": [
-   790,
-   310
-  ],
-  "cut": [
-   0,
-   300
-  ]
- },
- "release": {
-  "file": "pinch.png",
-  "grip": [
-   1125,
-   432
-  ],
-  "wrist": [
-   790,
-   310
-  ],
-  "cut": [
-   0,
-   300
-  ]
- },
- "press": {
-  "file": "press.png",
-  "grip": [
-   1200,
-   570
-  ],
-  "wrist": [
-   790,
-   310
-  ],
-  "cut": [
-   0,
-   300
-  ]
- }
+ "_": "cut-out arm sprites (nano-banana-pro on chroma green, keyed; media/gen/t2_BR_hand_*_nbp*.jpg + .txt prompts). Anchors in sprite px: grip = where the piece head / button sits, wrist = cuff, cut = the sleeve's cut edge (the arm axis runs grip -> cut). One right arm drawn entering from the left; hands.js mirrors it for the far side. len = sprite px per hand unit (same arm, same scale in every pose)",
+ "reach": { "file": "reach.png", "grip": [1170, 432], "wrist": [805, 315], "cut": [0, 300], "len": 360 },
+ "pinch": { "file": "pinch.png", "grip": [1125, 432], "wrist": [790, 310], "cut": [0, 300], "len": 360 },
+ "release": { "file": "release.png", "grip": [1120, 380], "wrist": [760, 300], "cut": [0, 300], "len": 360 },
+ "press": { "file": "press.png", "grip": [1200, 570], "wrist": [790, 310], "cut": [0, 300], "len": 360 }
 }

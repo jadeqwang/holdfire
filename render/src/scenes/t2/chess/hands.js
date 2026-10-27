@@ -25,7 +25,7 @@ export async function loadHands() {
   try {
     const meta = await (await fetch(BASE + 'hands.json')).json();
     const out = {};
-    await Promise.all(Object.entries(meta).map(([k, m]) => new Promise((res) => {
+    await Promise.all(Object.entries(meta).filter(([, m]) => m && m.file).map(([k, m]) => new Promise((res) => {
       const img = new Image();
       img.onload = () => { out[k] = { ...m, img }; res(); };
       img.onerror = () => res();
@@ -50,7 +50,7 @@ function headOf(ps) { return add(ps.pos, qRot(ps.q, [0, GRIP_H[ps.type] * ps.sca
 
 const sideZ = (s) => (s === 'w' ? 1 : -1);
 // where the arm comes from: the player's shoulder, beyond her edge of the board
-const shoulder = (side, grip) => [grip[0] * 0.35 + (side === 'w' ? 1.2 : -1.2), 4.4, sideZ(side) * 8.6];
+const shoulder = (side, grip) => [grip[0] * 0.35 + (side === 'w' ? 1.2 : -1.2), 3.4, sideZ(side) * 8.6];
 const retreat = (side, grip) => [lerp(grip[0], shoulder(side, grip)[0], 0.35), grip[1] + 1.6, grip[2] + sideZ(side) * 3.6];
 
 const BTN = (side) => [CLOCK_POS[0] + 0.18, 0.72, CLOCK_POS[2] + sideZ(side) * 0.68];
@@ -143,7 +143,7 @@ export function drawHands(e, hands, cam, v, o = {}) {
     const axS = flip ? Math.PI - ax : ax;
     // keep the forearm near the drawn angle (a sprite rotated far off its drawing reads wrong): soften the rotation
     let rot = ang - axS; rot = Math.atan2(Math.sin(rot), Math.cos(rot)); rot *= o.rotAmt ?? 0.75;
-    const len = Math.hypot(spr.grip[0] - spr.wrist[0], spr.grip[1] - spr.wrist[1]);
+    const len = spr.len ?? Math.hypot(spr.grip[0] - spr.wrist[0], spr.grip[1] - spr.wrist[1]);
     const k = (o.size ?? 1.35) * pxu / len;
     c.save();
     c.translate(g[0], g[1]); c.rotate(rot); c.scale(flip ? -k : k, k);

@@ -12,6 +12,9 @@
 //   fx: 1 (all effects), smash, shake, speed (speed-line gain), impact (impact frames on/off), lights (override room level 0..1),
 //   eyes (gain), sparks (gain)
 //   dive: d0 = 157.8, d1 = 158.7, size = 360 (side of the final black square, design px; = t2_poster_morph square0), cream '#F1E8D6', ink '#111010'
+//   hand shots: handTracks [{side, move: '5...Ba5'} | {side, press: 'start' | '1.e4' | t} | {side, hold: 'g4', hover?, release: t}]
+//   (hands.js: cut-out arm sprites over the true board; the moving piece is the one state.js carries, the hand holds its head),
+//   twos (the whole shot on twos, phase-locked to its first frame), smear 0 (no smear on a piece in a hand), handLook {size, gain, rotAmt}
 // }
 // Recommended look: CHESS_LOOK (no tone map: the colours are authored display-referred; the dive needs tonemap 0, bloom 0).
 import * as THREE from 'three';

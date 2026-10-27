@@ -1674,5 +1674,87 @@
    ],
    "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
   }
+ ],
+ "BR_hands": [
+  {
+   "tag": "t2_BR_hand_reach_nbp",
+   "model": "google/nano-banana-pro",
+   "job": "holdfire/t2_BR_hand_reach_nbp-2d518e4db0",
+   "kf": "media/gen/t2kf_BR_handW_aeb7fd06cf.jpg + design/take2/dot_ref_16x9.jpg",
+   "prompt_file": "media/gen/t2_BR_hand_reach_nbp.txt",
+   "file": "media/gen/t2_BR_hand_reach_nbp_2d518e4db0.jpg",
+   "dims": "2752x1536",
+   "pick": false,
+   "verdict": "reject: the handW keyframe ref bled a chessboard and a piece under the arm (not separable by the key); the arm, cleaned, became the ref for the other poses (work/t2/chesshand/ref_arm.jpg)",
+   "by": "chess hands fix (Jade note 2:26.5): sprites for the BR hand shots, $0.13 each"
+  },
+  {
+   "tag": "t2_BR_hand_release_nbp",
+   "model": "google/nano-banana-pro",
+   "job": "holdfire/t2_BR_hand_release_nbp-b67c292954",
+   "kf": "work/t2/chesshand/ref_arm.jpg + design/take2/dot_ref_16x9.jpg",
+   "prompt_file": "media/gen/t2_BR_hand_release_nbp.txt",
+   "file": "media/gen/t2_BR_hand_release_nbp_b67c292954.jpg",
+   "dims": "2752x1536",
+   "pick": false,
+   "verdict": "reject: the character sheet ref bled four faces into the bottom; the pose read as a second reach",
+   "by": "chess hands fix (Jade note 2:26.5): sprites for the BR hand shots, $0.13 each"
+  },
+  {
+   "tag": "t2_BR_hand_reach_nbp_v2",
+   "model": "google/nano-banana-pro",
+   "job": "holdfire/t2_BR_hand_reach_nbp_v2-fab39e8697",
+   "kf": "work/t2/chesshand/ref_arm.jpg",
+   "prompt_file": "media/gen/t2_BR_hand_reach_nbp_v2.txt",
+   "file": "media/gen/t2_BR_hand_reach_nbp_v2_fab39e8697.jpg",
+   "dims": "2752x1536",
+   "verdict": "PICK: clean green, the same sleeve in every pose (white, orange upper band, ribbed cuff), cel shaded; keyed -> render/assets/t2/hands/reach.png",
+   "pick": [
+    "BR_hand_reach"
+   ],
+   "by": "chess hands fix (Jade note 2:26.5): sprites for the BR hand shots, $0.13 each"
+  },
+  {
+   "tag": "t2_BR_hand_pinch_nbp",
+   "model": "google/nano-banana-pro",
+   "job": "holdfire/t2_BR_hand_pinch_nbp-8baef4445c",
+   "kf": "work/t2/chesshand/ref_arm.jpg + design/take2/dot_ref_16x9.jpg",
+   "prompt_file": "media/gen/t2_BR_hand_pinch_nbp.txt",
+   "file": "media/gen/t2_BR_hand_pinch_nbp_8baef4445c.jpg",
+   "dims": "2752x1536",
+   "verdict": "PICK: clean green, the same sleeve in every pose (white, orange upper band, ribbed cuff), cel shaded; keyed -> render/assets/t2/hands/pinch.png",
+   "pick": [
+    "BR_hand_pinch"
+   ],
+   "by": "chess hands fix (Jade note 2:26.5): sprites for the BR hand shots, $0.13 each"
+  },
+  {
+   "tag": "t2_BR_hand_release_nbp_v2",
+   "model": "google/nano-banana-pro",
+   "job": "holdfire/t2_BR_hand_release_nbp_v2-99de39d389",
+   "kf": "work/t2/chesshand/ref_arm.jpg",
+   "prompt_file": "media/gen/t2_BR_hand_release_nbp_v2.txt",
+   "file": "media/gen/t2_BR_hand_release_nbp_v2_99de39d389.jpg",
+   "dims": "2752x1536",
+   "verdict": "PICK: clean green, the same sleeve in every pose (white, orange upper band, ribbed cuff), cel shaded; keyed -> render/assets/t2/hands/release.png",
+   "pick": [
+    "BR_hand_release"
+   ],
+   "by": "chess hands fix (Jade note 2:26.5): sprites for the BR hand shots, $0.13 each"
+  },
+  {
+   "tag": "t2_BR_hand_press_nbp",
+   "model": "google/nano-banana-pro",
+   "job": "holdfire/t2_BR_hand_press_nbp-47cf7f8328",
+   "kf": "work/t2/chesshand/ref_arm.jpg + design/take2/dot_ref_16x9.jpg",
+   "prompt_file": "media/gen/t2_BR_hand_press_nbp.txt",
+   "file": "media/gen/t2_BR_hand_press_nbp_47cf7f8328.jpg",
+   "dims": "2752x1536",
+   "verdict": "PICK: clean green, the same sleeve in every pose (white, orange upper band, ribbed cuff), cel shaded; keyed -> render/assets/t2/hands/press.png",
+   "pick": [
+    "BR_hand_press"
+   ],
+   "by": "chess hands fix (Jade note 2:26.5): sprites for the BR hand shots, $0.13 each"
+  }
  ]
 }

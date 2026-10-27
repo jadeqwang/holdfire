@@ -29,8 +29,11 @@ export const qFromTo = (a, b) => {   // unit vectors
 };
 const qY = (a) => qAxis([0, 1, 0], a);
 
-// default facing: knights look to their owner's left (profile reads from both players' 3/4 views)
-export const restYaw = (pc) => (pc.p.toUpperCase() === 'N' ? (pc.p === 'N' ? Math.PI : 0) : (pc.p.toUpperCase() === 'K' ? 0 : hash1(pc.id * 7.3) * 6.283));
+// default facing: knights look to their owner's left (profile reads from both players' 3/4 views), turned 0.5 rad (~29 deg) back
+// toward their own player (RC2, QA_RC1 #5): each side's 3/4 view sees its knights 3/4 front, and no file-side camera (the 2:26
+// hand insert from the a-file) meets a knight face-on
+export const KNIGHT_TURN = 0.5;
+export const restYaw = (pc) => (pc.p.toUpperCase() === 'N' ? (pc.p === 'N' ? Math.PI + KNIGHT_TURN : KNIGHT_TURN) : (pc.p.toUpperCase() === 'K' ? 0 : hash1(pc.id * 7.3) * 6.283));
 
 // capture flights -------------------------------------------------------------------------------------------------------------
 // graveyards: captured black pieces line up on the table in front of White (z > 0), white ones in front of Black, lying down

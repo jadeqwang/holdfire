@@ -258,3 +258,10 @@ onset, coverage OK, no type rule breaks; chess_check OK; plate_windows: C103L (1
 - 0:34.1 the snowflake: a camera a little farther away would read more like "a snowflake in the boundless night".
 - 1:43.5 the near-miss list: check the news between the last entry (May 2025) and today, e.g. something at the Strait of Hormuz about a hallucinated target.
 - 2:26.5 chess: the board must match the previous frame's position, and she picks up an actual piece and makes the next move.
+
+## Jade's notes on v6 (27 Oct)
+- 0:26.1 the cuneiform should say something real if someone pauses: the lyrics, Fibonacci, or Ea-nasir's copper complaint → Fibonacci in real sexagesimal cuneiform numerals (Ea-nasir only if verifiable).
+- 0:48.2 "awake" reads like "awaawake" → P106 retake.
+- 1:50.5 stamp the non-validated years on the coins too, so a pause shows we're nearly halfway through the hundred flips.
+- 4:05.9 keep the credits on screen (no fade); put the video models on one line or two per line.
+- Approved: spend on sharpening/upscaling the 720p sung takes.

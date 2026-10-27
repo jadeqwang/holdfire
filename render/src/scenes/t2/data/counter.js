@@ -4,9 +4,9 @@
 // on the real date of every entry of the fact-checked list (render/data/t2/nearmisses.json `date`, sorted by date; entries on the
 // same day share one reset), each reset a two-frame red SIGNAL LOST and a flicker of VHS rewind lines. The resets land on a
 // 32nd-note grid taken from the beat list and come faster through the whispered count (one per sixteenth by 3:47.8), stuttering
-// to the last one, the 15 Sep 2026 entry. Past it the counter climbs to the release-date value (default 2026-10-26 -> 41),
+// to the last one, the 15 Sep 2026 entry. Past it the counter climbs to the release-date value (default 2026-10-27 -> 42),
 // digits rolling upward on "higher" (3:49.44), and keeps climbing a day per beat after that.
-// p: {release ('2026-10-26'), b0 (first grid point; default the beat at the shot start), gaps ([32nds] between resets, one per
+// p: {release ('2026-10-27'), b0 (first grid point; default the beat at the shot start), gaps ([32nds] between resets, one per
 //     reset date; default accelerating 8,8,4,3,3, 2 x13, 1 x10, then a 2 before the last), higher (default the word "higher"), climbEnd (default its end),
 //     perBeat (days added per beat after the climb, 1), hold (s the release value is held first, 1.0), push (0.06),
 //     countRate (12: between resets the board counts up from zero, a whole count every two frames, right-aligned in the ones place)}
@@ -38,7 +38,7 @@ export function schedule(audio, p, shotT0) {
   const L = lineByText(audio, 'count goes higher');
   const higher = p.higher ?? wordT(L, 'higher', resets[n - 1].t + 0.3);
   const climbEnd = p.climbEnd ?? (L && L.words.length ? (L.words[L.words.length - 1].end ?? higher + 0.58) : higher + 0.58);
-  const release = dayOf(p.release || list.release_default || '2026-10-26');
+  const release = dayOf(p.release || list.release_default || '2026-10-27');
   const target = release - resets[n - 1].day;
   SCHED = { key, epoch, t0: gridT(audio, k0), resets, higher, climbEnd, target, release };
   return SCHED;

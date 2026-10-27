@@ -379,7 +379,8 @@ const impact = {
       }
       const u = clamp((E.t - it.w.t + 0.04) / 0.13), sc = 1 + 0.75 * Math.pow(1 - u, 3);
       const rot = ((hash2(it.i + 3, 11) - 0.5) * 2 * (o.tilt ?? 4)) * Math.PI / 180;
-      const cx = it.ax + it.width / 2, cy = it.ay - size * 0.4;
+      // RC2 (QA_RC1 #9): the slam grows from the word's left edge, so it never eats the space after the word before it (LIGHTS aSPARK)
+      const cx = it.ax, cy = it.ay - size * 0.4;
       g.save(); g.translate(cx + sx, cy + sy); g.rotate(rot); g.scale(sc, sc); g.translate(-cx, -cy);
       g.globalAlpha = E.line * clamp(u * 3);
       g.fillStyle = acc; fillWord(g, it, it.ax + size * 0.07, it.ay + size * 0.07);

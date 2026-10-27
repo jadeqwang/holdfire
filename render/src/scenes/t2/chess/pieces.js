@@ -1,4 +1,5 @@
-// Staunton-ish chess pieces: lathe-turned bodies (one profile per piece), a knight head extruded from a side profile, and
+// Staunton-ish chess pieces: lathe-turned bodies (one profile per piece), a knight head extruded from a side profile and shaped
+// in thickness (ears, mane, eyes: see knight()), and
 // top details that keep the pieces legible from straight above (king's cross, queen's coronet, rook's merlons, bishop's slit).
 // Units: one board square = 1. Every geometry is non-indexed with attributes position, normal, ink (1 = drawn in ink),
 // onormal (welded smooth normals for the inverted-hull outline). PROFILES are also used flat for the dive's 2D silhouette.
@@ -31,7 +32,7 @@ export const PROFILES = {
 // crown balls of the queen (8 around the rim) and the king's cross, for the silhouette
 export const QUEEN_BALLS = { n: 8, r: 0.2, y: 1.2, size: 0.042 };
 export const KING_CROSS = { y0: 1.33, y1: 1.62, w: 0.075, arm: 0.21, armY: 1.5, armH: 0.07 };
-export const HEIGHT = { P: 0.77, R: 0.82, N: 1.0, B: 1.16, Q: 1.37, K: 1.62 };
+export const HEIGHT = { P: 0.77, R: 0.82, N: 1.1, B: 1.16, Q: 1.37, K: 1.62 };
 
 function lathe(pts) {
   const g = new THREE.LatheGeometry(pts.map(([x, y]) => new THREE.Vector2(Math.max(0, x), y)), SEG);
@@ -93,18 +94,70 @@ export const KNIGHT_HEAD = [
   [0.05, 0.89], [0.14, 0.84], [0.23, 0.72], [0.31, 0.6], [0.335, 0.53], [0.31, 0.49], [0.24, 0.48], [0.17, 0.5],
   [0.1, 0.52], [0.06, 0.47], [0.07, 0.38], [0.15, 0.3], [0.2, 0.2],
 ];
-
+// RC2 (QA_RC1 #5): the head is no longer a flat slab. Its thickness follows the anatomy (a thick neck that meets the collar, full
+// cheeks, a forehead that narrows between the ears, a tapered muzzle), it carries two pricked ears (the silhouette that reads from
+// the front and the back), a mane crest in ink down the back of the neck, ink eyes on both cheeks, nostrils and a mouth line, so the
+// knight reads as a horse from every camera (side, front, back, top, the low orbit and the hand inserts).
+const KN_HALF = 0.1;   // extrusion half depth before shaping (plus a 0.05 bevel)
+function knWidth(x, y) {   // thickness multiplier over the side profile
+  const neck = 1.38 - 0.55 * smooth01((y - 0.28) / 0.42);               // wide at the collar, easing up the neck
+  const cheek = 0.3 * Math.exp(-(((x - 0.06) / 0.13) ** 2) - (((y - 0.66) / 0.12) ** 2));
+  const brow = -0.22 * smooth01((y - 0.8) / 0.18);                      // the forehead narrows to the poll
+  const muzzle = -0.36 * smooth01((x - 0.14) / 0.2);                    // and the face to the muzzle
+  return Math.max(0.42, neck + cheek + brow + muzzle);
+}
+function smooth01(u) { const v = Math.min(1, Math.max(0, u)); return v * v * (3 - 2 * v); }
+// z scaled by s(x, y): position (x, y, z) -> (x, y, z s); normals by the inverse transpose of that map's Jacobian
+function shapeZ(g, fn) {
+  const P = g.attributes.position.array, N = g.attributes.normal.array, e = 1e-3;
+  for (let i = 0; i < P.length; i += 3) {
+    const x = P[i], y = P[i + 1], z = P[i + 2];
+    const sv = fn(x, y), sx = (fn(x + e, y) - fn(x - e, y)) / (2 * e), sy = (fn(x, y + e) - fn(x, y - e)) / (2 * e);
+    P[i + 2] = z * sv;
+    const nx = N[i], ny = N[i + 1], nz = N[i + 2];
+    const mx = nx - (z * sx / sv) * nz, my = ny - (z * sy / sv) * nz, mz = nz / sv;
+    const l = Math.hypot(mx, my, mz) || 1; N[i] = mx / l; N[i + 1] = my / l; N[i + 2] = mz / l;
+  }
+  g.attributes.position.needsUpdate = true; g.attributes.normal.needsUpdate = true;
+  return g;
+}
+// a pricked ear: a four-sided cone, tip up and a little back and out
+function ear(side) {
+  const g = new THREE.ConeGeometry(0.045, 0.13, 4, 1);
+  g.rotateY(Math.PI / 4); g.scale(1, 1, 0.65);
+  g.rotateZ(0.32); g.rotateX(-side * 0.3);
+  g.translate(-0.075, 1.03, side * 0.062);
+  return prep(g);
+}
 function knight() {
   const sh = new THREE.Shape(KNIGHT_HEAD.map(([x, y]) => new THREE.Vector2(x, y)));
-  const depth = 0.2;
-  const g = new THREE.ExtrudeGeometry(sh, { depth, bevelEnabled: true, bevelThickness: 0.045, bevelSize: 0.035, bevelSegments: 2, curveSegments: 4 });
+  const depth = KN_HALF * 2;
+  const g = new THREE.ExtrudeGeometry(sh, { depth, steps: 2, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.03, bevelSegments: 3, curveSegments: 4 });
   g.translate(0, 0, -depth / 2);
-  const head = prep(g);
-  // mane: a ridge of small blocks down the back of the neck; eyes in ink
-  const mane = [];
-  for (let i = 0; i < 4; i++) { const u = i / 3; mane.push(box(0.05, 0.1, 0.08, -0.2 - 0.035 + u * 0.09, 0.44 + u * 0.3, 0, 0, -0.5 - u * 0.4)); }
-  const eyes = [ball(0.026, 0.12, 0.74, 0.145, 1, 8, 6), ball(0.026, 0.12, 0.74, -0.145, 1, 8, 6)];
-  return merge([prep(lathe(PROFILES.N)), head, ...mane, ...eyes]);
+  const head = prep(shapeZ(g.index ? g.toNonIndexed() : g, knWidth));
+  const zAt = (x, y) => (KN_HALF + 0.05) * knWidth(x, y);   // the shaped surface's half thickness
+  // mane: a crest in ink along the back of the neck, from the poll down to the collar, its back edge cut into locks
+  const back = [[-0.045, 0.975], [-0.085, 0.9], [-0.13, 0.8], [-0.17, 0.71], [-0.2, 0.62], [-0.222, 0.53], [-0.232, 0.44], [-0.234, 0.35], [-0.225, 0.27]];
+  const nrm = back.map(([x, y], i) => {
+    const [x2, y2] = back[Math.min(back.length - 1, i + 1)], [x0, y0] = back[Math.max(0, i - 1)];
+    const tx = x2 - x0, ty = y2 - y0, l = Math.hypot(tx, ty); return [ty / l, -tx / l];    // to the back (-x side)
+  });
+  const outer = [], inner = [];
+  back.forEach(([x, y], i) => {
+    const [nx, ny] = nrm[i]; const lock = i % 2 ? 0.024 : 0.045;         // alternate locks: a combed crest
+    outer.push([x + nx * lock, y + ny * lock - (i % 2 ? 0 : 0.025)]); inner.push([x - nx * 0.012, y - ny * 0.012]);
+  });
+  const crest = new THREE.Shape([...outer, ...inner.reverse()].map(([x, y]) => new THREE.Vector2(x, y)));
+  const mg = new THREE.ExtrudeGeometry(crest, { depth: 0.06, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.008, bevelSegments: 1, curveSegments: 2 });
+  mg.translate(0, 0, -0.03);
+  const mane = [prep(mg, 1)];
+  // eyes (ink, on the cheek surface), nostrils and the mouth line
+  const ex = 0.1, ey = 0.75, ez = zAt(ex, ey);
+  const eyes = [ball(0.034, ex, ey, ez - 0.012, 1, 10, 7), ball(0.034, ex, ey, -ez + 0.012, 1, 10, 7)];
+  const nz = zAt(0.31, 0.56) * 0.55;
+  const nostrils = [ball(0.024, 0.322, 0.565, nz, 1, 8, 6), ball(0.024, 0.322, 0.565, -nz, 1, 8, 6)];
+  const mouth = [box(0.11, 0.014, zAt(0.27, 0.5) * 2 + 0.01, 0.275, 0.505, 0, 0, -0.18, 1)];
+  return merge([prep(lathe(PROFILES.N)), head, ear(1), ear(-1), ...mane, ...eyes, ...nostrils, ...mouth]);
 }
 
 export function buildGeometries() {

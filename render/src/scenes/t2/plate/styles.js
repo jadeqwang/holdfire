@@ -10,7 +10,9 @@
 // styles (params in o, all optional):
 //   riso      Rare Earth "signal print": 3 ink separations (subtractive density solve), AM screens at 3 angles, per-ink
 //             misregistration, ink mottle, paper. {inks: 'earth'|'echo'|'mirror'|[[r,g,b] x3], paper, cell 7, mis 1 (x the seeded
-//             2-3 px offsets), levels [black, white, gamma], density 0.92, angles [deg x3]}
+//             2-3 px offsets), levels [black, white, gamma], density 0.92, angles [deg x3], soft 0 (px: separate from a softened
+//             source; softDark [lo, hi]: only where the softened luma is under lo, ramping back to the sharp source by hi), minDot 0 (no dots under this coverage, no pinholes over 1 - it), screen 1 (dot contrast: < 1 eases the dots
+//             toward flat coverage), edge 1 (dot edge softness); soft/minDot/screen make a screen that survives a 12 Mb/s encode}
 //   halftone  grey newsprint: one black screen at 45 deg, unsharp mask, newsprint stock. {cell 7, levels, sharp 0.8, ink, paper, angle}
 //   newsprint red-black-cream: black + poster-red screens (red from the image's reds). {cell 8, levels, red [r,g,b], redGain 1, redAll 0,
 //             paper, ink, mis 1}
@@ -91,11 +93,31 @@ uniform sampler3D tLut; uniform float lutN;
 uniform vec3 ink0; uniform vec3 ink1; uniform vec3 ink2;
 uniform vec2 off0; uniform vec2 off1; uniform vec2 off2; uniform float mis;
 uniform float cell; uniform vec3 levels; uniform float density; uniform vec3 angles; uniform float push;
-// separation: a 3D LUT (built in JS by searching the real overprint model) maps a colour to 3 ink coverages
+uniform sampler2D tSep; uniform float minDot; uniform float screenK; uniform float edgeK;
+// separation: a 3D LUT (built in JS by searching the real overprint model) maps a colour to 3 ink coverages. tSep is the source,
+// or (o.soft) a softened copy of it, so a cell's coverage does not flicker with the plate's own noise
+uniform float softOn; uniform vec2 softDark;
 vec3 sep(vec2 q){
-  vec3 c = levelsOf(srcAt(q).rgb, levels);
+  vec3 c0 = srcAt(q).rgb;
+  vec3 c = c0;
+  if (softOn > .5) {   // softened in the darks (the plate's own grain and dot texture in the black of space); the lit subject and its lines stay sharp
+    vec3 cs = texture(tSep, vec2(q.x / 1920., 1. - q.y / 1080.)).rgb;
+    c = mix(cs, c0, smoothstep(softDark.x, softDark.y, luma(cs)));
+  }
+  c = levelsOf(c, levels);
   float l = luma(c); c = clamp(mix(vec3(l), c, push), 0., 1.);
-  return texture(tLut, c * (lutN - 1.) / lutN + .5 / lutN).rgb;
+  vec3 a = texture(tLut, c * (lutN - 1.) / lutN + .5 / lutN).rgb;
+  // a drum holds no dot under minDot (and no pinhole over 1 - minDot): no single-pixel specks boiling in flat areas
+  if (minDot > 0.) { a *= smoothstep(minDot * .5, minDot * 1.5, a); a = mix(a, vec3(1.), smoothstep(1. - minDot * 1.5, 1. - minDot * .5, a)); }
+  return a;
+}
+// the screened dot, its contrast eased toward flat coverage by screenK (1 = a hard dot, < 1 = a softer, lower-contrast screen)
+float rdot(vec2 p, float a, float ang, float rough){
+  vec2 g = rot(ang) * p / cell;
+  float s = .5 - .25 * (cos(6.2831853 * g.x) + cos(6.2831853 * g.y)) + rough;
+  float w = fwidth(s) * .7 * edgeK + 1e-4;
+  float d = a < .004 ? 0. : smoothstep(1. - a - w, 1. - a + w, s);
+  return mix(a, d, screenK);
 }
 void main(){
   vec2 q = dpx(); vec2 pp = patPx(q);
@@ -106,9 +128,9 @@ void main(){
   // ink mottle: each drum lays ink unevenly (different paper areas -> independent grain per ink)
   float g0 = paperAt(pp * .5 + vec2(311., 97.)).a, g1 = paperAt(pp * .5 + vec2(737., 513.)).a, g2 = paperAt(pp * .5 + vec2(1201., 271.)).a;
   float rough = (pa.g - .5) * .3;
-  float i0 = screenDot(pp + o0, a0, cell, angles.x, rough) * density * (.78 + .36 * g0);
-  float i1 = screenDot(pp + o1, a1, cell, angles.y, rough) * density * (.78 + .36 * g1);
-  float i2 = screenDot(pp + o2, a2, cell, angles.z, rough) * density * (.78 + .36 * g2);
+  float i0 = rdot(pp + o0, a0, angles.x, rough) * density * (.78 + .36 * g0);
+  float i1 = rdot(pp + o1, a1, angles.y, rough) * density * (.78 + .36 * g1);
+  float i2 = rdot(pp + o2, a2, angles.z, rough) * density * (.78 + .36 * g2);
   vec3 paper = paperC * pa.r;
   vec3 col = paper;
   col *= mix(vec3(1.), ink0 / paperC, clamp(i0, 0., 1.));
@@ -537,9 +559,17 @@ export function applyStyle(e, name, srcTex, target, o = {}) {
   if (name === 'riso') {
     const m = mat(e, 'riso', GLSL.riso, { ink0: { value: null }, ink1: { value: null }, ink2: { value: null }, tLut: { value: null }, lutN: { value: 24 },
       off0: { value: [0, 0] }, off1: { value: [0, 0] }, off2: { value: [0, 0] }, mis: { value: 1 }, cell: { value: 7 }, levels: { value: [0, 1, 1] },
-      density: { value: 0.92 }, angles: { value: [0, 0, 0] }, push: { value: 1 } });
+      density: { value: 0.92 }, angles: { value: [0, 0, 0] }, push: { value: 1 }, tSep: { value: null }, softOn: { value: 0 }, softDark: { value: [9, 10] }, minDot: { value: 0 }, screenK: { value: 1 }, edgeK: { value: 1 } });
     const paper = o.paper || INKS.paper;
     common(e, m, srcTex, o, paper, 0.04);
+    // o.soft (px): separate from a softened copy of the source (a 3x3 tent at half resolution), so the dots follow the picture, not its noise
+    let sepTex = srcTex;
+    if (o.soft > 0) {
+      const h = rt(e, 'risoSoft', 0.5), mb = mat(e, 'blur9', GLSL.blur9, {}, false);
+      mb.uniforms.tSrc.value = srcTex; mb.uniforms.texel.value = [o.soft / 1920, o.soft / 1080]; e.pass(mb, h);
+      sepTex = h.texture;
+    }
+    m.uniforms.tSep.value = sepTex; m.uniforms.softOn.value = o.soft > 0 ? 1 : 0; m.uniforms.softDark.value = o.softDark || [9, 10]; m.uniforms.minDot.value = o.minDot ?? 0; m.uniforms.screenK.value = o.screen ?? 1; m.uniforms.edgeK.value = o.edge ?? 1;
     const inks = Array.isArray(o.inks) ? o.inks : RISO_SETS[o.inks || 'earth'];
     const L = risoLut(inks, paper);
     const u = m.uniforms; const off = offsets(o.seed ?? 1, 3);

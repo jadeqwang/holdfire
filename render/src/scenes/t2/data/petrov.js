@@ -16,7 +16,7 @@
 //              transcription of any real document.
 //   'backdrop' a stand-in umber "painting" for the test timeline (a dark room, a dark wall screen, a lit desk).
 // p: {mode, rect, quad, over, t0 (mode's start; default the lyric line), tracks:[5 times] (map), strike:[times] (protocol),
-//     reliability (true), glow (1), grade (1), seed, light ([r, g, b]: the light on the protocol sheet; default lamp + screen red),
+//     reliability (true), relX ([0.08, 0.92]: the reliability panel's extent across the screen), glow (1), grade (1), seed, light ([r, g, b]: the light on the protocol sheet; default lamp + screen red),
 //     occ ([x0, y0, x1, y1] design px: a box round whatever stands in front of the screen, e.g. his head; inside it the overlay is
 //          held back wherever the painting under it is not screen red (a chroma matte of the plate, per frame), so the screen
 //          lights up BEHIND him; needs p.over)}
@@ -129,7 +129,7 @@ function drawMap(c, w, h, t, T, ghostK) {
   }
 }
 
-function drawStart(c, w, h, t, T, rel) {
+function drawStart(c, w, h, t, T, rel, relX = [0.08, 0.92]) {
   c.fillStyle = 'rgb(8,3,3)'; c.fillRect(0, 0, w, h);
   const strike = (t0) => { if (t < t0) return 0; const a = t - t0; if (a > 0.22) return 1; return [1, 0.1, 0.85, 0.2, 1, 0.55, 1][Math.floor(a / 0.03) % 7]; };
   const siren = 0.85 + 0.15 * Math.cos((t - T.t0) * Math.PI * 2 * 1.3);
@@ -146,13 +146,24 @@ function drawStart(c, w, h, t, T, rel) {
   c.strokeStyle = 'rgba(60,20,15,1)'; c.lineWidth = 6; c.strokeRect(6, 6, w - 12, bh - 12);
   if (rel) {
     // reconstructed wording (see the header): ДОСТОВЕРНОСТЬ ВЫСШАЯ
-    const y0 = h - relH;
+    // p.relX [x0, x1] (fractions of the screen's width): the panel's extent, kept clear of whatever stands in front of the screen
+    // (RC2: right of Petrov's head, so the word is never cut to ВЕРНОСТЬ); the line is fitted to the panel, and breaks in two
+    // (ДОСТОВЕРНОСТЬ / ВЫСШАЯ) rather than shrink by more than 5 %
+    const y0 = h - relH, px0 = w * relX[0], pw = w * (relX[1] - relX[0]), cx = px0 + pw / 2;
     const rb = strike(T.tRel) * (0.92 + 0.08 * siren);
-    c.fillStyle = 'rgb(12,4,3)'; c.fillRect(w * 0.08, y0, w * 0.84, relH);
-    c.strokeStyle = 'rgba(60,20,15,1)'; c.lineWidth = 4; c.strokeRect(w * 0.08, y0, w * 0.84, relH);
-    c.font = `600 ${Math.round(relH * 0.36)}px OpenSans`;
-    c.fillStyle = 'rgba(60,14,10,1)'; c.fillText('ДОСТОВЕРНОСТЬ ВЫСШАЯ', w / 2, y0 + relH * 0.54);
-    if (rb > 0) { c.fillStyle = `rgba(255,${Math.round(70 + 50 * rb)},40,${rb})`; c.fillText('ДОСТОВЕРНОСТЬ ВЫСШАЯ', w / 2, y0 + relH * 0.54); }
+    c.fillStyle = 'rgb(12,4,3)'; c.fillRect(px0, y0, pw, relH);
+    c.strokeStyle = 'rgba(60,20,15,1)'; c.lineWidth = 4; c.strokeRect(px0, y0, pw, relH);
+    const base = relH * 0.36;
+    c.font = `600 100px OpenSans`;
+    const one = 100 * pw * 0.9 / c.measureText('ДОСТОВЕРНОСТЬ ВЫСШАЯ').width;
+    const two = one < base * 0.95;
+    const fs = two ? Math.min(relH * 0.36, 100 * pw * 0.9 / c.measureText('ДОСТОВЕРНОСТЬ').width) : Math.min(base, one);
+    const rows = two ? [['ДОСТОВЕРНОСТЬ', y0 + relH * 0.32], ['ВЫСШАЯ', y0 + relH * 0.74]] : [['ДОСТОВЕРНОСТЬ ВЫСШАЯ', y0 + relH * 0.54]];
+    c.font = `600 ${Math.round(fs)}px OpenSans`;
+    for (const [s, y] of rows) {
+      c.fillStyle = 'rgba(60,14,10,1)'; c.fillText(s, cx, y);
+      if (rb > 0) { c.fillStyle = `rgba(255,${Math.round(70 + 50 * rb)},40,${rb})`; c.fillText(s, cx, y); }
+    }
   }
   try { c.fontStretch = 'normal'; } catch (er) { /* */ }
 }
@@ -343,7 +354,7 @@ export default {
     else if (mode === 'ghost') {
       const gk = smooth(range(t, T.g0 + 0.05, T.g0 + 0.6)) * (1 - smooth(range(t, T.g1 - 0.5, T.g1 + 0.2)));
       drawMap(C.c, cw, ch, Math.max(t, T.tracks[4] + 5), T, gk);
-    } else if (mode === 'start') drawStart(C.c, cw, ch, t, T, p.reliability ?? true);
+    } else if (mode === 'start') drawStart(C.c, cw, ch, t, T, p.reliability ?? true, p.relX);
     else if (mode === 'protocol') drawProtocol(C.c, cw, ch, t, T, seed);
     C.tex.needsUpdate = true;
     const H = homography(quad), Hi = inv3(H);

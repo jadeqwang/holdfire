@@ -543,7 +543,10 @@ export function buildTimeline(A) {
 
   // ============================================================================================== PRE-CHORUS 1 (35.50 to 51.70)
   section('P1');
-  S('0:35.50', wd('P1', 1, 'a'), { ...plate({ style: 'riso' }), method: 'video', era: ERA.signal, look: LK.riso,
+  // RC2: the riso screen at 0:35.5-0:40.6 is made to survive the X file's 12 Mb/s (QA_RC1 #6, the X notes): separated from a softened
+  // plate (no dot boil from Veo's noise in the black), no specks under 10 % coverage, a slightly coarser, lower-contrast screen
+  const RISO_X = { soft: 2.5, softDark: [0.25, 0.45], minDot: 0.08, screen: 0.85 };
+  S('0:35.50', wd('P1', 1, 'a'), { ...plate({ style: 'riso', styleP: RISO_X }), method: 'video', era: ERA.signal, look: LK.riso,
     want: 'The Golden Record flashes in sunlight as Voyager turns away, then the craft speeds off into the dark, shrinking to a point' });
   const countingT = wd('P1', 2, 'counting');
   // TOWER_RING: the crown's ring of lamps in design px as the P102 still frames it (a placeholder until the still is picked:
@@ -551,7 +554,7 @@ export function buildTimeline(A) {
   const TOWER_RING = { cx: 970, cy: 267, rx: 148, ry: 32 }, TOWER_HIDE = [920, 1015];   // P102's crown (g2's measurement)
   const DR14_RING = { cx: 1024, cy: 255, rx: 155, ry: 40 }, DR14_HIDE = [975, 1060];       // DR14's crown (measured on the still)
   const burstT = EIGHTHS.filter((e) => e >= countingT.t - 0.02).slice(0, 5);   // 1, 1, 2, 3, 5 lamps on five eighths
-  S('0:38.07', countingT, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { counts: [1, 1, 2, 3, 5], times: burstT, ring: TOWER_RING, hide: TOWER_HIDE } }), method: 'still', era: ERA.signal, look: LK.riso,
+  S('0:38.07', countingT, { ...over(still({ style: 'riso', styleP: RISO_X }), { scene: 't2_tower_bursts', p: { counts: [1, 1, 2, 3, 5], times: burstT, ring: TOWER_RING, hide: TOWER_HIDE } }), method: 'still', era: ERA.signal, look: LK.riso,
     want: 'Echo: the signal tower above the violet clouds (Rare Earth world sheet, panel 04) fires its ring of lights in bursts of 1, 1, 2, 3, 5 on eighths' });
   S('0:40.65', wd('P1', 3, 'a'), { scene: 't2_pulse', p: { tSend: wd('P1', 3, 'one-way').t, tArrive: LN('P1', 4).t - 0.27, dir: 'toEcho', dist: 217 }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: 'Ride the pulse across the galaxy toward a small blue point: Echo, 217 light-years away (fictional; never presented as a real exoplanet)', notes: "teal-tips Jade's voice enters, heard not seen" });
@@ -574,7 +577,7 @@ export function buildTimeline(A) {
   const lyT = wd('P1', 3, 'a').t;
   cue({ kind: 'hero', label: '217 LY', t0: lyT, t1: LN('P1', 4).t, size: 300, y: 420, out: 0.15, draw: drawHero,
     rows: [{ words: [{ text: '217', t: lyT }] }, { words: [{ text: 'LIGHT-YEARS', t: lyT + 0.25 }], k: 0.22 }], color: P.gold, hot: GOLD_HOT });
-  hero(caps(lineWords('P1', 5, 5)), { size: 140, y: 150, t1: roll1.t + 0.12, out: 0.25, rows: [2] });                     // WE'RE AWAKE, one row above her brow (polish 3: never over the face); gone before the push
+  hero(caps(lineWords('P1', 5, 5)), { size: 140, y: 150, t1: roll1.t + 0.12, out: 0.25, rows: [2], shade: 1, glow: 0 });   // WE'RE AWAKE, one row above her brow (polish 3: never over the face); gone before the push; RC2 (QA_RC1 #10): full shade, no glow, so the apostrophe and R hold over the tube light
 
   // ============================================================================================== CHORUS 1 (51.70 to 73.03)
   section('C1');
@@ -677,7 +680,10 @@ export function buildTimeline(A) {
   S(null, sat, { ...over(painting(), screen('map', { tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'The big screen: one missile track rises from the United States, then four more on "five"' });
   const every = wd('V2', 5, 'every');
-  S('1:35.36', every, { ...over(painting(), screen('start', { t0: every.t, tRel: wd('V2', 5, 'said').t })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
+  // RC2 (QA_RC1 #4): the reliability panel sits right of his head (HEAD_BOX + 25 px to the screen's right edge), so the matte never
+  // hides ДОСТО- and a Russian reader never sees ВЕРНОСТЬ ВЫСШАЯ ("loyalty: highest")
+  const relX = [(HEAD_BOX[2] + 25 - SCREEN_Q[0][0]) / (SCREEN_Q[1][0] - SCREEN_Q[0][0]), 0.975];
+  S('1:35.36', every, { ...over(painting(), screen('start', { t0: every.t, tRel: wd('V2', 5, 'said').t, relX })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'The wall display lights up in big red letters, СТАРТ (drawn by the scene); reliability rated highest' });
   S(null, wd('V2', 5, 'first'), oil('Petrov sits with his hand near the phone (no launch button in the room)', { zoom: 1.12 }, { notes: 'zoom 1.12 crops the red line Veo drew along the screen from 0.75 s' }));
   const petrovW = wd('V2', 6, 'petrov');
@@ -931,7 +937,8 @@ export function buildTimeline(A) {
   S('3:21.55', hit('drop_counts', 3), phyllo('55 spiral arms'));
   S('3:22.26', hit('drop_counts', 4), phyllo('89 spiral arms; the disk relaxes back into the galaxy'));
   const andSeen = wd('DR', 7, 'and');
-  S('3:22.89', andSeen, { ...over(still({ style: 'riso' }), { scene: 't2_tower_bursts', p: { mode: 'ring', t0: andSeen.t, fill: 0.9, ring: DR14_RING, hide: DR14_HIDE } }), method: 'still', era: ERA.signal, look: LK.riso, want: "On Echo the signal tower's ring lights up" });
+  // RC2 (QA_RC1 #6): a 9 px screen on DR14's cloud sky, so it does not beat into moire at phone size
+  S('3:22.89', andSeen, { ...over(still({ style: 'riso', styleP: { cell: 9, minDot: 0.08, screen: 0.85 } }), { scene: 't2_tower_bursts', p: { mode: 'ring', t0: andSeen.t, fill: 0.9, ring: DR14_RING, hide: DR14_HIDE } }), method: 'still', era: ERA.signal, look: LK.riso, want: "On Echo the signal tower's ring lights up" });
   S(null, barAfter(wd('DR', 7, 'too').t, 'bar line after "too" (inside the held note)'), { scene: 't2_echo_night', p: { tRing: andSeen.t }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: "Echo's night side shows its cities linked like a constellation (Rare Earth continuity)" });
   S(null, wd('DR', 7, 'wherever'), { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Cut back to the two Jades at one console, receiving; teal-tips Jade sings "wherever you are"' });
@@ -953,10 +960,12 @@ export function buildTimeline(A) {
   // t2_counter is one continuous board (it resets on the real dates of the list on a grid from the drums' return, climbs past the
   // last reset on "higher"), so the whispered-count cuts are one shot; b0 and "higher" come from the timing
   // the 29 resets (30 entries; two share 27 Oct 1962) run through the whispered count and end (the 15 Sep 2026 entry, with its own
-  // flash) on "count" of "The count goes higher"; the climb then lands on the release-date value (41) just after "higher" begins, digits rolling upward into it, and holds it to the cut
-  const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: '2026-10-26', gaps: [6, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, ...Array(17).fill(1)], climbEnd: higher.t + 0.04 };
+  // flash) on "count" of "The count goes higher"; the climb then lands on the release-date value (RELEASE: 42 on 27 Oct 2026) just after "higher" begins, digits rolling upward into it, and holds it to the cut
+  // the days counter's release date (a parameter: Jade may move it; 15 Sep 2026 -> 27 Oct 2026 reads 42)
+  const RELEASE = '2026-10-27';
+  const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: RELEASE, gaps: [6, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, ...Array(17).fill(1)], climbEnd: higher.t + 0.04 };
   S('3:44.33', drumsZ, { scene: 't2_counter', p: counterP, method: 'procedural', era: ERA.newsprint, look: COUNTER_LOOK,
-    want: '[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 15 Sep 2026 entry; then it climbs to the release-date value (41 on 26 Oct 2026, 42 on 27 Oct; recompute for release), digits rolling up on "higher"' });
+    want: '[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 15 Sep 2026 entry; then it climbs to the release-date value (RELEASE: 42 on 27 Oct 2026; recompute if the date moves), digits rolling up on "higher"' });
   reserve(6);                                                                                                            // the board's other cuts keep their numbers
   // the counter itself does not come back here (t2_counter has no corner view): the ISS crossing carries the shot
   S('3:50.04', hit('outro_whisper', 4), { ...over(plate(), { scene: 't2_iss_pass', p: {} }), method: 'video', era: ERA.light, look: LK.night,

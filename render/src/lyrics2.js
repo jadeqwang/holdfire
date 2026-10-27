@@ -139,7 +139,7 @@ export const PLAN = [
   { n: 70, style: 'board', size: 72, panel: '#1d5a35', x: 960, y: 985, align: 'center' },
   { n: 71, style: 'whisper', size: 72, x: 960, y: 260, align: 'center' },
   { n: 72, style: 'whisper', size: 76, col: [0.22, 0.24, 0.36], x: 960, y: 190, align: 'center', segs: { OU11: {} } },
-  { n: 73, style: 'whisper', size: 64, col: [0.9, 0.93, 1], x: 960, y: 1015, align: 'center' },
+  { n: 73, style: 'whisper', size: 64, col: [0.9, 0.93, 1], x: 960, y: 1015, align: 'center', segs: { OU14: false } },   // RC2: gone on the final hit (the end card's credits now land with the title, and its small lines sit at y ~990)
 ];
 export const LYRIC_LINES = new Set(PLAN.map((e) => e.n));
 

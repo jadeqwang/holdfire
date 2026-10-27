@@ -970,25 +970,26 @@
    ],
    "singer": "teal-tips",
    "voice": "B",
-   "conf": "med-low",
-   "lag": 0.25,
-   "lagFrames": 6,
+   "conf": "medium",
+   "lag": 1.25,
+   "lagFrames": 30,
    "s0": 207.223,
-   "take": "t2_DR16_sd25_m6_c41d090cb4.mp4",
+   "take": "t2_DR16_sd25_r4_9d3e73b813_dotfix.mp4",
    "half": null,
    "aspect": "16/9",
    "k": [
-    -8,
+    -10,
+    -6,
     -4,
+    -2,
     0,
+    2,
     4,
-    8,
-    12,
-    16,
-    24
+    6,
+    10
    ],
    "poster": "clips/DR16_poster.jpg",
-   "since": "2026-10-27T08:58:39.000Z"
+   "since": "2026-10-27T09:40:10.000Z"
   }
  ]
 }

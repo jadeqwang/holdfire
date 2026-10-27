@@ -168,17 +168,23 @@
  "DR16": {
   "dir": "work/plates/DR16",
   "kind": "video",
-  "src": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
+  "src": "media/gen/t2_DR16_sd25_r4_9d3e73b813_dotfix.mp4",
   "s0": 207.223,
-  "lag": 0.25,
-  "note": "mirror rule: two-shot at one console, NOT flipped (Jade is in it); teal-tips' dot repainted on her right chest (mirrored jacket) in media/kf2/DR16_mir_v3.jpg; Seedance 2.5 m6, lag 0.958 (you / held are open to the end, eyes open near the end)",
-  "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\"",
+  "lag": 1.25,
+  "note": "mirror rule: two-shot at one console, NOT flipped (Jade is in it); keyframe media/kf2/DR16_mir_v3.jpg (teal-tips' dot on her right chest). Seedance 2.5 r4 (DR16 retake, prompt media/kf2/prompts/t2_DR16_sd25_r4.txt, aref media/aref/DR16_lip2.mp3); Seedance added a second dot on her left chest from frame 0: painted out per frame (work/t2/lips2/dr16_dotfix.py) -> _dotfix.mp4. Was m6 at +0.25",
+  "lipsync": "DR16 retake 27 Oct: r4 at +1.250 (+30 f): lips round and close briefly on \"wh\", jaw opens on \"-ev-\", small rounded mouth through \"-er you\", opens wide on the onset of \"are\" (take frame 74) and stays open to the end of the take (held \"are\" 100 % open at +26..+36 f; work/t2/lips2/DR16_r4.mouthline.jpg). +28 f centres \"-ev-\" but opens \"are\" a drawing late, so the larger lag (mouth a frame early) per LIPSYNC.md. The shot starts on clip 1.55 s; its last 1-2 frames hold the take's last frame (still open)",
   "lag_history": [
    {
     "from": 1.25,
     "to": 0.25,
     "by": "Jade lip-sync picker 27 Oct",
     "k": 24
+   },
+   {
+    "from": 0.25,
+    "to": 1.25,
+    "by": "DR16 retake (r4), 27 Oct",
+    "take": "t2_DR16_sd25_r4_9d3e73b813.mp4"
    }
   ]
  },

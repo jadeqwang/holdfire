@@ -378,11 +378,9 @@
    "dur": 7,
    "file": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
    "dims": "1280x720",
-   "verdict": "PICK (mirror rule, two-shot not flipped): teal-tips' dot on her right chest holds; mouth opens with the vocal on wherever at +1.25, you / held are open to the end (last frame at the window end)",
+   "verdict": "PICK (mirror rule, two-shot not flipped): teal-tips' dot on her right chest holds; mouth opens with the vocal on wherever at +1.25, you / held are open to the end (last frame at the window end) | replaced by r4 (DR16 retake, 27 Oct): opened, shut 0.6-0.7 s, then held open, so no lag covered wherever / you / are",
    "lag": "1.25",
-   "pick": [
-    "DR16"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_DR16_sd25_n1",
@@ -431,6 +429,77 @@
    "lag": null,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_DR16_sd25_r1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_r1-39765af0ad",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR16_sd25_r1.txt",
+   "aref": "media/aref/DR16_lip2.mp3",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_r1_39765af0ad.mp4",
+   "dims": "1280x720",
+   "est_usd": 1.6184,
+   "verdict": "reject: shuts 1.6-2.6 s and again 3.5-4.4 s; the longest open run (2.6 s) is shorter than the held \"are\" (3.86 s) at any lag",
+   "lag": 1.5,
+   "pick": false,
+   "by": "DR16 retake, 27 Oct (720p first-frame, aref DR16_lip2.mp3 = a fresh tools/t2/aref.py cut, Jade's \"Six hundred\" muted; prompt: three-syllable \"wher-ev-er\" + small rounded \"you\" + \"are\" wide and held until the sound fades; r1/r2 with clip-time anchors, r3/r4 without; scored with lipmeasure + mouthline (unflipped) + score2 strips + held-\"are\" openness per lag)"
+  },
+  {
+   "tag": "t2_DR16_sd25_r2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_r2-bb841e6776",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR16_sd25_r2.txt",
+   "aref": "media/aref/DR16_lip2.mp3",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_r2_bb841e6776.mp4",
+   "dims": "1280x720",
+   "est_usd": 1.6184,
+   "verdict": "reject: idles shut to 2.7 s, closes again 3.2-4.3 s; held \"are\" at most 84 % open",
+   "lag": 1.458,
+   "pick": false,
+   "by": "DR16 retake, 27 Oct (720p first-frame, aref DR16_lip2.mp3 = a fresh tools/t2/aref.py cut, Jade's \"Six hundred\" muted; prompt: three-syllable \"wher-ev-er\" + small rounded \"you\" + \"are\" wide and held until the sound fades; r1/r2 with clip-time anchors, r3/r4 without; scored with lipmeasure + mouthline (unflipped) + score2 strips + held-\"are\" openness per lag)"
+  },
+  {
+   "tag": "t2_DR16_sd25_r3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_r3-affee1efdf",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR16_sd25_r3.txt",
+   "aref": "media/aref/DR16_lip2.mp3",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_r3_affee1efdf.mp4",
+   "dims": "1280x720",
+   "est_usd": 1.6184,
+   "verdict": "reject: closes 3.8-4.5 s inside the held \"are\" (84 % open at best)",
+   "lag": 1.375,
+   "pick": false,
+   "by": "DR16 retake, 27 Oct (720p first-frame, aref DR16_lip2.mp3 = a fresh tools/t2/aref.py cut, Jade's \"Six hundred\" muted; prompt: three-syllable \"wher-ev-er\" + small rounded \"you\" + \"are\" wide and held until the sound fades; r1/r2 with clip-time anchors, r3/r4 without; scored with lipmeasure + mouthline (unflipped) + score2 strips + held-\"are\" openness per lag)"
+  },
+  {
+   "tag": "t2_DR16_sd25_r4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_r4-9d3e73b813",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR16_sd25_r4.txt",
+   "aref": "media/aref/DR16_lip2.mp3",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_r4_9d3e73b813.mp4",
+   "dims": "1280x720",
+   "est_usd": 1.6184,
+   "verdict": "PICK at +1.25: wh round/close, -ev- open, small rounded -er you, opens wide on \"are\" (frame 74) and holds to the end of the take; no grin, eyes soft, Jade silent. Seedance added a second chest dot (her left) from frame 0: painted out -> _dotfix.mp4",
+   "lag": 1.25,
+   "pick": [
+    "DR16"
+   ],
+   "by": "DR16 retake, 27 Oct (720p first-frame, aref DR16_lip2.mp3 = a fresh tools/t2/aref.py cut, Jade's \"Six hundred\" muted; prompt: three-syllable \"wher-ev-er\" + small rounded \"you\" + \"are\" wide and held until the sound fades; r1/r2 with clip-time anchors, r3/r4 without; scored with lipmeasure + mouthline (unflipped) + score2 strips + held-\"are\" openness per lag)",
+   "fixed_file": "media/gen/t2_DR16_sd25_r4_9d3e73b813_dotfix.mp4"
   }
  ],
  "BU12R": [

@@ -571,7 +571,15 @@ export function buildTimeline(A) {
     want: "Take one's 0:44 diagram unchanged: PSR B1919+21 ticking every 1.3373 s (left), the count 1 1 2 3 5 8 (right)", notes: 'NATURAL / NOT NATURAL are drawn by pulsar.js itself' });
   const hearT = wd('P1', 5, 'hear');
   S('0:46.02', hearT, { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'First sight of teal-tips Jade in her own (mirrored, cooler) control room, headphones on, singing' });
-  S(null, wd('P1', 5, 'awake'), { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Closer: teal-tips Jade opens her eyes on "awake"', notes: 'cut on "awake" so the eyes open on the word' });
+  // P106 (Jade: "both of them are singing 'we're awake'"): P105 sings "we're" up to the cut, so P106 starts on w2's own held, wide
+  // "-WAKE" (take frame 72, eyes already open: the cut opens them on "awake") instead of its "a" + "w" (frames 57-71, which played a
+  // second onset 0.3 s late). w2 holds that vowel for only 21 frames (72-92, she clenches from 93), so the hold plays at 0.57x:
+  // clipT = hold(t) - s0' + lag with s0' = s0 + (1 - r)(hold(t) - tA), i.e. the pick's lag (picks2 P106) still sets frame 72 at the
+  // cut, and r slows the drawings after it (frames 72..92 across 47.75..49.17; lipcheck's onset frame = the formula's)
+  const awakeT = wd('P1', 5, 'awake');
+  const P106_S0 = 47.432, P106_R = 0.57, P106_TA = hold2(awakeT.t);
+  S(null, awakeT, { ...plate(), p: (t) => ({ clip: 'P106', s0: P106_S0 + (1 - P106_R) * Math.max(0, hold2(t) - P106_TA) }),
+    method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Closer: teal-tips Jade opens her eyes on "awake"', notes: 'cut on "awake" so the eyes open on the word; the held -WAKE at 0.57x so no second onset' });
   const roll1 = ev('snare_roll', null, hearT.t);
   // polish 3 (director: her lips part ~1.3x into the push): P107 plays the plate's frames 0-17 only (lips shut; frame 18 would
   // show from lt 0.94 at rate 0.8) with a JS push about her near eye (flipped, at ~(1134, 510)), and cuts on the roll's eighth

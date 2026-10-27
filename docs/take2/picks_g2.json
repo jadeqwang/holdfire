@@ -398,8 +398,8 @@
   "kind": "video",
   "src": "media/gen/t2_P106_sd25_w2_de406600dc.mp4",
   "s0": 47.432,
-  "lag": 2.083,
-  "note": "mirror rule: Seedance 2.5 w2 on media/kf2/P106_mir_v2.jpg (unflipped canon), flipped; two-syllable prompt. Idles eyes-closed to clip 2.37 s, then eyes open with the mouth on 'a' (frames 57-62), a soft 'w' (64-68), 'WAKE' held wide open 70-91; she clenches from frame 93 (the take's end), so lag 2.083 (+50 f) shows frames 57-91: eyes and 'a' on the cut at 47.73, open to the cut at 49.24. Was m5 at 2.375 ('awaawake').",
+  "lag": 2.778,
+  "note": "mirror rule: Seedance 2.5 w2 on media/kf2/P106_mir_v2.jpg (unflipped canon), flipped; two-syllable prompt. Idles eyes-closed to clip 2.37 s, then eyes open with the mouth on 'a' (frames 57-62), a soft 'w' (64-68), 'WAKE' held wide open 70-91; she clenches from frame 93 (the take's end), so lag 2.083 (+50 f) shows frames 57-91: eyes and 'a' on the cut at 47.73, open to the cut at 49.24. Was m5 at 2.375 ('awaawake'). | 27 Oct edit fix: lag 2.778 puts frame 72 (the held, wide -WAKE, eyes open) on the cut at 47.73; timeline.js slows the hold to 0.57x (frames 72-92 over 47.75-49.17), so P106 shows no 'a' + 'w' second onset after P105's 'we're'.",
   "flipX": true,
   "zoom": 1.3,
   "pan": [
@@ -418,6 +418,12 @@
     "to": 2.083,
     "by": "retake w2 (Jade v6: lips read 'awaawake'), 27 Oct",
     "take_was": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4"
+   },
+   {
+    "from": 2.083,
+    "to": 2.778,
+    "by": "lip/edit fix 27 Oct (Jade: 'both of them are singing we're awake'): start on w2's held -WAKE (frame 72) at the cut; timeline.js plays the hold at 0.57x via s0",
+    "k": null
    }
   ],
   "upscaled": "media/gen/up_P106_fluxp_1872248ff9.mp4",

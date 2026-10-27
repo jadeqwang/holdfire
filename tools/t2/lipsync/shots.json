@@ -167,8 +167,8 @@
    "singer": "teal-tips",
    "voice": "B",
    "conf": "med-high",
-   "lag": 2.083,
-   "lagFrames": 50,
+   "lag": 2.778,
+   "lagFrames": 67,
    "s0": 47.432,
    "take": "t2_P106_sd25_w2_de406600dc.mp4",
    "half": null,
@@ -189,7 +189,7 @@
     24
    ],
    "poster": "clips/P106_poster.jpg",
-   "since": "2026-10-27T21:58:15.000Z"
+   "since": "2026-10-27T22:40:17.000Z"
   },
   {
    "id": "C103L",

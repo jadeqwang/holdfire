@@ -8708,5 +8708,38 @@
    ]
   ],
   "note": "lip round 2: frame-0 box by hand; keys by face template matching (work/t2/lips2/trackkeys.py), ECC drifted"
+ },
+ "t2_V101_sd25_n1_564e8b64d7.mp4": {
+  "pick": "V101_n1",
+  "ref": 0,
+  "box": [
+   720,
+   442,
+   40,
+   36
+  ],
+  "note": "seeded from V101 frame 0 (same keyframe)"
+ },
+ "t2_V101_sd25_n2_34dd38e6ac.mp4": {
+  "pick": "V101_n2",
+  "ref": 0,
+  "box": [
+   720,
+   442,
+   40,
+   36
+  ],
+  "note": "seeded from V101 frame 0 (same keyframe)"
+ },
+ "t2_V101_sd25_n3_475ac8cf19.mp4": {
+  "pick": "V101_n3",
+  "ref": 0,
+  "box": [
+   720,
+   442,
+   40,
+   36
+  ],
+  "note": "seeded from V101 frame 0 (same keyframe)"
  }
 }

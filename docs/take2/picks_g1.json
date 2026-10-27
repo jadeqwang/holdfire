@@ -235,16 +235,24 @@
  "V101": {
   "dir": "work/plates/V101",
   "kind": "video",
-  "src": "media/gen/t2_V101_sd25_t2_9163d752d3.mp4",
+  "src": "media/gen/t2_V101_sd25_n1_564e8b64d7.mp4",
   "s0": 12.75,
-  "lag": 0.042,
-  "in": 0.3,
-  "note": "Seedance 2.5 sung, vocal-stem slice S0 12.750 (media/aref/V101.mp3); in = 13.05 - S0 + lag. Alt take t3 (eyes closed) lag -0.125",
+  "lag": 1.125,
+  "in": 1.425,
+  "note": "Seedance 2.5 sung n1 (lip round 3, labial/sibilant-cue prompt media/kf2/prompts/t2_V101_sd25_n1.txt), vocal-stem slice S0 12.750 (media/aref/V101_lip3.mp3, = V101.mp3); idles 1.1 s, so in = 13.05 - S0 + lag = 1.425. Was t2 at +0.042",
   "grade": {
    "exposure": 0.9,
    "contrast": 1.08
   },
-  "lipsync": "lipsync pass 27 Oct: +0.042 (+1 f, was 0). As played on twos the closures on the s of \"sea\" (13.7-13.78) and through \"salt\" (14.32-14.65) land within a frame of the stem; r 0.60, the same lag in every 1.4 s sub-window (work/t2/lips/V101.mouthline.jpg). Regens t5/t6 and a remouth were no better; alt t6 at +1.125 articulates \"of the sea\" best but never sings \"Out\""
+  "lipsync": "lip round 3, 27 Oct (Jade: none match, 'out of the mo mo'): t2 shut its lips fully on the s of 'sea' and of 'salt', which reads as m ('the mo', 'mo'). n1 at +1.125 (+27 f) shows teeth together, lips parted on both s's, opens on 'of the', 'sea' and 'alt in our'; r 0.61 (t2 0.58), balanced open/shut 0.90 (t2 0.75), drift 13.1:+1.083 13.6:+1.125 14.1:+1.125; 'Out' (breathy, quiet in the stem) only slightly open (work/t2/lips/V101_n1.mouthline.jpg)",
+  "lag_history": [
+   {
+    "from": 0.042,
+    "to": 1.125,
+    "by": "lip round 3 retake (n1), 27 Oct",
+    "take": "t2_V101_sd25_n1_564e8b64d7.mp4"
+   }
+  ]
  },
  "V102": {
   "dir": "work/plates/V102",

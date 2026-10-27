@@ -167,7 +167,8 @@
   "kind": "video",
   "src": "media/gen/t2_C103R_sd25_t2_1584d49648.mp4",
   "s0": 56.371,
-  "lag": -0.25
+  "lag": -0.083,
+  "lipsync": "lipsync pass 27 Oct: -0.083 (was -0.25): \"you\" opened 0.17 s late at -0.25 (work/t2/lips/C103R.mouthline.jpg); late lines drift"
  },
  "C108": {
   "dir": "work/plates/C108",
@@ -237,7 +238,8 @@
   "kind": "video",
   "src": "media/gen/t2_C209R_sd25_t1_3b86d4fe74.mp4",
   "s0": 128.098,
-  "lag": -0.167
+  "lag": 0.083,
+  "lipsync": "lipsync pass 27 Oct: +0.083 (was -0.167): \"you\" opened 0.25 s late; the held \"are\" is not articulated (low confidence)"
  },
  "C210": {
   "dir": "work/plates/C210",
@@ -462,8 +464,9 @@
   "kind": "video",
   "src": "media/gen/t2_DR16_sd25_t2_8e3128f390.mp4",
   "s0": 207.223,
-  "lag": 0.958,
-  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear"
+  "lag": 1.0,
+  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear",
+  "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\""
  },
  "OU10": {
   "dir": "work/plates/OU10",
@@ -533,7 +536,8 @@
   "kind": "video",
   "src": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
   "s0": 45.715,
-  "lag": 0.0
+  "lag": 0.25,
+  "lipsync": "lipsync pass 27 Oct: +0.25 (was 0): as played on twos, the opens on it/know/we're line up (work/t2/lips/P105_new.mouthline.jpg); take articulates little on \"Hear it and you'll\""
  },
  "P106": {
   "dir": "work/plates/P106",

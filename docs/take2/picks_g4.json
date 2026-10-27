@@ -144,8 +144,9 @@
   "kind": "video",
   "src": "media/gen/t2_DR16_sd25_t2_8e3128f390.mp4",
   "s0": 207.223,
-  "lag": 0.958,
-  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear"
+  "lag": 1.0,
+  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear",
+  "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\""
  },
  "OU10": {
   "dir": "work/plates/OU10",

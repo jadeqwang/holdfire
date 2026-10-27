@@ -93,6 +93,36 @@
    "pick": [
     "C103R"
    ]
+  },
+  {
+   "tag": "t2_C103R_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103R_sd25_m5-0913b0637d",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C103R_sd25_m5.json",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103R_sd25_m5_0913b0637d.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: barely opens her mouth",
+   "lag": "-0.333",
+   "pick": false
+  },
+  {
+   "tag": "t2_C103R_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103R_sd25_m6-03f90610a1",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C103R_sd25_m6.json",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103R_sd25_m6_03f90610a1.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): stable, sings through; word strip at lag 0 (b of but shut, are / I'm / on open). ECC mouth track drifted: re-keyed by template match",
+   "lag": "0.0",
+   "pick": [
+    "C103R"
+   ]
   }
  ],
  "C108": [
@@ -122,6 +152,64 @@
    "dims": "1280x720",
    "verdict": "pick: eyes closed throughout, hand on earcup; +0.125 opens 'you'; cascade fails on teal (fixed-box strip)",
    "lag": 0.125,
+   "pick": [
+    "C108"
+   ]
+  },
+  {
+   "tag": "t2_C108_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_m5-7811660411",
+   "kf": "media/kf2/C108_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C108_sd25_m5.json",
+   "s0": 64.289,
+   "dur": 4,
+   "file": "media/gen/t2_C108_sd25_m5_7811660411.mp4",
+   "dims": "1470x630",
+   "verdict": "reject: 1470x630 (21:9)",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_C108_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_m6-09889cccfb",
+   "kf": "media/kf2/C108_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C108_sd25_m6.json",
+   "s0": 64.289,
+   "dur": 4,
+   "file": "media/gen/t2_C108_sd25_m6_09889cccfb.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: lag 0 by strip, metrics disagree; superseded by m8",
+   "lag": "0.0",
+   "pick": false
+  },
+  {
+   "tag": "t2_C108_sd25_m7",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_m7-e83e3fb72e",
+   "kf": "media/kf2/C108_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C108_sd25_m7.json",
+   "s0": 64.289,
+   "dur": 4,
+   "file": "media/gen/t2_C108_sd25_m7_e83e3fb72e.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: rms peak -0.625 (below -0.3: frame-0 freeze risk)",
+   "lag": "0.333",
+   "pick": false
+  },
+  {
+   "tag": "t2_C108_sd25_m8",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_m8-6811637e11",
+   "kf": "media/kf2/C108_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C108_sd25_m8.json",
+   "s0": 64.289,
+   "dur": 4,
+   "file": "media/gen/t2_C108_sd25_m8_6811637e11.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): white/noise/breathe/somewhere open on the voiced peaks; eyes closed, hand on the earcup; dot on the far side, no patch",
+   "lag": "0.042",
    "pick": [
     "C108"
    ]
@@ -221,6 +309,36 @@
    "verdict": "alt: fine picture, not strip-checked",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_C208R_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208R_sd25_m5-9397c102db",
+   "kf": "media/kf2/C208R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C208R_sd25_m5.json",
+   "s0": 125.524,
+   "dur": 4,
+   "file": "media/gen/t2_C208R_sd25_m5_9397c102db.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: voice r .61 at -0.042",
+   "lag": "-0.042",
+   "pick": false
+  },
+  {
+   "tag": "t2_C208R_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208R_sd25_m6-ac2e706ee6",
+   "kf": "media/kf2/C208R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C208R_sd25_m6.json",
+   "s0": 125.524,
+   "dur": 4,
+   "file": "media/gen/t2_C208R_sd25_m6_ac2e706ee6.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): exact mirror of C208L's studio pose; voice r .58 at -0.25, strip agrees",
+   "lag": "-0.25",
+   "pick": [
+    "C208R"
+   ]
   }
  ],
  "P105": [
@@ -253,6 +371,36 @@
    "verdict": "alt: very small mouth movement",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_P105_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P105_sd25_m5-00d8fb2da5",
+   "kf": "media/kf2/P105_mir_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_P105_sd25_m5.json",
+   "s0": 45.715,
+   "dur": 4,
+   "file": "media/gen/t2_P105_sd25_m5_00d8fb2da5.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: measured +1.25 is the pre-roll word (make); idles",
+   "lag": "1.25",
+   "pick": false
+  },
+  {
+   "tag": "t2_P105_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P105_sd25_m6-5c9b5e216f",
+   "kf": "media/kf2/P105_mir_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_P105_sd25_m6.json",
+   "s0": 45.715,
+   "dur": 4,
+   "file": "media/gen/t2_P105_sd25_m6_5c9b5e216f.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): canon jacket holds, eyes closed, know/we're peaks align at lag 0",
+   "lag": "0.0",
+   "pick": [
+    "P105"
+   ]
   }
  ],
  "C203L": [
@@ -349,6 +497,64 @@
    "verdict": "alt: metrics agree +0.500, not strip-checked",
    "lag": 0.5,
    "pick": false
+  },
+  {
+   "tag": "t2_C203R_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_m6-fa1f5944e6",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C203R_sd25_m6.json",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203R_sd25_m6_fa1f5944e6.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics -0.29 but the held 'are' closed at its onset",
+   "lag": "-0.292",
+   "pick": false
+  },
+  {
+   "tag": "t2_C203R_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_m5-c0582807c7",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C203R_sd25_m5.json",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203R_sd25_m5_c0582807c7.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: strip plausible at 0 but the held 'are' mostly closes (superseded by m8)",
+   "lag": "0.0",
+   "pick": false
+  },
+  {
+   "tag": "t2_C203R_sd25_m7",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_m7-e5b860a854",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C203R_sd25_m7.json",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203R_sd25_m7_e5b860a854.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: closed on 'you', out of phase",
+   "lag": "0.75",
+   "pick": false
+  },
+  {
+   "tag": "t2_C203R_sd25_m8",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_m8-02a2f13a41",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C203R_sd25_m8.json",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203R_sd25_m8_02a2f13a41.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): you open, held are open (closes with the vocal's own dip), I'm/counting/on on the peaks; idles ~1 s first; lipcheck: 0.958/1.0 tie -> 1.0",
+   "lag": "1.0",
+   "pick": [
+    "C203R"
+   ]
   }
  ],
  "C209L": [
@@ -445,6 +651,64 @@
    "verdict": "alt: metrics agree -0.167",
    "lag": -0.167,
    "pick": false
+  },
+  {
+   "tag": "t2_C209R_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_m6-510a8e82ba",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C209R_sd25_m6.json",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209R_sd25_m6_510a8e82ba.mp4",
+   "dims": "1284x716",
+   "verdict": "reject: 1284x716",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_C209R_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_m5-a1ce0f25e4",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C209R_sd25_m5.json",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209R_sd25_m5_a1ce0f25e4.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: weak (r .2); superseded by m8",
+   "lag": "0.0",
+   "pick": false
+  },
+  {
+   "tag": "t2_C209R_sd25_m7",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_m7-4ddb7c1e82",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C209R_sd25_m7.json",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209R_sd25_m7_4ddb7c1e82.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: misses 'you', closes inside the held 'are'",
+   "lag": "0.25",
+   "pick": false
+  },
+  {
+   "tag": "t2_C209R_sd25_m8",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_m8-29b8537d38",
+   "kf": "media/kf2/C103R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_C209R_sd25_m8.json",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209R_sd25_m8_29b8537d38.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): If / you on time; closes mid held 'are' (every take does); plate pre-graded (work/t2/mirror/C209R_m8_graded.mp4)",
+   "lag": "0.958",
+   "pick": [
+    "C209R"
+   ]
   }
  ],
  "C101": [
@@ -574,6 +838,36 @@
    "verdict": "alt: eyes open ~2.0 s",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_P106_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_m5-e236c6987a",
+   "kf": "media/kf2/P106_mir_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_P106_sd25_m5.json",
+   "s0": 47.432,
+   "dur": 4,
+   "file": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): idles eyes-closed ~2 s, opens eyes with the held note at clip 2.33 s; lag 1.958 = eyes open 2 frames after the cut; pick zoom 1.3 pan [0,160] keeps her eyes under WE'RE AWAKE",
+   "lag": "1.958",
+   "pick": [
+    "P106"
+   ]
+  },
+  {
+   "tag": "t2_P106_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_m6-85537307c8",
+   "kf": "media/kf2/P106_mir_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_P106_sd25_m6.json",
+   "s0": 47.432,
+   "dur": 4,
+   "file": "media/gen/t2_P106_sd25_m6_85537307c8.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: eyes open at clip 2.67 s (needs lag ~2.3, runs off the take end); jumpy head lift",
+   "lag": "1.208",
+   "pick": false
   }
  ],
  "C201R": [
@@ -588,6 +882,22 @@
    "file": "media/gen/t2_C201R_veo31_t1_d50e877697.mp4",
    "dims": "1920x1080",
    "verdict": "pick: mirrored teal-tips dish field, swing f19-40 and the same target star; in 0.77 rate 1.5 (C201L = C101 take at in 1.27)",
+   "lag": null,
+   "pick": [
+    "C201R"
+   ]
+  },
+  {
+   "tag": "t2_C201R_veo31_m1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_C201R_veo31_m1-8dded7fd56",
+   "kf": "media/kf2/C201R_mir_nbp_v1fix.jpg",
+   "prompt_file": "media/gen/specs/t2_C201R_veo31_m1.json",
+   "s0": null,
+   "dur": "6s",
+   "file": "media/gen/t2_C201R_veo31_m1_8dded7fd56.mp4",
+   "dims": "1920x1080",
+   "verdict": "PICK (mirror rule): back to camera, circle + RARE EARTH + patch hold; dishes flatten then swing up at clip ~4.0-5.5 s; pick in 3.2 rate 1.15",
    "lag": null,
    "pick": [
     "C201R"
@@ -777,6 +1087,24 @@
    "lag": null,
    "pick": [
     "BR_faceW"
+   ]
+  }
+ ],
+ "P107": [
+  {
+   "tag": "t2_P107_veo31_m1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_P107_veo31_m1-705bb64fe9",
+   "kf": "media/kf2/P107_mir_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_P107_veo31_m1.json",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_P107_veo31_m1_705bb64fe9.mp4",
+   "dims": "1920x1080",
+   "verdict": "PICK (mirror rule): stares at her screens, slight lip part ~1 s, blinks ~2.6 s (outside the used 0-2.5 s); pushed digitally into the eye + crossfade to the 2K eye still (work/t2/mirror/P107_push.mp4)",
+   "lag": null,
+   "pick": [
+    "P107"
    ]
   }
  ]

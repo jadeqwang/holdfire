@@ -1341,3 +1341,9 @@
 {"ts": "2026-10-27T02:43:37Z", "model": "bytedance/seedance-2.5", "tag": "t2_C209R_sd25_m8", "job": "holdfire/t2_C209R_sd25_m8-29b8537d38", "event": "submit", "ok": null, "est_usd": 1.156, "where": "cloud"}
 {"ts": "2026-10-27T02:43:37Z", "model": "bytedance/seedance-2.5", "tag": "t2_C108_sd25_m7", "job": "holdfire/t2_C108_sd25_m7-e83e3fb72e", "event": "submit", "ok": null, "est_usd": 0.9248, "where": "cloud"}
 {"ts": "2026-10-27T02:43:38Z", "model": "bytedance/seedance-2.5", "tag": "t2_C108_sd25_m8", "job": "holdfire/t2_C108_sd25_m8-6811637e11", "event": "submit", "ok": null, "est_usd": 0.9248, "where": "cloud"}
+{"ts": "2026-10-27T03:11:49Z", "model": "bytedance/seedance-2.5", "tag": "t2_C203R_sd25_m7", "job": "holdfire/t2_C203R_sd25_m7-e5b860a854", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T03:11:50Z", "model": "bytedance/seedance-2.5", "tag": "t2_C203R_sd25_m8", "job": "holdfire/t2_C203R_sd25_m8-02a2f13a41", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T03:11:50Z", "model": "bytedance/seedance-2.5", "tag": "t2_C209R_sd25_m7", "job": "holdfire/t2_C209R_sd25_m7-4ddb7c1e82", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-27T03:11:51Z", "model": "bytedance/seedance-2.5", "tag": "t2_C209R_sd25_m8", "job": "holdfire/t2_C209R_sd25_m8-29b8537d38", "event": "result", "ok": true, "est_usd": 1.156, "where": "cloud"}
+{"ts": "2026-10-27T03:11:52Z", "model": "bytedance/seedance-2.5", "tag": "t2_C108_sd25_m7", "job": "holdfire/t2_C108_sd25_m7-e83e3fb72e", "event": "result", "ok": true, "est_usd": 0.9248, "where": "cloud"}
+{"ts": "2026-10-27T03:11:52Z", "model": "bytedance/seedance-2.5", "tag": "t2_C108_sd25_m8", "job": "holdfire/t2_C108_sd25_m8-6811637e11", "event": "result", "ok": true, "est_usd": 0.9248, "where": "cloud"}

@@ -185,6 +185,36 @@
    "verdict": "pick: on model both sides, hands rise to the glass, softer mouth; ROI r 0.33",
    "lag": 0.583,
    "pick": true
+  },
+  {
+   "tag": "t2_DR04_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR04_sd25_m5-2a193f5b64",
+   "kf": "media/kf2/DR04_mir_v3.jpg",
+   "prompt_file": "media/gen/specs/t2_DR04_sd25_m5.json",
+   "s0": 188.376,
+   "dur": 5,
+   "file": "media/gen/t2_DR04_sd25_m5_2a193f5b64.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: ignores the first frame (hands start down)",
+   "lag": "0.208",
+   "pick": false
+  },
+  {
+   "tag": "t2_DR04_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR04_sd25_m6-ee9a78bbe4",
+   "kf": "media/kf2/DR04_mir_v3.jpg",
+   "prompt_file": "media/gen/specs/t2_DR04_sd25_m6.json",
+   "s0": 188.376,
+   "dur": 5,
+   "file": "media/gen/t2_DR04_sd25_m6_ee9a78bbe4.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule, two-shot not flipped): hands rise to the glass, patches on both near sleeves, brown irises; mouthline drifts (first were wants 0, second -0.4): -0.125 (tie -> larger)",
+   "lag": "-0.125",
+   "pick": [
+    "DR04"
+   ]
   }
  ],
  "BU04": [
@@ -241,6 +271,36 @@
    "verdict": "pick: on model, mouth open to the end of the held note",
    "lag": 0.958,
    "pick": true
+  },
+  {
+   "tag": "t2_DR16_sd25_m5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_m5-92c1a1a5b1",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/gen/specs/t2_DR16_sd25_m5.json",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_m5_92c1a1a5b1.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: mouth barely opens",
+   "lag": "0.417",
+   "pick": false
+  },
+  {
+   "tag": "t2_DR16_sd25_m6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_m6-c41d090cb4",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/gen/specs/t2_DR16_sd25_m6.json",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule, two-shot not flipped): teal-tips' dot on her right chest holds; mouth opens with the vocal on wherever at +1.25, you / held are open to the end (last frame at the window end)",
+   "lag": "1.25",
+   "pick": [
+    "DR16"
+   ]
   }
  ],
  "BU12R": [
@@ -255,6 +315,24 @@
    "dims": "1920x1080",
    "verdict": "pick (BU12R, BU14, BU17R): on model; light flares mid-take; push-in",
    "pick": true
+  },
+  {
+   "tag": "t2_BU12R_veo31_m1",
+   "model": "google/veo-3.1",
+   "job": "holdfire/t2_BU12R_veo31_m1-79b456d788",
+   "kf": "media/kf2/BU12R_mir_nbp_v2.jpg",
+   "prompt_file": "media/gen/specs/t2_BU12R_veo31_m1.json",
+   "s0": null,
+   "dur": "4s",
+   "file": "media/gen/t2_BU12R_veo31_m1_79b456d788.mp4",
+   "dims": "1920x1080",
+   "verdict": "PICK (mirror rule): exact mirror of BU12L after the flip; light swells and flares; serves BU12R, BU14, BU17R",
+   "lag": null,
+   "pick": [
+    "BU12R",
+    "BU14",
+    "BU17R"
+   ]
   }
  ]
 }

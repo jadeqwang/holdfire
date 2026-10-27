@@ -188,11 +188,11 @@
  "C108": {
   "dir": "work/plates/C108",
   "kind": "video",
-  "src": "media/gen/t2_C108_sd25_m6_09889cccfb.mp4",
+  "src": "media/gen/t2_C108_sd25_m8_6811637e11.mp4",
   "s0": 64.289,
-  "lag": 0.0,
+  "lag": 0.042,
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m6 on media/kf2/C108_mir_nbp_v2.jpg (canon, her right side to camera: dot on the far side, no patch visible), room A cool; flipped; lag 0 by strip (provisional)"
+  "note": "mirror rule: Seedance 2.5 m8 on media/kf2/C108_mir_nbp_v2.jpg (canon, right side to camera: dot on the far side, no patch visible; room A cool), flipped; lag 0.042 (best = rms) by mouthline: white / noise / breathe / somewhere open on the voiced peaks"
  },
  "C109": {
   "dir": "work/plates/C109",
@@ -228,11 +228,11 @@
  "C203R": {
   "dir": "work/plates/C203R",
   "kind": "video",
-  "src": "media/gen/t2_C203R_sd25_m5_c0582807c7.mp4",
+  "src": "media/gen/t2_C203R_sd25_m8_02a2f13a41.mp4",
   "s0": 117.637,
-  "lag": 0.0,
+  "lag": 1.0,
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m5 on the C103R mirror keyframe, flipped; lag 0 (provisional)"
+  "note": "mirror rule: Seedance 2.5 m8 (round 2, held-note timing cue) on the C103R mirror keyframe (= Jade C103L_v2 composition), flipped; lag 0.958 by mouthline: you open, held are open, I am / counting / on on the voiced peaks"
  },
  "C208L": {
   "dir": "work/plates/C208L",
@@ -262,12 +262,12 @@
  "C209R": {
   "dir": "work/plates/C209R",
   "kind": "video",
-  "src": "media/gen/t2_C209R_sd25_m5_a1ce0f25e4.mp4",
+  "src": "work/t2/mirror/C209R_m8_graded.mp4",
   "s0": 128.098,
-  "lag": 0.0,
+  "lag": 0.958,
   "lipsync": "lipsync pass 27 Oct: +0.083 (was -0.167): \"you\" opened 0.25 s late; the held \"are\" is not articulated (low confidence)",
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m5 on the C103R mirror keyframe, flipped; lag 0 (provisional)"
+  "note": "mirror rule: Seedance 2.5 m8 (media/gen/t2_C209R_sd25_m8_29b8537d38.mp4, pre-graded -6% / contrast 0.95 because the edit grades C209R hotter, RM(1.25, 1.18), than C103R) on the C103R mirror keyframe, flipped; lag 0.958 by mouthline (If / you on time; the held are closes mid-note in every take)"
  },
  "C210": {
   "dir": "work/plates/C210",
@@ -457,7 +457,7 @@
   "kind": "video",
   "src": "media/gen/t2_DR04_sd25_m6_ee9a78bbe4.mp4",
   "s0": 188.376,
-  "lag": -0.25,
+  "lag": -0.125,
   "note": "mirror rule: two-shot through the glass, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR04_mir_v3.jpg (irises brown with teal / pale-blue catchlights, a 1420 patch on each near sleeve band: teal-tips right = mirrored, Jade left = canon); hands rise to the glass; lag -0.25 by strip (m5 ignored the first frame)"
  },
  "DR05": {
@@ -494,7 +494,7 @@
   "kind": "video",
   "src": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
   "s0": 207.223,
-  "lag": 0.958,
+  "lag": 1.25,
   "note": "mirror rule: two-shot at one console, NOT flipped (Jade is in it); teal-tips' dot repainted on her right chest (mirrored jacket) in media/kf2/DR16_mir_v3.jpg; Seedance 2.5 m6, lag 0.958 (you / held are open to the end, eyes open near the end)",
   "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\""
  },

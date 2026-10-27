@@ -115,7 +115,7 @@
   "kind": "video",
   "src": "media/gen/t2_DR04_sd25_m6_ee9a78bbe4.mp4",
   "s0": 188.376,
-  "lag": -0.25,
+  "lag": -0.125,
   "note": "mirror rule: two-shot through the glass, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR04_mir_v3.jpg (irises brown with teal / pale-blue catchlights, a 1420 patch on each near sleeve band: teal-tips right = mirrored, Jade left = canon); hands rise to the glass; lag -0.25 by strip (m5 ignored the first frame)"
  },
  "DR05": {
@@ -152,7 +152,7 @@
   "kind": "video",
   "src": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
   "s0": 207.223,
-  "lag": 0.958,
+  "lag": 1.25,
   "note": "mirror rule: two-shot at one console, NOT flipped (Jade is in it); teal-tips' dot repainted on her right chest (mirrored jacket) in media/kf2/DR16_mir_v3.jpg; Seedance 2.5 m6, lag 0.958 (you / held are open to the end, eyes open near the end)",
   "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\""
  },

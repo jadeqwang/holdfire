@@ -161,3 +161,9 @@ No paid generation in this pass ($0 of the $30).
 - 24.0–25.4 the words pressed into the dusty road read low-contrast on a phone; deepen the emboss/shadow or add a faint ink fill.
 - 27.9 "SEEDS I…" sits on the bottom edge; lift it into the safe area.
 - Check every lyric line at 540p on the next full render: legible in under a second, never over a face.
+
+## After the mirror regeneration
+- Director: accepted the two-shot exception: in frames that hold both Jades (DR03, DR04, DR16) nothing is flipped; teal-tips wears the mirrored jacket (dot and patch on her right) in the keyframe itself.
+- C209: grade the right half like C103's right half (it's lit hotter than C209L).
+- P107: her lips part slightly at ~1.3× into the push; end the push before that or hold the eye still sooner.
+- Weak lip sync still: C209R, C209L, DR04, C103R (low/medium); C203R, DR16 medium.

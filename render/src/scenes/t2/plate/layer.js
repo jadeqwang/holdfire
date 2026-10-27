@@ -44,7 +44,7 @@ function build(e) {
         } else {
           float teal = min(col.g - col.r, col.b - col.r * .92);
           float w = smoothstep(.015, .09, teal) * (1. - smoothstep(.66, .8, l)) * m;
-          col = mix(col, fixB[i].rgb * (l / max(.05, luma(fixB[i].rgb))), w);
+          col = mix(col, fixB[i].rgb * (min(l * .8, .42) / max(.05, luma(fixB[i].rgb))), w);   // a darker, warm iris, never amber
         }
       }
       float a = inside * alpha;
@@ -90,7 +90,7 @@ function fixAt(F, f) {
     const a = K[i], b = K[Math.min(K.length - 1, i + 1)];
     const u = b[0] > a[0] ? Math.max(0, Math.min(1, (f - a[0]) / (b[0] - a[0]))) : 0;
     c = [a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
-    if (a[3] !== undefined) r = a[3] + ((b[3] ?? a[3]) - a[3]) * u;
+    if (a[3] !== undefined) { const ra = [].concat(a[3]), rb = [].concat(b[3] ?? a[3]); r = [0, 1].map((j) => (ra[j] ?? ra[0]) + ((rb[j] ?? rb[0]) - (ra[j] ?? ra[0])) * u); }
   }
   const rr = Array.isArray(r) ? r : [r, r];
   return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3 })[F.mode] || 1]];

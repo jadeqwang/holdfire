@@ -93,8 +93,8 @@
   "dir": "work/plates/CO17",
   "kind": "video",
   "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
-  "in": 0.958,
-  "note": "plate = take 0.5-2.0 s; in = 0.85 s of the take (plate starts at 0.5 s) | polish 2: in 0.958 (plate frame 11): her eyes start to open on the 12.50 beat cut, open 3 frames later"
+  "in": 0.98,
+  "note": "plate = take 0.5-2.0 s; in = 0.85 s of the take (plate starts at 0.5 s) | polish 2: in 0.98 (plate frame 11): her eyes start to open on the 12.50 beat cut, open 3 frames later"
  },
  "CO11": {
   "dir": "work/plates/CO11",
@@ -273,18 +273,50 @@
      "mode": "erase",
      "c": [
       1400,
-      175
+      178
      ],
      "r": [
-      48,
-      36
+      56,
+      44
      ],
      "col": [
       0.055,
       0.35,
       0.57
      ],
-     "note": "the plate's static bright point is painted back to sky: the ISS is t2_iss_pass, which starts there and crosses"
+     "note": "the plate's static bright point is painted back to sky (core, then its cross spikes): the ISS is t2_iss_pass, which starts there and crosses"
+    },
+    {
+     "mode": "erase",
+     "c": [
+      1400,
+      178
+     ],
+     "r": [
+      120,
+      16
+     ],
+     "col": [
+      0.055,
+      0.35,
+      0.57
+     ]
+    },
+    {
+     "mode": "erase",
+     "c": [
+      1400,
+      178
+     ],
+     "r": [
+      16,
+      100
+     ],
+     "col": [
+      0.055,
+      0.35,
+      0.57
+     ]
     }
    ]
   }

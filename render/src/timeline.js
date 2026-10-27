@@ -61,7 +61,7 @@ function drawHero(ty, t, c) {
         const col = mixc(c.color || P.cream, c.hot || P.goldPale, hot);
         const sc = c.mode === 'fade' ? (c.hotT != null && t >= c.hotT ? 1 + 0.05 * Math.exp(-(t - c.hotT) / 0.14) : 1) : lerp(1.18, 1, easeOutExpo(k));
         cx.save(); cx.translate(x + ww / 2, y - size * 0.35); cx.scale(sc, sc); cx.translate(-(x + ww / 2), -(y - size * 0.35));
-        ty.text(w.text, x, y, { ...st, color: col, alpha: (c.mode === 'fade' ? easeOutCubic(k) : k) * fade * (c.alpha ?? 1), glow: c.glow ?? 3, shade: c.shade ?? 0.55 });
+        ty.text(w.text, x, y, { ...st, color: col, alpha: (c.mode === 'fade' ? easeOutCubic(k) : k) * fade * (c.alpha ?? 1), glow: c.glow ?? 3, glowColor: c.glowColor, shade: c.shade ?? 0.55 });
         cx.restore();
       }
       x += ww + sp;
@@ -332,7 +332,10 @@ export function buildTimeline(A) {
   co.push(S('0:05.30', wd('CO', 0, 'five'), { ...over(plate(), { scene: 't2_spiral_trace', p: { count: 5, hand: 1, center: [960, 540], r0: 60, r1: 480, turns: 0.42, t0: wd('CO', 0, 'five').t + 0.04, dur: 0.42 } }), method: 'video', era: ERA.spiral, look: LK.photo,
     want: 'Spiral aloe (Aloe polyphylla) from above; its five spiral rows of leaves trace in gold (the one real count)' }));
   co.push(S('0:06.00', wd('CO', 0, 'eight', 0), spiral('Hurricane from orbit (log spiral: no golden-rectangle overlay)')));
-  const coGal = S('0:06.63', wd('CO', 0, 'eight', 1), spiral('Spiral galaxy, face on (if ESA/Hubble: visible "ESA/Hubble" credit)'));
+  // Jade's note (26 Oct): the doubled "eight" is a stylistic echo: no second numeral; the galaxy cuts in on the beat after the echo
+  const echo1 = wd('CO', 0, 'eight', 1);
+  const coGal = S(null, beatK(echo1.t, 0, 'beat after the echoed "eight" (Jade\'s note: cut on the beat, no numeral)'), { ...spiral('Spiral galaxy, face on (if ESA/Hubble: visible "ESA/Hubble" credit); no numeral (the echoed "eight")'),
+    notes: 'plan prints 0:06.63 (the echo); Jade: cut on the next beat instead' });
   co.push(coGal);
   const redT = eighth('0:07.0');
   S('0:07.0', redT, { scene: 't2_plate', p: { clip: coGal.id, in: redT.t - coGal.t0, grade: { red: 1 } }, method: 'video', era: ERA.spiral,
@@ -353,10 +356,14 @@ export function buildTimeline(A) {
     want: "Earth's night side from the ISS, cities joined by roads of light (NASA imagery is public domain; t2_earth_night 'iss' until a plate is picked)" });
   const yeah = hitWord('(yeah)');
   // t2_graph_flash: eight links at once, then (from the last whisper) the light gathers into one pale-blue point at frame centre
-  const flashP = { tEight: wd('CO', 1, 'eight').t, tGather: [yeah.t, yeah.t + 0.8], dot: [960, 540] };
+  // Jade's note: the echo whisper after count 2's "eight" (11.51) gets no numeral; the gather starts on it and the pull-back from the
+  // catchlight cuts in on the next beat
+  const pullT = beatK(yeah.t, 0, 'beat after the echo whisper (Jade\'s note)');
+  const flashP = { tEight: wd('CO', 1, 'eight').t, tGather: [yeah.t, pullT.t], dot: [960, 540] };
   S('0:11.16', wd('CO', 1, 'eight'), { scene: 't2_graph_flash', p: flashP, method: 'procedural', era: ERA.light, look: LK.light,
     want: 'The contact graph over the Milky Way, eight links lighting at once' });
-  S('0:11.51', yeah, { scene: 't2_first', p: { chain: [{ scene: 't2_plate', p: { clip: '@' } }, { scene: 't2_graph_flash', p: flashP }] }, method: 'video', era: ERA.room, look: LK.room,
+  S(null, pullT, { scene: 't2_first', p: { chain: [{ scene: 't2_plate', p: { clip: '@', rate: 6.15 } }, { scene: 't2_graph_flash', p: flashP }] }, method: 'video', era: ERA.room, look: LK.room,
+    notes: 'plan prints 0:11.5 (the echo whisper); Jade: the pull-back carries it on the next beat. rate 6.15: the whole pull-back (take 0 to 3.96 s) inside the 0.64 s shot',
     want: "The graph's light gathers into one point; pull back: it is the catchlight in Jade's eye; she is at her console in headphones, waterfall spectrograms behind" });
   S('0:12.50', beat('0:12.50'), { ...plate(), method: 'video', era: ERA.room, look: LK.room, want: 'Jade opens her eyes and looks up (on the beat before the verse)' });
 
@@ -371,8 +378,8 @@ export function buildTimeline(A) {
       const n = NUMS[norm(w.w)];
       if (!n) return;
       const prev = items[items.length - 1];
-      const echo = prev && prev.n === n && n !== 1;            // the doubled whispered "eight" re-slams the same numeral
-      const slot = echo ? prev.slot : items.length ? Math.max(...items.map((x) => x.slot)) + 1 : 0;
+      if (prev && prev.n === n && n !== 1) return;              // the doubled whispered "eight" is an echo: no numeral (Jade's note)
+      const slot = items.length ? Math.max(...items.map((x) => x.slot)) + 1 : 0;
       items.push({ n, t: w.t, slot, giant });
     });
     return items;
@@ -382,7 +389,7 @@ export function buildTimeline(A) {
   c1items.forEach((x) => { if (x.out == null) x.out = blackT; });
   cue({ kind: 'num', label: '1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)', t0: intro0.t, t1: blackT + 0.01, items: c1items, slots: Math.max(...c1items.map((x) => x.slot)) + 1, draw: drawCount });
   const c2items = countItems(intro1);
-  cue({ kind: 'num', label: '1 2 3 5 8 (giant, then the row; fades as the light gathers)', t0: intro1.t, t1: yeah.t + 0.6, items: c2items, slots: Math.max(...c2items.map((x) => x.slot)) + 1, draw: drawCount });
+  cue({ kind: 'num', label: '1 2 3 5 8 (giant, then the row; fades as the light gathers)', t0: intro1.t, t1: pullT.t + 0.3, items: c2items, slots: Math.max(...c2items.map((x) => x.slot)) + 1, draw: drawCount });
 
   // ============================================================================================== VERSE 1 (13.05 to 35.50)
   section('V1');
@@ -460,7 +467,9 @@ export function buildTimeline(A) {
   sub('V1', 2, { cap: wd('V1', 3, 'seeds').t, band: true });                                                             // carried the egg ...
   sub('V1', 3, { to: 7, t1: wd('V1', 3, 'flood').t, band: true });                                                        // seeds ... waking
   // FLOOD right of Jade's head in V117 (she walks in at x ~560-720) and over the locomotive's smoke in V118
-  hero([{ text: 'FLOOD', t: wd('V1', 3, 'flood').t }], { size: 185, x: 1110, maxW: 560, y: 330, t1: wd('V1', 3, 'flood').t + 0.6, out: 0.1 });
+  // (cyanotype ink like OUT OF THE SEA, with a pale halo: it crosses the pale Okavango sky and the locomotive's dark smoke)
+  hero([{ text: 'FLOOD', t: wd('V1', 3, 'flood').t }], { size: 185, x: 1110, maxW: 560, y: 330, t1: wd('V1', 3, 'flood').t + 0.6, out: 0.1,
+    color: [0.05, 0.12, 0.3], hot: [0.13, 0.36, 0.86], glow: 22, glowColor: [0.98, 0.95, 0.86], shade: 0 });
   sub('P1', 0, { cap: LN('P1', 1).t });                                                                                    // Snowflake in the boundless night
 
   // ============================================================================================== PRE-CHORUS 1 (35.50 to 51.70)
@@ -848,8 +857,8 @@ export function buildTimeline(A) {
   const z0 = 1.06, back = (1 - 1 / z0) / (A.duration - holdLast.t);
   const zHit = z0 * (1 - back * (finalHit.t - holdLast.t)), backHit = (1 - 1 / zHit) / (A.duration - finalHit.t);
   S('4:02.08', holdLast, { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: z0, push: -back }, method: 'video', era: ERA.spiral, look: LK.photo, want: "The opening frame itself (CO01's first frame, easing back to the opening framing), so the post loops cleanly" });
-  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t, endT: A.duration, under: { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: zHit, push: -backHit } } }, method: 'procedural', era: ERA.light,
-    look: withLook(LK.photo, flash([1, 0.85, 0.55], 0.35, 0.08)),
+  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t, endT: A.duration, titleLoop: true, under: { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: zHit, push: -backHit } } }, method: 'procedural', era: ERA.light,
+    look: withLook({ ...LK.photo, tonemap: 0 }, flash([1, 0.85, 0.55], 0.35, 0.08)),   // tonemap 0 like the plate it ends on (frame 0)
     want: 'HOLD FIRE lands on the final hit (the opening title\'s type and place), then the credits; the card clears to the opening frame by the end of the file (loop)',
     notes: 'no real images are used so far (every picture is generated or drawn): add p.images [{credit: "ESA/Hubble"}] / NASA if one is' });
 

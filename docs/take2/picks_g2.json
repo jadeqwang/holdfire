@@ -175,13 +175,225 @@
   "src": "media/gen/t2_P106_sd25_t3_eb735d9762.mp4",
   "s0": 47.432,
   "lag": 1.263,
-  "note": "lag 1.18 -> 1.263 (polish pass 1): her eyes now open 2 frames after the cut on the held 'awake' (47.73) instead of 4"
+  "note": "lag 1.18 -> 1.263 (polish pass 1): her eyes now open 2 frames after the cut on the held 'awake' (47.73) instead of 4",
+  "grade": {
+   "fix": [
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "track": [
+      [
+       37,
+       1010,
+       625,
+       [
+        18,
+        14
+       ]
+      ],
+      [
+       44,
+       1000,
+       600,
+       [
+        25,
+        24
+       ]
+      ],
+      [
+       56,
+       985,
+       590,
+       [
+        27,
+        27
+       ]
+      ],
+      [
+       74,
+       965,
+       575,
+       [
+        26,
+        27
+       ]
+      ],
+      [
+       96,
+       960,
+       570,
+       [
+        26,
+        27
+       ]
+      ]
+     ],
+     "note": "teal-tips' irises read teal-green: recoloured to canon brown at their luma (catchlights kept); keyframes measured on the plate (polish 2)"
+    },
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "track": [
+      [
+       37,
+       1120,
+       670,
+       [
+        20,
+        15
+       ]
+      ],
+      [
+       44,
+       1130,
+       650,
+       [
+        27,
+        26
+       ]
+      ],
+      [
+       56,
+       1135,
+       630,
+       [
+        29,
+        29
+       ]
+      ],
+      [
+       74,
+       1128,
+       615,
+       [
+        28,
+        28
+       ]
+      ],
+      [
+       96,
+       1126,
+       612,
+       [
+        28,
+        28
+       ]
+      ]
+     ]
+    }
+   ]
+  }
  },
  "P107": {
   "dir": "work/plates/P107",
   "kind": "video",
   "src": "work/t2/g2/P107_push.mp4",
-  "in": 0.0
+  "in": 0.0,
+  "grade": {
+   "fix": [
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "track": [
+      [
+       0,
+       982,
+       600,
+       24
+      ],
+      [
+       12,
+       962,
+       602,
+       26
+      ],
+      [
+       24,
+       966,
+       612,
+       32
+      ],
+      [
+       36,
+       955,
+       640,
+       46
+      ],
+      [
+       48,
+       962,
+       660,
+       62
+      ],
+      [
+       59,
+       1000,
+       640,
+       80
+      ]
+     ],
+     "note": "the push into her eye: both irises to canon brown, tracked by hand keyframes (polish 2)"
+    },
+    {
+     "mode": "iris",
+     "col": [
+      0.4,
+      0.26,
+      0.17
+     ],
+     "track": [
+      [
+       0,
+       1140,
+       628,
+       22
+      ],
+      [
+       12,
+       1150,
+       640,
+       24
+      ],
+      [
+       24,
+       1186,
+       680,
+       30
+      ],
+      [
+       36,
+       1240,
+       730,
+       46
+      ],
+      [
+       48,
+       1400,
+       790,
+       64
+      ],
+      [
+       59,
+       1720,
+       860,
+       98
+      ]
+     ]
+    }
+   ]
+  }
  },
  "X201": {
   "dir": "work/plates/X201",

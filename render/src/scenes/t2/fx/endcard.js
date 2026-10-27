@@ -95,11 +95,17 @@ export default {
       // the title lands on the hit (slam, hot gold to cream) and holds to the loop point, where the opening fades it in again
       const k = clamp((t - T.hitT + 0.02) / 0.12);
       const hot = 1 - easeOutCubic(range(t, T.hitT, T.hitT + 0.4));
-      const out = 1 - smooth(range(t, T.endT - 0.5, T.endT - 0.05));
+      // p.titleLoop: frame 0 carries the title too, so it holds to the last frame (the loop); else it fades out for the opening's fade-in
+      const out = p.titleLoop ? 1 : 1 - smooth(range(t, T.endT - 0.5, T.endT - 0.05));
       const col = [lerp(P.cream[0], 1, hot), lerp(P.cream[1], 0.94, hot), lerp(P.cream[2], 0.78, hot)];
       const sc = lerp(1.15, 1, easeOutExpo(k));
+      // set exactly as the opening title (the edit's hero layout): two words, fitted inside the centred 4:5 area (864 px)
+      const sp = ty.measure(' ', TITLE) * 0.9, wH = ty.measure('HOLD', TITLE), wF = ty.measure('FIRE', TITLE);
+      const fit = Math.min(1, 864 / (wH + sp + wF)), st = { ...TITLE, size: TITLE.size * fit };
+      const x0 = 960 - (wH + sp + wF) * fit / 2;
       const cx = ty.ctx; cx.save(); cx.translate(960, 538); cx.scale(sc, sc); cx.translate(-960, -538);
-      ty.text('HOLD FIRE', 960, 590, { ...TITLE, align: 'center', color: col, alpha: k * out, glow: 10, shade: 0.55 });
+      ty.text('HOLD', x0, 590, { ...st, color: col, alpha: k * out, glow: 10, shade: 0.55 });
+      ty.text('FIRE', x0 + (wH + sp) * fit, 590, { ...st, color: col, alpha: k * out, glow: 10, shade: 0.55 });
       cx.restore();
     }
     const C = credits(p, ctx.state.t2credits);

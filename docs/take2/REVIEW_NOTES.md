@@ -93,3 +93,11 @@ rule breaks; chess_check OK (42 plies legal, final position as planned).
 
 ## Jade's notes
 - (26 Oct, on preview v2) Cold open: the whispered "eight" is echoed (sung twice). Don't show a second 8 on screen; cut to the next image (the galaxy) on the beat instead. Same for the second count's echo.
+- (27 Oct, on preview v2, timestamped)
+  - Lip sync off at 0:13.6 (V101), 0:46.6 (P105), 0:57.4 (C103, both), 1:05.1 (C108), 1:58.8 (C203, both), 3:19.6 (DR11), 3:29.1 (DR16).
+  - Jacket canon: 0:15.4 RARE EARTH missing from the back (V102); 0:46.6 decide whether teal-tips lives in a full mirror world; the arm patch sits on the same side as the blue dot and, when visible, in the middle of the orange stripe; 0:48.9 erase the arm patch; 1:05.1 blue dot on the other side, arm patch not visible; 1:54.9 teal-tips' back is missing the text and the blue circle; 1:58.8 and 2:09.0 teal-tips' patch placement; 2:08.4 "a good argument for making them actual mirror images of each other".
+  - 0:15.5 the words go by fast: make every lyric visible, woven into the scenery the way rewind-take-two does it.
+  - 0:31.8 the technology diagrams look unfinished: show them nearly complete rather than the first strokes.
+  - 0:33.3 the ISS isn't recognisable to anyone who doesn't already know.
+  - 2:47.1 more time on the rewind, galactic war included, so nobody misses it.
+- Director's decision on the mirror (from Jade's 2:08.4 note): **teal-tips is Jade's true mirror image**. Every teal-tips shot is generated with the canon jacket (dot on the left chest, 1420 MHz patch centred on the left sleeve's orange band, RARE EARTH + pale-blue circle on the back) and then flipped left-right in the renderer, so her dot and patch sit on her right, her room is A mirrored, and her lettering reads reversed, as in a mirror. Jade's world is never flipped.

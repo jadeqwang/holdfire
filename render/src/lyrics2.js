@@ -17,7 +17,8 @@
 //              fitted into the quad, qAlign / vAlign), zoom / pan (numbers or fn(lt) -> the plate's centred zoom and pan, applied
 //              to x, y and quad, lt from the segment's shot start), copies [{...overrides}] (draw the line again, e.g. mirrored)
 //   words      all (also show words the edit's cues carry), only [indices], from (first word index)
-//   time       hold (s after the last word, default 1.1), endAt / startAt (absolute song times)
+//   time       hold (s after the last word, default 1.1), endAt / startAt (absolute song times), handover (s the line stays
+//              after an edit hero carries the rest of it, default 0.4)
 //   a shot listed with false hides the line in that shot; a shot not listed uses the entry's own options; the line ends at the
 //   first cut after its last word into a shot the entry does not list (so it never leaks into an unrelated picture)
 import { clamp, smooth, range } from './util.js';
@@ -85,7 +86,7 @@ export const PLAN = [
   { n: 33, style: 'engrave', size: 60, shade: 2, plate: 0.8, x: 960, y: 150, align: 'center', maxW: 860, br: [3], segs: { P204: {} } },   // ends at the cut to chorus 2 (CAN'T BE SURE); a dark ground over the coins flying up (polish 4)
   // ---------------------------------------------------------------- CHORUS 2: the mirror, first (as chorus 1, both rooms)
   { n: 34, style: 'light', size: 74, col: GOLD, shade: 1.4, x: 960, yLast: 1015, align: 'center' },
-  { n: 35, style: 'engrave', size: 50, x: 960, y: 925, align: 'center', maxW: 860, br: [4] },
+  { n: 35, style: 'engrave', size: 50, x: 960, yLast: 1010, align: 'center', maxW: 860, br: [4, 6] },   // a row per phrase where the commas were
   { n: 36, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 770, align: 'center', handover: 0 },
   { n: 37, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, yLast: 985, align: 'center', maxW: 860, br: [3] },
   { n: 38, style: 'crt', size: 64, col: '#a8f0ff', panel: 'rgba(2,10,20,1)', x: 960, yLast: 1012, align: 'center', maxW: 860, br: [4] },

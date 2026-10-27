@@ -152,3 +152,6 @@ No paid generation in this pass ($0 of the $30).
 - C203L (3 held frames) and DR11's vanish hold as in pass 1. Plan-time deviations: BU04/BU06 (above), BR01, BR13, V218 (pass 1).
 - The locomotive outline is approximate on the painted engine (it reads as a schematic over it, not a trace).
 
+
+## Director, after polish pass 2
+- CO01/OU12 catchlight: the new pale-blue disc sits on top of the plate's white catchlight and reads as a big double bubble. Recolour the existing white catchlight to pale blue #8EC5FF in place (same size and shape, keep a tiny white core), no extra disc.

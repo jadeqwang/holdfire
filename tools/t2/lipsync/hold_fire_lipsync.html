@@ -1,0 +1,456 @@
+<title>Hold Fire Lip Sync</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Same console as the review page: signal-print paper, Klein blue for the pick, beacon orange for retakes. One card per sung shot. */
+:root {
+  --ground: #edf0f5;
+  --card: #ffffff;
+  --ink: #0b1024;
+  --dim: #535a70;
+  --rule: #d5d9e3;
+  --signal: #002fa7;
+  --on-signal: #ffffff;
+  --signal-soft: #e3e9f8;
+  --beacon: #c2410c;
+  --on-beacon: #ffffff;
+  --beacon-soft: #fff0e5;
+  --tc: #0b1024;
+  --screen: #05060a;
+  --on-screen: #ece9e1;
+  --danger: #b42318;
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --r: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #07080b; --card: #12141b; --ink: #ece9e1; --dim: #9ba0ae; --rule: #262a36;
+    --signal: #8ec5ff; --on-signal: #001a5e; --signal-soft: #121d33; --beacon: #ff7a33; --on-beacon: #1a0a00; --beacon-soft: #2a1609;
+    --tc: #f2c14e; --screen: #000000; --on-screen: #ece9e1; --danger: #ff8a7a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #07080b; --card: #12141b; --ink: #ece9e1; --dim: #9ba0ae; --rule: #262a36;
+  --signal: #8ec5ff; --on-signal: #001a5e; --signal-soft: #121d33; --beacon: #ff7a33; --on-beacon: #1a0a00; --beacon-soft: #2a1609;
+  --tc: #f2c14e; --screen: #000000; --on-screen: #ece9e1; --danger: #ff8a7a; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { background: var(--ground); color: var(--ink); }
+body {
+  margin: 0;
+  font-family: var(--f-body); font-size: 15px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-top: max(12px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(48px, env(safe-area-inset-bottom, 0px));
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+button, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 16px; }
+
+/* header */
+.top { display: flex; align-items: baseline; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; }
+.name { margin: 0; display: flex; align-items: baseline; gap: 10px; }
+.name b {
+  font-family: var(--f-display); font-weight: 800; font-size: 2.1rem; line-height: .9; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--signal); text-shadow: 2px 1px 0 var(--beacon);
+}
+.name span { font-family: var(--f-mono); font-size: .78rem; font-weight: 500; color: var(--dim); letter-spacing: .14em; text-transform: uppercase; }
+.meta { font-family: var(--f-mono); font-size: .72rem; color: var(--dim); }
+.intro { margin: 0; max-width: 62ch; color: var(--dim); font-size: .92rem; }
+.intro b { color: var(--ink); font-weight: 600; }
+
+/* summary strip */
+.summary { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 12px; display: grid; gap: 10px; }
+.sum-head { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; }
+.count { font-family: var(--f-mono); font-weight: 600; font-size: 1.5rem; line-height: 1; color: var(--tc); font-variant-numeric: tabular-nums; }
+.count small { font-family: var(--f-body); font-size: .9rem; font-weight: 500; color: var(--dim); }
+.dbstate { font-size: .8rem; color: var(--dim); margin: 0; }
+.dbstate.warn { color: var(--danger); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.chip {
+  min-height: 36px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--rule); background: var(--ground); cursor: pointer;
+  font-family: var(--f-mono); font-size: .8rem; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums;
+}
+.chip .st { font-size: .72rem; color: var(--dim); }
+.chip.ok { background: var(--signal-soft); border-color: var(--signal); }
+.chip.ok .st { color: var(--signal); }
+.chip.none { background: var(--beacon-soft); border-color: var(--beacon); }
+.chip.none .st { color: var(--beacon); }
+
+/* cards */
+.cards { display: grid; gap: 16px; list-style: none; margin: 0; padding: 0; }
+@media (min-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 12px; display: grid; gap: 10px; min-width: 0; scroll-margin-top: 12px; }
+.card.ok { border-color: var(--signal); }
+.card.none { border-color: var(--beacon); }
+.c-head { display: flex; align-items: baseline; gap: 4px 10px; flex-wrap: wrap; }
+.sid { font-family: var(--f-display); font-weight: 800; font-size: 1.7rem; line-height: 1; letter-spacing: .03em; }
+.when { font-family: var(--f-mono); font-weight: 600; font-size: .95rem; color: var(--tc); font-variant-numeric: tabular-nums; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.tag { font-family: var(--f-mono); font-size: .7rem; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--rule); color: var(--dim); white-space: nowrap; }
+.tag.who { color: var(--ink); }
+.lyric { margin: 0; font-size: 1.02rem; font-weight: 500; overflow-wrap: anywhere; }
+.lyric::before { content: "“"; color: var(--dim); }
+.lyric::after { content: "”"; color: var(--dim); }
+
+.screen { position: relative; background: var(--screen); border-radius: 6px; overflow: hidden; margin-inline: auto; width: 100%; }
+.screen video { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--screen); object-fit: contain; }
+.screen .badge {
+  position: absolute; left: 8px; top: 8px; font-family: var(--f-mono); font-size: .72rem; font-weight: 600; color: var(--on-screen);
+  background: var(--screen); padding: 3px 7px; border-radius: 4px; opacity: .85; pointer-events: none; font-variant-numeric: tabular-nums;
+}
+.screen .badge.err { background: var(--danger); opacity: 1; }
+
+/* variant dial: one row of 13 when there's room; on a phone earlier / now / later in three rows */
+.dial { display: grid; gap: 6px; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.dial .cap { font-family: var(--f-mono); font-size: .72rem; color: var(--dim); letter-spacing: .04em; }
+.dial .cap.e { grid-column: 1 / -1; grid-row: 1; }
+.dial .cap.l { grid-column: 1 / -1; grid-row: 4; text-align: right; }
+.vb {
+  min-height: 44px; min-width: 0; padding: 0 2px; border-radius: 6px; border: 1px solid var(--rule); background: var(--card); cursor: pointer;
+  font-family: var(--f-mono); font-size: .86rem; font-weight: 500; font-variant-numeric: tabular-nums; position: relative;
+}
+.vb:active { transform: translateY(1px); }
+.vb.now { font-family: var(--f-body); font-weight: 600; }
+.vb[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+.vb.saved::after { content: ""; position: absolute; right: 4px; top: 4px; width: 7px; height: 7px; border-radius: 50%; background: var(--signal); }
+.vb.saved[aria-pressed="true"]::after { background: var(--tc); }
+.dial .vb.e { grid-row: 2; }
+.dial .vb.now { grid-row: 3; grid-column: 1 / -1; }
+.dial .vb.l { grid-row: 5; }
+.dial .vb[data-c="1"] { grid-column: 1; }
+.dial .vb[data-c="2"] { grid-column: 2; }
+.dial .vb[data-c="3"] { grid-column: 3; }
+.dial .vb[data-c="4"] { grid-column: 4; }
+.dial .vb[data-c="5"] { grid-column: 5; }
+.dial .vb[data-c="6"] { grid-column: 6; }
+@media (min-width: 560px) {
+  .dial { grid-template-columns: repeat(13, minmax(0, 1fr)); }
+  .dial .vb.l[data-c="1"] { grid-column: 8; }
+  .dial .vb.l[data-c="2"] { grid-column: 9; }
+  .dial .vb.l[data-c="3"] { grid-column: 10; }
+  .dial .vb.l[data-c="4"] { grid-column: 11; }
+  .dial .vb.l[data-c="5"] { grid-column: 12; }
+  .dial .vb.l[data-c="6"] { grid-column: 13; }
+  .dial .cap.e { grid-column: 1 / 7; grid-row: 1; }
+  .dial .cap.l { grid-column: 8 / 14; grid-row: 1; }
+  .dial .vb.e, .dial .vb.l { grid-row: 2; }
+  .dial .vb.now { grid-row: 2; grid-column: 7; }
+}
+@media (min-width: 1000px) and (max-width: 1240px) {
+  .vb { font-size: .78rem; }
+}
+.reading { font-family: var(--f-mono); font-size: .76rem; color: var(--dim); margin: 0; font-variant-numeric: tabular-nums; }
+
+.tools { display: flex; gap: 6px; flex-wrap: wrap; }
+.tbtn {
+  min-height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--rule); background: var(--card); cursor: pointer;
+  font-family: var(--f-mono); font-size: .84rem; font-weight: 500;
+}
+.tbtn[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
+
+.choose { display: grid; gap: 8px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn { min-height: 44px; padding: 0 14px; border-radius: 6px; border: 1px solid var(--rule); background: var(--card); cursor: pointer; font-weight: 500; }
+.btn.primary { background: var(--signal); border-color: var(--signal); color: var(--on-signal); font-weight: 600; flex: 1 1 12em; }
+.btn.retake { color: var(--beacon); border-color: var(--beacon); }
+.btn.quiet { min-height: 36px; font-size: .86rem; }
+.btn:disabled { opacity: .5; cursor: default; }
+.choose textarea {
+  width: 100%; min-height: 60px; resize: vertical; border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px;
+  font-size: 16px; background: var(--ground); color: var(--ink);
+}
+.saved-line { margin: 0; font-size: .88rem; padding: 8px 10px; border-radius: 6px; background: var(--ground); color: var(--dim); }
+.saved-line b { color: var(--ink); font-weight: 600; }
+.saved-line.ok { background: var(--signal-soft); }
+.saved-line.ok b { color: var(--signal); }
+.saved-line.none { background: var(--beacon-soft); }
+.saved-line.none b { color: var(--beacon); }
+.saved-line .note { display: block; margin-top: 2px; color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+.warn { font-size: .85rem; color: var(--danger); margin: 0; }
+.empty { border: 1px dashed var(--rule); border-radius: var(--r); padding: 16px; color: var(--dim); }
+
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink); color: var(--ground); padding: 8px 14px; border-radius: 999px; font-size: .88rem; z-index: 20; max-width: calc(100% - 32px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vb, .chip, .card, .tbtn { transition: border-color .15s, background-color .15s; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1 class="name"><b>Hold Fire</b><span>Lip sync</span></h1>
+    <span class="meta" id="ver">take two</span>
+  </header>
+  <p class="intro">Each clip is a sung shot as the film plays it now. The buttons slide the song against the picture: <b>now</b> is the cut as it is. Try a few, then tap <b>This one matches</b> on the one where her mouth and the voice land together. If two look equally right, pick the one nearer <b>mouth earlier</b>.</p>
+
+  <section class="summary" aria-label="Progress">
+    <div class="sum-head">
+      <span class="count" id="count">0 of 0 <small>chosen</small></span>
+      <p class="dbstate" id="dbState">Connecting to saved choices…</p>
+    </div>
+    <ul class="chips" id="chips"></ul>
+  </section>
+
+  <ul class="cards" id="cards"></ul>
+  <div class="empty" id="loading">Loading the shots…</div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+  'use strict';
+  // Data: shots.json next to this page ({fps, version, shots: [...]}, film order). Clips: clips/<id>_k<+NN>.mp4.
+  // Variant k plays the song k frames ahead of the picture: the mouth looks k frames LATER than now (k < 0: earlier).
+  // A chosen k becomes the pick's new lag: lag' = lag − k / fps.
+  // Choices: db collection "lagpicks", doc id = shot id: {shot, k, note, none, by, at}. One doc per shot, overwritten.
+  const $ = (s, el) => (el || document).querySelector(s);
+  const fmt1 = (t) => { const d = Math.round(Math.max(0, t) * 10), m = Math.floor(d / 600), s = d - m * 600; return m + ':' + String(Math.floor(s / 10)).padStart(2, '0') + '.' + (s % 10); };
+  const kName = (k) => 'k' + (k < 0 ? '-' : '+') + String(Math.abs(k)).padStart(2, '0');
+  const kLabel = (k) => k === 0 ? 'now' : (k < 0 ? '−' : '+') + Math.abs(k);
+  const kWords = (k, fps) => k === 0 ? 'as cut now' : 'mouth ' + Math.abs(k) + (Math.abs(k) === 1 ? ' frame ' : ' frames ') + (k < 0 ? 'earlier' : 'later') + ' (' + Math.round(Math.abs(k) / fps * 1000) + ' ms)';
+  const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  let toastTimer = 0;
+  const toast = (msg) => { const el = $('#toast'); el.textContent = msg; el.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { el.hidden = true; }, 2400); };
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  let FPS = 24, SHOTS = [];
+  const cards = new Map();          // id -> card state
+  let picks = {};                   // id -> saved doc
+  let col = null, me = null, dbFailed = false;
+  const NEED_CLAUDE = 'Choices and notes need this page opened on claude.ai while signed in. The clips still play here.';
+
+  // ---------------------------------------------------------------- db + user (both may be null)
+  const use = (n) => (window.claude && typeof window.claude.use === 'function') ? Promise.resolve(window.claude.use(n)).catch(() => null) : Promise.resolve(null);
+  const dbState = $('#dbState');
+  const dbReady = (async () => {
+    const [db, user] = await Promise.all([use('db'), use('user')]);
+    if (user) { try { me = await user.id(); } catch (e) { me = null; } }
+    if (!db) { dbFailed = true; dbState.textContent = NEED_CLAUDE; dbState.className = 'dbstate warn'; refreshAll(); return; }
+    col = db.collection('lagpicks');
+    col.onSnapshot((snap) => {
+      const next = {};
+      snap.docs.forEach((d) => { if (d.exists) next[d.id] = d.data(); });
+      picks = next;
+      dbState.textContent = 'Saved with the page; the director reads them from here.';
+      dbState.className = 'dbstate';
+      refreshAll();
+    }, (err) => { dbState.textContent = 'Choices stopped syncing (' + ((err && err.code) || 'error') + '). Reload the page.'; dbState.className = 'dbstate warn'; });
+    refreshAll();
+  })();
+
+  async function save(c, body) {
+    await dbReady;
+    if (!col) { c.warn.hidden = false; c.warn.textContent = NEED_CLAUDE; return false; }
+    c.busy = true; setButtons(c);
+    try {
+      const by = me;   // user.id(), resolved once at load (null when the viewer has no identity here)
+      await col.doc(c.s.id).set(Object.assign({ shot: c.s.id, k: null, note: '', none: false }, body, { by, at: new Date().toISOString() }));
+      c.warn.hidden = true;
+      return true;
+    } catch (e) {
+      c.warn.hidden = false;
+      c.warn.textContent = 'Couldn’t save (' + ((e && e.code) || 'error') + '). Try again.';
+      return false;
+    } finally { c.busy = false; setButtons(c); }
+  }
+
+  // ---------------------------------------------------------------- one card
+  function buildCard(s) {
+    const ks = (s.k && s.k.length ? s.k : [-24, -16, -10, -6, -4, -2, 0, 2, 4, 6, 10, 16, 24]).slice().sort((a, b) => a - b);
+    const li = el('li', 'card'); li.id = 'shot-' + s.id;
+    const head = el('div', 'c-head');
+    head.append(el('span', 'sid', s.id), el('span', 'when', fmt1(s.t)));
+    const tags = el('span', 'tags');
+    tags.append(el('span', 'tag who', s.singer === 'Jade' ? 'Jade sings' : 'teal-tips sings'), el('span', 'tag', 'confidence ' + (s.conf || '?')));
+    head.append(tags);
+    const lyric = el('p', 'lyric', s.lyric || '');
+
+    const screen = el('div', 'screen');
+    const ar = String(s.aspect || '16/9').split('/').map(Number);
+    const arN = (ar[0] / (ar[1] || 1)) || 16 / 9;
+    screen.style.aspectRatio = ar[0] + ' / ' + (ar[1] || 1);
+    screen.style.maxWidth = 'min(100%, calc(min(62vh, 560px) * ' + arN.toFixed(4) + '))';
+    const video = document.createElement('video');
+    video.setAttribute('playsinline', ''); video.setAttribute('webkit-playsinline', ''); video.setAttribute('disableremoteplayback', '');
+    video.controls = true; video.preload = 'metadata'; video.loop = true;
+    if (s.poster) video.poster = s.poster;   // a frame on the first sung word (frame 0 is the shot before)
+    const badge = el('span', 'badge', 'now');
+    screen.append(video, badge);
+
+    const dial = el('div', 'dial'); dial.setAttribute('role', 'group'); dial.setAttribute('aria-label', 'Offset of the song against the picture');
+    dial.append(el('span', 'cap e', '← mouth earlier'), el('span', 'cap l', 'mouth later →'));
+    const vbs = new Map();
+    let ei = 0, li2 = 0;
+    for (const k of ks) {
+      const b = el('button', 'vb ' + (k < 0 ? 'e' : k > 0 ? 'l' : 'now'), kLabel(k)); b.type = 'button';
+      b.setAttribute('aria-pressed', 'false');
+      b.setAttribute('aria-label', k === 0 ? 'Now, as cut' : 'Mouth ' + Math.abs(k) + ' frames ' + (k < 0 ? 'earlier' : 'later'));
+      if (k < 0) b.dataset.c = String(++ei);     // earlier: columns 1..6
+      if (k > 0) b.dataset.c = String(++li2);    // later: columns 1..6 on a phone, 8..13 on a wide card
+      b.addEventListener('click', () => { c.touched = true; pick(c, k, true); });
+      dial.append(b); vbs.set(k, b);
+    }
+    const reading = el('p', 'reading', '');
+
+    const tools = el('div', 'tools');
+    const bLoop = el('button', 'tbtn', 'Loop'); bLoop.type = 'button'; bLoop.setAttribute('aria-pressed', 'true');
+    const bSlow = el('button', 'tbtn', '0.5×'); bSlow.type = 'button'; bSlow.setAttribute('aria-pressed', 'false');
+    const bAgain = el('button', 'tbtn', 'From the start'); bAgain.type = 'button';
+    tools.append(bLoop, bSlow, bAgain);
+
+    const choose = el('div', 'choose');
+    const savedLine = el('p', 'saved-line', 'Not chosen yet.');
+    const row = el('div', 'row');
+    const bMatch = el('button', 'btn primary', 'This one matches'); bMatch.type = 'button';
+    const bNone = el('button', 'btn retake', 'None match — retake'); bNone.type = 'button';
+    row.append(bMatch, bNone);
+    const ta = document.createElement('textarea');
+    ta.placeholder = 'Note (optional): what you see or hear'; ta.setAttribute('aria-label', 'Note for ' + s.id); ta.rows = 2;
+    const row2 = el('div', 'row');
+    const bNote = el('button', 'btn quiet', 'Save note'); bNote.type = 'button';
+    const hint = el('span', 'reading', 'The note is saved with your choice.');
+    row2.append(bNote, hint);
+    const warn = el('p', 'warn'); warn.hidden = true;
+    choose.append(savedLine, row, ta, row2, warn);
+
+    li.append(head, lyric, screen, dial, reading, tools, choose);
+    const c = { s, li, video, badge, vbs, reading, bLoop, bSlow, bMatch, bNone, bNote, ta, savedLine, warn, k: null, busy: false, noteDirty: false, ks };
+
+    bLoop.addEventListener('click', () => { video.loop = !video.loop; bLoop.setAttribute('aria-pressed', String(video.loop)); });
+    bSlow.addEventListener('click', () => { const slow = video.playbackRate !== 0.5; setRate(c, slow ? 0.5 : 1); });
+    bAgain.addEventListener('click', () => { try { video.currentTime = 0; } catch (e) {} video.play().catch(() => {}); });
+    video.addEventListener('ratechange', () => bSlow.setAttribute('aria-pressed', String(video.playbackRate === 0.5)));
+    video.addEventListener('play', () => { cards.forEach((o) => { if (o !== c && !o.video.paused) o.video.pause(); }); });
+    video.addEventListener('error', () => { if (!video.getAttribute('src')) return; badge.textContent = 'Clip didn’t load: ' + kName(c.k) + '.mp4'; badge.classList.add('err'); });
+    video.addEventListener('loadeddata', () => { badge.classList.remove('err'); badge.textContent = kLabel(c.k) === 'now' ? 'now' : kLabel(c.k) + ' f'; });
+
+    bMatch.addEventListener('click', async () => {
+      const k = c.k;
+      if (await save(c, { k, none: false, note: ta.value.trim() })) { c.noteDirty = false; toast(s.id + ': saved ' + (k === 0 ? '“now”' : kLabel(k) + ' frames')); }
+    });
+    bNone.addEventListener('click', async () => {
+      if (await save(c, { k: null, none: true, note: ta.value.trim() })) { c.noteDirty = false; toast(s.id + ': marked for a retake'); }
+    });
+    bNote.addEventListener('click', async () => {
+      const p = picks[s.id] || {};
+      if (await save(c, { k: p.k == null ? null : p.k, none: !!p.none, note: ta.value.trim() })) { c.noteDirty = false; toast(s.id + ': note saved'); }
+    });
+    ta.addEventListener('input', () => { c.noteDirty = true; store.set('hf-lips-draft-' + s.id, ta.value); setButtons(c); });
+    const draft = store.get('hf-lips-draft-' + s.id);
+    if (draft) { ta.value = draft; c.noteDirty = true; }
+    return c;
+  }
+
+  function setRate(c, r) {
+    const v = c.video;
+    v.preservesPitch = true; v.mozPreservesPitch = true; v.webkitPreservesPitch = true;
+    v.defaultPlaybackRate = r; v.playbackRate = r;
+  }
+
+  function pick(c, k, play) {
+    if (c.k === k && c.video.getAttribute('src')) { if (play) { try { c.video.currentTime = 0; } catch (e) {} c.video.play().catch(() => {}); } return; }
+    c.k = k;
+    c.vbs.forEach((b, kk) => b.setAttribute('aria-pressed', String(kk === k)));
+    const rate = c.video.playbackRate === 0.5 ? 0.5 : 1;
+    c.badge.classList.remove('err'); c.badge.textContent = (k === 0 ? 'now' : kLabel(k) + ' f') + ' · loading';
+    c.video.src = 'clips/' + c.s.id + '_' + kName(k) + '.mp4';
+    setRate(c, rate);
+    c.video.load();
+    setRate(c, rate);
+    if (play) c.video.play().catch(() => {});
+    const lagNew = Math.round((Number(c.s.lag) - k / FPS) * 1000) / 1000;
+    c.reading.textContent = 'Playing: ' + kWords(k, FPS) + ' · lag ' + lagNew.toFixed(3) + ' s';
+    c.bMatch.textContent = 'This one matches (' + (k === 0 ? 'now' : kLabel(k)) + ')';
+  }
+
+  function setButtons(c) {
+    const off = c.busy || dbFailed;
+    c.bMatch.disabled = off; c.bNone.disabled = off;
+    c.bNote.disabled = off || !c.noteDirty;
+    c.bMatch.title = dbFailed ? NEED_CLAUDE : '';
+  }
+
+  function refreshCard(c) {
+    const p = picks[c.s.id];
+    const chosen = p && (p.none || p.k != null);
+    c.li.classList.toggle('ok', !!(p && !p.none && p.k != null));
+    c.li.classList.toggle('none', !!(p && p.none));
+    c.vbs.forEach((b, k) => b.classList.toggle('saved', !!(p && !p.none && p.k === k)));
+    // until she taps a variant on this card, it opens on the saved one (choices arrive after the first paint)
+    if (!c.touched && c.k != null && p && !p.none && p.k != null && p.k !== c.k && c.ks.includes(p.k) && c.video.paused) pick(c, p.k, false);
+    c.savedLine.className = 'saved-line' + (p && p.none ? ' none' : chosen ? ' ok' : '');
+    c.savedLine.textContent = '';
+    if (!p || !chosen) {
+      c.savedLine.append(document.createTextNode(dbFailed ? 'Choices can’t be saved here.' : 'Not chosen yet.'));
+    } else {
+      const b = el('b', '', p.none ? 'None match — retake' : 'Chosen: ' + (p.k === 0 ? 'now (no change)' : kLabel(p.k) + ', ' + kWords(p.k, FPS)));
+      c.savedLine.append(b);
+      if (!p.none) c.savedLine.append(document.createTextNode(' · lag ' + (Math.round((Number(c.s.lag) - p.k / FPS) * 1000) / 1000).toFixed(3) + ' s'));
+      const d = new Date(p.at); if (!isNaN(d)) c.savedLine.append(document.createTextNode(' · ' + d.toLocaleString([], { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })));
+    }
+    if (p && p.note) { const n = el('span', 'note', p.note); c.savedLine.append(n); }
+    if (p && !c.noteDirty && document.activeElement !== c.ta) c.ta.value = p.note || '';
+    if (p && c.noteDirty && (p.note || '') === c.ta.value.trim()) { c.noteDirty = false; store.set('hf-lips-draft-' + c.s.id, ''); }
+    setButtons(c);
+  }
+
+  function refreshAll() {
+    cards.forEach(refreshCard);
+    const ids = SHOTS.map((s) => s.id);
+    const done = ids.filter((id) => picks[id] && (picks[id].none || picks[id].k != null));
+    const retakes = ids.filter((id) => picks[id] && picks[id].none).length;
+    const cnt = $('#count'); cnt.textContent = done.length + ' of ' + ids.length + ' ';
+    cnt.append(el('small', '', 'chosen' + (retakes ? ' · ' + retakes + (retakes === 1 ? ' retake' : ' retakes') : '')));
+    const ul = $('#chips'); ul.textContent = '';
+    for (const s of SHOTS) {
+      const p = picks[s.id];
+      const li = el('li');
+      const b = el('button', 'chip' + (p && p.none ? ' none' : p && p.k != null ? ' ok' : ''));
+      b.type = 'button';
+      b.append(document.createTextNode(s.id));
+      b.append(el('span', 'st', p && p.none ? 'retake' : p && p.k != null ? kLabel(p.k) : '—'));
+      b.addEventListener('click', () => { const c = cards.get(s.id); if (c) { try { c.li.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { c.li.scrollIntoView(); } } });
+      li.append(b); ul.append(li);
+    }
+  }
+
+  // ---------------------------------------------------------------- boot
+  async function boot() {
+    let data;
+    try {
+      const r = await fetch('shots.json', { cache: 'no-cache' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      data = await r.json();
+    } catch (e) {
+      $('#loading').textContent = 'The shot list (shots.json) didn’t load: ' + (e.message || e) + '. Reload the page.';
+      return;
+    }
+    FPS = Number(data.fps) || 24;
+    SHOTS = (Array.isArray(data) ? data : data.shots || []).slice().sort((a, b) => (a.t - b.t) || String(a.id).localeCompare(String(b.id)));
+    if (data.version) $('#ver').textContent = data.version + ' · ' + SHOTS.length + ' sung shots';
+    const ul = $('#cards');
+    for (const s of SHOTS) {
+      const c = buildCard(s);
+      cards.set(s.id, c);
+      ul.append(c.li);
+    }
+    $('#loading').hidden = true;
+    refreshAll();
+    await dbReady.catch(() => {});
+    cards.forEach((c) => { const p = picks[c.s.id]; pick(c, p && !p.none && p.k != null && c.ks.includes(p.k) ? p.k : 0, false); });
+  }
+  window.__lips = { get picks() { return picks; }, cards, get shots() { return SHOTS; } };
+  boot();
+})();
+</script>

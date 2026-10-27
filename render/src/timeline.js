@@ -294,6 +294,23 @@ export function buildTimeline(A) {
   // the cooler tint is kept (plan: her room is Jade's flipped, with cooler light)
   const RM = (contrast, exposure) => ({ grade: { contrast, exposure } });
   const split = (l = {}, r = {}, line = 2) => ({ scene: 't2_split', p: { left: { scene: 't2_plate', p: { clip: '@L', ...l } }, right: { scene: 't2_plate', p: { clip: '@R', ...r } }, x: 960, line } });
+  // Jade (v3, 0:57.4): in the splits each Jade sings one phrase: Jade (left) "but if you are", teal-tips (right) "I'm counting on you";
+  // the half that isn't singing listens, mouth closed (a Seedance 2.0 listening plate, <ID>L_LS / <ID>R_LS, on the same keyframe;
+  // teal-tips' is generated unflipped and flipped by its pick). Both halves cut on the same film frame, the first at or after the
+  // onset of "I'm". The left listening plate's first frame is the drawing the sung take shows on that frame; the right one's last
+  // frame is the drawing the sung take showed just before it (generated with that as its last frame, ending at LS_END[id] clip s),
+  // so each half's cut is matched. Listening plates run on the song clock on twos, like the sung picks (hold2).
+  const hold2 = (t) => { let ff = Math.floor(t * 24 + 1e-3); ff -= ((ff % 2) + 2) % 2; return ff / 24; };
+  const onFrame = (t) => Math.ceil(t * 24 - 1e-6) / 24;
+  const LS_END = { C103: 4.0, C203: 4.0 };
+  const phraseSplit = (id, cut, l = {}, r = {}) => {
+    const c = onFrame(cut);
+    return { scene: 't2_split', p: { x: 960, line: 2,
+      left: { scene: 't2_plate', clips: [{ clip: `${id}L` }, { clip: `${id}L_LS` }],
+        p: (t) => (t < c ? { clip: `${id}L`, ...l } : { clip: `${id}L_LS`, at: hold2(t) - hold2(c), ...l }) },
+      right: { scene: 't2_plate', clips: [{ clip: `${id}R_LS` }, { clip: `${id}R` }],
+        p: (t) => (t < c ? { clip: `${id}R_LS`, at: LS_END[id] - (hold2(c - 1 / 24) - hold2(t)), ...r } : { clip: `${id}R`, ...r }) } } };
+  };
   const flash = (col = [1, 0.86, 0.6], k = 0.6, dec = 0.12) => (t, lt) => ({ flash: Math.exp(-Math.max(0, lt) / dec) * k, flashCol: col });
   const withLook = (L, f) => (t, lt, ctx) => ({ ...L, ...f(t, lt, ctx) });
 
@@ -466,29 +483,44 @@ export function buildTimeline(A) {
   machines.forEach(([pl, subj, name, at], i) => S(pl, eighth(pl), { ...over(plate(), bp(subj, { over: true, ...at, arrive: { from: 0.88, frames: 3 } })), method: 'video', era: ERA.v1, look: LK.blueprint,
     want: `${name}, blueprint linework over it; the flood becomes a flood of machines; Jade's walk breaks into a run`, notes: i === 0 ? 'bar 13 downbeat; stacked choir enters' : 'eighth-note cut' }));
   S('0:32.62', wd('P1', 0, 'snowflake'), { ...over(plate(), { scene: 't2_iss_pass', p: { over: true, from: [1400, 175], to: [1800, 92], bend: 26, fadeIn: 0.04, I: 3.6 } }), method: 'video', era: ERA.v1, look: LK.night, want: 'Jade stops at night and looks up at a bright point crossing the sky' });
-  // Jade's note (v2): the ISS must be unmistakable: a hero view of its real silhouette (the plate's first frame, the station ~60% of
-  // the frame width, turning slowly like a snowflake) with a white blueprint outline drawing on over it (truss, the eight array
-  // wings, radiators, modules) and a small ISS callout. Outline anchors measured on work/plates/V123/f_00000.jpg (design px).
+  // Jade's note (v2): the ISS must be unmistakable: a hero view of its real silhouette with a white blueprint outline (truss, the
+  // eight array wings, radiators, modules) and a small ISS callout. Jade's note (v3, 0:34.1): "a camera a little farther away would
+  // read more like a snowflake in the boundless night". So the ISS beat stays on the cut (the hero view, ~60% of the frame, outline
+  // >= 88% drawn on the first frame, ISS callout up by frame 3), then the camera pulls back through the shot (ease out, in log zoom):
+  // by ~34.1 the station is small in a vast starfield and it ends ~6% of the frame wide, still turning. The plate is V123K (V123's
+  // still with its black keyed out, so the stars show round it and through the truss); as it shrinks it fades under the white line
+  // drawing (truss + eight wings, riding the same camera), so what is left is a white snowflake. Outline anchors measured on
+  // work/plates/V123/f_00000.jpg (design px; V123K has the same cover framing).
   const bnd = wd('P1', 0, 'boundless'), issEnd = wd('P1', 1, 'a').t, issDur = issEnd - bnd.t;
-  const issZ = [0.6, 0.68], issRot = [0, 0.06], issPan = [0, -40];
-  const issU = (lt) => clamp(lt / issDur);
+  const pbT0 = bnd.t + 0.17;                                                  // the hero view holds 4 frames, then the pull-back
+  const pbU = (t) => easeOutExpo(clamp((t - pbT0) / (issEnd - pbT0)));
+  const ISSZ = [0.62, 0.062];
+  const issZoom = (t) => ISSZ[0] * Math.pow(ISSZ[1] / ISSZ[0], pbU(t));
+  const issRot = (t, lt) => 0.16 * lt / issDur;                               // the slow snowflake turn
+  const issPan = (t) => [0, lerp(-40, -120, pbU(t))];                         // ends a little above centre, clear of the lyric
+  const issSmall = (t) => smooth(range(pbU(t), 0.3, 0.8));                    // 0 = hero view .. 1 = the snowflake
   const WINGS = [[[84, 168], [270, 160], [324, 528], [180, 528]], [[314, 162], [470, 162], [534, 522], [396, 522]],
     [[202, 600], [348, 600], [414, 888], [282, 888]], [[408, 600], [528, 600], [600, 888], [474, 888]],
     [[1440, 156], [1596, 156], [1530, 528], [1380, 528]], [[1680, 156], [1836, 156], [1740, 528], [1602, 528]],
     [[1362, 600], [1518, 600], [1488, 888], [1332, 888]], [[1566, 600], [1722, 600], [1656, 888], [1524, 888]]];
-  const issPaths = [
-    { type: 'rect', a: [258, 546], b: [1680, 588], t0: 0.0, t1: 0.3 },
-    ...WINGS.map((pts, i) => ({ type: 'poly', closed: true, pts, t0: 0.12 + 0.04 * i, t1: 0.42 + 0.04 * i })),
-    { type: 'rect', a: [672, 360], b: [840, 534], t0: 0.3, t1: 0.55, w: 2 }, { type: 'rect', a: [1086, 360], b: [1236, 534], t0: 0.32, t1: 0.57, w: 2 },
-    { type: 'rect', a: [930, 282], b: [996, 540], t0: 0.36, t1: 0.6, w: 2 }, { type: 'rect', a: [810, 612], b: [1248, 756], t0: 0.4, t1: 0.64, w: 2 },
-    { type: 'dim', a: [84, 930], b: [1836, 930], off: 30, t0: 0.5, t1: 0.85, w: 2 },
-    { type: 'callout', at: [963, 282], to: [1150, 190], shelf: 120, label: 'ISS', t0: 0.55, t1: 0.9, w: 2.5 },
-  ];
-  S(null, bnd, { ...over({ scene: 't2_still', p: { img: 'work/plates/V123/f_00000.jpg', zoom: issZ, rot: issRot, pan: issPan, ease: 'linear', style: 'riso', bg: [0, 0, 0] } },
-    { scene: 't2_blueprint', p: { over: true, paths: issPaths, size: 54, w: 2.5,
-      zoom: (t, lt) => lerp(issZ[0], issZ[1], issU(lt)), rot: (t, lt) => lerp(issRot[0], issRot[1], issU(lt)), pan: issPan } }),
+  const issPaths = (t) => {
+    const k = 1 - issSmall(t), lab = 1 - smooth(range(t, pbT0 + 0.16, pbT0 + 0.36));   // the callout leaves once the station is small
+    return [
+      { type: 'rect', a: [258, 546], b: [1680, 588] },
+      ...WINGS.map((pts) => ({ type: 'poly', closed: true, pts })),
+      ...[[[672, 360], [840, 534]], [[1086, 360], [1236, 534]], [[930, 282], [996, 540]], [[810, 612], [1248, 756]]].map(([a, b]) => ({ type: 'rect', a, b, w: 2, alpha: k })),
+      { type: 'dim', a: [84, 930], b: [1836, 930], off: 30, w: 2, alpha: k * lab },
+      { type: 'callout', at: [963, 282], to: [1150, 190], shelf: 120, label: 'ISS', w: 2.5, alpha: lab },
+    ];
+  };
+  S(null, bnd, { scene: 'multi', p: { layers: [
+    { scene: 'sky', p: (t) => ({ density: 0.55, band: 0.3, bandAng: 0.55, neb: 0.05, seed: 31, exposure: 0.85, zoom: lerp(1.2, 1, pbU(t)) }) },
+    { scene: 't2_still', p: (t, lt) => ({ img: 'V123K', key: 'green', zoom: issZoom(t), rot: issRot(t, lt), pan: issPan(t), style: 'riso', alpha: 1 - 0.8 * issSmall(t) }) },
+    { scene: 't2_blueprint', p: (t, lt) => ({ paths: issPaths(t), arrive: { from: 0.88, frames: 3 }, size: 54, w: 2.5, glow: lerp(1, 0.6, issSmall(t)),
+      col: mixc([0.94, 0.98, 1], [1, 1, 1], issSmall(t)), zoom: issZoom(t), rot: issRot(t, lt), pan: issPan(t) }) }] },
     method: 'still', era: ERA.signal, look: LK.riso,
-    want: 'The ISS against black, its solar arrays spread like the arms of a snowflake (hero view + blueprint outline + ISS callout); the technology run ends here', notes: 'cut placed on "boundless" (plan gives no time for the cut to the ISS)' });
+    want: 'The ISS against black, its solar arrays spread like the arms of a snowflake: the hero view + blueprint outline + ISS callout on the cut, then the camera pulls back until it is a small white snowflake in a vast starfield; the technology run ends here',
+    notes: 'cut placed on "boundless" (plan gives no time for the cut to the ISS); Jade v3: the pull-back' });
 
   // OUT OF / THE SEA in cyanotype ink: cream vanished on the pale dawn sky
   hero(caps(lineWords('V1', 0, 0, 4)), { rows: [2, 2], size: 190, y: 250, align: 'left', t1: fish.t0, out: 0.12, color: [0.05, 0.12, 0.3], hot: [0.13, 0.36, 0.86], glow: 0, shade: 0 });
@@ -547,7 +579,9 @@ export function buildTimeline(A) {
   S('0:51.70', wd('C1', 0, "can't"), { ...plate({ swingT: dl1 }), method: 'video', era: ERA.room, look: (t) => ({ ...LK.night, flash: t >= dl1 ? Math.exp(-(t - dl1) / 0.15) * 0.4 : 0, flashCol: [1, 0.9, 0.7] }),
     want: 'Jade alone on the dish field at night; on the 0:51.82 downbeat every dish swings to the same point in the sky' });
   S('0:54.28', wd('C1', 1, 'message'), { scene: 'goldenrecord', p: {}, method: 'reuse', era: ERA.light, look: LK.diagram, want: "Take one's 0:54 diagram unchanged: the Golden Record cover engraves itself in gold light" });
-  S('0:56.67', wd('C1', 2, 'but'), { ...split({}, RM(1.18, 1.02)), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split screen: both Jades sing the line at their own consoles, neither aware of the other (left Jade, right teal-tips)' });
+  S('0:56.67', wd('C1', 2, 'but'), { ...phraseSplit('C103', wd('C1', 2, "i'm").t, {}, RM(1.18, 1.02)), method: 'seedance_sung', era: ERA.room, look: LK.room,
+    want: 'Split screen at their own consoles, neither aware of the other: Jade (left) sings "but if you are" while teal-tips (right) listens; on "I\'m" teal-tips sings "I\'m counting on you" while Jade listens',
+    notes: 'Jade v3: one phrase per half; both halves cut on the onset of "I\'m" (phraseSplit)' });
   // t2_crt_matrix is one continuous camera (close on one CRT, smash back on the two beats and on "swear"), so it is one shot;
   // the beats and "swear" are passed in (the scene would otherwise take the beats after its own start)
   const crt = (silent, sec, want, extra = {}) => ({ scene: 't2_crt_matrix', method: 'procedural', era: ERA.crt, look: CRT_LOOK, want,
@@ -694,13 +728,18 @@ export function buildTimeline(A) {
     want: 'Split: each Jade alone on her own dish field at night (mirrored); the dishes swing to the same point', notes: 'chorus 1 shot returns as a split; cut on "Can\'t" like chorus 1' });
   S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, right: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
     want: 'Split: the Golden Record cover engraves itself on both sides at once' });
-  S(null, wd('C2', 2, 'but'), { ...split({}, RM(1.22, 1.07)), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: both Jades sing "but if you are, I\'m counting on you" at their mirrored consoles' });
+  S(null, wd('C2', 2, 'but'), { ...phraseSplit('C203', wd('C2', 2, "i'm").t, {}, RM(1.22, 1.07)), method: 'seedance_sung', era: ERA.room, look: LK.room,
+    want: 'Split at their mirrored consoles: Jade (left) sings "but if you are" while teal-tips listens; on "I\'m" teal-tips sings "I\'m counting on you" while Jade listens',
+    notes: 'Jade v3: one phrase per half; both halves cut on the onset of "I\'m" (phraseSplit)' });
   const silent2 = wd('C2', 3, 'silent');
   S(null, silent2, crt(silent2, 'C2', 'The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades\' control rooms (the g2 loops CRT_roomA / CRT_roomB)', { variant: 'mirror', inset: [{ clip: 'CRT_roomA', at: [0, 1] }, { clip: 'CRT_roomB', at: [1, 1] }] }));
   reserve(3);
   S(null, wd('C2', 4, 'in'), { ...split({}, { flipX: true, ...RM(1.22, 1.07) }, 4), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Both Jades in the studio pose; the two halves match exactly, hard vertical line between them' });
-  S(null, wd('C2', 5, 'if'), { ...split({}, RM(1.18, 1.02)), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Split: each Jade looks at her own screen, singing "If you are"' });
+  // Jade v3: "If you are" is Jade's phrase (as in C103 / C203): teal-tips listens through it (C209R_LS); her "I'm counting on you"
+  // falls on the crane (C210)
+  S(null, wd('C2', 5, 'if'), { ...split({}, { clip: 'C209R_LS', in: 0, ...RM(1.18, 1.02) }), method: 'seedance_sung', era: ERA.room, look: LK.room,
+    want: 'Split: each Jade looks at her own screen; Jade (left) sings "If you are", teal-tips (right) listens, mouth closed' });
   S(null, wd('C2', 5, "i'm"), { ...plate(), method: 'video', era: ERA.room, look: LK.night,
     want: 'Crane up out of both rooms side by side: the faint signal each one hears comes from the same direction, the other control room' });
   hero(caps(lineWords('C2', 0, 0, 3)), { size: 180, y: 290, t1: LN('C2', 1).t });

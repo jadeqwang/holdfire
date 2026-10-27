@@ -1059,6 +1059,13 @@
   "twos": false,
   "note": "generated flat illustration of the ISS (8 gold array wings on the truss, radiators, modules) on black, upscaled; baked slow push + 2 deg/s turn like a turning snowflake; the edit applies riso"
  },
+ "V123K": {
+  "dir": "work/plates/V123K",
+  "kind": "still",
+  "src": "media/kf2/V123_nbp_v1_key.jpg",
+  "key": "green",
+  "note": "V123 (media/kf2/V123_nbp_v1.jpg) with its black ground keyed out: media/kf2/V123_nbp_v1_key.jpg = background (border-connected dark + thick enclosed dark gaps) painted green, then plates.py --fit cover --key green; same cover framing as work/plates/V123/f_00000.jpg, so the outline anchors hold. Used by V123 (the pull-back over the starfield)"
+ },
  "V201": {
   "dir": "work/plates/V201",
   "kind": "video",

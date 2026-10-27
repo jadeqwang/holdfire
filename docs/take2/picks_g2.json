@@ -223,6 +223,13 @@
   "flipX": true,
   "note": "mirror rule (27 Oct): Veo 3.1 t2_P107_veo31_m1 on media/kf2/P107_mir_v2.jpg (canon jacket, room A geometry, cool), digital push into her near eye (tracked) 1->6.88x by plate 1.92 s, crossfading into the crisp 2K still media/kf2/P107_eye_nbp_v1_2k.jpg (scratchpad p107_push.py); flipped in the renderer. The edit plays it at rate 0.8 (ends at plate 1.96 s = the eye still)"
  },
+ "V123K": {
+  "dir": "work/plates/V123K",
+  "kind": "still",
+  "src": "media/kf2/V123_nbp_v1_key.jpg",
+  "key": "green",
+  "note": "V123 (media/kf2/V123_nbp_v1.jpg) with its black ground keyed out: media/kf2/V123_nbp_v1_key.jpg = background (border-connected dark + thick enclosed dark gaps) painted green, then plates.py --fit cover --key green; same cover framing as work/plates/V123/f_00000.jpg, so the outline anchors hold. Used by V123 (the pull-back over the starfield)"
+ },
  "X201": {
   "dir": "work/plates/X201",
   "kind": "still",

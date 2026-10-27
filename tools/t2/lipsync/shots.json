@@ -1,0 +1,717 @@
+{
+ "about": "Hold Fire Lip Sync: one entry per sung pick, film order. Add a shot by appending an entry and its clips/<id>_k<+NN>.mp4 files (variant k = the song shifted so the mouth looks k frames later than now; new lag = lag - k/24).",
+ "fps": 24,
+ "version": "take two · 27 Oct",
+ "shots": [
+  {
+   "id": "V101",
+   "shot": "V101",
+   "t": 13.05,
+   "from": 12.5417,
+   "to": 15.5833,
+   "dur": 3.0417,
+   "frames": 73,
+   "lyric": "Out of the sea with salt in our",
+   "words": [
+    [
+     "Out",
+     13.05,
+     13.345
+    ],
+    [
+     "of",
+     13.35,
+     13.425
+    ],
+    [
+     "the",
+     13.43,
+     13.774
+    ],
+    [
+     "sea",
+     13.779,
+     14.173
+    ],
+    [
+     "with",
+     14.178,
+     14.255
+    ],
+    [
+     "salt",
+     14.26,
+     14.821
+    ],
+    [
+     "in",
+     14.826,
+     14.874
+    ],
+    [
+     "our",
+     14.879,
+     15.116
+    ]
+   ],
+   "singer": "Jade",
+   "voice": "A",
+   "conf": "med-high",
+   "lag": 0.042,
+   "lagFrames": 1,
+   "s0": 12.75,
+   "take": "t2_V101_sd25_t2_9163d752d3.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/V101_poster.jpg"
+  },
+  {
+   "id": "P105",
+   "shot": "P105",
+   "t": 46.015,
+   "from": 45.5,
+   "to": 48.25,
+   "dur": 2.75,
+   "frames": 66,
+   "lyric": "Hear it and you'll know we're",
+   "words": [
+    [
+     "Hear",
+     46.015,
+     46.295
+    ],
+    [
+     "it",
+     46.3,
+     46.434
+    ],
+    [
+     "and",
+     46.439,
+     46.504
+    ],
+    [
+     "you'll",
+     46.509,
+     46.784
+    ],
+    [
+     "know",
+     46.789,
+     47.188
+    ],
+    [
+     "we're",
+     47.193,
+     47.727
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "med-high",
+   "lag": 0.333,
+   "lagFrames": 8,
+   "s0": 45.715,
+   "take": "t2_P105_sd25_m6_5c9b5e216f.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/P105_poster.jpg"
+  },
+  {
+   "id": "P106",
+   "shot": "P106",
+   "t": 47.732,
+   "from": 47.2083,
+   "to": 49.75,
+   "dur": 2.5417,
+   "frames": 61,
+   "lyric": "awake",
+   "words": [
+    [
+     "awake",
+     47.732,
+     51.678
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "medium",
+   "lag": 1.958,
+   "lagFrames": 47,
+   "s0": 47.432,
+   "take": "t2_P106_sd25_m5_e236c6987a.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/P106_poster.jpg"
+  },
+  {
+   "id": "C108",
+   "shot": "C108",
+   "t": 64.589,
+   "from": 64.0833,
+   "to": 67.7917,
+   "dur": 3.7083,
+   "frames": 89,
+   "lyric": "in the white noise I can hear you breathe somewhere",
+   "words": [
+    [
+     "in",
+     64.589,
+     64.808
+    ],
+    [
+     "the",
+     64.813,
+     65.002
+    ],
+    [
+     "white",
+     65.007,
+     65.351
+    ],
+    [
+     "noise",
+     65.356,
+     65.666
+    ],
+    [
+     "I",
+     65.671,
+     65.78
+    ],
+    [
+     "can",
+     65.785,
+     66.025
+    ],
+    [
+     "hear",
+     66.03,
+     66.264
+    ],
+    [
+     "you",
+     66.269,
+     66.425
+    ],
+    [
+     "breathe",
+     66.43,
+     66.654
+    ],
+    [
+     "somewhere",
+     66.659,
+     67.287
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "medium",
+   "lag": 0.125,
+   "lagFrames": 3,
+   "s0": 64.289,
+   "take": "t2_C108_sd25_m8_6811637e11.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C108_poster.jpg"
+  },
+  {
+   "id": "V201",
+   "shot": "V201",
+   "t": 82.547,
+   "from": 82.0417,
+   "to": 85.5,
+   "dur": 3.4583,
+   "frames": 83,
+   "lyric": "Priests in the smoke wanted never to die",
+   "words": [
+    [
+     "Priests",
+     82.547,
+     83.041
+    ],
+    [
+     "in",
+     83.046,
+     83.106
+    ],
+    [
+     "the",
+     83.111,
+     83.236
+    ],
+    [
+     "smoke",
+     83.241,
+     83.625
+    ],
+    [
+     "wanted",
+     83.63,
+     83.929
+    ],
+    [
+     "never",
+     83.934,
+     84.423
+    ],
+    [
+     "to",
+     84.428,
+     84.523
+    ],
+    [
+     "die",
+     84.528,
+     84.975
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "high",
+   "lag": -0.125,
+   "lagFrames": -3,
+   "s0": 82.247,
+   "take": "t2_V201_sd25_t2_1e28ea548a.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/V201_poster.jpg"
+  },
+  {
+   "id": "C208L",
+   "shot": "C208",
+   "t": 125.824,
+   "from": 125.2917,
+   "to": 128.9167,
+   "dur": 3.625,
+   "frames": 87,
+   "lyric": "in the white noise I can hear you breathe somewhere",
+   "words": [
+    [
+     "in",
+     125.824,
+     125.944
+    ],
+    [
+     "the",
+     125.949,
+     126.143
+    ],
+    [
+     "white",
+     126.148,
+     126.493
+    ],
+    [
+     "noise",
+     126.498,
+     126.782
+    ],
+    [
+     "I",
+     126.787,
+     126.882
+    ],
+    [
+     "can",
+     126.887,
+     127.006
+    ],
+    [
+     "hear",
+     127.011,
+     127.246
+    ],
+    [
+     "you",
+     127.251,
+     127.405
+    ],
+    [
+     "breathe",
+     127.41,
+     127.745
+    ],
+    [
+     "somewhere",
+     127.75,
+     128.378
+    ]
+   ],
+   "singer": "Jade",
+   "voice": "A",
+   "conf": "med-high",
+   "lag": 0.042,
+   "lagFrames": 1,
+   "s0": 125.524,
+   "take": "t2_C208L_sd25_t2_6669650da7.mp4",
+   "half": "L",
+   "aspect": "8/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C208L_poster.jpg"
+  },
+  {
+   "id": "C208R",
+   "shot": "C208",
+   "t": 125.824,
+   "from": 125.2917,
+   "to": 128.9167,
+   "dur": 3.625,
+   "frames": 87,
+   "lyric": "in the white noise I can hear you breathe somewhere",
+   "words": [
+    [
+     "in",
+     125.824,
+     125.944
+    ],
+    [
+     "the",
+     125.949,
+     126.143
+    ],
+    [
+     "white",
+     126.148,
+     126.493
+    ],
+    [
+     "noise",
+     126.498,
+     126.782
+    ],
+    [
+     "I",
+     126.787,
+     126.882
+    ],
+    [
+     "can",
+     126.887,
+     127.006
+    ],
+    [
+     "hear",
+     127.011,
+     127.246
+    ],
+    [
+     "you",
+     127.251,
+     127.405
+    ],
+    [
+     "breathe",
+     127.41,
+     127.745
+    ],
+    [
+     "somewhere",
+     127.75,
+     128.378
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "medium",
+   "lag": -0.25,
+   "lagFrames": -6,
+   "s0": 125.524,
+   "take": "t2_C208R_sd25_m6_ac2e706ee6.mp4",
+   "half": "R",
+   "aspect": "8/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C208R_poster.jpg"
+  },
+  {
+   "id": "DR04",
+   "shot": "DR04",
+   "t": 188.676,
+   "from": 188.1667,
+   "to": 191.9583,
+   "dur": 3.7917,
+   "frames": 91,
+   "lyric": "but you were You were",
+   "words": [
+    [
+     "but",
+     188.676,
+     189.025
+    ],
+    [
+     "you",
+     189.03,
+     189.405
+    ],
+    [
+     "were",
+     189.41,
+     189.925
+    ],
+    [
+     "You",
+     189.93,
+     190.425
+    ],
+    [
+     "were",
+     190.43,
+     191.44
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "med-high",
+   "lag": 0.542,
+   "lagFrames": 13,
+   "s0": 188.376,
+   "take": "t2_DR04_sd25_n3_b61e7967fa.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/DR04_poster.jpg"
+  },
+  {
+   "id": "DR11",
+   "shot": "DR11",
+   "t": 198.928,
+   "from": 198.4167,
+   "to": 202.0417,
+   "dur": 3.625,
+   "frames": 87,
+   "lyric": "alone we never would've made it here",
+   "words": [
+    [
+     "alone",
+     198.928,
+     199.392
+    ],
+    [
+     "we",
+     199.397,
+     199.661
+    ],
+    [
+     "never",
+     199.666,
+     200.01
+    ],
+    [
+     "would've",
+     200.015,
+     200.419
+    ],
+    [
+     "made",
+     200.424,
+     200.794
+    ],
+    [
+     "it",
+     200.799,
+     200.958
+    ],
+    [
+     "here",
+     200.963,
+     201.532
+    ]
+   ],
+   "singer": "Jade",
+   "voice": "A",
+   "conf": "med-high",
+   "lag": -0.167,
+   "lagFrames": -4,
+   "s0": 198.628,
+   "take": "t2_DR11_sd25_m6_2dab1c396c.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/DR11_poster.jpg"
+  },
+  {
+   "id": "DR16",
+   "shot": "DR16",
+   "t": 207.523,
+   "from": 207.0,
+   "to": 213.5417,
+   "dur": 6.5417,
+   "frames": 157,
+   "lyric": "wherever you are",
+   "words": [
+    [
+     "wherever",
+     207.523,
+     208.441
+    ],
+    [
+     "you",
+     208.446,
+     209.15
+    ],
+    [
+     "are",
+     209.155,
+     213.016
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "med-low",
+   "lag": 1.25,
+   "lagFrames": 30,
+   "s0": 207.223,
+   "take": "t2_DR16_sd25_m6_c41d090cb4.mp4",
+   "half": null,
+   "aspect": "16/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/DR16_poster.jpg"
+  }
+ ]
+}

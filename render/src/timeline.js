@@ -402,10 +402,11 @@ export function buildTimeline(A) {
   S('0:16.99', snare1, { ...over({ scene: 't2_plate', p: { clip: fish.id, in: snare1.t - fish.t0, zoom: 1.8, pan: [-252, -351] } },
     bp('fin_bones', { t0: snare1.t, stages: ['one bone', 'two bones', 'the wrist'], stageT: [snare1.t, e8(snare1.t), beatsAfter(snare1.t, 1)[0]], drawDur: 0.32, pos: [965, 532], scale: 0.7, subjectRot: 0.938, w: 3 })),
     method: 'video', era: ERA.v1, look: LK.blueprint, want: "Punch in on the fin: white blueprint lines draw the fin's bones over the painting, one bone, then two, then the wrist (on the snares)" });
-  S('0:18.07', wd('V1', 1, 'fin'), { ...bp('fin', { full: true, stageT: [wd('V1', 1, 'fin').t, e8(wd('V1', 1, 'fin').t), e8(wd('V1', 1, 'fin').t, 2)] }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'The fin schematic, full frame (white line on cyanotype)' });
-  S('0:18.89', wd('V1', 1, 'foot'), { ...bp('foot', { full: true, stageT: [wd('V1', 1, 'foot').t, e8(wd('V1', 1, 'foot').t), e8(wd('V1', 1, 'foot').t) + 0.16], drawDur: 0.3 }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'An early tetrapod foot in the same line style' });
-  const handT = wd('V1', 1, 'hand').t;
-  S('0:19.56', wd('V1', 1, 'hand'), { ...over(plate(), bp('hand', { over: true, pos: [948, 488], subjectFlip: true, stageT: [handT, handT + 0.07, handT + 0.14], drawDur: 0.13 })), method: 'video', era: ERA.v1, look: LK.blueprint, want: "Match cut: Jade's hand opens in the same silhouette as the foot schematic" });
+  // FIN / FOOT (0.8 / 0.7 s): the first stage is already there on the cut (it rhymes with the bones just drawn), the rest is done
+  // well before the next cut (Jade: never a schematic caught half-drawn)
+  S('0:18.07', wd('V1', 1, 'fin'), { ...bp('fin', { full: true, stageT: [wd('V1', 1, 'fin').t - 0.5, wd('V1', 1, 'fin').t, wd('V1', 1, 'fin').t + 0.16], drawDur: 0.36 }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'The fin schematic, full frame (white line on cyanotype)' });
+  S('0:18.89', wd('V1', 1, 'foot'), { ...bp('foot', { full: true, stageT: [wd('V1', 1, 'foot').t - 0.5, wd('V1', 1, 'foot').t, wd('V1', 1, 'foot').t + 0.14], drawDur: 0.3 }), method: 'procedural', era: ERA.v1, look: LK.blueprint, want: 'An early tetrapod foot in the same line style' });
+  S('0:19.56', wd('V1', 1, 'hand'), { ...over(plate(), bp('hand', { over: true, pos: [948, 488], subjectFlip: true, arrive: true })), method: 'video', era: ERA.v1, look: LK.blueprint, want: "Match cut: Jade's hand opens in the same silhouette as the foot schematic" });
   S('0:19.84', wd('V1', 1, 'we'), v1('She presses the hand to a cave wall; red ochre sprays around it and leaves a stencil among much older ones', { in: 1.46, rate: 0.45 },
     { notes: 'plate frames 11-22 only: before 10 a spray can shows, after 23 the hand picks up a stone' }));
   S(null, beat('0:20.86'), { ...plate({ clip: 'V107', in: 3.22, rate: 0.52, zoom: 1.7, pan: [-17, 102] }), method: 'video', era: ERA.v1, look: LK.blueprint, sub: 'b',
@@ -443,12 +444,35 @@ export function buildTimeline(A) {
   const machines = [['0:31.18', 'locomotive', 'Steam locomotive', { pos: [1706, 625], scale: 1.09, pan: scrollPan(20) }],
     ['0:31.51', 'wright_flyer', 'Wright Flyer', { pos: [777, 389], scale: 1.6, subjectRot: 0.17, pan: scrollPan(20, -1) }],
     ['0:31.83', 'jet_airliner', 'Jet airliner', { pos: [565, 485], scale: 0.85, subjectRot: -0.23, pan: scrollPan(20) }],
-    ['0:32.15', 'saturn_v', 'Saturn V lifting off', { pos: [1030, 246], scale: 0.73, pan: scrollPan(14.5) }]];
-  machines.forEach(([pl, subj, name, at], i) => S(pl, eighth(pl), { ...over(plate(), bp(subj, { over: true, ...at, stageT: [eighth(pl).t, eighth(pl).t + 0.08, eighth(pl).t + 0.16], drawDur: 0.16 })), method: 'video', era: ERA.v1, look: LK.blueprint,
+    // the white rocket would swallow white lines: its schematic is drawn in Klein-blue ink (still a blueprint), riding the scroll
+    ['0:32.15', 'saturn_v', 'Saturn V lifting off', { pos: [1041, 253], scale: 0.755, pan: scrollPan(16.7), col: [0.06, 0.16, 0.6], glowCol: [0.55, 0.8, 1], glow: 0.5, w: 3 }]];
+  // Jade's note (v2): an eighth per machine is too short to watch a drawing grow: each schematic arrives >= 85% drawn, done by frame 3
+  machines.forEach(([pl, subj, name, at], i) => S(pl, eighth(pl), { ...over(plate(), bp(subj, { over: true, ...at, arrive: { from: 0.88, frames: 3 } })), method: 'video', era: ERA.v1, look: LK.blueprint,
     want: `${name}, blueprint linework over it; the flood becomes a flood of machines; Jade's walk breaks into a run`, notes: i === 0 ? 'bar 13 downbeat; stacked choir enters' : 'eighth-note cut' }));
   S('0:32.62', wd('P1', 0, 'snowflake'), { ...over(plate(), { scene: 't2_iss_pass', p: { over: true, from: [1400, 175], to: [1800, 92], bend: 26, fadeIn: 0.04, I: 3.6 } }), method: 'video', era: ERA.v1, look: LK.night, want: 'Jade stops at night and looks up at a bright point crossing the sky' });
-  S(null, wd('P1', 0, 'boundless'), { ...plate({ style: 'riso' }), method: 'video', era: ERA.signal, look: LK.riso,
-    want: 'The ISS against black, its solar arrays spread like the arms of a snowflake; the technology run ends here', notes: 'cut placed on "boundless" (plan gives no time for the cut to the ISS)' });
+  // Jade's note (v2): the ISS must be unmistakable: a hero view of its real silhouette (the plate's first frame, the station ~60% of
+  // the frame width, turning slowly like a snowflake) with a white blueprint outline drawing on over it (truss, the eight array
+  // wings, radiators, modules) and a small ISS callout. Outline anchors measured on work/plates/V123/f_00000.jpg (design px).
+  const bnd = wd('P1', 0, 'boundless'), issEnd = wd('P1', 1, 'a').t, issDur = issEnd - bnd.t;
+  const issZ = [0.6, 0.68], issRot = [0, 0.06], issPan = [0, -40];
+  const issU = (lt) => clamp(lt / issDur);
+  const WINGS = [[[84, 168], [270, 160], [324, 528], [180, 528]], [[314, 162], [470, 162], [534, 522], [396, 522]],
+    [[202, 600], [348, 600], [414, 888], [282, 888]], [[408, 600], [528, 600], [600, 888], [474, 888]],
+    [[1440, 156], [1596, 156], [1530, 528], [1380, 528]], [[1680, 156], [1836, 156], [1740, 528], [1602, 528]],
+    [[1362, 600], [1518, 600], [1488, 888], [1332, 888]], [[1566, 600], [1722, 600], [1656, 888], [1524, 888]]];
+  const issPaths = [
+    { type: 'rect', a: [258, 546], b: [1680, 588], t0: 0.0, t1: 0.3 },
+    ...WINGS.map((pts, i) => ({ type: 'poly', closed: true, pts, t0: 0.12 + 0.04 * i, t1: 0.42 + 0.04 * i })),
+    { type: 'rect', a: [672, 360], b: [840, 534], t0: 0.3, t1: 0.55, w: 2 }, { type: 'rect', a: [1086, 360], b: [1236, 534], t0: 0.32, t1: 0.57, w: 2 },
+    { type: 'rect', a: [930, 282], b: [996, 540], t0: 0.36, t1: 0.6, w: 2 }, { type: 'rect', a: [810, 612], b: [1248, 756], t0: 0.4, t1: 0.64, w: 2 },
+    { type: 'dim', a: [84, 930], b: [1836, 930], off: 30, t0: 0.5, t1: 0.85, w: 2 },
+    { type: 'callout', at: [963, 282], to: [1150, 190], shelf: 120, label: 'ISS', t0: 0.55, t1: 0.9, w: 2.5 },
+  ];
+  S(null, bnd, { ...over({ scene: 't2_still', p: { img: 'work/plates/V123/f_00000.jpg', zoom: issZ, rot: issRot, pan: issPan, ease: 'linear', style: 'riso', bg: [0, 0, 0] } },
+    { scene: 't2_blueprint', p: { over: true, paths: issPaths, size: 54, w: 2.5,
+      zoom: (t, lt) => lerp(issZ[0], issZ[1], issU(lt)), rot: (t, lt) => lerp(issRot[0], issRot[1], issU(lt)), pan: issPan } }),
+    method: 'still', era: ERA.signal, look: LK.riso,
+    want: 'The ISS against black, its solar arrays spread like the arms of a snowflake (hero view + blueprint outline + ISS callout); the technology run ends here', notes: 'cut placed on "boundless" (plan gives no time for the cut to the ISS)' });
 
   // OUT OF / THE SEA in cyanotype ink: cream vanished on the pale dawn sky
   hero(caps(lineWords('V1', 0, 0, 4)), { rows: [2, 2], size: 190, y: 250, align: 'left', t1: fish.t0, out: 0.12, color: [0.05, 0.12, 0.3], hot: [0.13, 0.36, 0.86], glow: 0, shade: 0 });
@@ -738,16 +762,36 @@ export function buildTimeline(A) {
 
   // ============================================================================================== BUILD (163.67 to 183.88)
   section('BU');
-  S('2:43.67', wd('BU', 0, 'hunters'), { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war,
+  // Jade's note (v2): the rewind needs time and must rewind the galactic war too. Re-timed (all from timing.json): the destruction is
+  // tightened (the warheads land from "burn", the lights are out by ~170.3: war clock fall' = 40% of the way from "burn" to "fall"),
+  // the console cut moves from "Only" to "fall", and the rewind runs from "Only" (170.83) to the beat before "all" (173.88), 3.05 s:
+  // the lights flicker back, the warheads lift off the cities, the pull-out where the galaxy's dark worlds relight, the tracks fall
+  // back into the silos and submarines; then Earth whole, its node lighting on the graph through "all" to "Hold your fire" (175.06).
+  const burn = wd('BU', 2, 'burn'), fall = wd('BU', 2, 'fall'), onlyW = wd('BU', 3, 'only'), allW = wd('BU', 4, 'all');
+  const huntT = wd('BU', 0, 'hunters').t, fireT = wd('BU', 1, 'fire').t;
+  const wholeB = beatK(allW.t - 0.2, 0, 'beat before "all": Earth whole (the rewind stops)');
+  const WT = { hunt: huntT, fire: fireT, burn: burn.t, fall: lerp(burn.t, fall.t, 0.4), rw0: onlyW.t, whole: wholeB.t, end: wd('BU', 5, 'hold').t };
+  // the rewind's war clock: piecewise in screen time (fractions of the 3.05 s), so each part gets its share
+  const RWK = [[0, WT.rw0], [0.06, WT.fall + 0.55], [0.3, WT.burn - 0.14], [0.68, WT.fire - 0.13], [0.94, WT.hunt + 0.58], [1, WT.hunt - 0.35]];
+  const rwClock = (t) => {
+    const u = clamp((t - WT.rw0) / (WT.whole - 0.12 - WT.rw0));
+    let k = 0; while (k + 2 < RWK.length && u > RWK[k + 1][0]) k++;
+    const [a, wa] = RWK[k], [b, wb] = RWK[k + 1];
+    return lerp(wa, wb, easeInOutCubic(clamp((u - a) / (b - a))) * 0.35 + clamp((u - a) / (b - a)) * 0.65);
+  };
+  const warP = { times: WT };
+  S('2:43.67', wd('BU', 0, 'hunters'), { scene: 't2_war', p: warP, method: 'procedural', era: ERA.war, look: LK.war,
     want: "The Rare Earth war scene: Earth's night side over the pole, missile tracks rising from both sides' silo fields and from submarines" });
-  S('2:46.93', wd('BU', 1, 'fire'), { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war, want: 'Pull out to the contact graph: elsewhere in the galaxy, worlds fire on each other and go dark one by one' });
-  const burn = wd('BU', 2, 'burn'), fall = wd('BU', 2, 'fall');
-  S('2:49.44', burn, { scene: 't2_war', p: {}, method: 'procedural', era: ERA.war, look: LK.war, want: 'Back on Earth the warheads land and the lights go out' });
-  S('2:50.83', wd('BU', 3, 'only'), { ...plate({ grade: { contrast: 1.08, lift: -0.04, sat: 0.88 } }), method: 'video', era: ERA.room, look: LK.room, want: 'Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back' });
-  S(null, wd('BU', 3, 'held'), { scene: 't2_war', p: { rewind: true }, method: 'procedural', era: ERA.war, look: LK.war,
-    want: 'VHS rewind: the warheads lift off the cities, the tracks fall back into silos and submarines, the lights come back on' });
-  S('2:53.25', wd('BU', 4, 'out'), { scene: 't2_war', p: { rewind: true }, method: 'procedural', era: ERA.war, look: LK.night, want: 'Earth whole again' });
-  S(null, wd('BU', 4, 'all'), { scene: 't2_war', p: { rewind: true, view: 'graph' }, method: 'procedural', era: ERA.light, look: LK.light, want: "Earth's node on the contact graph lights again" });
+  S('2:46.93', wd('BU', 1, 'fire'), { scene: 't2_war', p: warP, method: 'procedural', era: ERA.war, look: LK.war, want: 'Pull out to the contact graph: elsewhere in the galaxy, worlds fire on each other and go dark one by one' });
+  S('2:49.44', burn, { scene: 't2_war', p: warP, method: 'procedural', era: ERA.war, look: LK.war, want: 'Back on Earth the warheads land and the lights go out (tightened: dark by ~170.3)' });
+  S('2:50.83', fall, { ...plate({ rate: 3.0, grade: { contrast: 1.08, lift: -0.04, sat: 0.88 } }), method: 'video', era: ERA.room, look: LK.room,
+    want: 'Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back', notes: 'moved from "Only" (2:50.83) to "fall" so the rewind gets 3 s; rate 3.0: hand on the wheel to her face in 0.76 s' });
+  S(null, onlyW, { scene: 't2_war', p: (t) => ({ ...warP, rewind: true, w: rwClock(t) }), method: 'procedural', era: ERA.war, look: LK.war,
+    want: 'VHS rewind (3 s): the lights flicker back, the warheads lift off the cities, the galaxy\'s dark worlds relight, the tracks fall back into silos and submarines',
+    notes: 'starts on "Only" (the plan\'s console time); the war clock is piecewise so Earth and the galaxy each get their share' });
+  S('2:53.25', wholeB, { scene: 't2_war', p: { ...warP, rewind: true }, method: 'procedural', era: ERA.light, look: LK.light,
+    want: "Earth whole again; the camera pulls out and Earth's node on the contact graph lights again (through \"all\")", notes: 'moved from "out" (173.25) to the beat before "all": the rewind runs through "out there"' });
+  reserve(1);                                                                     // BU07 (the graph cut on "all") is now inside BU06's pull-out
   const hold1 = wd('BU', 5, 'hold'), show1 = wd('BU', 5, 'show');
   S('2:55.06', hold1, { scene: 't2_scroll_warning', p: { phase: 'held', text: '有以硫黃、雄黃合硝石，并蜜燒之，焰起燒手面，及燼屋舍者。' }, method: 'procedural', era: ERA.ink, look: LK.ink, want: "The people who held fire, 1: the alchemists' warning scroll" });
   S(null, wd('BU', 5, 'fire'), { ...plate({ style: 'oil' }), method: 'video', era: ERA.oil, look: LK.oil, want: 'The people who held fire, 2: Petrov, oil portrait lit by the screen' });
@@ -767,9 +811,9 @@ export function buildTimeline(A) {
       look: i === rollBeats.length - 1 ? (t) => ({ ...LK_HAND, flash: smooth(range(t, b + 0.25, dropT)), flashCol: [1, 1, 1] }) : (m === 'video' ? LK_HAND : LK.light), want: `${w} (cut rate doubles on the roll: one per beat)` });
   });
   // on a dark plate (red caps over the red Earth did not read); SIGNAL LOST stays up while Jade sees it and grabs the jog wheel
-  cue({ kind: 'cap', label: 'NUCLEAR DETONATIONS', t0: burn.t, t1: LN('BU', 3).t, y: 960, draw: drawCaps, color: [1, 0.42, 0.3], band: true,
-    lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t, size: 30 }] });
-  cue({ kind: 'cap', label: 'SIGNAL LOST', t0: fall.t, t1: wd('BU', 3, 'held').t, y: 1010, draw: drawCaps, color: P.red, band: true,
+  cue({ kind: 'cap', label: 'NUCLEAR DETONATIONS', t0: burn.t - 0.05, t1: fall.t, y: 960, draw: drawCaps, color: [1, 0.42, 0.3], band: true,
+    lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t - 0.05, size: 30 }] });
+  cue({ kind: 'cap', label: 'SIGNAL LOST', t0: fall.t, t1: onlyW.t, y: 1010, draw: drawCaps, color: P.red, band: true,
     lines: [{ text: 'SIGNAL LOST', t: fall.t, size: 30, glow: 6 }] });
   hero(caps(lineWords('BU', 5, 0, 3)), { size: 170, y: 280, t1: show1.t, color: P.cream, hot: P.goldPale, shade: 1, glow: 2 });   // HOLD YOUR FIRE (cream with a full shade: red is for fire)
   hero(caps(lineWords('BU', 6, 3, 6)), { size: 150, y: 960, t1: Math.min(dropT, rollBeats[rollBeats.length - 1] + 0.3), color: P.goldPale, hot: GOLD_HOT, shade: 0.8 });   // SHOW YOUR LIGHT (lower third: the closing split's faces fill the upper half; out as the frame burns white)

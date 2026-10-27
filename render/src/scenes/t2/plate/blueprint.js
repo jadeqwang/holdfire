@@ -4,6 +4,9 @@
 //     col ([0.94, 0.98, 1]), glowCol ([0.35, 0.85, 1]), glow (1), w (2.5 px), alpha (1 | fn(t, lt)), abs (false: path times are
 //     shot-local lt; true: song time t), zoom (1) / pan ([0,0]) / rot (0): the same transform as the plate under it, so lines stick to
 //     the painting, gain (1.3: lifts the core line into bloom), font ('Plex'), size (18 px labels), pen (true: bright pen tip)}
+//     zoom / pan / rot may also be fn(t, lt), to ride a plate that moves (a scroll, a Ken Burns push);
+//     arrive {from (0.85), frames (3)} | true: for shots too short to watch a drawing grow: every path is already `from` drawn on the
+//     shot's first frame and complete `frames` film frames later (stage timing ignored)
 // PATH: {type, t0, t1 (draw-on window, s), ease ('inOut'|'out'|'linear'...), w, col, alpha, dash ([on, off] px), ...shape}:
 //   poly    {pts: [[x,y]...], closed, smooth (Catmull-Rom)}     line {a, b}       rect {a, b} | {x, y, w, h}
 //   circle  {c, r, a0 (-90 deg: where the stroke starts), dir (1 = clockwise), cross (centre mark)}
@@ -135,9 +138,9 @@ export function drawBlueprint(c, paths, time, o = {}) {
   const tips = [];
   for (const P of paths || []) {
     const t0 = P.t0 ?? 0, t1 = P.t1 ?? t0 + 0.6;
-    if (time < t0) continue;
+    if (time < t0 && o.arriveU === undefined) continue;
     const ez = EASES[P.ease || 'inOut'] || EASES.inOut;
-    const f = ez(clamp((time - t0) / Math.max(1e-3, t1 - t0)));
+    const f = o.arriveU !== undefined ? o.arriveU : ez(clamp((time - t0) / Math.max(1e-3, t1 - t0)));
     const { strokes, labels } = shape(P);
     const { out, tip } = partial(strokes, f);
     const w = P.w ?? W, pc = P.col || col, pa = (P.alpha ?? 1) * A;
@@ -219,7 +222,10 @@ export default {
     let grid = p.grid;
     if (p.full) grid = cyanotypeGround(c, p.grid);
     const fx = (v) => (typeof v === 'function' ? v(t, lt) : v);
-    drawBlueprint(c, paths, time, { ...p, zoom: fx(p.zoom), pan: fx(p.pan), rot: fx(p.rot), grid, alpha: A });
+    // arrive: progress from `from` on the first frame to 1 after `frames` whole film frames
+    const ar = p.arrive === true ? {} : p.arrive;
+    const arriveU = ar ? Math.min(1, (ar.from ?? 0.85) + (1 - (ar.from ?? 0.85)) * Math.floor(lt * 24 + 1e-3) / Math.max(1, ar.frames ?? 3)) : undefined;
+    drawBlueprint(c, paths, time, { ...p, zoom: fx(p.zoom), pan: fx(p.pan), rot: fx(p.rot), grid, alpha: A, arriveU });
     if (p.full) { e.blit2d('replace', p.gain ?? 1.3); return; }
     if (!p.over) e.clear(e.rtScene, ...(p.bg || [0.03, 0.08, 0.16]));
     e.blit2d('over', p.gain ?? 1.3);

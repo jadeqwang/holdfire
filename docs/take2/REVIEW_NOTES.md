@@ -250,3 +250,11 @@ onset, coverage OK, no type rule breaks; chess_check OK; plate_windows: C103L (1
 **Left**
 - Lip sync on C103 / C203 / DR16 (item 8): needs the regenerations LIPSYNC.md lists (paid); not touched.
 - The CRT readouts at 0:57 / 1:58 stay at chest height (only 3:28 was asked to move).
+
+## Jade's notes on v3 and sung reel v4 (27 Oct)
+- Lip sync still off: 0:14.4 (V101), 0:46.6 (P105), 0:57.4 (C103: teal-tips synced, Jade not), 1:05.1 (C108, words right but slightly off), 1:58.8 (C203 both), 2:06.3 (C208: teal-tips off, Jade in sync), 3:08.8 (DR04), 3:19.6 (DR11), 3:21.0, 3:28.6 (DR16: she's already singing "you are" at the cut instead of "wherever"). Many were fixed in sung reel v4, not all → a lip-sync picker artifact: per shot, lag variants a little earlier/later; Jade picks the one that matches.
+- 0:57.4 suggestion: in the splits, the left sings one line and the right the other.
+- Lyrics: drop the comma after "if you are"; generally drop punctuation (1:50.2, 1:52.9 period, 2:00.7 comma); no exclamation marks (1:16.8 "counting on you", 2:58.3, 3:01.2); 2:10.1 "if you are" on one screen, "I'm counting on you" on the next; 3:24.3 "you were seen too" and "wherever you are" on two different clips; 2:20.6 no "One! One! Two!" subtitles in the chess section.
+- 0:34.1 the snowflake: a camera a little farther away would read more like "a snowflake in the boundless night".
+- 1:43.5 the near-miss list: check the news between the last entry (May 2025) and today, e.g. something at the Strait of Hormuz about a hallucinated target.
+- 2:26.5 chess: the board must match the previous frame's position, and she picks up an actual piece and makes the next move.

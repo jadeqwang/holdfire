@@ -10,11 +10,9 @@
    "dur": 7.042,
    "file": "media/gen/t2_C103L_sd25_t1_d610863352.mp4",
    "dims": "1280x720",
-   "verdict": "pick: on model, sings the whole line; strip closes on 'but', open vowels through the held 'are'",
+   "verdict": "pick: on model, sings the whole line; strip closes on 'but', open vowels through the held 'are' | superseded 27 Oct by t2_C103L_sd25_t4 (lipsync)",
    "lag": -0.25,
-   "pick": [
-    "C103L"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_C103L_sd25_t2",
@@ -29,6 +27,40 @@
    "verdict": "alt: fine picture; measured +0.833 opens on the b of 'but' (metrics disagree)",
    "lag": 0.833,
    "pick": false
+  },
+  {
+   "tag": "t2_C103L_sd25_t3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103L_sd25_t3-f86cce44f7",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103L_sd25_t3.txt",
+   "aref": "media/aref/C103.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103L_sd25_t3_f86cce44f7.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics weak (r 0.24), drifts",
+   "lag": -0.375,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_C103L_sd25_t4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103L_sd25_t4-62f94118e2",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103L_sd25_t4.txt",
+   "aref": "media/aref/C103.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103L_sd25_t4_62f94118e2.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK candidate: sings \"you\" (the 0:57.4 note) on time at -0.375..-0.417 (r 0.40, both metrics); closes mid \"are\" -> remouth",
+   "lag": -0.375,
+   "pick": [
+    "C103L"
+   ],
+   "by": "lipsync pass 27 Oct"
   }
  ],
  "C103R": [
@@ -125,6 +157,38 @@
    "pick": [
     "C208L"
    ]
+  },
+  {
+   "tag": "t2_C208L_sd25_t3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208L_sd25_t3-94a4752d50",
+   "kf": "media/kf2/C208L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C208L_sd25_t3.txt",
+   "aref": "media/aref/C208.mp3",
+   "s0": 125.524,
+   "dur": 4,
+   "file": "media/gen/t2_C208L_sd25_t3_94a4752d50.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics disagree (+0.833 / -0.042); t2 stays the pick",
+   "lag": null,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_C208L_sd25_t4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208L_sd25_t4-f052b52cea",
+   "kf": "media/kf2/C208L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C208L_sd25_t4.txt",
+   "aref": "media/aref/C208.mp3",
+   "s0": 125.524,
+   "dur": 4,
+   "file": "media/gen/t2_C208L_sd25_t4_f052b52cea.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: -0.208 r 0.47 voice; t2 (+0.042, cleaner closures on breathe/somewhere) stays the pick",
+   "lag": -0.208,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
   }
  ],
  "C208R": [
@@ -202,11 +266,9 @@
    "dur": 7.042,
    "file": "media/gen/t2_C203L_sd25_t1_dcab53c4e0.mp4",
    "dims": "1280x720",
-   "verdict": "pick: metrics agree -0.375",
+   "verdict": "pick: metrics agree -0.375 | superseded 27 Oct by t2_C203L_sd25_t3 (lipsync)",
    "lag": -0.375,
-   "pick": [
-    "C203L"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_C203L_sd25_t2",
@@ -221,6 +283,40 @@
    "verdict": "alt: metrics disagree",
    "lag": 0.333,
    "pick": false
+  },
+  {
+   "tag": "t2_C203L_sd25_t3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203L_sd25_t3-6c8ad4c084",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203L_sd25_t3.txt",
+   "aref": "media/aref/C203.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203L_sd25_t3_6c8ad4c084.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK candidate: \"you\" on time at -0.042 (the 1:58.8 note); closes mid \"are\", \"I'm counting\" held open -> remouth",
+   "lag": -0.042,
+   "pick": [
+    "C203L"
+   ],
+   "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_C203L_sd25_t4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203L_sd25_t4-f6129a0a9f",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203L_sd25_t4.txt",
+   "aref": "media/aref/C203.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203L_sd25_t4_f6129a0a9f.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics disagree, drifts (sub-window lags -0.33..+0.96)",
+   "lag": null,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
   }
  ],
  "C203R": [
@@ -285,6 +381,38 @@
    "pick": [
     "C209L"
    ]
+  },
+  {
+   "tag": "t2_C209L_sd25_t3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209L_sd25_t3-7335aab114",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209L_sd25_t3.txt",
+   "aref": "media/aref/C209.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209L_sd25_t3_7335aab114.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: pushes in to a closer framing mid-take",
+   "lag": null,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_C209L_sd25_t4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209L_sd25_t4-a99e10f024",
+   "kf": "media/kf2/C103L_v2_nbp.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209L_sd25_t4.txt",
+   "aref": "media/aref/C209.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209L_sd25_t4_a99e10f024.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: closes during the held \"are\"; best metric lag -0.667 would freeze frame 0 for 0.37 s",
+   "lag": null,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
   }
  ],
  "C209R": [

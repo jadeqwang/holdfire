@@ -11,14 +11,18 @@
   "kind": "video",
   "src": "media/gen/t2_BR_clock_veo31_t1_760286b3fa.mp4",
   "in": 0.0,
-  "rate": 1.0
+  "rate": 1.0,
+  "flipX": true,
+  "mirror": "mirror rule: teal-tips plate flipped (flipX); canon-compatible take, no regen"
  },
  "BR_faceB": {
   "dir": "work/plates/BR_faceB",
   "kind": "video",
   "src": "media/gen/t2_BR_faceB_veo31_t1_9e384a5af4.mp4",
   "in": 0.0,
-  "rate": 1.0
+  "rate": 1.0,
+  "flipX": true,
+  "mirror": "mirror rule: teal-tips plate flipped (flipX); canon-compatible take, no regen"
  },
  "BR_faceW": {
   "dir": "work/plates/BR_faceW",
@@ -30,7 +34,9 @@
   "dir": "work/plates/BR_handB",
   "kind": "video",
   "src": "media/gen/t2_BR_handB_veo31_t1_75a1400d0c.mp4",
-  "in": 0.0
+  "in": 0.0,
+  "flipX": true,
+  "mirror": "mirror rule: teal-tips plate flipped (flipX); canon-compatible take, no regen"
  },
  "BR_handW": {
   "dir": "work/plates/BR_handW",
@@ -49,24 +55,29 @@
  "C103L": {
   "dir": "work/plates/C103L",
   "kind": "video",
-  "src": "media/gen/t2_C103L_sd25_t1_d610863352.mp4",
+  "src": "media/gen/t2_C103L_sd25_t4_62f94118e2.mp4",
   "s0": 56.371,
-  "lag": -0.25
+  "lag": -0.375,
+  "lipsync": "lipsync regen 27 Oct (t4, labial-cue prompt, same keyframe + aref): sings \"you\" on time (the 0:57.4 note; t1 never sang it); -0.375 (-9 f) as played, r 0.40 both metrics (work/t2/lips/C103L_t4.mouthline.jpg). Closes part-way through the held \"are\" (58.6-59.4); remouth could not fix it (cool light defeats its skin test). Holds frame 0 for the first 2 film frames"
  },
  "C103R": {
   "dir": "work/plates/C103R",
   "kind": "video",
-  "src": "media/gen/t2_C103R_sd25_t2_1584d49648.mp4",
+  "src": "media/gen/t2_C103R_sd25_m6_03f90610a1.mp4",
   "s0": 56.371,
-  "lag": -0.083,
-  "lipsync": "lipsync pass 27 Oct: -0.083 (was -0.25): \"you\" opened 0.17 s late at -0.25 (work/t2/lips/C103R.mouthline.jpg); late lines drift"
+  "lag": 0.0,
+  "lipsync": "lipsync pass 27 Oct: -0.083 (was -0.25): \"you\" opened 0.17 s late at -0.25 (work/t2/lips/C103R.mouthline.jpg); late lines drift",
+  "flipX": true,
+  "note": "mirror rule: Seedance 2.5 m6 on media/kf2/C103R_mir_nbp_v2.jpg = Jade's C103L_v2 frame with teal-tips swapped in and room A relit cool -> flipped, the split's halves are mirror images; lag 0 by the word strip (b of but shut, are / I'm / on open)"
  },
  "C108": {
   "dir": "work/plates/C108",
   "kind": "video",
-  "src": "media/gen/t2_C108_sd25_t2_3721f7f98e.mp4",
+  "src": "media/gen/t2_C108_sd25_m6_09889cccfb.mp4",
   "s0": 64.289,
-  "lag": 0.125
+  "lag": 0.0,
+  "flipX": true,
+  "note": "mirror rule: Seedance 2.5 m6 on media/kf2/C108_mir_nbp_v2.jpg (canon, her right side to camera: dot on the far side, no patch visible), room A cool; flipped; lag 0 by strip (provisional)"
  },
  "C109": {
   "dir": "work/plates/C109",
@@ -85,52 +96,63 @@
  "C201R": {
   "dir": "work/plates/C201R",
   "kind": "video",
-  "src": "media/gen/t2_C201R_veo31_t1_d50e877697.mp4",
-  "in": 0.77,
-  "rate": 1.5
+  "src": "media/gen/t2_C201R_veo31_m1_8dded7fd56.mp4",
+  "in": 3.2,
+  "rate": 1.15,
+  "flipX": true,
+  "note": "mirror rule: Veo 3.1 m1 on media/kf2/C201R_mir_nbp_v1fix.jpg (= Jade C101 frame, teal-tips from behind, canon back: pale-blue circle + RARE EARTH painted clean, 1420 patch on the left-sleeve band) -> flipped, lettering reads reversed; the dishes swing up at clip ~4.0-5.5 s (lt 0.7-2.0)"
  },
  "C203L": {
   "dir": "work/plates/C203L",
   "kind": "video",
-  "src": "media/gen/t2_C203L_sd25_t1_dcab53c4e0.mp4",
+  "src": "media/gen/t2_C203L_sd25_t3_6c8ad4c084.mp4",
   "s0": 117.637,
-  "lag": -0.375
+  "lag": -0.042,
+  "lipsync": "lipsync regen 27 Oct (t3, labial-cue prompt, keyframe C103L_v2, aref C203): \"you\" lands on the frame (the 1:58.8 note); -0.042 (-1 f), r 0.32 (work/t2/lips/C203L_t3.mouthline.jpg); closes briefly mid \"are\" and holds open through \"I'm counting\""
  },
  "C203R": {
   "dir": "work/plates/C203R",
   "kind": "video",
-  "src": "media/gen/t2_C203R_sd25_t1_7828c97ddb.mp4",
+  "src": "media/gen/t2_C203R_sd25_m5_c0582807c7.mp4",
   "s0": 117.637,
-  "lag": 0.917
+  "lag": 0.0,
+  "flipX": true,
+  "note": "mirror rule: Seedance 2.5 m5 on the C103R mirror keyframe, flipped; lag 0 (provisional)"
  },
  "C208L": {
   "dir": "work/plates/C208L",
   "kind": "video",
   "src": "media/gen/t2_C208L_sd25_t2_6669650da7.mp4",
   "s0": 125.524,
-  "lag": 0.042
+  "lag": 0.042,
+  "lipsync": "lipsync pass 27 Oct: +0.042 confirmed (closures on the b of \"breathe\" and the m of \"somewhere\"); regens t3/t4 not better"
  },
  "C208R": {
   "dir": "work/plates/C208R",
   "kind": "video",
-  "src": "work/t2/g2/flip/t2_C208R_sd25_t1_hflip.mp4",
+  "src": "media/gen/t2_C208R_sd25_m6_ac2e706ee6.mp4",
   "s0": 125.524,
-  "lag": 0.0
+  "lag": -0.25,
+  "flipX": true,
+  "note": "mirror rule: Seedance 2.5 m6 on media/kf2/C208R_mir_nbp_v2.jpg = Jade's C208L_v2 studio pose, teal-tips swapped in, cool; flipped (the edit's own p also sets flipX: true); lag -0.25 (voice r .58, strip)"
  },
  "C209L": {
   "dir": "work/plates/C209L",
   "kind": "video",
   "src": "media/gen/t2_C209L_sd25_t2_22438bdadd.mp4",
   "s0": 128.098,
-  "lag": 0.833
+  "lag": 0.833,
+  "lipsync": "lipsync pass 27 Oct: +0.833 kept (low confidence): the mouth stays open through \"If you\" without closing between words; regens t3 (push-in) and t4 (shuts on \"are\") and a remouth were worse"
  },
  "C209R": {
   "dir": "work/plates/C209R",
   "kind": "video",
-  "src": "media/gen/t2_C209R_sd25_t1_3b86d4fe74.mp4",
+  "src": "media/gen/t2_C209R_sd25_m5_a1ce0f25e4.mp4",
   "s0": 128.098,
-  "lag": 0.083,
-  "lipsync": "lipsync pass 27 Oct: +0.083 (was -0.167): \"you\" opened 0.25 s late; the held \"are\" is not articulated (low confidence)"
+  "lag": 0.0,
+  "lipsync": "lipsync pass 27 Oct: +0.083 (was -0.167): \"you\" opened 0.25 s late; the held \"are\" is not articulated (low confidence)",
+  "flipX": true,
+  "note": "mirror rule: Seedance 2.5 m5 on the C103R mirror keyframe, flipped; lag 0 (provisional)"
  },
  "C210": {
   "dir": "work/plates/C210",
@@ -167,24 +189,34 @@
  "P105": {
   "dir": "work/plates/P105",
   "kind": "video",
-  "src": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
+  "src": "media/gen/t2_P105_sd25_m6_5c9b5e216f.mp4",
   "s0": 45.715,
-  "lag": 0.25,
-  "lipsync": "lipsync pass 27 Oct: +0.25 (was 0): as played on twos, the opens on it/know/we're line up (work/t2/lips/P105_new.mouthline.jpg); take articulates little on \"Hear it and you'll\""
+  "lag": 0.0,
+  "lipsync": "lipsync pass 27 Oct: +0.25 (was 0): as played on twos, the opens on it/know/we're line up (work/t2/lips/P105_new.mouthline.jpg); take articulates little on \"Hear it and you'll\"",
+  "flipX": true,
+  "note": "mirror rule (27 Oct): Seedance 2.5 m6 on media/kf2/P105_mir_v2.jpg (canon jacket, room A geometry, cool), flipped; lag 0 (know / we're peaks on the voiced curve; m5's +1.25 was the pre-roll)"
  },
  "P106": {
   "dir": "work/plates/P106",
   "kind": "video",
-  "src": "media/gen/t2_P106_sd25_t3_eb735d9762.mp4",
+  "src": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4",
   "s0": 47.432,
-  "lag": 1.263,
-  "note": "lag 1.18 -> 1.263 (polish pass 1): her eyes now open 2 frames after the cut on the held 'awake' (47.73) instead of 4"
+  "lag": 1.958,
+  "note": "mirror rule: Seedance 2.5 m5 on media/kf2/P106_mir_v2.jpg, flipped; she idles eyes-closed ~2 s, opens her eyes with the held note at clip 2.33 s: lag 1.958 puts the eyes opening 2 frames after the cut on awake (47.73); mouth open on the held note to the shot end (clip 3.76)",
+  "flipX": true,
+  "zoom": 1.3,
+  "pan": [
+   0.0,
+   160.0
+  ]
  },
  "P107": {
   "dir": "work/plates/P107",
   "kind": "video",
-  "src": "work/t2/g2/P107_push.mp4",
-  "in": 0.0
+  "src": "work/t2/mirror/P107_push.mp4",
+  "in": 0.0,
+  "flipX": true,
+  "note": "mirror rule (27 Oct): Veo 3.1 t2_P107_veo31_m1 on media/kf2/P107_mir_v2.jpg (canon jacket, room A geometry, cool), digital push into her near eye (tracked) 1->6.88x by plate 1.92 s, crossfading into the crisp 2K still media/kf2/P107_eye_nbp_v1_2k.jpg (scratchpad p107_push.py); flipped in the renderer. The edit plays it at rate 0.8 (ends at plate 1.96 s = the eye still)"
  },
  "X201": {
   "dir": "work/plates/X201",

@@ -33,9 +33,11 @@
  "BU12R": {
   "dir": "work/plates/BU12R",
   "kind": "video",
-  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "src": "media/gen/t2_BU12R_veo31_m1_79b456d788.mp4",
   "in": 0.5,
-  "note": "teal-tips, room B, mirrored framing of BU12L (keyframe = BU12L flipped + edited, patch moved back to her left sleeve); Veo pushes in and drifts right"
+  "note": "teal-tips, room B, mirrored framing of BU12L (keyframe = BU12L flipped + edited, patch moved back to her left sleeve); Veo pushes in and drifts right",
+  "flipX": true,
+  "mirror": "mirror rule: Veo 3.1 m1 on media/kf2/BU12R_mir_nbp_v2.jpg (= Jade BU12L frame, teal-tips swapped in, room A cool, canon jacket) -> flipped = exact mirror of BU12L"
  },
  "BU13": {
   "dir": "work/plates/BU12L",
@@ -52,14 +54,16 @@
  "BU14": {
   "dir": "work/plates/BU12R",
   "kind": "video",
-  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "src": "media/gen/t2_BU12R_veo31_m1_79b456d788.mp4",
   "in": 0.3,
   "zoom": 1.6,
   "pan": [
    312,
    320
   ],
-  "note": "same take, pushed in on teal-tips and the light"
+  "note": "same take, pushed in on teal-tips and the light",
+  "flipX": true,
+  "mirror": "mirror rule: Veo 3.1 m1 on media/kf2/BU12R_mir_nbp_v2.jpg (= Jade BU12L frame, teal-tips swapped in, room A cool, canon jacket) -> flipped = exact mirror of BU12L"
  },
  "BU17L": {
   "dir": "work/plates/BU12L",
@@ -71,9 +75,11 @@
  "BU17R": {
   "dir": "work/plates/BU12R",
   "kind": "video",
-  "src": "media/gen/t2_BU12R_veo_t1_939043e1ac.mp4",
+  "src": "media/gen/t2_BU12R_veo31_m1_79b456d788.mp4",
   "in": 1.8,
-  "note": "same take, the light flares (1.6-2.6 s) for the burn to white"
+  "note": "same take, the light flares (1.6-2.6 s) for the burn to white",
+  "flipX": true,
+  "mirror": "mirror rule: Veo 3.1 m1 on media/kf2/BU12R_mir_nbp_v2.jpg (= Jade BU12L frame, teal-tips swapped in, room A cool, canon jacket) -> flipped = exact mirror of BU12L"
  },
  "DR01": {
   "dir": "work/plates/DR01",
@@ -92,8 +98,9 @@
  "DR03": {
   "dir": "work/plates/DR03_reveal",
   "kind": "still",
-  "src": "media/kf2/DR03_nbp_v2.jpg",
-  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)"
+  "src": "media/kf2/DR03_mir_v3.jpg",
+  "note": "the reveal frame (teal-tips near side in teal/silver, Jade through the glass, exactly DR02's last pose) under t2_mirror's own whip; the Seedance 2.0 swing take is the alt pick DR03_swing (reads as a smear at 4.5x under the whip)",
+  "mirror": "mirror rule: two-shot through the glass, not flipped; irises brown (teal / pale-blue catchlights), 1420 patch on each near sleeve band (teal-tips right = mirrored, Jade left = canon)"
  },
  "DR03_swing": {
   "dir": "work/plates/DR03",
@@ -106,10 +113,10 @@
  "DR04": {
   "dir": "work/plates/DR04",
   "kind": "video",
-  "src": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
+  "src": "media/gen/t2_DR04_sd25_m6_ee9a78bbe4.mp4",
   "s0": 188.376,
-  "lag": 0.583,
-  "note": "Seedance 2.5 sung t2: teal-tips (left, teal/silver) sings across the glass, Jade (right, warm inks, through the glass) mirrors; both hands rise to the glass. Profiles: the anime cascade can't find them, lag from a hand-placed mouth ROI (work/g4/roisync.py, r 0.33; t1 also peaks at +0.583). Mirror line at x ~962"
+  "lag": -0.25,
+  "note": "mirror rule: two-shot through the glass, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR04_mir_v3.jpg (irises brown with teal / pale-blue catchlights, a 1420 patch on each near sleeve band: teal-tips right = mirrored, Jade left = canon); hands rise to the glass; lag -0.25 by strip (m5 ignored the first frame)"
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -128,10 +135,11 @@
  "DR11": {
   "dir": "work/plates/DR11",
   "kind": "video",
-  "src": "media/gen/t2_DR11_sd25_t1_9a22600294.mp4",
+  "src": "media/gen/t2_DR11_sd25_t4_94cd346a9f.mp4",
   "s0": 198.628,
-  "lag": -0.125,
-  "note": "Seedance 2.5 sung t1: Jade sings in front, teal-tips beside her looks up, mouth closed; lag by the strip (m of 'made' shut at -3f)"
+  "lag": -0.167,
+  "note": "Seedance 2.5 sung t4 (lipsync regen 27 Oct, labial-cue prompt, aref media/aref/DR11_v2.mp3 with the 'Fifty-five' choir muted): Jade sings in front, teal-tips beside her looks up, mouth closed",
+  "lipsync": "lag -0.167 (-4 f) as played: closures on 'we' and the w of 'would've', open on 'never' and 'here'; rms r 0.54 (work/t2/lips/DR11_t4.mouthline.jpg). Was t1 at -0.125, late on 'never'"
  },
  "DR14": {
   "dir": "work/plates/DR14",
@@ -142,10 +150,10 @@
  "DR16": {
   "dir": "work/plates/DR16",
   "kind": "video",
-  "src": "media/gen/t2_DR16_sd25_t2_8e3128f390.mp4",
+  "src": "media/gen/t2_DR16_sd25_m6_c41d090cb4.mp4",
   "s0": 207.223,
-  "lag": 1.0,
-  "note": "Seedance 2.5 sung t2: teal-tips in front, eyes closed, mouth open through the held note to the end; Jade beside her at the jog wheel. Lag +23 f from t2sync (both metrics); legato, so confirm by ear",
+  "lag": 0.958,
+  "note": "mirror rule: two-shot at one console, NOT flipped (Jade is in it); teal-tips' dot repainted on her right chest (mirrored jacket) in media/kf2/DR16_mir_v3.jpg; Seedance 2.5 m6, lag 0.958 (you / held are open to the end, eyes open near the end)",
   "lipsync": "lipsync pass 27 Oct: +1.0 (was +0.958): the closure on the v of \"wherever\" lands ~0.1 s late at +0.958; legato, idles open on the held \"are\""
  },
  "OU10": {

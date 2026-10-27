@@ -81,20 +81,13 @@
   "twos": false,
   "note": "still with a baked centred push 1.00->1.06/s about the measured spiral centre [960, 537] (now exactly at 960,540); hurricane, eye at centre; slow counter-clockwise turn 3 deg/s baked in"
  },
- "CO16": {
-  "dir": "work/plates/CO16",
+ "CO08": {
+  "dir": "work/plates/CO08",
   "kind": "video",
-  "src": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
+  "src": "media/kf2/CO08_nbp_v1.jpg",
   "in": 0,
-  "rate": 4.0,
-  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot"
- },
- "CO17": {
-  "dir": "work/plates/CO17",
-  "kind": "video",
-  "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
-  "in": 0.98,
-  "note": "plate = take 0.5-2.0 s; in = 0.85 s of the take (plate starts at 0.5 s) | polish 2: in 0.98 (plate frame 11): her eyes start to open on the 12.50 beat cut, open 3 frames later"
+  "twos": false,
+  "note": "generated grand-design spiral (not a real galaxy, no ESA/Hubble credit needed); core 965,550 moved to centre; push + 1.5 deg/s turn. CO09 continues it (red grade)"
  },
  "CO11": {
   "dir": "work/plates/CO11",
@@ -110,18 +103,13 @@
   "in": 0.8,
   "note": "plate = take 0.8-2.4 s; in = 1.35 s of the take (plate starts at 0.8 s) | polish 2: in 0.8 (the plate's first frame): the beam sweeps through the fog and turns into the lens by the cut (from 1.35 it was glare only)"
  },
- "V101": {
-  "dir": "work/plates/V101",
+ "CO13": {
+  "dir": "work/plates/CO13",
   "kind": "video",
-  "src": "media/gen/t2_V101_sd25_t2_9163d752d3.mp4",
-  "s0": 12.75,
-  "lag": 0.0,
-  "in": 0.3,
-  "note": "Seedance 2.5 sung, vocal-stem slice S0 12.750 (media/aref/V101.mp3); in = 13.05 - S0 + lag. Alt take t3 (eyes closed) lag -0.125",
-  "grade": {
-   "exposure": 0.9,
-   "contrast": 1.08
-  }
+  "src": "media/kf2/CO13_nbp_v1.jpg",
+  "in": 0,
+  "twos": false,
+  "note": "city grid through an aircraft window; still with a baked slow push"
  },
  "CO14": {
   "dir": "work/plates/CO14",
@@ -131,21 +119,42 @@
   "twos": false,
   "note": "generated still (night side from orbit, not NASA imagery) with a baked slow push + 1.5 deg/s drift. The cosmos group also has procedural t2_earth_night view iss as an alternative"
  },
- "CO08": {
-  "dir": "work/plates/CO08",
+ "CO16": {
+  "dir": "work/plates/CO16",
   "kind": "video",
-  "src": "media/kf2/CO08_nbp_v1.jpg",
+  "src": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
   "in": 0,
-  "twos": false,
-  "note": "generated grand-design spiral (not a real galaxy, no ESA/Hubble credit needed); core 965,550 moved to centre; push + 1.5 deg/s turn. CO09 continues it (red grade)"
+  "rate": 4.0,
+  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot"
  },
- "CO13": {
-  "dir": "work/plates/CO13",
+ "CO17": {
+  "dir": "work/plates/CO17",
   "kind": "video",
-  "src": "media/kf2/CO13_nbp_v1.jpg",
+  "src": "media/gen/t2_CO17_veo_t1_f3cac7dd15.mp4",
+  "in": 0.98,
+  "note": "plate = take 0.5-2.0 s; in = 0.85 s of the take (plate starts at 0.5 s) | polish 2: in 0.98 (plate frame 11): her eyes start to open on the 12.50 beat cut, open 3 frames later"
+ },
+ "V101": {
+  "dir": "work/plates/V101",
+  "kind": "video",
+  "src": "media/gen/t2_V101_sd25_t2_9163d752d3.mp4",
+  "s0": 12.75,
+  "lag": 0.042,
+  "in": 0.3,
+  "note": "Seedance 2.5 sung, vocal-stem slice S0 12.750 (media/aref/V101.mp3); in = 13.05 - S0 + lag. Alt take t3 (eyes closed) lag -0.125",
+  "grade": {
+   "exposure": 0.9,
+   "contrast": 1.08
+  },
+  "lipsync": "lipsync pass 27 Oct: +0.042 (+1 f, was 0). As played on twos the closures on the s of \"sea\" (13.7-13.78) and through \"salt\" (14.32-14.65) land within a frame of the stem; r 0.60, the same lag in every 1.4 s sub-window (work/t2/lips/V101.mouthline.jpg). Regens t5/t6 and a remouth were no better; alt t6 at +1.125 articulates \"of the sea\" best but never sings \"Out\""
+ },
+ "V102": {
+  "dir": "work/plates/V102",
+  "kind": "video",
+  "src": "work/t2/mirror/V102_lettered.mp4",
   "in": 0,
-  "twos": false,
-  "note": "city grid through an aircraft window; still with a baked slow push"
+  "note": "Seedance 2.0 (Veo t1 drifted). V103 continues it at in 1.92: at that time the near front fin is at (1140,760) in the plate (shoulder 1100,680 to tip 1140,790), head 760-900,560-620. With the edit p zoom 1.5 pan [-120,60] the fin lands at screen ~(1110,930), near the bottom edge; pan [-270,-270] puts it at (960,600)",
+  "mirror": "27 Oct: RARE EARTH baked under the back circle on every frame (tracked, hair-occluded; scratchpad v102_letter.py) of t2_V102_sd20_t2_b72e2c06c8.mp4"
  },
  "V106": {
   "dir": "work/plates/V106",
@@ -154,6 +163,14 @@
   "in": 0.66,
   "rate": 1.5,
   "note": "plate = take 0.5-1.5 s; in = 0.66 s of the take (plate starts at 0.5 s); rate 1.5: the hand opens across the 0.28 s shot (palm centre ~1000,560)"
+ },
+ "V107": {
+  "dir": "work/plates/V107",
+  "kind": "video",
+  "src": "media/gen/t2_V107_veo_t3_624affc89f.mp4",
+  "in": 1.17,
+  "rate": 1.2,
+  "note": "plate = take 1.0-3.6 s; in = 1.17 s of the take (plate starts at 1.0 s); rate 1.2: mist settles, hand lifts at ~+0.5 s, stencil shows from ~+0.9 s. Take time < 1.0 s is excluded (anachronistic spray can)"
  },
  "V108": {
   "dir": "work/plates/V108",
@@ -176,21 +193,6 @@
   "in": 0,
   "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.691 s, keyed, over painted era plate media/kf2/V110_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
  },
- "V102": {
-  "dir": "work/plates/V102",
-  "kind": "video",
-  "src": "media/gen/t2_V102_sd20_t2_b72e2c06c8.mp4",
-  "in": 0,
-  "note": "Seedance 2.0 (Veo t1 drifted). V103 continues it at in 1.92: at that time the near front fin is at (1140,760) in the plate (shoulder 1100,680 to tip 1140,790), head 760-900,560-620. With the edit p zoom 1.5 pan [-120,60] the fin lands at screen ~(1110,930), near the bottom edge; pan [-270,-270] puts it at (960,600)"
- },
- "V107": {
-  "dir": "work/plates/V107",
-  "kind": "video",
-  "src": "media/gen/t2_V107_veo_t3_624affc89f.mp4",
-  "in": 1.17,
-  "rate": 1.2,
-  "note": "plate = take 1.0-3.6 s; in = 1.17 s of the take (plate starts at 1.0 s); rate 1.2: mist settles, hand lifts at ~+0.5 s, stencil shows from ~+0.9 s. Take time < 1.0 s is excluded (anachronistic spray can)"
- },
  "V111": {
   "dir": "work/plates/V111",
   "kind": "video",
@@ -205,11 +207,12 @@
   "in": 0.3,
   "note": "plate = take 0.3-1.5 s; in = 0.3 s of the take (plate starts at 0.3 s)"
  },
- "V115": {
-  "dir": "work/plates/V115",
-  "kind": "still",
-  "src": "media/kf2/V115_nbp_v1.jpg",
-  "note": "painted cutaway: field surface/horizon at y~500, the seed just below the surface at ~(950,630), the dry canal in section at right (~1600-1800, 560-640); calm soil and sky for the blueprint cross-section"
+ "V113": {
+  "dir": "work/plates/V113",
+  "kind": "video",
+  "src": "media/gen/t2_V113_veof_t1_a076292c94.mp4",
+  "in": 0.5,
+  "note": "keyframe media/kf2/V113_nbp_v5.jpg (v1-v4 rejected: copied the style sheet, glyph-like marks, lens vignette). Plate = take 0.3-2.9 s; in = 0.5 s of the take; the wedge row sits at ~(480-820, 600-640)"
  },
  "V114": {
   "dir": "work/plates/V114",
@@ -218,6 +221,12 @@
   "in": 0,
   "note": "the dry channel runs from (1350,1080) to the vanishing point (~1440,300); seed pressed at ~(1260,700)"
  },
+ "V115": {
+  "dir": "work/plates/V115",
+  "kind": "still",
+  "src": "media/kf2/V115_nbp_v1.jpg",
+  "note": "painted cutaway: field surface/horizon at y~500, the seed just below the surface at ~(950,630), the dry canal in section at right (~1600-1800, 560-640); calm soil and sky for the blueprint cross-section"
+ },
  "V116": {
   "dir": "work/plates/V116",
   "kind": "video",
@@ -225,6 +234,13 @@
   "in": 1.9,
   "rate": 1.5,
   "note": "plate = take 1.5-3.9 s; in = 1.9 s of the take (plate starts at 1.5 s); rate 1.5: the ditch fills and lilies open"
+ },
+ "V117": {
+  "dir": "work/plates/V117",
+  "kind": "video",
+  "src": "media/gen/t2_V117_veof_t1_46220d7a56.mp4",
+  "in": 0.5,
+  "note": "plate = take 0.3-1.3 s; in = 0.5 s of the take (plate starts at 0.3 s)"
  },
  "V118": {
   "dir": "work/plates/V118",
@@ -253,13 +269,6 @@
   "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
   "in": 0,
   "note": "composite: the walk take from 4.469 s (she breaks into a run at ~3.6 s), keyed, over painted plate media/kf2/V121_nbp_v1.jpg; 1.2x, scroll 400 px/s; Saturn V vertical at x~920, tower x~800, Jade small lower left x~760"
- },
- "V117": {
-  "dir": "work/plates/V117",
-  "kind": "video",
-  "src": "media/gen/t2_V117_veof_t1_46220d7a56.mp4",
-  "in": 0.5,
-  "note": "plate = take 0.3-1.3 s; in = 0.5 s of the take (plate starts at 0.3 s)"
  },
  "V122": {
   "dir": "work/plates/V122",
@@ -328,12 +337,5 @@
   "in": 0,
   "twos": false,
   "note": "generated flat illustration of the ISS (8 gold array wings on the truss, radiators, modules) on black, upscaled; baked slow push + 2 deg/s turn like a turning snowflake; the edit applies riso"
- },
- "V113": {
-  "dir": "work/plates/V113",
-  "kind": "video",
-  "src": "media/gen/t2_V113_veof_t1_a076292c94.mp4",
-  "in": 0.5,
-  "note": "keyframe media/kf2/V113_nbp_v5.jpg (v1-v4 rejected: copied the style sheet, glyph-like marks, lens vignette). Plate = take 0.3-2.9 s; in = 0.5 s of the take; the wedge row sits at ~(480-820, 600-640)"
  }
 }

@@ -106,9 +106,9 @@
    "dur": 4,
    "file": "media/gen/t2_DR11_sd25_t1_9a22600294.mp4",
    "dims": "1280x720",
-   "verdict": "pick: on model, teal tips hold; background lost the two palettes (white + light rays); closed-eye smile only after the window",
+   "verdict": "pick: on model, teal tips hold; background lost the two palettes (white + light rays); closed-eye smile only after the window | superseded 27 Oct by t2_DR11_sd25_t4 (lipsync)",
    "lag": -0.125,
-   "pick": true
+   "pick": false
   },
   {
    "tag": "t2_DR11_sd25_t2",
@@ -123,6 +123,38 @@
    "verdict": "reject: teeth grin, teal tips fade to black, light turns warm",
    "lag": null,
    "pick": false
+  },
+  {
+   "tag": "t2_DR11_sd25_t3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR11_sd25_t3-b337a904fa",
+   "kf": "media/kf2/DR11_gpt.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR11_sd25_t3.txt",
+   "aref": "media/aref/DR11_v2.mp3",
+   "s0": 198.628,
+   "dur": 4,
+   "file": "media/gen/t2_DR11_sd25_t3_b337a904fa.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics disagree (+0.417 / +0.833)",
+   "lag": null,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_DR11_sd25_t4",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR11_sd25_t4-94cd346a9f",
+   "kf": "media/kf2/DR11_gpt.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR11_sd25_t4.txt",
+   "aref": "media/aref/DR11_v2.mp3",
+   "s0": 198.628,
+   "dur": 4,
+   "file": "media/gen/t2_DR11_sd25_t4_94cd346a9f.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK: on model; closures on \"we\" and the w of \"would've\", open on \"never\"/\"here\"; rms r 0.54 at -0.167",
+   "lag": -0.167,
+   "pick": true,
+   "by": "lipsync pass 27 Oct"
   }
  ],
  "DR04": [

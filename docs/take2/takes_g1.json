@@ -147,6 +147,38 @@
    "verdict": "bake-off (Seedance 2.5 reference mode, refs DOT sheet + V101 frame): same framing, on model, but sings late (best lag +0.417, r .41); t2 kept",
    "lag": 0.417,
    "pick": false
+  },
+  {
+   "tag": "t2_V101_sd25_t5",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_t5-30ba2746b8",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_t5.txt",
+   "aref": "media/aref/V101.mp3",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25_t5_30ba2746b8.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: on model; small mouth through \"of the\" and \"sea\"; in sync at +0.042 but no better than t2",
+   "lag": null,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_V101_sd25_t6",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_t6-ff9afe815a",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_t6.txt",
+   "aref": "media/aref/V101.mp3",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25_t6_ff9afe815a.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: idles 1.1 s, then the best articulation of \"of the sea with salt\" at +1.125, but \"Out\" unsung and the mouth shuts during the held \"our\"",
+   "lag": 1.125,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
   }
  ],
  "CO11": [

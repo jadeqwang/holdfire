@@ -1,4 +1,37 @@
 {
+ "BR13": {
+  "dir": "work/plates/BR13",
+  "kind": "still",
+  "src": "media/kf2/BR14_nbp_v1.jpg",
+  "note": "the Soviet poster the Suprematist morph can assemble into (= BR14's first frame): sea surface ~y 115 (right) to 276 (left), destroyers on it, sub centred ~(900, 830); flat red/black/cream, empty cream band for the dots"
+ },
+ "BR14": {
+  "dir": "work/plates/BR14",
+  "kind": "video",
+  "src": "media/gen/t2_BR14_veo_t1_eb65957989.mp4",
+  "in": 0.0,
+  "twos": true,
+  "style": "newsprint",
+  "note": "veo-3.1, flat poster in motion (destroyers glide, current lines drift, sub creeps); keyframe BR14_nbp_v1 (paper margin cropped by Veo). Optional p.img for t2_arkhipov 'charges'; use style 'newsprint' (red+black), not 'halftone' (grey only)"
+ },
+ "BR15": {
+  "dir": "work/plates/BR15",
+  "kind": "still",
+  "src": "media/kf2/BR15_nbp_v1.jpg",
+  "note": "two officers in red silhouette, one pointing at the torpedo-tube hatch (right); faces featureless; optional t2_arkhipov p.img for 'fire'"
+ },
+ "BR16": {
+  "dir": "work/plates/BR16",
+  "kind": "still",
+  "src": "media/kf2/BR16_nbp_v1.jpg",
+  "note": "open hand, palm out, between two officers; right officer's face partly lit and caps carry a small cockade (soften in halftone or skip); optional p.img for 'hand'"
+ },
+ "BR17": {
+  "dir": "work/plates/BR17",
+  "kind": "still",
+  "src": "media/kf2/BR17_nbp_v1.jpg",
+  "note": "B-59 surfacing at night among destroyers in searchlights; still only (no time in the edit); optional p.img for 'surface'"
+ },
  "V201": {
   "dir": "work/plates/V201",
   "kind": "video",
@@ -8,7 +41,33 @@
   "twos": true,
   "style": "ink",
   "styleAmt": 0.4,
-  "note": "seedance-2.5 t2 on media/kf2/V201_nbp_v1crop.jpg; aref = Kim_Vocal_2 excerpt (RoFormer stem was not ready), S0 82.247, 'you' muted 82.247-82.50; metrics agree at -3 f"
+  "note": "seedance-2.5 t2 on media/kf2/V201_nbp_v1crop.jpg; aref = Kim_Vocal_2 excerpt (RoFormer stem was not ready), S0 82.247, 'you' muted 82.247-82.50; metrics agree at -3 f",
+  "flipX": true,
+  "mirror": "mirror rule (27 Oct): take is canon (dot on her left chest, un-mirrored) -> flipX in the renderer; world mirrored with her"
+ },
+ "V206": {
+  "dir": "work/plates/V206",
+  "kind": "still",
+  "src": "media/kf2/V206_nbp_v1.jpg",
+  "note": "fire lance, siege of De'an 1132; t2_ink_weapons p.imgs[0] (work/plates/V206/f_00000.jpg)"
+ },
+ "V207": {
+  "dir": "work/plates/V207",
+  "kind": "still",
+  "src": "media/kf2/V207_nbp_v2fix.jpg",
+  "note": "bronze hand cannon c.1288 on its tiller; v2, bottom band faded to paper (a leaked fragment of Jade from the style ref); p.imgs[1]"
+ },
+ "V208": {
+  "dir": "work/plates/V208",
+  "kind": "still",
+  "src": "media/kf2/V208_nbp_v2.jpg",
+  "note": "bombard on a timber cradle (no wheels) before Constantinople's double land walls, 1453; v2; p.imgs[2]"
+ },
+ "V209": {
+  "dir": "work/plates/V209",
+  "kind": "still",
+  "src": "media/kf2/V209_nbp_v2.jpg",
+  "note": "the Somme 1916: craters, stumps, wire, duckboards, smoke columns (no cloud, no people); v2 with no image ref; p.imgs[3]"
  },
  "V211": {
   "dir": "work/plates/V211",
@@ -56,73 +115,6 @@
   ],
   "note": "seedance-2.5 10 s, locked-off (<0.35 px drift); serves V211-V217 on the song clock (clip t = song t - 92.6). Screen face stays empty dark red, no flash. He reaches for the phone at clip ~7.0 s and holds the receiver at his ear from ~8.0 s (song 100.3 'ignored' -> V217 continuity). His head overlaps the screen's lower edge (x ~620-830, y >= 510): the screen overlay needs to go behind it. 'paper' = the protocol sheet on the desk (small, grazing angle)."
  },
- "V218": {
-  "dir": "work/plates/V218",
-  "kind": "video",
-  "src": "media/gen/t2_V218_sd25_t1_c95e46c74b.mp4",
-  "in": 1.0,
-  "twos": true,
-  "style": "oil",
-  "styleAmt": 0.25,
-  "note": "seedance-2.5 t1 (bake-off vs veo t1: Veo's eyes turn teal when they open, off model). Clip 1.0-1.94: eyes close and she breathes out, lips part ~1.7 s, brown eyes on model; slow pan right. Face x ~880-1100, y ~380-560 (under WE'RE ALIVE)."
- },
- "V206": {
-  "dir": "work/plates/V206",
-  "kind": "still",
-  "src": "media/kf2/V206_nbp_v1.jpg",
-  "note": "fire lance, siege of De'an 1132; t2_ink_weapons p.imgs[0] (work/plates/V206/f_00000.jpg)"
- },
- "V207": {
-  "dir": "work/plates/V207",
-  "kind": "still",
-  "src": "media/kf2/V207_nbp_v2fix.jpg",
-  "note": "bronze hand cannon c.1288 on its tiller; v2, bottom band faded to paper (a leaked fragment of Jade from the style ref); p.imgs[1]"
- },
- "V208": {
-  "dir": "work/plates/V208",
-  "kind": "still",
-  "src": "media/kf2/V208_nbp_v2.jpg",
-  "note": "bombard on a timber cradle (no wheels) before Constantinople's double land walls, 1453; v2; p.imgs[2]"
- },
- "V209": {
-  "dir": "work/plates/V209",
-  "kind": "still",
-  "src": "media/kf2/V209_nbp_v2.jpg",
-  "note": "the Somme 1916: craters, stumps, wire, duckboards, smoke columns (no cloud, no people); v2 with no image ref; p.imgs[3]"
- },
- "BR13": {
-  "dir": "work/plates/BR13",
-  "kind": "still",
-  "src": "media/kf2/BR14_nbp_v1.jpg",
-  "note": "the Soviet poster the Suprematist morph can assemble into (= BR14's first frame): sea surface ~y 115 (right) to 276 (left), destroyers on it, sub centred ~(900, 830); flat red/black/cream, empty cream band for the dots"
- },
- "BR15": {
-  "dir": "work/plates/BR15",
-  "kind": "still",
-  "src": "media/kf2/BR15_nbp_v1.jpg",
-  "note": "two officers in red silhouette, one pointing at the torpedo-tube hatch (right); faces featureless; optional t2_arkhipov p.img for 'fire'"
- },
- "BR16": {
-  "dir": "work/plates/BR16",
-  "kind": "still",
-  "src": "media/kf2/BR16_nbp_v1.jpg",
-  "note": "open hand, palm out, between two officers; right officer's face partly lit and caps carry a small cockade (soften in halftone or skip); optional p.img for 'hand'"
- },
- "BR17": {
-  "dir": "work/plates/BR17",
-  "kind": "still",
-  "src": "media/kf2/BR17_nbp_v1.jpg",
-  "note": "B-59 surfacing at night among destroyers in searchlights; still only (no time in the edit); optional p.img for 'surface'"
- },
- "BR14": {
-  "dir": "work/plates/BR14",
-  "kind": "video",
-  "src": "media/gen/t2_BR14_veo_t1_eb65957989.mp4",
-  "in": 0.0,
-  "twos": true,
-  "style": "newsprint",
-  "note": "veo-3.1, flat poster in motion (destroyers glide, current lines drift, sub creeps); keyframe BR14_nbp_v1 (paper margin cropped by Veo). Optional p.img for t2_arkhipov 'charges'; use style 'newsprint' (red+black), not 'halftone' (grey only)"
- },
  "V214": {
   "dir": "work/plates/V214",
   "kind": "video",
@@ -142,5 +134,17 @@
   "style": "oil",
   "styleAmt": 0.35,
   "note": "veo-3.1: lifts the receiver 1.0-1.9 s, at his ear 2.2 s+ (calm); face x ~880-1000, y ~150-330 (anonymous, not Petrov)"
+ },
+ "V218": {
+  "dir": "work/plates/V218",
+  "kind": "video",
+  "src": "media/gen/t2_V218_sd25_t1_c95e46c74b.mp4",
+  "in": 1.0,
+  "twos": true,
+  "style": "oil",
+  "styleAmt": 0.25,
+  "note": "seedance-2.5 t1 (bake-off vs veo t1: Veo's eyes turn teal when they open, off model). Clip 1.0-1.94: eyes close and she breathes out, lips part ~1.7 s, brown eyes on model; slow pan right. Face x ~880-1100, y ~380-560 (under WE'RE ALIVE).",
+  "flipX": true,
+  "mirror": "mirror rule: canon take (dot left chest, patch on the left-sleeve band) -> flipX"
  }
 }

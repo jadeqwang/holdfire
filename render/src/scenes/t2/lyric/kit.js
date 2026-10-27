@@ -21,6 +21,7 @@ export const FONTS2 = [
   ['L2Inst', 'assets/fonts/InstrumentSerif-Regular.ttf', {}],              // light in the sky, the mirror
   ['L2InstI', 'assets/fonts/InstrumentSerif-Italic.ttf', {}],
   ['L2Board', 'assets/fonts/BigShouldersDisplay-VF.ttf', { weight: '100 900' }],   // factory safety board
+  ['L2Cun', 'assets/fonts/NotoSansCuneiform-t2-subset.ttf', {}],          // V113's tablet: cuneiform numerals + one Ea-nasir line (cuneiform.js)
 ];
 let fontsP = null;
 export function loadLyricFonts() {
@@ -35,7 +36,7 @@ export function loadLyricFonts() {
 // family aliases used by the plan (type.js faces + this group's)
 export const FAM = {
   archivo: 'Archivo', open: 'OpenSans', plex: 'PlexM', plexR: 'Plex', michroma: 'Michroma', corm: 'Cormorant', cormI: 'CormorantI',
-  anton: 'L2Anton', vt: 'L2VT', hand: 'L2Hand', brush: 'L2Brush', fell: 'L2Fell', fellI: 'L2FellI', inst: 'L2Inst', instI: 'L2InstI', board: 'L2Board',
+  anton: 'L2Anton', vt: 'L2VT', hand: 'L2Hand', brush: 'L2Brush', fell: 'L2Fell', fellI: 'L2FellI', inst: 'L2Inst', instI: 'L2InstI', board: 'L2Board', cun: 'L2Cun',
 };
 const ST = { '62%': 'extra-condensed', '75%': 'condensed', '87.5%': 'semi-condensed', '100%': 'normal', '112.5%': 'semi-expanded', '125%': 'expanded' };
 export function setFont(g, f) {

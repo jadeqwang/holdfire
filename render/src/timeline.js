@@ -456,17 +456,13 @@ export function buildTimeline(A) {
     want: "An egg outline in blueprint line becomes a clay jar of grain on a woman's shoulder as Jade passes her" });
   S('0:24.70', wd('V1', 2, 'dust'), v1('Cart ruts in dust'));
   const mudT = wd('V1', 2, 'mud').t;
-  const WEDGES = [[513, 700], [589, 673], [660, 647], [731, 620], [803, 600], [867, 585]];   // V113's tally row (the 6th is pressed late)
-  const tallyT = [mudT, ...[1, 2, 3, 4, 5].map((k) => e8(mudT, k))];
-  const tallyPaths = (t) => {
-    const out = WEDGES.map(([x, y], i) => ({ type: 'poly', closed: true, pts: [[x - 30, y + 8], [x + 18, y - 22], [x + 30, y + 20]], t0: tallyT[i], t1: tallyT[i] + 0.16, w: 2.5 }));
-    const k = tallyT.filter((x) => t >= x).length;   // the running count, as a dimension under the row
-    // above the row (polish 4: below it, the bracket crossed CARRIED on the tablet's inscription)
-    if (k > 1) out.push({ type: 'dim', a: [WEDGES[0][0] - 30, WEDGES[0][1] - 26], b: [WEDGES[k - 1][0] + 30, WEDGES[k - 1][1] - 26], off: -26, label: String(k), t0: tallyT[k - 1], t1: tallyT[k - 1] + 0.14, w: 2 });
-    return out;
-  };
-  S('0:25.37', wd('V1', 2, 'mud'), { ...over(plate(), { scene: 't2_blueprint', p: { over: true, abs: true, paths: (t) => tallyPaths(t), size: 30 } }), method: 'video', era: ERA.v1, look: LK.blueprint,
-    want: 'A reed stylus presses tally wedges into wet clay; the wedges count while "mud" holds (to 27.3): blueprint outlines count them one per eighth', notes: 'writing began as counting grain' });
+  // V113's tablet (Jade, v6 note at 0:26.1): the plate's painted triangles are covered with clean clay and the Fibonacci count
+  // 1 1 2 3 5 8 13 21 34 55 89 is pressed in real sexagesimal cuneiform, one number per sixteenth while "mud" holds (25.38 to
+  // 26.99, the old tally's span), above a line of the Ea-nasir tablet (scenes/t2/lyric/tablet.js, cuneiform.js)
+  const E8m = (j) => (j === 0 ? mudT : e8(mudT, j));
+  const fibT = Array.from({ length: 11 }, (_, k) => (k % 2 ? (E8m((k - 1) / 2) + E8m((k + 1) / 2)) / 2 : E8m(k / 2)));
+  S('0:25.37', wd('V1', 2, 'mud'), { ...over(plate(), { scene: 't2_tablet', p: { clip: 'V113', times: fibT } }), method: 'video', era: ERA.v1, look: LK.blueprint,
+    want: 'A reed stylus presses wedges into wet clay; while "mud" holds (to 27.3) the tablet counts 1 1 2 3 5 8 13 21 34 55 89 in Babylonian sexagesimal numerals, one number per sixteenth', notes: 'writing began as counting grain; the numerals are genuine (tools/t2/cuneiform_card.py)' });
   S('0:27.32', wd('V1', 3, 'seeds'), v1('A hand presses seeds into dark soil beside a dry irrigation channel'));
   // the cross-section on V115's painted cutaway (surface y ~500, seed ~(950, 630), the dry canal at the right): a slow push, the
   // lines ride it; stages on "dark", the beat, the snare
@@ -981,10 +977,10 @@ export function buildTimeline(A) {
   const z0 = 1.06, back = (1 - 1 / z0) / (A.duration - holdLast.t);
   const zHit = z0 * (1 - back * (finalHit.t - holdLast.t)), backHit = (1 - 1 / zHit) / (A.duration - finalHit.t);
   S('4:02.08', holdLast, { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: z0, push: -back }, method: 'video', era: ERA.spiral, look: LK.photo, want: "The opening frame itself (CO01's first frame, easing back to the opening framing), so the post loops cleanly" });
-  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t, endT: A.duration, titleLoop: true, under: { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: zHit, push: -backHit } } }, method: 'procedural', era: ERA.light,
+  S('4:04.05', finalHit, { scene: 't2_endcard', p: { hitT: finalHit.t, endT: A.duration, titleLoop: true, support: ['FLUX Video Upscale'], under: { scene: 't2_plate', p: { clip: coEye.id, at: 0, zoom: zHit, push: -backHit } } }, method: 'procedural', era: ERA.light,
     look: withLook({ ...LK.photo, tonemap: 0 }, flash([1, 0.85, 0.55], 0.35, 0.08)),   // tonemap 0 like the plate it ends on (frame 0)
     want: 'HOLD FIRE lands on the final hit (the opening title\'s type and place), then the credits; the card clears to the opening frame by the end of the file (loop)',
-    notes: 'no real images are used so far (every picture is generated or drawn): add p.images [{credit: "ESA/Hubble"}] / NASA if one is' });
+    notes: 'no real images are used so far (every picture is generated or drawn): add p.images [{credit: "ESA/Hubble"}] / NASA if one is; p.support adds FLUX Video Upscale (RC2: the 720p sung and close-up plates are built from its 1080p upscales, picks2 `upscaled`)' });
 
   // ---------------------------------------------------------------------------------------------- finish: contiguous cuts, type per shot
   // a subtitle gives way to the next one (both sit on the same lower-third baseline): no cross-faded double line

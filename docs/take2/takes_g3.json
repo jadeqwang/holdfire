@@ -150,6 +150,20 @@
    "lag": -0.125,
    "pick": true,
    "usd": 0.9248
+  },
+  {
+   "tag": "up_V201_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_V201_fluxp-51f03ab357",
+   "src": "media/gen/t2_V201_sd25_t2_1e28ea548a.mp4",
+   "file": "media/gen/up_V201_fluxp_51f03ab357.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "V201"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "V211": [
@@ -246,6 +260,20 @@
    "lag": null,
    "pick": false,
    "usd": 0.8
+  },
+  {
+   "tag": "up_V218_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_V218_fluxp-d7991ed5da",
+   "src": "media/gen/t2_V218_sd25_t1_c95e46c74b.mp4",
+   "file": "media/gen/up_V218_fluxp_d7991ed5da.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "V218"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "V214": [

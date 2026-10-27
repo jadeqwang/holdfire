@@ -166,11 +166,11 @@
    ],
    "singer": "teal-tips",
    "voice": "B",
-   "conf": "medium",
-   "lag": 1.958,
-   "lagFrames": 47,
+   "conf": "med-high",
+   "lag": 2.083,
+   "lagFrames": 50,
    "s0": 47.432,
-   "take": "t2_P106_sd25_m5_e236c6987a.mp4",
+   "take": "t2_P106_sd25_w2_de406600dc.mp4",
    "half": null,
    "aspect": "16/9",
    "k": [
@@ -188,7 +188,8 @@
     16,
     24
    ],
-   "poster": "clips/P106_poster.jpg"
+   "poster": "clips/P106_poster.jpg",
+   "since": "2026-10-27T21:58:15.000Z"
   },
   {
    "id": "C103L",

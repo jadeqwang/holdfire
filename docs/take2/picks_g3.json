@@ -51,7 +51,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": 0
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_V201_fluxp_51f03ab357.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "V206": {
   "dir": "work/plates/V206",
@@ -153,6 +155,8 @@
   "styleAmt": 0.25,
   "note": "seedance-2.5 t1 (bake-off vs veo t1: Veo's eyes turn teal when they open, off model). Clip 1.0-1.94: eyes close and she breathes out, lips part ~1.7 s, brown eyes on model; slow pan right. Face x ~880-1100, y ~380-560 (under WE'RE ALIVE).",
   "flipX": true,
-  "mirror": "mirror rule: canon take (dot left chest, patch on the left-sleeve band) -> flipX"
+  "mirror": "mirror rule: canon take (dot left chest, patch on the left-sleeve band) -> flipX",
+  "upscaled": "media/gen/up_V218_fluxp_d7991ed5da.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  }
 }

@@ -74,6 +74,20 @@ the window) against the current pick; picked only where the strip beat it; `lipc
 
 Not retaken (budget): V101, C208L, DR11 (med-high), P106 (medium: its lag is set by the eyes opening on the held "awake").
 
+## P106 retake (27 Oct, Jade's v6 note: "awake" reads as "awaawake")
+
+Three Seedance 2.5 takes (`t2_P106_sd25_w1`..`w3`, $2.77) on the unflipped canon keyframe `media/kf2/P106_mir_v2.jpg`, flipped
+in the pick, with aref `media/aref/P106_lip3.mp3` (S0 47.432). The prompt sang the word as two syllables: a short "a" (one small
+jaw drop), then "WAKE" held in a wide "ay", with no second onset, plus "never closes her mouth during a held note" and the face
+guards. All three idle with their eyes closed for about 2.4 s, as earlier P106 takes did.
+- **w1:** rejected. Its mouth shuts on frames 70 to 78 between "a" and "wake", which is the fault Jade heard.
+- **w3:** an alternate. Its "a" is barely open for 0.7 s, "wake" opens late, and the irises read grey-green.
+- **w2 is the pick.** The eyes open together with the "a" on frame 57, a soft "w" falls on frames 64 to 68 (the stem's "w" is
+  at about 48.0), and "WAKE" is held wide open from frame 70 to 91. She clenches her teeth from frame 93, at the take's end.
+  **Lag +2.083 (+50 f)** plays frames 57 to 91: the eyes and the "a" land on the cut at 47.73, and the mouth stays open to the
+  cut at 49.24. The pick's pan moved from [0, 160] to [0, 40] because w2's head sits lower in frame. `lipcheck`: 0 mismatches.
+  Confidence went from medium to med-high.
+
 ## Shots (pass of 27 Oct, before round 2)
 
 Lag = clip t − (song t − s0), in s (frames at 24 fps). Method: *lag* = same take, new or confirmed lag; *regen* = new Seedance take

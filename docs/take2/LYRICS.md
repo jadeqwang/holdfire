@@ -69,7 +69,7 @@ Jade's notes on v3 and sung reel v4 (REVIEW_NOTES.md, 27 Oct). They hold for thi
 | Section | Treatment (style) | Where it lives |
 |---|---|---|
 | Verse 1 | **blueprint**: drafting caps, white or cyanotype navy. Unsung words are dashed construction outlines; each word is inked left to right under a pen point; a running dimension line under the row grows and ticks at every word | in the sky beside Jade under OUT OF THE SEA; a callout over the lobe-finned fish; the full "fin into foot into hand, we were young" as the spec line beside the schematics and on the cave wall; in the sky over the mud-brick street; a label in the seed cross-section; the Okavango sky |
-| Verse 1 (dust, clay) | **incise**: letters pressed into the surface (dark recess, lit lip), a reed wedge before each word on the tablet | corner-pinned onto the cart road in the dust (V112) and onto the clay tablet beside the tally (V113) |
+| Verse 1 (dust, clay) | **incise**: letters pressed into the surface (dark recess, lit lip), a reed wedge before each word on the tablet | corner-pinned onto the cart road in the dust (V112) and onto the clay tablet under the cuneiform count (V113) |
 | ISS, pre-chorus 1, Echo | **riso**: two inks off register (a screened light ink, a mottled key ink); each word prints in two frames | on the black under the ISS, the Klein-blue Voyager print, over Echo's clouds, under the tower (DR14) |
 | Starlight | **light**: a thin serif in gold that ignites with a four-point flare. On the graph, words hang on nodes joined edge to edge | the night skies (V122, C101, C109, C210), the pulse flight, the pulsar diagram, "Counting on you" over the graph and the Earth, the outro graph, "Show your light" / "Hold your fire" |
 | Control rooms, CRTs | **crt**: VT323 phosphor typed character by character across the sung length, a block cursor, scanlines, sometimes a dark screen face | on teal-tips' window glass (P105), a shared readout across the split, the SETI CRT matrix, across C108's monitor bank, the studio split, the last room (DR16) |
@@ -87,6 +87,38 @@ Jade's notes on v3 and sung reel v4 (REVIEW_NOTES.md, 27 Oct). They hold for thi
 The cold open's whispered counts are carried by the edit's numerals, so the layer draws nothing there (no echoed 8). The
 post-chorus counts over the graph and the lights are the edit's numerals too. The layer adds the shouted "Counting on
 you". Over the chessboard there are no counts at all (Jade's text rules).
+
+## The clay tablet (V113, 0:25.4 to 27.3)
+
+Jade's v6 note at 0:26.1 asked what the cuneiform says. **Before:** nothing. The Veo plate paints a row of six generic
+triangles, and blueprint outlines counted them 1 to 6, one per eighth, with a dimension bracket labelled with the running
+count. **Now:** the painted triangles are covered with clean clay (`tools/t2/tablet_clay.py` bakes `render/assets/t2/tablet/`:
+the inpainted clay, plus a per-plate-frame shadow and stylus/hand matte so the stylus stays on top). The scene `t2_tablet`
+(`scenes/t2/lyric/tablet.js`) presses the Fibonacci numbers into the clay in Old Babylonian sexagesimal numerals, one number per
+sixteenth from 25.38 to 26.99 (the old tally's span, while "mud" holds). Each sign gets a brief blueprint flash as it lands:
+
+| 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 | 89 = 1;29 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 𒁹 | 𒁹 | 𒈫 | 𒐈 | 𒐊 | 𒐍 | 𒌋𒐈 | 𒎙𒁹 | 𒌍𒐉 | 𒐐𒐊 | 𒁹 𒎙𒐎 |
+
+Row 1 holds 1 to 13 and row 2 holds 21 to 89. Under a double ruling, already on the tablet, is obverse line 3 of the Ea-nasir
+complaint tablet (UET 5, 81; CDLI P414985, transliteration read from the CDLI ATF dump): 𒌝𒈠 𒈾𒀭𒉌𒈠 *um-ma na-an-ni-ma*,
+"thus (says) Nanni". Each sign was checked in the ORACC sign list (`osl.asl`). Line 1 ("To Ea-nasir") is left out because the
+transliteration's *ṣi* is ZE₂ in ORACC's numbering but ZI in the older convention, and no photo was available to settle which.
+The font is Noto Sans Cuneiform (OFL), subset to these 20 signs (`assets/fonts/NotoSansCuneiform-t2-subset.ttf`). The data is in
+`scenes/t2/lyric/cuneiform.js`. `python3 tools/t2/cuneiform_card.py` reads every numeral's value back from its Unicode names and
+renders `work/t2/tablet/cuneiform_card.png`. The incised lyric on the tablet moved 14 px lower to clear the Nanni line. If the
+V113 plate is ever re-made (for example by an upscale), re-run `tablet_clay.py`. The scene skips the clay cover when the
+plate's src or frame count no longer matches `tablet.json`.
+
+## The coins (t2_coins, 1:48.0 to 1:53.2)
+
+There are 46 stamped coins out of 100, so the grid reads "nearly halfway" when paused. They are in date order: the 30 years of
+the fact-checked list, plus 16 known close calls the list leaves out. The 16 are take one's entries that were not carried over
+(`UNVALIDATED` in `scenes/t2/data/coins.js`): Lakenheath 1956, the disputed Suez "swans" alarm 1956, Kirtland 1957, Mars Bluff
+1958, Yuba City 1961, K-19 1961, the Black Forest relay 1961, the Banes U-2 1962, the disputed Okinawa order 1962, Moorestown
+1962, Savage Mountain 1964, the Philippine Sea A-4 1965, Chernobyl 1986, K-219 1986, the August coup 1991 and Hawaii 2018.
+Each of the 16 carries a small "?" under its year and a duller patina. The years are about 20 px tall at 1080p.
 
 ## Checking it
 

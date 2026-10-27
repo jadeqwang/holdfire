@@ -232,6 +232,20 @@
    "lag": -0.25,
    "pick": false,
    "by": "lip round 3, 27 Oct (Jade: none match, 'out of the mo mo'; 720p first-frame, per-word labial/sibilant cues + no-b/m/p line + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_V101_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_V101_fluxp-5c6535abbe",
+   "src": "media/gen/t2_V101_sd25_n1_564e8b64d7.mp4",
+   "file": "media/gen/up_V101_fluxp_5c6535abbe.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "V101"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "CO11": [
@@ -517,6 +531,20 @@
    "verdict": "pick: first/last-frame pull-back from the catchlight to Jade at the console; her eyes close briefly mid-move; 720p",
    "lag": null,
    "pick": true
+  },
+  {
+   "tag": "up_CO16_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_CO16_fluxp-91ea2426ea",
+   "src": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
+   "file": "media/gen/up_CO16_fluxp_91ea2426ea.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "CO16"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "CO17": [

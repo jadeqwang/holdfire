@@ -223,7 +223,9 @@
   "src": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
   "in": 0,
   "rate": 4.0,
-  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot"
+  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot",
+  "upscaled": "media/gen/up_CO16_fluxp_91ea2426ea.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged; plate frame 40 is the Lanczos frame (Flux merged that in-between frame into 39)"
  },
  "CO17": {
   "dir": "work/plates/CO17",
@@ -258,7 +260,9 @@
     "by": "Jade lip-sync picker 27 Oct (retake n1)",
     "k": 10
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_V101_fluxp_5c6535abbe.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "V102": {
   "dir": "work/plates/V102",

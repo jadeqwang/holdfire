@@ -1,0 +1,17 @@
+{
+ "region": [
+  420,
+  500,
+  1000,
+  790
+ ],
+ "mapScale": 0.5,
+ "mapW": 290,
+ "mapH": 145,
+ "n": 62,
+ "plate": {
+  "src": "media/gen/t2_V113_veof_t1_a076292c94.mp4",
+  "start": 0.3,
+  "n": 62
+ }
+}

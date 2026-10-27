@@ -10311,5 +10311,38 @@
   ],
   "note": "DR16 r4 with the extra chest dot painted out (same frames otherwise); box/keys copied from t2_DR16_sd25_r4_9d3e73b813.mp4",
   "pick": "DR16"
+ },
+ "t2_P106_sd25_w1_47d5247cd1.mp4": {
+  "pick": "P106_w1",
+  "ref": 0,
+  "box": [
+   540,
+   567,
+   40,
+   30
+  ],
+  "note": "P106 retake (two-syllable prompt): seeded on the keyframe (frame 0), as m5"
+ },
+ "t2_P106_sd25_w2_de406600dc.mp4": {
+  "pick": "P106_w2",
+  "ref": 0,
+  "box": [
+   540,
+   567,
+   40,
+   30
+  ],
+  "note": "P106 retake (two-syllable prompt): seeded on the keyframe (frame 0), as m5"
+ },
+ "t2_P106_sd25_w3_deb88d7954.mp4": {
+  "pick": "P106_w3",
+  "ref": 0,
+  "box": [
+   540,
+   567,
+   40,
+   30
+  ],
+  "note": "P106 retake (two-syllable prompt): seeded on the keyframe (frame 0), as m5"
  }
 }

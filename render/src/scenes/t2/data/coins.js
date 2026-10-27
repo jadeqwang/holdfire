@@ -2,8 +2,10 @@
 // Adapted from take one's coins.js (render/src/scenes/signal/coins.js): same engraved gold coin, same faces.
 //
 // t2_coins (1:48.00-1:50.61): straight down over a 10 x 10 grid. A hundred coins flip and land HEADS, faster and faster, in
-//   reading order. The first 30 are stamped with the years of the fact-checked list (render/data/t2/nearmisses.json, in the
-//   list's order); the rest carry no year (the true number is unknown). The odds type across the bottom on teletype mono:
+//   reading order. The first 46 are stamped, in date order: the 30 years of the fact-checked list (render/data/t2/nearmisses.json)
+//   and the 16 known close calls that list leaves out (UNVALIDATED below: take one's entries it did not carry over, incl. the
+//   two disputed ones the plan dropped), which carry a small "?" under the year and a duller patina. 46 of 100: paused, the
+//   grid reads "nearly halfway". The rest carry no year (the true number is unknown). The odds type across the bottom on teletype mono:
 //   1 / 1,267,650,600,228,229,401,496,703,205,376 (= 2^100, computed with BigInt). Ends on the still grid.
 // t2_cointree (1:50.61-1:53.15): continuous with that last frame. The camera pulls up and tilts forward; the coins stream out of
 //   the grid into a line, and turn out to be the forks of a binary tree laid on the ground, one fork per flip, running away to
@@ -27,8 +29,22 @@ const CAM_H = 54;                                                 // top-down ca
 const SKY = { density: 0.5, band: 0.3, bandAng: -0.3, bandOff: 40, neb: 0.3, nebCol: [0.03, 0.04, 0.08], nebCol2: [0.05, 0.035, 0.02], seed: 21 };
 let three = null;
 
-const NY = 30;                    // stamped coins (the list's length; the atlas holds 62)
-function atlas(yrs) {
+// Close calls on take one's list (render/data/nearmisses.json, ids nm..) that the fact-checked take-two list does not carry:
+// not re-validated for take two (nm03 Suez 1956 and nm18 Okinawa 1962 are the two disputed ones the plan dropped; nm32 is
+// Chernobyl, a civil disaster). docs/take2/LYRICS.md, "The coins".
+export const UNVALIDATED = [
+  ['nm02', '1956-07-27'], ['nm03', '1956-11-05'], ['nm04', '1957-05-22'], ['nm07', '1958-03-11'], ['nm10', '1961-03-14'],
+  ['nm11', '1961-07-04'], ['nm12', '1961-11-24'], ['nm17', '1962-10-27'], ['nm18', '1962-10-28'], ['nm19', '1962-10-28'],
+  ['nm20', '1964-01-13'], ['nm21', '1965-12-05'], ['nm32', '1986-04-26'], ['nm33', '1986-10-03'], ['nm34', '1991-08-18'],
+  ['nm38', '2018-01-13'],
+];
+// the stamped coins in date order: {year, v (validated)}; the atlas holds 62 tiles (stamps + plain heads + tails)
+const stamps = () => [
+  ...listNow().entries.map((x) => ({ date: x.date, year: String(x.year), v: true })),
+  ...UNVALIDATED.map(([, d]) => ({ date: d, year: d.slice(0, 4), v: false })),
+].map((x, i) => ({ ...x, i })).sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.i - b.i));
+function atlas(st) {
+  const NY = st.length;
   const T = 256, G = 8;
   const cv = document.createElement('canvas'); cv.width = cv.height = T * G;
   const c = cv.getContext('2d');
@@ -40,13 +56,20 @@ function atlas(yrs) {
     for (let i = 0; i < 72; i++) { const a = i / 72 * Math.PI * 2; c.moveTo(Math.cos(a) * r * 0.84, Math.sin(a) * r * 0.84); c.lineTo(Math.cos(a) * r * 0.89, Math.sin(a) * r * 0.89); }
     c.stroke();
   };
-  const heads = (r, year) => {
+  const heads = (r, year, unval) => {
     rim(r);
-    c.strokeStyle = '#fff'; c.lineWidth = 9; c.beginPath(); c.arc(0, year ? -r * 0.12 : 0, r * 0.42, 0, Math.PI * 2); c.stroke();
-    c.fillStyle = '#fff'; c.beginPath(); c.arc(0, year ? -r * 0.12 : 0, r * 0.075, 0, Math.PI * 2); c.fill();
-    if (year) { c.font = `500 ${Math.round(r * 0.36)}px PlexM`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(year, 0, r * 0.6); }
+    if (!year) {
+      c.strokeStyle = '#fff'; c.lineWidth = 9; c.beginPath(); c.arc(0, 0, r * 0.42, 0, Math.PI * 2); c.stroke();
+      c.fillStyle = '#fff'; c.beginPath(); c.arc(0, 0, r * 0.075, 0, Math.PI * 2); c.fill();
+      return;
+    }
+    // stamped: the emblem shrinks to the top so the year can be big enough to read in a pause at 1080p (~20 px tall)
+    c.strokeStyle = '#fff'; c.lineWidth = 6; c.beginPath(); c.arc(0, -r * 0.5, r * 0.17, 0, Math.PI * 2); c.stroke();
+    c.fillStyle = '#fff'; c.beginPath(); c.arc(0, -r * 0.5, r * 0.05, 0, Math.PI * 2); c.fill();
+    c.font = `500 ${Math.round(r * 0.54)}px PlexM`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(year, 0, r * 0.06);
+    if (unval) { c.font = `500 ${Math.round(r * 0.3)}px PlexM`; c.fillText('?', 0, r * 0.56); }
   };
-  yrs.forEach((y, i) => tile(i, (r) => heads(r, y)));
+  st.forEach((x, i) => tile(i, (r) => heads(r, x.year, !x.v)));
   tile(NY, (r) => heads(r, null));
   tile(NY + 1, (r) => {
     rim(r);
@@ -59,34 +82,36 @@ function atlas(yrs) {
   return tex;
 }
 
-function build(yrs) {
+function build(st) {
   if (three) return three;
+  const NY = st.length;
   const scene = new THREE.Scene();
   const cam = new THREE.PerspectiveCamera(30, 16 / 9, 0.5, 9000);
   const geo = new THREE.CylinderGeometry(RAD, RAD, THK, 72, 1, false);
   const tileA = new THREE.InstancedBufferAttribute(new Float32Array(NC), 1);
   const glowA = new THREE.InstancedBufferAttribute(new Float32Array(NC), 1); glowA.setUsage(THREE.DynamicDrawUsage);
   const litA = new THREE.InstancedBufferAttribute(new Float32Array(NC).fill(1), 1); litA.setUsage(THREE.DynamicDrawUsage);
-  geo.setAttribute('tile', tileA); geo.setAttribute('glow', glowA); geo.setAttribute('lit', litA);
-  for (let i = 0; i < NC; i++) tileA.array[i] = i < yrs.length ? i : NY;
+  const dullA = new THREE.InstancedBufferAttribute(new Float32Array(NC), 1);
+  geo.setAttribute('tile', tileA); geo.setAttribute('glow', glowA); geo.setAttribute('lit', litA); geo.setAttribute('dull', dullA);
+  for (let i = 0; i < NC; i++) { tileA.array[i] = i < NY ? i : NY; dullA.array[i] = i < NY && !st[i].v ? 1 : 0; }
   const mat = new THREE.ShaderMaterial({
     glslVersion: THREE.GLSL3,
-    uniforms: { tAtlas: { value: atlas(yrs) }, lightDir: { value: new THREE.Vector3(-0.5, 0.75, 0.45).normalize() }, camPos: { value: new THREE.Vector3() },
+    uniforms: { tAtlas: { value: atlas(st) }, lightDir: { value: new THREE.Vector3(-0.5, 0.75, 0.45).normalize() }, camPos: { value: new THREE.Vector3() },
       gold: { value: new THREE.Color(...P.gold) }, pale: { value: new THREE.Color(...P.goldPale) }, deep: { value: new THREE.Color(...P.goldDeep) }, emis: { value: 1 } },
     vertexShader: /* glsl */`
-      in float tile; in float glow; in float lit;
-      out vec3 vN; out vec3 vP; out vec2 vUv; out float vTile; out float vGlow; out float vFace; out float vLit;
+      in float tile; in float glow; in float lit; in float dull;
+      out vec3 vN; out vec3 vP; out vec2 vUv; out float vTile; out float vGlow; out float vFace; out float vLit; out float vDull;
       void main(){
         mat4 m = modelMatrix * instanceMatrix;
         vec4 wp = m * vec4(position, 1.);
-        vN = normalize(mat3(m) * normal); vP = wp.xyz; vUv = uv; vTile = tile; vGlow = glow; vLit = lit;
+        vN = normalize(mat3(m) * normal); vP = wp.xyz; vUv = uv; vTile = tile; vGlow = glow; vLit = lit; vDull = dull;
         vFace = normal.y > .5 ? 1. : (normal.y < -.5 ? -1. : 0.);
         gl_Position = projectionMatrix * viewMatrix * wp;
       }`,
     fragmentShader: /* glsl */`
       precision highp float;
       uniform sampler2D tAtlas; uniform vec3 lightDir; uniform vec3 camPos; uniform vec3 gold; uniform vec3 pale; uniform vec3 deep; uniform float emis;
-      in vec3 vN; in vec3 vP; in vec2 vUv; in float vTile; in float vGlow; in float vFace; in float vLit;
+      in vec3 vN; in vec3 vP; in vec2 vUv; in float vTile; in float vGlow; in float vFace; in float vLit; in float vDull;
       out vec4 fragColor;
       void main(){
         vec3 N = normalize(vN); vec3 V = normalize(camPos - vP); if (dot(N, V) < 0.) N = -N;
@@ -107,6 +132,8 @@ function build(yrs) {
         }
         vec3 col = deep * (.05 + .26 * diff) + gold * spec * 1.1 + pale * pow(spec, 3.) * 1.4 + gold * fres * .3;
         col += mix(gold, pale, .3 + .7 * vGlow) * lines * emis * (.95 + .9 * vGlow);
+        // unvalidated years: an older, duller patina (less saturated, a little darker)
+        col = mix(col, vec3(dot(col, vec3(.3, .55, .15))) * vec3(1., .9, .76), .3 * vDull) * (1. - .12 * vDull);
         col *= mix(.16, 1., vLit);
         fragColor = vec4(col, 1.);
       }`,
@@ -120,7 +147,6 @@ function build(yrs) {
 }
 
 const slot = (i) => { const r = Math.floor(i / GRID), c = i % GRID; return [(c - (GRID - 1) / 2) * SP, GZ + (r - (GRID - 1) / 2) * SP]; };
-const years = () => listNow().entries.slice(0, NY).map((x) => String(x.year));
 
 // ---------------------------------------------------------------- the tree (ground plane, receding along -z)
 const STEP = 2.7, Z0 = 9.5;
@@ -206,10 +232,10 @@ export const treeLook = { ...look, streak: 0.3, bloom: 0.85 };
 
 // ================================================================ t2_coins
 const coins = {
-  async init() { await ensureList(); build(years()); },
+  async init() { await ensureList(); build(stamps()); },
   async prepare() { await ensureList(); },
   draw(ctx, shot, t, lt, p) {
-    const e = ctx.engine; const S = build(years()); const T = coinTimes(ctx, shot, p);
+    const e = ctx.engine; const S = build(stamps()); const T = coinTimes(ctx, shot, p);
     const drift = smooth(range(t, shot.t0, shot.t1));
     setCam(S, [0, CAM_H + 2.5 * (1 - drift), GZ + 0.001], [0, 0, GZ], 30, 0);
     drawSky(ctx, { pan: [0, 300], zoom: 1.3, ...SKY, exposure: 0.3 });
@@ -265,10 +291,10 @@ function typeOdds(ty, t, t0, t1, alpha) {
 
 // ================================================================ t2_cointree
 const cointree = {
-  async init() { await ensureList(); build(years()); tree(); },
+  async init() { await ensureList(); build(stamps()); tree(); },
   async prepare() { await ensureList(); },
   draw(ctx, shot, t, lt, p) {
-    const e = ctx.engine; const S = build(years()); const TR = tree(); const T = treeTimes(ctx, shot, p);
+    const e = ctx.engine; const S = build(stamps()); const TR = tree(); const T = treeTimes(ctx, shot, p);
     const [b1, b2, b3] = T.beats;
     // ---- camera: morph off the grid (tilt and rise), then a smash out on each beat
     const kf = (() => {

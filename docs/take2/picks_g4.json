@@ -5,7 +5,9 @@
   "src": "media/gen/t2_BU04_sd20_t1_86d0420bbb.mp4",
   "in": 0.4,
   "rate": 2.2,
-  "note": "Seedance 2.0 bake-off beat Veo: opens tight on her hand on the jog wheel, pulls back to her face (0.4-3.0 s at 2.2x in the 1.2 s shot); the dead red monitors (top left) are blank for the JS SIGNAL LOST. Hair reads brown under the red light: grade toward black. Veo alt: media/gen/t2_BU04_veo_t1_bfdf52e607.mp4 (1080p, in 0.5 rate 1.6)"
+  "note": "Seedance 2.0 bake-off beat Veo: opens tight on her hand on the jog wheel, pulls back to her face (0.4-3.0 s at 2.2x in the 1.2 s shot); the dead red monitors (top left) are blank for the JS SIGNAL LOST. Hair reads brown under the red light: grade toward black. Veo alt: media/gen/t2_BU04_veo_t1_bfdf52e607.mp4 (1080p, in 0.5 rate 1.6)",
+  "upscaled": "media/gen/up_BU04_fluxp_0e7fac4bfc.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "BU09": {
   "dir": "work/plates/V214",
@@ -125,7 +127,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": 10
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_DR04_fluxp_9e4fcf6716.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -157,7 +161,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -16
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_DR11_fluxp_0edcdae64a.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "DR14": {
   "dir": "work/plates/DR14",
@@ -186,7 +192,9 @@
     "by": "DR16 retake (r4), 27 Oct",
     "take": "t2_DR16_sd25_r4_9d3e73b813.mp4"
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_DR16_fluxp_b05ca694cc.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "OU10": {
   "dir": "work/plates/OU10",

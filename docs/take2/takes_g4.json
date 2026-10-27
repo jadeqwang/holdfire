@@ -189,6 +189,20 @@
    "pick": [
     "DR11"
    ]
+  },
+  {
+   "tag": "up_DR11_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_DR11_fluxp-0edcdae64a",
+   "src": "media/gen/t2_DR11_sd25_m6_2dab1c396c.mp4",
+   "file": "media/gen/up_DR11_fluxp_0edcdae64a.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "DR11"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "DR04": [
@@ -297,6 +311,20 @@
     "DR04"
    ],
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_DR04_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_DR04_fluxp-9e4fcf6716",
+   "src": "media/gen/t2_DR04_sd25_n3_b61e7967fa.mp4",
+   "file": "media/gen/up_DR04_fluxp_9e4fcf6716.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.732,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "DR04"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "BU04": [
@@ -323,6 +351,20 @@
    "dims": "1280x720",
    "verdict": "pick (bake-off): hand close-up then pull back to her face, closer to the brief",
    "pick": true
+  },
+  {
+   "tag": "up_BU04_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_BU04_fluxp-0e7fac4bfc",
+   "src": "media/gen/t2_BU04_sd20_t1_86d0420bbb.mp4",
+   "file": "media/gen/up_BU04_fluxp_0e7fac4bfc.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "BU04"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "DR16": [
@@ -500,6 +542,20 @@
    ],
    "by": "DR16 retake, 27 Oct (720p first-frame, aref DR16_lip2.mp3 = a fresh tools/t2/aref.py cut, Jade's \"Six hundred\" muted; prompt: three-syllable \"wher-ev-er\" + small rounded \"you\" + \"are\" wide and held until the sound fades; r1/r2 with clip-time anchors, r3/r4 without; scored with lipmeasure + mouthline (unflipped) + score2 strips + held-\"are\" openness per lag)",
    "fixed_file": "media/gen/t2_DR16_sd25_r4_9d3e73b813_dotfix.mp4"
+  },
+  {
+   "tag": "up_DR16_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_DR16_fluxp-b05ca694cc",
+   "src": "media/gen/t2_DR16_sd25_r4_9d3e73b813_dotfix.mp4",
+   "file": "media/gen/up_DR16_fluxp_b05ca694cc.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.022,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "DR16"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "BU12R": [

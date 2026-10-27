@@ -41,7 +41,7 @@ export const PLAN = [
   { n: 4, style: 'blueprint', size: 50, segs: {
     V111: { ink: INK.navy, x: 560, y: 150, align: 'left', maxW: 500, br: [3, 6], halo: NAVY_HALO, haloA: 0.3 },     // in the pale sky over the mud-brick street
     V112: { style: 'incise', size: 72, weight: 700, quad: [[640, 600], [1280, 600], [1440, 990], [480, 990]], br: [3, 6], dark: 'rgba(28,14,4,1)', core: 'rgba(48,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', ghost: 0.45, shade: 0.9, shadeCol: 'rgba(60,36,14,1)' },   // drawn in the dust of the cart road: ink-filled recess, deeper shadow (polish 3: phone legibility)
-    V113: { style: 'incise', size: 64, maxW: 1500, quad: [[400, 745], [1270, 625], [1360, 790], [470, 935]], br: [6], wedges: true, ghost: 0.45, dark: 'rgba(24,12,4,1)', core: 'rgba(46,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', shade: 0.6, shadeCol: 'rgba(60,36,14,1)' } } },   // pressed into the clay tablet beside the tally
+    V113: { style: 'incise', size: 64, maxW: 1500, quad: [[400, 759], [1270, 639], [1360, 804], [470, 949]], br: [6], wedges: true, ghost: 0.45, dark: 'rgba(24,12,4,1)', core: 'rgba(46,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', shade: 0.6, shadeCol: 'rgba(60,36,14,1)' } } },   // pressed into the clay tablet under the cuneiform count (14 px lower than before, to clear the Nanni line)
   { n: 5, style: 'blueprint', size: 52, segs: {
     V114: { x: 1385, y: 760, align: 'right', maxW: 560, halo: 'rgba(24,14,6,0.9)', haloA: 0.6 },   // on the dark soil by the furrow, inside the safe area (polish 3)
     V115: { x: 600, y: 790, align: 'left', maxW: 760 },                                  // a label in the blueprint cross-section

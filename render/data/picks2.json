@@ -116,7 +116,9 @@
   "src": "media/gen/t2_BU04_sd20_t1_86d0420bbb.mp4",
   "in": 0.4,
   "rate": 2.2,
-  "note": "Seedance 2.0 bake-off beat Veo: opens tight on her hand on the jog wheel, pulls back to her face (0.4-3.0 s at 2.2x in the 1.2 s shot); the dead red monitors (top left) are blank for the JS SIGNAL LOST. Hair reads brown under the red light: grade toward black. Veo alt: media/gen/t2_BU04_veo_t1_bfdf52e607.mp4 (1080p, in 0.5 rate 1.6)"
+  "note": "Seedance 2.0 bake-off beat Veo: opens tight on her hand on the jog wheel, pulls back to her face (0.4-3.0 s at 2.2x in the 1.2 s shot); the dead red monitors (top left) are blank for the JS SIGNAL LOST. Hair reads brown under the red light: grade toward black. Veo alt: media/gen/t2_BU04_veo_t1_bfdf52e607.mp4 (1080p, in 0.5 rate 1.6)",
+  "upscaled": "media/gen/up_BU04_fluxp_0e7fac4bfc.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "BU09": {
   "dir": "work/plates/V214",
@@ -214,7 +216,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": 0
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_C103L_fluxp_7c8b1a8368.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C103L_LS": {
   "dir": "work/plates/C103L_LS",
@@ -226,7 +230,9 @@
    8.9,
    -5.9
   ],
-  "note": "listening plate (Jade v3: one phrase per half): Seedance 2.0 t1 from C103L n3 f96 (the drawing C103L shows on the first frame of \"I'm\"); she closes her mouth by ~frame 14 and listens. zoom/pan align its frame 0 to f96 (ECC, resid 3.7). The edit plays it on the song clock from that frame (phraseSplit)"
+  "note": "listening plate (Jade v3: one phrase per half): Seedance 2.0 t1 from C103L n3 f96 (the drawing C103L shows on the first frame of \"I'm\"); she closes her mouth by ~frame 14 and listens. zoom/pan align its frame 0 to f96 (ECC, resid 3.7). The edit plays it on the song clock from that frame (phraseSplit)",
+  "upscaled": "media/gen/up_C103L_LS_fluxp_4c096cf485.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C103R": {
   "dir": "work/plates/C103R",
@@ -244,7 +250,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -4
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_C103R_fluxp_868c04c359.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C103R_LS": {
   "dir": "work/plates/C103R_LS",
@@ -257,7 +265,9 @@
    -12.7
   ],
   "flipX": true,
-  "note": "listening plate: Seedance 2.0 t2, first frame media/kf2/C103R_mir_v3_crop.jpg (room-A geometry, cool, canon jacket), last frame = C103R n3 f95 (the drawing just before \"I'm\"); mouth closed, opens into the sung pose over the last ~0.5 s. Flipped like C103R; zoom/pan (x negated for the flip) align its last frame to f95 (resid 6.9). The edit ends it on the frame before the cut (phraseSplit, LS_END 4.0)"
+  "note": "listening plate: Seedance 2.0 t2, first frame media/kf2/C103R_mir_v3_crop.jpg (room-A geometry, cool, canon jacket), last frame = C103R n3 f95 (the drawing just before \"I'm\"); mouth closed, opens into the sung pose over the last ~0.5 s. Flipped like C103R; zoom/pan (x negated for the flip) align its last frame to f95 (resid 6.9). The edit ends it on the frame before the cut (phraseSplit, LS_END 4.0)",
+  "upscaled": "media/gen/up_C103R_LS_fluxp_209077b39c.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C108": {
   "dir": "work/plates/C108",
@@ -275,7 +285,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -6
    }
-  ]
+  ],
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged",
+  "upscaled": "media/gen/up_C108_m8_fluxp_f0f6172a47.mp4"
  },
  "C109": {
   "dir": "work/plates/C109",
@@ -315,7 +327,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -6
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_C203L_fluxp_43c5fc4fcf.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C203L_LS": {
   "dir": "work/plates/C203L_LS",
@@ -327,7 +341,9 @@
    8.8,
    -6.0
   ],
-  "note": "listening plate: Seedance 2.0 t2 from C203L n2 f104 (the drawing after \"I'm\"); closes by ~frame 15, no blink in the window. zoom/pan align frame 0 to f104 (resid 4.5)"
+  "note": "listening plate: Seedance 2.0 t2 from C203L n2 f104 (the drawing after \"I'm\"); closes by ~frame 15, no blink in the window. zoom/pan align frame 0 to f104 (resid 4.5)",
+  "upscaled": "media/gen/up_C203L_LS_fluxp_b75142cab5.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C203R": {
   "dir": "work/plates/C203R",
@@ -345,7 +361,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -10
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_C203R_fluxp_dd5793c0bb.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C203R_LS": {
   "dir": "work/plates/C203R_LS",
@@ -358,7 +376,9 @@
    -10.1
   ],
   "flipX": true,
-  "note": "listening plate: Seedance 2.0 t1, first frame C103R_mir_v3_crop, last frame = C203R n1 f92 (the drawing on the cut); mouth closed, eyes close and lips part into the sung pose at the end. Flipped; zoom/pan (x negated for the flip) align the last frame to f92 (resid 4.5)"
+  "note": "listening plate: Seedance 2.0 t1, first frame C103R_mir_v3_crop, last frame = C203R n1 f92 (the drawing on the cut); mouth closed, eyes close and lips part into the sung pose at the end. Flipped; zoom/pan (x negated for the flip) align the last frame to f92 (resid 4.5)",
+  "upscaled": "media/gen/up_C203R_LS_fluxp_6a9cd0c3d4.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C208L": {
   "dir": "work/plates/C208L",
@@ -374,7 +394,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -4
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_C208L_fluxp_a4d126fa93.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C208R": {
   "dir": "work/plates/C208R",
@@ -391,7 +413,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -6
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_C208R_fluxp_0b39b02d24.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C209L": {
   "dir": "work/plates/C209L",
@@ -408,7 +432,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -6
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_C209L_fluxp_da1c8aa6ae.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C209R": {
   "dir": "work/plates/C209R",
@@ -418,7 +444,9 @@
   "lag": 1.333,
   "flipX": true,
   "lipsync": "lip round 2 (27 Oct): n1 at +1.333 (+32 f), scored as played (work/t2/lips2/C209R_strip.jpg, C209R_n1.mouthline.jpg): idles ~1.3 s; you opens on the stem's peak, held are open to the cut (m8 opened are 0.45 s late after a closure); the quiet If pickup stays nearly shut; sub-window lags all +1.33..+1.38; last 2 plate frames held (take end). Was C209R_m8_graded.mp4 lag 0.958.",
-  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
+  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror",
+  "upscaled": "media/gen/up_C209R_fluxp_13650d8aeb.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C209R_LS": {
   "dir": "work/plates/C209R_LS",
@@ -426,7 +454,9 @@
   "src": "media/gen/t2_C209R_LS_sd20_t1_c9051faf5d.mp4",
   "in": 0.0,
   "flipX": true,
-  "note": "listening plate: Seedance 2.0 t1 from C103R_mir_v3_crop; teal-tips listens, mouth closed, through Jade's \"If you are\" (C209). Flipped"
+  "note": "listening plate: Seedance 2.0 t1 from C103R_mir_v3_crop; teal-tips listens, mouth closed, through Jade's \"If you are\" (C209). Flipped",
+  "upscaled": "media/gen/up_C209R_LS_fluxp_6fa7d5d477.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "C210": {
   "dir": "work/plates/C210",
@@ -659,7 +689,9 @@
   "src": "media/gen/t2_CO16_sd20_t1_bd3dce7217.mp4",
   "in": 0,
   "rate": 4.0,
-  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot"
+  "note": "Seedance 2.0 first/last frame pull-back: catchlight (recentred to 960,540) -> Jade at the console; the 4.04 s take runs at 4x across the 0.99 s shot",
+  "upscaled": "media/gen/up_CO16_fluxp_91ea2426ea.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged; plate frame 40 is the Lanczos frame (Flux merged that in-between frame into 39)"
  },
  "CO17": {
   "dir": "work/plates/CO17",
@@ -724,7 +756,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": 10
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_DR04_fluxp_9e4fcf6716.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -756,7 +790,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -16
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_DR11_fluxp_0edcdae64a.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "DR14": {
   "dir": "work/plates/DR14",
@@ -785,7 +821,9 @@
     "by": "DR16 retake (r4), 27 Oct",
     "take": "t2_DR16_sd25_r4_9d3e73b813.mp4"
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_DR16_fluxp_b05ca694cc.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "OU10": {
   "dir": "work/plates/OU10",
@@ -964,20 +1002,22 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": -2
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_P105_fluxp_b0b86e053c.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "P106": {
-  "dir": "work/plates/P106",
+  "dir": "work/plates/P106_w2",
   "kind": "video",
-  "src": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4",
+  "src": "media/gen/t2_P106_sd25_w2_de406600dc.mp4",
   "s0": 47.432,
-  "lag": 2.375,
-  "note": "mirror rule: Seedance 2.5 m5 on media/kf2/P106_mir_v2.jpg, flipped; she idles eyes-closed ~2 s, opens her eyes with the held note at clip 2.33 s: lag 1.958 puts the eyes opening 2 frames after the cut on awake (47.73); mouth open on the held note to the shot end (clip 3.76)",
+  "lag": 2.083,
+  "note": "mirror rule: Seedance 2.5 w2 on media/kf2/P106_mir_v2.jpg (unflipped canon), flipped; two-syllable prompt. Idles eyes-closed to clip 2.37 s, then eyes open with the mouth on 'a' (frames 57-62), a soft 'w' (64-68), 'WAKE' held wide open 70-91; she clenches from frame 93 (the take's end), so lag 2.083 (+50 f) shows frames 57-91: eyes and 'a' on the cut at 47.73, open to the cut at 49.24. Was m5 at 2.375 ('awaawake').",
   "flipX": true,
   "zoom": 1.3,
   "pan": [
    0.0,
-   160.0
+   40.0
   ],
   "lag_history": [
    {
@@ -985,6 +1025,12 @@
     "to": 2.375,
     "by": "Jade lip-sync picker 27 Oct",
     "k": -10
+   },
+   {
+    "from": 2.375,
+    "to": 2.083,
+    "by": "retake w2 (Jade v6: lips read 'awaawake'), 27 Oct",
+    "take_was": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4"
    }
   ]
  },
@@ -1081,7 +1127,9 @@
     "by": "Jade lip-sync picker 27 Oct (retake n1)",
     "k": 10
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_V101_fluxp_5c6535abbe.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "V102": {
   "dir": "work/plates/V102",
@@ -1299,7 +1347,9 @@
     "by": "Jade lip-sync picker 27 Oct",
     "k": 0
    }
-  ]
+  ],
+  "upscaled": "media/gen/up_V201_fluxp_51f03ab357.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "V206": {
   "dir": "work/plates/V206",
@@ -1401,7 +1451,9 @@
   "styleAmt": 0.25,
   "note": "seedance-2.5 t1 (bake-off vs veo t1: Veo's eyes turn teal when they open, off model). Clip 1.0-1.94: eyes close and she breathes out, lips part ~1.7 s, brown eyes on model; slow pan right. Face x ~880-1100, y ~380-560 (under WE'RE ALIVE).",
   "flipX": true,
-  "mirror": "mirror rule: canon take (dot left chest, patch on the left-sleeve band) -> flipX"
+  "mirror": "mirror rule: canon take (dot left chest, patch on the left-sleeve band) -> flipX",
+  "upscaled": "media/gen/up_V218_fluxp_d7991ed5da.mp4",
+  "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
  "X201": {
   "dir": "work/plates/X201",

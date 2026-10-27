@@ -109,6 +109,20 @@
     "C103L"
    ],
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C103L_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C103L_fluxp-7c8b1a8368",
+   "src": "media/gen/t2_C103L_sd25_n3_eac2306974.mp4",
+   "file": "media/gen/up_C103L_fluxp_7c8b1a8368.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.022,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C103L"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C103R": [
@@ -217,6 +231,20 @@
     "C103R"
    ],
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C103R_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C103R_fluxp-868c04c359",
+   "src": "media/gen/t2_C103R_sd25_n3_9e6dc9fe64.mp4",
+   "file": "media/gen/up_C103R_fluxp_868c04c359.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.022,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C103R"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C108": [
@@ -355,6 +383,32 @@
    "lag": 0.833,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C108_m8_slf2",
+   "model": "topaz/starlight-fast-2",
+   "job": "holdfire/up_C108_m8_slf2-277bb14131",
+   "src": "media/gen/t2_C108_sd25_m8_6811637e11.mp4",
+   "file": "media/gen/up_C108_m8_slf2_277bb14131.mp4",
+   "dims": "1920x1080",
+   "est_usd": 6.0,
+   "verdict": "bake-off only (frames 0-47): smooth, painterly; lineart softened and eyelashes blobbed; not used",
+   "pick": false,
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
+  },
+  {
+   "tag": "up_C108_m8_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C108_m8_fluxp-f0f6172a47",
+   "src": "media/gen/t2_C108_sd25_m8_6811637e11.mp4",
+   "file": "media/gen/up_C108_m8_fluxp_f0f6172a47.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.59,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C108"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C208L": [
@@ -419,6 +473,20 @@
    "lag": -0.208,
    "pick": false,
    "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "up_C208L_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C208L_fluxp-a4d126fa93",
+   "src": "media/gen/t2_C208L_sd25_t2_6669650da7.mp4",
+   "file": "media/gen/up_C208L_fluxp_a4d126fa93.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C208L"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C208R": [
@@ -529,6 +597,20 @@
    "lag": 0.875,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C208R_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C208R_fluxp-0b39b02d24",
+   "src": "media/gen/t2_C208R_sd25_m6_ac2e706ee6.mp4",
+   "file": "media/gen/up_C208R_fluxp_0b39b02d24.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C208R"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "P105": [
@@ -639,6 +721,20 @@
    "lag": null,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_P105_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_P105_fluxp-b0b86e053c",
+   "src": "media/gen/t2_P105_sd25_m6_5c9b5e216f.mp4",
+   "file": "media/gen/up_P105_fluxp_b0b86e053c.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "P105"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C203L": [
@@ -751,6 +847,20 @@
    "lag": 1.042,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C203L_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C203L_fluxp-43c5fc4fcf",
+   "src": "media/gen/t2_C203L_sd25_n2_a7e2c27f56.mp4",
+   "file": "media/gen/up_C203L_fluxp_43c5fc4fcf.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.022,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C203L"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C203R": [
@@ -887,6 +997,20 @@
    "lag": 0.792,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C203R_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C203R_fluxp-dd5793c0bb",
+   "src": "media/gen/t2_C203R_sd25_n1_e8e3c679cc.mp4",
+   "file": "media/gen/up_C203R_fluxp_dd5793c0bb.mp4",
+   "dims": "1920x1080",
+   "est_usd": 1.022,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C203R"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C209L": [
@@ -999,6 +1123,20 @@
    "lag": 0.1,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C209L_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C209L_fluxp-da1c8aa6ae",
+   "src": "media/gen/t2_C209L_sd25_n1_5992390d36.mp4",
+   "file": "media/gen/up_C209L_fluxp_da1c8aa6ae.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.732,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C209L"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C209R": [
@@ -1135,6 +1273,20 @@
    "lag": 0.1,
    "pick": false,
    "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "up_C209R_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C209R_fluxp-13650d8aeb",
+   "src": "media/gen/t2_C209R_sd25_n1_ec78b90930.mp4",
+   "file": "media/gen/up_C209R_fluxp_13650d8aeb.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.732,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C209R"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C101": [
@@ -1275,11 +1427,9 @@
    "dur": 4,
    "file": "media/gen/t2_P106_sd25_m5_e236c6987a.mp4",
    "dims": "1280x720",
-   "verdict": "PICK (mirror rule): idles eyes-closed ~2 s, opens eyes with the held note at clip 2.33 s; lag 1.958 = eyes open 2 frames after the cut; pick zoom 1.3 pan [0,160] keeps her eyes under WE'RE AWAKE",
+   "verdict": "PICK (mirror rule): idles eyes-closed ~2 s, opens eyes with the held note at clip 2.33 s; lag 1.958 = eyes open 2 frames after the cut; pick zoom 1.3 pan [0,160] keeps her eyes under WE'RE AWAKE | superseded 27 Oct by w2 (Jade v6: lips read 'awaawake')",
    "lag": "1.958",
-   "pick": [
-    "P106"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_P106_sd25_m6",
@@ -1293,6 +1443,56 @@
    "dims": "1280x720",
    "verdict": "alt: eyes open at clip 2.67 s (needs lag ~2.3, runs off the take end); jumpy head lift",
    "lag": "1.208",
+   "pick": false
+  },
+  {
+   "tag": "t2_P106_sd25_w1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_w1-47d5247cd1",
+   "kf": "media/kf2/P106_mir_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_P106_sd25_w1.txt",
+   "spec": "media/gen/specs/t2_P106_sd25_w1.json",
+   "aref": "media/aref/P106_lip3.mp3",
+   "s0": 47.432,
+   "dur": 4,
+   "file": "media/gen/t2_P106_sd25_w1_47d5247cd1.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: eyes open at clip 2.58 s with a small 'a', then the mouth shuts frames 70-78 before 'wake' (a second onset, the 'awaawake' fault)",
+   "lag": null,
+   "pick": false
+  },
+  {
+   "tag": "t2_P106_sd25_w2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_w2-de406600dc",
+   "kf": "media/kf2/P106_mir_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_P106_sd25_w2.txt",
+   "spec": "media/gen/specs/t2_P106_sd25_w2.json",
+   "aref": "media/aref/P106_lip3.mp3",
+   "s0": 47.432,
+   "dur": 4,
+   "file": "media/gen/t2_P106_sd25_w2_de406600dc.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (mirror rule): eyes open with the mouth on 'a' at frame 57, soft 'w' 64-68, 'WAKE' held wide open 70-91 (no second onset); clenches from 93, so lag 2.083 shows 57-91; warm brown irises, on model",
+   "lag": 2.083,
+   "pick": [
+    "P106"
+   ]
+  },
+  {
+   "tag": "t2_P106_sd25_w3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P106_sd25_w3-deb88d7954",
+   "kf": "media/kf2/P106_mir_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_P106_sd25_w3.txt",
+   "spec": "media/gen/specs/t2_P106_sd25_w3.json",
+   "aref": "media/aref/P106_lip3.mp3",
+   "s0": 47.432,
+   "dur": 4,
+   "file": "media/gen/t2_P106_sd25_w3_deb88d7954.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: a barely-open 'a' for ~0.7 s, 'wake' opens late (frame ~82); irises read grey-green",
+   "lag": null,
    "pick": false
   }
  ],
@@ -1562,6 +1762,20 @@
    "verdict": "ok (closes by ~frame 19, blink at 6); t1 matches the cut frame better",
    "pick": [],
    "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  },
+  {
+   "tag": "up_C103L_LS_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C103L_LS_fluxp-4c096cf485",
+   "src": "media/gen/t2_C103L_LS_sd20_t1_99bc3b9e1b.mp4",
+   "file": "media/gen/up_C103L_LS_fluxp_4c096cf485.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C103L_LS"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C203L_LS": [
@@ -1592,6 +1806,20 @@
     "C203L_LS"
    ],
    "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  },
+  {
+   "tag": "up_C203L_LS_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C203L_LS_fluxp-b75142cab5",
+   "src": "media/gen/t2_C203L_LS_sd20_t2_88597e003b.mp4",
+   "file": "media/gen/up_C203L_LS_fluxp_b75142cab5.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C203L_LS"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C103R_LS": [
@@ -1624,6 +1852,20 @@
    ],
    "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame + last-frame, camera_fixed, $0.60",
    "last_frame": "media/kf2/C103R_lis_end_f095.jpg"
+  },
+  {
+   "tag": "up_C103R_LS_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C103R_LS_fluxp-209077b39c",
+   "src": "media/gen/t2_C103R_LS_sd20_t2_0f9803f544.mp4",
+   "file": "media/gen/up_C103R_LS_fluxp_209077b39c.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C103R_LS"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C203R_LS": [
@@ -1656,6 +1898,20 @@
    "pick": [],
    "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame + last-frame, camera_fixed, $0.60",
    "last_frame": "media/kf2/C203R_lis_end_f092.jpg"
+  },
+  {
+   "tag": "up_C203R_LS_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C203R_LS_fluxp-6a9cd0c3d4",
+   "src": "media/gen/t2_C203R_LS_sd20_t1_cfd73d912c.mp4",
+   "file": "media/gen/up_C203R_LS_fluxp_6a9cd0c3d4.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C203R_LS"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "C209R_LS": [
@@ -1673,6 +1929,20 @@
     "C209R_LS"
    ],
    "by": "split phrases (Jade v3, 27 Oct): listening plate, 720p first-frame, camera_fixed, $0.60"
+  },
+  {
+   "tag": "up_C209R_LS_fluxp",
+   "model": "black-forest-labs/flux-video-upscale",
+   "job": "holdfire/up_C209R_LS_fluxp-6fa7d5d477",
+   "src": "media/gen/t2_C209R_LS_sd20_t1_c9051faf5d.mp4",
+   "file": "media/gen/up_C209R_LS_fluxp_6fa7d5d477.mp4",
+   "dims": "1920x1080",
+   "est_usd": 0.587,
+   "verdict": "PICK (RC2 upscale): precise 1.5x, crisp cel lineart, no repaint; frame-for-frame (verify_up: same count, k->k); plate rebuilt from it, pick lag unchanged",
+   "pick": [
+    "C209R_LS"
+   ],
+   "by": "RC2 upscale bake-off / batch, 27 Oct"
   }
  ],
  "BR_hands": [

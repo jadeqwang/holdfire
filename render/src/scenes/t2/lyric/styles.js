@@ -4,13 +4,22 @@
 //   style = { font(o) -> {family, px, weight, stretch, track, italic, caps}, pad(o) (design px around the text),
 //             extra(o) -> {top, bottom} (room for rules, banners), draw(env) }
 //   env   = { g, res, rows, items (flat, with ax/ay baselines and state st), size, lead, t, o, L (line), bw, bh, line (0..1 in/out) }
-// Every style shows the whole line from its first word (unsung words as a ghost the eye can read ahead on) and lights each
-// word on its onset; a style with ghost 0 writes the words on as they are sung instead.
+// Every style shows the whole line from its first word (unsung words at half strength or more, GHOST, so the line reads whole
+// while it is up) and lights each word on its onset, the word being sung brightest.
 import { clamp, lerp, hash1, hash2, easeOutCubic, easeOutExpo, smooth, range } from '../../../util.js';
 import { setFont, grainTile, mottleTile, dotsTile, scanTile, knock, maskIn, scratch, rgba, mixc, hex } from './kit.js';
 
 const fillWord = (g, it, x = it.ax, y = it.ay) => g.fillText(it.w.text, x, y);
 const clipWrite = (g, it, k, size, pad = 4) => { g.beginPath(); g.rect(it.ax - pad, it.ay - size * 1.15, (it.width + pad * 2) * k, size * 1.6); g.clip(); };
+// polish 4 (phone legibility at 540p): a line reads whole while it is up. Unsung words wait at GHOST (>= 0.5) in the line's own ink,
+// sung words are full, the word being sung is brighter. boldWord thickens thin faces (a same-ink stroke under the fill), so serif
+// hairlines and script strokes survive the 1920 -> 480 px downscale of a phone view.
+const GHOST = 0.5;
+const ghostA = (o, d = GHOST) => Math.max(GHOST, o.ghost ?? d);
+const boldWord = (g, it, w, x = it.ax, y = it.ay) => {
+  if (w > 0) { g.save(); g.lineJoin = 'round'; g.lineWidth = w; g.strokeStyle = g.fillStyle; g.strokeText(it.w.text, x, y); g.restore(); }
+  g.fillText(it.w.text, x, y);
+};
 
 // ================================================================================================ verse 1: blueprint lettering
 // Drafting caps in white (or cyanotype ink on pale plates): unsung words wait as dashed construction outlines; each word is
@@ -21,18 +30,22 @@ const blueprint = {
   pad: (o) => 26, extra: (o) => ({ bottom: o.dims === false ? 0 : 26 }),
   draw(E) {
     const { g, size, o, items, rows } = E;
-    const ink = o.ink || '#f2f8ff', halo = o.halo, ghost = (o.ghost ?? 0.5) * E.line;
+    const ink = o.ink || '#f2f8ff', halo = o.halo, ghost = ghostA(o, 0.55) * E.line;
     g.lineJoin = 'round';
     // halo first (a cheap soft ground so white ink holds on a pale plate)
     if (halo) {
       g.save(); g.strokeStyle = halo; g.lineWidth = size * 0.22; g.globalAlpha = (o.haloA ?? 0.4) * E.line;
-      for (const it of items) if (!it.st.pre) { g.save(); clipWrite(g, it, it.st.write, size, 12); g.strokeText(it.w.text, it.ax, it.ay); g.restore(); }
+      for (const it of items) {
+        if (it.st.write < 1) { g.save(); g.globalAlpha = (o.haloA ?? 0.4) * E.line * 0.8; g.strokeText(it.w.text, it.ax, it.ay); g.restore(); }   // the ghost gets its ground too
+        if (!it.st.pre) { g.save(); clipWrite(g, it, it.st.write, size, 12); g.strokeText(it.w.text, it.ax, it.ay); g.restore(); }
+      }
       g.restore();
     }
     for (const it of items) {
       const s = it.st;
-      if (s.write < 1 && ghost > 0) {   // construction outline (dashed)
-        g.save(); g.setLineDash([size * 0.09, size * 0.07]); g.lineWidth = Math.max(1, size * 0.022); g.strokeStyle = ink; g.globalAlpha = ghost;
+      if (s.write < 1 && ghost > 0) {   // unsung: the word in half-strength ink under a dashed construction outline (reads ahead)
+        g.save(); g.fillStyle = ink; g.globalAlpha = ghost; fillWord(g, it);
+        g.setLineDash([size * 0.09, size * 0.07]); g.lineWidth = Math.max(1.5, size * 0.03); g.strokeStyle = ink; g.globalAlpha = Math.min(1, ghost * 1.5);
         g.strokeText(it.w.text, it.ax, it.ay); g.restore();
       }
       if (!s.pre) {
@@ -79,7 +92,7 @@ const incise = {
     const dark = o.dark || 'rgba(38,24,12,0.9)', lite = o.lite || 'rgba(255,238,205,0.6)', core = o.core || 'rgba(96,66,40,0.85)';
     for (const it of items) {
       const s = it.st;
-      if (s.pre || s.k < 1) { g.save(); g.globalAlpha = (o.ghost ?? 0.22) * E.line; g.strokeStyle = dark; g.lineWidth = 1; g.strokeText(it.w.text, it.ax, it.ay); g.restore(); }
+      if (s.pre || s.k < 1) { g.save(); g.globalAlpha = ghostA(o) * E.line; g.fillStyle = core; fillWord(g, it); g.strokeStyle = dark; g.lineWidth = Math.max(1.5, size * 0.02); g.strokeText(it.w.text, it.ax, it.ay); g.restore(); }
       if (s.pre) continue;
       const sc = lerp(1.12, 1, easeOutExpo(s.k)), a = E.line * clamp(s.k * 1.6);
       g.save(); g.globalAlpha = a;
@@ -118,7 +131,7 @@ const riso = {
     const LA = scratch('l2_risoA', E.pw, E.ph), ga = LA.g; ga.setTransform(E.res, 0, 0, E.res, 0, 0); setFont(ga, E.f); ga.textBaseline = 'alphabetic';
     for (const it of items) {
       const s = it.st;
-      if (s.pre || s.f < 1) { ga.globalAlpha = (o.ghost ?? 0.28) * E.line; ga.fillStyle = o.ghostInk || A; fillWord(ga, it); continue; }
+      if (s.pre || s.f < 1) { ga.globalAlpha = ghostA(o, 0.55) * E.line; ga.fillStyle = o.ghostInk || A; fillWord(ga, it); continue; }
       ga.globalAlpha = E.line; ga.fillStyle = s.hot > 0.5 && o.hotInk ? o.hotInk : A; fillWord(ga, it);
     }
     knock(ga, mottleTile(), o.mottle ?? 0.35, E.pw, E.ph);
@@ -142,7 +155,7 @@ const crt = {
     let cursor = null;
     for (const it of items) {
       const s = it.st, txt = it.w.text;
-      if ((o.ghost ?? 0.18) > 0) { g.globalAlpha = (o.ghost ?? 0.18) * E.line; g.fillStyle = col; if (s.write < 1) fillWord(g, it); }
+      if (s.write < 1) { g.globalAlpha = ghostA(o) * E.line; g.fillStyle = col; fillWord(g, it); }
       if (s.pre) continue;
       const n = Math.ceil(s.write * txt.length), shown = txt.slice(0, n);
       g.globalAlpha = E.line * 0.3; g.fillStyle = col; g.fillText(shown, it.ax + 3, it.ay);     // horizontal ghost
@@ -166,13 +179,13 @@ const light = {
   draw(E) {
     const { g, size, o, items } = E;
     const col = o.col || [1, 0.84, 0.52], ghostCol = o.ghostCol || [0.7, 0.82, 1];
-    const lit = [];
+    const lit = [], bw = size * (o.bold ?? 0.03);
     for (const [i, it] of items.entries()) {
       const s = it.st;
-      if (s.k < 1) { g.globalAlpha = (o.ghost ?? 0.26) * E.line * (1 - s.k); g.fillStyle = rgba(ghostCol); fillWord(g, it); }
+      if (s.k < 1) { g.globalAlpha = ghostA(o, 0.55) * E.line * (1 - s.k); g.fillStyle = rgba(mixc(col, ghostCol, 0.3)); boldWord(g, it, bw); }
       if (s.pre) continue;
-      const tw = o.twinkle === false ? 1 : 0.88 + 0.12 * hash2(i + 1, Math.floor(E.t * 12));
-      g.globalAlpha = E.line * s.k * tw; g.fillStyle = rgba(mixc(col, [1, 1, 1], 0.7 * s.hot)); fillWord(g, it);
+      const tw = o.twinkle === false ? 1 : 0.92 + 0.08 * hash2(i + 1, Math.floor(E.t * 12));
+      g.globalAlpha = E.line * s.k * tw; g.fillStyle = rgba(mixc(col, [1, 1, 1], 0.7 * Math.max(s.hot, s.sung ? 0.4 : 0))); boldWord(g, it, bw);
       lit.push(it);
       if (o.flare !== false && s.hot > 0.05) {   // four-point flare at the word's first letter
         const fx = it.ax + Math.min(it.width * 0.12, size * 0.25), fy = it.ay - size * 0.72, L = size * (0.25 + 0.9 * s.hot);
@@ -203,8 +216,8 @@ const brush = {
     const ink = o.ink || '#16120e';
     for (const it of items) {
       const s = it.st;
-      const gh = o.ghost ?? 0.13;
-      if (s.write < 1 && gh) { g.globalAlpha = gh * E.line; g.fillStyle = ink; fillWord(g, it); }
+      const gh = ghostA(o, 0.45);
+      if (s.write < 1) { g.globalAlpha = gh * E.line; g.fillStyle = ink; boldWord(g, it, size * 0.03); }
       if (s.pre) continue;
       g.save(); clipWrite(g, it, s.write, size, 8);
       g.globalAlpha = E.line; g.fillStyle = ink; g.strokeStyle = ink;
@@ -246,7 +259,7 @@ const terminal = {
     let cursor = null;
     for (const it of items) {
       const s = it.st, txt = it.w.text;
-      if ((o.ghost ?? 0.22) > 0 && s.write < 1) { g.globalAlpha = (o.ghost ?? 0.22) * E.line; g.fillStyle = col; fillWord(g, it); }
+      if (s.write < 1) { g.globalAlpha = ghostA(o) * E.line; g.fillStyle = col; fillWord(g, it); }
       if (s.pre) continue;
       const n = Math.ceil(s.write * txt.length), shown = txt.slice(0, n);
       g.globalAlpha = E.line; g.fillStyle = s.hot > 0.6 && o.hotCol ? o.hotCol : col; g.fillText(shown, it.ax, it.ay);
@@ -283,14 +296,14 @@ const typewriter = {
     }
     for (const it of items) {
       const s = it.st;
-      if (s.pre) { if (o.ghost) { g.globalAlpha = o.ghost * E.line; g.fillStyle = ink; fillWord(g, it); } continue; }
+      if (s.pre) { g.globalAlpha = ghostA(o, 0.45) * E.line; g.fillStyle = ink; fillWord(g, it); continue; }
       let x = it.ax;
       for (let j = 0; j < it.w.text.length; j++) {
         const ch = it.w.text[j], cw = g.measureText(ch).width;
         if (E.t >= it.w.t - 0.04 + j * (o.cps ? 1 / o.cps : 0.014)) {
           g.globalAlpha = E.line * (0.72 + 0.28 * hash2(it.i * 31 + j, 7)); g.fillStyle = ink;
           g.fillText(ch, x + (hash2(j, it.i) - 0.5) * 1.2, it.ay + (hash2(it.i, j + 5) - 0.5) * 2.2);
-        }
+        } else { g.globalAlpha = ghostA(o, 0.45) * E.line; g.fillStyle = ink; g.fillText(ch, x, it.ay); }   // not struck yet: the ghost
         x += cw;
       }
     }
@@ -308,13 +321,13 @@ const engrave = {
     const { g, size, o, items } = E;
     for (const it of items) {
       const s = it.st;
-      if (s.k < 1) { g.globalAlpha = (o.ghost ?? 0.32) * E.line; g.fillStyle = o.ghostCol || '#7a5a26'; fillWord(g, it); }
+      if (s.k < 1) { g.globalAlpha = ghostA(o, 0.6) * E.line * (1 - s.k * 0.5); g.fillStyle = o.ghostCol || '#d2a65a'; boldWord(g, it, size * 0.02); }
       if (s.pre) continue;
       const gr = g.createLinearGradient(0, it.ay - size * 0.75, 0, it.ay + size * 0.05);
       gr.addColorStop(0, o.top || '#fff3cc'); gr.addColorStop(0.45, o.mid || '#f0b84a'); gr.addColorStop(1, o.bot || '#9a6420');
       g.globalAlpha = E.line * s.k;
       g.fillStyle = 'rgba(30,18,4,0.85)'; fillWord(g, it, it.ax + size * 0.025, it.ay + size * 0.035);
-      g.fillStyle = gr; fillWord(g, it);
+      g.fillStyle = gr; boldWord(g, it, size * 0.02);
       if (s.hot > 0.02) {   // glint
         g.save(); clipWrite(g, it, 1, size, 0);
         const gx = it.ax - size + (it.width + size * 2) * (1 - s.hot);
@@ -334,14 +347,14 @@ const chalk = {
   draw(E) {
     const { g, size, o, items } = E;
     const col = o.col || '#f1efe6';
-    g.lineJoin = 'round'; g.lineWidth = size * 0.035; g.strokeStyle = col; g.fillStyle = col;
+    g.lineJoin = 'round'; g.lineWidth = size * (o.bold ?? 0.056); g.strokeStyle = col; g.fillStyle = col;
     for (const it of items) {
       const s = it.st;
-      if (s.write < 1) { g.globalAlpha = (o.ghost ?? 0.24) * E.line; fillWord(g, it); }
+      if (s.write < 1) { g.globalAlpha = ghostA(o) * E.line; g.strokeText(it.w.text, it.ax, it.ay); fillWord(g, it); }
       if (s.pre) continue;
       g.save(); clipWrite(g, it, s.write, size, 6); g.globalAlpha = E.line; g.strokeText(it.w.text, it.ax, it.ay); fillWord(g, it); g.restore();
     }
-    knock(g, grainTile(), o.grain ?? 0.42, E.pw, E.ph);
+    knock(g, grainTile(), o.grain ?? 0.3, E.pw, E.ph);
   },
 };
 
@@ -359,7 +372,11 @@ const impact = {
     const sx = (hash2(Math.floor(E.t * 24), 1) - 0.5) * 16 * kk, sy = (hash2(Math.floor(E.t * 24), 2) - 0.5) * 12 * kk;
     g.lineJoin = 'round';
     for (const it of items) {
-      const s = it.st; if (s.pre) continue;
+      const s = it.st;
+      if (s.pre) {   // unsung: flat and still, half strength (the line reads ahead; the slam is the word's own moment)
+        g.globalAlpha = E.line * ghostA(o, 0.45); g.strokeStyle = edge; g.lineWidth = size * 0.1; g.strokeText(it.w.text, it.ax, it.ay);
+        g.fillStyle = fill; fillWord(g, it); continue;
+      }
       const u = clamp((E.t - it.w.t + 0.04) / 0.13), sc = 1 + 0.75 * Math.pow(1 - u, 3);
       const rot = ((hash2(it.i + 3, 11) - 0.5) * 2 * (o.tilt ?? 4)) * Math.PI / 180;
       const cx = it.ax + it.width / 2, cy = it.ay - size * 0.4;
@@ -391,7 +408,7 @@ const poster = {
     }
     for (const it of items) {
       const s = it.st;
-      if (s.pre || s.f < 1) { g.globalAlpha = (o.ghost ?? 0.3) * E.line * wipe; g.fillStyle = ink; fillWord(g, it); if (s.pre) continue; }
+      if (s.pre || s.f < 1) { g.globalAlpha = ghostA(o) * E.line * wipe; g.fillStyle = ink; fillWord(g, it); if (s.pre) continue; }
       const sc = lerp(1.14, 1, easeOutExpo(s.k));
       g.save(); g.translate(it.ax + it.width / 2, it.ay - size * 0.4); g.scale(sc, sc); g.translate(-(it.ax + it.width / 2), -(it.ay - size * 0.4));
       g.globalAlpha = E.line; g.fillStyle = ink; fillWord(g, it); g.restore();
@@ -416,7 +433,7 @@ const osd = {
       g.globalAlpha = E.line; g.fillStyle = '#000'; tri(x + 4 + h, ); g.fillStyle = '#fff'; tri(x + h); if (o.glyph !== 'play') { g.fillStyle = '#000'; tri(x + 4 + h * 2.6); g.fillStyle = '#fff'; tri(x + h * 2.6); }
     }
     for (const it of items) {
-      if (it.st.pre) continue;
+      if (it.st.pre) { g.globalAlpha = E.line * ghostA(o, 0.45); g.fillStyle = '#000'; fillWord(g, it, it.ax + 4, it.ay + 4); g.fillStyle = o.col || '#ffffff'; fillWord(g, it); continue; }
       g.globalAlpha = E.line; g.fillStyle = '#000'; fillWord(g, it, it.ax + 4, it.ay + 4);
       g.globalAlpha = E.line * 0.55; g.fillStyle = '#ff3040'; fillWord(g, it, it.ax - 2.5, it.ay);
       g.fillStyle = '#30e0ff'; fillWord(g, it, it.ax + 2.5, it.ay);
@@ -434,15 +451,15 @@ const glass = {
   pad: () => 26,
   draw(E) {
     const { g, size, o, items } = E;
-    const ink = o.ink || '#1f2bd1';
+    const ink = o.ink || '#1f2bd1', bw = size * (o.bold ?? 0.03);
     if (o.halo) { g.save(); g.lineJoin = 'round'; g.strokeStyle = o.halo; g.lineWidth = size * 0.3; g.globalAlpha = 0.85 * E.line; for (const it of items) g.strokeText(it.w.text, it.ax, it.ay); g.restore(); }
     for (const it of items) {
       const s = it.st;
-      if (s.write < 1) { g.globalAlpha = (o.ghost ?? 0.22) * E.line; g.fillStyle = ink; fillWord(g, it); }
+      if (s.write < 1) { g.globalAlpha = ghostA(o, 0.55) * E.line; g.fillStyle = ink; boldWord(g, it, bw); }
       if (s.pre) continue;
       g.save(); clipWrite(g, it, s.write, size, 6);
       g.globalAlpha = E.line * 0.22; g.fillStyle = ink; fillWord(g, it, it.ax + size * 0.06, it.ay + size * 0.04);
-      g.globalAlpha = E.line; fillWord(g, it);
+      g.globalAlpha = E.line; boldWord(g, it, bw);
       if (s.hot > 0.05) {
         const gx = it.ax - size + (it.width + size * 2) * (1 - s.hot);
         const gg = g.createLinearGradient(gx - size * 0.4, 0, gx + size * 0.4, 0); gg.addColorStop(0, 'rgba(255,255,255,0)'); gg.addColorStop(0.5, 'rgba(255,255,255,0.85)'); gg.addColorStop(1, 'rgba(255,255,255,0)');
@@ -469,7 +486,7 @@ const board = {
     }
     for (const it of items) {
       const s = it.st;
-      g.globalAlpha = E.line * (s.pre ? (o.ghost ?? 0.28) : lerp(o.ghost ?? 0.28, 1, s.k)); g.fillStyle = s.hot > 0.6 && !s.pre ? (o.hotCol || '#ffffff') : ink; fillWord(g, it);
+      g.globalAlpha = E.line * (s.pre ? ghostA(o) : lerp(ghostA(o), 1, s.k)); g.fillStyle = s.hot > 0.6 && !s.pre ? (o.hotCol || '#ffffff') : ink; fillWord(g, it);
     }
     knock(g, mottleTile(), o.wear ?? 0.22, E.pw, E.ph);
   },
@@ -484,9 +501,10 @@ const whisper = {
     const { g, size, o, items } = E;
     const col = o.col || [0.86, 0.9, 1];
     for (const it of items) {
-      const k = easeOutCubic(clamp((E.t - (it.w.t - 0.08)) / 0.55));
-      if (k <= 0) continue;
-      g.globalAlpha = E.line * k * (o.alpha ?? 0.9); g.fillStyle = rgba(col); fillWord(g, it, it.ax, it.ay + (1 - k) * size * 0.25);
+      const k = easeOutCubic(clamp((E.t - (it.w.t - 0.08)) / 0.55)), bw = size * (o.bold ?? 0.025);
+      g.fillStyle = rgba(col);
+      if (k <= 0) { g.globalAlpha = E.line * ghostA(o, 0.45); boldWord(g, it, bw); continue; }   // unsung: waits in place at half strength
+      g.globalAlpha = E.line * lerp(ghostA(o, 0.45), o.alpha ?? 0.95, k); boldWord(g, it, bw, it.ax, it.ay + (1 - k) * size * 0.12);
     }
   },
 };
@@ -498,7 +516,7 @@ const plain = {
   draw(E) {
     const { g, size, o, items } = E;
     for (const it of items) {
-      g.globalAlpha = E.line * (it.st.pre ? 0.35 : 1); g.lineWidth = size * 0.16; g.strokeStyle = 'rgba(5,7,13,0.55)'; g.lineJoin = 'round';
+      g.globalAlpha = E.line * (it.st.pre ? GHOST : 1); g.lineWidth = size * 0.16; g.strokeStyle = 'rgba(5,7,13,0.55)'; g.lineJoin = 'round';
       g.strokeText(it.w.text, it.ax, it.ay); g.fillStyle = o.col || '#f3eee4'; fillWord(g, it);
     }
   },

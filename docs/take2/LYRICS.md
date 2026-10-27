@@ -25,7 +25,7 @@ line stays readable until the next one replaces it.
   `if (LYRIC_LINES.has(LN(sec, k).n)) return null;` (and import `LYRIC_LINES` from `./lyrics2.js`). Note that `?lyrics2=0`
   could then no longer bring the subtitles back.
 - **Timing.** A line appears up to 0.22 s before its first word, but never back across a cut. Each word lights on its onset
-  (unsung words wait as a faint ghost, so the eye can read ahead). A line is held until 1.1 s after its last word, until the
+  (unsung words wait at half strength or more in the line's own ink, so the whole line reads while it is up; polish 4). A line is held until 1.1 s after its last word, until the
   next line, or until the first cut into a shot its entry does not list, whichever comes first. If an edit hero carries the
   rest of the line, the layer hands over 0.4 s after that hero lands.
 - **Placement.** Positions are design px (1920×1080). A line is placed either at a flat anchor (x, first baseline y or last

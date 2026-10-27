@@ -107,6 +107,15 @@ function drawCount(ty, t, c) {
   // which item currently owns each slot (a later item on the same slot replaces the earlier one)
   const owner = {};
   c.items.forEach((it, i) => { if (t >= it.t - 0.02 && !(it.out != null && t >= it.out)) owner[it.slot] = i; });
+  // scrim: a soft dark ground under each numeral, so lines drawn behind (the graph's edges) dim to ~30% inside its box (polish 4)
+  const ground = (n, x, y, s, a) => {
+    if (!c.scrim || a <= 0) return;
+    const cx = ty.ctx, rx = s * (0.42 + 0.3 * String(n).length), ry = s * 0.7;
+    cx.save(); cx.translate(x, y); cx.scale(rx / ry, 1);
+    const g = cx.createRadialGradient(0, 0, ry * 0.2, 0, 0, ry);
+    g.addColorStop(0, `rgba(3,4,10,${0.78 * c.scrim * a})`); g.addColorStop(0.75, `rgba(3,4,10,${0.7 * c.scrim * a})`); g.addColorStop(1, 'rgba(3,4,10,0)');
+    cx.fillStyle = g; cx.beginPath(); cx.arc(0, 0, ry, 0, Math.PI * 2); cx.fill(); cx.restore();
+  };
   c.items.forEach((it, i) => {
     if (owner[it.slot] !== i) return;
     const u = t - it.t;
@@ -116,10 +125,12 @@ function drawCount(ty, t, c) {
       const k = clamp((u + 0.02) / 0.16);
       const v = easeInOutCubic(range(u, hold, hold + fly));
       const s = lerp(c.giantSize || 600, c.size || 120, v) * lerp(1.25, 1, easeOutExpo(k));
+      ground(it.n, lerp(SAFE.cx, sx(it.slot), v), lerp(c.giantY ?? 540, c.y ?? 880, v), s, k * fade);
       ty.text(String(it.n), lerp(SAFE.cx, sx(it.slot), v), lerp(c.giantY ?? 540, c.y ?? 880, v), { ...st, size: s, color: col, alpha: k * fade, glow: 4, shade: 0.5 });
     } else {
       const k = it.giant ? 1 : easeOutExpo(clamp((u + 0.02) / 0.14));
       const s = (c.size || 120) * lerp(1.3, 1, k);
+      ground(it.n, sx(it.slot), c.y ?? 880, s, fade * (it.giant ? 1 : k));
       ty.text(String(it.n), sx(it.slot), c.y ?? 880, { ...st, size: s, color: col, alpha: fade * (it.giant ? 1 : k), glow: 3, shade: 0.5 });
     }
   });
@@ -131,7 +142,8 @@ function drawCaps(ty, t, c) {
   if (c.band && fade > 0) {   // a soft dark plate behind the lines, so small caps read over paper as well as night
     const a0 = easeOutCubic(range(t, c.lines[0].t - 0.03, c.lines[0].t + 0.15)) * fade;
     const w = Math.max(...c.lines.map((ln) => ty.measure(ln.text, { ...CAPST, size: ln.size || CAPST.size }))) + 64;
-    const y0 = (c.y ?? 960) - 42, h = (c.lines.length - 1) * (c.lead ?? 44) + 62;
+    const ms = Math.max(...c.lines.map((ln) => ln.size || CAPST.size));   // the plate scales with type over 30 px
+    const y0 = (c.y ?? 960) - (ms > 30 ? ms * 1.5 : 42), h = (c.lines.length - 1) * (c.lead ?? 44) + (ms > 30 ? ms * 2.2 : 62);
     const cx = ty.ctx; cx.save(); cx.globalAlpha = 0.62 * a0; cx.fillStyle = 'rgb(5,7,13)';
     cx.beginPath(); cx.roundRect((c.x ?? SAFE.cx) - w / 2, y0, w, h, 10); cx.fill(); cx.restore();
   }
@@ -336,7 +348,10 @@ export function buildTimeline(A) {
     look: (t, lt) => ({ ...LK.photo, flash: 0.75, flashCol: [1.0, 0.12, 0.05], exposure: 1.2 }),
     want: 'The galaxy flashes red (Rare Earth self-destruct look)', notes: 'continues the galaxy clip; red grade + red flash' });
   const sub716 = ev('sub_hit', null, 7.0);
-  const blackT = A.bars.find((b) => b > sub716.t);           // bar 4 downbeat: the rewind reaches black
+  const barT = A.bars.find((b) => b > sub716.t);             // bar 4 downbeat
+  // polish 4: the rewind runs two more 16ths past the bar line, back to the first spiral (all seven clips), and reaches black on the
+  // 16th after; the black before the match is 7 frames (it was 15, 0.6 s of nothing for muted autoplay)
+  const blackT = SIXTEENTHS.filter((x) => x > barT + 0.02)[1];
   const rewSteps = SIXTEENTHS.filter((x) => x >= sub716.t - 0.01 && x < blackT);
   S('0:07.16', sub716, { scene: 't2_vhs_rewind', p: { clips: co.slice().reverse().map((s) => s.id), steps: rewSteps, blackAt: blackT }, method: 'procedural', era: ERA.spiral,
     look: (t, lt) => ({ ...LK.photo, flash: 0.5 * Math.exp(-lt / 0.09), flashCol: [1.0, 0.12, 0.05] }),   // the red flash's tail runs into the rewind
@@ -426,7 +441,8 @@ export function buildTimeline(A) {
   const tallyPaths = (t) => {
     const out = WEDGES.map(([x, y], i) => ({ type: 'poly', closed: true, pts: [[x - 30, y + 8], [x + 18, y - 22], [x + 30, y + 20]], t0: tallyT[i], t1: tallyT[i] + 0.16, w: 2.5 }));
     const k = tallyT.filter((x) => t >= x).length;   // the running count, as a dimension under the row
-    if (k > 1) out.push({ type: 'dim', a: [WEDGES[0][0] - 30, WEDGES[0][1] + 24], b: [WEDGES[k - 1][0] + 30, WEDGES[k - 1][1] + 24], off: 44, label: String(k), t0: tallyT[k - 1], t1: tallyT[k - 1] + 0.14, w: 2 });
+    // above the row (polish 4: below it, the bracket crossed CARRIED on the tablet's inscription)
+    if (k > 1) out.push({ type: 'dim', a: [WEDGES[0][0] - 30, WEDGES[0][1] - 26], b: [WEDGES[k - 1][0] + 30, WEDGES[k - 1][1] - 26], off: -26, label: String(k), t0: tallyT[k - 1], t1: tallyT[k - 1] + 0.14, w: 2 });
     return out;
   };
   S('0:25.37', wd('V1', 2, 'mud'), { ...over(plate(), { scene: 't2_blueprint', p: { over: true, abs: true, paths: (t) => tallyPaths(t), size: 30 } }), method: 'video', era: ERA.v1, look: LK.blueprint,
@@ -504,7 +520,7 @@ export function buildTimeline(A) {
     want: 'Echo: the signal tower above the violet clouds (Rare Earth world sheet, panel 04) fires its ring of lights in bursts of 1, 1, 2, 3, 5 on eighths' });
   S('0:40.65', wd('P1', 3, 'a'), { scene: 't2_pulse', p: { tSend: wd('P1', 3, 'one-way').t, tArrive: LN('P1', 4).t - 0.27, dir: 'toEcho', dist: 217 }, method: 'procedural', era: ERA.signal, look: LK.light,
     want: 'Ride the pulse across the galaxy toward a small blue point: Echo, 217 light-years away (fictional; never presented as a real exoplanet)', notes: "teal-tips Jade's voice enters, heard not seen" });
-  S('0:43.27', wd('P1', 4, 'a'), { scene: 'pulsar', p: {}, method: 'reuse', era: ERA.signal, look: LK.diagram,
+  S('0:43.27', wd('P1', 4, 'a'), { scene: 'pulsar', p: { notes: false }, method: 'reuse', era: ERA.signal, look: LK.diagram,   // notes false: its two ~6 px captions dropped (polish 4)
     want: "Take one's 0:44 diagram unchanged: PSR B1919+21 ticking every 1.3373 s (left), the count 1 1 2 3 5 8 (right)", notes: 'NATURAL / NOT NATURAL are drawn by pulsar.js itself' });
   const hearT = wd('P1', 5, 'hear');
   S('0:46.02', hearT, { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'First sight of teal-tips Jade in her own (mirrored, cooler) control room, headphones on, singing' });
@@ -568,7 +584,7 @@ export function buildTimeline(A) {
   const pcCount = (hs, ch, t1) => {
     const items = hs.map((h, i) => ({ n: [1, 1, 2, 3, 5][i], t: h.t, slot: i, giant: false }));
     items.push({ n: 8, t: ch.t, slot: 5, giant: true });
-    return cue({ kind: 'num', label: '1 1 2 3 5 (row) + giant 8 on "Counting on you!"', t0: hs[0].t, t1, items, slots: 6, size: 110, hold: 0.55, fly: 0.3, draw: drawCount });
+    return cue({ kind: 'num', label: '1 1 2 3 5 (row) + giant 8 on "Counting on you!"', t0: hs[0].t, t1, items, slots: 6, size: 110, hold: 0.55, fly: 0.3, scrim: 1, draw: drawCount });
   };
   pcCount(x1h.slice(0, 5), wd('X1', 1, 'counting'), x1h[5].t - 0.05);
   pcCount(x1h.slice(5, 10), hit('counting_on_you', 1), LN('V2', 0).t);
@@ -644,7 +660,7 @@ export function buildTimeline(A) {
   S(null, prev, { ...over(painting({ zoom: PZ, pan: PPAN }), screen('protocol', { quad: paperQ, occ: null, light: [0.92, 0.74, 0.56], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'Insert: the printed protocol on the desk beside him is struck through line by line' });
   S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', {}, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
-  hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 110, y: 830, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });   // lower third: the wall map is the picture
+  hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 110, y: 780, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });   // lower third: the wall map is the picture
   const lookedT = looked.t;
   // the gloss sits on a dark plate just above the years row (y 1000) and holds into the first weapons so it reads at < 3 words/s
   cue({ kind: 'cap', label: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE', t0: lookedT, t1: weapons[2][1].t, x: SAFE.cx, y: 896, lead: 38, band: true, draw: drawCaps,
@@ -801,7 +817,8 @@ export function buildTimeline(A) {
     want: "Earth whole again; the camera pulls out and Earth's node on the contact graph lights again (through \"all\")", notes: 'moved from "out" (173.25) to the beat before "all": the rewind runs through "out there"' });
   reserve(1);                                                                     // BU07 (the graph cut on "all") is now inside BU06's pull-out
   const hold1 = wd('BU', 5, 'hold'), show1 = wd('BU', 5, 'show');
-  S('2:55.06', hold1, { scene: 't2_scroll_warning', p: { phase: 'held', text: '有以硫黃、雄黃合硝石，并蜜燒之，焰起燒手面，及燼屋舍者。' }, method: 'procedural', era: ERA.ink, look: LK.ink, want: "The people who held fire, 1: the alchemists' warning scroll" });
+  // the scroll laid 200 px right (column and seal move with it), so HOLD YOUR sits left of the column (polish 4: YOUR ran under 燼)
+  S('2:55.06', hold1, { scene: 't2_scroll_warning', p: { phase: 'held', text: '有以硫黃、雄黃合硝石，并蜜燒之，焰起燒手面，及燼屋舍者。', colX: 1310, paperX: [490, 1462] }, method: 'procedural', era: ERA.ink, look: LK.ink, want: "The people who held fire, 1: the alchemists' warning scroll" });
   S(null, wd('BU', 5, 'fire'), { ...plate({ style: 'oil' }), method: 'video', era: ERA.oil, look: LK.oil, want: 'The people who held fire, 2: Petrov, oil portrait lit by the screen' });
   S(null, barAfter(wd('BU', 5, 'fire').t, 'bar line after "fire"'), { ...still({ style: 'halftone' }), method: 'still', era: ERA.poster, look: LK.poster, want: 'The people who held fire, 3: Arkhipov, poster halftone' });
   S(null, show1, { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t }, method: 'procedural', era: ERA.lights, look: LK.night, want: 'On "Show your light" the cities come on across the night side' });
@@ -820,9 +837,10 @@ export function buildTimeline(A) {
   });
   // on a dark plate (red caps over the red Earth did not read); SIGNAL LOST stays up while Jade sees it and grabs the jog wheel
   cue({ kind: 'cap', label: 'NUCLEAR DETONATIONS', t0: burn.t - 0.05, t1: fall.t, y: 960, draw: drawCaps, color: [1, 0.42, 0.3], band: true,
-    lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t - 0.05, size: 30 }] });
-  cue({ kind: 'cap', label: 'SIGNAL LOST', t0: fall.t, t1: onlyW.t, y: 1010, draw: drawCaps, color: P.red, band: true,
-    lines: [{ text: 'SIGNAL LOST', t: fall.t, size: 30, glow: 6 }] });
+    lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t - 0.05, size: 46 }] });   // 46 px (was 30): reads on a phone (polish 4)
+  // SIGNAL LOST as big as BURN, AND FALL's 84 px (polish 4: at 30 px it was ~12 px tall at 540p under the jog wheel)
+  cue({ kind: 'cap', label: 'SIGNAL LOST', t0: fall.t, t1: onlyW.t, y: 1000, draw: drawCaps, color: [1, 0.3, 0.24], band: true,
+    lines: [{ text: 'SIGNAL LOST', t: fall.t, size: 72, glow: 6 }] });
   hero(caps(lineWords('BU', 5, 0, 3)), { size: 170, y: 280, t1: show1.t, color: P.cream, hot: P.goldPale, shade: 1, glow: 2 });   // HOLD YOUR FIRE (cream with a full shade: red is for fire)
   hero(caps(lineWords('BU', 6, 3, 6)), { size: 150, y: 960, t1: Math.min(dropT, rollBeats[rollBeats.length - 1] + 0.3), color: P.goldPale, hot: GOLD_HOT, shade: 0.8 });   // SHOW YOUR LIGHT (lower third: the closing split's faces fill the upper half; out as the frame burns white)
 
@@ -854,7 +872,8 @@ export function buildTimeline(A) {
   // the ring links open on the line's words after "Link" (by, link, we, broke, chain, fear: centre outward), each into two hands
   const linkW = LN('DR', 4).words;
   const opens = ['by', 'link', 'we', 'broke', 'chain', 'fear'].map((w) => linkW.find((x, i) => i > 0 && norm(x.w) === w).t);
-  S('3:15.84', wd('DR', 4, 'link'), { ...over({ scene: 'phyllo', p: { center: PALM, radius: 360 } }, { scene: 't2_chain_links', p: { center: PALM, radius: 360, opens, t0: wd('DR', 4, 'link').t } }), method: 'procedural', era: ERA.light, look: LK.light,
+  // hud 0: the disk's corner legend would repeat the sung "LINK BY LINK" in micro type under the lyric (polish 4)
+  S('3:15.84', wd('DR', 4, 'link'), { ...over({ scene: 'phyllo', p: { center: PALM, radius: 360, hud: 0 } }, { scene: 't2_chain_links', p: { center: PALM, radius: 360, opens, t0: wd('DR', 4, 'link').t } }), method: 'procedural', era: ERA.light, look: LK.light,
     want: 'A chain runs through the disk; each link opens into two hands letting go, and the hands become edges of the graph' });
   // the mirror vanishes on "alone": the plane flares and is gone, the two halves give way to the side-by-side plate (p.both)
   S('3:18.93', wd('DR', 5, 'alone'), { scene: 't2_mirror', p: { phase: 'gone', full: { scene: 't2_plate', p: { clip: rippleShot.id, at: 99 } }, both: { scene: 't2_plate', p: { clip: '@' } }, palm: PALM, vanishT: wd('DR', 5, 'alone').t },

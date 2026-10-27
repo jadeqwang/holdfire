@@ -151,12 +151,13 @@ export default {
     const steel = mix(P.steel, P.cream, 0.55);
     // left
     ty.text('PSR B1919+21', 140, 190, { font: 'Plex', size: 34, track: 0.04, color: P.cream, alpha: a });
-    ty.label("CP 1919 · 'LGM-1' · BELL & HEWISH, CAMBRIDGE, 1967", 140, 252, { size: 12, color: steel, alpha: a * 0.85 });
+    const notes = !(ctx.p && ctx.p.notes === false);   // p.notes false: drop the two micro captions (take two, polish 4; take one unchanged)
+    if (notes) ty.label("CP 1919 · 'LGM-1' · BELL & HEWISH, CAMBRIDGE, 1967", 140, 252, { size: 12, color: steel, alpha: a * 0.85 });
     ty.text('P = 1.3373 s', 140, 815, { font: 'Plex', size: 26, track: 0.02, color: P.cream, alpha: a * 0.9 });
     ty.label('DEAD STAR · PERIODIC · NATURAL', 140, 878, { size: 26, weight: 600, track: 0.3, color: steel, alpha: a });
     // right
     { let x = 1040; FIB.forEach((n, i) => { const on = t >= T.onsets[i] - 0.02; const w = ty.text(String(n), x, 190, { font: 'Plex', size: 34, color: P.gold, alpha: a * (on ? 1 : 0.3), glow: on ? 6 : 0 }); x += w + 20; }); }
-    ty.label('EACH THE SUM OF THE TWO BEFORE · IN BINARY, AS ARECIBO (1974) AND PIONEER (1972) WROTE NUMBERS', 1040, 252, { size: 11, track: 0.2, color: P.bookGold, alpha: a * 0.85 });
+    if (notes) ty.label('EACH THE SUM OF THE TWO BEFORE · IN BINARY, AS ARECIBO (1974) AND PIONEER (1972) WROTE NUMBERS', 1040, 252, { size: 11, track: 0.2, color: P.bookGold, alpha: a * 0.85 });
     FIB.forEach((n, i) => {
       const on = T.onsets[i]; if (t < on - 0.02 || cols[i] == null) return;
       const k = easeOutCubic(range(t, on, on + 0.15));

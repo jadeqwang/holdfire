@@ -221,17 +221,26 @@
  "X201": {
   "dir": "work/plates/X201",
   "kind": "still",
-  "src": "media/kf2/X201_nbp.jpg"
+  "src": "media/kf2/X201_nbp.jpg",
+  "style": "riso",
+  "styleAmt": 0.4,
+  "note_style": "polish 4: a light riso pass (earth inks, amt 0.4) so the photographic lamp/window/street plates read as the film's signal print and run as one sequence into t2_earth_night"
  },
  "X202": {
   "dir": "work/plates/X202",
   "kind": "still",
-  "src": "media/kf2/X202_nbp.jpg"
+  "src": "media/kf2/X202_nbp.jpg",
+  "style": "riso",
+  "styleAmt": 0.4,
+  "note_style": "polish 4: a light riso pass (earth inks, amt 0.4) so the photographic lamp/window/street plates read as the film's signal print and run as one sequence into t2_earth_night"
  },
  "X203": {
   "dir": "work/plates/X203",
   "kind": "still",
-  "src": "media/kf2/X203_nbp.jpg"
+  "src": "media/kf2/X203_nbp.jpg",
+  "style": "riso",
+  "styleAmt": 0.4,
+  "note_style": "polish 4: a light riso pass (earth inks, amt 0.4) so the photographic lamp/window/street plates read as the film's signal print and run as one sequence into t2_earth_night"
  },
  "X204": {
   "dir": "work/plates/X204",

@@ -156,11 +156,14 @@ let vhsMat = null;
 export function vhsPass(e, t, o = {}) {
   if (!vhsMat) {
     vhsMat = e.shader(/* glsl */`
-      uniform sampler2D tSrc; uniform float vhs; uniform float red; uniform float seed; uniform float gain; uniform float t; uniform vec2 res;
+      uniform sampler2D tSrc; uniform float vhs; uniform float red; uniform float seed; uniform float gain; uniform float t; uniform vec2 res; uniform vec4 keep;
       vec3 tap(vec2 uv){ vec4 c = texture(tSrc, uv); return c.rgb * c.a; }
       void main(){
         vec2 uv = vUv; float y = 1. - uv.y;
-        float k = vhs;
+        // keep (design px x0 y0 x1 y1): a window that does not tear (the counter's digits read through a reset's flash)
+        vec2 dp = vec2(uv.x * 1920., y * 1080.);
+        float inK = keep.z > keep.x ? smoothstep(keep.x - 6., keep.x + 6., dp.x) * smoothstep(keep.z + 6., keep.z - 6., dp.x) * smoothstep(keep.y - 6., keep.y + 6., dp.y) * smoothstep(keep.w + 6., keep.w - 6., dp.y) : 0.;
+        float k = vhs * (1. - inK);
         // tracking bands: a few horizontal bands slide sideways; one big tear rolls up the frame
         float band = floor(y * 34. + seed * 7.);
         float hb = hash12(vec2(band, seed));
@@ -185,12 +188,13 @@ export function vhsPass(e, t, o = {}) {
         col = mix(col, vec3(luma(col) * 1.2 + .25, .03, .02), red * .82);
         col = col + max(col - .7, 0.) * (gain - 1.) * 3.;
         fragColor = vec4(col, 1.);
-      }`, { tSrc: { value: null }, vhs: { value: 0 }, red: { value: 0 }, seed: { value: 0 }, gain: { value: 1 }, t: { value: 0 }, res: { value: new THREE.Vector2(1920, 1080) } });
+      }`, { tSrc: { value: null }, vhs: { value: 0 }, red: { value: 0 }, seed: { value: 0 }, gain: { value: 1 }, t: { value: 0 }, res: { value: new THREE.Vector2(1920, 1080) }, keep: { value: new THREE.Vector4(0, 0, 0, 0) } });
   }
   const u = vhsMat.uniforms;
   e.c2dTex.needsUpdate = true;
   u.tSrc.value = e.c2dTex; u.vhs.value = o.vhs || 0; u.red.value = o.red || 0; u.seed.value = o.seed || 0; u.gain.value = o.gain ?? 1;
   u.t.value = t; u.res.value.set(e.W, e.H);
+  const kp = o.keep || [0, 0, 0, 0]; u.keep.value.set(kp[0], kp[1], kp[2], kp[3]);
   e.pass(vhsMat, e.rtScene);
 }
 

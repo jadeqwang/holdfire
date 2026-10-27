@@ -163,7 +163,7 @@ function coinTimes(ctx, shot, p) {
   const t0 = p.t0 ?? wordT(L1, 'coin', shot.t0) + 0.12;
   const t1 = p.t1 ?? wordT(L1, 'row', t0 + 1.9);
   const type0 = p.type0 ?? wordT(L1, 'hundred', t0 + 1.2);
-  const type1 = p.type1 ?? type0 + 1.15;
+  const type1 = p.type1 ?? type0 + 0.8;   // typed fast so the whole number holds (polish 4)
   return { t0, t1, type0, type1 };
 }
 const landT = (T, k) => T.t0 + (T.t1 - T.t0) * Math.pow(k / (NC - 1), 0.52);
@@ -246,13 +246,17 @@ const coins = {
   },
 };
 
-// the odds, typed on teletype mono across the bottom (a character per tick, a block cursor, a strike flash on the newest)
+// the odds, typed on teletype mono across the bottom (a character per tick, a block cursor, a strike flash on the newest).
+// polish 4: the number is the shot's key fact: 52 px (it was 36), bright, on a dark band drawn over the coins (they no longer
+// show through it), so it reads on a phone
 function typeOdds(ty, t, t0, t1, alpha) {
   if (t < t0 || alpha <= 0) return;
   const n = Math.floor(clamp((t - t0) / (t1 - t0)) * ODDS.length + 1e-6);
   const s = ODDS.slice(0, Math.max(1, n));
-  const size = 36, x0 = 960 - ty.measure(ODDS, { font: 'PlexM', size }) / 2, y = 1018;
-  ty.text(s, x0, y, { font: 'PlexM', size, color: mix(P.cream, P.goldPale, 0.5), alpha: 0.95 * alpha, glow: 6, shade: 0.6 });
+  const size = 52, wFull = ty.measure(ODDS, { font: 'PlexM', size }), x0 = 960 - wFull / 2, y = 1030;
+  const cx = ty.ctx; cx.save(); cx.globalAlpha = 0.82 * alpha * clamp((t - t0) / 0.08); cx.fillStyle = 'rgb(4,4,8)';
+  cx.beginPath(); cx.roundRect(x0 - 28, y - size * 0.95, wFull + 56, size * 1.38, 12); cx.fill(); cx.restore();
+  ty.text(s, x0, y, { font: 'PlexM', size, color: mix(P.cream, P.goldPale, 0.3), alpha: alpha, glow: 4, shade: 0.6 });
   if (n < ODDS.length && Math.floor(t * 6) % 2 === 0) {
     const w = ty.measure(s, { font: 'PlexM', size });
     ty.text('▍', x0 + w, y, { font: 'PlexM', size, color: P.goldPale, alpha: 0.9 * alpha });
@@ -396,7 +400,7 @@ const cointree = {
   },
   type(ty, t, lt, shot, ctx) {
     // the odds, still on screen from the coin shot, clear as the camera lifts
-    const a = 1 - smooth(range(t, shot.t0, shot.t0 + 0.3));
+    const a = 1 - smooth(range(t, shot.t0 + 0.7, shot.t0 + 1.0));   // held 0.7 s into the lift (polish 4), then it clears
     if (a > 0) typeOdds(ty, t, shot.t0 - 10, shot.t0 - 9, a);
   },
 };

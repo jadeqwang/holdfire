@@ -114,12 +114,12 @@ export default {
     // sizes for a 540p phone: nothing under 22 design px (11 px on the phone), the main lines 30-40
     const STY = {
       title: { font: 'CormorantI', weight: 600, size: 44, color: P.cream },
-      line: { font: 'OpenSans', weight: 600, size: 30, color: P.cream },
+      line: { font: 'OpenSans', weight: 600, size: 32, color: P.cream },
       dim: { font: 'OpenSans', weight: 500, size: 25, color: [0.86, 0.82, 0.74] },
       ititle: { font: 'CormorantI', weight: 600, size: 32, color: P.cream },
-      key: { font: 'OpenSans', weight: 700, size: 26, color: P.cream },
-      name: { font: 'OpenSans', weight: 600, size: 27, color: P.goldPale },
-      support: { font: 'OpenSans', weight: 500, size: 23, color: P.bookGold },
+      key: { font: 'OpenSans', weight: 700, size: 32, color: P.cream },          // polish 4: the model lines read on a phone (were 26/27/23)
+      name: { font: 'OpenSans', weight: 600, size: 34, color: P.goldPale },
+      support: { font: 'OpenSans', weight: 500, size: 28, color: P.bookGold },
       small: { font: 'OpenSans', weight: 500, size: 22, color: P.bookGold },
     };
     const W = 864;   // the centred 4:5 safe area
@@ -137,19 +137,20 @@ export default {
       const al = ain(T.beats[i]);
       cr.forEach((segs, r) => { if (al > 0) row(segs, y, al); y += r + 1 < cr.length ? 40 : 62; });
     });
-    // MODELS: below the rule, one row per sixteenth from the first beat
+    // MODELS: below the rule, one row per 32nd from the first beat (polish 4: all in by ~0.7 s, so the last line is not still
+    // fading in while the card is read)
     const lines = [[['Music by Jade Wang and Suno', 'line']], null, [[`Animated by ${C.animated}`, 'key']], [['and a supporting cast of models:', 'dim']]];
     nameRows(ty, C.cast, STY.name, W).forEach((s) => lines.push([[s, 'name']]));
     nameRows(ty, C.support, STY.support, W).forEach((s) => lines.push([[s, 'support']]));
     C.images.forEach((s) => lines.push([[s, 'support']]));
-    y = 700; let k = 0;
+    y = 692; let k = 0;
     lines.forEach((segs) => {
-      if (!segs) { y += 12; return; }
-      const al = ain(T.cIn + T.s16 * (1 + k++));
+      if (!segs) { y += 10; return; }
+      const al = ain(T.cIn + T.s16 * 0.5 * (1 + k++));
       if (al > 0) row(segs, y, al);
-      y += 38;
+      y += 40;
     });
     const asm = ain(T.beats[2]);
-    if (asm > 0) SMALL.forEach((x, i) => row([[x, 'small']], Math.max(y + 12, 990) + i * 28, asm * 0.9));
+    if (asm > 0) SMALL.forEach((x, i) => row([[x, 'small']], Math.min(Math.max(y + 12, 990), 994) + i * 27, asm * 0.9));   // the last small line stays inside the frame
   },
 };

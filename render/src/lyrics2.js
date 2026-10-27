@@ -55,9 +55,9 @@ export const PLAN = [
   { n: 9, style: 'light', size: 86, col: GOLD, shade: 0.8, x: 960, y: 900, align: 'center', italic: false },
   { n: 10, style: 'light', size: 72, col: [0.96, 0.9, 0.78], shade: 0.8, x: 960, y: 1010, align: 'center', maxW: 1000, flare: false },
   // WE'RE AWAKE is the edit's hero: "Hear it, and you'll know" glows on the dark window glass beside her
-  { n: 11, style: 'crt', size: 66, col: '#9fe8ff', x: 548, y: 330, align: 'left', maxW: 250, br: [2, 4] },
+  { n: 11, style: 'crt', size: 66, col: '#9fe8ff', x: 508, y: 330, align: 'left', maxW: 250, br: [2, 4] },
   // ---------------------------------------------------------------- CHORUS 1: light in the sky, the screens
-  { n: 12, style: 'light', size: 80, col: GOLD, shade: 1.2, x: 560, y: 540, align: 'left', maxW: 420, br: [2] },             // in the dark sky left of the Milky Way
+  { n: 12, style: 'light', size: 80, col: GOLD, shade: 2, x: 548, y: 405, align: 'left', maxW: 560, br: [5] },             // in the dark sky left of the Milky Way, under the hero and off the core (polish 4)
   { n: 13, style: 'engrave', size: 62, x: 770, y: 400, align: 'right', maxW: 620, br: [4, 6] },    // the record's own legend, beside the disc
   { n: 14, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 770, align: 'center' },   // a shared readout across the split, at chest height (clear of both mouths)
   { n: 15, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, y: 985, align: 'center', maxW: 860 },
@@ -74,21 +74,21 @@ export const PLAN = [
   { n: 24, style: 'brush', size: 86, x: 590, y: 300, align: 'left', maxW: 560, br: [4, 7] },      // on the scroll beside the warning
   { n: 25, style: 'brush', size: 80, yLast: 1045, x: 960, align: 'center', maxW: 1100, br: [5] },
   // ---------------------------------------------------------------- Petrov: the console readout (Plex Mono, phosphor)
-  { n: 26, style: 'terminal', size: 46, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1052, align: 'center', maxW: 860, br: [2] },
-  { n: 27, style: 'terminal', size: 52, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 860, br: [3] },
-  { n: 28, style: 'terminal', size: 52, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 860, br: [4] },
-  { n: 29, style: 'terminal', size: 54, col: '#8dffb0', panel: 'rgba(3,10,6,1)', prompt: '>', x: 960, yLast: 1030, align: 'center', maxW: 900, br: [2], segs: { 'V216,V217': {} } },   // ends at the cut to WE'RE ALIVE
+  { n: 26, style: 'terminal', size: 46, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 1010, align: 'center', maxW: 860, br: [2] },   // title-safe: raised 40 px (polish 4)
+  { n: 27, style: 'terminal', size: 52, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 990, align: 'center', maxW: 860, br: [3] },
+  { n: 28, style: 'terminal', size: 52, col: '#ffcf8a', panel: 'rgba(14,6,4,1)', prompt: '>', x: 960, yLast: 990, align: 'center', maxW: 860, br: [4] },
+  { n: 29, style: 'terminal', size: 54, col: '#8dffb0', panel: 'rgba(3,10,6,1)', prompt: '>', x: 960, yLast: 990, align: 'center', maxW: 900, br: [2], segs: { 'V216,V217': {} } },   // ends at the cut to WE'RE ALIVE
   // ---------------------------------------------------------------- PRE-CHORUS 2: ticker tape among the near-misses, the coin legend
   { n: 30, style: 'typewriter', tape: true, size: 54, x: 960, yLast: 1000, align: 'center', maxW: 1400 },
   { n: 31, style: 'typewriter', tape: true, size: 54, x: 960, yLast: 1000, align: 'center', maxW: 1400 },
   { n: 32, style: 'engrave', size: 54, copies: [{ only: [0, 1, 2, 3], x: 505, y: 420, align: 'right', br: [2] }, { only: [4, 5, 6, 7, 8], x: 1415, y: 420, align: 'left', br: [6] }] },
-  { n: 33, style: 'engrave', size: 56, x: 960, y: 160, align: 'center', maxW: 860, br: [3], segs: { P204: {} } },   // ends at the cut to chorus 2 (CAN'T BE SURE)
+  { n: 33, style: 'engrave', size: 60, shade: 2, plate: 0.8, x: 960, y: 150, align: 'center', maxW: 860, br: [3], segs: { P204: {} } },   // ends at the cut to chorus 2 (CAN'T BE SURE); a dark ground over the coins flying up (polish 4)
   // ---------------------------------------------------------------- CHORUS 2: the mirror, first (as chorus 1, both rooms)
   { n: 34, style: 'light', size: 74, col: GOLD, shade: 1.4, x: 960, yLast: 1015, align: 'center' },
   { n: 35, style: 'engrave', size: 50, x: 960, y: 925, align: 'center', maxW: 860, br: [4] },
   { n: 36, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 770, align: 'center' },
   { n: 37, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, y: 985, align: 'center', maxW: 860 },
-  { n: 38, style: 'crt', size: 58, col: '#a8f0ff', panel: 'rgba(2,10,20,1)', x: 960, y: 960, align: 'center', maxW: 860, br: [4] },
+  { n: 38, style: 'crt', size: 64, col: '#a8f0ff', panel: 'rgba(2,10,20,1)', x: 960, yLast: 1012, align: 'center', maxW: 860, br: [4] },
   { n: 39, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', br: [3], segs: {
     C209: { x: 960, y: 770, align: 'center' },
     C210: { style: 'light', size: 84, col: GOLD, shade: 0.8, x: 960, y: 230, align: 'center' } } },
@@ -122,13 +122,14 @@ export const PLAN = [
   { n: 57, style: 'light', size: 120, caps: true, track: 0.06, col: GOLD, x: 960, y: 200, align: 'center', maxW: 900 },
   { n: 58, style: 'light', size: 110, caps: true, track: 0.06, col: GOLD, shade: 1.3, x: 960, y: 150, align: 'center', maxW: 900 },
   // ---------------------------------------------------------------- DROP: marker on the mirror glass (mirrored on teal-tips' side)
-  { n: 59, style: 'glass', size: 64, ink: INK.klein, br: [3], copies: [{ x: 530, y: 330, align: 'right', maxW: 460 }, { x: 1390, y: 330, align: 'right', maxW: 460, mirror: true, ink: INK.teal }] },   // on the white outside each walker, clear of both heads (polish 3)
-  { n: 60, style: 'glass', size: 64, ink: INK.klein, br: [4, 6], segs: { 'DR02,DR03': { copies: [{ x: 600, y: 300, align: 'right', maxW: 420 }, { x: 1000, y: 300, align: 'right', maxW: 420, mirror: true, ink: INK.teal }] } } },
+  { n: 59, style: 'glass', size: 68, ink: INK.klein, br: [3], copies: [{ x: 470, y: 105, align: 'center', maxW: 860 }, { x: 1450, y: 105, align: 'center', maxW: 860, mirror: true, ink: INK.teal }] },   // on the white above each walker's head: the walkers cross x 400-840 during the shot (polish 4)
+  { n: 60, style: 'glass', size: 64, ink: INK.klein, br: [4, 6], segs: { 'DR02,DR03': { copies: [{ x: 570, y: 300, align: 'right', maxW: 420 }, { x: 1030, y: 300, align: 'right', maxW: 420, mirror: true, ink: INK.teal }] } } },
   { n: 61, style: 'glass', size: 70, ink: INK.klein, halo: 'rgba(250,250,255,1)', copies: [{ x: 930, y: 1010, align: 'right', maxW: 390 }, { x: 990, y: 1010, align: 'right', maxW: 390, mirror: true, ink: INK.teal }] },
-  { n: 63, style: 'light', size: 64, col: GOLD, shade: 0.9, x: 960, y: 150, align: 'center', maxW: 1200 },   // top: the edit's 13 21 34 hold at the bottom (polish 3)
+  { n: 63, style: 'light', size: 64, col: GOLD, shade: 0.9, x: 960, y: 100, align: 'center', maxW: 1200 },   // top: the edit's 13 21 34 hold at the bottom (polish 3); lifted clear of the disk (polish 4)
   { n: 64, style: 'glass', size: 70, ink: INK.klein, halo: 'rgba(250,250,255,1)', x: 960, yLast: 1030, align: 'center', maxW: 1000, segs: { DR11: {} } },
   { n: 66, style: 'riso', size: 62, shade: 1, inks: [INK.paper, INK.pink], x: 960, yLast: 990, align: 'center', maxW: 1100, br: [4], segs: {
-    DR14: { yLast: 780, shade: 1.8 }, DR15: { style: 'light', col: [0.75, 1, 0.92], nodes: true, size: 66 }, DR16: { style: 'crt', col: '#a8f0ff', panel: 'rgba(2,10,20,1)', size: 70, shade: 0 } } },
+    DR14: { yLast: 780, shade: 1.8 }, DR15: { style: 'light', col: [0.75, 1, 0.92], nodes: true, size: 66, shade: 2 },   // a dark ground: the constellation lines and rings cross it (polish 4)
+    DR16: { style: 'crt', col: '#a8f0ff', panel: 'rgba(2,10,20,1)', size: 62, shade: 0, x: 1885, y: 112, yLast: null, align: 'right', maxW: 520 } } },   // on the window glass top right, clear of both figures (polish 4; outside the 4:5 area)
   // ---------------------------------------------------------------- OUTRO: starlight on the graph, the safety board, whispers
   { n: 67, style: 'light', size: 74, col: GOLD, x: 960, y: 150, align: 'center', maxW: 1100, br: [3], nodes: true },
   { n: 68, style: 'light', size: 70, col: GOLD, x: 960, y: 160, align: 'center', maxW: 900, br: [4], segs: { OU02: {}, OU03: false } },
@@ -271,9 +272,13 @@ function drawLine(ty, t, lt, o, x, line, ctx) {
   const pw = Math.ceil(bw * res), ph = Math.ceil(bh * res);
   const B = scratch('l2_block', pw, ph), g = B.g;
   g.setTransform(res, 0, 0, res, 0, 0); setFont(g, f); g.textBaseline = 'alphabetic'; g.textAlign = 'left';
+  if (o.plate) {   // a soft dark plate behind the whole block (busy 3D behind the type, e.g. coins flying up through the line)
+    g.save(); g.globalAlpha = o.plate * line; g.filter = `blur(${(10 * res).toFixed(1)}px)`; g.fillStyle = o.plateCol || 'rgba(3,3,8,1)';
+    g.beginPath(); g.roundRect(pad * 0.6, pad * 0.6, bw - pad * 1.2, bh - pad * 1.2, 18); g.fill(); g.restore();
+  }
   if (o.shade) {   // a soft dark ground under the glyphs (bright skies, busy boards): wide translucent strokes
     g.save(); g.lineJoin = 'round'; g.strokeStyle = o.shadeCol || 'rgba(4,6,14,1)';
-    for (const it of items) for (const [lw, a] of [[f.px * 0.36, 0.16], [f.px * 0.2, 0.22]]) { g.globalAlpha = a * o.shade * line * (it.st.pre ? 0.6 : 1); g.lineWidth = lw; g.strokeText(it.w.text, it.ax, it.ay); }
+    for (const it of items) for (const [lw, a] of [[f.px * 0.36, 0.16], [f.px * 0.2, 0.22]]) { g.globalAlpha = a * o.shade * line; g.lineWidth = lw; g.strokeText(it.w.text, it.ax, it.ay); }
     g.restore();
   }
   style.draw({ g, res, rows, items, size: f.px, lead, t, o, L: x, bw, bh, pw, ph, f, line });

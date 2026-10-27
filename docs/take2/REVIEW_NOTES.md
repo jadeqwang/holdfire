@@ -209,3 +209,44 @@ the whole film every 0.5 s at 960×540; `lyrics_sheet_00…05`: every lyric line
   lettering readable). It is a two-shot (not flipped, like DR03/DR04/DR16), but its keyframe was never repainted. Needs the
   keyframe's teal-tips repainted with the mirrored jacket and a new Seedance take on the same aref (≈ $1.5), or accept it.
 - Weak lip sync still as listed after the mirror regeneration (C209R/L, DR04, C103R; C203R, DR16): no lag changed in this pass.
+
+## Polish pass 4 (finishing editor, 27 Oct): the confirmed findings of the v3 outside review
+Source: `docs/reviews/t2_v3_review_summary.md` (DR11 was already fixed there). Stills: `work/t2/polish4/fixed/` + sheets
+`work/t2/polish4_sheets/fixed_0…1.jpg` (every fixed moment, 960×540, laid out at 480 px wide = a phone); every lyric line at a
+quarter and at 70 % of its window (134 stills, phone-width sheets); full pass every 1 s (247 stills, sheets of 36); 12-frame motion
+strips `work/t2/polish4_sheets/m_225.0 … m_227.6.jpg` (counter) and `m_110.0 … m_111.9.jpg` (coins / tree). check_cuts: 0 cuts off
+onset, coverage OK, no type rule breaks; chess_check OK; plate_windows: C103L (1 frame) and DR11's vanish hold, as before; lipcheck
+below. No lag changed, $0 generation.
+
+**Fixed**
+- Lyric legibility (systemic, `lyric/styles.js`): unsung words now wait at ≥ 50 % in the line's own ink (`GHOST`; was 13–32 %, or
+  nothing for impact / OSD / typewriter / whisper), so a line reads whole while it is up; sung words are full and the word being
+  sung is brightest (light: whitened while sung). Thin faces are thickened with a same-ink stroke (`boldWord`): light, glass,
+  whisper, engrave, brush; chalk 1.6× thicker with less tooth; blueprint ghosts are half-ink fills under the dashed outline; incise
+  ghosts are filled; the `shade` ground now sits under unsung words too. Every treatment checked at 540p on a 480 px view.
+- Placements (`lyrics2.js`): 0:53 line off the galactic core (two rows under the hero, x 548, shade 2); 3:04 white-void line above
+  both walkers' heads (they cross x 400–840 during DR01), DR02's copies 30 px further out; Petrov terminal raised 40 px (title-safe),
+  26 SEP 1983 / SERPUKHOV-15 raised 50 px to stay clear of it; 0:46.7 "Hear it…" 40 px left (off her hair); 3:16 Link by link
+  lifted 50 px off the disk; 3:25 constellation line on a dark ground; 3:28 CRT readout moved onto the window glass top right
+  (clear of both figures; outside the 4:5 area); chorus-2 CRT line 64 px, anchored by its last baseline.
+- 1:50–1:52 (`data/coins.js`, line 33): the 2^100 number is 52 px (was 36), bright, on a dark band over the coins, typed in 0.8 s and
+  held 0.7 s into the lift (fully readable ~1.1 s); "the only road from here to you" on a soft dark plate (new `plate` option) so
+  the coins flying up no longer cover it.
+- 3:46.9–3:48.1 counter (`data/counter.js`, `data/lib.js`): the red flash is frame-indexed, ≤ 2 frames each with ≥ 2 clean frames
+  between (a reset that lands sooner snaps the board without a flash; measured on every frame 3:44.25–3:48.5: max red run 2, min gap 2);
+  the tear's tail is one faint frame; the digits and the year card sit in an untorn window (`keep`) through every flash, and SIGNAL
+  LOST moved above the sign, so the count and the year read on any paused frame.
+- Type collisions: 0:26 tally bracket above the wedges (it crossed CARRIED); 1:16 numerals get a soft dark ground (`scrim`), the
+  graph edges dim under them; 2:55 BU08's scroll laid 200 px right (colX 1310) so HOLD YOUR sits left of the kanji column; 3:16 the
+  disk's corner legend is off for DR10 (`hud: 0`: it repeated LINK BY LINK in micro type); 3:25 as above.
+- 2:14–2:16 Earth lights (X201–X203, picks_g2.json → picks2.json): a light riso pass (earth inks, amt 0.4) so the photographic
+  lamp / window / street plates read as the film's signal print into t2_earth_night.
+- Micro type: the pulsar diagram's two ~6 px captions dropped (`pulsar.js` p.notes false; take one unchanged); SIGNAL LOST at 2:50
+  is 72 px (was 30), NUCLEAR DETONATIONS 46 px, their plates scale with the type; end card model lines 32–34 px (names), 28 px
+  (support), arriving one per 32nd so the last is in ~0.7 s after the first beat, and the small print now stays inside the frame.
+- 0:08 black: the rewind runs two more 16ths (back to the first spiral, all seven clips) and reaches black 7 frames before the match
+  (was 15). Plan-time deviation: the plan says black "on the bar line".
+
+**Left**
+- Lip sync on C103 / C203 / DR16 (item 8): needs the regenerations LIPSYNC.md lists (paid); not touched.
+- The CRT readouts at 0:57 / 1:58 stay at chest height (only 3:28 was asked to move).

@@ -42,6 +42,16 @@ export function schedule(audio, p, shotT0) {
   return SCHED;
 }
 
+// red-flash start frames: the first film frame at or after each reset, skipping a reset whose flash would start less than two
+// clean frames after the previous flash ended (so: <= 2 red frames each, >= 2 clean frames between)
+function flashFrames(S) {
+  if (S.flash) return S.flash;
+  const F = []; let next = -1e9;
+  for (const r of S.resets) { const f = Math.ceil(r.t / FRAME - 1e-3); if (f >= next) { F.push(f); next = f + 4; } }
+  S.flash = F;
+  return F;
+}
+
 // counter value (continuous, days) and the index of the last reset at time t
 function valueAt(S, audio, t, p) {
   const R = S.resets; const n = R.length;
@@ -165,14 +175,20 @@ export default {
     const e = ctx.engine; const A = ctx.audio;
     const S = schedule(A, p, shot.t0); const R = S.resets; const n = R.length;
     const V = valueAt(S, A, t, p);
-    // the newest reset (for the flash) and how long ago it was
+    // the newest reset; the red flash and the tear are frame-indexed (polish 4): each flash is at most two frames, with at least
+    // two clean frames before the next; a reset that lands sooner still snaps the board and its year card, without a flash (the
+    // fast run used to merge into 29 straight red frames and the count vanished where it peaks)
     let ri = -1; for (let k = 0; k < n; k++) if (t >= R[k].t - 1e-4) ri = k;
-    const since = ri >= 0 ? t - R[ri].t : 1e9;
-    const red = since < 2 * FRAME - 1e-4 ? 1 : 0;                         // two frames of red
-    const vhs = ri >= 0 ? Math.exp(-since / 0.09) * (since < 0.3 ? 1 : 0) : 0;
+    const fi = Math.round(t / FRAME);
+    const FL = flashFrames(S);
+    let f0 = -1e9; for (const f of FL) if (f <= fi) f0 = f;
+    const df = fi - f0;
+    const red = df >= 0 && df < 2 ? 1 : 0;                                  // two frames of red
+    const vhs = red ? 1 : df === 2 ? 0.18 : 0;                              // a faint tail on the first clean frame only
     const AR = art();
     const c = e.c2dBegin();
     const push = 1 + (p.push ?? 0.06) * smooth(range(t, shot.t0, shot.t0 + 12));
+    const pz = ([x, y]) => [960 + (x - 960) * push, 540 + (y - 540) * push];
     c.save(); c.translate(960, 540); c.scale(push, push); c.translate(-960, -540);
     // wall and lamp
     c.drawImage(AR.wall, -60, -40, 2040, 1160);
@@ -217,12 +233,15 @@ export default {
       c.fillStyle = g; c.fillRect(SIGN.x - 40, SIGN.y - 40, SIGN.w + 80, SIGN.h + 80); }
     c.restore();
     if (red > 0) {
-      c.fillStyle = 'rgba(0,0,0,0.35)'; c.fillRect(0, 0, 1920, 1080);
-      c.font = '600 132px PlexM'; c.textAlign = 'center'; c.textBaseline = 'middle';
-      const jx = (hash1(ri * 3.3) - 0.5) * 16, jy = (hash1(ri * 5.1) - 0.5) * 10;
-      c.fillStyle = 'rgba(255,240,235,1)'; c.fillText('SIGNAL LOST', 960 + jx, 540 + jy);
+      c.fillStyle = 'rgba(0,0,0,0.3)'; c.fillRect(0, 0, 1920, 1080);
+      // SIGNAL LOST above the sign (it used to sit across the board, under the digits)
+      c.font = '600 112px PlexM'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      const jx = (hash1(ri * 3.3) - 0.5) * 16, jy = (hash1(ri * 5.1) - 0.5) * 8;
+      c.fillStyle = 'rgba(255,240,235,1)'; c.fillText('SIGNAL LOST', 960 + jx, 112 + jy);
     }
-    vhsPass(e, t, { vhs: Math.max(vhs, red), red: red, seed: (ri + 1) * 1.37 + Math.floor(t * 24) * 0.11, gain: red ? 1.6 : 1.05 });
+    // the digits and the year card stay untorn through every flash (only the frame around them tears)
+    const k0 = pz([px - 8, py - 8]), k1 = pz([cx + cw + 8, py + ph + 8]);
+    vhsPass(e, t, { vhs: Math.max(vhs, red), red: red, seed: (ri + 1) * 1.37 + Math.floor(t * 24) * 0.11, gain: red ? 1.6 : 1.05, keep: [k0[0], k0[1], k1[0], k1[1]] });
     ctx.state.t2counter = { S, V, ri };
   },
 };

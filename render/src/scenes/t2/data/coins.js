@@ -2,7 +2,7 @@
 // Adapted from take one's coins.js (render/src/scenes/signal/coins.js): same engraved gold coin, same faces.
 //
 // t2_coins (1:48.00-1:50.61): straight down over a 10 x 10 grid. A hundred coins flip and land HEADS, faster and faster, in
-//   reading order. The first 27 are stamped with the years of the fact-checked list (render/data/t2/nearmisses.json, in the
+//   reading order. The first 30 are stamped with the years of the fact-checked list (render/data/t2/nearmisses.json, in the
 //   list's order); the rest carry no year (the true number is unknown). The odds type across the bottom on teletype mono:
 //   1 / 1,267,650,600,228,229,401,496,703,205,376 (= 2^100, computed with BigInt). Ends on the still grid.
 // t2_cointree (1:50.61-1:53.15): continuous with that last frame. The camera pulls up and tilts forward; the coins stream out of
@@ -27,7 +27,7 @@ const CAM_H = 54;                                                 // top-down ca
 const SKY = { density: 0.5, band: 0.3, bandAng: -0.3, bandOff: 40, neb: 0.3, nebCol: [0.03, 0.04, 0.08], nebCol2: [0.05, 0.035, 0.02], seed: 21 };
 let three = null;
 
-const NY = 27;                    // stamped coins
+const NY = 30;                    // stamped coins (the list's length; the atlas holds 62)
 function atlas(yrs) {
   const T = 256, G = 8;
   const cv = document.createElement('canvas'); cv.width = cv.height = T * G;

@@ -4,10 +4,10 @@
 // on the real date of every entry of the fact-checked list (render/data/t2/nearmisses.json `date`, sorted by date; entries on the
 // same day share one reset), each reset a two-frame red SIGNAL LOST and a flicker of VHS rewind lines. The resets land on a
 // 32nd-note grid taken from the beat list and come faster through the whispered count (one per sixteenth by 3:47.8), stuttering
-// to the last one, the 10 May 2025 entry. Past it the counter climbs to the release-date value (default 2026-10-26 -> 534),
+// to the last one, the 15 Sep 2026 entry. Past it the counter climbs to the release-date value (default 2026-10-26 -> 41),
 // digits rolling upward on "higher" (3:49.44), and keeps climbing a day per beat after that.
 // p: {release ('2026-10-26'), b0 (first grid point; default the beat at the shot start), gaps ([32nds] between resets, one per
-//     reset date; default accelerating 8,8,4,3,3, 2 x14, 1 x7), higher (default the word "higher"), climbEnd (default its end),
+//     reset date; default accelerating 8,8,4,3,3, 2 x13, 1 x10, then a 2 before the last), higher (default the word "higher"), climbEnd (default its end),
 //     perBeat (days added per beat after the climb, 1), hold (s the release value is held first, 1.0), push (0.06),
 //     countRate (12: between resets the board counts up from zero, a whole count every two frames, right-aligned in the ones place)}
 import { P, css, mix } from '../../../palette.js';
@@ -29,7 +29,9 @@ export function schedule(audio, p, shotT0) {
   for (const it of list.entries) { if (!byDate.has(it.date)) byDate.set(it.date, []); byDate.get(it.date).push(it); }
   const dates = [...byDate.keys()].sort();
   const n = dates.length;
-  const gaps = p.gaps || [8, 8, 4, 3, 3, ...Array(14).fill(2), ...Array(Math.max(0, n - 19)).fill(1)].slice(0, n);
+  // the last gap is a two-32nd stutter, so the last reset (the newest entry) gets its own flash (with the default run it lands on "higher")
+  const run = [8, 8, 4, 3, 3, ...Array(13).fill(2), ...Array(Math.max(0, n - 19)).fill(1)];
+  const gaps = p.gaps || [...run.slice(0, n - 1), 2];
   const k0 = p.b0 != null ? beatK(audio, p.b0) : Math.round(beatK(audio, shotT0));
   let u = 0;
   const resets = dates.map((d, i) => { u += gaps[i] ?? 1; return { date: d, day: dayOf(d), year: Number(d.slice(0, 4)), t: gridT(audio, k0 + u / 8), items: byDate.get(d) }; });

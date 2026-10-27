@@ -219,8 +219,8 @@ export const ERA = {
 export const PLIES = ('e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Ba5 b4 cxd4 Qg4 Ne7 bxa5 dxc3 Qxg7 Rg8 Qxh7 Nbc6 Nf3 Qc7 Bb5 Bd7 O-O O-O-O ' +
   'Bg5 Nxe5 Nxe5 Bxb5 Nxf7 Bxf1 Nxd8 Rxg5 Nxe6 Rxg2+ Kh1 Qe5 Rxf1 Qxe6 Kxg2 Qg4+').split(' ');
 
-// near-miss years (plan, "On-screen list"), for the counter's resets; the last is the 2025 entry
-const NEAR_MISS_YEARS = [1950, 1957, 1958, 1960, 1961, 1962, 1962, 1962, 1962, 1966, 1967, 1968, 1968, 1968, 1973, 1979, 1979, 1980, 1980, 1980, 1983, 1983, 1995, 2007, 2010, 2022, 2025];
+// near-miss years (plan, "On-screen list"), for the counter's resets; the last is the 15 Sep 2026 entry
+const NEAR_MISS_YEARS = [1950, 1957, 1958, 1960, 1961, 1962, 1962, 1962, 1962, 1966, 1967, 1968, 1968, 1968, 1973, 1979, 1979, 1980, 1980, 1980, 1983, 1983, 1995, 2007, 2010, 2022, 2025, 2025, 2026, 2026];
 
 export function buildTimeline(A) {
   const T = A.d;
@@ -712,11 +712,11 @@ export function buildTimeline(A) {
   // t2_nearmiss is one continuous strip (paper and tally together), so the list and the counter are one shot
   const knew = wd('P2', 1, 'knew');
   S('1:42.99', wd('P2', 0, 'secret'), { scene: 't2_nearmiss', p: { t0: LN('P2', 0).t + 0.06, t1: knew.t, spin: knew.t }, method: 'procedural', era: ERA.newsprint, look: NEARMISS_LOOK,
-    want: 'The near-miss list scrolls on teletype paper (~5 lines/s, the 27-entry fact-checked list); years big, place and description small; the tally beside it climbs with the entries, then its wheels keep spinning, never settling (no fixed total)' });
+    want: 'The near-miss list scrolls on teletype paper (~6.5 lines/s, the 30-entry fact-checked list); years big, place and description small; the tally beside it climbs with the entries, then its wheels keep spinning, never settling (no fixed total)' });
   reserve(1);                                                                                                            // the old counter cut keeps its number
   const coinW = wd('P2', 2, 'coin');
   S('1:48.00', coinW, { scene: 't2_coins', p: { t0: coinW.t + 0.12, t1: wd('P2', 2, 'row').t, type0: wd('P2', 2, 'hundred').t }, method: 'procedural', era: ERA.newsprint, look: COIN_LOOK,
-    want: '100 gold coins land heads, the first 27 stamped with the list\'s years, filling a 10 x 10 grid; the full 2^100 number types across the bottom' });
+    want: '100 gold coins land heads, the first 30 stamped with the list\'s years, filling a 10 x 10 grid; the full 2^100 number types across the bottom' });
   const theRoad = wd('P2', 3, 'the'), youRoad = wd('P2', 3, 'you');
   const treeBeats = ['1:51.25', '1:51.88', '1:52.52'].map((x) => beat(x).t);
   // t2_cointree is one continuous camera (pull up out of the grid, the depth doubling on each beat), so it is one shot
@@ -952,11 +952,11 @@ export function buildTimeline(A) {
   const higher = wd('OU', 3, 'higher');
   // t2_counter is one continuous board (it resets on the real dates of the list on a grid from the drums' return, climbs past the
   // last reset on "higher"), so the whispered-count cuts are one shot; b0 and "higher" come from the timing
-  // the 26 resets run through the whispered count and end (the 2025 entry) as "The count goes higher" begins; the climb then lands
-  // on the release-date value (534) just after "higher" begins, digits rolling upward into it, and holds it to the cut
-  const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: '2026-10-26', gaps: [6, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, ...Array(14).fill(1)], climbEnd: higher.t + 0.04 };
+  // the 29 resets (30 entries; two share 27 Oct 1962) run through the whispered count and end (the 15 Sep 2026 entry, with its own
+  // flash) on "count" of "The count goes higher"; the climb then lands on the release-date value (41) just after "higher" begins, digits rolling upward into it, and holds it to the cut
+  const counterP = { b0: nearest(BEATS, drumsZ.t), higher: higher.t, release: '2026-10-26', gaps: [6, 4, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, ...Array(17).fill(1)], climbEnd: higher.t + 0.04 };
   S('3:44.33', drumsZ, { scene: 't2_counter', p: counterP, method: 'procedural', era: ERA.newsprint, look: COUNTER_LOOK,
-    want: '[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 2025 entry; then it climbs to the release-date value (534 on 26 Oct 2026; recompute for release), digits rolling up on "higher"' });
+    want: '[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 15 Sep 2026 entry; then it climbs to the release-date value (41 on 26 Oct 2026, 42 on 27 Oct; recompute for release), digits rolling up on "higher"' });
   reserve(6);                                                                                                            // the board's other cuts keep their numbers
   // the counter itself does not come back here (t2_counter has no corner view): the ISS crossing carries the shot
   S('3:50.04', hit('outro_whisper', 4), { ...over(plate(), { scene: 't2_iss_pass', p: {} }), method: 'video', era: ERA.light, look: LK.night,

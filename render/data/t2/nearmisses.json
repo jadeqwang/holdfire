@@ -1,13 +1,13 @@
 {
  "title": "Near-miss list, take two (fact-checked)",
  "from_doc": "docs/PLAN_TAKE_TWO.md § The near-miss list (fact-checked): year, place, on-screen text and source copied exactly, in the plan's order",
- "dates": "Day and month researched per entry (date_source). Every entry has a known day; none uses the 1 Jan fallback (date_precision would read 'year').",
+ "dates": "Day and month researched per entry (date_source). Every entry but one has a known day; none uses the 1 Jan fallback (date_precision would read 'year'). The exception is n 29 (approx: true, date_precision 'approx'): reported only as spring 2026, placed at 2026-04-15 for ordering and the counter. 27 Oct 2026: entries 28-30 added at Jade's request (docs/research/nearmiss_update_2026-10.md, 'Second pass').",
  "epoch": {
   "date": "1945-08-09",
   "note": "Nagasaki: day 0 of the outro counter (last use of a nuclear weapon in war)"
  },
  "release_default": "2026-10-26",
- "count": 27,
+ "count": 30,
  "entries": [
   {
    "n": 1,
@@ -305,6 +305,41 @@
    "date_precision": "day",
    "date_note": "Strikes 7-10 May 2025; reset on the last day, 10 May (plan fact sheet: the counter's 534 days run from 10 May 2025).",
    "date_source": "https://www.armscontrol.org/node/14664"
+  },
+  {
+   "n": 28,
+   "year": 2025,
+   "place": "Poland",
+   "text": "NATO jets down Russian drones",
+   "source": "https://www.armscontrol.org/act/2025-10/news/nato-downs-russian-drones-over-poland",
+   "date": "2025-09-10",
+   "date_precision": "day",
+   "date_note": "Drones crossed on the night of 9/10 Sep 2025; NATO jets shot several down; reset on 10 Sep (Arms Control Association, Oct 2025; NPR, 10 Sep 2025).",
+   "date_source": "https://www.armscontrol.org/act/2025-10/news/nato-downs-russian-drones-over-poland"
+  },
+  {
+   "n": 29,
+   "year": 2026,
+   "place": "Mideast",
+   "text": "AI error nearly boards Chinese ship (rptd)",
+   "source": "https://www.cnn.com/2026/09/18/politics/us-military-ai-false-intelligence-china-ship",
+   "date": "2026-04-15",
+   "date_precision": "approx",
+   "approx": true,
+   "date_note": "spring 2026; CNN reported 18 Sep 2026",
+   "reported": "Per CNN's four anonymous sources (18 Sep 2026): an AI chatbot's false intelligence report said a Chinese ship carried nuclear-weapons-programme parts; warplanes were airborne and armed personnel prepared to board before it was called off. No official confirmation; day and exact place not reported. On screen as reported (rptd).",
+   "date_source": "https://www.cnn.com/2026/09/18/politics/us-military-ai-false-intelligence-china-ship"
+  },
+  {
+   "n": 30,
+   "year": 2026,
+   "place": "Arabian Sea",
+   "text": "Indian and Pakistani warships collide",
+   "source": "Bloomberg, 16 Sep 2026; Japan Times, 17 Sep 2026; The Diplomat",
+   "date": "2026-09-15",
+   "date_precision": "day",
+   "date_note": "North Arabian Sea, 15 Sep 2026; both governments protested (summoned diplomats). Minor damage; ship names disputed, kept off screen. The last reset on the outro counter.",
+   "date_source": "Bloomberg, 16 Sep 2026; Japan Times, 17 Sep 2026"
   }
  ]
 }

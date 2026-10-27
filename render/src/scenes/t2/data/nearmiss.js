@@ -1,7 +1,7 @@
 // t2_nearmiss — Pre-chorus 2, "Secret list of every near-miss and disaster, running total no one ever knew:" (1:42.99-1:47.98).
-// The plan's fact-checked 27-entry list (render/data/t2/nearmisses.json, in the plan's order) prints on teletype paper: newsprint
+// The plan's fact-checked 30-entry list (render/data/t2/nearmisses.json, in the plan's order) prints on teletype paper: newsprint
 // grey roll, IBM Plex Mono struck through a worn ribbon (per-glyph strike jitter, density and voids, the odd double strike),
-// years big, place and description small. The paper advances one line per entry in a quick line feed (about five a second), so
+// years big, place and description small. The paper advances one line per entry in a quick line feed (about six a second; the spacing follows the list length), so
 // between feeds every line stands still and is crisp in a pause. A mechanical tally beside the paper counts the entries as they
 // pass; after the last one its wheels keep spinning and never settle: the real total is unknown (never 39, never a fixed number).
 // p: {t0 (first line strikes; default the shot start + 0.06), t1 (last line; default t0 + 4.55), spin (when the tally starts to

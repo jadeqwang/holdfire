@@ -26,7 +26,7 @@ const SONG = [
     [['Inference', 'ititle'], [', ', 'dim'], ['Petrov Test', 'ititle'], [', ', 'dim'], ['Tao of Totality', 'ititle'], [' (the Spaces Left Blank trilogy)', 'dim']],
     [['and ', 'dim'], ['Variations and Metamorphosis', 'ititle']]],
 ];
-const SMALL = ['Fischer\u2013Tal · Leipzig 1960 · \u00bd\u2013\u00bd   ·   fonts under the SIL Open Font License', 'near-miss sources: National Security Archive, Union of Concerned Scientists,', 'Chatham House, Atomic Heritage Foundation'];
+const SMALL = ['Fischer\u2013Tal · Leipzig 1960 · \u00bd\u2013\u00bd   ·   fonts under the SIL Open Font License', 'near-miss sources: National Security Archive, Union of Concerned Scientists,', 'Chatham House, Atomic Heritage Fdn., Arms Control Assn., NPR, CNN, Bloomberg'];   // 850 px at 22 px: fits the 864 px safe width unscaled
 // rows of names joined with " · ", wrapped to the safe width
 function nameRows(ty, names, st, maxW) {
   const rows = []; let cur = [];

@@ -190,6 +190,120 @@
    "poster": "clips/P106_poster.jpg"
   },
   {
+   "id": "C103L",
+   "shot": "C103",
+   "t": 56.671,
+   "from": 56.1667,
+   "to": 61.0,
+   "dur": 4.8333,
+   "frames": 116,
+   "lyric": "but if you are",
+   "words": [
+    [
+     "but",
+     56.671,
+     57.02
+    ],
+    [
+     "if",
+     57.025,
+     57.574
+    ],
+    [
+     "you",
+     57.579,
+     58.302
+    ],
+    [
+     "are",
+     58.307,
+     60.488
+    ]
+   ],
+   "singer": "Jade",
+   "voice": "A",
+   "conf": "med-high",
+   "lag": -0.125,
+   "lagFrames": -3,
+   "s0": 56.371,
+   "take": "t2_C103L_sd25_n3_eac2306974.mp4",
+   "half": "L",
+   "aspect": "8/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C103L_poster.jpg"
+  },
+  {
+   "id": "C103R",
+   "shot": "C103",
+   "t": 60.493,
+   "from": 59.9583,
+   "to": 62.6667,
+   "dur": 2.7083,
+   "frames": 65,
+   "lyric": "I'm counting on you",
+   "words": [
+    [
+     "I'm",
+     60.493,
+     60.757
+    ],
+    [
+     "counting",
+     60.762,
+     61.504
+    ],
+    [
+     "on",
+     61.509,
+     61.784
+    ],
+    [
+     "you",
+     61.789,
+     62.134
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "med-high",
+   "lag": -0.083,
+   "lagFrames": -2,
+   "s0": 56.371,
+   "take": "t2_C103R_sd25_n3_9e6dc9fe64.mp4",
+   "half": "R",
+   "aspect": "8/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C103R_poster.jpg"
+  },
+  {
    "id": "C108",
    "shot": "C108",
    "t": 64.589,
@@ -352,6 +466,120 @@
     24
    ],
    "poster": "clips/V201_poster.jpg"
+  },
+  {
+   "id": "C203L",
+   "shot": "C203",
+   "t": 117.937,
+   "from": 117.4167,
+   "to": 122.2083,
+   "dur": 4.7917,
+   "frames": 115,
+   "lyric": "but if you are",
+   "words": [
+    [
+     "but",
+     117.937,
+     118.255
+    ],
+    [
+     "if",
+     118.26,
+     118.825
+    ],
+    [
+     "you",
+     118.83,
+     119.563
+    ],
+    [
+     "are",
+     119.568,
+     121.678
+    ]
+   ],
+   "singer": "Jade",
+   "voice": "A",
+   "conf": "med-high",
+   "lag": 0.25,
+   "lagFrames": 6,
+   "s0": 117.637,
+   "take": "t2_C203L_sd25_n2_a7e2c27f56.mp4",
+   "half": "L",
+   "aspect": "8/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C203L_poster.jpg"
+  },
+  {
+   "id": "C203R",
+   "shot": "C203",
+   "t": 121.683,
+   "from": 121.1667,
+   "to": 123.8333,
+   "dur": 2.6667,
+   "frames": 64,
+   "lyric": "I'm counting on you",
+   "words": [
+    [
+     "I'm",
+     121.683,
+     122.058
+    ],
+    [
+     "counting",
+     122.063,
+     122.631
+    ],
+    [
+     "on",
+     122.636,
+     122.856
+    ],
+    [
+     "you",
+     122.861,
+     123.3
+    ]
+   ],
+   "singer": "teal-tips",
+   "voice": "B",
+   "conf": "med-high",
+   "lag": -0.167,
+   "lagFrames": -4,
+   "s0": 117.637,
+   "take": "t2_C203R_sd25_n1_e8e3c679cc.mp4",
+   "half": "R",
+   "aspect": "8/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C203R_poster.jpg"
   },
   {
    "id": "C208L",
@@ -526,6 +754,58 @@
     24
    ],
    "poster": "clips/C208R_poster.jpg"
+  },
+  {
+   "id": "C209L",
+   "shot": "C209",
+   "t": 128.398,
+   "from": 127.875,
+   "to": 132.375,
+   "dur": 4.5,
+   "frames": 108,
+   "lyric": "If you are",
+   "words": [
+    [
+     "If",
+     128.398,
+     128.967
+    ],
+    [
+     "you",
+     128.972,
+     129.7
+    ],
+    [
+     "are",
+     129.705,
+     131.84
+    ]
+   ],
+   "singer": "Jade",
+   "voice": "A",
+   "conf": "med-high",
+   "lag": 0.5,
+   "lagFrames": 12,
+   "s0": 128.098,
+   "take": "t2_C209L_sd25_n1_5992390d36.mp4",
+   "half": "L",
+   "aspect": "8/9",
+   "k": [
+    -24,
+    -16,
+    -10,
+    -6,
+    -4,
+    -2,
+    0,
+    2,
+    4,
+    6,
+    10,
+    16,
+    24
+   ],
+   "poster": "clips/C209L_poster.jpg"
   },
   {
    "id": "DR04",

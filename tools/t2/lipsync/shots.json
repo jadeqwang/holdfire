@@ -56,11 +56,11 @@
    ],
    "singer": "Jade",
    "voice": "A",
-   "conf": "med-high",
-   "lag": 0.042,
-   "lagFrames": 1,
+   "conf": "medium",
+   "lag": 1.125,
+   "lagFrames": 27,
    "s0": 12.75,
-   "take": "t2_V101_sd25_t2_9163d752d3.mp4",
+   "take": "t2_V101_sd25_n1_564e8b64d7.mp4",
    "half": null,
    "aspect": "16/9",
    "k": [
@@ -78,7 +78,8 @@
     16,
     24
    ],
-   "poster": "clips/V101_poster.jpg"
+   "poster": "clips/V101_poster.jpg",
+   "since": "2026-10-27T09:15:16.000Z"
   },
   {
    "id": "P105",
@@ -970,28 +971,24 @@
    "singer": "teal-tips",
    "voice": "B",
    "conf": "med-low",
-   "lag": 1.25,
-   "lagFrames": 30,
+   "lag": 0.25,
+   "lagFrames": 6,
    "s0": 207.223,
    "take": "t2_DR16_sd25_m6_c41d090cb4.mp4",
    "half": null,
    "aspect": "16/9",
    "k": [
-    -24,
-    -16,
-    -10,
-    -6,
+    -8,
     -4,
-    -2,
     0,
-    2,
     4,
-    6,
-    10,
+    8,
+    12,
     16,
     24
    ],
-   "poster": "clips/DR16_poster.jpg"
+   "poster": "clips/DR16_poster.jpg",
+   "since": "2026-10-27T08:58:39.000Z"
   }
  ]
 }

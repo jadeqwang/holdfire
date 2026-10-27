@@ -114,9 +114,9 @@
    "file": "media/gen/t2_V101_sd25_t2_9163d752d3.mp4",
    "dims": "1280x720",
    "est_usd": 0.9248,
-   "verdict": "pick: eyes open looking out to sea, clear vowels; lag 0 (strip), r .55 face",
+   "verdict": "pick: eyes open looking out to sea, clear vowels; lag 0 (strip), r .55 face; replaced 27 Oct (lip round 3) by n1: lips shut on the s's read as m",
    "lag": 0.0,
-   "pick": true
+   "pick": false
   },
   {
    "tag": "t2_V101_sd25_t3",
@@ -179,6 +179,59 @@
    "lag": 1.125,
    "pick": false,
    "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_V101_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_n1-564e8b64d7",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_n1.txt",
+   "aref": "media/aref/V101_lip3.mp3",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25_n1_564e8b64d7.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.9248,
+   "verdict": "PICK: on model; teeth together with lips parted on the s of 'sea' and 'salt' (t2 shut its lips there: the 'mo mo'), opens on 'of the', 'sea', 'alt in our'; idles 1.1 s; r 0.61, bacc 0.90, drift +1.083..+1.125; 'Out' only slightly open",
+   "lag": 1.125,
+   "pick": [
+    "V101"
+   ],
+   "by": "lip round 3, 27 Oct (Jade: none match, 'out of the mo mo'; 720p first-frame, per-word labial/sibilant cues + no-b/m/p line + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_V101_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_n2-34dd38e6ac",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_n2.txt",
+   "aref": "media/aref/V101_lip3.mp3",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25_n2_34dd38e6ac.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.9248,
+   "verdict": "reject: mouth open through the long s of 'salt', 'in our' opens late; drift +0.54/-0.08/+1.33 (no single lag)",
+   "lag": 1.208,
+   "pick": false,
+   "by": "lip round 3, 27 Oct (Jade: none match, 'out of the mo mo'; 720p first-frame, per-word labial/sibilant cues + no-b/m/p line + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_V101_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_V101_sd25_n3-475ac8cf19",
+   "kf": "media/kf2/V101_nbp_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_V101_sd25_n3.txt",
+   "aref": "media/aref/V101_lip3.mp3",
+   "s0": 12.75,
+   "dur": 4,
+   "file": "media/gen/t2_V101_sd25_n3_475ac8cf19.mp4",
+   "dims": "1280x720",
+   "est_usd": 0.9248,
+   "verdict": "reject: nearly shut through 'sea' and 'with salt', shuts before 'lungs'; sub-windows disagree (+0.50/+1.46/+1.29)",
+   "lag": -0.25,
+   "pick": false,
+   "by": "lip round 3, 27 Oct (Jade: none match, 'out of the mo mo'; 720p first-frame, per-word labial/sibilant cues + no-b/m/p line + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "CO11": [

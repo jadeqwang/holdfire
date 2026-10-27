@@ -226,7 +226,19 @@ button, textarea { font: inherit; color: inherit; }
 
   let FPS = 24, SHOTS = [];
   const cards = new Map();          // id -> card state
-  let picks = {};                   // id -> saved doc
+  let picks = {};                   // id -> saved doc that applies to the current clips
+  let rawPicks = {};                // id -> saved doc as stored
+  // a shot rebuilt on a new take or lag carries `since` (ISO time): choices saved before it were made on the old clips, so they are
+  // ignored here (the doc stays in the db until a new choice overwrites it)
+  function freshPicks() {
+    const next = {};
+    for (const id of Object.keys(rawPicks)) {
+      const v = rawPicks[id], s = SHOTS.find((x) => x.id === id);
+      if (s && s.since && !(v && v.at && String(v.at) >= String(s.since))) continue;
+      next[id] = v;
+    }
+    picks = next;
+  }
   let col = null, me = null, dbFailed = false;
   const NEED_CLAUDE = 'Choices and notes need this page opened on claude.ai while signed in. The clips still play here.';
 
@@ -241,7 +253,7 @@ button, textarea { font: inherit; color: inherit; }
     col.onSnapshot((snap) => {
       const next = {};
       snap.docs.forEach((d) => { if (d.exists) next[d.id] = d.data(); });
-      picks = next;
+      rawPicks = next; freshPicks();
       dbState.textContent = 'Saved with the page; the director reads them from here.';
       dbState.className = 'dbstate';
       refreshAll();
@@ -438,6 +450,7 @@ button, textarea { font: inherit; color: inherit; }
     }
     FPS = Number(data.fps) || 24;
     SHOTS = (Array.isArray(data) ? data : data.shots || []).slice().sort((a, b) => (a.t - b.t) || String(a.id).localeCompare(String(b.id)));
+    freshPicks();
     if (data.version) $('#ver').textContent = data.version + ' · ' + SHOTS.length + ' sung shots';
     const ul = $('#cards');
     for (const s of SHOTS) {

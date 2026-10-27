@@ -31,7 +31,50 @@ the strip can't decide between two lags, take the larger one, so the mouth is a 
 "if you" (1:58.8), C108 flaps on a ≈ 0.25 s cycle that doesn't follow the words (1:05.1), and DR16 opens slowly into "you" and
 holds open through "are" (3:29.1).
 
-## Shots
+## Round 2 (27 Oct, after the outside review's 4.6/10)
+
+Reel: `work/out/sung_reel_v4.mp4` (every s0 pick's window ±0.5 s from the renderer at 960×540, song muxed, labelled shot · time ·
+lyric · take · lag · confidence). Work files: `work/t2/lips2/` (strips `<SHOT>_strip.jpg`, mouth lines `<SHOT>_nN.mouthline.jpg`,
+renderer checks `check/<PICK>.lipcheck.jpg`).
+
+**Measurement bug found: several teal-tips mouth boxes sat on the chin.** The mirror pass seeded its takes' boxes in
+`mouths.json` ~20 px below the mouth (C103R m6, C203R m8, C209R m8 and its graded copy, P105 m6; DR16 m6 and C108 m8 ~10 px off),
+so those picks' lags and ratings were measured on the chin. Re-placed by hand on frame 0 (notes in `mouths.json`). Re-measured,
+P105's own take wants **+0.333** (r 0.56, every sub-window agrees; it played 8 frames late at 0) and C108's **+0.125**.
+When ECC loses a moving face (C209R n1, C108), `work/t2/lips2/trackkeys.py` writes keys by face template matching.
+
+**Reframes.** The C103 split keyframe pair (used by C103, C203 and C209) had a face of 17.7 % of frame height and a 22 px mouth:
+both halves are now pushed in 1.35× (`media/kf2/C103L_v3_crop.jpg`, `C103R_mir_v3_crop.jpg`: face ≈ 24 %, same relative position,
+so the flipped right half still mirrors the left; teal-tips keeps the canon jacket in room-A geometry, cool light, flipped in the
+renderer). DR04's singer was a pure profile: new keyframe `media/kf2/DR04_lip_v1.jpg` (both girls ¾ front across the glass,
+teal-tips in the mirrored jacket, two-shot not flipped; see its .txt). All six split halves moved to round-2 takes together, so
+each split still mirrors.
+
+**Takes.** 33 Seedance 2.5 takes (3 per shot: C103L/R, C203L/R, C209L/R, DR04, DR16, C108, P105, C208R), 720p first frame,
+arefs re-cut with `aref.py --out media/aref/<SHOT>_lip2.mp3` (DR16 mutes Jade's "Six hundred" in the handle, C108 the
+both-voice "If you"), prompts `media/kf2/prompts/t2_<SHOT>_sd25_nN.txt` (§1.2 + per-word labial cues + clip-time span of the
+held note + "she never closes her mouth during a held note" + eye/face/head guards). $43.27 incl. 2 keyframe images ($0.27). Verdicts in
+`takes_g2.json` / `takes_g4.json`. Scored: lipmeasure + mouthline on the unflipped take, then `work/t2/lips2/score2.py` (word-event
+strip as played on twos: b/m/p shut, vowel nuclei open, every drawing of a held note open, plus balanced open/shut accuracy over
+the window) against the current pick; picked only where the strip beat it; `lipcheck.mjs`: 16 picks, 0 mismatches.
+
+| shot | was | now | lag | conf. was → now | why |
+|---|---|---|---|---|---|
+| C103L | t4 −0.375 | **n3** | −0.125 (−3) | medium → med-high | b shut, rounded you, held are open (to the stem's own breath at ~60.0), m of I'm shut |
+| C103R | m6 0 | **n3** | −0.083 (−2) | low-med → med-high | same pattern; mirrors C103L on the crop |
+| C203L | t3 −0.042 | **n2** | +0.250 (+6) | medium → med-high | held are open throughout, m shut (t3 closed mid-are) |
+| C203R | m8 +1.0 | **n1** | −0.167 (−4) | low → med-high | b, f, you, are, I'm/m, counting/on/you all on the strip |
+| C209L | t2 +0.833 | **n1** | +0.500 (+12) | low → med-high | If opens and shuts before you; are opens on its onset and holds to the cut |
+| C209R | m8 +0.958 | **n1** | +1.333 (+32) | low → medium | you and the held are right (m8 opened are 0.45 s late); quiet If pickup barely opens; last 2 frames held |
+| DR04 | m6 −0.125 | **n3** (new kf) | +0.542 (+13) | low-med → med-high | ¾ front; you/were open, the long were held open; Jade silent |
+| DR16 | m6 +1.25 | m6 | +1.25 | med-low → med-low | all 3 rejected: two idle 2.5–3 s, one shuts 1.9 s inside are |
+| C108 | m8 +0.042 | m8 | **+0.125** (+3) | low → medium | lag on the corrected box; n2 never sings, n1/n3 not better |
+| P105 | m6 0 | m6 | **+0.333** (+8) | medium → med-high | lag on the corrected box; new takes not better |
+| C208R | m6 −0.25 | m6 | −0.25 | medium | strips ambiguous for all; kept |
+
+Not retaken (budget): V101, C208L, DR11 (med-high), P106 (medium: its lag is set by the eyes opening on the held "awake").
+
+## Shots (pass of 27 Oct, before round 2)
 
 Lag = clip t − (song t − s0), in s (frames at 24 fps). Method: *lag* = same take, new or confirmed lag; *regen* = new Seedance take
 (labial-cue prompt, same keyframe and aref); *keep* = unchanged. Confidence is from the mouth line (closures on b/m/p and in rests,
@@ -92,7 +135,7 @@ chest, the 1420 patch on her left sleeve's band; the backs aren't visible), so n
    unflipped source; the lag doesn't change. After the pick, `cd render && node tools/lipcheck.mjs --picks <ID>` confirms the
    renderer's frames. When two lags tie, take the larger.
 
-## What's left
+## What's left (before round 2; see Round 2 above for the current state)
 
 - C209L (+0.833) and C103L / C203L (held "are") are only medium-to-low: a third regen with "never closes during a held note" is
   ≈ $1.2–1.6 a take.
@@ -101,3 +144,6 @@ chest, the 1420 patch on her left sleeve's band; the backs aren't visible), so n
 - V101: if Jade still hears 0:13.6 as off, try alt t6 at +1.125 (it doesn't sing "Out") or a new take; the current pick is in sync
   by every check I have.
 - `render/src/timeline.js` needs no change.
+
+After round 2: DR16 (legato "wherever you are") is the weakest left (med-low); a regen would need a tighter first-frame (mouth
+already open) or remouth now that faces are large enough. C209R's take idles 1.3 s, so its window ends 2 frames past the take.

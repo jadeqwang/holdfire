@@ -113,10 +113,11 @@
  "DR04": {
   "dir": "work/plates/DR04",
   "kind": "video",
-  "src": "media/gen/t2_DR04_sd25_m6_ee9a78bbe4.mp4",
+  "src": "media/gen/t2_DR04_sd25_n3_b61e7967fa.mp4",
   "s0": 188.376,
-  "lag": -0.125,
-  "note": "mirror rule: two-shot through the glass, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR04_mir_v3.jpg (irises brown with teal / pale-blue catchlights, a 1420 patch on each near sleeve band: teal-tips right = mirrored, Jade left = canon); hands rise to the glass; lag -0.25 by strip (m5 ignored the first frame)"
+  "lag": 0.542,
+  "lipsync": "lip round 2 (27 Oct): n3 at +0.542 (+13 f), scored as played (work/t2/lips2/DR04_strip.jpg, DR04_n3.mouthline.jpg): reframed keyframe (3/4 front, face ~21%): you / were open, the second you rounded, the long were held open to its end; Jade silent; (m6 was a profile that barely opened). Was t2_DR04_sd25_m6_ee9a78bbe4.mp4 lag -0.125.",
+  "note": "keyframe media/kf2/DR04_lip_v1.jpg (reframed: both girls 3/4 front across the glass, teal-tips in the mirrored jacket); two-shot, not flipped"
  },
  "DR05": {
   "dir": "work/plates/DR05",

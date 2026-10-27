@@ -216,9 +216,9 @@
    "dur": 5,
    "file": "media/gen/t2_DR04_sd25_t2_33ea75dea7.mp4",
    "dims": "1280x720",
-   "verdict": "pick: on model both sides, hands rise to the glass, softer mouth; ROI r 0.33",
+   "verdict": "pick: on model both sides, hands rise to the glass, softer mouth; ROI r 0.33 | superseded 27 Oct by t2_DR04_sd25_n3 (lip round 2)",
    "lag": 0.583,
-   "pick": true
+   "pick": false
   },
   {
    "tag": "t2_DR04_sd25_m5",
@@ -244,11 +244,59 @@
    "dur": 5,
    "file": "media/gen/t2_DR04_sd25_m6_ee9a78bbe4.mp4",
    "dims": "1280x720",
-   "verdict": "PICK (mirror rule, two-shot not flipped): hands rise to the glass, patches on both near sleeves, brown irises; mouthline drifts (first were wants 0, second -0.4): -0.125 (tie -> larger)",
+   "verdict": "PICK (mirror rule, two-shot not flipped): hands rise to the glass, patches on both near sleeves, brown irises; mouthline drifts (first were wants 0, second -0.4): -0.125 (tie -> larger) | superseded 27 Oct by t2_DR04_sd25_n3 (lip round 2)",
    "lag": "-0.125",
+   "pick": false
+  },
+  {
+   "tag": "t2_DR04_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR04_sd25_n1-17c108eb98",
+   "kf": "media/kf2/DR04_lip_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR04_sd25_n1.txt",
+   "aref": "media/aref/DR04_lip2.mp3",
+   "s0": 188.376,
+   "dur": 5,
+   "file": "media/gen/t2_DR04_sd25_n1_17c108eb98.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: closes inside the long were",
+   "lag": 0.542,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_DR04_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR04_sd25_n2-bc245d33de",
+   "kf": "media/kf2/DR04_lip_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR04_sd25_n2.txt",
+   "aref": "media/aref/DR04_lip2.mp3",
+   "s0": 188.376,
+   "dur": 5,
+   "file": "media/gen/t2_DR04_sd25_n2_bc245d33de.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: closes once inside the long were",
+   "lag": 0.417,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_DR04_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR04_sd25_n3-b61e7967fa",
+   "kf": "media/kf2/DR04_lip_v1.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR04_sd25_n3.txt",
+   "aref": "media/aref/DR04_lip2.mp3",
+   "s0": 188.376,
+   "dur": 5,
+   "file": "media/gen/t2_DR04_sd25_n3_b61e7967fa.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (lip round 2): see the pick's lipsync note",
+   "lag": 0.542,
    "pick": [
     "DR04"
-   ]
+   ],
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "BU04": [
@@ -335,6 +383,54 @@
    "pick": [
     "DR16"
    ]
+  },
+  {
+   "tag": "t2_DR16_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_n1-23fde86312",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR16_sd25_n1.txt",
+   "aref": "media/aref/DR16_lip2.mp3",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_n1_23fde86312.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: idles ~2.5 s, then only the held note (no wherever / you)",
+   "lag": 1.5,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_DR16_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_n2-c5f4220044",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR16_sd25_n2.txt",
+   "aref": "media/aref/DR16_lip2.mp3",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_n2_c5f4220044.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: idles ~3 s before opening (no wherever / you)",
+   "lag": null,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_DR16_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_DR16_sd25_n3-e28db0dedd",
+   "kf": "media/kf2/DR16_mir_v3.jpg",
+   "prompt_file": "media/kf2/prompts/t2_DR16_sd25_n3.txt",
+   "aref": "media/aref/DR16_lip2.mp3",
+   "s0": 207.223,
+   "dur": 7,
+   "file": "media/gen/t2_DR16_sd25_n3_e28db0dedd.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: sings wherever / you, then shuts for ~1.9 s inside the held are",
+   "lag": null,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "BU12R": [

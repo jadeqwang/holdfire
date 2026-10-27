@@ -55,12 +55,60 @@
    "dur": 7,
    "file": "media/gen/t2_C103L_sd25_t4_62f94118e2.mp4",
    "dims": "1280x720",
-   "verdict": "PICK candidate: sings \"you\" (the 0:57.4 note) on time at -0.375..-0.417 (r 0.40, both metrics); closes mid \"are\" -> remouth",
+   "verdict": "PICK candidate: sings \"you\" (the 0:57.4 note) on time at -0.375..-0.417 (r 0.40, both metrics); closes mid \"are\" -> remouth | superseded 27 Oct by t2_C103L_sd25_n3 (lip round 2)",
    "lag": -0.375,
+   "pick": false,
+   "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_C103L_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103L_sd25_n1-b9b8974e3b",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103L_sd25_n1.txt",
+   "aref": "media/aref/C103_lip2.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103L_sd25_n1_b9b8974e3b.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: you missed (opens only after the stem's peak), on/you shut at the end",
+   "lag": 0.583,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C103L_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103L_sd25_n2-4a3aedafa6",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103L_sd25_n2.txt",
+   "aref": "media/aref/C103_lip2.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103L_sd25_n2_4a3aedafa6.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: held are fully open but I'm / on / you shut; best lag at the -0.3 freeze limit",
+   "lag": -0.292,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C103L_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103L_sd25_n3-eac2306974",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103L_sd25_n3.txt",
+   "aref": "media/aref/C103_lip2.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103L_sd25_n3_eac2306974.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (lip round 2): see the pick's lipsync note",
+   "lag": -0.125,
    "pick": [
     "C103L"
    ],
-   "by": "lipsync pass 27 Oct"
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C103R": [
@@ -88,11 +136,9 @@
    "dur": 7.042,
    "file": "media/gen/t2_C103R_sd25_t2_1584d49648.mp4",
    "dims": "1280x720",
-   "verdict": "pick: stable 3/4, sings through; lag as C103L (Seedance starts early)",
+   "verdict": "pick: stable 3/4, sings through; lag as C103L (Seedance starts early) | superseded 27 Oct by t2_C103R_sd25_n3 (lip round 2)",
    "lag": -0.25,
-   "pick": [
-    "C103R"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_C103R_sd25_m5",
@@ -118,11 +164,59 @@
    "dur": 7,
    "file": "media/gen/t2_C103R_sd25_m6_03f90610a1.mp4",
    "dims": "1280x720",
-   "verdict": "PICK (mirror rule): stable, sings through; word strip at lag 0 (b of but shut, are / I'm / on open). ECC mouth track drifted: re-keyed by template match",
+   "verdict": "PICK (mirror rule): stable, sings through; word strip at lag 0 (b of but shut, are / I'm / on open). ECC mouth track drifted: re-keyed by template match | superseded 27 Oct by t2_C103R_sd25_n3 (lip round 2)",
    "lag": "0.0",
+   "pick": false
+  },
+  {
+   "tag": "t2_C103R_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103R_sd25_n1-9c8c8c5f2f",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103R_sd25_n1.txt",
+   "aref": "media/aref/C103_lip2.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103R_sd25_n1_9c8c8c5f2f.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: close second to n3 (counting/on less articulated)",
+   "lag": -0.083,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C103R_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103R_sd25_n2-050fb74b84",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103R_sd25_n2.txt",
+   "aref": "media/aref/C103_lip2.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103R_sd25_n2_050fb74b84.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: b and m closures fine, the held are partly closes, metrics disagree (-0.375 / +1.083)",
+   "lag": 0.5,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C103R_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C103R_sd25_n3-9e6dc9fe64",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C103R_sd25_n3.txt",
+   "aref": "media/aref/C103_lip2.mp3",
+   "s0": 56.371,
+   "dur": 7,
+   "file": "media/gen/t2_C103R_sd25_n3_9e6dc9fe64.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (lip round 2): see the pick's lipsync note",
+   "lag": -0.083,
    "pick": [
     "C103R"
-   ]
+   ],
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C108": [
@@ -151,7 +245,7 @@
    "file": "media/gen/t2_C108_sd25_t2_3721f7f98e.mp4",
    "dims": "1280x720",
    "verdict": "pick: eyes closed throughout, hand on earcup; +0.125 opens 'you'; cascade fails on teal (fixed-box strip)",
-   "lag": 0.125,
+   "lag": "0.125",
    "pick": [
     "C108"
    ]
@@ -209,10 +303,58 @@
    "file": "media/gen/t2_C108_sd25_m8_6811637e11.mp4",
    "dims": "1280x720",
    "verdict": "PICK (mirror rule): white/noise/breathe/somewhere open on the voiced peaks; eyes closed, hand on the earcup; dot on the far side, no patch",
-   "lag": "0.042",
+   "lag": "0.125",
    "pick": [
     "C108"
    ]
+  },
+  {
+   "tag": "t2_C108_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_n1-4640dc2bbb",
+   "kf": "media/kf2/C108_mir_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C108_sd25_n1.txt",
+   "aref": "media/aref/C108_lip2.mp3",
+   "s0": 64.289,
+   "dur": 4,
+   "file": "media/gen/t2_C108_sd25_n1_4640dc2bbb.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: not better than m8 on the strip",
+   "lag": 0.417,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C108_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_n2-b2505c0b6a",
+   "kf": "media/kf2/C108_mir_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C108_sd25_n2.txt",
+   "aref": "media/aref/C108_lip2.mp3",
+   "s0": 64.289,
+   "dur": 4,
+   "file": "media/gen/t2_C108_sd25_n2_b2505c0b6a.mp4",
+   "dims": "1280x720",
+   "verdict": "reject: never opens her mouth inside the window (idles to ~3.4 s)",
+   "lag": null,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C108_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C108_sd25_n3-7f33a5e25e",
+   "kf": "media/kf2/C108_mir_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C108_sd25_n3.txt",
+   "aref": "media/aref/C108_lip2.mp3",
+   "s0": 64.289,
+   "dur": 4,
+   "file": "media/gen/t2_C108_sd25_n3_7f33a5e25e.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: not better than m8 on the strip; best lag noisy",
+   "lag": 0.833,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C208L": [
@@ -339,6 +481,54 @@
    "pick": [
     "C208R"
    ]
+  },
+  {
+   "tag": "t2_C208R_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208R_sd25_n1-f14e1c24ca",
+   "kf": "media/kf2/C208R_mir_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C208R_sd25_n1.txt",
+   "aref": "media/aref/C208_lip2.mp3",
+   "s0": 125.524,
+   "dur": 4,
+   "file": "media/gen/t2_C208R_sd25_n1_f14e1c24ca.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: metrics disagree (-0.667 / +0.042); strip no better than m6",
+   "lag": null,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C208R_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208R_sd25_n2-810845c699",
+   "kf": "media/kf2/C208R_mir_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C208R_sd25_n2.txt",
+   "aref": "media/aref/C208_lip2.mp3",
+   "s0": 125.524,
+   "dur": 4,
+   "file": "media/gen/t2_C208R_sd25_n2_810845c699.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: strip no better than m6",
+   "lag": 0.0,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C208R_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C208R_sd25_n3-9eaa0d5408",
+   "kf": "media/kf2/C208R_mir_nbp_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C208R_sd25_n3.txt",
+   "aref": "media/aref/C208_lip2.mp3",
+   "s0": 125.524,
+   "dur": 4,
+   "file": "media/gen/t2_C208R_sd25_n3_9eaa0d5408.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: strip no better than m6",
+   "lag": 0.875,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "P105": [
@@ -353,7 +543,7 @@
    "file": "media/gen/t2_P105_sd25_t1_5b90b05d9b.mp4",
    "dims": "1280x720",
    "verdict": "pick: eyes closed, the more active mouth; wide open on 'we're'",
-   "lag": 0.0,
+   "lag": "0.333",
    "pick": [
     "P105"
    ]
@@ -397,10 +587,58 @@
    "file": "media/gen/t2_P105_sd25_m6_5c9b5e216f.mp4",
    "dims": "1280x720",
    "verdict": "PICK (mirror rule): canon jacket holds, eyes closed, know/we're peaks align at lag 0",
-   "lag": "0.0",
+   "lag": "0.333",
    "pick": [
     "P105"
    ]
+  },
+  {
+   "tag": "t2_P105_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P105_sd25_n1-d60333a9cf",
+   "kf": "media/kf2/P105_mir_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_P105_sd25_n1.txt",
+   "aref": "media/aref/P105_lip2.mp3",
+   "s0": 45.715,
+   "dur": 4,
+   "file": "media/gen/t2_P105_sd25_n1_d60333a9cf.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: no lag holds from Hear to we're; m6 at +0.333 kept",
+   "lag": null,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_P105_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P105_sd25_n2-0494d7cb09",
+   "kf": "media/kf2/P105_mir_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_P105_sd25_n2.txt",
+   "aref": "media/aref/P105_lip2.mp3",
+   "s0": 45.715,
+   "dur": 4,
+   "file": "media/gen/t2_P105_sd25_n2_0494d7cb09.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: mouth open on every word, little articulation; m6 at +0.333 kept",
+   "lag": 0.625,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_P105_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_P105_sd25_n3-20a3ba12a7",
+   "kf": "media/kf2/P105_mir_v2.jpg",
+   "prompt_file": "media/kf2/prompts/t2_P105_sd25_n3.txt",
+   "aref": "media/aref/P105_lip2.mp3",
+   "s0": 45.715,
+   "dur": 4,
+   "file": "media/gen/t2_P105_sd25_n3_20a3ba12a7.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: idles ~1.2 s; m6 kept",
+   "lag": null,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C203L": [
@@ -443,11 +681,9 @@
    "dur": 7,
    "file": "media/gen/t2_C203L_sd25_t3_6c8ad4c084.mp4",
    "dims": "1280x720",
-   "verdict": "PICK candidate: \"you\" on time at -0.042 (the 1:58.8 note); closes mid \"are\", \"I'm counting\" held open -> remouth",
+   "verdict": "PICK candidate: \"you\" on time at -0.042 (the 1:58.8 note); closes mid \"are\", \"I'm counting\" held open -> remouth | superseded 27 Oct by t2_C203L_sd25_n2 (lip round 2)",
    "lag": -0.042,
-   "pick": [
-    "C203L"
-   ],
+   "pick": false,
    "by": "lipsync pass 27 Oct"
   },
   {
@@ -465,6 +701,56 @@
    "lag": null,
    "pick": false,
    "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_C203L_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203L_sd25_n1-bb139840e3",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203L_sd25_n1.txt",
+   "aref": "media/aref/C203_lip2.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203L_sd25_n1_bb139840e3.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: as good as n2 on the strip (b, are, m) but r -0.04; n2 kept for the envelope fit",
+   "lag": -0.042,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C203L_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203L_sd25_n2-a7e2c27f56",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203L_sd25_n2.txt",
+   "aref": "media/aref/C203_lip2.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203L_sd25_n2_a7e2c27f56.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (lip round 2): see the pick's lipsync note",
+   "lag": 0.25,
+   "pick": [
+    "C203L"
+   ],
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C203L_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203L_sd25_n3-d1c6eed33f",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203L_sd25_n3.txt",
+   "aref": "media/aref/C203_lip2.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203L_sd25_n3_d1c6eed33f.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: idles ~1 s, then closes on I'm / on / you",
+   "lag": 1.042,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C203R": [
@@ -478,11 +764,9 @@
    "dur": 7.042,
    "file": "media/gen/t2_C203R_sd25_t1_7828c97ddb.mp4",
    "dims": "1280x720",
-   "verdict": "pick: metrics agree +0.917 (idles ~0.9 s then sings)",
+   "verdict": "pick: metrics agree +0.917 (idles ~0.9 s then sings) | superseded 27 Oct by t2_C203R_sd25_n1 (lip round 2)",
    "lag": 0.917,
-   "pick": [
-    "C203R"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_C203R_sd25_t2",
@@ -550,11 +834,59 @@
    "dur": 7,
    "file": "media/gen/t2_C203R_sd25_m8_02a2f13a41.mp4",
    "dims": "1280x720",
-   "verdict": "PICK (mirror rule): you open, held are open (closes with the vocal's own dip), I'm/counting/on on the peaks; idles ~1 s first; lipcheck: 0.958/1.0 tie -> 1.0",
+   "verdict": "PICK (mirror rule): you open, held are open (closes with the vocal's own dip), I'm/counting/on on the peaks; idles ~1 s first; lipcheck: 0.958/1.0 tie -> 1.0 | superseded 27 Oct by t2_C203R_sd25_n1 (lip round 2)",
    "lag": "1.0",
+   "pick": false
+  },
+  {
+   "tag": "t2_C203R_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_n1-e8e3c679cc",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203R_sd25_n1.txt",
+   "aref": "media/aref/C203_lip2.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203R_sd25_n1_e8e3c679cc.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (lip round 2): see the pick's lipsync note",
+   "lag": -0.167,
    "pick": [
     "C203R"
-   ]
+   ],
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C203R_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_n2-d45ad9d607",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203R_sd25_n2.txt",
+   "aref": "media/aref/C203_lip2.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203R_sd25_n2_d45ad9d607.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: are open throughout, but the vowel of but and on shut",
+   "lag": 0.458,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C203R_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C203R_sd25_n3-e655bfc96c",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C203R_sd25_n3.txt",
+   "aref": "media/aref/C203_lip2.mp3",
+   "s0": 117.637,
+   "dur": 7,
+   "file": "media/gen/t2_C203R_sd25_n3_e655bfc96c.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: closes inside the held are and on I'm",
+   "lag": 0.792,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C209L": [
@@ -582,11 +914,9 @@
    "dur": 5.042,
    "file": "media/gen/t2_C209L_sd25_t2_22438bdadd.mp4",
    "dims": "1280x720",
-   "verdict": "pick: metrics agree +0.833, open on if/you/are",
+   "verdict": "pick: metrics agree +0.833, open on if/you/are | superseded 27 Oct by t2_C209L_sd25_n1 (lip round 2)",
    "lag": 0.833,
-   "pick": [
-    "C209L"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_C209L_sd25_t3",
@@ -619,6 +949,56 @@
    "lag": null,
    "pick": false,
    "by": "lipsync pass 27 Oct"
+  },
+  {
+   "tag": "t2_C209L_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209L_sd25_n1-5992390d36",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209L_sd25_n1.txt",
+   "aref": "media/aref/C209_lip2.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209L_sd25_n1_5992390d36.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (lip round 2): see the pick's lipsync note",
+   "lag": 0.5,
+   "pick": [
+    "C209L"
+   ],
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C209L_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209L_sd25_n2-63cb7c7516",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209L_sd25_n2.txt",
+   "aref": "media/aref/C209_lip2.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209L_sd25_n2_63cb7c7516.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: no single lag: If opens 0.35 s early when are is on time",
+   "lag": 0.625,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C209L_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209L_sd25_n3-6e29c2c646",
+   "kf": "media/kf2/C103L_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209L_sd25_n3.txt",
+   "aref": "media/aref/C209_lip2.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209L_sd25_n3_6e29c2c646.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: closed through you",
+   "lag": 0.1,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C209R": [
@@ -632,11 +1012,9 @@
    "dur": 5.042,
    "file": "media/gen/t2_C209R_sd25_t1_3b86d4fe74.mp4",
    "dims": "1280x720",
-   "verdict": "pick: metrics agree -0.167",
+   "verdict": "pick: metrics agree -0.167 | superseded 27 Oct by t2_C209R_sd25_n1 (lip round 2)",
    "lag": -0.167,
-   "pick": [
-    "C209R"
-   ]
+   "pick": false
   },
   {
    "tag": "t2_C209R_sd25_t2",
@@ -704,11 +1082,59 @@
    "dur": 5,
    "file": "media/gen/t2_C209R_sd25_m8_29b8537d38.mp4",
    "dims": "1280x720",
-   "verdict": "PICK (mirror rule): If / you on time; closes mid held 'are' (every take does); plate pre-graded (work/t2/mirror/C209R_m8_graded.mp4)",
+   "verdict": "PICK (mirror rule): If / you on time; closes mid held 'are' (every take does); plate pre-graded (work/t2/mirror/C209R_m8_graded.mp4) | superseded 27 Oct by t2_C209R_sd25_n1 (lip round 2)",
    "lag": "0.958",
+   "pick": false
+  },
+  {
+   "tag": "t2_C209R_sd25_n1",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_n1-ec78b90930",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209R_sd25_n1.txt",
+   "aref": "media/aref/C209_lip2.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209R_sd25_n1_ec78b90930.mp4",
+   "dims": "1280x720",
+   "verdict": "PICK (lip round 2): see the pick's lipsync note",
+   "lag": 1.333,
    "pick": [
     "C209R"
-   ]
+   ],
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C209R_sd25_n2",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_n2-ede49bab77",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209R_sd25_n2.txt",
+   "aref": "media/aref/C209_lip2.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209R_sd25_n2_ede49bab77.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: closed through you, are opens 0.5 s late",
+   "lag": 0.8,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
+  },
+  {
+   "tag": "t2_C209R_sd25_n3",
+   "model": "bytedance/seedance-2.5",
+   "job": "holdfire/t2_C209R_sd25_n3-203d0172d4",
+   "kf": "media/kf2/C103R_mir_v3_crop.jpg",
+   "prompt_file": "media/kf2/prompts/t2_C209R_sd25_n3.txt",
+   "aref": "media/aref/C209_lip2.mp3",
+   "s0": 128.098,
+   "dur": 5,
+   "file": "media/gen/t2_C209R_sd25_n3_203d0172d4.mp4",
+   "dims": "1280x720",
+   "verdict": "alt: closed through you; are tapers shut before its end",
+   "lag": 0.1,
+   "pick": false,
+   "by": "lip round 2, 27 Oct (720p first-frame, labial-cue prompt + never closes during a held note; scored with lipmeasure + mouthline + work/t2/lips2/score2.py strips)"
   }
  ],
  "C101": [

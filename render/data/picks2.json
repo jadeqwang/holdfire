@@ -170,29 +170,31 @@
  "C103L": {
   "dir": "work/plates/C103L",
   "kind": "video",
-  "src": "media/gen/t2_C103L_sd25_t4_62f94118e2.mp4",
+  "src": "media/gen/t2_C103L_sd25_n3_eac2306974.mp4",
   "s0": 56.371,
-  "lag": -0.375,
-  "lipsync": "lipsync regen 27 Oct (t4, labial-cue prompt, same keyframe + aref): sings \"you\" on time (the 0:57.4 note; t1 never sang it); -0.375 (-9 f) as played, r 0.40 both metrics (work/t2/lips/C103L_t4.mouthline.jpg). Closes part-way through the held \"are\" (58.6-59.4); remouth could not fix it (cool light defeats its skin test). Holds frame 0 for the first 2 film frames"
+  "lag": -0.125,
+  "lipsync": "lip round 2 (27 Oct): n3 at -0.125 (-3 f), scored as played (work/t2/lips2/C103L_strip.jpg, C103L_n3.mouthline.jpg): b closed, open on but, f on if, rounded you, held are open to the stem's own breath at ~60.0, I'm open + m closed, counting/on/you articulated (t4 closed mid-are and never closed the m). Was t2_C103L_sd25_t4_62f94118e2.mp4 lag -0.375.",
+  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
  "C103R": {
   "dir": "work/plates/C103R",
   "kind": "video",
-  "src": "media/gen/t2_C103R_sd25_m6_03f90610a1.mp4",
+  "src": "media/gen/t2_C103R_sd25_n3_9e6dc9fe64.mp4",
   "s0": 56.371,
-  "lag": 0.0,
-  "lipsync": "lipsync pass 27 Oct: -0.083 (was -0.25): \"you\" opened 0.17 s late at -0.25 (work/t2/lips/C103R.mouthline.jpg); late lines drift",
+  "lag": -0.083,
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m6 on media/kf2/C103R_mir_nbp_v2.jpg = Jade's C103L_v2 frame with teal-tips swapped in and room A relit cool -> flipped, the split's halves are mirror images; lag 0 by the word strip (b of but shut, are / I'm / on open)"
+  "lipsync": "lip round 2 (27 Oct): n3 at -0.083 (-2 f), scored as played (work/t2/lips2/C103R_strip.jpg, C103R_n3.mouthline.jpg): b closed, f on if, rounded you, held are open, I'm open + m closed, counting/on/you articulated; mirrors C103L n3 on the same 1.35x crop. Was t2_C103R_sd25_m6_03f90610a1.mp4 lag 0.0.",
+  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
  "C108": {
   "dir": "work/plates/C108",
   "kind": "video",
   "src": "media/gen/t2_C108_sd25_m8_6811637e11.mp4",
   "s0": 64.289,
-  "lag": 0.042,
+  "lag": 0.125,
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m8 on media/kf2/C108_mir_nbp_v2.jpg (canon, right side to camera: dot on the far side, no patch visible; room A cool), flipped; lag 0.042 (best = rms) by mouthline: white / noise / breathe / somewhere open on the voiced peaks"
+  "note": "mirror rule: Seedance 2.5 m8 on media/kf2/C108_mir_nbp_v2.jpg (canon, right side to camera: dot on the far side, no patch visible; room A cool), flipped; lag 0.042 (best = rms) by mouthline: white / noise / breathe / somewhere open on the voiced peaks",
+  "lipsync": "lip round 2: +0.125 (was +0.042) on the corrected mouth box: somewhere opens on its vowel, b of breathe and m of somewhere shut; ties -> larger"
  },
  "C109": {
   "dir": "work/plates/C109",
@@ -220,19 +222,21 @@
  "C203L": {
   "dir": "work/plates/C203L",
   "kind": "video",
-  "src": "media/gen/t2_C203L_sd25_t3_6c8ad4c084.mp4",
+  "src": "media/gen/t2_C203L_sd25_n2_a7e2c27f56.mp4",
   "s0": 117.637,
-  "lag": -0.042,
-  "lipsync": "lipsync regen 27 Oct (t3, labial-cue prompt, keyframe C103L_v2, aref C203): \"you\" lands on the frame (the 1:58.8 note); -0.042 (-1 f), r 0.32 (work/t2/lips/C203L_t3.mouthline.jpg); closes briefly mid \"are\" and holds open through \"I'm counting\""
+  "lag": 0.25,
+  "lipsync": "lip round 2 (27 Oct): n2 at +0.250 (+6 f), scored as played (work/t2/lips2/C203L_strip.jpg, C203L_n2.mouthline.jpg): b closed, open on but, rounded you, held are open throughout, m of I'm closed, counting open; r 0.33 (rms 0.49) at +0.25 (t3 closed mid-are, m open). Was t2_C203L_sd25_t3_6c8ad4c084.mp4 lag -0.042.",
+  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
  "C203R": {
   "dir": "work/plates/C203R",
   "kind": "video",
-  "src": "media/gen/t2_C203R_sd25_m8_02a2f13a41.mp4",
+  "src": "media/gen/t2_C203R_sd25_n1_e8e3c679cc.mp4",
   "s0": 117.637,
-  "lag": 1.0,
+  "lag": -0.167,
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m8 (round 2, held-note timing cue) on the C103R mirror keyframe (= Jade C103L_v2 composition), flipped; lag 0.958 by mouthline: you open, held are open, I am / counting / on on the voiced peaks"
+  "lipsync": "lip round 2 (27 Oct): n1 at -0.167 (-4 f), scored as played (work/t2/lips2/C203R_strip.jpg, C203R_n1.mouthline.jpg): b closed, f on if, rounded you, held are open throughout, I'm open + m closed, counting/on/you articulated (m8 idled 1 s and its are opened early, closed before its end). Was t2_C203R_sd25_m8_02a2f13a41.mp4 lag 1.0.",
+  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
  "C208L": {
   "dir": "work/plates/C208L",
@@ -254,20 +258,21 @@
  "C209L": {
   "dir": "work/plates/C209L",
   "kind": "video",
-  "src": "media/gen/t2_C209L_sd25_t2_22438bdadd.mp4",
+  "src": "media/gen/t2_C209L_sd25_n1_5992390d36.mp4",
   "s0": 128.098,
-  "lag": 0.833,
-  "lipsync": "lipsync pass 27 Oct: +0.833 kept (low confidence): the mouth stays open through \"If you\" without closing between words; regens t3 (push-in) and t4 (shuts on \"are\") and a remouth were worse"
+  "lag": 0.5,
+  "lipsync": "lip round 2 (27 Oct): n1 at +0.500 (+12 f), scored as played (work/t2/lips2/C209L_strip.jpg, C209L_n1.mouthline.jpg): opens on If and shuts before you, you rounded on the stem's peak, are opens on its onset and stays open to the cut (t2 closed three times inside are). Was t2_C209L_sd25_t2_22438bdadd.mp4 lag 0.833.",
+  "note": "keyframe media/kf2/C103L_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), Jade, room A; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
  "C209R": {
   "dir": "work/plates/C209R",
   "kind": "video",
-  "src": "work/t2/mirror/C209R_m8_graded.mp4",
+  "src": "media/gen/t2_C209R_sd25_n1_ec78b90930.mp4",
   "s0": 128.098,
-  "lag": 0.958,
-  "lipsync": "lipsync pass 27 Oct: +0.083 (was -0.167): \"you\" opened 0.25 s late; the held \"are\" is not articulated (low confidence)",
+  "lag": 1.333,
   "flipX": true,
-  "note": "mirror rule: Seedance 2.5 m8 (media/gen/t2_C209R_sd25_m8_29b8537d38.mp4, pre-graded -6% / contrast 0.95 because the edit grades C209R hotter, RM(1.25, 1.18), than C103R) on the C103R mirror keyframe, flipped; lag 0.958 by mouthline (If / you on time; the held are closes mid-note in every take)"
+  "lipsync": "lip round 2 (27 Oct): n1 at +1.333 (+32 f), scored as played (work/t2/lips2/C209R_strip.jpg, C209R_n1.mouthline.jpg): idles ~1.3 s; you opens on the stem's peak, held are open to the cut (m8 opened are 0.45 s late after a closure); the quiet If pickup stays nearly shut; sub-window lags all +1.33..+1.38; last 2 plate frames held (take end). Was C209R_m8_graded.mp4 lag 0.958.",
+  "note": "keyframe media/kf2/C103R_mir_v3_crop.jpg: the C103 split keyframe pushed in 1.35x (face 17.7% -> ~24% of frame height, mouth unobstructed), teal-tips canon jacket in room-A geometry, flipped in the renderer; both halves of the split are round-2 takes on the same crop, so they still mirror"
  },
  "C210": {
   "dir": "work/plates/C210",
@@ -553,10 +558,11 @@
  "DR04": {
   "dir": "work/plates/DR04",
   "kind": "video",
-  "src": "media/gen/t2_DR04_sd25_m6_ee9a78bbe4.mp4",
+  "src": "media/gen/t2_DR04_sd25_n3_b61e7967fa.mp4",
   "s0": 188.376,
-  "lag": -0.125,
-  "note": "mirror rule: two-shot through the glass, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR04_mir_v3.jpg (irises brown with teal / pale-blue catchlights, a 1420 patch on each near sleeve band: teal-tips right = mirrored, Jade left = canon); hands rise to the glass; lag -0.25 by strip (m5 ignored the first frame)"
+  "lag": 0.542,
+  "lipsync": "lip round 2 (27 Oct): n3 at +0.542 (+13 f), scored as played (work/t2/lips2/DR04_strip.jpg, DR04_n3.mouthline.jpg): reframed keyframe (3/4 front, face ~21%): you / were open, the second you rounded, the long were held open to its end; Jade silent; (m6 was a profile that barely opened). Was t2_DR04_sd25_m6_ee9a78bbe4.mp4 lag -0.125.",
+  "note": "keyframe media/kf2/DR04_lip_v1.jpg (reframed: both girls 3/4 front across the glass, teal-tips in the mirrored jacket); two-shot, not flipped"
  },
  "DR05": {
   "dir": "work/plates/DR05",
@@ -763,8 +769,8 @@
   "kind": "video",
   "src": "media/gen/t2_P105_sd25_m6_5c9b5e216f.mp4",
   "s0": 45.715,
-  "lag": 0.0,
-  "lipsync": "lipsync pass 27 Oct: +0.25 (was 0): as played on twos, the opens on it/know/we're line up (work/t2/lips/P105_new.mouthline.jpg); take articulates little on \"Hear it and you'll\"",
+  "lag": 0.333,
+  "lipsync": "lip round 2: +0.333 (was 0) on the corrected mouth box (the old box sat on her chin): rms/voice/sub-windows all +0.333, r 0.56; Hear / know / we're / awake open on the stem's peaks, a frame early at most",
   "flipX": true,
   "note": "mirror rule (27 Oct): Seedance 2.5 m6 on media/kf2/P105_mir_v2.jpg (canon jacket, room A geometry, cool), flipped; lag 0 (know / we're peaks on the voiced curve; m5's +1.25 was the pre-roll)"
  },

@@ -237,7 +237,7 @@
   "kind": "video",
   "src": "media/gen/t2_V101_sd25_n1_564e8b64d7.mp4",
   "s0": 12.75,
-  "lag": 1.125,
+  "lag": 0.7083,
   "in": 1.425,
   "note": "Seedance 2.5 sung n1 (lip round 3, labial/sibilant-cue prompt media/kf2/prompts/t2_V101_sd25_n1.txt), vocal-stem slice S0 12.750 (media/aref/V101_lip3.mp3, = V101.mp3); idles 1.1 s, so in = 13.05 - S0 + lag = 1.425. Was t2 at +0.042",
   "grade": {
@@ -251,6 +251,12 @@
     "to": 1.125,
     "by": "lip round 3 retake (n1), 27 Oct",
     "take": "t2_V101_sd25_n1_564e8b64d7.mp4"
+   },
+   {
+    "from": 1.125,
+    "to": 0.7083,
+    "by": "Jade lip-sync picker 27 Oct (retake n1)",
+    "k": 10
    }
   ]
  },

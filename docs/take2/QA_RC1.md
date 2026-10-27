@@ -73,3 +73,43 @@ Where the X file loses most (2 s windows): 0:36 Voyager riso print 29.6 dB, 0:38
 dive 37.9, 2:40 the poster 39.8, 0:06 the galaxy 40.2; everything else ≥ 40 dB. At 0:36–0:39 the 7 px riso dot screen is
 smoothed into mottle at 12 Mb/s (it still reads as print, not as blocks). 108 frames are under 35 dB: 79 at 0:35.5–0:39.5,
 16 at 2:39 (the dive into the poster), 11 at 3:23–3:24 (the tower's halftone sky), 2 in the 0:08 rewind. Upload the master (not the X file) wherever the bitrate is not capped.
+
+## RC2 fixes (27 Oct)
+
+Stills of every fixed moment at 1920×1080: `work/stills/rc2/` (sheet `work/stills/rc2_sheet.jpg`). `check_cuts` (0 cuts off onset,
+coverage OK, no type rule breaks), `chess_check` OK, `lipcheck` (16 s0 picks, 0 mismatches, after the plate rebuild), `plate_windows`
+(only DR11's deliberate DR06 hold, as in RC1).
+
+- **#1 counter**: `RELEASE = '2026-10-27'` in the edit (one constant, `render/src/timeline.js`; `t2_counter` default too): 3:49.4 now
+  lands on **0042**. Move the constant if the date moves (`render/data/t2/nearmisses.json` `release_default` still says 26 Oct; the
+  edit's value wins).
+- **#2 end card** (Jade's v6 note supersedes the "≥ 2.5 s then dissolve" brief): every credit arrives with the title, staggered by
+  1/64 notes over the hit's first sixteenth (complete by 4:04.26), and the card **stays up, credits and all, to the end of the file**;
+  only the last frame (4:07.125) cuts to the clean opening frame, so the post still loops (last frame vs frame 0: mean |Δ| 1.7/255,
+  grain, as RC1). Complete card on screen 2.9 s. The models are set by role in whole, balanced rows: video models on one row
+  (Seedance 2.5 · Seedance 2.0 · Veo 3.1), image models and upscalers on the next (Nano Banana Pro · P-Image Upscale · FLUX Video
+  Upscale), the audio/vision tools 3 + 3; Music and Animated share one row. The whispered "Hold your fire" no longer runs into the end
+  card (lyric line 73 hidden in OU14).
+- **#3 soft sung shots**: upscale bake-off on C108 m8 (face crops at 2×: `work/t2/upscale_bakeoff/face_compare.png`, L0 = current
+  Lanczos, L2 = Lanczos + CAS 0.4, TZ = Topaz Starlight Fast 2, FX = FLUX Video Upscale precise; `body_compare.png` jacket/hands).
+  Topaz repaints softly (lineart smeared, lashes blobbed); CAS only sharpens the 720p softness; **FLUX precise keeps the cel look
+  with crisp black lineart and no invented detail**. Applied to all 16 sung picks (incl. P106 w2) and the 720p close-ups that share
+  their frames or faces (the five split `_LS` listening plates, CO16, BU04, V218): plates rebuilt from the 1080p upscales
+  (`work/plates_720/` keeps the old ones); picks keep `src` = the take and every lag, and gain `upscaled`; plate `meta.src` stays the take
+  (`built_from` = the upscale) so the lip tools still use their mouth boxes. Timing: every upscale has the take's frame count and fps,
+  and the motion cross-correlation peaks at lag 0 for all 24 (r 0.89–0.999); CO16's frame 40 (an in-between Flux merged into 39) is
+  the Lanczos frame. Jobs logged in the takes files (`up_<ID>_fluxp`). Cost: bake-off $0.59 (Flux) + $6.00 est. (Topaz, list price
+  unknown, booked at the cap of the estimate); batch $16.11 (23 clips, 111 s × 2.07 MP × $0.07).
+- **#4 Petrov readout**: the reliability panel sits right of his head (from HEAD_BOX + 25 px to the screen edge) and breaks to
+  ДОСТОВЕРНОСТЬ / ВЫСШАЯ at the original size; the occluder never reaches it (checked 1:35.4–1:36.7).
+- **#5 knights**: new head (thickness shaped over the profile: thick neck, full cheeks, narrow brow and muzzle; two pricked ears;
+  an ink mane crest; ink eyes on both cheeks, nostrils, mouth line), and the knights turned 0.5 rad back toward their own player, so the
+  a-file hand insert (2:26.1) sees a 3/4 profile instead of a face-on slab. Checked on a 12-view turntable and every bridge camera.
+- **#6 riso screens**: `riso` gains `soft` (separate from a softened plate), `softDark`, `minDot`, `screen` and `edge`. P101/P102
+  (0:35.5–0:40.6) separate from a 2.5 px-softened plate in the darks only (Veo's own dot texture in the black no longer boils the
+  screen; the craft's lines stay sharp), no dots under 8 %, screen contrast 0.85. 12 Mb/s 2-pass test on the segment alone: P101
+  27.7 → 35.0 dB mean, P102 36.9 → 37.2. DR14 (3:22.9) gets a 9 px screen: at 640×360 it reads as a regular screen, not a beat.
+- **#8**: left as is (the scroll scene tilts down with the brush by design).
+- **#9 LIGHTS aSPARK**: the impact slam grows from the word's left edge, so it never eats the space before it.
+- **#10 WE'RE**: full shade, no glow (as WE'RE ALIVE); the apostrophe and R hold over the tube.
+- Not touched: #7 (two-frame impact flash), #11 (texture).

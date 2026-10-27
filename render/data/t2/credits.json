@@ -13,7 +13,8 @@
   "GPT-4o Transcribe",
   "Grok STT",
   "MediaPipe",
-  "P-Image Upscale"
+  "P-Image Upscale",
+  "FLUX Video Upscale"
  ],
  "shots": {
   "Nano Banana Pro": [
@@ -22,11 +23,8 @@
    "BR15",
    "BR16",
    "BR17",
-   "BR_LETGO",
-   "BR_clock",
    "BR_faceB",
    "BR_faceW",
-   "BR_handB",
    "BU04",
    "BU09",
    "BU10",
@@ -84,6 +82,7 @@
    "V121",
    "V122",
    "V123",
+   "V123K",
    "V201",
    "V206",
    "V207",
@@ -110,6 +109,7 @@
   ],
   "Seedance 2.0": [
    "BU04",
+   "C209R_LS",
    "CO16"
   ],
   "Seedance 2.5": [
@@ -124,7 +124,6 @@
    "C209R",
    "DR04",
    "DR11",
-   "DR16",
    "P105",
    "P106",
    "V101",
@@ -133,5 +132,5 @@
    "V218"
   ]
  },
- "picks_used": 100
+ "picks_used": 99
 }

@@ -96,7 +96,7 @@ function drawSub(ty, t, c) {
   });
 }
 
-// NUM row: c = {items: [{n, t, slot, giant, out}], slots, y (row centre), size (row), giantSize, t1, hold, fly}
+// NUM row: c = {items: [{n, t, slot, giant, out, hold, rev, lit, settled}], slots, y (row centre), size (row), giantSize, t1, hold, fly}
 function drawCount(ty, t, c) {
   const fade = 1 - smooth(range(t, c.t1 - 0.3, c.t1));
   if (fade <= 0) return;
@@ -106,7 +106,7 @@ function drawCount(ty, t, c) {
   const st = { font: 'Archivo', weight: 900, stretch: '100%', align: 'center', base: 'middle' };
   // which item currently owns each slot (a later item on the same slot replaces the earlier one)
   const owner = {};
-  c.items.forEach((it, i) => { if (t >= it.t - 0.02 && !(it.out != null && t >= it.out)) owner[it.slot] = i; });
+  c.items.forEach((it, i) => { if (t >= it.t - (it.settled || it.rev ? 0 : 0.02) && !(it.out != null && t >= it.out)) owner[it.slot] = i; });
   // scrim: a soft dark ground under each numeral, so lines drawn behind (the graph's edges) dim to ~30% inside its box (polish 4)
   const ground = (n, x, y, s, a) => {
     if (!c.scrim || a <= 0) return;
@@ -119,16 +119,19 @@ function drawCount(ty, t, c) {
   c.items.forEach((it, i) => {
     if (owner[it.slot] !== i) return;
     const u = t - it.t;
-    const hot = 1 - easeOutCubic(range(u, 0, 0.35));
+    // it.rev (s): the numeral rewinds out of its row slot back up to giant at centre, then holds there (it.hold) lit (it.lit, 0..1)
+    // it.settled: already sitting in the row (carried over), no pop and no hot flash
+    const r0 = it.rev || 0;
+    const hot = it.settled ? 0 : Math.max(it.lit ?? 0, 1 - easeOutCubic(range(u, r0, r0 + 0.35)));
     const col = mixc(c.color || P.gold, GOLD_HOT, hot);
-    if (it.giant && u < hold + fly) {
-      const k = clamp((u + 0.02) / 0.16);
-      const v = easeInOutCubic(range(u, hold, hold + fly));
+    if (it.giant && u < (it.hold ?? hold) + fly) {
+      const k = r0 ? 1 : clamp((u + 0.02) / 0.16);
+      const v = r0 ? 1 - easeInOutCubic(range(u, 0, r0)) : easeInOutCubic(range(u, hold, hold + fly));
       const s = lerp(c.giantSize || 600, c.size || 120, v) * lerp(1.25, 1, easeOutExpo(k));
       ground(it.n, lerp(SAFE.cx, sx(it.slot), v), lerp(c.giantY ?? 540, c.y ?? 880, v), s, k * fade);
       ty.text(String(it.n), lerp(SAFE.cx, sx(it.slot), v), lerp(c.giantY ?? 540, c.y ?? 880, v), { ...st, size: s, color: col, alpha: k * fade, glow: 4, shade: 0.5 });
     } else {
-      const k = it.giant ? 1 : easeOutExpo(clamp((u + 0.02) / 0.14));
+      const k = it.giant || it.settled ? 1 : easeOutExpo(clamp((u + 0.02) / 0.14));
       const s = (c.size || 120) * lerp(1.3, 1, k);
       ground(it.n, sx(it.slot), c.y ?? 880, s, fade * (it.giant ? 1 : k));
       ty.text(String(it.n), sx(it.slot), c.y ?? 880, { ...st, size: s, color: col, alpha: fade * (it.giant ? 1 : k), glow: 3, shade: 0.5 });
@@ -369,15 +372,21 @@ export function buildTimeline(A) {
     want: 'The galaxy flashes red (Rare Earth self-destruct look)', notes: 'continues the galaxy clip; red grade + red flash' });
   const sub716 = ev('sub_hit', null, 7.0);
   const barT = A.bars.find((b) => b > sub716.t);             // bar 4 downbeat
-  // polish 4: the rewind runs two more 16ths past the bar line, back to the first spiral (all seven clips), and reaches black on the
-  // 16th after; the black before the match is 7 frames (it was 15, 0.6 s of nothing for muted autoplay)
-  const blackT = SIXTEENTHS.filter((x) => x > barT + 0.02)[1];
-  const rewSteps = SIXTEENTHS.filter((x) => x >= sub716.t - 0.01 && x < blackT);
-  S('0:07.16', sub716, { scene: 't2_vhs_rewind', p: { clips: co.slice().reverse().map((s) => s.id), steps: rewSteps, blackAt: blackT }, method: 'procedural', era: ERA.spiral,
+  // polish 4: the rewind runs two more 16ths past the bar line, back to the first spiral (all seven clips)
+  // Jade's note (0:08.8): count 2 has no first "one", so the match's "One" must read as the SECOND 1 ("like we rewound but not all
+  // the way"): the rewind stops on the first spiral (CO02, the floret) instead of going to black. CO02's plate is 1 s, scrubbed back
+  // at 6x from its last frame it reaches frame 0 (the frame of the 2.80 cut) on the 16th where black used to start (stopT); from
+  // there the tape is paused on it (VHS look, the rewind bands down to a pause wobble) with its giant gold 1 lit, until the match
+  const stopT = SIXTEENTHS.filter((x) => x > barT + 0.02)[1];
+  const rewSteps = SIXTEENTHS.filter((x) => x >= sub716.t - 0.01 && x < stopT);
+  const matchT = wd('CO', 1, 'one');
+  const rewP = { clips: co.slice().reverse().map((s) => s.id), steps: rewSteps };
+  S('0:07.16', sub716, { scene: 't2_vhs_rewind', p: (t) => ({ ...rewP, rewind: t < stopT ? 1 : 0.12 }), method: 'procedural', era: ERA.spiral,
     look: (t, lt) => ({ ...LK.photo, flash: 0.5 * Math.exp(-lt / 0.09), flashCol: [1.0, 0.12, 0.05] }),   // the red flash's tail runs into the rewind
-    want: 'The count scrubs backward in VHS rewind lines, one spiral per 16th (galaxy to romanesco), down to black on the bar line', notes: 'no text: the red does the work' });
+    want: 'The count scrubs backward in VHS rewind lines, one spiral per 16th (galaxy to romanesco), and stops on the first spiral: the floret paused under the VHS look, its giant gold 1 lit, until the match',
+    notes: 'no text: the red does the work. Jade (0:08.8): the rewind stops on the first 1 (was: down to black), so the match reads as the second 1' });
   const lightShot = (want, extra = {}) => ({ ...plate(extra), method: 'video', era: ERA.lights, look: LK.night, want });
-  S('0:08.60', wd('CO', 1, 'one'), lightShot('Two hands strike a match in the dark'));
+  S('0:08.60', matchT, lightShot('Two hands strike a match in the dark'));
   S('0:09.23', wd('CO', 1, 'two'), lightShot('A lighthouse beam turning through fog'));
   S('0:09.86', wd('CO', 1, 'three'), lightShot('A city grid at night through a plane window'));
   // the plate if one is picked (NASA night imagery is public domain), else t2_earth_night's ISS view
@@ -415,10 +424,14 @@ export function buildTimeline(A) {
   };
   const c1items = countItems(intro0);
   rewSteps.forEach((st, i) => { const it = c1items.filter((x, j) => c1items.findIndex((y) => y.slot === x.slot) === j).reverse()[i]; if (it) c1items.filter((x) => x.slot === it.slot).forEach((x) => { x.out = st; }); });
-  c1items.forEach((x) => { if (x.out == null) x.out = blackT; });
-  cue({ kind: 'num', label: '1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)', t0: intro0.t, t1: blackT + 0.01, items: c1items, slots: Math.max(...c1items.map((x) => x.slot)) + 1, draw: drawCount });
-  const c2items = countItems(intro1);
-  cue({ kind: 'num', label: '1 2 3 5 8 (giant, then the row; fades as the light gathers)', t0: intro1.t, t1: pullT.t + 0.3, items: c2items, slots: Math.max(...c2items.map((x) => x.slot)) + 1, draw: drawCount });
+  c1items.forEach((x) => { if (x.out == null) x.out = stopT; });
+  // the first 1 rewinds out of its slot back up to giant as the floret comes up (one 16th), then holds lit over the paused floret
+  const stepFloret = rewSteps[co.length - 1];
+  c1items.push({ n: 1, t: stepFloret, slot: 0, giant: true, rev: Math.min(0.16, stopT - stepFloret), hold: matchT.t - stepFloret, lit: 0.35, out: matchT.t });
+  cue({ kind: 'num', label: '1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)', t0: intro0.t, t1: matchT.t + 0.3, items: c1items, slots: Math.max(...c1items.map((x) => x.slot)) + 1, draw: drawCount });
+  // count 2 opens on the carried 1 (slot 0, already in the row), so the match's "One" lands as the second 1: 1 1, 1 1 2, ... 1 1 2 3 5 8
+  const c2items = [{ n: 1, t: matchT.t, slot: 0, giant: false, settled: true }, ...countItems(intro1).map((x) => ({ ...x, slot: x.slot + 1 }))];
+  cue({ kind: 'num', label: '1 1 2 3 5 8 (the carried 1, then giant, then the row; fades as the light gathers)', t0: intro1.t, t1: pullT.t + 0.3, items: c2items, slots: Math.max(...c2items.map((x) => x.slot)) + 1, draw: drawCount });
 
   // ============================================================================================== VERSE 1 (13.05 to 35.50)
   section('V1');

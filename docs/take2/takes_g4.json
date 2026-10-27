@@ -151,10 +151,44 @@
    "dur": 4,
    "file": "media/gen/t2_DR11_sd25_t4_94cd346a9f.mp4",
    "dims": "1280x720",
-   "verdict": "PICK: on model; closures on \"we\" and the w of \"would've\", open on \"never\"/\"here\"; rms r 0.54 at -0.167",
+   "verdict": "PICK: on model; closures on \"we\" and the w of \"would've\", open on \"never\"/\"here\"; rms r 0.54 at -0.167 | superseded 27 Oct by t2_DR11_sd25_m6 (mirror rule: teal-tips in the mirrored jacket)",
    "lag": -0.167,
-   "pick": true,
+   "pick": false,
    "by": "lipsync pass 27 Oct"
+  },
+  {
+   "model": "bytedance/seedance-2.5",
+   "kf": "media/kf2/DR11_mir_v3.jpg",
+   "aref": "media/aref/DR11_v2.mp3",
+   "s0": 198.628,
+   "dur": 4,
+   "dims": "1280x720",
+   "by": "DR11 mirror regen 27 Oct",
+   "tag": "t2_DR11_sd25_m5",
+   "job": "holdfire/t2_DR11_sd25_m5-9027583323",
+   "prompt_file": "media/kf2/prompts/t2_DR11_sd25_m5.txt",
+   "file": "media/gen/t2_DR11_sd25_m5_9027583323.mp4",
+   "verdict": "alt: on model, mirrored dot holds, teal-tips silent; mouth line less consistent (metrics +0.083 / +0.125 / -0.292 disagree, drift +0.5 .. +1.25 across sub-windows; opens late on 'made'); toothy grin after the window",
+   "lag": 0.083,
+   "pick": false
+  },
+  {
+   "model": "bytedance/seedance-2.5",
+   "kf": "media/kf2/DR11_mir_v3.jpg",
+   "aref": "media/aref/DR11_v2.mp3",
+   "s0": 198.628,
+   "dur": 4,
+   "dims": "1280x720",
+   "by": "DR11 mirror regen 27 Oct",
+   "tag": "t2_DR11_sd25_m6",
+   "job": "holdfire/t2_DR11_sd25_m6-2dab1c396c",
+   "prompt_file": "media/kf2/prompts/t2_DR11_sd25_m6.txt",
+   "file": "media/gen/t2_DR11_sd25_m6_2dab1c396c.mp4",
+   "verdict": "PICK (mirror rule, two-shot not flipped): teal-tips' dot on her right chest holds, no left-sleeve patch, teal ends hold, she stays silent; Jade's closures/opens follow the vocal at -0.167 from 'alone' to 'here' (mouthline); smile with teeth only after the window",
+   "lag": -0.167,
+   "pick": [
+    "DR11"
+   ]
   }
  ],
  "DR04": [

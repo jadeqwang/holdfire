@@ -5727,5 +5727,27 @@
     18
    ]
   ]
+ },
+ "t2_DR11_sd25_m5_9027583323.mp4": {
+  "pick": "DR11_m5",
+  "ref": 0,
+  "box": [
+   478,
+   129,
+   44,
+   34
+  ],
+  "note": "seeded from DR11 frame 0 (same keyframe)"
+ },
+ "t2_DR11_sd25_m6_2dab1c396c.mp4": {
+  "pick": "DR11_m6",
+  "ref": 0,
+  "box": [
+   478,
+   129,
+   44,
+   34
+  ],
+  "note": "seeded from DR11 frame 0 (same keyframe)"
  }
 }

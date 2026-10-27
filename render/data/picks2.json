@@ -575,11 +575,12 @@
  "DR11": {
   "dir": "work/plates/DR11",
   "kind": "video",
-  "src": "media/gen/t2_DR11_sd25_t4_94cd346a9f.mp4",
+  "src": "media/gen/t2_DR11_sd25_m6_2dab1c396c.mp4",
   "s0": 198.628,
   "lag": -0.167,
-  "note": "Seedance 2.5 sung t4 (lipsync regen 27 Oct, labial-cue prompt, aref media/aref/DR11_v2.mp3 with the 'Fifty-five' choir muted): Jade sings in front, teal-tips beside her looks up, mouth closed",
-  "lipsync": "lag -0.167 (-4 f) as played: closures on 'we' and the w of 'would've', open on 'never' and 'here'; rms r 0.54 (work/t2/lips/DR11_t4.mouthline.jpg). Was t1 at -0.125, late on 'never'"
+  "note": "mirror rule: two-shot, NOT flipped (Jade is in it): Seedance 2.5 m6 on media/kf2/DR11_mir_v3.jpg (DR11_gpt.jpg with teal-tips repainted in the mirrored jacket: dot on HER right chest, the left-chest dot and left-sleeve 1420 patch erased; her right sleeve is hidden behind Jade's arm, so no patch shows), aref media/aref/DR11_v2.mp3 ('Fifty-five' choir muted). Jade sings in front, teal-tips beside her looks up, mouth closed. Was t4 (canon jacket on both).",
+  "lipsync": "lag -0.167 (-4 f) as played (work/t2/lips/DR11_m6.mouthline.jpg): open on 'alone', closure before 'we', rest closure before 'never', closures between 'never'/'would've' and on the m of 'made', open on 'made' and 'here'; lipmeasure best -0.167 (rms/voice curves +0.417/+0.292 are twin peaks: at +0.292 the mouth opens before every vowel). lipcheck confirms the renderer's frames.",
+  "mirror": "two-shot exception (as DR03/DR04/DR16): teal-tips' pale-blue dot on her right chest holds through the take; no patch appears on her left sleeve"
  },
  "DR14": {
   "dir": "work/plates/DR14",

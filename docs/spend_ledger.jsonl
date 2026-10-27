@@ -1465,3 +1465,11 @@
 {"ts": "2026-10-27T09:00:15Z", "model": "bytedance/seedance-2.5", "tag": "t2_V101_sd25_n1", "job": "holdfire/t2_V101_sd25_n1-564e8b64d7", "event": "result", "ok": true, "est_usd": 0.9248, "where": "cloud"}
 {"ts": "2026-10-27T09:01:21Z", "model": "bytedance/seedance-2.5", "tag": "t2_V101_sd25_n2", "job": "holdfire/t2_V101_sd25_n2-34dd38e6ac", "event": "result", "ok": true, "est_usd": 0.9248, "where": "cloud"}
 {"ts": "2026-10-27T09:04:32Z", "model": "bytedance/seedance-2.5", "tag": "t2_V101_sd25_n3", "job": "holdfire/t2_V101_sd25_n3-475ac8cf19", "event": "result", "ok": true, "est_usd": 0.9248, "where": "cloud"}
+{"ts": "2026-10-27T09:23:16Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r1", "job": "holdfire/t2_DR16_sd25_r1-39765af0ad", "event": "submit", "ok": null, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T09:23:17Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r2", "job": "holdfire/t2_DR16_sd25_r2-bb841e6776", "event": "submit", "ok": null, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T09:23:18Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r3", "job": "holdfire/t2_DR16_sd25_r3-affee1efdf", "event": "submit", "ok": null, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T09:23:19Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r4", "job": "holdfire/t2_DR16_sd25_r4-9d3e73b813", "event": "submit", "ok": null, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T09:28:58Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r1", "job": "holdfire/t2_DR16_sd25_r1-39765af0ad", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T09:29:49Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r2", "job": "holdfire/t2_DR16_sd25_r2-bb841e6776", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T09:30:06Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r3", "job": "holdfire/t2_DR16_sd25_r3-affee1efdf", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}
+{"ts": "2026-10-27T09:32:12Z", "model": "bytedance/seedance-2.5", "tag": "t2_DR16_sd25_r4", "job": "holdfire/t2_DR16_sd25_r4-9d3e73b813", "event": "result", "ok": true, "est_usd": 1.6184, "where": "cloud"}

@@ -38,7 +38,7 @@ from scipy.ndimage import gaussian_filter1d
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import mouth  # noqa: E402
-from common import FPS, VOCALS  # noqa: E402  (work/stems/vocals.wav)
+from common import FPS, VOCALS, frame_on_twos  # noqa: E402  (work/stems/vocals.wav)
 
 def read_clip(path):
     cap = cv2.VideoCapture(path)
@@ -182,8 +182,7 @@ def target_at(ts, win, voc=None):
 def display_units(win, start, lag, n):
     """The even frames the renderer shows in the window (drawings on twos), with the song time at their middle."""
     ts = np.arange(win[0], win[1], 1 / 240)
-    f = np.floor((ts - start + lag) * FPS + 1e-3).astype(int)
-    f = np.clip(f - f % 2, 0, n - 1)
+    f = frame_on_twos(ts, start, lag, n=n)           # exactly the renderer's plateFrame (film frames held on twos)
     units = []
     for e in np.unique(f):
         tt = ts[f == e]

@@ -7,8 +7,8 @@
 
 S0 = song time of the take's audio-ref start (tools/t2/aref.py prints it: the exact cut start; the mp3's ~25 ms LAME
 delay is trimmed by gapless decoders, and if Seedance ignores it the lag absorbs it), [A, B] = the song-time window the edit plays.
-Convention: clip time = song time - S0 + lag (lag > 0: the take's mouth runs late); shown frame f = floor(clip t * 24),
-f -= f % 2. Lags are swept in 1/24 s steps.
+Convention: clip time = song time - S0 + lag (lag > 0: the take's mouth runs late); shown frame = common.frame_on_twos (the
+renderer's plateFrame: film frame held on twos, then mapped into the clip). Lags are swept in 1/24 s steps.
 
 Metrics (Rare Earth pipeline/sync, ported here): `face` = mouth-interior area in the anime face cascade's mouth ROI
 (mouth.py), `colour` = dark-red mouth pixels in the lower half of the largest skin blob (mouth_color.py); optional

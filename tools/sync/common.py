@@ -1,7 +1,8 @@
 """Shared paths and helpers for the anime lip-sync tools (ported from Rare Earth pipeline/sync/).
 
 Convention (pipeline_lessons §2): clip time = song time - S0 + lag; lag > 0 = the take's mouth runs late.
-The renderer plays takes on twos: the frame shown at song time t is f = floor((t - S0 + lag) * 24), f -= f % 2.
+The renderer plays takes on twos, holding FILM frames: ff = floor(t * 24), ff -= ff % 2, f = floor((ff/24 - S0 + lag) * 24)
+(frame_on_twos below; render/src/scenes/t2/plate/lib.js plateFrame).
 """
 import json
 import os
@@ -17,10 +18,19 @@ TIMING = os.path.join(ROOT, 'render', 'data', 'timing.json')        # master clo
 FPS = 24
 
 
-def frame_on_twos(t, s0, lag, fps=FPS):
-    """Clip frame index the renderer shows at song time t (array ok)."""
-    f = np.floor((np.asarray(t, float) - s0 + lag) * fps + 1e-3).astype(int)
-    return f - f % 2
+def frame_on_twos(t, s0, lag, fps=FPS, twos=True, start=0.0, n=None):
+    """Clip frame index the renderer shows at song time t (array ok): exactly render/src/scenes/t2/plate/lib.js plateFrame.
+    The renderer holds FILM frames on twos (song frame ff -= ff % 2), then maps that time into the clip:
+    clipT = ff/24 - s0 + lag, f = floor((clipT - start) * fps). When s0 is not on the 24 fps grid the drawings it shows are
+    odd clip frames; the old rule here (floor clip frame, then f -= f % 2) was up to a frame off and changed drawing on the
+    other film frame. start = plate meta.start (plates.py --start), n = plate frame count (clamp)."""
+    ff = np.floor(np.asarray(t, float) * 24 + 1e-3).astype(int)
+    if twos:
+        ff = ff - ff % 2
+    f = np.floor(((ff / 24 - s0 + lag) - start) * fps + 1e-3).astype(int)
+    if n is not None:
+        f = np.clip(f, 0, n - 1)
+    return f
 
 
 def read_frames(path, lo=0, hi=None):

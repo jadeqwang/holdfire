@@ -8,7 +8,8 @@
 // digits rolling upward on "higher" (3:49.44), and keeps climbing a day per beat after that.
 // p: {release ('2026-10-26'), b0 (first grid point; default the beat at the shot start), gaps ([32nds] between resets, one per
 //     reset date; default accelerating 8,8,4,3,3, 2 x14, 1 x7), higher (default the word "higher"), climbEnd (default its end),
-//     perBeat (days added per beat after the climb, 1), hold (s the release value is held first, 1.0), push (0.06)}
+//     perBeat (days added per beat after the climb, 1), hold (s the release value is held first, 1.0), push (0.06),
+//     countRate (12: between resets the board counts up from zero, a whole count every two frames, right-aligned in the ones place)}
 import { P, css, mix } from '../../../palette.js';
 import { clamp, lerp, smooth, smoother, easeInOutCubic, easeOutCubic, range, hash1, hash2, rng } from '../../../util.js';
 import { ensureList, listNow, dayOf, gridT, beatK, lineByText, wordT, drawWheel, odoPos, vhsPass } from './lib.js';
@@ -49,8 +50,13 @@ function valueAt(S, audio, t, p) {
   if (i < n - 1) {
     const ta = i < 0 ? S.t0 : R[i].t, tb = R[i + 1].t;
     const da = i < 0 ? S.epoch : R[i].day, db = R[i + 1].day;
-    const f = clamp((t - ta) / (tb - ta));
-    return { v: (db - da) * f, last: i, rate: (db - da) / (tb - ta) };
+    // Jade's note (3:45): after each snap to zero the board counts up like a real roller counter, the small numbers in the ones
+    // place (1, 2, 3 ...), low wheels rolling and the high ones at 0: a readable count (p.countRate, 24 a second = one a frame),
+    // capped at the real number of days to the next entry
+    // whole counts held for two frames each (on twos), so every number reads crisp
+    const f = clamp((t - ta) / (tb - ta)), cr = p.countRate ?? 12;
+    const vt = (db - da) * f, vc = Math.floor(cr * (t - ta) + 1e-3);
+    return vc < vt ? { v: vc, last: i, rate: 0 } : { v: vt, last: i, rate: (db - da) / (tb - ta) };
   }
   // past the last reset: climb to the release-date value, accelerating into "higher", then a day per beat
   const ta = R[n - 1].t + 0.06, tb = S.climbEnd;

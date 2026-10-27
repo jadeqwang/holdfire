@@ -1,0 +1,178 @@
+{
+ "t2_V101_sd25_t2_9163d752d3.mp4": {
+  "pick": "V101",
+  "ref": 48,
+  "box": [
+   721,
+   404,
+   40,
+   36
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C103L_sd25_t1_d610863352.mp4": {
+  "pick": "C103L",
+  "ref": 84,
+  "box": [
+   710,
+   344,
+   22,
+   20
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C103R_sd25_t2_1584d49648.mp4": {
+  "pick": "C103R",
+  "ref": 84,
+  "box": [
+   710,
+   286,
+   24,
+   22
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C108_sd25_t2_3721f7f98e.mp4": {
+  "pick": "C108",
+  "ref": 48,
+  "box": [
+   603,
+   246,
+   22,
+   20
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C203L_sd25_t1_dcab53c4e0.mp4": {
+  "pick": "C203L",
+  "ref": 84,
+  "box": [
+   707,
+   342,
+   22,
+   20
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C203R_sd25_t1_7828c97ddb.mp4": {
+  "pick": "C203R",
+  "ref": 84,
+  "box": [
+   731,
+   336,
+   20,
+   18
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C208L_sd25_t2_6669650da7.mp4": {
+  "pick": "C208L",
+  "ref": 48,
+  "box": [
+   664,
+   248,
+   30,
+   22
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C208R_sd25_t1_hflip.mp4": {
+  "pick": "C208R",
+  "ref": 48,
+  "box": [
+   667,
+   226,
+   26,
+   20
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C209L_sd25_t2_22438bdadd.mp4": {
+  "pick": "C209L",
+  "ref": 60,
+  "box": [
+   659,
+   338,
+   22,
+   22
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_C209R_sd25_t1_3b86d4fe74.mp4": {
+  "pick": "C209R",
+  "ref": 60,
+  "box": [
+   718,
+   324,
+   18,
+   18
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_DR04_sd25_t2_33ea75dea7.mp4": {
+  "pick": "DR04",
+  "ref": 60,
+  "box": [
+   400,
+   324,
+   18,
+   24
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_DR11_sd25_t1_9a22600294.mp4": {
+  "pick": "DR11",
+  "ref": 48,
+  "box": [
+   476,
+   127,
+   44,
+   34
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_DR16_sd25_t2_8e3128f390.mp4": {
+  "pick": "DR16",
+  "ref": 84,
+  "box": [
+   748,
+   239,
+   50,
+   46
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_P105_sd25_t1_5b90b05d9b.mp4": {
+  "pick": "P105",
+  "ref": 48,
+  "box": [
+   662,
+   387,
+   36,
+   28
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_P106_sd25_t3_eb735d9762.mp4": {
+  "pick": "P106",
+  "ref": 48,
+  "box": [
+   694,
+   509,
+   44,
+   32
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ },
+ "t2_V201_sd25_t2_1e28ea548a.mp4": {
+  "pick": "V201",
+  "ref": 48,
+  "box": [
+   626,
+   197,
+   20,
+   16
+  ],
+  "note": "mouth centre + size on the take frame (1280x720), placed by hand at the ref frame"
+ }
+}

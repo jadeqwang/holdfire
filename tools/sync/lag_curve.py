@@ -2,7 +2,7 @@
 (Ported from Rare Earth pipeline/sync/lag_curve.py; RE sampled on ones with round(); take two plays on twos.)
 
 For each lag in the range, the clip's mouth-openness curve is resampled at the drawing shown at song time t
-(f = floor((t - S0 + lag) * 24), f -= f % 2) for every 24 fps song time t inside the window the edit uses, and
+(common.frame_on_twos: film frame held on twos, then f = floor((ff/24 - S0 + lag) * 24)) for every 24 fps song time t inside the window the edit uses, and
 correlated with the vocal-stem RMS envelope (both high-passed). Two independent openness metrics are reported:
 the anime-face-cascade mouth ROI (mouth.py) and the skin-blob + mouth-interior colour metric (mouth_color.py).
 A lag is trusted when both curves peak together.

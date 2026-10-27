@@ -774,6 +774,8 @@ export function buildTimeline(A) {
   // the rewind's war clock: piecewise in screen time (fractions of the 3.05 s), so each part gets its share
   const RWK = [[0, WT.rw0], [0.06, WT.fall + 0.55], [0.3, WT.burn - 0.14], [0.68, WT.fire - 0.13], [0.94, WT.hunt + 0.58], [1, WT.hunt - 0.35]];
   const rwClock = (t) => {
+    // past the stop the clock keeps drifting back slowly (before the first launch, so nothing fires): the globe never freezes
+    if (t > WT.whole - 0.12) return RWK[RWK.length - 1][1] - 1.5 * (t - (WT.whole - 0.12));
     const u = clamp((t - WT.rw0) / (WT.whole - 0.12 - WT.rw0));
     let k = 0; while (k + 2 < RWK.length && u > RWK[k + 1][0]) k++;
     const [a, wa] = RWK[k], [b, wb] = RWK[k + 1];
@@ -789,7 +791,7 @@ export function buildTimeline(A) {
   S(null, onlyW, { scene: 't2_war', p: (t) => ({ ...warP, rewind: true, w: rwClock(t) }), method: 'procedural', era: ERA.war, look: LK.war,
     want: 'VHS rewind (3 s): the lights flicker back, the warheads lift off the cities, the galaxy\'s dark worlds relight, the tracks fall back into silos and submarines',
     notes: 'starts on "Only" (the plan\'s console time); the war clock is piecewise so Earth and the galaxy each get their share' });
-  S('2:53.25', wholeB, { scene: 't2_war', p: { ...warP, rewind: true }, method: 'procedural', era: ERA.light, look: LK.light,
+  S('2:53.25', wholeB, { scene: 't2_war', p: (t) => ({ ...warP, rewind: true, w: rwClock(t) }), method: 'procedural', era: ERA.light, look: LK.light,
     want: "Earth whole again; the camera pulls out and Earth's node on the contact graph lights again (through \"all\")", notes: 'moved from "out" (173.25) to the beat before "all": the rewind runs through "out there"' });
   reserve(1);                                                                     // BU07 (the graph cut on "all") is now inside BU06's pull-out
   const hold1 = wd('BU', 5, 'hold'), show1 = wd('BU', 5, 'show');

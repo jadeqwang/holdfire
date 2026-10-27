@@ -93,6 +93,8 @@ rule breaks; chess_check OK (42 plies legal, final position as planned).
 
 ## Jade's notes
 - (26 Oct, on preview v2) Cold open: the whispered "eight" is echoed (sung twice). Don't show a second 8 on screen; cut to the next image (the galaxy) on the beat instead. Same for the second count's echo.
+- (27 Oct, 3:45) The days-since-last-reset board must count like a real roller counter: small numbers right-aligned in the ones
+  place, leading wheels at 0, the low wheels rolling during the fast reset run while the high ones stay at 0. (Done in polish pass 2.)
 - (27 Oct, on preview v2, timestamped)
   - Lip sync off at 0:13.6 (V101), 0:46.6 (P105), 0:57.4 (C103, both), 1:05.1 (C108), 1:58.8 (C203, both), 3:19.6 (DR11), 3:29.1 (DR16).
   - Jacket canon: 0:15.4 RARE EARTH missing from the back (V102); 0:46.6 decide whether teal-tips lives in a full mirror world; the arm patch sits on the same side as the blue dot and, when visible, in the middle of the orange stripe; 0:48.9 erase the arm patch; 1:05.1 blue dot on the other side, arm patch not visible; 1:54.9 teal-tips' back is missing the text and the blue circle; 1:58.8 and 2:09.0 teal-tips' patch placement; 2:08.4 "a good argument for making them actual mirror images of each other".
@@ -101,3 +103,52 @@ rule breaks; chess_check OK (42 plies legal, final position as planned).
   - 0:33.3 the ISS isn't recognisable to anyone who doesn't already know.
   - 2:47.1 more time on the rewind, galactic war included, so nobody misses it.
 - Director's decision on the mirror (from Jade's 2:08.4 note): **teal-tips is Jade's true mirror image**. Every teal-tips shot is generated with the canon jacket (dot on the left chest, 1420 MHz patch centred on the left sleeve's orange band, RARE EARTH + pale-blue circle on the back) and then flipped left-right in the renderer, so her dot and patch sit on her right, her room is A mirrored, and her lettering reads reversed, as in a mirror. Jade's world is never flipped.
+
+## Polish pass 2 (whole film, special care 0:00–0:35; finishing editor, 27 Oct)
+Final sheets: `work/t2/polish2_sheets/p2final_00.jpg` … `_18.jpg` (0–35 s every 0.25 s, then every 0.5 s; stills in
+`work/t2/polish2/final/`). Before: `p2before_*.jpg`. Build re-time: `p2build_*.jpg`; counter, every frame 3:44.3–3:53.2 at 1080p:
+`p2counter_0…3.jpg`; motion strips (12 frames): `work/t2/polish2_sheets/m_*.jpg`. check_cuts: 0 cuts off onset, coverage OK, no
+type rule breaks (5 plan-time deviations, all noted in shot notes); chess_check OK; plate_windows: only C203L / DR11 (as pass 1).
+No paid generation in this pass ($0 of the $30).
+
+**Fixed**
+- Jade's echo note: no numeral on either echo; CO08 (galaxy) cuts on the beat after the echoed "eight" (6.706), the pull-back to
+  the catchlight (CO16) on the beat after the echo whisper (11.857); CO16 rate 6.15 so the whole pull-back plays in the shot.
+- Title in frame zero (HOLD FIRE up from frame 0, landing on the 0:00.2 sub with a hot flash); the end card holds the title to
+  the last frame, set exactly as the opening title, tonemap off like the plate: the last frame matches frame 0 (mean diff 1.8/255).
+- Outro CO01 reuse never freezes: OU12 plays the plate backward; OU13 + the end card are one linear pull-back (1.06 → 1.00) that
+  lands on the opening framing at the last frame.
+- Jade's catchlight: CO01 and OU12 carry a tracked plate-space fix (new `grade.fix` in `plate/layer.js`: modes `dot`, `iris`, `erase`,
+  keyframed by plate frame, riding zoom/pan/rot): the white disc reads #8EC5FF-ish pale blue (measured 150,203,255 on screen).
+- 0:07 red flash carries into the first rewind 16ths; CO12 lighthouse from the plate's first frame (beam, not glare); CO17 in 0.98 so
+  her eyes open 3 frames after the 12.50 cut.
+- V101 OUT OF THE SEA: cyanotype-ink type (no shade) reads on the pale dawn sky. V117 FLOOD: right of her head (x 830–1390, y 330),
+  ink with a pale halo so it holds over the Okavango sky and the locomotive smoke.
+- V103: punch-in on the fin (zoom 1.8, pan [−252, −351]); the bones lie along the fin, staged on the snare, the next snare and the beat.
+  **V102 is being regenerated (mirror-world agent): re-measure the fin and V103's pan/fin_bones pos/rot on the new plate.**
+- Blueprint anchors wired from the g1 notes: hand bones over V106's open hand (mirrored), egg→jar on the woman's jar (riding its
+  drift), a tally count (one outline per eighth + a running dimension) over V113's wedges, the seed cross-section on V115 (riding
+  the push), the four machines on their machines (riding the composites' 20 px/frame scroll; Saturn V in Klein-blue ink, as white
+  lines vanished on the white rocket). New t2_blueprint options: fn zoom/pan/rot, `subjectFlip`, `arrive`.
+- Jade's v2 notes: the machines (and HAND) now arrive ≥ 85% drawn and finish by frame 3 (`arrive`); FIN/FOOT have their first stage
+  on the cut and finish well before the next cut. ISS (V123): a hero view of the station (~60% of the frame, slow push and a
+  snowflake turn) with a white blueprint outline (truss, eight array wings, radiators, modules) and an ISS callout.
+- Build re-timed (Jade: the rewind needs time and the galactic war): destruction tightened (impacts from "burn", dark by ~170.3);
+  **moved**: BU04 console "Only" → "fall" (170.07, rate 3.0), BU05 rewind starts on "Only" (170.83), BU06 Earth whole "out" (173.25)
+  → the beat before "all" (173.88); BU07's graph cut merged into BU06's pull-out (`reserve(1)`). The rewind is 3.05 s on a piecewise
+  war clock: lights back, warheads lift off, the galaxy's dark worlds relight, tracks fall into silos and subs; Earth's node lights
+  through "all". NUCLEAR DETONATIONS burn−0.05 → fall, SIGNAL LOST fall → "Only".
+- V122: the plate's static bright point is erased (`erase` fix, core + spikes) and `t2_iss_pass` starts there and crosses.
+- V107: only the clean window (plate frames 11–22: no spray can, no stone pick-up), then V107b on the beat: a push-in on the finished
+  stencil (the departing hand cropped out).
+- Counter (Jade, 3:45): between resets the board counts whole numbers from 0, 12 a second, in the ones place (capped at the real day
+  count); the climb past 2025 rolls the low wheels into 0534 with the thousands wheel at 0. Checked every frame.
+
+**Left / handed over**
+- Teal irises (DR03/DR04, also P106/P107): recolour built and tested, then dropped on the director's mirror-world decision (all
+  teal-tips plates are being regenerated). If a regenerated take still reads teal, `grade.fix` `{mode: 'iris'}` works; P106's measured
+  keyframes were: `[{"mode": "iris", "col": [0.4, 0.26, 0.17], "track": [[37, 1010, 625, [18, 14]], [44, 1000, 600, [25, 24]], [56, 985, 590, [27, 27]], [74, 965, 575, [26, 27]], [96, 960, 570, [26, 27]]], "note": "teal-tips' irises read teal-green: recoloured to canon brown at their luma (catchlights kept); keyframes measured on the plate (polish 2)"}, {"mode": "iris", "col": [0.4, 0.26, 0.17], "track": [[37, 1120, 670, [20, 15]], [44, 1130, 650, [27, 26]], [56, 1135, 630, [29, 29]], [74, 1128, 615, [28, 28]], [96, 1126, 612, [28, 28]]]}]`.
+- My subtitle band was reverted (the lyric-design agent owns the lyric type now).
+- C203L (3 held frames) and DR11's vanish hold as in pass 1. Plan-time deviations: BU04/BU06 (above), BR01, BR13, V218 (pass 1).
+- The locomotive outline is approximate on the painted engine (it reads as a schematic over it, not a trace).
+

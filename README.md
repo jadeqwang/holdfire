@@ -37,7 +37,7 @@ rendered frame by frame in headless Chromium).
 | 1:43 | pre-chorus 2 | The near-miss list (30 entries, 1950–2026, fact-checked) on teletype newsprint with a running total that never settles; 100 gold coins land heads, the first 30 stamped with the list's years, 2¹⁰⁰ typed under them; the coins become a tree whose tails branches end in SIGNAL LOST, and one gold path leaves the top. |
 | 1:53 | chorus 2 | Every chorus 1 shot returns as a split: Jade on the left, teal-tips on the right, in mirrored rooms; two of the CRT wall's screens now show their control rooms. |
 | 2:14 | post-chorus 2 | Earth's lights at growing scale (a window, a street, a city, the night side), then a chessboard sets itself and the two Jades sit down across it. |
-| 2:23 | bridge | Fischer–Tal, Leipzig 1960, replayed from the PGN at blitz speed with real clocks: chalk lyrics, eyes in the dark around the board, impact frames and speed lines, captured pieces flying past as a chain, the perpetual check, both hands let go. The camera dives into the black queen, the board becomes a Suprematist square and wedge, then a Soviet poster in newsprint halftone: B-59 under the destroyers, SIXTY-TWO DEPTH CHARGES FALLING, two red officers, Arkhipov's open hand, NO. |
+| 2:23 | bridge | Fischer–Tal, Leipzig 1960, replayed from the PGN at speed with real one-minute (1+0) clocks: chalk lyrics, eyes in the dark around the board, impact frames and speed lines, captured pieces flying past as a chain, the perpetual check, both hands let go. The camera dives into the black queen, the board becomes a Suprematist square and wedge, then a Soviet poster in newsprint halftone: B-59 under the destroyers, SIXTY-TWO DEPTH CHARGES FALLING, two red officers, Arkhipov's open hand, NO. |
 | 2:43 | build | Take one's war scene: missile tracks over the pole, the galaxy's worlds firing and going dark, NUCLEAR DETONATIONS, SIGNAL LOST. Jade grabs the jog wheel and rewinds it all for 3 s (warheads lift off, lights come back, dark worlds relight). HOLD YOUR FIRE / SHOW YOUR LIGHT: the three who held fire, both Jades raising a hand light, the cut rate doubling into white. |
 | 3:04 | drop | A white void and a mirror: Jade walks to the glass, the impact swings round to teal-tips standing the same way, their palms meet (YOU WERE COUNTING TOO). The ripple becomes the 610-world phyllotaxis disk (13 21 34), a chain through it breaks link by link, the mirror is gone and the two stand side by side; 55 89; Echo's tower and its night side linked like a constellation; both Jades at one console, receiving. |
 | 3:33 | outro | Six hundred worlds across the Milky Way, each flickering red once and holding gold. DAYS SINCE LAST RESET snaps to zero at every near-miss, faster through the whispered count, then climbs: the count goes higher. The ISS over the dish field, Jade at dawn lowering her headphones, the eye again; the title lands on the final hit, the end card, and the last frame is frame zero, so the post loops. |
@@ -106,7 +106,9 @@ The card reads:
 
 ### Deliverables
 
-Rendered locally to `work/out/` (not committed; the files exceed GitHub's 100 MB limit):
+A 540p preview of RC3 is committed: [`previews/hold_fire_t2_rc3_540p.mp4`](previews/hold_fire_t2_rc3_540p.mp4) (960×540, 2-pass H.264
+at 1.4 Mb/s, AAC 128k of the mix, 47 MB). The full-resolution files are rendered locally to `work/out/` (not committed;
+they exceed GitHub's 100 MB limit):
 
 | file | what |
 |---|---|
@@ -200,7 +202,9 @@ mattes, face landmarks) and redraws everything; the footage itself never appears
 
 ## Deliverables
 
-Rendered locally to `work/out/` (not committed; the files exceed GitHub's 100 MB limit):
+A 540p preview of RC3 is committed: [`previews/hold_fire_t2_rc3_540p.mp4`](previews/hold_fire_t2_rc3_540p.mp4) (960×540, 2-pass H.264
+at 1.4 Mb/s, AAC 128k of the mix, 47 MB). The full-resolution files are rendered locally to `work/out/` (not committed;
+they exceed GitHub's 100 MB limit):
 
 | file | what |
 |---|---|

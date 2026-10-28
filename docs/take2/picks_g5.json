@@ -1,0 +1,15 @@
+{
+ "C208b": {
+  "dir": "work/plates/C208b",
+  "kind": "still",
+  "src": "media/kf2/C208b_switch_A_nbp_v2.jpg",
+  "note": "adversary pass (28 Oct): Jade's hand resting beside a guarded switch (cover shut, no lettering), warm lamp; Nano Banana Pro v2 from design/take2/room_A_jade.jpg (v1 drew the cover open and a ghost under the desk). The edit pushes in on the upper half (the lower half is plain console front)"
+ },
+ "C209b": {
+  "dir": "work/plates/C209b",
+  "kind": "still",
+  "src": "media/kf2/C208c_switch_B_nbp_v3.jpg",
+  "flipX": true,
+  "note": "adversary pass (28 Oct): teal-tips' hand beside the same guarded switch, cold fluorescent; Nano Banana Pro v3 = C208b's composition relit cold (refs C208b v2 + room_B_teal), flipped in the renderer so her hand enters from the right: the mirror of Jade's insert (v1 cover open; v2 hand over the switch)"
+ }
+}

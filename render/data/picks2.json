@@ -417,6 +417,12 @@
   "upscaled": "media/gen/up_C208R_fluxp_0b39b02d24.mp4",
   "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
  },
+ "C208b": {
+  "dir": "work/plates/C208b",
+  "kind": "still",
+  "src": "media/kf2/C208b_switch_A_nbp_v2.jpg",
+  "note": "adversary pass (28 Oct): Jade's hand resting beside a guarded switch (cover shut, no lettering), warm lamp; Nano Banana Pro v2 from design/take2/room_A_jade.jpg (v1 drew the cover open and a ghost under the desk). The edit pushes in on the upper half (the lower half is plain console front)"
+ },
  "C209L": {
   "dir": "work/plates/C209L",
   "kind": "video",
@@ -457,6 +463,13 @@
   "note": "listening plate: Seedance 2.0 t1 from C103R_mir_v3_crop; teal-tips listens, mouth closed, through Jade's \"If you are\" (C209). Flipped",
   "upscaled": "media/gen/up_C209R_LS_fluxp_6fa7d5d477.mp4",
   "upscale": "RC2: black-forest-labs/flux-video-upscale precise 1.5x (1280x720 -> 1920x1080), frame-for-frame; lag unchanged"
+ },
+ "C209b": {
+  "dir": "work/plates/C209b",
+  "kind": "still",
+  "src": "media/kf2/C208c_switch_B_nbp_v3.jpg",
+  "flipX": true,
+  "note": "adversary pass (28 Oct): teal-tips' hand beside the same guarded switch, cold fluorescent; Nano Banana Pro v3 = C208b's composition relit cold (refs C208b v2 + room_B_teal), flipped in the renderer so her hand enters from the right: the mirror of Jade's insert (v1 cover open; v2 hand over the switch)"
  },
  "C210": {
   "dir": "work/plates/C210",

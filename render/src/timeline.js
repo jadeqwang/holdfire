@@ -303,6 +303,8 @@ export function buildTimeline(A) {
   const WARM = { exposure: 1.02, contrast: 1.04, sat: 1.06, tint: [1.07, 1.0, 0.88] };
   const COLD = { exposure: 0.86, contrast: 1.14, sat: 0.55, tint: [0.8, 0.94, 1.16], lift: [-0.012, -0.004, 0.012] };
   const WALL = { bar: { w: 32, col: [0, 0, 0], tex: 1 }, tone: { L: WARM, R: COLD } };
+  // COOL: the milder cool cast on teal-tips' solo shots (item 6), so colour tells the two apart where the jacket patch cannot
+  const COOL = { contrast: 1.06, sat: 0.8, tint: [0.88, 0.96, 1.1], lift: [-0.006, 0, 0.008] };
   // each one's monitor tracks the other as an unknown contact (t2_contact), on the C103 keyframe crop's top monitors (C103 / C203
   // share it): Jade's (left edge) points right, toward the wall; teal-tips' (right edge) is the same display mirrored, pointing left
   const SCREENS = { L: [[12, 152], [270, 196], [216, 385], [0, 372]], R: [[1652, 192], [1930, 136], [1930, 377], [1705, 388]] };
@@ -630,7 +632,7 @@ export function buildTimeline(A) {
   const silent1 = wd('C1', 3, 'silent');
   S('1:02.15', silent1, crt(silent1, 'C1', 'Close on one 1999 CRT in a dark bedroom running the SETI@home screensaver (power-spectrum graph); on the beats at 1:02.77 and 1:03.41 the camera smashes back, 1 to 4 to 16 screens; on "swear" a matrix of hundreds of CRTs, each in its own dark room (over a million people ran SETI@home)'));
   reserve(3);                                                                     // the matrix's other three cuts keep their numbers
-  S('1:04.59', wd('C1', 4, 'in'), { ...plate({ staticT: wd('C1', 4, 'breathe').t }), method: 'seedance_sung', era: ERA.room, look: LK.room,
+  S('1:04.59', wd('C1', 4, 'in'), { ...plate({ staticT: wd('C1', 4, 'breathe').t, grade: COOL }), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'The studio pose: teal-tips Jade (voice B line) at the console, one hand on her headphones, eyes closed, singing like a recording artist; screen static swells and falls on "breathe"',
     notes: 'plan says "Jade"; the timing tags this line B_belt, so teal-tips Jade sings it (chorus 2 has both in this pose)' });
   S('1:07.31', wd('C1', 5, 'if'), { ...plate(), method: 'video', era: ERA.room, look: LK.night, want: 'Crane up out of the control room, over the dishes and into the sky' });
@@ -667,7 +669,7 @@ export function buildTimeline(A) {
   // ============================================================================================== VERSE 2 (82.55 to 102.99)
   section('V2');
   const ink = (want, extra = {}, more = {}) => ({ ...plate({ style: 'ink', ...extra }), method: 'video', era: ERA.ink, look: LK.ink, want, ...more });
-  S('1:22.55', wd('V2', 0, 'priests'), ink('Ink wash: Daoist alchemists around a bronze cauldron in a mountain grotto, brewing an elixir of life; teal-tips Jade stands among them singing, the only cel-shaded figure', {}, { method: 'seedance_sung' }));
+  S('1:22.55', wd('V2', 0, 'priests'), ink('Ink wash: Daoist alchemists around a bronze cauldron in a mountain grotto, brewing an elixir of life; teal-tips Jade stands among them singing, the only cel-shaded figure', { grade: COOL }, { method: 'seedance_sung' }));
   // the k-th sixteenth after time x (grid times for things the scenes animate between word onsets)
   const s16 = (x, k = 1) => SIXTEENTHS.filter((y) => y > x + 0.02)[k - 1];
   const sulfur = wd('V2', 1, 'sulfur'), saltpeter = wd('V2', 1, 'saltpeter'), thunder = wd('V2', 1, 'thunder');
@@ -738,7 +740,7 @@ export function buildTimeline(A) {
   S(null, prev, { ...over(painting({ zoom: PZ, pan: PPAN }), screen('protocol', { quad: paperQ, occ: null, light: [0.92, 0.74, 0.56], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'Insert: the printed protocol on the desk beside him is struck through line by line' });
   // RC3 (QA_RC2 #5): gain .9 with gamma 1.1 rolls the highlights off (mids kept), so teal-tips' face holds its skin tone under the oil look
-  S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', { grade: { gain: 0.9, gamma: 1.1 } }, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
+  S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', { grade: { ...COOL, gain: 0.9, gamma: 1.1 } }, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
   hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 110, y: 780, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });   // lower third: the wall map is the picture
   const lookedT = looked.t;
   // the gloss sits on a dark plate in the lower third of the scroll shot (the plan's 1:27.39 row) and is gone by the cut on "an"
@@ -783,10 +785,19 @@ export function buildTimeline(A) {
   reserve(3);
   S(null, wd('C2', 4, 'in'), { ...split({}, { flipX: true }, 4, WALL), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Both Jades in the studio pose, the same pose on either side of the wall: warm room and cold room (the audience sees the mirror; they do not)' });
+  // adversary pass (item 3): the first "hand near the trigger" shots, which set up the hands letting go in the bridge: one insert per
+  // side, one beat each on the cut grid; each a hand resting beside a guarded switch (cover shut, no lettering), a still with a slow
+  // JS push on its upper half. Jade's (warm) takes C208's last beat ("somewhere"); teal-tips' (cold, flipped: the mirror of Jade's)
+  // takes C209's held "are" from its second beat to the crane
+  const SWITCH_PUSH = (side) => ({ zoom: [1.3, 1.38], pan: side === 'L' ? [[280, 90], [300, 96]] : [[-280, 90], [-300, 96]], ease: 'linear' });
+  S(null, beatK(wd('C2', 4, 'breathe').t, 0, 'beat after "breathe" (on "somewhere")'), { ...still({ img: 'C208b', ...SWITCH_PUSH('L') }), method: 'still', era: ERA.room, look: LK.room, sub: 'b',
+    want: "Insert: Jade's hand rests on the console beside a guarded switch, its red cover shut; she does not touch it (warm lamp)" });
   // Jade v3: "If you are" is Jade's phrase (as in C103 / C203): teal-tips listens through it (C209R_LS); her "I'm counting on you"
   // falls on the crane (C210)
   S(null, wd('C2', 5, 'if'), { ...split({}, { clip: 'C209R_LS', in: 0 }, 2, WALL), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Split: each Jade looks at her own screen; Jade (left) sings "If you are", teal-tips (right) listens, mouth closed' });
+  S(null, beatK(wd('C2', 5, 'are').t, 1, 'second beat of the held "are"'), { ...still({ img: 'C209b', ...SWITCH_PUSH('R'), grade: COOL }), method: 'still', era: ERA.room, look: LK.room, sub: 'b',
+    want: "Insert: teal-tips' hand beside the same guarded switch, cover shut, in her cold room: the mirror of Jade's insert" });
   // the two roofs (lit windows' centroids lifted to the roof line), measured on C210's plate every 6 frames (adversary pass)
   const C210_ROOFS = [[0, 395, 536, 1530, 536], [0.5, 396, 552, 1531, 552], [1.0, 392, 589, 1535, 589], [1.5, 390, 643, 1540, 643],
     [2.0, 382, 708, 1543, 708], [2.5, 376, 780, 1546, 780], [3.0, 360, 855, 1549, 855], [3.5, 335, 929, 1552, 929]];
@@ -849,7 +860,7 @@ export function buildTimeline(A) {
     { ...handShot('The same hand slaps teal-tips Jade\'s button on the clock an eighth after 5...Ba5 (starting White\'s clock); White\'s hand hovers over the b-pawn off screen (moves 5-6)',
       { pos: [1.45, 3.1, -0.35], target: [5.8, 0.8, -0.1], fov: 36 }, [{ side: 'b', press: '5...Ba5' }]), sub: 'b' });
   S(null, holdsW, { ...brPlate('BR_faceW', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW; framed above the plate\'s board edge)'), sub: 'c' });
-  S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB; framed above the plate\'s board edge)'), sub: 'd' });
+  S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3, zoom: 1.1, pan: [0, 50], grade: COOL }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB; framed above the plate\'s board edge)'), sub: 'd' });
   S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));
   S('2:30.32', wd('BR', 2, 'spark'), chess('The first capture, 9.Qxg7 on "spark": impact frame, sparks off the clock', {}, withLook(CHESS_LOOK, flash([1, 1, 1], 0.9, 0.05))));
   S('2:30.5', eighth('2:30.5'), chess('9...Rg8 to 13.O-O on eighths'));
@@ -947,7 +958,7 @@ export function buildTimeline(A) {
   const rollBeats = [roll2.t, ...BEATS.filter((b) => b > roll2.t + 0.05 && b < dropT - 0.3)];
   // the hand-light plates: the room look with little bloom (the lights must not wash the faces white)
   const LK_HAND = { ...LK.room, bloom: 0.28, bloomThreshold: 0.93, halation: 0.1 };
-  const rollW = [['video', plate(), 'Jade raises her hand light, close'], ['video', plate(), 'Teal-tips Jade raises her hand light, close'], ['procedural', { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t } }, 'Cities across the night side, brighter'],
+  const rollW = [['video', plate(), 'Jade raises her hand light, close'], ['video', plate({ grade: COOL }), 'Teal-tips Jade raises her hand light, close (her cool cast)'], ['procedural', { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t } }, 'Cities across the night side, brighter'],
     ['procedural', { scene: 't2_graph_outro', p: { reveal: false, wave: [roll2.t, roll2.t + 1.2] } }, 'The contact graph, every node lit'], ['video', split({}, {}, 2, WALL), 'Both hand lights held up on either side of the wall; the frame burns to white for the drums cut']];
   rollBeats.forEach((b, i) => {
     const [m, sc, w] = rollW[i % rollW.length];

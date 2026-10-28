@@ -67,14 +67,17 @@ if (cs) {
   const p = P(cs, cs.t0);
   const Sc = schedule(A, p, cs.t0);
   const R = Sc.resets, n = R.length;
-  // the board's value, as counter.js valueAt draws it (whole counts on twos between resets; the climb to the release value)
-  const cr = p.countRate ?? 12;
+  // the board's value, as counter.js valueAt draws it: between resets it zooms up to the real day gap (climbAt, whole counts per
+  // film frame); a ratchet tick on every frame the rollers move, a carry where the hundreds wheel or above turns
+  const { valueAt } = await import(path.join(RENDER, 'src', 'scenes', 't2', 'data', 'counter.js'));
   const ticks = [];
-  for (let i = -1; i < n - 1; i++) {
-    const ta = i < 0 ? Sc.t0 : R[i].t, tb = R[i + 1].t;
-    const da = i < 0 ? Sc.epoch : R[i].day, db = R[i + 1].day;
-    for (let k = 1; ; k++) { const t = ta + (k - 1e-3) / cr; if (t >= tb - 1e-4) break; if (k < (db - da) * ((t - ta) / (tb - ta)) && t >= cs.t0) ticks.push({ t: r4(t), v: k }); }
-  }
+  { let prev = 0, last = -2;
+    for (let f = Math.ceil(cs.t0 * 24 - 1e-3); f / 24 < R[n - 1].t; f++) {
+      const t = f / 24, V = valueAt(Sc, A, t, p); const v = Math.round(V.v);
+      if (V.last !== last) { prev = 0; last = V.last; }
+      if (v > prev) ticks.push({ t: r4(t), v, carry: Math.floor(v / 100) !== Math.floor(prev / 100) });
+      prev = v;
+    } }
   const ta = R[n - 1].t + 0.06, tb = Sc.climbEnd;
   const roll = [];
   for (let v = 1; v <= Sc.target; v++) {          // v = target * f^2.6 crosses each whole number: one ratchet tooth per day

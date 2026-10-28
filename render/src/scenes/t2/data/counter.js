@@ -5,11 +5,12 @@
 // same day share one reset), each reset a two-frame red SIGNAL LOST and a flicker of VHS rewind lines. The resets land on a
 // 32nd-note grid taken from the beat list and come faster through the whispered count (one per sixteenth by 3:47.8), stuttering
 // to the last one, the 15 Sep 2026 entry. Past it the counter climbs to the release-date value (default 2026-10-27 -> 42),
-// digits rolling upward on "higher" (3:49.44), and keeps climbing a day per beat after that.
+// digits rolling upward on "higher" (3:49.44), and keeps climbing a day per beat after that. Between resets it zooms up to the
+// true number of days between the two entries (climbAt).
 // p: {release ('2026-10-27'), b0 (first grid point; default the beat at the shot start), gaps ([32nds] between resets, one per
 //     reset date; default accelerating 8,8,4,3,3, 2 x13, 1 x10, then a 2 before the last), higher (default the word "higher"), climbEnd (default its end),
 //     perBeat (days added per beat after the climb, 1), hold (s the release value is held first, 1.0), push (0.06),
-//     countRate (12: between resets the board counts up from zero, a whole count every two frames, right-aligned in the ones place)}
+//     between resets the board zooms up to the real day count between the two entries (climbAt), whole counts on every frame}
 import { P, css, mix } from '../../../palette.js';
 import { clamp, lerp, smooth, smoother, easeInOutCubic, easeOutCubic, range, hash1, hash2, rng } from '../../../util.js';
 import { ensureList, listNow, dayOf, gridT, beatK, lineByText, wordT, drawWheel, odoPos, vhsPass } from './lib.js';
@@ -54,22 +55,36 @@ function flashFrames(S) {
   return F;
 }
 
-// counter value (continuous, days) and the index of the last reset at time t
-function valueAt(S, audio, t, p) {
+// counter value (days) and the index of the last reset at time t.
+// Jade's note (take two, 27 Oct): between two resets the board ZOOMS UP to the real number of days between the two entries'
+// dates (13 Feb 1950 -> 29 Sep 1957 = 2,785) and snaps to 0 again: the reset's first frame reads 0, the rollers spin up
+// (eased in-out over the film frames of the interval, every wheel carried as on a mechanical counter) and touch the true gap
+// on the frame before the next reset. Whole counts only (every paused frame a legible, true in-between number); an interval
+// only one frame long shows its 0. Before the first reset it climbs from day 0 (9 Aug 1945) the same way.
+export function climbAt(S, t) {
+  const R = S.resets; const n = R.length;
+  const FA = flashFramesAll(S);
+  const fx = t / FRAME;
+  let i = -1; for (let k = 0; k < n; k++) if (fx >= FA[k] - 1e-3) i = k;
+  if (i >= n - 1) return null;
+  const fa = i < 0 ? Math.ceil(S.t0 / FRAME - 1e-3) : FA[i], fb = FA[i + 1] - 1;
+  const gap = (R[i + 1].day - (i < 0 ? S.epoch : R[i].day));
+  if (fb <= fa) return { v: 0, last: i, rate: 0, gap };
+  const u = clamp((fx - fa) / (fb - fa));
+  const v = Math.floor(gap * easeInOutCubic(u) + 1e-6);
+  const du = u > 0 && u < 1 ? (u < 0.5 ? 12 * u * u : 12 * (1 - u) * (1 - u)) : 0;          // d easeInOutCubic / du
+  return { v: Math.min(gap, v), last: i, rate: gap * du / ((fb - fa) * FRAME), gap };
+}
+// every reset's first film frame (flashFrames() keeps only those whose flash fits; the board snaps on all of them)
+function flashFramesAll(S) {
+  if (!S.fa) S.fa = S.resets.map((r) => Math.ceil(r.t / FRAME - 1e-3));
+  return S.fa;
+}
+export function valueAt(S, audio, t, p) {
   const R = S.resets; const n = R.length;
   if (t < S.t0) return { v: 0, last: -1, rate: 0 };
-  let i = -1; for (let k = 0; k < n; k++) if (t >= R[k].t) i = k;
-  if (i < n - 1) {
-    const ta = i < 0 ? S.t0 : R[i].t, tb = R[i + 1].t;
-    const da = i < 0 ? S.epoch : R[i].day, db = R[i + 1].day;
-    // Jade's note (3:45): after each snap to zero the board counts up like a real roller counter, the small numbers in the ones
-    // place (1, 2, 3 ...), low wheels rolling and the high ones at 0: a readable count (p.countRate, 24 a second = one a frame),
-    // capped at the real number of days to the next entry
-    // whole counts held for two frames each (on twos), so every number reads crisp
-    const f = clamp((t - ta) / (tb - ta)), cr = p.countRate ?? 12;
-    const vt = (db - da) * f, vc = Math.floor(cr * (t - ta) + 1e-3);
-    return vc < vt ? { v: vc, last: i, rate: 0 } : { v: vt, last: i, rate: (db - da) / (tb - ta) };
-  }
+  const C = climbAt(S, t);
+  if (C) return C;
   // past the last reset: climb to the release-date value, accelerating into "higher", then a day per beat
   const ta = R[n - 1].t + 0.06, tb = S.climbEnd;
   if (t < tb) {
@@ -213,7 +228,7 @@ export default {
     for (let k = 0; k < DR.n; k++) {
       const wx = px + 22 + (DR.n - 1 - k) * (DR.w + DR.gap), wy = py + 20;
       const pos = odoPos(v, k);
-      const blur = clamp(V.rate / Math.pow(10, k) / 24 * 0.9, 0, 1.3);
+      const blur = clamp(V.rate / Math.pow(10, k) / 24 * 0.9, 0, V.gap != null ? 0 : 1.3);   // a climb: crisp whole counts every frame (a smear ghosted them)
       drawWheel(c, wx, wy, DR.w, DR.h, pos, { size: 168, font: '700 168px Archivo', drum: '#121314', ink: '#efe9da', blur, shade: 0.9, pitch: 0.95, dy: 6 });
       c.strokeStyle = '#050505'; c.lineWidth = 3; c.strokeRect(wx, wy, DR.w, DR.h);
     }

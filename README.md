@@ -30,16 +30,16 @@ rendered frame by frame in headless Chromium).
 |---|---|---|
 | 0:00 | cold open | HOLD FIRE over Jade's eye in frame zero. A cut on every whispered count, a giant gold numeral each: romanesco, artichoke, sunflower, spiral aloe, a hurricane, a galaxy (1 1 2 3 5 8). The galaxy flashes red and the count scrubs back in VHS rewind to black. Again in human light: a match, a lighthouse, a city from a plane, Earth's night side, the contact graph, which pulls back into the catchlight of Jade's eye at her console. She looks up on the beat. |
 | 0:13 | verse 1 | Deep time to spaceflight as painted plates with white blueprint linework over them: Jade at the shore (OUT OF THE SEA), a lobe-finned fish, FIN / FOOT / HAND, her hand stencil among older ones on a cave wall; she walks through the eras (flint, wheel, mud-brick wall), an egg drawn into a grain jar, words pressed into a dusty road and a clay tally tablet, seeds and a canal in cross-section, the Okavango flood (FLOOD), then a flood of machines from the locomotive to Saturn V, and the ISS as a snowflake in the night. |
-| 0:35 | pre-chorus 1 | Signal print (riso): Voyager turns away, Echo's tower fires its ring of lights in bursts, the pulse rides 217 light-years to a blue point, take one's pulsar diagram (a pattern no dead star could make). First sight of teal-tips Jade in her mirrored room: WE'RE AWAKE, and a push into her eye. |
-| 0:52 | chorus 1 | The dish field turns to one point (CAN'T BE SURE); the Golden Record cover engraves itself; a split screen of the two Jades, each singing her half of the line (I'M COUNTING ON YOU); one SETI@home CRT multiplies to a wall of bedrooms; the studio pose; a crane out over the dishes. |
+| 0:35 | pre-chorus 1 | Signal print (riso): Voyager turns away, Echo's tower fires its ring of lights in bursts, the pulse rides 217 light-years to a blue point, take one's pulsar diagram (a pattern no dead star could make). First sight of teal-tips Jade in her mirrored room, cold and hard, her monitors tracking Jade's dish field in red alert: WE'RE AWAKE, and a push into her eye. |
+| 0:52 | chorus 1 | The dish field turns to one point (CAN'T BE SURE); the Golden Record cover engraves itself; a split screen of the two Jades in two rooms with a wall between them, warm and cold, each one's monitor tracking the other as an unknown contact, each singing her half of the line (I'M COUNTING ON YOU); one SETI@home CRT multiplies to a wall of bedrooms; the studio pose; a crane out over the dishes. |
 | 1:12 | post-chorus 1 | The contact graph grows from Earth, one set of links per shout; the 8 lands on "Counting on you", then the count again across half the galaxy. |
 | 1:23 | verse 2 | Ink wash: teal-tips Jade among the alchemists at the cauldron; 硫黃 · 硝石 brushed large; the warning written down the scroll (FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE); fire lance, hand cannon, Constantinople, the Somme, and the Trinity flash burning through the paper into an oil painting of Serpukhov-15 (26 SEP 1983): five tracks, СТАРТ, the ghost of a real first strike, Petrov on the phone (`> ignored all previous instructions`). Morning in Moscow: WE'RE ALIVE. |
 | 1:43 | pre-chorus 2 | The near-miss list (30 entries, 1950–2026, fact-checked) on teletype newsprint with a running total that never settles; 100 gold coins land heads, the first 30 stamped with the list's years, 2¹⁰⁰ typed under them; the coins become a tree whose tails branches end in SIGNAL LOST, and one gold path leaves the top. |
-| 1:53 | chorus 2 | Every chorus 1 shot returns as a split: Jade on the left, teal-tips on the right, in mirrored rooms; two of the CRT wall's screens now show their control rooms. |
+| 1:53 | chorus 2 | Every chorus 1 shot returns as a split with the wall: Jade on the left, teal-tips on the right, in mirrored rooms that do not match (warm and cold); the contact closer; two of the CRT wall's screens show their control rooms; one hand each rests beside a guarded switch; from the crane, a thin line of signal runs between the two buildings. |
 | 2:14 | post-chorus 2 | Earth's lights at growing scale (a window, a street, a city, the night side), then a chessboard sets itself and the two Jades sit down across it. |
 | 2:23 | bridge | Fischer–Tal, Leipzig 1960, replayed from the PGN at speed with real one-minute (1+0) clocks: chalk lyrics, eyes in the dark around the board, impact frames and speed lines, captured pieces flying past as a chain, the perpetual check, both hands let go. The camera dives into the black queen, the board becomes a Suprematist square and wedge, then a Soviet poster in newsprint halftone: B-59 under the destroyers, SIXTY-TWO DEPTH CHARGES FALLING, two red officers, Arkhipov's open hand, NO. |
-| 2:43 | build | Take one's war scene: missile tracks over the pole, the galaxy's worlds firing and going dark, NUCLEAR DETONATIONS, SIGNAL LOST. Jade grabs the jog wheel and rewinds it all for 3 s (warheads lift off, lights come back, dark worlds relight). HOLD YOUR FIRE / SHOW YOUR LIGHT: the three who held fire, both Jades raising a hand light, the cut rate doubling into white. |
-| 3:04 | drop | A white void and a mirror: Jade walks to the glass, the impact swings round to teal-tips standing the same way, their palms meet (YOU WERE COUNTING TOO). The ripple becomes the 610-world phyllotaxis disk (13 21 34), a chain through it breaks link by link, the mirror is gone and the two stand side by side; 55 89; Echo's tower and its night side linked like a constellation; both Jades at one console, receiving. |
+| 2:43 | build | Take one's war scene: missile tracks over the pole, the galaxy's worlds firing and going dark, NUCLEAR DETONATIONS, SIGNAL LOST. Jade spins the jog wheel backward (REW, SIGNAL LOST on her dead monitor) and rewinds it all for 3 s (warheads lift off, lights come back, dark worlds relight). HOLD YOUR FIRE / SHOW YOUR LIGHT: the three who held fire, both Jades raising a hand light on either side of a wall, the cut rate doubling into white. |
+| 3:04 | drop | A white void and a mirror: Jade walks to the glass, the impact swings round to teal-tips standing the same way, their palms meet (YOU WERE COUNTING TOO), framed like the hands letting go of the chess pieces, whose ghost dissolves into them. The ripple becomes the 610-world phyllotaxis disk (13 21 34), a chain through it breaks link by link, the mirror is gone and the two stand side by side; 55 89; Echo's tower and its night side linked like a constellation; both Jades at one console, receiving. |
 | 3:33 | outro | Six hundred worlds across the Milky Way, each flickering red once and holding gold. DAYS SINCE LAST RESET snaps to zero at every near-miss, faster through the whispered count, then climbs: the count goes higher. The ISS over the dish field, Jade at dawn lowering her headphones, the eye again; the title lands on the final hit, the end card, and the last frame is frame zero, so the post loops. |
 
 ### How it was made
@@ -106,8 +106,9 @@ The card reads:
 
 ### Deliverables
 
-A 540p preview of RC4 is committed: [`previews/hold_fire_t2_rc4_540p.mp4`](previews/hold_fire_t2_rc4_540p.mp4) (960×540, 2-pass H.264
-at 1.4 Mb/s, AAC 128k of the mix, 47 MB). The full-resolution files are rendered locally to `work/out/` (not committed;
+A 540p preview of RC5 (the adversary pass) is committed: [`previews/hold_fire_t2_rc5_540p.mp4`](previews/hold_fire_t2_rc5_540p.mp4) (960×540, 2-pass H.264
+at 1.4 Mb/s, AAC 128k of the mix). It was made in a cloud session: the changed ranges re-rendered at 1080p and spliced into RC4's
+preview frames (RC4's preview is in git history, commit 9b9bdf7); see the adversary pass in `REVIEW_NOTES.md`. The full-resolution files are rendered locally to `work/out/` (not committed;
 they exceed GitHub's 100 MB limit):
 
 | file | what |
@@ -119,6 +120,12 @@ they exceed GitHub's 100 MB limit):
 Release candidate 4 (commit 245d40a): RC2's full-res QA, its fixes (RC3) and the chess reviewer's fixes (RC4: one-minute
 clocks, the clock on White's right in every shot, the moving hand presses the clock) are in `QA_RC2.md`. The days counter ends on 42 (Jade:
 keep 42; the release is planned for 1 Nov).
+
+RC5 (the adversary pass, 28 Oct; Jade's plan "Hold Fire: adversary arc plan (next pass)"): teal-tips reads as the other side
+from her first shot (a cold room, her monitors tracking Jade's dish field), a wall and a warm/cold grade between them in every
+split until the glass, each one's monitor tracking the other, hands resting near guarded switches in chorus 2, a line of signal
+between the two buildings, BU04 as an unmistakable rewind, and the palms on the glass rhymed with the hands letting go of the
+chess pieces. The 1080p master for RC5 has to be rendered locally (`tools/t2/render_segments.sh`), from the full `work/`.
 
 ### Reproduce
 
@@ -166,7 +173,8 @@ takes about 55 minutes with 3 jobs on 4 CPUs (0.55 s a frame). With no `media/au
 ### Generation spend
 
 `python3 tools/gen/spend.py` (list-price estimates; every paid call is logged in `docs/spend_ledger.jsonl`):
-**$348.26 of the $950 cap** for the project, 796 billed items. Take one's share (25–26 Oct, before take two started at
+**$374.40 of the $950 cap** for the project, 829 billed items (the adversary pass: $0.67, five Nano Banana Pro stills; the
+breakdown below is as of RC2). Take one's share (25–26 Oct, before take two started at
 15:47 UTC on 26 Oct) is $160.01; take two's is $188.25, two thirds of it ($127.16) Seedance 2.5 sung takes (206 paid takes
 logged in `docs/take2/takes_g*.json`, plus keyframes). By model, both takes: Seedance 2.5 $274.67 (179 calls), Nano Banana Pro
 $34.74 (253), Veo 3.1 $26.00 (27), Seedance 2.0 $8.25 (13), Veo 3.1 Fast $2.80 (7), GPT Image 2.5 $1.64 (8), the rest under

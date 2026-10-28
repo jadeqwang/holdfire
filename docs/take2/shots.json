@@ -45,7 +45,7 @@
   "clip": [
    "CO02"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -71,7 +71,7 @@
   "clip": [
    "CO03"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -97,7 +97,7 @@
   "clip": [
    "CO04"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -123,7 +123,7 @@
   "clip": [
    "CO05"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -153,7 +153,7 @@
   "clip": [
    "CO06"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -179,7 +179,7 @@
   "clip": [
    "CO07"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -205,7 +205,7 @@
   "clip": [
    "CO08"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "beat",
@@ -231,7 +231,7 @@
   "clip": [
    "CO08"
   ],
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "eighth",
@@ -250,12 +250,12 @@
   "timing_section": "Intro",
   "lyric": null,
   "voice": null,
-  "picture": "The count scrubs backward in VHS rewind lines, one spiral per 16th (galaxy to romanesco), down to black on the bar line",
+  "picture": "The count scrubs backward in VHS rewind lines, one spiral per 16th (galaxy to romanesco), and stops on the first spiral: the floret paused under the VHS look, its giant gold 1 lit, until the match",
   "era_style": "Cold open spirals: macro nature photography, true colour; natural colour, gold numerals on black; spiral centre locked at frame centre",
   "method": "procedural",
   "scene": "t2_vhs_rewind",
   "clip": null,
-  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1)",
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
@@ -263,7 +263,7 @@
    "t": 7.16
   },
   "plan": "0:07.16",
-  "notes": "no text: the red does the work"
+  "notes": "no text: the red does the work. Jade (0:08.8): the rewind stops on the first 1 (was: down to black), so the match reads as the second 1"
  },
  {
   "id": "CO11",
@@ -281,7 +281,7 @@
   "clip": [
    "CO11"
   ],
-  "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
+  "type": "1 1 2 3 5 8 (giant, then the bottom-third row; unwinds with the rewind, back to the first 1) / 1 1 2 3 5 8 (the carried 1, then giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -307,7 +307,7 @@
   "clip": [
    "CO12"
   ],
-  "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
+  "type": "1 1 2 3 5 8 (the carried 1, then giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -333,7 +333,7 @@
   "clip": [
    "CO13"
   ],
-  "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
+  "type": "1 1 2 3 5 8 (the carried 1, then giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -359,7 +359,7 @@
   "clip": [
    "CO14"
   ],
-  "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
+  "type": "1 1 2 3 5 8 (the carried 1, then giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -383,7 +383,7 @@
   "method": "procedural",
   "scene": "t2_graph_flash",
   "clip": null,
-  "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
+  "type": "1 1 2 3 5 8 (the carried 1, then giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -409,7 +409,7 @@
   "clip": [
    "CO16"
   ],
-  "type": "1 2 3 5 8 (giant, then the row; fades as the light gathers)",
+  "type": "1 1 2 3 5 8 (the carried 1, then giant, then the row; fades as the light gathers)",
   "lipsync_window": null,
   "anchor": {
    "kind": "beat",
@@ -803,13 +803,13 @@
   "timing_section": "Verse 1",
   "lyric": "mud",
   "voice": "A",
-  "picture": "A reed stylus presses tally wedges into wet clay; the wedges count while \"mud\" holds (to 27.3): blueprint outlines count them one per eighth",
+  "picture": "A reed stylus presses wedges into wet clay: the tablet already counts 1 1 2 3 5 8 13 21 34 55 in Babylonian sexagesimal numerals, and the stylus presses the last two wedges of 89 where it touches down",
   "era_style": "Verse 1, deep time to spaceflight: painted plates with white blueprint linework drawn over them; sepia and cyanotype blue; schematics draw on with the snare",
   "method": "video",
   "scene": "multi",
   "layers": [
    "t2_first",
-   "t2_blueprint"
+   "t2_tablet"
   ],
   "clip": [
    "V113"
@@ -822,7 +822,7 @@
    "t": 25.372
   },
   "plan": "0:25.37",
-  "notes": "writing began as counting grain"
+  "notes": "writing began as counting grain; the numerals are genuine (tools/t2/cuneiform_card.py)"
  },
  {
   "id": "V114",
@@ -1226,10 +1226,14 @@
   "timing_section": "Pre-Chorus 1",
   "lyric": "Hear it and you'll know we're",
   "voice": "B",
-  "picture": "First sight of teal-tips Jade in her own (mirrored, cooler) control room, headphones on, singing",
+  "picture": "First sight of teal-tips Jade in her own (mirrored, cold) control room, headphones on, singing; on her monitor bank a target track in red alert ends on Jade's dish field",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
-  "scene": "t2_plate",
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_contact"
+  ],
   "clip": [
    "P105"
   ],
@@ -1258,10 +1262,12 @@
   "picture": "Closer: teal-tips Jade opens her eyes on \"awake\"",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
-  "scene": "t2_plate",
-  "clip": [
-   "P106"
+  "scene": "multi",
+  "layers": [
+   "t2_plate",
+   "t2_contact"
   ],
+  "clip": null,
   "type": "WE'RE AWAKE",
   "lipsync_window": [
    47.732,
@@ -1273,7 +1279,7 @@
    "t": 47.732
   },
   "plan": null,
-  "notes": "cut on \"awake\" so the eyes open on the word"
+  "notes": "cut on \"awake\" so the eyes open on the word; the held -WAKE at 0.57x so no second onset"
  },
  {
   "id": "P107",
@@ -1384,13 +1390,13 @@
   "timing_section": "Chorus 1",
   "lyric": "but if you are I'm counting on you",
   "voice": "both",
-  "picture": "Split screen at their own consoles, neither aware of the other: Jade (left) sings \"but if you are\" while teal-tips (right) listens; on \"I'm\" teal-tips sings \"I'm counting on you\" while Jade listens",
+  "picture": "Split screen, two rooms with a wall between them: Jade (left, warm lamp) sings \"but if you are\" while teal-tips (right, cold fluorescent) listens; on \"I'm\" teal-tips sings \"I'm counting on you\" while Jade listens. Each one's monitor tracks the other as an unknown contact (CONTACT 0217)",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
-  "scene": "t2_split",
+  "scene": "multi",
   "layers": [
-   "t2_plate",
-   "t2_plate"
+   "t2_split",
+   "t2_contact"
   ],
   "clip": [
    "C103L",
@@ -1409,7 +1415,7 @@
    "t": 56.671
   },
   "plan": "0:56.67",
-  "notes": "Jade v3: one phrase per half; both halves cut on the onset of \"I'm\" (phraseSplit)"
+  "notes": "Jade v3: one phrase per half; both halves cut on the onset of \"I'm\" (phraseSplit). Adversary pass: wall bar, warm/cold split grade (RM matching dropped), contact tracks"
  },
  {
   "id": "C104",
@@ -1943,7 +1949,7 @@
   "clip": [
    "V211"
   ],
-  "type": "FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE",
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -1969,7 +1975,7 @@
   "clip": [
    "V211"
   ],
-  "type": "FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE",
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "beat",
@@ -2290,7 +2296,7 @@
   "timing_section": "Verse 2",
   "lyric": "Secret list of every near-miss and disaster running total no one ever knew",
   "voice": "B",
-  "picture": "The near-miss list scrolls on teletype paper (~5 lines/s, the 27-entry fact-checked list); years big, place and description small; the tally beside it climbs with the entries, then its wheels keep spinning, never settling (no fixed total)",
+  "picture": "The near-miss list scrolls on teletype paper (~6.5 lines/s, the 30-entry fact-checked list); years big, place and description small; the tally beside it climbs with the entries, then its wheels keep spinning, never settling (no fixed total)",
   "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
   "method": "procedural",
   "scene": "t2_nearmiss",
@@ -2314,7 +2320,7 @@
   "timing_section": "Pre-Chorus 2",
   "lyric": "coin flips all heads a hundred in a row",
   "voice": "B",
-  "picture": "100 gold coins land heads, the first 27 stamped with the list's years, filling a 10 x 10 grid; the full 2^100 number types across the bottom",
+  "picture": "100 gold coins land heads, the first 30 stamped with the list's years, filling a 10 x 10 grid; the full 2^100 number types across the bottom",
   "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
   "method": "procedural",
   "scene": "t2_coins",
@@ -2424,10 +2430,10 @@
   "picture": "Split at their mirrored consoles: Jade (left) sings \"but if you are\" while teal-tips listens; on \"I'm\" teal-tips sings \"I'm counting on you\" while Jade listens",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
-  "scene": "t2_split",
+  "scene": "multi",
   "layers": [
-   "t2_plate",
-   "t2_plate"
+   "t2_split",
+   "t2_contact"
   ],
   "clip": [
    "C203L",
@@ -2478,13 +2484,13 @@
  {
   "id": "C208",
   "t0": 125.824,
-  "t1": 128.398,
+  "t1": 127.739,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
-  "lyric": "in the white noise I can hear you breathe somewhere",
+  "lyric": "in the white noise I can hear you breathe",
   "voice": "both",
-  "picture": "Both Jades in the studio pose; the two halves match exactly, hard vertical line between them",
+  "picture": "Both Jades in the studio pose, the same pose on either side of the wall: warm room and cold room (the audience sees the mirror; they do not)",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
   "scene": "t2_split",
@@ -2499,7 +2505,7 @@
   "type": null,
   "lipsync_window": [
    125.824,
-   128.378
+   127.739
   ],
   "anchor": {
    "kind": "word",
@@ -2510,9 +2516,35 @@
   "notes": null
  },
  {
+  "id": "C208b",
+  "t0": 127.739,
+  "t1": 128.398,
+  "section": "Chorus 2",
+  "edit_section": "C2",
+  "timing_section": "Chorus 2",
+  "lyric": "somewhere",
+  "voice": "both",
+  "picture": "Insert: Jade's hand rests on the console beside a guarded switch, its red cover shut; she does not touch it (warm lamp)",
+  "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
+  "method": "still",
+  "scene": "t2_still",
+  "clip": [
+   "C208b"
+  ],
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "beat",
+   "ref": "beat after \"breathe\" (on \"somewhere\")",
+   "t": 127.739
+  },
+  "plan": null,
+  "notes": null
+ },
+ {
   "id": "C209",
   "t0": 128.398,
-  "t1": 131.845,
+  "t1": 130.911,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2533,12 +2565,38 @@
   "type": null,
   "lipsync_window": [
    128.398,
-   131.84
+   130.911
   ],
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[5] \"If\"",
    "t": 128.398
+  },
+  "plan": null,
+  "notes": null
+ },
+ {
+  "id": "C209b",
+  "t0": 130.911,
+  "t1": 131.845,
+  "section": "Chorus 2",
+  "edit_section": "C2",
+  "timing_section": "Chorus 2",
+  "lyric": null,
+  "voice": "both",
+  "picture": "Insert: teal-tips' hand beside the same guarded switch, cover shut, in her cold room: the mirror of Jade's insert",
+  "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
+  "method": "still",
+  "scene": "t2_still",
+  "clip": [
+   "C209b"
+  ],
+  "type": null,
+  "lipsync_window": null,
+  "anchor": {
+   "kind": "beat",
+   "ref": "second beat of the held \"are\"",
+   "t": 130.911
   },
   "plan": null,
   "notes": null
@@ -2552,10 +2610,14 @@
   "timing_section": "Chorus 2",
   "lyric": "I'm counting on you",
   "voice": "both",
-  "picture": "Crane up out of both rooms side by side: the faint signal each one hears comes from the same direction, the other control room",
+  "picture": "Crane up out of both rooms side by side: the faint signal each one hears comes from the other control room, a thin line of light between the two buildings, pulses running both ways",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
-  "scene": "t2_plate",
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_signal_link"
+  ],
   "clip": [
    "C210"
   ],
@@ -2872,12 +2934,17 @@
   "timing_section": "Post-Chorus 2",
   "lyric": "on you",
   "voice": "both",
-  "picture": "The two Jades sit down across the board from each other",
+  "picture": "The two Jades sit down across the board from each other; the clock on White's right (the near edge), seen from behind",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "video",
-  "scene": "t2_plate",
+  "scene": "multi",
+  "layers": [
+   "t2_first",
+   "t2_chess_paint"
+  ],
   "clip": [
-   "X213"
+   "X213",
+   "assets/t2/chess/X213_clock.png"
   ],
   "type": null,
   "lipsync_window": null,
@@ -2946,7 +3013,7 @@
   "timing_section": "Bridge",
   "lyric": "every hunter",
   "voice": "A",
-  "picture": "Teal-tips Jade's hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 on the beat, lets go, and the cut back to the board comes a sixteenth later",
+  "picture": "Teal-tips Jade's left hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 on the beat, lets go and heads for the clock; the cut comes a sixteenth later",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -2970,7 +3037,7 @@
   "timing_section": "Bridge",
   "lyric": null,
   "voice": "A",
-  "picture": "Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)",
+  "picture": "The same hand slaps teal-tips Jade's button on the clock an eighth after 5...Ba5 (starting White's clock); White's hand hovers over the b-pawn off screen (moves 5-6)",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -2983,7 +3050,7 @@
    "t": 146.902
   },
   "plan": null,
-  "notes": null
+  "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR02c",
@@ -3502,14 +3569,16 @@
   "timing_section": "Build",
   "lyric": "fall",
   "voice": "B",
-  "picture": "Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back",
+  "picture": "Jade at her console spins the jog wheel BACKWARD from the first frame: the wheel blurs counter-clockwise, REW chevrons, the VHS rewind lines start under her hand; SIGNAL LOST on the dead monitor she is staring at",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
-  "scene": "t2_plate",
-  "clip": [
-   "BU04"
+  "scene": "multi",
+  "layers": [
+   "t2_plate",
+   "t2_rewind_console"
   ],
-  "type": "SIGNAL LOST",
+  "clip": null,
+  "type": null,
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3517,7 +3586,7 @@
    "t": 170.073
   },
   "plan": "2:50.83",
-  "notes": "moved from \"Only\" (2:50.83) to \"fall\" so the rewind gets 3 s; rate 3.0: hand on the wheel to her face in 0.76 s"
+  "notes": "moved from \"Only\" (2:50.83) to \"fall\" so the rewind gets 3 s; rate 3.0: hand on the wheel to her face in 0.76 s. Adversary pass: reads as a rewind, never a launch (Jade, 28 Oct)"
  },
  {
   "id": "BU05",
@@ -3676,7 +3745,7 @@
   "timing_section": "Build",
   "lyric": "Hold your fire",
   "voice": "both",
-  "picture": "Both Jades raise a hand light at their consoles (split)",
+  "picture": "Both Jades raise a hand light at their consoles, a wall between them: the same gesture on both sides, parallel, not together (split)",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
   "scene": "t2_split",
@@ -3733,7 +3802,7 @@
   "timing_section": "Build",
   "lyric": null,
   "voice": "both",
-  "picture": "Teal-tips Jade raises her hand light, close (cut rate doubles on the roll: one per beat)",
+  "picture": "Teal-tips Jade raises her hand light, close (her cool cast) (cut rate doubles on the roll: one per beat)",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
   "scene": "t2_plate",
@@ -3807,7 +3876,7 @@
   "timing_section": "Build",
   "lyric": null,
   "voice": "both",
-  "picture": "Both hand lights held up, split; the frame burns to white for the drums cut (cut rate doubles on the roll: one per beat)",
+  "picture": "Both hand lights held up on either side of the wall; the frame burns to white for the drums cut (cut rate doubles on the roll: one per beat)",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "video",
   "scene": "t2_split",
@@ -3945,13 +4014,15 @@
   "timing_section": "Drop",
   "lyric": "counting",
   "voice": "B",
-  "picture": "The palms meet on the glass on \"too\"",
+  "picture": "The palms meet on the glass on \"too\"; the shot opens framed like the let-go at the chess board (BR11b) and a ghost of those hands dissolves into these",
   "era_style": "Mirror: white void; each Jade keeps her own palette (signal-print inks on one side, cool teal and silver on the other)",
   "method": "video",
-  "scene": "t2_mirror",
-  "clip": [
-   "DR05"
+  "scene": "multi",
+  "layers": [
+   "t2_mirror",
+   "t2_still"
   ],
+  "clip": null,
   "type": "YOU WERE COUNTING TOO",
   "lipsync_window": null,
   "anchor": {
@@ -4306,7 +4377,7 @@
   "timing_section": "Outro",
   "lyric": "One one two three The count goes higher",
   "voice": "both",
-  "picture": "[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 2025 entry; then it climbs to the release-date value (534 on 26 Oct 2026; recompute for release), digits rolling up on \"higher\"",
+  "picture": "[ N ] DAYS SINCE LAST RESET on a factory safety board: counts from 9 Aug 1945 and snaps to zero on every near-miss entry (two-frame red SIGNAL LOST, VHS flicker, the year beside the number), faster through the whispered count, the last reset the 15 Sep 2026 entry; then it climbs to the release-date value (RELEASE: 42 on 27 Oct 2026; recompute if the date moves), digits rolling up on \"higher\"",
   "era_style": "Near-miss list, coins: teletype on newsprint, then engraved gold coins; newsprint grey, gold",
   "method": "procedural",
   "scene": "t2_counter",
@@ -4453,6 +4524,6 @@
    "t": 244.05
   },
   "plan": "4:04.05",
-  "notes": "no real images are used so far (every picture is generated or drawn): add p.images [{credit: \"ESA/Hubble\"}] / NASA if one is"
+  "notes": "no real images are used so far (every picture is generated or drawn): add p.images [{credit: \"ESA/Hubble\"}] / NASA if one is; p.support adds FLUX Video Upscale (RC2: the 720p sung and close-up plates are built from its 1080p upscales, picks2 `upscaled`)"
  }
 ]

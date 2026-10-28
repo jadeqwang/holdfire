@@ -265,3 +265,61 @@ onset, coverage OK, no type rule breaks; chess_check OK; plate_windows: C103L (1
 - 1:50.5 stamp the non-validated years on the coins too, so a pause shows we're nearly halfway through the hundred flips.
 - 4:05.9 keep the credits on screen (no fade); put the video models on one line or two per line.
 - Approved: spend on sharpening/upscaling the 720p sung takes.
+
+## Adversary pass (28 Oct, the plan "Hold Fire: adversary arc plan (next pass)")
+Goal (Jade): a first-time viewer reads teal-tips Jade as the other side, a default adversary, and likes her by the end. The
+friendship ending already worked; the adversary beginning was missing (a v7 viewer: "they seemed to be friends and then they
+were playing chess for some reason"). The open hand is the spine: cave stencil, Petrov's hand, the let-go, Arkhipov's hand, the
+palms on the glass. Preview: `previews/hold_fire_t2_rc5_540p.mp4` (review page v8). Stills and sheets: `docs/take2/adversary/`
+(the 0:58 / 1:58 checkpoint at 1920 and 480 px wide, `hand_sheet.jpg`). check_cuts: 0 cuts off onset, coverage OK (173 shots);
+the one type-rule line ("FLAMES ROSE…", a caption at 3.84 words/s) is on RC4 too. chess_check OK (42 plies). lipcheck: 16 picks,
+0 mismatches, no pick or lag changed (DR16's strip could not be drawn without its local dotfix clip; its frames were checked against
+the same formula from its render log). Spend: $0.67 (five Nano Banana Pro stills); project $374.40 of $950.
+
+**Done (plan items in order)**
+1. **C103 (0:57): two rooms with a wall.** `t2_split` gains `bar` (a 32 px black wall with faint scanlines and an interference
+   band, on twos) and `tone` (a per-side grade after each half is drawn). WALL = bar + Jade's half WARM (her amber lamp) and
+   teal-tips' COLD (blue-white, the jacket's orange muted, deeper blacks); it replaces RM's matching. New `t2_contact` maps an
+   unknown-contact scope onto each one's top monitor (CONTACT 0217 · BRG 090 · UNKNOWN, a blip pulsing on the beat, no country);
+   teal-tips' display is Jade's mirrored (her lettering reads reversed), so each track points at the other across the wall. Jade's
+   "but if you are" readout moved onto her side of the wall (it bridged the split). Jade OK'd the checkpoint stills.
+2. **P105–P107b (0:46): the other side.** COLD_P on all four (cooler, harder, deeper blacks); on her monitor bank a red-alert
+   track whose end is a monochrome feed of Jade's dish field (C101's plate, Jade in the reticle; `t2_contact` feed / alert), plus a
+   second alert scope; P106 gets one on the monitor at the frame's edge. WE'RE AWAKE and the eye push unchanged.
+3. **Chorus 2.** WALL on C201, C202 (the Golden Record goes silver on her side), C203 (contacts closer and brighter), C208, C209.
+   C210: new `t2_signal_link`, a thin line of light between the two buildings, tracked through the crane, warm and cold pulses
+   crossing on every beat. New inserts C208b (Jade, warm) and C209b (teal-tips, cold, flipped = the mirror of Jade's): a hand
+   resting beside a guarded switch, cover shut, no lettering, one beat each on the cut grid (C208's last beat "somewhere"; C209's
+   held "are" from its second beat to the crane), stills with a slow push (`picks_g5.json`). Nano Banana Pro from the room sheets:
+   v1 drew the cover open (armed), so v2 shut it; teal-tips' v3 is Jade's v2 relit cold. "If you are" holds on Jade's side through C209b.
+4. **BU12 / BU17 (3:00): parallel, not together.** WALL on both splits (her hand light goes white-blue, Jade's stays gold).
+   Audit: the first unwalled shared frame is DR03; the chorus-2 CRT insets sit in separate screens, DR01/DR02 have the glass
+   between them, and X213 is the plan's exception (checked: neither smiles, eyes in the dark, overhead light).
+5. **The hand rhyme.** DR05 opens framed like BR11b (zoom 1.2, the palms raised to where the chess hands open, about the same
+   scale) and eases back to the glass's framing by the cut on "too" (DR06's ripple centre unchanged); BR11b's let-go frame
+   (`render/assets/t2/rhyme/br11b_letgo.jpg`, the edit's own frame at 2:38.08, faded out below the hands) dissolves out over DR05's
+   first five frames. `hand_sheet.jpg`: the five moments read as one line; Petrov's is the weakest (a hand on the phone, not open).
+6. **Cool cast (optional, done).** COOL (milder than COLD) on her solo shots: C108, V201 (under the ink), V218 (the Moscow
+   morning), BR02d, BU14; P105–P107b carry COLD_P.
+7. **BU04 (2:50): a rewind, never a launch.** New `t2_rewind_console`, tracked to the plate's pull-back by plate frame: the jog
+   wheel spins backward from the first frame (counter-clockwise blur arcs and chevrons), the VCR's ◀◀ REW in the OSD corner (VT323,
+   the OSD lyric's look, on a soft dark backing), the VHS rewind pass already running (0.3 → 0.7), and SIGNAL LOST on the dead
+   monitor she is staring at (red VT323, blinking on twos); the cap under her hand is gone. New plate fix mode `neutral` lifts the
+   red cast off the platter (low-saturation pixels only, so her fingers keep their colour).
+
+**How the preview was made (this cloud session)**
+The session started without `media/` and `work/`. `tools/t2/restore_media.py` (new) restores generated takes and stills from the
+relay's KV mirror (kept until ~15 Nov; free), and the plates were re-conformed with `plates.py` (from the upscales, as RC2 did).
+P107's push and DR05's mirror composite are derived clips whose scripts lived in a scratchpad; they were rebuilt here to match RC4
+(P107: a cubic ease-in 1 → 6.88x about the eye at (800, 550), fitted to RC4's frames; DR05: the Veo take reversed, the glass line
+tracked and centred, the left side mirrored with a cool grade). Your local `work/` has the originals, so a local master render
+uses those. The 540p preview re-renders only the changed ranges (46.0–51.7, 56.7–62.2, 64.6–67.3, 82.6–85.0, 102.1–103.0,
+113.2–122.9, 125.8–134.1, 148.0–148.6, 170.1–170.8, 180.1–183.9, 191.4–193.4) at 1080p and splices them into RC4's frames
+(the CRT matrix C204, whose derived clips are not in KV, is RC4's; nothing in it changed). The audio is RC4's mix.
+
+**Left**
+- The 1080p master (and the X and hook files) must be rendered locally with the full `work/`: `tools/t2/render_segments.sh`.
+- Petrov's hand is the weakest beat of the open-hand line (a grip on the phone).
+- C208's "in the white noise…" readout still sits across the wall (both sing it); I'M COUNTING ON YOU and CAN'T BE SURE are
+  title cards across the split, left as they were (moving them into a half would put them over a face).
+- The contact lettering (CONTACT 0217) is small at 480 px; the blip, bracket and track read.

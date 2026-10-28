@@ -6,7 +6,11 @@
 //   { side: 'w'|'b', move: '5...Ba5' }           hover over the piece (a full beat for moves 5-6), grip, carry it on the ply's own arc
 //                                                (state.js moves the piece; the hand holds its head), set it down on the ply time,
 //                                                open and withdraw
-//   { side, press: t | 'start' | '1.e4' }        slap the side's clock button at song time t (the start press, or a ply's time), lift away
+//   { side, move: '5...Ba5', press: true }        the same, and then the same hand goes on to its clock button and presses it at the
+//                                                ply's press time (schedule.js tp), then lifts away
+//   { side, press: t | 'start' | '1.e4' }        slap the side's clock button at song time t (the start press, or a ply's press time), lift away
+//   hand: 'L' | 'R' on any track                 which of her hands (default: the clock-side hand, the one that presses: the clock is on
+//                                                White's right = Black's left, so Jade plays with her right hand, teal-tips with her left)
 //   { side, hold: 'g4', release: t }             fingers on the piece on that square (pinch), or hovering over it ('hover': true);
 //                                                at `release` the hand opens and lifts off ("let go")
 // The arm runs from the grip point toward the player's shoulder (projected), so it always enters the frame from her side; the sprite
@@ -49,15 +53,43 @@ const GRIP_H = { P: 0.6, R: 0.7, N: 0.78, B: 0.92, Q: 1.12, K: 1.24 };
 function headOf(ps) { return add(ps.pos, qRot(ps.q, [0, GRIP_H[ps.type] * ps.scale[1], 0])); }
 
 const sideZ = (s) => (s === 'w' ? 1 : -1);
+// which hand: the clock-side one by default (the clock is at +x: White's right, Black's left); +x shoulder for White's right hand and
+// for Black's left hand
+const clockHand = (side) => (side === 'w' ? 'R' : 'L');
+const handX = (side, hand = clockHand(side)) => ((hand === 'R') === (side === 'w') ? 1.2 : -1.2);
 // where the arm comes from: the player's shoulder, beyond her edge of the board
-const shoulder = (side, grip) => [grip[0] * 0.35 + (side === 'w' ? 1.2 : -1.2), 3.4, sideZ(side) * 8.6];
-const retreat = (side, grip) => [lerp(grip[0], shoulder(side, grip)[0], 0.35), grip[1] + 1.6, grip[2] + sideZ(side) * 3.6];
+const shoulder = (side, grip, hand) => [grip[0] * 0.35 + handX(side, hand), 3.4, sideZ(side) * 8.6];
+const retreat = (side, grip, hand) => [lerp(grip[0], shoulder(side, grip, hand)[0], 0.35), grip[1] + 1.6, grip[2] + sideZ(side) * 3.6];
 
 const BTN = (side) => [CLOCK_POS[0] + 0.18, 0.72, CLOCK_POS[2] + sideZ(side) * 0.68];
 
-// one hand at time t -> {pose, grip [x,y,z], amt (0..1 presence), side} or null
+// a slap on the side's button at tp, coming from `from` (a point, or null: from her shoulder side) -> pose or null (not yet / gone)
+function pressAt(side, hand, tp, t, from, t0 = tp - 0.3) {
+  const B = BTN(side), top = add(B, [0, 0.62, sideZ(side) * 0.1]);
+  const src = from || retreat(side, B, hand);
+  if (t < t0) return null;
+  if (t < tp - 0.05) {   // from a piece: an arc over the pieces in between (a king is 1.6 tall)
+    const u = easeOutCubic((t - t0) / Math.max(1e-3, tp - 0.05 - t0)), g = L3(src, top, u);
+    if (from) g[1] += 0.9 * 4 * u * (1 - u);
+    return { pose: from ? 'reach' : 'press', grip: g };
+  }
+  if (t < tp) { const u = easeInCubic((t - (tp - 0.05)) / 0.05); return { pose: 'press', grip: L3(top, B, u) }; }
+  const a = t - tp;
+  if (a < 0.09) return { pose: 'press', grip: [B[0], B[1] - 0.06 * Math.exp(-a / 0.03), B[2]] };
+  const u = easeInCubic((a - 0.09) / 0.38);
+  if (u >= 1) return null;
+  return { pose: u < 0.2 ? 'press' : 'reach', grip: L3(B, retreat(side, B, hand), u) };
+}
+
+// one hand at time t -> {pose, grip [x,y,z], amt (0..1 presence), side, hand} or null
 function trackAt(S, tr, t, st) {
-  const side = tr.side;
+  const side = tr.side, hand = tr.hand || clockHand(side);
+  const r = trackPose(S, tr, t, st, side, hand);
+  return r ? { side, hand, amt: 1, ...r } : null;
+}
+function trackPose(S, tr, t, st, side, hand) {
+  const retreat_ = (s, g) => retreat(s, g, hand);
+  const tpOf = (lbl) => { const q = S.plies.find((x) => x.label === lbl); return q.tp ?? q.t; };
   if (tr.move) {
     const i = S.plies.findIndex((p) => p.label === tr.move || p.san === tr.move);
     if (i < 0) return null;
@@ -71,7 +103,7 @@ function trackAt(S, tr, t, st) {
     const tA = h0 - (tr.approach ?? 0.3);
     const above = add(restHead, [0, 0.55, sideZ(side) * 0.15]);
     if (t < tA) return null;
-    if (t < h0) { const u = easeOutCubic((t - tA) / (h0 - tA)); return { side, pose: 'reach', grip: L3(retreat(side, restHead), above, u), amt: 1 }; }
+    if (t < h0) { const u = easeOutCubic((t - tA) / (h0 - tA)); return { side, pose: 'reach', grip: L3(retreat_(side, restHead), above, u), amt: 1 }; }
     if (t < t0 - 0.09) {   // hovering: a held breath, the slightest drift
       const bob = 0.05 * (noise1(t * 2.1 + i) - 0.5);
       return { side, pose: 'reach', grip: add(above, [bob, 0.04 * Math.sin((t - h0) * 5), 0]), amt: 1 };
@@ -80,21 +112,15 @@ function trackAt(S, tr, t, st) {
     if (t < t1) return { side, pose: 'pinch', grip: headOf(ps), amt: 1 };
     const a = t - t1;
     if (a < 0.1) return { side, pose: a < 0.04 ? 'pinch' : 'release', grip: add(toHead, [0, 0.5 * easeOutCubic(a / 0.1), 0]), amt: 1 };
+    // and on to the clock: the same hand presses her button at the ply's press time
+    if (tr.press === true && P.tp != null) return pressAt(side, hand, P.tp, t, add(toHead, [0, 0.5, 0]), t1 + 0.1);
     const u = easeInCubic((a - 0.1) / 0.36);
     if (u >= 1) return null;
-    return { side, pose: 'release', grip: L3(add(toHead, [0, 0.5, 0]), retreat(side, toHead), u), amt: 1 };
+    return { side, pose: 'release', grip: L3(add(toHead, [0, 0.5, 0]), retreat_(side, toHead), u), amt: 1 };
   }
   if (tr.press != null) {
-    const tp = tr.press === 'start' ? S.startPress : typeof tr.press === 'string' ? S.plies.find((q) => q.label === tr.press).t : tr.press, B = BTN(side);
-    const top = add(B, [0, 0.62, sideZ(side) * 0.1]);
-    if (t < tp - 0.3) return null;
-    if (t < tp - 0.05) { const u = easeOutCubic((t - (tp - 0.3)) / 0.25); return { side, pose: 'press', grip: L3(retreat(side, B), top, u), amt: 1 }; }
-    if (t < tp) { const u = easeInCubic((t - (tp - 0.05)) / 0.05); return { side, pose: 'press', grip: L3(top, B, u), amt: 1 }; }
-    const a = t - tp;
-    if (a < 0.09) return { side, pose: 'press', grip: [B[0], B[1] - 0.06 * Math.exp(-a / 0.03), B[2]], amt: 1 };
-    const u = easeInCubic((a - 0.09) / 0.38);
-    if (u >= 1) return null;
-    return { side, pose: u < 0.2 ? 'press' : 'reach', grip: L3(B, retreat(side, B), u), amt: 1 };
+    const tp = tr.press === 'start' ? S.startPress : typeof tr.press === 'string' ? tpOf(tr.press) : tr.press;
+    return pressAt(side, hand, tp, t, null);
   }
   if (tr.hold) {
     const sq = sqOf(tr.hold), id = GAME.boards[st.k + 1][sq];
@@ -108,7 +134,7 @@ function trackAt(S, tr, t, st) {
     if (a < 0.12) return { side, pose: 'release', grip: lift, amt: 1 };
     const u = easeInCubic((a - 0.12) / 0.4);
     if (u >= 1) return null;
-    return { side, pose: 'release', grip: L3(lift, retreat(side, head), u), amt: 1 };
+    return { side, pose: 'release', grip: L3(lift, retreat_(side, head), u), amt: 1 };
   }
   return null;
 }
@@ -132,7 +158,7 @@ export function drawHands(e, hands, cam, v, o = {}) {
     const g = proj(h.grip);
     if (g[2] > 1) continue;
     // toward her shoulder: a probe a short way up the arm (the shoulder itself can be behind the lens)
-    const S0 = shoulder(h.side, h.grip), dl = Math.hypot(S0[0] - h.grip[0], S0[1] - h.grip[1], S0[2] - h.grip[2]);
+    const S0 = shoulder(h.side, h.grip, h.hand), dl = Math.hypot(S0[0] - h.grip[0], S0[1] - h.grip[1], S0[2] - h.grip[2]);
     const sh = proj(L3(h.grip, S0, 0.35 / dl));
     const g1 = proj([h.grip[0] + right[0], h.grip[1] + right[1], h.grip[2] + right[2]]);
     const pxu = Math.hypot(g1[0] - g[0], g1[1] - g[1]);          // design px per world unit at the hand

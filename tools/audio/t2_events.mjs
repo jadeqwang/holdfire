@@ -27,8 +27,13 @@ const P = (s, t) => (typeof s.p === 'function' ? s.p(t) : s.p);
 
 // ---------------------------------------------------------------- chess clock (scenes/t2/chess/schedule.js)
 const S = buildSchedule(A);
-const presses = [{ t: S.startPress, side: 'b', label: 'start (Black starts White\'s clock)', grid: '16th' },
-  ...S.plies.map((p) => ({ t: p.t, side: p.side, label: p.label, grid: p.grid, capture: p.capId >= 0, check: !!p.check }))]
+// every press of the schedule: the start press, then each ply's press by the hand that made it (S.presses: on the sixteenth after the
+// ply lands, an eighth for moves 5-6; 21...Qg4+ is not pressed, the hand stays on the queen)
+const presses = S.presses.map((pr) => {
+  if (pr.label === 'start') return { t: pr.t, side: 'b', label: 'start (Black starts White\'s clock)', grid: '16th' };
+  const p = S.plies.find((q) => q.label === pr.label);
+  return { t: pr.t, side: p.side, label: p.label, grid: '16th', landed: r4(p.t), capture: p.capId >= 0, check: !!p.check };
+})
   .map((x) => ({ ...x, t: r4(x.t), shot: shotAt(x.t)?.id, scene: shotAt(x.t)?.scene }));
 const clock = { presses, stop: r4(S.stop), anchors: Object.fromEntries(Object.entries(S.anchors).filter(([, v]) => typeof v === 'number').map(([k, v]) => [k, r4(v)])) };
 

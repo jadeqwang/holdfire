@@ -789,7 +789,11 @@ export function buildTimeline(A) {
   for (let i = 0; i < 5; i++) S(i === 0 ? '2:19.11' : null, hit('post_chorus_2', 5 + i), { scene: 't2_chess', p: { mode: 'set', cam: 'auto' }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.3, 0.06)),
     want: `A chessboard sets itself: pieces slam down from above (${setN[i]} on the board)` });
   S('2:22.19', wd('X2', 3, 'counting'), { scene: 't2_chess', p: { mode: 'set', cam: 'auto' }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.5, 0.08)), want: '"Counting on you!" lands the rest of the pieces' });
-  S(null, wd('X2', 3, 'on'), { ...plate(), method: 'video', era: ERA.chess, look: LK.anime, want: 'The two Jades sit down across the board from each other' });
+  // chess reviewer: the plate's analog clock stood on the board's far edge = White's left (Jade and White are on the left of frame), with
+  // dials that were not a 1+0 start; it is painted out and the procedural clock is drawn on the near edge (White's right), seen from
+  // behind as this camera must see it, orange button on Jade's side, teal on teal-tips' (tools/t2/chess_x213_clock.py)
+  S(null, wd('X2', 3, 'on'), { ...over(plate(), { scene: 't2_chess_paint', p: { img: 'assets/t2/chess/X213_clock.png' } }), method: 'video', era: ERA.chess, look: LK.anime,
+    want: 'The two Jades sit down across the board from each other; the clock on White\'s right (the near edge), seen from behind' });
   const x2Row = x2h.slice(0, 5).map((h, i) => ({ n: [1, 1, 2, 3, 5][i], t: h.t, slot: i, giant: false }));
   x2Row.push({ n: 8, t: wd('X2', 1, 'counting').t, slot: 5, giant: true });
   cue({ kind: 'num', label: '1 1 2 3 5 (row) + giant 8 on "Counting on you!" (lights pass only; the board stays clear)', t0: x2Row[0].t, t1: x2h[5].t - 0.05, items: x2Row, slots: 6, size: 110, hold: 0.55, fly: 0.3, draw: drawCount });
@@ -813,9 +817,14 @@ export function buildTimeline(A) {
       { pos: [1.45, 3.1, 0.0], target: [5.8, 0.8, 0.0], fov: 36 }, [{ side: 'b', press: 'start' }, { side: 'w', press: '1.e4' }]));
   S(null, eighth('2:23.9'), { ...chess('Premoved opening from 1.e4 on the drums-out, hands a blur; the room lights go down until only the board is lit'), sub: 'b' });
   const brBa5 = nearest(BEATS, tB1 + 0.62), holdsW = wd('BR', 1, 'holds'), breathW = wd('BR', 1, 'breath');
-  S('2:26.1', beat('2:26.1'), handShot('Teal-tips Jade\'s hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 on the beat, lets go, and the cut back to the board comes a sixteenth later',
-    { pos: [-8.6, 3.0, 0.3], target: [-2.8, 1.3, 0.0], fov: 30 }, [{ side: 'b', move: '5...Ba5' }]));
-  S(null, { t: SIXTEENTHS.find((x) => x > brBa5 + 0.05), kind: 'sixteenth', ref: 'a sixteenth after 5...Ba5 lands (the hand lets go of the bishop first)' }, { ...chess('Slow orbit at board height: 5...Ba5 lands, a hand hovers over the b-pawn (moves 5-6)'), sub: 'b' });
+  // chess reviewer: the hand that makes the move hits the clock. Teal-tips Jade plays with her left hand (the clock is on White's
+  // right = Black's left), and the cut a sixteenth after 5...Ba5 lands goes to the clock, where the same hand slaps her button on
+  // the eighth after the move (schedule.js tp)
+  S('2:26.1', beat('2:26.1'), handShot('Teal-tips Jade\'s left hand hovers a full beat over her bishop on b4, picks it up and sets it down on a5 on the beat, lets go and heads for the clock; the cut comes a sixteenth later',
+    { pos: [-8.6, 3.0, 0.3], target: [-2.8, 1.3, 0.0], fov: 30 }, [{ side: 'b', move: '5...Ba5', press: true }]));
+  S(null, { t: SIXTEENTHS.find((x) => x > brBa5 + 0.05), kind: 'sixteenth', ref: 'a sixteenth after 5...Ba5 lands (the hand lets go of the bishop first)' },
+    { ...handShot('The same hand slaps teal-tips Jade\'s button on the clock an eighth after 5...Ba5 (starting White\'s clock); White\'s hand hovers over the b-pawn off screen (moves 5-6)',
+      { pos: [1.45, 3.1, -0.35], target: [5.8, 0.8, -0.1], fov: 36 }, [{ side: 'b', press: '5...Ba5' }]), sub: 'b' });
   S(null, holdsW, { ...brPlate('BR_faceW', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW; framed above the plate\'s board edge)'), sub: 'c' });
   S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB; framed above the plate\'s board edge)'), sub: 'd' });
   S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));

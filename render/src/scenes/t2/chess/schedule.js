@@ -11,9 +11,17 @@
 //   plies 18-26 9...Rg8 .. 13...O-O-O  on eighths; 13...O-O-O on "death"
 //   plies 27-36 14.Bg5 .. 18...Rxg2+   one per eighth from the drums returning (2:33.69)
 //   plies 37-42 19.Kh1 .. 21...Qg4+    sixteenth-note flurry; 21...Qg4+ on "hand"
+//   presses     the hand that moved the piece then presses its own side of the clock (one hand does both; the clock is on White's
+//               right = Black's left): each press is on the sixteenth grid after its ply lands, an eighth after it when the next
+//               ply is a beat away (moves 5-6, the hover beats), never after the opponent's next landing (the flurry: the press and
+//               the reply land together). 21...Qg4+ is not pressed: teal-tips Jade keeps her fingers on the queen until both let
+//               go, so her clock runs until the stop
+//   clocks      1+0 (one minute each, on the chess reviewer's advice: the game is played through in 15 s)
 //   stop        clocks stop on "let" of "let go"
 // The set (post-chorus 2): pieces slam down on the shouts, 1, 1, 2, 3, 5 of them, and "Counting" lands the other 20 (done by "on").
 import { GAME, sqOf } from './pgn.js';
+
+export const TC = 60;   // seconds per side (1+0)
 
 const clean = (w) => (w || '').toLowerCase().replace(/[^a-z0-9']/g, '');
 
@@ -60,21 +68,37 @@ export function buildSchedule(audio) {
   if (T.length !== GAME.plies.length) throw new Error(`schedule has ${T.length} plies`);
 
   const startPress = G(k0, -0.25);
+  // the first sixteenth-grid point at or after t (beat grid: quarters of each beat)
+  const grid16 = (t) => {
+    let k = bi(t); if (audio.beatT(k) > t) k--;
+    const a = audio.beatT(k), b = audio.beatT(k + 1);
+    return G(k, Math.ceil((t - a) / (b - a) * 4 - 1e-6) / 4);
+  };
   const plies = GAME.plies.map((p, i) => {
     const [t, grid] = T[i];
     const prev = i ? T[i - 1][0] : startPress;
     const gap = t - prev;
-    const dur = Math.min(0.34, Math.max(0.085, gap * 0.62));   // travel time: the piece lands (and the clock is slapped) at t
+    const dur = Math.min(0.34, Math.max(0.085, gap * 0.62));   // travel time: the piece lands at t (its press follows, below)
     const beat = audio.beatT(bi(t) + 1) - audio.beatT(bi(t));
     const hover = (i >= 8 && i < 12) ? beat : 0;                  // moves 5-6: a hand hovers a full beat before the move
-    return { ...p, t, grid, gap, t0: t - dur, hover0: hover ? t - hover : t - dur };
+    // the press: the same hand goes on to the clock (the sixteenth after landing; an eighth when the reply is a beat away), and
+    // never later than the reply lands. The last ply (21...Qg4+) has none: the hand stays on the queen
+    let tp = null;
+    if (i + 1 < T.length) {
+      const next = T[i + 1][0];
+      const s16 = beat / 4;
+      tp = grid16(t + 0.6 * s16);
+      if (next - t > 0.9 * beat) tp = grid16(tp + 0.6 * s16);
+      tp = Math.min(tp, next);
+    }
+    return { ...p, t, grid, gap, t0: t - dur, hover0: hover ? t - hover : t - dur, tp };
   });
 
-  // clocks: three minutes each, each side's clock runs while it is that side's move
-  const presses = [{ t: startPress, side: 'b' }, ...plies.map((p) => ({ t: p.t, side: p.side }))];
+  // clocks: 1+0, each side's clock runs only on its own turn: from the opponent's press to its own press
+  const presses = [{ t: startPress, side: 'b', label: 'start' }, ...plies.filter((p) => p.tp != null).map((p) => ({ t: p.tp, side: p.side, label: p.label, ply: p.k }))];
   const stop = letgo;
   function clockAt(t) {
-    let w = 180, b = 180, running = null, last = null;
+    let w = TC, b = TC, running = null, last = null;
     for (let i = 0; i < presses.length; i++) {
       const pr = presses[i];
       if (t < pr.t) break;
@@ -105,7 +129,7 @@ export function buildSchedule(audio) {
   'hgfedcba'.split('').forEach((f, j) => set.push({ sq: S(f + '7'), t: count + 0.26 + (j + 0.5) * pd, shout: 5 }));
   const setBySq = new Map(set.map((x) => [x.sq, x]));
 
-  return { plies, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };
+  return { plies, presses, TC, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };
 }
 
 // index of the last ply that has landed at time t (-1 before 1.e4)

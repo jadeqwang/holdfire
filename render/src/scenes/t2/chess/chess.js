@@ -688,7 +688,7 @@ function drawImpl(ctx, shot, t, lt, p) {
       }
     }
     // sparks off the clock on 9.Qxg7 (White's button)
-    const sparkT = S.anchors.spark, sa = t - sparkT;
+    const sparkT = S.plies[16].tp ?? S.anchors.spark, sa = t - sparkT;   // on White's press after 9.Qxg7 (the same hand slaps the clock)
     if (sa >= 0 && sa < 1.0 && (p.sparks ?? 1) > 0) {
       const btn = [CLOCK_POS[0] + 0.18, 0.75, CLOCK_POS[2] + 0.68];
       for (let i = 0; i < 70; i++) {

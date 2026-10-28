@@ -45,14 +45,31 @@ near(T('13...O-O-O'), 153.04, 0.042, '13...O-O-O on "death"');
 near(T('14.Bg5'), 153.69, 0.042, '14.Bg5 on drums back');
 near(T('21...Qg4+'), 157.48, 0.042, '21...Qg4+ on "hand"');
 near(S.stop, 158.10, 0.042, 'clocks stop on "let go"');
-// clocks: each side's clock only runs on its own move; the sum of both elapsed times = stop - start press
+// clocks: 1+0 (chess reviewer); each side's clock only runs on its own move; the sum of both elapsed times = stop - start press
+assert.equal(S.TC, 60, 'one minute per side');
 const c = S.clockAt(S.stop + 1);
-near((180 - c.w) + (180 - c.b), S.stop - S.startPress, 1e-6, 'clock bookkeeping');
-console.log(`   Black starts White's clock at ${S.startPress.toFixed(3)}; clocks stop at ${S.stop.toFixed(3)}: White ${c.w.toFixed(2)} s, Black ${c.b.toFixed(2)} s left`);
+near((S.TC - c.w) + (S.TC - c.b), S.stop - S.startPress, 1e-6, 'clock bookkeeping');
+// presses: the hand that moved presses after its own ply lands, on the sixteenth grid, never after the reply lands; 21...Qg4+ none
+{ const sixteenths = []; for (let i = 0; i < A.beats.length - 1; i++) for (let j = 0; j < 4; j++) sixteenths.push(A.beatT(i) + (A.beatT(i + 1) - A.beatT(i)) * j / 4);
+  for (let i = 0; i < 42; i++) {
+    const p = S.plies[i];
+    if (i === 41) { assert.equal(p.tp, null, '21...Qg4+: no press (the hand stays on the queen)'); continue; }
+    assert.ok(p.tp > p.t + 0.05 && p.tp <= S.plies[i + 1].t + 1e-9, `${p.label}: press ${p.tp.toFixed(3)} after landing ${p.t.toFixed(3)}, by the reply ${S.plies[i + 1].t.toFixed(3)}`);
+    assert.ok(sixteenths.some((x) => Math.abs(x - p.tp) < 1e-6) || Math.abs(p.tp - S.plies[i + 1].t) < 1e-9, `${p.label}: press on the sixteenth grid`);
+  }
+  assert.equal(S.presses.length, 42, 'start press + 41 ply presses');
+  // whose clock runs: between Black's press (or the start) and White's next press only White's time moves, and the other way round
+  for (let i = 0; i + 1 < S.presses.length; i++) {
+    const a = S.presses[i], b = S.presses[i + 1]; if (b.t - a.t < 0.02) continue;
+    const c0 = S.clockAt(a.t + 0.005), c1 = S.clockAt(b.t - 0.005), run = a.side === 'w' ? 'b' : 'w', idle = run === 'w' ? 'b' : 'w';
+    assert.ok(c0.running === run && Math.abs(c1[idle] - c0[idle]) < 1e-9 && c1[run] < c0[run], `after ${a.label}: only ${run} runs`);
+  }
+  const s0 = S.clockAt(S.startPress - 0.01); assert.ok(s0.w === S.TC && s0.b === S.TC && s0.running === null, 'before the start press: 1:00 / 1:00, nothing running'); }
+console.log(`   1+0: Black starts White's clock at ${S.startPress.toFixed(3)}; every move pressed by the hand that made it (on the 16th after landing, an eighth for moves 5-6; 21...Qg4+ unpressed); clocks stop at ${S.stop.toFixed(3)}: White ${c.w.toFixed(2)} s, Black ${c.b.toFixed(2)} s left`);
 const rows = [];
 for (let i = 0; i < 42; i += 2) {
   const a = S.plies[i], b = S.plies[i + 1];
-  rows.push(`${String(a.moveNo).padStart(2)}. ${a.san.padEnd(6)} ${a.t.toFixed(3)} ${a.grid.padEnd(5)}  ${b.san.padEnd(6)} ${b.t.toFixed(3)} ${b.grid}`);
+  rows.push(`${String(a.moveNo).padStart(2)}. ${a.san.padEnd(6)} ${a.t.toFixed(3)} ${a.grid.padEnd(5)} press ${a.tp.toFixed(3)}  ${b.san.padEnd(6)} ${b.t.toFixed(3)} ${b.grid.padEnd(5)} press ${b.tp == null ? '  -  ' : b.tp.toFixed(3)}`);
 }
 console.log(rows.join('\n'));
 console.log('set:', S.set.map((x) => `${sqName(x.sq)}@${x.t.toFixed(3)}`).join(' '));

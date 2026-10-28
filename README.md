@@ -20,7 +20,7 @@ rendered frame by frame in headless Chromium).
 | Plan (the brief) | [`docs/PLAN_TAKE_TWO.md`](docs/PLAN_TAKE_TWO.md), a copy of the Google Doc "Hold Fire music video plan (take two)" |
 | Conventions, generation | [`docs/take2/CONVENTIONS.md`](docs/take2/CONVENTIONS.md), [`docs/take2/GENERATION.md`](docs/take2/GENERATION.md) |
 | Lyrics layer, lip sync | [`docs/take2/LYRICS.md`](docs/take2/LYRICS.md), [`docs/take2/LIPSYNC.md`](docs/take2/LIPSYNC.md) |
-| Review notes, QA | [`docs/take2/REVIEW_NOTES.md`](docs/take2/REVIEW_NOTES.md), [`docs/take2/QA_RC1.md`](docs/take2/QA_RC1.md), [`docs/reviews/t2_v3_review_summary.md`](docs/reviews/t2_v3_review_summary.md) |
+| Review notes, QA | [`docs/take2/REVIEW_NOTES.md`](docs/take2/REVIEW_NOTES.md), [`docs/take2/QA_RC1.md`](docs/take2/QA_RC1.md), [`docs/take2/QA_RC2.md`](docs/take2/QA_RC2.md), [`docs/reviews/t2_v3_review_summary.md`](docs/reviews/t2_v3_review_summary.md) |
 | Shots, takes, picks | [`docs/take2/shots.json`](docs/take2/shots.json) (171 shots), `docs/take2/takes_g*.json`, `docs/take2/picks_g*.json` → `render/data/picks2.json` |
 | Sheets, keyframes | [`design/take2/`](design/take2/) (character, set and era style sheets), `media/kf2/` (152 keyframes and their prompts) |
 
@@ -79,7 +79,7 @@ rendered frame by frame in headless Chromium).
    [`tools/t2/review/`](tools/t2/review/)); Jade's notes and the fixes are in `REVIEW_NOTES.md`. An outside model (Gemini)
    watched preview v3 in five chunks; of its 58 claims, 18 checked out against the frames, and polish pass 4 fixed those (lip
    sync aside, which went to the picker). Contact sheets every
-   0.25–0.5 s after each polish pass, and a 1080p QA of the master (`QA_RC1.md`).
+   0.25–0.5 s after each polish pass, and a 1080p QA of each release candidate (`QA_RC1.md`, `QA_RC2.md`).
 
 ### Credits on the end card
 
@@ -110,12 +110,12 @@ Rendered locally to `work/out/` (not committed; the files exceed GitHub's 100 MB
 
 | file | what |
 |---|---|
-| `hold_fire_t2_master_rc1.mp4` | 1920×1080, 24 fps, 4:07.17 (5,932 frames), H.264 CRF 14 (~28 Mb/s), AAC 320k of the song, sample-aligned (872 MB). Upload this to YouTube. |
+| `hold_fire_t2_master_rc3.mp4` | 1920×1080, 24 fps, 4:07.17 (5,932 frames), H.264 CRF 14 (~29 Mb/s), AAC 320k of the mix (`media/audio/hold_fire_t2_mix.wav`: the song plus the light sound layer, `SOUND_T2.md`), sample-aligned (890 MB). Upload this to YouTube. |
 | `hold_fire_t2_x.mp4` | the same, 2-pass H.264 High@4.1 at 12 Mb/s (maxrate 16M, `-tune grain`), AAC 256k, faststart (378 MB; PSNR 43.2 dB against the master). For X. |
 | `hold_fire_t2_hook_31s.mp4` | 0:00–0:31 of the master with a 0.5 s picture and sound fade-out, same settings as the X file (47 MB). A teaser. |
 
-Release candidate 1: the days counter reads 41 (the 26 Oct value) and must be recomputed for the release date; the open
-items are in `QA_RC1.md`.
+Release candidate 3 (commit 869f897): RC2's full-res QA and its fixes are in `QA_RC2.md`. The days counter ends on 42 (Jade:
+keep 42; the release is planned for 1 Nov).
 
 ### Reproduce
 
@@ -124,13 +124,14 @@ python3 tools/t2/merge_picks.py                          # docs/take2/picks_*.js
 python3 tools/t2/plates.py media/gen/<take>.mp4 <PICK>   # once per pick (its src in picks2.json; stills: media/kf2/*.jpg --fit keep)
 python3 tools/t2/credits.py                              # end-card credits from the picks the edit uses
 cd render
-node tools/check_cuts.mjs && node tools/chess_check.mjs && node tools/lipcheck.mjs
+node tools/check_cuts.mjs && node tools/chess_check.mjs && node tools/chess_lens.mjs && node tools/lipcheck.mjs
 node tools/render.mjs --stills 13.5,95.5,246.5 --w 1920 --h 1080 --outdir ../work/stills/t2
-node tools/render.mjs --from 0 --to 247.17 --w 1920 --h 1080 --jobs 3 --crf 14 --out ../work/out/hold_fire_t2_master_rc1.mp4
-cd ../work/out                                           # X file (pipeline_lessons §3.7)
+cd .. && python3 tools/audio/sfx_t2.py                  # the mix (re-run after any timing change)
+tools/t2/render_segments.sh hold_fire_t2_master_rc3 1920 1080 14 media/audio/hold_fire_t2_mix.wav   # restart-safe, 12 s segments
+cd work/out                                           # X file (pipeline_lessons §3.7)
 X="-c:v libx264 -b:v 12M -maxrate 16M -bufsize 24M -profile:v high -level:v 4.1 -refs 4 -preset slow -tune grain -pix_fmt yuv420p -r 24"
-nice -n 10 ffmpeg -i hold_fire_t2_master_rc1.mp4 $X -pass 1 -an -f mp4 /dev/null
-nice -n 10 ffmpeg -i hold_fire_t2_master_rc1.mp4 $X -pass 2 -c:a aac -b:a 256k -movflags +faststart hold_fire_t2_x.mp4
+nice -n 10 ffmpeg -i hold_fire_t2_master_rc3.mp4 $X -pass 1 -an -f mp4 /dev/null
+nice -n 10 ffmpeg -i hold_fire_t2_master_rc3.mp4 $X -pass 2 -c:a aac -b:a 256k -movflags +faststart hold_fire_t2_x.mp4
 # hook: the same two passes with -t 31 -vf fade=t=out:st=30.5:d=0.5 -af afade=t=out:st=30.5:d=0.5 (audio on pass 2)
 ```
 

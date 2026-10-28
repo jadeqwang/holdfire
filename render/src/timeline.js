@@ -308,7 +308,7 @@ export function buildTimeline(A) {
   const SCREENS = { L: [[12, 152], [270, 196], [216, 385], [0, 372]], R: [[1652, 192], [1930, 136], [1930, 377], [1705, 388]] };
   const contacts = (o = {}) => ({ scene: 't2_contact', p: { screens: [
     { quad: SCREENS.L, brg: '090', ...o }, { quad: SCREENS.R, brg: '090', mirror: true, cold: true, ...o }] } });
-  const split = (l = {}, r = {}, line = 2) => ({ scene: 't2_split', p: { left: { scene: 't2_plate', p: { clip: '@L', ...l } }, right: { scene: 't2_plate', p: { clip: '@R', ...r } }, x: 960, line } });
+  const split = (l = {}, r = {}, line = 2, extra = {}) => ({ scene: 't2_split', p: { left: { scene: 't2_plate', p: { clip: '@L', ...l } }, right: { scene: 't2_plate', p: { clip: '@R', ...r } }, x: 960, line, ...extra } });
   // Jade (v3, 0:57.4): in the splits each Jade sings one phrase: Jade (left) "but if you are", teal-tips (right) "I'm counting on you";
   // the half that isn't singing listens, mouth closed (a Seedance 2.0 listening plate, <ID>L_LS / <ID>R_LS, on the same keyframe;
   // teal-tips' is generated unflipped and flipped by its pick). Both halves cut on the same film frame, the first at or after the
@@ -580,7 +580,13 @@ export function buildTimeline(A) {
   S('0:43.27', wd('P1', 4, 'a'), { scene: 'pulsar', p: { notes: false }, method: 'reuse', era: ERA.signal, look: LK.diagram,   // notes false: its two ~6 px captions dropped (polish 4)
     want: "Take one's 0:44 diagram unchanged: PSR B1919+21 ticking every 1.3373 s (left), the count 1 1 2 3 5 8 (right)", notes: 'NATURAL / NOT NATURAL are drawn by pulsar.js itself' });
   const hearT = wd('P1', 5, 'hear');
-  S('0:46.02', hearT, { ...plate(), method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'First sight of teal-tips Jade in her own (mirrored, cooler) control room, headphones on, singing' });
+  // adversary pass (item 2): her room cold and hard (COLD_P: cooler, deeper blacks), and on her monitor bank a target track in red
+  // alert that ends on Jade's dish field (C101's plate, Jade in the reticle): before she has done anything she is watching Jade's side
+  const COLD_P = { exposure: 0.9, contrast: 1.18, sat: 0.6, tint: [0.82, 0.95, 1.16], lift: [-0.02, -0.012, 0.0] };
+  const P105_SCREENS = [{ quad: [[1607, 354], [1848, 126], [1950, 500], [1700, 638]], mirror: true, alert: true, feed: 'work/plates/C101/f_00040.jpg', feedAt: [0.48, 0.66], code: '0217', brg: '270' },
+    { quad: [[1362, 487], [1582, 372], [1658, 642], [1406, 690]], mirror: true, alert: true, range: 0.6, code: '0217', brg: '270' }];
+  S('0:46.02', hearT, { ...over(plate({ grade: COLD_P }), { scene: 't2_contact', p: { screens: P105_SCREENS, gain: 1.4 } }), method: 'seedance_sung', era: ERA.room, look: LK.room,
+    want: 'First sight of teal-tips Jade in her own (mirrored, cold) control room, headphones on, singing; on her monitor bank a target track in red alert ends on Jade\'s dish field' });
   // P106 (Jade: "both of them are singing 'we're awake'"): P105 sings "we're" up to the cut, so P106 starts on w2's own held, wide
   // "-WAKE" (take frame 72, eyes already open: the cut opens them on "awake") instead of its "a" + "w" (frames 57-71, which played a
   // second onset 0.3 s late). w2 holds that vowel for only 21 frames (72-92, she clenches from 93), so the hold plays at 0.57x:
@@ -588,16 +594,18 @@ export function buildTimeline(A) {
   // cut, and r slows the drawings after it (frames 72..92 across 47.75..49.17; lipcheck's onset frame = the formula's)
   const awakeT = wd('P1', 5, 'awake');
   const P106_S0 = 47.432, P106_R = 0.57, P106_TA = hold2(awakeT.t);
-  S(null, awakeT, { ...plate(), p: (t) => ({ clip: 'P106', s0: P106_S0 + (1 - P106_R) * Math.max(0, hold2(t) - P106_TA) }),
+  const P106_SCREEN = { quad: [[1628, 672], [1960, 610], [1960, 1090], [1640, 1090]], mirror: true, alert: true, range: 0.7, code: '0217', brg: '270' };
+  S(null, awakeT, { scene: 'multi', p: { layers: [{ scene: 't2_plate', p: (t) => ({ clip: 'P106', grade: COLD_P, s0: P106_S0 + (1 - P106_R) * Math.max(0, hold2(t) - P106_TA) }) },
+    { scene: 't2_contact', p: { screens: [P106_SCREEN], gain: 1.4 } }] },
     method: 'seedance_sung', era: ERA.room, look: LK.room, want: 'Closer: teal-tips Jade opens her eyes on "awake"', notes: 'cut on "awake" so the eyes open on the word; the held -WAKE at 0.57x so no second onset' });
   const roll1 = ev('snare_roll', null, hearT.t);
   // polish 3 (director: her lips part ~1.3x into the push): P107 plays the plate's frames 0-17 only (lips shut; frame 18 would
   // show from lt 0.94 at rate 0.8) with a JS push about her near eye (flipped, at ~(1134, 510)), and cuts on the roll's eighth
   // 50.21 to P107b, the crisp eye still (the plate's last frame = the 2K still), still pushing, to the downbeat
   const rollLook = (t, lt) => ({ ...LK.room, exposure: 1 + 0.5 * range(t, roll1.t, LN('C1', 0).t) });
-  S('0:49.24', roll1, { ...plate({ rate: 0.8 }), p: (t, lt) => { const z = 1 + 0.3 * lt; return { clip: 'P107', rate: 0.8, zoom: z, pan: [(1 - z) * 174, (1 - z) * -30] }; },
+  S('0:49.24', roll1, { ...plate({ rate: 0.8 }), p: (t, lt) => { const z = 1 + 0.3 * lt; return { clip: 'P107', rate: 0.8, zoom: z, pan: [(1 - z) * 174, (1 - z) * -30], grade: COLD_P }; },
     method: 'video', era: ERA.room, look: rollLook, want: "The snare roll pushes into teal-tips Jade's eye (iris fills the frame)" });
-  S(null, { t: e8(roll1.t, 3), kind: 'eighth', ref: 'roll eighth 3 (before her lips part)' }, { ...plate({ clip: 'P107', at: 2.46, zoom: 1, push: 0.09 }), method: 'video', era: ERA.room, look: rollLook, sub: 'b',
+  S(null, { t: e8(roll1.t, 3), kind: 'eighth', ref: 'roll eighth 3 (before her lips part)' }, { ...plate({ clip: 'P107', at: 2.46, zoom: 1, push: 0.09, grade: COLD_P }), method: 'video', era: ERA.room, look: rollLook, sub: 'b',
     want: "Teal-tips Jade's eye fills the frame (the crisp still), the roll still pushing in", notes: 'insert: the eye still, so P107 ends before her lips part' });
   sub('P1', 1);                                                                                                         // a chord that's searching ...
   sub('P1', 2, { cap: LN('P1', 3).t });                                                                                   // counting out in bursts of light
@@ -763,9 +771,9 @@ export function buildTimeline(A) {
   // ============================================================================================== CHORUS 2 (113.18 to 134.06): the mirror, first
   section('C2');
   const dl2 = A.sections.find((s) => s.name === 'Chorus 2').start;
-  S(null, wd('C2', 0, "can't"), { ...split({ swingT: dl2 }, { swingT: dl2 }), method: 'video', era: ERA.room, look: LK.night,
+  S(null, wd('C2', 0, "can't"), { ...split({ swingT: dl2 }, { swingT: dl2 }, 2, WALL), method: 'video', era: ERA.room, look: LK.night,
     want: 'Split: each Jade alone on her own dish field at night (mirrored); the dishes swing to the same point', notes: 'chorus 1 shot returns as a split; cut on "Can\'t" like chorus 1' });
-  S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, right: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
+  S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, right: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, x: 960, line: 2, ...WALL }, method: 'reuse', era: ERA.light, look: LK.diagram,
     want: 'Split: the Golden Record cover engraves itself on both sides at once' });
   S(null, wd('C2', 2, 'but'), { ...over(phraseSplit('C203', wd('C2', 2, "i'm").t, {}, {}, WALL), contacts({ range: 0.75, bright: 1.25 })), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Split at their mirrored consoles: Jade (left) sings "but if you are" while teal-tips listens; on "I\'m" teal-tips sings "I\'m counting on you" while Jade listens',
@@ -773,11 +781,11 @@ export function buildTimeline(A) {
   const silent2 = wd('C2', 3, 'silent');
   S(null, silent2, crt(silent2, 'C2', 'The CRT returns and multiplies 1 to 4 to 16 to hundreds; two of its screens show the two Jades\' control rooms (the g2 loops CRT_roomA / CRT_roomB)', { variant: 'mirror', inset: [{ clip: 'CRT_roomA', at: [0, 1] }, { clip: 'CRT_roomB', at: [1, 1] }] }));
   reserve(3);
-  S(null, wd('C2', 4, 'in'), { ...split({}, { flipX: true, ...RM(1.22, 1.07) }, 4), method: 'seedance_sung', era: ERA.room, look: LK.room,
-    want: 'Both Jades in the studio pose; the two halves match exactly, hard vertical line between them' });
+  S(null, wd('C2', 4, 'in'), { ...split({}, { flipX: true }, 4, WALL), method: 'seedance_sung', era: ERA.room, look: LK.room,
+    want: 'Both Jades in the studio pose, the same pose on either side of the wall: warm room and cold room (the audience sees the mirror; they do not)' });
   // Jade v3: "If you are" is Jade's phrase (as in C103 / C203): teal-tips listens through it (C209R_LS); her "I'm counting on you"
   // falls on the crane (C210)
-  S(null, wd('C2', 5, 'if'), { ...split({}, { clip: 'C209R_LS', in: 0, ...RM(1.18, 1.02) }), method: 'seedance_sung', era: ERA.room, look: LK.room,
+  S(null, wd('C2', 5, 'if'), { ...split({}, { clip: 'C209R_LS', in: 0 }, 2, WALL), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Split: each Jade looks at her own screen; Jade (left) sings "If you are", teal-tips (right) listens, mouth closed' });
   S(null, wd('C2', 5, "i'm"), { ...plate(), method: 'video', era: ERA.room, look: LK.night,
     want: 'Crane up out of both rooms side by side: the faint signal each one hears comes from the same direction, the other control room' });
@@ -917,14 +925,14 @@ export function buildTimeline(A) {
   S(null, wd('BU', 5, 'fire'), { ...plate({ style: 'oil' }), method: 'video', era: ERA.oil, look: LK.oil, want: 'The people who held fire, 2: Petrov, oil portrait lit by the screen' });
   S(null, barAfter(wd('BU', 5, 'fire').t, 'bar line after "fire"'), { ...still({ style: 'halftone' }), method: 'still', era: ERA.poster, look: LK.poster, want: 'The people who held fire, 3: Arkhipov, poster halftone' });
   S(null, show1, { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t }, method: 'procedural', era: ERA.lights, look: LK.night, want: 'On "Show your light" the cities come on across the night side' });
-  S('3:00.09', wd('BU', 6, 'hold'), { ...split({}, RM(1.09, 1.05)), method: 'video', era: ERA.room, look: { ...LK.room, bloom: 0.28, bloomThreshold: 0.93, halation: 0.1 }, want: 'Both Jades raise a hand light at their consoles (split)' });
+  S('3:00.09', wd('BU', 6, 'hold'), { ...split({}, {}, 2, WALL), method: 'video', era: ERA.room, look: { ...LK.room, bloom: 0.28, bloomThreshold: 0.93, halation: 0.1 }, want: 'Both Jades raise a hand light at their consoles, a wall between them: the same gesture on both sides, parallel, not together (split)' });
   const roll2 = ev('snare_roll', /BUILD/);
   const dropT = LN('DR', 0).t;
   const rollBeats = [roll2.t, ...BEATS.filter((b) => b > roll2.t + 0.05 && b < dropT - 0.3)];
   // the hand-light plates: the room look with little bloom (the lights must not wash the faces white)
   const LK_HAND = { ...LK.room, bloom: 0.28, bloomThreshold: 0.93, halation: 0.1 };
   const rollW = [['video', plate(), 'Jade raises her hand light, close'], ['video', plate(), 'Teal-tips Jade raises her hand light, close'], ['procedural', { scene: 't2_earth_night', p: { view: 'cities_on', t0: show1.t } }, 'Cities across the night side, brighter'],
-    ['procedural', { scene: 't2_graph_outro', p: { reveal: false, wave: [roll2.t, roll2.t + 1.2] } }, 'The contact graph, every node lit'], ['video', split(), 'Both hand lights held up, split; the frame burns to white for the drums cut']];
+    ['procedural', { scene: 't2_graph_outro', p: { reveal: false, wave: [roll2.t, roll2.t + 1.2] } }, 'The contact graph, every node lit'], ['video', split({}, {}, 2, WALL), 'Both hand lights held up on either side of the wall; the frame burns to white for the drums cut']];
   rollBeats.forEach((b, i) => {
     const [m, sc, w] = rollW[i % rollW.length];
     S(i === 0 ? '3:00.80' : null, i === 0 ? roll2 : { t: b, kind: 'beat', ref: `beat ${i} of the build roll` }, { ...sc, method: m, era: m === 'video' ? ERA.room : ERA.light,

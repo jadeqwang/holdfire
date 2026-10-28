@@ -6,9 +6,11 @@
 // reversed, README "The mirror rule"), so her track points the other way: at Jade.
 // p: {screens: [{quad: [[x,y] x4] (TL, TR, BR, BL design px, as the frame shows the screen), mirror (false), range (0..1: how close
 //       the contact is, 0 far / 1 at the edge; default 0.35), bright (1), cold (false: a blue-white scope instead of amber),
-//       target (false: the track ends on a dish-field glyph, the contact being Jade's station: P105-P107b), code ('0217'),
+//       feed (a picture URL: the track ends on it, monochrome in the display's ink, the reticle at feedAt [x, y] (0..1) of the picture,
+//       feedZoom (1.6); P105-P107b: Jade on the dish field), alert (false: red-alert palette), code ('0217'),
 //       brg ('090'), alpha (0.92)}], from (shot start: the track's motion starts here), beats (default the song's beats)}
 import { clamp } from '../../../util.js';
+import { loadTex } from '../plate/lib.js';
 
 const CW = 640, CH = 400;
 let cv = null;
@@ -19,8 +21,8 @@ function canvas() {
 
 // the display in content space (CW x CH), own position on the left, contact toward the right edge
 function drawDisplay(c, s, tq, pulse, age) {
-  const amber = s.cold ? [190, 225, 255] : [255, 178, 84];
-  const grid = s.cold ? [120, 170, 230] : [90, 170, 200];
+  const amber = s.alert ? [255, 96, 64] : s.cold ? [190, 225, 255] : [255, 178, 84];
+  const grid = s.alert ? [210, 110, 120] : s.cold ? [120, 170, 230] : [90, 170, 200];
   const rgba = (k, a) => `rgba(${k[0]},${k[1]},${k[2]},${a})`;
   c.setTransform(1, 0, 0, 1, 0, 0);
   c.clearRect(0, 0, CW, CH);
@@ -44,7 +46,25 @@ function drawDisplay(c, s, tq, pulse, age) {
   c.fillStyle = rgba(grid, 0.8); c.beginPath(); c.moveTo(ox, oy - 9); c.lineTo(ox + 8, oy + 6); c.lineTo(ox - 8, oy + 6); c.closePath(); c.fill();
   // the contact: far right, drifting in as range grows; its trail comes in from the edge
   const rg = clamp(s.range ?? 0.35);
-  const cx = CW * (0.9 - 0.18 * rg) - 6 * Math.min(age, 6) / 6, cy = CH * (0.36 + 0.04 * Math.sin(tq * 0.7));
+  let cx = CW * (0.9 - 0.18 * rg) - 6 * Math.min(age, 6) / 6, cy = CH * (0.36 + 0.04 * Math.sin(tq * 0.7));
+  // feed (P105-P107b): the track ends on a picture of the dish field Jade stands in at C101 (a plate frame, monochrome, in the
+  // display's ink), with the reticle on her: a pause shows teal-tips is watching Jade's side
+  if (s.feedImg) {
+    const fx = CW * 0.4, fy = CH * 0.18, fw = CW * 0.57, fh = fw * 9 / 16;
+    c.save();
+    c.beginPath(); c.rect(fx, fy, fw, fh); c.clip();
+    c.filter = 'grayscale(1) contrast(1.35) brightness(1.15)';
+    const im = s.feedImg, sc = Math.max(fw / im.width, fh / im.height) * (s.feedZoom || 1.6);
+    const [ax, ay] = s.feedAt || [0.5, 0.62];
+    c.drawImage(im, fx + fw / 2 - im.width * sc * ax, fy + fh / 2 - im.height * sc * ay, im.width * sc, im.height * sc);
+    c.filter = 'none';
+    c.globalCompositeOperation = 'multiply'; c.fillStyle = rgba(amber, 1); c.fillRect(fx, fy, fw * 2, fh);
+    c.globalCompositeOperation = 'source-over';
+    for (let y = fy; y < fy + fh; y += 4) { c.fillStyle = 'rgba(0,0,0,0.22)'; c.fillRect(fx - fw, y, fw * 3, 1.5); }
+    c.restore();
+    c.strokeStyle = rgba(amber, 0.85); c.lineWidth = 3; c.strokeRect(fx, fy, fw, fh);
+    cx = fx + fw / 2; cy = fy + fh / 2;
+  }
   for (let i = 1; i <= 7; i++) {
     const x = cx + i * 26, y = cy - i * 8 + 3 * Math.sin(i * 1.7);
     c.fillStyle = rgba(amber, 0.75 * (1 - i / 8)); c.beginPath(); c.arc(x, y, 7 - i * 0.6, 0, Math.PI * 2); c.fill();
@@ -64,17 +84,6 @@ function drawDisplay(c, s, tq, pulse, age) {
   const B = 44, L = 16;
   for (const [sx, sy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
     c.beginPath(); c.moveTo(cx + sx * B, cy + sy * (B - L)); c.lineTo(cx + sx * B, cy + sy * B); c.lineTo(cx + sx * (B - L), cy + sy * B); c.stroke();
-  }
-  // the target glyph (P105-P107b): the track ends on a dish field, Jade's station: three dishes on a ground line
-  if (s.target) {
-    const tx = cx, ty = cy + 88;
-    c.strokeStyle = rgba(amber, 0.8 * b); c.lineWidth = 2.5;
-    c.beginPath(); c.moveTo(tx - 64, ty + 20); c.lineTo(tx + 64, ty + 20); c.stroke();
-    for (const dx of [-40, 0, 40]) {
-      c.beginPath(); c.arc(tx + dx, ty, 14, Math.PI * 0.95, Math.PI * 1.95); c.stroke();
-      c.beginPath(); c.moveTo(tx + dx, ty + 2); c.lineTo(tx + dx, ty + 20); c.stroke();
-    }
-    c.setLineDash([6, 6]); c.beginPath(); c.moveTo(cx, cy + B); c.lineTo(tx, ty - 18); c.stroke(); c.setLineDash([]);
   }
   // labels: a code and a bearing only
   c.font = '600 50px PlexM';
@@ -120,6 +129,9 @@ function mapQuad(c, img, q, alpha) {
 }
 
 export default {
+  async prepare(ctx, shot, t, lt, p) {
+    for (const s of p.screens || []) if (s.feed) s.feedImg = (await loadTex(s.feed)).image;
+  },
   draw(ctx, shot, t, lt, p) {
     const e = ctx.engine;
     const tq = Math.floor(t * 12 + 1e-3) / 12;   // on twos

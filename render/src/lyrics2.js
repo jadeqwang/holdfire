@@ -91,7 +91,7 @@ export const PLAN = [
   { n: 37, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, yLast: 985, align: 'center', maxW: 860, br: [3] },
   { n: 38, style: 'crt', size: 64, col: '#a8f0ff', panel: 'rgba(2,10,20,1)', x: 960, yLast: 1012, align: 'center', maxW: 860, br: [4] },
   { n: 39, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', segs: {   // as n 17: "If you are" on C209, "I'm counting on you" on C210 (the cut is on I'm)
-    C209: { x: 960, y: 770, align: 'center', only: [0, 1, 2] },
+    C209: { x: 470, y: 770, align: 'center', only: [0, 1, 2] },   // adversary pass: Jade's line on her side of the wall
     C210: { style: 'light', size: 84, col: GOLD, shade: 0.8, x: 960, y: 230, align: 'center', only: [3, 4, 5, 6] } } },
   // ---------------------------------------------------------------- POST-CHORUS 2
   { n: 41, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 150, align: 'center', segs: { X206: {} } },   // ends at the cut to the chess board (no lyric over the set-up)

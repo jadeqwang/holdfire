@@ -144,3 +144,36 @@ change something (plus the BR09 frame below). Next time, clear the `.done` files
 | fine as is | the cold-open rewind no longer reaches black (by design, ea67304) | 0:08.2–0:08.6 | – |
 | fine as is | colour primaries/transfer untagged (as RC1; tag bt709 on the upload encode if a platform shifts colour) | – | – |
 | fine as is | 404s in the render log (three per page load, as RC1; no missing picture seen) | – | `work/out/seg_hold_fire_t2_master_rc2/s_*.log` |
+
+## RC3 fixes (28 Oct 2026)
+
+All seven findings are fixed, none skipped. `check_cuts`, `chess_check` and `lipcheck` pass (exit 0). The new
+`render/tools/chess_lens.mjs` also passes: for every frame of every t2_chess shot, the lens is never inside a piece or chain link,
+or within 0.07 of one. Before/after sheets are in `work/stills/rc3_compare/` and the 1080p stills in `work/stills/rc3_before/`
+and `work/stills/rc3_after/`.
+
+| # | fix | files |
+|---|---|---|
+| 1 | The FLAMES ROSE cap now ends at the V206 cut (`t1: LN('V2', 3).t` = 89.995) and fades over 89.80–90.00, so it never shares a frame with "an end with no life". The other fact captions were checked and are clear: NUCLEAR DETONATIONS and SIGNAL LOST sit under BURN AND FALL, 26 SEP 1983 / SERPUKHOV-15 sits above the terminal panel, and 217 LIGHT-YEARS sits above "a one-way dialogue". Note: `check_cuts` now lists this cap as a soft type-rule break (10 tokens in 2.61 s = 3.84 w/s; "c. 850 CE" counts as three words). It cannot hold longer without overlapping the lyric, and the plan puts it on the 1:27.39 row only. | `render/src/timeline.js` |
+| 2 | BR09's first frame (f3716) had the lens inside captured knight 25 (the chain flight passes 0.59 beside the lens, and the thick head reaches it). `state.js` now drops a chain-flight piece on any frame where the lens is inside its bounding capsule (pieces.js extents + 0.1). Only f3716 meets this condition; the frame now shows the board, chain and links. `chess_lens.mjs` checks every chess frame against the real meshes, with the vertex smear included. Every chess shot's first and last frames now have mean luma ≥ 58 (RC2 f3716: 26). | `render/src/scenes/t2/chess/state.js`, `render/tools/chess_lens.mjs` (new) |
+| 3 | OU11 patch: a new `t2_plate` grade fix, `mode: 'patch'`. Each OU11 plate frame (4–140, i.e. the whole shot) has a tracked inner disc: the patch's bright paper region with the lettering filled, fitted as an ellipse from its moments. The track is smooth and never lost. The disc is refilled from its own rim, so the sleeve shading is kept, and the renderer then draws "1420 / MHz" (Archivo 900), squashed and turned with the disc. It follows the arm on twos because it is keyed to the plate frame shown. Set through `picks.py -g g4 set OU11 … --set grade=…`. | `render/src/scenes/t2/plate/layer.js`, `docs/take2/picks_g4.json` → `render/data/picks2.json` |
+| 4 | Knight lift: the jagged shading was the vertex smear tearing the flat-shaded mesh. Outside the battle, the piece being moved (and a castling rook) is no longer smeared. Set drops, captured pieces in flight and the battle keep the smear. Hand shadow: a piece in the shadow now keeps its own material (a shallower band step, a shadow band of its own mid tone ×0.62, ×0.75 overall, no rim or spec) instead of dropping to White's lavender shadow band. White's a1 rook and a3 pawn now read as white in shade. | `render/src/scenes/t2/chess/chess.js` |
+| 5 | V218 shot `p.grade {gain: 0.9, gamma: 1.1}` rolls off the highlights. Her face goes from 235/225/222 (69 % of pixels ≥ 250) to 224/202/182 (0 % clipped), and her pale-blue dot shows again. | `render/src/timeline.js` |
+| 6 | BR04 and BR06 impact lines now use `maxW 860` with breaks ("ANY WORLD THAT / LIGHTS A SPARK", "IS LIGHTING / ITS OWN DEATH"), so they sit inside x 528–1392. | `render/src/lyrics2.js` |
+| 7 | Impact slams: while a word's slam overshoots, the unsung words after it go on their own layer, and a 0.12 em gap is cut around the slamming word (stroke and offset shadow). At f3715/f3716, CHAINS and ARE no longer touch. Frames with no landing slam are drawn exactly as before. | `render/src/scenes/t2/lyric/styles.js` |
+
+**Song-time ranges that render differently.** Each segment below was rendered before (HEAD 379c830) and after at 960×540, and
+compared frame by frame (luma difference > 24 on > 30 px):
+
+| segment | covers | changed frames |
+|---|---|---|
+| 7 | 84–96 | 89.875–90.917 (cap gone from V206/V207) |
+| 8 | 96–108 | 102.083–103.000 (V218 grade) |
+| 11 | 132–144 | 142.917–142.958 and 143.917–144.000 (hand shadow; ≤ 402 px) |
+| 12 | 144–156 | 144.000–156.000 in nine spans (moves without smear, hand shadow, BR04/BR06 type, CHAINS slam gap, f3716) |
+| 13 | 156–168 | 156.000–157.583 and 157.750–158.167 (slam gaps on line 49, hand shadow in BR11b) |
+| 19 | 228–240 | 233.208–238.500 (OU11 patch) |
+
+Re-render segments **7, 8, 11, 12, 13 and 19** (72 s). No other segment changes. Nine stills in other segments (20.5, 47.9,
+66.0, 100.9, 118.0, 176.0, 200.0, 215.0, 244.5) are pixel-identical to HEAD. The `layer.js` patch branch only runs for a
+`mode: 'patch'` fix.

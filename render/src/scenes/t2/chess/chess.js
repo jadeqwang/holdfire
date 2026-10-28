@@ -91,16 +91,20 @@ void main(){
   if (!gl_FrontFacing) N = -N;
   float hl = dot(N, lightDir) * .5 + .5;
   float sh = handShadow(vW);
-  hl -= sh * .55;
+  // RC3 (QA_RC2 #4): in the hand's shadow a piece keeps its own material: a shallower step down the bands, a shadow band that is
+  // its mid tone darkened (not the lavender shadow band, which on White is black's lit tone, so White's a-file read as Black's),
+  // then the whole piece darkened
+  hl -= sh * .3;
   float aa = max(fwidth(hl), 1e-3);
-  vec3 col = mix(cShadow, cMid, smoothstep(.42 - aa, .42 + aa, hl));
+  vec3 col = mix(mix(cShadow, cMid * .62, sh), cMid, smoothstep(.42 - aa, .42 + aa, hl));
   col = mix(col, cLight, smoothstep(.74 - aa, .74 + aa, hl));
   vec3 H = normalize(lightDir + V);
   float sp = pow(max(dot(N, H), 0.), 70.); float aas = max(fwidth(sp), 1e-3);
   col = mix(col, cSpec, smoothstep(.45 - aas, .45 + aas, sp) * specAmt * (1. - sh));
   float fr = 1. - max(dot(N, V), 0.);
   float rimMask = smoothstep(.6, .63, fr) * smoothstep(-.1, .25, dot(N, rimDir));
-  col = mix(col, cRim, rimMask * rimAmt);
+  col = mix(col, cRim, rimMask * rimAmt * (1. - sh));
+  col *= 1. - .25 * sh;
   if (vInk > .5) col = cInk;
   col *= lightAt(vW) * dim;
   col += glowCol * glow * (.03 + .9 * smoothstep(.66, .7, fr));
@@ -627,7 +631,10 @@ function drawImpl(ctx, shot, t, lt, p) {
       const sp = Math.hypot(...ps.vel);
       const sm = m.material.uniforms.smear.value;
       m.material.uniforms.smearJag.value = (ps.pos[1] > 1.2 && !ps.flying) ? 0 : 1;
-      if (sp > 2.5 && (p.smear ?? 1) > 0) { const k = Math.min(0.03, (ps.pos[1] > 1.2 && !ps.flying ? 0.4 : 0.75) / sp); sm.set(ps.vel[0] * k, ps.vel[1] * k, ps.vel[2] * k); } else sm.set(0, 0, 0);
+      // RC3 (QA_RC2 #4): outside the battle the piece being moved is not smeared: the smear tears the flat-shaded meshes into shards,
+      // which on the 3.Nc3 knight read as a glitch (the set's drops, captured pieces in flight and the battle keep it)
+      const lifted = battle <= 0 && !ps.flying && st.moving && (st.moving.id === ps.id || (st.moving.rook && st.moving.rook.id === ps.id));
+      if (sp > 2.5 && (p.smear ?? 1) > 0 && !lifted) { const k = Math.min(0.03, (ps.pos[1] > 1.2 && !ps.flying ? 0.4 : 0.75) / sp); sm.set(ps.vel[0] * k, ps.vel[1] * k, ps.vel[2] * k); } else sm.set(0, 0, 0);
       // glow: the checked king, the black queen giving the last check
       let glow = 0;
       if (st.check && st.check.sq !== undefined && GAME.boards[st.k + 1][st.check.sq] === ps.id) glow = 0.6 + 0.4 * Math.exp(-st.check.age / 0.25);

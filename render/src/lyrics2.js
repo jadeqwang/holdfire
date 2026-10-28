@@ -108,8 +108,8 @@ export const PLAN = [
     BR02b: { x: 960, y: 125, align: 'center', maxW: 1300 },
     'BR02c,BR02d': { x: 960, y: 110, align: 'center', maxW: 1240, size: 88 },   // one row above her head
     BR03: { x: 960, y: 125, align: 'center', maxW: 1300 } } },
-  { n: 46, style: 'chalk', size: 96, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { 'BR03,BR05': {}, BR04: { style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center' } } },
-  { n: 47, style: 'chalk', size: 96, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { BR05: {}, BR06: { style: 'impact', size: 104, x: 960, yLast: 1025, align: 'center' } } },
+  { n: 46, style: 'chalk', size: 96, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { 'BR03,BR05': {}, BR04: { style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center', maxW: 860, br: [3] } } },   // RC3 (QA_RC2 #6): two rows inside the 4:5 area
+  { n: 47, style: 'chalk', size: 96, shade: 1.6, x: 960, y: 125, align: 'center', maxW: 1300, segs: { BR05: {}, BR06: { style: 'impact', size: 104, x: 960, yLast: 1025, align: 'center', maxW: 860, br: [2] } } },   // RC3 (QA_RC2 #6): two rows inside the 4:5 area
   { n: 48, style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center', maxW: 1000, br: [4] },
   { n: 49, style: 'impact', size: 100, x: 960, yLast: 1025, align: 'center', maxW: 1000, br: [4] },
   // ---------------------------------------------------------------- Arkhipov: poster banners (NO is the poster's own lettering)

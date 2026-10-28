@@ -28,6 +28,8 @@ export const qFromTo = (a, b) => {   // unit vectors
   const q = [c[0], c[1], c[2], 1 + d]; const l = Math.hypot(...q); return q.map((x) => x / l);
 };
 const qY = (a) => qAxis([0, 1, 0], a);
+const qRot = (q, v) => { const [x, y, z, w] = q; const tx = 2 * (y * v[2] - z * v[1]), ty = 2 * (z * v[0] - x * v[2]), tz = 2 * (x * v[1] - y * v[0]);
+  return [v[0] + w * tx + y * tz - z * ty, v[1] + w * ty + z * tx - x * tz, v[2] + w * tz + x * ty - y * tx]; };
 
 // default facing: knights look to their owner's left (profile reads from both players' 3/4 views), turned 0.5 rad (~29 deg) back
 // toward their own player (RC2, QA_RC1 #5): each side's 3/4 view sees its knights 3/4 front, and no file-side camera (the 2:26
@@ -75,6 +77,18 @@ export function chainPath(S, capPly, tau, cam) {
   return lerp3(W, C, w);
 }
 
+// RC3 (QA_RC2 #2): a piece tumbles about its base while it passes 0.6-0.9 beside the lens, so a wide one (the thick knight head)
+// can reach the lens itself: the near plane then cuts into the mesh and the frame goes black (BR09's first frame). On a frame
+// where the lens is inside the piece's bounding capsule (its axis from the base up HULL[P][1], radius HULL[P][0] + 0.1 for the
+// near plane and the ink hull: pieces.js's geometry extents) the piece is dropped (its links still trail past). Only BR09's
+// first frame meets it; render/tools/chess_lens.mjs checks every chess frame against the real meshes
+const HULL = { P: [0.25, 0.77], R: [0.3, 0.93], N: [0.374, 1.09], B: [0.28, 1.16], Q: [0.32, 1.37], K: [0.33, 1.62] };
+function lensInside(pos, q, P, cam) {
+  const [r, h] = HULL[P];
+  const ax = qRot(q, [0, 1, 0]), rel = [cam.pos[0] - pos[0], cam.pos[1] - pos[1], cam.pos[2] - pos[2]];
+  const u = clamp(rel[0] * ax[0] + rel[1] * ax[1] + rel[2] * ax[2], 0, h);
+  return Math.hypot(rel[0] - ax[0] * u, rel[1] - ax[1] * u, rel[2] - ax[2] * u) < r + 0.1;
+}
 function chainFlight(S, capPly, pc, t, cam) {
   const tc = S.plies[capPly].t, tau = t - tc;
   if (tau > CHAIN_T) return { gone: true };
@@ -83,6 +97,7 @@ function chainFlight(S, capPly, pc, t, cam) {
   const vel = [(pos2[0] - pos[0]) * 48, (pos2[1] - pos[1]) * 48, (pos2[2] - pos[2]) * 48];
   const ax = norm([hash1(capPly) - 0.5, 0.4, hash1(capPly + 9) - 0.5]);
   const q = qMul(qAxis(ax, tau * (9 + 4 * hash1(capPly * 2))), qY(restYaw(pc)));
+  if (lensInside(pos, q, pc.p.toUpperCase(), cam)) return { gone: true };
   return { pos, q, vel, gone: false };
 }
 

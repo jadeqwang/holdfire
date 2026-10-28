@@ -717,11 +717,14 @@ export function buildTimeline(A) {
   const paperQ = paperQ0.map(([x, y]) => [pc[0] + 1.45 * (x - pc[0]), pc[1] - 75 + 1.45 * (y - pc[1])]);
   S(null, prev, { ...over(painting({ zoom: PZ, pan: PPAN }), screen('protocol', { quad: paperQ, occ: null, light: [0.92, 0.74, 0.56], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'Insert: the printed protocol on the desk beside him is struck through line by line' });
-  S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', {}, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
+  // RC3 (QA_RC2 #5): gain .9 with gamma 1.1 rolls the highlights off (mids kept), so teal-tips' face holds its skin tone under the oil look
+  S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', { grade: { gain: 0.9, gamma: 1.1 } }, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
   hero([{ text: '26 SEP 1983', t: wd('V2', 4, 'eighty-three').t }, { text: 'SERPUKHOV-15', t: wd('V2', 4, 'eighty-three').t + 0.35 }], { rows: [1, 1], ks: [1, 0.5], size: 110, y: 780, t1: LN('V2', 5).t, color: P.cream, hot: [1, 0.55, 0.4] });   // lower third: the wall map is the picture
   const lookedT = looked.t;
-  // the gloss sits on a dark plate just above the years row (y 1000) and holds into the first weapons so it reads at < 3 words/s
-  cue({ kind: 'cap', label: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE', t0: lookedT, t1: weapons[2][1].t, x: SAFE.cx, y: 896, lead: 38, band: true, draw: drawCaps,
+  // the gloss sits on a dark plate in the lower third of the scroll shot (the plan's 1:27.39 row) and is gone by the cut on "an"
+  // (V206, 89.995): from there "an end with no life" is brushed across the same band (lyrics2 line 25), so the two never overlap
+  // (QA_RC2 #1; it used to hold into the 1288 weapon and its plate covered the first three sung words)
+  cue({ kind: 'cap', label: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES · c. 850 CE', t0: lookedT, t1: LN('V2', 3).t, x: SAFE.cx, y: 896, lead: 38, band: true, draw: drawCaps,
     lines: [{ text: 'FLAMES ROSE, BURNING THEIR HANDS AND FACES', t: lookedT, size: 26 }, { text: 'c. 850 CE', t: lookedT + 0.4, size: 22, color: [0.86, 0.8, 0.68] }] });
   // the weapons' years (1132 · 1288 · 1453 · 1916 · 1945) are brushed by t2_ink_weapons itself, top left of each image
   sub('V2', 7, { to: 4, t1: wd('V2', 7, "we're").t });                                                                    // ignored all previous instructions

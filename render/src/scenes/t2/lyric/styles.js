@@ -371,16 +371,39 @@ const impact = {
     const kk = last ? Math.exp(-Math.max(0, E.t - last.w.t) / 0.08) : 0;
     const sx = (hash2(Math.floor(E.t * 24), 1) - 0.5) * 16 * kk, sy = (hash2(Math.floor(E.t * 24), 2) - 0.5) * 12 * kk;
     g.lineJoin = 'round';
-    for (const it of items) {
-      const s = it.st;
-      if (s.pre) {   // unsung: flat and still, half strength (the line reads ahead; the slam is the word's own moment)
-        g.globalAlpha = E.line * ghostA(o, 0.45); g.strokeStyle = edge; g.lineWidth = size * 0.1; g.strokeText(it.w.text, it.ax, it.ay);
-        g.fillStyle = fill; fillWord(g, it); continue;
-      }
+    const slam = (it) => {   // the slam transform (scale > 1 while the word lands)
       const u = clamp((E.t - it.w.t + 0.04) / 0.13), sc = 1 + 0.75 * Math.pow(1 - u, 3);
       const rot = ((hash2(it.i + 3, 11) - 0.5) * 2 * (o.tilt ?? 4)) * Math.PI / 180;
+      return { u, sc, rot, cx: it.ax, cy: it.ay - size * 0.4 };
+    };
+    const ghost = (gg, it) => {   // unsung: flat and still, half strength (the line reads ahead; the slam is the word's own moment)
+      gg.globalAlpha = E.line * ghostA(o, 0.45); gg.strokeStyle = edge; gg.lineWidth = size * 0.1; gg.strokeText(it.w.text, it.ax, it.ay);
+      gg.fillStyle = fill; fillWord(gg, it);
+    };
+    // RC3 (QA_RC2 #7): while a word's slam overshoots it grows over the unsung words after it (CHAINSARE): the unsung words go on
+    // their own layer, a gap of size * 0.12 round the slamming word is cut out of it, then the layer goes under the sung words
+    const landing = items.filter((it) => !it.st.pre && slam(it).sc > 1.002), ghosts = items.filter((it) => it.st.pre);
+    let layered = false;
+    if (landing.length && ghosts.length) {
+      const L = scratch('l2_impact_ghosts', E.pw, E.ph), lg = L.g;
+      lg.setTransform(E.res, 0, 0, E.res, 0, 0); setFont(lg, E.f); lg.textBaseline = 'alphabetic'; lg.textAlign = 'left'; lg.lineJoin = 'round';
+      for (const it of ghosts) ghost(lg, it);
+      lg.globalCompositeOperation = 'destination-out'; lg.globalAlpha = 1; lg.fillStyle = '#000'; lg.strokeStyle = '#000';
+      for (const it of landing) {
+        const m = slam(it);
+        lg.save(); lg.translate(m.cx + sx, m.cy + sy); lg.rotate(m.rot); lg.scale(m.sc, m.sc); lg.translate(-m.cx, -m.cy);
+        lg.lineWidth = size * (0.13 + 0.24 / m.sc);   // the ink stroke (scaled with the slam) + a 0.12 * size gap each side
+        for (const [dx, dy] of [[0, 0], [size * 0.07, size * 0.07]]) { lg.strokeText(it.w.text, it.ax + dx, it.ay + dy); fillWord(lg, it, it.ax + dx, it.ay + dy); }
+        lg.restore();
+      }
+      g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.drawImage(L, 0, 0, E.pw, E.ph, 0, 0, E.pw, E.ph); g.restore();
+      layered = true;
+    }
+    for (const it of items) {
+      const s = it.st;
+      if (s.pre) { if (!layered) ghost(g, it); continue; }
+      const { u, sc, rot, cx, cy } = slam(it);
       // RC2 (QA_RC1 #9): the slam grows from the word's left edge, so it never eats the space after the word before it (LIGHTS aSPARK)
-      const cx = it.ax, cy = it.ay - size * 0.4;
       g.save(); g.translate(cx + sx, cy + sy); g.rotate(rot); g.scale(sc, sc); g.translate(-cx, -cy);
       g.globalAlpha = E.line * clamp(u * 3);
       g.fillStyle = acc; fillWord(g, it, it.ax + size * 0.07, it.ay + size * 0.07);

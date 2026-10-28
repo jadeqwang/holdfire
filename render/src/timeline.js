@@ -978,7 +978,16 @@ export function buildTimeline(A) {
   // the palms touch on "too": DR05's contact frame (clip 3.40, g4) lands on the cut to DR06, which holds them together (rate 0.8 so
   // the plate's last frame is reached at the shot's end, not before)
   const tooT = wd('DR', 2, 'too').t, countingT2 = wd('DR', 2, 'counting').t;
-  S(null, wd('DR', 2, 'counting'), mirror('palms_meet', 'The palms meet on the glass on "too"', { full: { scene: 't2_plate', p: { clip: '@', in: 3.40 - (tooT - countingT2) } } }));
+  // adversary pass (item 5): the palms rhyme with the let-go (BR11b, 2:37.79). DR05 opens framed like BR11b, its palms raised to where
+  // the chess hands opened (y ~330; at zoom 1.2 they keep about BR11b's scale), and eases back to the glass's own framing by the cut on
+  // "too" (DR06's ripple centre is unchanged); BR11b's let-go frame (assets/t2/rhyme/br11b_letgo.jpg, a still of the edit's own
+  // frame at 2:38.08, faded out below the hands) dissolves out over DR05's first five frames
+  const dr05In = 3.40 - (tooT - countingT2), dr05Dur = tooT - countingT2;
+  const dr05Cam = (lt) => { const u = easeInOutCubic(clamp(lt / dr05Dur)); const z = lerp(1.2, 1, u); return { zoom: z, pan: [0, lerp(-100, 0, u)] }; };
+  const palms = S(null, wd('DR', 2, 'counting'), mirror('palms_meet', 'The palms meet on the glass on "too"; the shot opens framed like the let-go at the chess board (BR11b) and a ghost of those hands dissolves into these',
+    { full: { scene: 't2_plate', p: (t, lt) => ({ clip: 'DR05', in: dr05In, ...dr05Cam(lt) }) } }));
+  palms.scene = 'multi';
+  palms.p = { layers: [{ scene: 't2_mirror', p: palms.p }, { scene: 't2_still', p: (t, lt) => ({ img: 'assets/t2/rhyme/br11b_letgo.jpg', alpha: 0.42 * (1 - clamp(lt / (5 / 24))) }) }] };
   const rippleShot = S(null, wd('DR', 2, 'too'), mirror('ripple', 'On "too" the mirror starts to ripple (rings spread from the palms)', { rippleT: tooT, full: { scene: 't2_plate', p: { clip: '@', in: 3.40, rate: 0.8 } } }));
   const dropHits = HITS.filter((h) => h.kind === 'drop_counts');
   const phyllo = (want, k) => ({ scene: 'phyllo', p: { center: PALM, radius: 360 }, method: 'reuse', era: ERA.light,

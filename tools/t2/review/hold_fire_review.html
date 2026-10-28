@@ -278,7 +278,7 @@ button { font: inherit; color: inherit; }
     </section>
 
     <section id="p-eye" role="tabpanel" aria-labelledby="tab-eye" hidden>
-      <p class="unfinished"><b>New in v7:</b> the sound layer (match, rewinds, clock slaps, sonar, counter), upscaled sung shots, the real cuneiform (Fibonacci + a line of Ea-nasir), 46 stamped coins, three new near-misses, “we’re awake” sung once, the match as the second 1, credits that stay up, Petrov’s full readout, horse-headed knights. <b>Note:</b> this cut’s counter reads 42; the master reads 47 for the 1 Nov release.</p>
+      <p class="unfinished"><b>New in v10 (RC5, the adversary pass):</b> teal-tips Jade arrives as the other side (a cold room, her monitors tracking your dish field in red alert); a wall and a warm/cold grade between the two rooms in every split until the glass, each monitor tracking the other as an unknown contact; a hand beside a guarded switch on each side in chorus 2; a line of signal between the two buildings; BU04 now a rewind from its first frame; the palms on the glass rhyme with the hands letting go of the pieces. <b>Note:</b> this preview splices the changed shots into RC4’s frames; the counter reads 42 as in RC4.</p>
       <p class="hint">Things to check in this cut. Each one starts 2 seconds before the moment.</p>
       <ul class="list eye" id="eye"></ul>
     </section>
@@ -292,7 +292,7 @@ button { font: inherit; color: inherit; }
   'use strict';
   // ---------------------------------------------------------------- this cut
   // One cut at a time. To publish v3: re-encode into media/, update VERSION, SEGS and FILM_LEN. Notes keep the version they were made on.
-  const VERSION = 'v7 · 28 Oct · 540p';
+  const VERSION = 'v10 · RC5 · 28 Oct · 540p';
 
   // ---------------------------------------------------------------- film data
   // media/init.mp4 + media/s000.mp4 … s041.mp4: fMP4 HLS, H.264 main (no B-frames), keyframe at every 6 s segment start, AAC copied from the cut.
@@ -316,7 +316,7 @@ button { font: inherit; color: inherit; }
     [72.406, 'Post-Chorus 1', 'The graph grows: one, one, two, three, five links, then the 8', .743],
     [82.645, 'Verse 2', 'Fire: the alchemists, Petrov', .663],
     [102.995, 'Pre-Chorus 2', 'The list: teletype near-misses, a hundred coins, the gold path', .750],
-    [113.152, 'Chorus 2', 'Split screen: both Jades in mirrored rooms', .735],
+    [113.152, 'Chorus 2', 'Split screen: both Jades in mirrored rooms, a wall between them; hands near the switch', .735],
     [133.447, 'Post-Chorus 2', 'Earth’s lights scale up, then the chessboard sets itself', .752],
     [143.581, 'Bridge', 'The game and the submarine: Fischer–Tal, then Arkhipov says no', .631],
     [163.793, 'Build', 'First strike and rewind; hold your fire, show your light', .814],
@@ -326,20 +326,19 @@ button { font: inherit; color: inherit; }
 
   // Eyeball list: [moment (s), label, what to look at]. Each jump starts 2 s before.
   const EYE = [
-    [46.0, '0:46.0', 'Teal-tips Jade on “Hear it, and you’ll know we’re awake.” Does her mouth match, and do her eyes open on “awake” (0:47.7)?'],
-    [64.6, '1:04.6', 'The studio pose on “in the white noise”: hand on the headphones, eyes closed.'],
-    [92.6, '1:32.6–1:42', 'The Petrov screen: five missile tracks, the red СТАРТ, the ghost tracks fading. Does it sit right on the screen?'],
-    [117.9, '1:57.9', 'Lip sync: teal-tips Jade on “but if you are, I’m counting on you” in chorus 2.'],
-    [125.8, '2:05.8', 'The studio pose again on “in the white noise”, split screen. Do the two halves match?'],
-    [150.3, '2:30.3', 'Chess: the queen takes on g7 (9.Qxg7) right on “spark”.'],
-    [158.1, '2:38.1', 'Chess: both take their hands off the pieces on “let go”, and the clocks stop.'],
-    [188.4, '3:08.4', 'The drop impact: the camera swings around the mirror to teal-tips Jade.'],
-    [188.7, '3:08.7', '“But you were. You were counting too.” at the mirror: lip sync and the palms meeting.'],
-    [207.5, '3:27.5', 'The held note on “wherever you are”: does her mouth hold it?'],
-    [128.4, '2:08.4', 'The mirrored split on “If you are, I’m counting on you”: lip sync on both, and do the halves read as mirror images?'],
-    [15.5, '0:15.5', 'Lyrics woven into the scenery: is every line readable in time, here and through verse 1?'],
-    [224, '3:44–3:53', 'The reset counter: does it snap to zero at each near-miss and read when paused?'],
-    [244, '4:04', 'The end card credits: names, spelling, how long they stay up.'],
+    [46.0, '0:46.0', 'Teal-tips Jade’s first shot: does she read as the other side? Cold room, red-alert monitors, the track ending on your dish field.'],
+    [56.7, '0:56.7', 'Chorus 1 split: two rooms with a wall, warm and cold; each monitor tracks the other (CONTACT 0217).'],
+    [64.6, '1:04.6', 'Her studio pose with the cool cast: can you tell her from Jade at a glance?'],
+    [113.2, '1:53.2', 'Chorus 2: the wall and the split grade on every split (dish field, Golden Record, both consoles).'],
+    [117.9, '1:57.9', 'The contact again, closer and brighter.'],
+    [127.7, '2:07.7', 'Jade’s hand beside the guarded switch, cover shut (one beat).'],
+    [130.9, '2:10.9', 'Teal-tips’ hand at the same switch, mirrored and cold (to the crane).'],
+    [131.8, '2:11.8', 'The crane: a thin line of signal between the two buildings, pulses both ways.'],
+    [142.9, '2:22.9', 'The chess sit-down: a standoff, nobody smiling.'],
+    [170.1, '2:50.1', 'BU04: does every frame read as a rewind, never a launch? The wheel spins backward, REW, SIGNAL LOST on her monitor.'],
+    [180.1, '3:00.1', 'Hand lights on either side of a wall: parallel, not together.'],
+    [191.4, '3:11.4', 'The palms on the glass open framed like the let-go at the chess board, with its ghost.'],
+    [158.1, '2:38.1', 'The let-go itself, to compare with 3:11.'],
   ];
 
   // ---------------------------------------------------------------- helpers

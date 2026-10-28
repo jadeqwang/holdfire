@@ -50,7 +50,7 @@ function build(e) {
           col = mix(col, dotc, w);
           continue;
         }
-        if (fixB[i].w > 3.5) {
+        if (fixB[i].w > 3.5 && fixB[i].w < 4.5) {
           // patch (RC3, QA_RC2 #3): the lettering inside a printed patch's inner disc (an ellipse turned by rot) is repainted:
           // the disc is refilled with its own paper (below), then tPatch's lettering is laid in, in col
           vec2 dd = (rot(fixC[i].z) * (ipx - fixA[i].xy)) / fixA[i].zw;   // rot(a) turns by -a: back into the disc frame
@@ -75,6 +75,16 @@ function build(e) {
           col = mix(col, paper / max(pw, 1e-4), me);
           float ink = texture(tPatch, vec2(dd.x, -dd.y) * .5 + .5).a * (1. - smoothstep(.97, 1.0, rr));
           col = mix(col, fixB[i].rgb, ink);
+          continue;
+        }
+        if (fixB[i].w > 4.5) {
+          // neutral (adversary pass, BU04): the alarm-red cast lifted off a surface (the jog wheel's platter) inside the ellipse: its
+          // low-saturation pixels take col at their own luma, saturated ones (her fingers) are left alone
+          float mn = 1. - smoothstep(.9, 1.04, length(d));
+          if (mn <= 0.) continue;
+          float mx = max(col.r, max(col.g, col.b)), sat = (mx - min(col.r, min(col.g, col.b))) / max(mx, 1e-3);
+          float w = (1. - smoothstep(fixC[i].x, fixC[i].x + .14, sat)) * mn;
+          col = mix(col, fixB[i].rgb * (l / max(.05, luma(fixB[i].rgb))), w);
           continue;
         }
         float m = 1. - smoothstep(.82, 1.08, length(d));
@@ -127,6 +137,8 @@ function build(e) {
 //     'erase': pixels brighter than col (a star, a glint) are painted back to col (the local sky), darker strokes kept.
 //     'patch': a printed patch's lettering repainted inside its inner disc (c, r = [rx, ry], rot rad; track [f, x, y, [rx, ry], rot]):
 //     the plate's letters lifted out, lines [{text, y, w, h}] (disc units, y down; default 1420 / MHz) laid in, in col (the ink).
+//     'neutral': inside the ellipse r, pixels under satMax (0.42) saturation take col at their luma (a red cast lifted off metal;
+//     saturated pixels, e.g. skin, kept).
 function fixAt(F, f) {
   let c = F.c || [0, 0], r = F.r ?? 10;
   const K = F.track;
@@ -144,7 +156,8 @@ function fixAt(F, f) {
     if (A[4] !== undefined) { const u = B[0] > A[0] ? Math.max(0, Math.min(1, (f - A[0]) / (B[0] - A[0]))) : 0; a = A[4] + ((B[4] ?? A[4]) - A[4]) * u; }
   }
   const rr = Array.isArray(r) ? r : [r, r];
-  return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3, patch: 4 })[F.mode] || 1], [F.core || 0, F.glow || 0, a, 0]];
+  const c0 = F.mode === 'neutral' ? (F.satMax ?? 0.42) : (F.core || 0);
+  return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3, patch: 4, neutral: 5 })[F.mode] || 1], [c0, F.glow || 0, a, 0]];
 }
 // the 'patch' lettering: lines of type set in the unit disc (y down), white on transparent, one texture per text (cached)
 const patchTex = new Map();

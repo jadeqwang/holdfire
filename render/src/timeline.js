@@ -787,8 +787,11 @@ export function buildTimeline(A) {
   // falls on the crane (C210)
   S(null, wd('C2', 5, 'if'), { ...split({}, { clip: 'C209R_LS', in: 0 }, 2, WALL), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Split: each Jade looks at her own screen; Jade (left) sings "If you are", teal-tips (right) listens, mouth closed' });
-  S(null, wd('C2', 5, "i'm"), { ...plate(), method: 'video', era: ERA.room, look: LK.night,
-    want: 'Crane up out of both rooms side by side: the faint signal each one hears comes from the same direction, the other control room' });
+  // the two roofs (lit windows' centroids lifted to the roof line), measured on C210's plate every 6 frames (adversary pass)
+  const C210_ROOFS = [[0, 395, 536, 1530, 536], [0.5, 396, 552, 1531, 552], [1.0, 392, 589, 1535, 589], [1.5, 390, 643, 1540, 643],
+    [2.0, 382, 708, 1543, 708], [2.5, 376, 780, 1546, 780], [3.0, 360, 855, 1549, 855], [3.5, 335, 929, 1552, 929]];
+  S(null, wd('C2', 5, "i'm"), { ...over(plate(), { scene: 't2_signal_link', p: { track: C210_ROOFS, rate: 1.5 } }), method: 'video', era: ERA.room, look: LK.night,
+    want: 'Crane up out of both rooms side by side: the faint signal each one hears comes from the other control room, a thin line of light between the two buildings, pulses running both ways' });
   hero(caps(lineWords('C2', 0, 0, 3)), { size: 180, y: 290, t1: LN('C2', 1).t });
   hero(caps(lineWords('C2', 2, 4)), { rows: [2, 2], size: 150, y: 190, t1: LN('C2', 3).t, out: 0.1 });
 
@@ -911,8 +914,21 @@ export function buildTimeline(A) {
     want: "The Rare Earth war scene: Earth's night side over the pole, missile tracks rising from both sides' silo fields and from submarines" });
   S('2:46.93', wd('BU', 1, 'fire'), { scene: 't2_war', p: warP, method: 'procedural', era: ERA.war, look: LK.war, want: 'Pull out to the contact graph: elsewhere in the galaxy, worlds fire on each other and go dark one by one' });
   S('2:49.44', burn, { scene: 't2_war', p: warP, method: 'procedural', era: ERA.war, look: LK.war, want: 'Back on Earth the warheads land and the lights go out (tightened: dark by ~170.3)' });
-  S('2:50.83', fall, { ...plate({ rate: 3.0, grade: { contrast: 1.08, lift: -0.04, sat: 0.88 } }), method: 'video', era: ERA.room, look: LK.room,
-    want: 'Jade at her console sees SIGNAL LOST, grabs the jog wheel and spins it back', notes: 'moved from "Only" (2:50.83) to "fall" so the rewind gets 3 s; rate 3.0: hand on the wheel to her face in 0.76 s' });
+  // BU04 must read as a rewind from its first frame, never a launch (Jade, 28 Oct): the wheel spins backward (blur arcs and chevrons,
+  // counter-clockwise), its red cast lifted (grade.fix 'neutral' on the platter), the VCR's REW chevrons in the OSD corner (top right), the
+  // VHS rewind lines already running under her hand, and SIGNAL LOST on the dead monitor she is looking at (it sat under her hand).
+  // Tracks by plate frame (in 0.4, rate 3.0 -> frames ~10-64), measured on the BU04 plate: the platter's top ellipse, the monitor's quad
+  const BU04_WHEEL = [[10, 955, 705, 645, 155], [22, 900, 730, 600, 130], [34, 905, 825, 415, 95], [46, 855, 930, 345, 90], [58, 845, 945, 275, 90], [64, 870, 935, 260, 88]];
+  const BU04_SCREEN = [[22, [[-15, -180], [367, -145], [367, 115], [-15, 165]]], [30, [[95, 0], [423, 23], [424, 266], [94, 316]]], [34, [[151, 79], [453, 116], [452, 342], [148, 393]]],
+    [38, [[195, 166], [479, 197], [480, 413], [193, 459]]], [42, [[239, 239], [501, 266], [503, 469], [236, 516]]], [46, [[273, 301], [520, 324], [523, 519], [270, 563]]],
+    [50, [[300, 348], [535, 371], [539, 557], [297, 601]]], [54, [[321, 385], [547, 406], [551, 588], [317, 631]]], [58, [[336, 413], [557, 432], [560, 611], [332, 652]]],
+    [62, [[344, 430], [563, 448], [566, 626], [342, 666]]]];
+  const BU04_NEUTRAL = { mode: 'neutral', col: [0.86, 0.8, 0.7], satMax: 0.42, track: BU04_WHEEL.map(([f, x, y, rx, ry]) => [f, x, y + ry * 0.35, [rx * 1.06, ry * 1.6]]) };
+  S('2:50.83', fall, { scene: 'multi', p: { layers: [{ scene: 't2_plate', p: (t, lt) => ({ clip: 'BU04', rate: 3.0, grade: { contrast: 1.08, lift: -0.04, sat: 0.88, fix: [BU04_NEUTRAL] }, vhs: 0.3 + 0.4 * clamp(lt / 0.76), vhsP: { rewind: 1 } }) },
+      { scene: 't2_rewind_console', p: { in: 0.4, rate: 3.0, wheel: BU04_WHEEL, screen: BU04_SCREEN, osd: { x: 1390, y: 130, size: 130 } } }] },
+    method: 'video', era: ERA.room, look: LK.room,
+    want: 'Jade at her console spins the jog wheel BACKWARD from the first frame: the wheel blurs counter-clockwise, REW chevrons, the VHS rewind lines start under her hand; SIGNAL LOST on the dead monitor she is staring at',
+    notes: 'moved from "Only" (2:50.83) to "fall" so the rewind gets 3 s; rate 3.0: hand on the wheel to her face in 0.76 s. Adversary pass: reads as a rewind, never a launch (Jade, 28 Oct)' });
   S(null, onlyW, { scene: 't2_war', p: (t) => ({ ...warP, rewind: true, w: rwClock(t) }), method: 'procedural', era: ERA.war, look: LK.war,
     want: 'VHS rewind (3 s): the lights flicker back, the warheads lift off the cities, the galaxy\'s dark worlds relight, the tracks fall back into silos and submarines',
     notes: 'starts on "Only" (the plan\'s console time); the war clock is piecewise so Earth and the galaxy each get their share' });
@@ -941,9 +957,7 @@ export function buildTimeline(A) {
   // on a dark plate (red caps over the red Earth did not read); SIGNAL LOST stays up while Jade sees it and grabs the jog wheel
   cue({ kind: 'cap', label: 'NUCLEAR DETONATIONS', t0: burn.t - 0.05, t1: fall.t, y: 960, draw: drawCaps, color: [1, 0.42, 0.3], band: true,
     lines: [{ text: 'NUCLEAR DETONATIONS', t: burn.t - 0.05, size: 46 }] });   // 46 px (was 30): reads on a phone (polish 4)
-  // SIGNAL LOST as big as BURN, AND FALL's 84 px (polish 4: at 30 px it was ~12 px tall at 540p under the jog wheel)
-  cue({ kind: 'cap', label: 'SIGNAL LOST', t0: fall.t, t1: onlyW.t, y: 1000, draw: drawCaps, color: [1, 0.3, 0.24], band: true,
-    lines: [{ text: 'SIGNAL LOST', t: fall.t, size: 72, glow: 6 }] });
+  // (adversary pass: SIGNAL LOST is now on the monitor she is reacting to in BU04, t2_rewind_console; the cap under her hand is gone)
   hero(caps(lineWords('BU', 5, 0, 3)), { size: 170, y: 280, t1: show1.t, color: P.cream, hot: P.goldPale, shade: 1, glow: 2 });   // HOLD YOUR FIRE (cream with a full shade: red is for fire)
   hero(caps(lineWords('BU', 6, 3, 6)), { size: 150, y: 960, t1: Math.min(dropT, rollBeats[rollBeats.length - 1] + 0.3), color: P.goldPale, hot: GOLD_HOT, shade: 0.8 });   // SHOW YOUR LIGHT (lower third: the closing split's faces fill the upper half; out as the frame burns white)
 

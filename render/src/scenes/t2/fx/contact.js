@@ -101,7 +101,7 @@ function drawDisplay(c, s, tq, pulse, age) {
 }
 
 // map the content canvas onto a quad: a grid of cells, each drawn with its own affine transform (canvas has no perspective)
-function mapQuad(c, img, q, alpha) {
+export function mapQuad(c, img, q, alpha, CWo = CW, CHo = CH) {
   const N = 10, M = 7;
   const at = (u, v) => {
     const top = [q[0][0] + (q[1][0] - q[0][0]) * u, q[0][1] + (q[1][1] - q[0][1]) * u];
@@ -119,9 +119,9 @@ function mapQuad(c, img, q, alpha) {
     [p00, p10, p11, p01].map(grow).forEach((p, k) => (k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])));
     c.closePath(); c.clip();
     // affine from content cell (u0..u1, v0..v1) to (p00, p10, p01)
-    const sx = (u1 - u0) * CW, sy = (v1 - v0) * CH;
+    const sx = (u1 - u0) * CWo, sy = (v1 - v0) * CHo;
     const a = (p10[0] - p00[0]) / sx, b = (p10[1] - p00[1]) / sx, cc = (p01[0] - p00[0]) / sy, d = (p01[1] - p00[1]) / sy;
-    c.transform(a, b, cc, d, p00[0] - a * u0 * CW - cc * v0 * CH, p00[1] - b * u0 * CW - d * v0 * CH);
+    c.transform(a, b, cc, d, p00[0] - a * u0 * CWo - cc * v0 * CHo, p00[1] - b * u0 * CWo - d * v0 * CHo);
     c.drawImage(img, 0, 0);
     c.restore();
   }

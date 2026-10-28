@@ -296,6 +296,18 @@ export function buildTimeline(A) {
   // get the contrast and exposure that match the left half's luma mean and spread (measured per split on the polish-pass stills);
   // the cooler tint is kept (plan: her room is Jade's flipped, with cooler light)
   const RM = (contrast, exposure) => ({ grade: { contrast, exposure } });
+  // adversary-arc pass (28 Oct, the plan "Hold Fire: the adversary arc"): the two halves are two rooms that do not match. A wall
+  // (t2_split bar, 32 px, faint scanlines) replaces the 2 px line, and the split grade (t2_split tone) keeps Jade's half warm (her
+  // amber lamp) and turns teal-tips' cold (blue-white fluorescent, the orange of her jacket muted, deeper blacks). This replaces RM's
+  // matching on the splits it is used on. COLD is also the cool cast on teal-tips' solo shots (as a plate grade).
+  const WARM = { exposure: 1.02, contrast: 1.04, sat: 1.06, tint: [1.07, 1.0, 0.88] };
+  const COLD = { exposure: 0.86, contrast: 1.14, sat: 0.55, tint: [0.8, 0.94, 1.16], lift: [-0.012, -0.004, 0.012] };
+  const WALL = { bar: { w: 32, col: [0, 0, 0], tex: 1 }, tone: { L: WARM, R: COLD } };
+  // each one's monitor tracks the other as an unknown contact (t2_contact), on the C103 keyframe crop's top monitors (C103 / C203
+  // share it): Jade's (left edge) points right, toward the wall; teal-tips' (right edge) is the same display mirrored, pointing left
+  const SCREENS = { L: [[12, 152], [270, 196], [216, 385], [0, 372]], R: [[1652, 192], [1930, 136], [1930, 377], [1705, 388]] };
+  const contacts = (o = {}) => ({ scene: 't2_contact', p: { screens: [
+    { quad: SCREENS.L, brg: '090', ...o }, { quad: SCREENS.R, brg: '090', mirror: true, cold: true, ...o }] } });
   const split = (l = {}, r = {}, line = 2) => ({ scene: 't2_split', p: { left: { scene: 't2_plate', p: { clip: '@L', ...l } }, right: { scene: 't2_plate', p: { clip: '@R', ...r } }, x: 960, line } });
   // Jade (v3, 0:57.4): in the splits each Jade sings one phrase: Jade (left) "but if you are", teal-tips (right) "I'm counting on you";
   // the half that isn't singing listens, mouth closed (a Seedance 2.0 listening plate, <ID>L_LS / <ID>R_LS, on the same keyframe;
@@ -308,10 +320,10 @@ export function buildTimeline(A) {
   const hold2 = (t) => { let ff = Math.floor(t * 24 + 1e-3); ff -= ((ff % 2) + 2) % 2; return ff / 24; };
   const onFrame = (t) => Math.ceil(t * 24 - 1e-6) / 24;
   const LS = { C103: { from: 14 / 24, to: 78 / 24 }, C203: { from: 10 / 24, to: 78 / 24 } };
-  const phraseSplit = (id, cut, l = {}, r = {}) => {
+  const phraseSplit = (id, cut, l = {}, r = {}, extra = {}) => {
     const c = onFrame(cut), q = LS[id];   // c - 1e-4: a still asked for at c rounded down still shows the cut
     const rightAt = (t, lt) => { const a = hold2(t - lt), b = hold2(c - 1 / 24); return q.to * clamp((hold2(t) - a) / Math.max(1e-3, b - a)); };
-    return { scene: 't2_split', p: { x: 960, line: 2,
+    return { scene: 't2_split', p: { x: 960, line: 2, ...extra,
       left: { scene: 't2_plate', clips: [{ clip: `${id}L` }, { clip: `${id}L_LS` }],
         p: (t) => (t < c - 1e-4 ? { clip: `${id}L`, ...l } : { clip: `${id}L_LS`, at: q.from + hold2(t) - hold2(c), ...l }) },
       right: { scene: 't2_plate', clips: [{ clip: `${id}R_LS` }, { clip: `${id}R` }],
@@ -600,9 +612,9 @@ export function buildTimeline(A) {
   S('0:51.70', wd('C1', 0, "can't"), { ...plate({ swingT: dl1 }), method: 'video', era: ERA.room, look: (t) => ({ ...LK.night, flash: t >= dl1 ? Math.exp(-(t - dl1) / 0.15) * 0.4 : 0, flashCol: [1, 0.9, 0.7] }),
     want: 'Jade alone on the dish field at night; on the 0:51.82 downbeat every dish swings to the same point in the sky' });
   S('0:54.28', wd('C1', 1, 'message'), { scene: 'goldenrecord', p: {}, method: 'reuse', era: ERA.light, look: LK.diagram, want: "Take one's 0:54 diagram unchanged: the Golden Record cover engraves itself in gold light" });
-  S('0:56.67', wd('C1', 2, 'but'), { ...phraseSplit('C103', wd('C1', 2, "i'm").t, {}, RM(1.18, 1.02)), method: 'seedance_sung', era: ERA.room, look: LK.room,
-    want: 'Split screen at their own consoles, neither aware of the other: Jade (left) sings "but if you are" while teal-tips (right) listens; on "I\'m" teal-tips sings "I\'m counting on you" while Jade listens',
-    notes: 'Jade v3: one phrase per half; both halves cut on the onset of "I\'m" (phraseSplit)' });
+  S('0:56.67', wd('C1', 2, 'but'), { ...over(phraseSplit('C103', wd('C1', 2, "i'm").t, {}, {}, WALL), contacts({ range: 0.3 })), method: 'seedance_sung', era: ERA.room, look: LK.room,
+    want: 'Split screen, two rooms with a wall between them: Jade (left, warm lamp) sings "but if you are" while teal-tips (right, cold fluorescent) listens; on "I\'m" teal-tips sings "I\'m counting on you" while Jade listens. Each one\'s monitor tracks the other as an unknown contact (CONTACT 0217)',
+    notes: 'Jade v3: one phrase per half; both halves cut on the onset of "I\'m" (phraseSplit). Adversary pass: wall bar, warm/cold split grade (RM matching dropped), contact tracks' });
   // t2_crt_matrix is one continuous camera (close on one CRT, smash back on the two beats and on "swear"), so it is one shot;
   // the beats and "swear" are passed in (the scene would otherwise take the beats after its own start)
   const crt = (silent, sec, want, extra = {}) => ({ scene: 't2_crt_matrix', method: 'procedural', era: ERA.crt, look: CRT_LOOK, want,
@@ -755,7 +767,7 @@ export function buildTimeline(A) {
     want: 'Split: each Jade alone on her own dish field at night (mirrored); the dishes swing to the same point', notes: 'chorus 1 shot returns as a split; cut on "Can\'t" like chorus 1' });
   S(null, wd('C2', 1, 'message'), { scene: 't2_split', p: { left: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, right: { scene: 'goldenrecord', p: { R: 300, cx: 960, cy: 520, caption: false } }, x: 960, line: 2 }, method: 'reuse', era: ERA.light, look: LK.diagram,
     want: 'Split: the Golden Record cover engraves itself on both sides at once' });
-  S(null, wd('C2', 2, 'but'), { ...phraseSplit('C203', wd('C2', 2, "i'm").t, {}, RM(1.22, 1.07)), method: 'seedance_sung', era: ERA.room, look: LK.room,
+  S(null, wd('C2', 2, 'but'), { ...over(phraseSplit('C203', wd('C2', 2, "i'm").t, {}, {}, WALL), contacts({ range: 0.75, bright: 1.25 })), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Split at their mirrored consoles: Jade (left) sings "but if you are" while teal-tips listens; on "I\'m" teal-tips sings "I\'m counting on you" while Jade listens',
     notes: 'Jade v3: one phrase per half; both halves cut on the onset of "I\'m" (phraseSplit)' });
   const silent2 = wd('C2', 3, 'silent');

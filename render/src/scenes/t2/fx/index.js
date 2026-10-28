@@ -8,5 +8,6 @@ import t2_tower_bursts from './towerbursts.js';
 import t2_chain_links from './chainlinks.js';
 import t2_mirror from './mirror.js';
 import t2_endcard from './endcard.js';
+import t2_contact from './contact.js';
 
-export const SCENES = { t2_first, t2_seed_spiral, t2_spiral_trace, t2_tower_bursts, t2_chain_links, t2_mirror, t2_endcard };
+export const SCENES = { t2_first, t2_seed_spiral, t2_spiral_trace, t2_tower_bursts, t2_chain_links, t2_mirror, t2_endcard, t2_contact };

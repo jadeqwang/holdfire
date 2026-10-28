@@ -60,7 +60,7 @@ export const PLAN = [
   // ---------------------------------------------------------------- CHORUS 1: light in the sky, the screens
   { n: 12, style: 'light', size: 80, col: GOLD, shade: 2, x: 548, y: 405, align: 'left', maxW: 560, br: [5] },             // in the dark sky left of the Milky Way, under the hero and off the core (polish 4)
   { n: 13, style: 'engrave', size: 62, x: 770, y: 400, align: 'right', maxW: 620, br: [4, 6] },    // the record's own legend, beside the disc
-  { n: 14, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 770, align: 'center', handover: 0 },   // "but if you are" gives way on the onset of the hero I'M COUNTING ON YOU (Jade's text rules)   // a shared readout across the split, at chest height (clear of both mouths)
+  { n: 14, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 470, y: 770, align: 'center', handover: 0 },   // adversary pass: Jade's line on Jade's side of the wall (it bridged the split), on her chest, clear of her face   // "but if you are" gives way on the onset of the hero I'M COUNTING ON YOU (Jade's text rules)   // a shared readout across the split, at chest height (clear of both mouths)
   { n: 15, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, yLast: 985, align: 'center', maxW: 860, br: [3] },
   { n: 16, style: 'crt', size: 58, col: '#a8f0ff', quad: [[1250, 170], [1850, 140], [1860, 560], [1255, 575]], br: [4, 8], panel: 'rgba(2,10,20,1)', panelA: 0.55 },   // across the monitor bank
   { n: 17, style: 'light', size: 84, col: GOLD, shade: 0.8, segs: {   // one phrase per clip: "If you are" on C109, "I'm counting on you" from the cut on I'm (Jade's text rules)
@@ -87,7 +87,7 @@ export const PLAN = [
   // ---------------------------------------------------------------- CHORUS 2: the mirror, first (as chorus 1, both rooms)
   { n: 34, style: 'light', size: 74, col: GOLD, shade: 1.4, x: 960, yLast: 1015, align: 'center' },
   { n: 35, style: 'engrave', size: 50, x: 960, yLast: 1010, align: 'center', maxW: 860, br: [4, 6] },   // a row per phrase where the commas were
-  { n: 36, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 960, y: 770, align: 'center', handover: 0 },
+  { n: 36, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 470, y: 770, align: 'center', handover: 0 },   // adversary pass: Jade's line on Jade's side of the wall (it bridged the split), on her chest, clear of her face
   { n: 37, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, yLast: 985, align: 'center', maxW: 860, br: [3] },
   { n: 38, style: 'crt', size: 64, col: '#a8f0ff', panel: 'rgba(2,10,20,1)', x: 960, yLast: 1012, align: 'center', maxW: 860, br: [4] },
   { n: 39, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', segs: {   // as n 17: "If you are" on C209, "I'm counting on you" on C210 (the cut is on I'm)

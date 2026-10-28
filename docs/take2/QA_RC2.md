@@ -177,3 +177,33 @@ compared frame by frame (luma difference > 24 on > 30 px):
 Re-render segments **7, 8, 11, 12, 13 and 19** (72 s). No other segment changes. Nine stills in other segments (20.5, 47.9,
 66.0, 100.9, 118.0, 176.0, 200.0, 215.0, 244.5) are pixel-identical to HEAD. The `layer.js` patch branch only runs for a
 `mode: 'patch'` fix.
+
+## Chess reviewer fixes
+
+From Jade's chess reviewer (a strong player): "3 minutes is too much given that the game is played through in 15 seconds… the
+analog clock at 2:22 also is on the wrong side (or white is on the left here) and not showing 3 minutes per player… where you show
+the girl making a move… the same hand making the move hits the clock." No generation was needed: **$0 spent**.
+
+| # | fix | files |
+|---|---|---|
+| 1 | **1+0.** `schedule.js` `TC = 60`: the digital clocks start at 1:00 and count down for real, each side only on its own turn (from the opponent's press to its own). Every frame from the set (X208 on) reads 1:00 / 1:00 until the start press (143.423); the clocks stop on "let" (158.101) at White 0:52.7, Black 0:52.6. Plan (bridge paragraph, fact sheet row) and README now say one-minute clocks, noting the change is on the chess reviewer's advice. The scoresheet carries only the credit line (no time control), unchanged. | `render/src/scenes/t2/chess/schedule.js`, `docs/PLAN_TAKE_TWO.md`, `README.md` |
+| 2 | **Presses by the hand that moved.** A ply still lands on its grid time (all plan anchors unchanged); its press is now its own event, on the next sixteenth after landing (an eighth for moves 5-6, the hover beats), never after the reply lands (in the flurry press and reply land together). 21...Qg4+ is not pressed: teal-tips keeps her fingers on the queen in BR11b until both let go, so her clock runs to the stop. The button-down side, the running indicator, the clock jolt and the sparks (now on White's press after 9.Qxg7, 150.536) follow the presses. `chess_check` asserts all of it (every press after its own landing and on the grid, only the side to move runs, 1:00/1:00 before the start). | `schedule.js`, `chess.js`, `render/tools/chess_check.mjs` |
+| 3 | **Same hand, clock side.** The clock is at +x (White's right = Black's left), so hands default to the clock-side hand: Jade's right, teal-tips' left (her arm now comes from her left shoulder in BR01, BR02, BR02b, BR11b). New track `{move, press: true}`: after the move the hand arcs over the pieces to its own button. BR02: teal-tips' left hand makes 5...Ba5 (146.744) and heads for the clock; BR02b (same cut, 146.902) is now a clock insert (was a 0.46 s board orbit) where that hand slaps her button at 147.060, starting White's clock. BR01: Black's start press, then Jade's right hand presses after 1.e4 at 143.739 (was on the landing, 143.581). No cut moved; `check_cuts` is clean. | `render/src/scenes/t2/chess/hands.js`, `render/src/timeline.js` |
+| 4 | **X213 two-shot (2:22.92–2:23.42).** White and Jade are on the left of frame, so the camera stands on White's right (h-file) and the clock belongs on the near edge; the plate had an analog clock on the far edge (White's left) with dials that were not a 1+0 start. Not flipped (that would mirror Jade's jacket marks). Renderer paint-over: the analog clock is painted out by a row-wise blend of the plate's own columns either side (wall, table edge, table top); the procedural clock is drawn on the near edge, seen from behind as this camera must see it (its LCDs face the board), orange button on Jade's side and teal on teal-tips', both up (before the start press). The plate is locked off over the frames shown (0 px motion, ≤ 2 levels mean noise), so one image holds. New multi layer `t2_chess_paint`; the image is built by `tools/t2/chess_x213_clock.py` from plate frame 48. Lyric and lip-sync timing unchanged (`lipcheck` 0 mismatches). | `render/src/scenes/t2/chess/paint.js`, `chess/index.js`, `render/assets/t2/chess/X213_clock.png`, `tools/t2/chess_x213_clock.py`, `timeline.js` |
+| 5 | **Sound.** The clock slaps follow the new press times: `t2_events.mjs` now reads `S.presses`; `sfx_t2.py` re-run, all mix checks true (bit-identical outside the cues, loudness delta within 0.01 LU). `media/audio/hold_fire_t2_mix.wav` and `docs/take2/SOUND_T2.md` regenerated. **Re-mux the film with the new mix.** | `tools/audio/t2_events.mjs`, `tools/audio/sfx_t2.py`, `docs/take2/SOUND_T2.md` |
+
+**Consistency pass, every chess shot** (stills in `work/stills/chessfix_all/`): the clock is on +x in every procedural angle (left of
+frame from Black's side X208/X211, behind the board from the queens' angle X209 and from the a-file in BR02, right from the h1
+diagonal X210, White's 3/4 and the kingside); the LCD faces read Black left / White right from the board side; only the side to move runs; the
+button down is the last presser's; pieces White = cream, Black = navy throughout; X213 now agrees (White left, clock near = White's
+right, orange on Jade's side).
+
+**Checks:** `chess_check`, `chess_lens` (lens never inside or within 0.07 of a piece), `check_cuts` (0 cuts off onset; coverage OK)
+and `lipcheck` (0 mismatches) all pass. Before/after 1080p frames: `work/stills/chessfix_before/` (RC3 master) and
+`work/stills/chessfix/`, side by side in `work/stills/chessfix_before_after.jpg`.
+
+**Song-time ranges that render differently** (HEAD 1dd84e6 vs now, 960×540, every frame of 132–168, luma difference > 24 on > 30 px):
+139.625–147.333, 148.667–153.583, 153.708–158.167 (with a few unchanged frames inside, where no clock is in frame). Nothing outside
+139.625–158.167 changes (the chess scene is only used from X207 to the BR12 dive).
+
+Re-render segments **11, 12 and 13** (132–168, 36 s), and re-mux with the new mix.

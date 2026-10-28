@@ -661,7 +661,8 @@ def write_doc(rows, V, ctx, T, aud):
          "* **All synthesized** (numpy/scipy, seeded, deterministic); take one's match, sonar and depth-charge synths are reused.\n",
          "## The clock\n",
          f"{ctx['clock']['n']} presses, one per clock press of `render/src/scenes/t2/chess/schedule.js` (the start press "
-         f"{ctx['clock']['first']:.3f}, then every ply to 21...Qg4+ on 'hand' {ctx['clock']['last']:.3f}; the clocks stop on 'let' "
+         f"{ctx['clock']['first']:.3f}, then each ply's press by the hand that moved, on the sixteenth after it lands (an eighth for moves "
+         f"5-6), the last 21.Kxg2's on 'hand' {ctx['clock']['last']:.3f}; 21...Qg4+ is not pressed, and the clocks stop on 'let' "
          f"{ctx['clock']['stop']:.3f} without a press). Drums out until {ctx['clock']['back']:.3f}: there the slaps are the rhythm "
          "(one level for the phase; measured median "
          f"{np.median([r['margin_median_db'] for r in rows if r['group'] == 'clock_out']):.1f} dB under the song); once the drums "

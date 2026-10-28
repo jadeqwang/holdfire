@@ -94,21 +94,29 @@ Jade's v6 note at 0:26.1 asked what the cuneiform says. **Before:** nothing. The
 triangles, and blueprint outlines counted them 1 to 6, one per eighth, with a dimension bracket labelled with the running
 count. **Now:** the painted triangles are covered with clean clay (`tools/t2/tablet_clay.py` bakes `render/assets/t2/tablet/`:
 the inpainted clay, plus a per-plate-frame shadow and stylus/hand matte so the stylus stays on top). The scene `t2_tablet`
-(`scenes/t2/lyric/tablet.js`) presses the Fibonacci numbers into the clay in Old Babylonian sexagesimal numerals, one number per
-sixteenth from 25.38 to 26.99 (the old tally's span, while "mud" holds). Each sign gets a brief blueprint flash as it lands:
+(`scenes/t2/lyric/tablet.js`) puts the Fibonacci numbers on the clay in Old Babylonian sexagesimal numerals. Jade's take-two
+note: the stylus has to make the strokes that appear. So the count is already there when the shot opens except two wedges of
+89, and the plate's stylus presses those. The reed tip is hand-marked on every plate frame the shot shows (`TIP`, even plate
+frames 4 to 50). It touches down twice: plate frame 14 (25.79 s) and plate frame 42 (26.96 s). The rows are fitted so that
+89's sixties wedge 𒁹 has its head where the first touch lands and the tall last column of 𒐎 has its head where the second
+lands. Each impression grows down from its head as the tip slides, with a ridge of displaced clay ahead of it, and gets a
+brief blueprint flash. Near the tip, the plate matte is trimmed to the shaft, so the plate's own marks don't cut the inscription:
 
 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 | 89 = 1;29 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 𒁹 | 𒁹 | 𒈫 | 𒐈 | 𒐊 | 𒐍 | 𒌋𒐈 | 𒎙𒁹 | 𒌍𒐉 | 𒐐𒐊 | 𒁹 𒎙𒐎 |
 
-Row 1 holds 1 to 13 and row 2 holds 21 to 89. Under a double ruling, already on the tablet, is obverse line 3 of the Ea-nasir
+Row 1 holds 1 to 13 and row 2 holds 21 to 89, ending at the stylus. Under a double ruling, already on the tablet, is obverse line 3 of the Ea-nasir
 complaint tablet (UET 5, 81; CDLI P414985, transliteration read from the CDLI ATF dump): 𒌝𒈠 𒈾𒀭𒉌𒈠 *um-ma na-an-ni-ma*,
 "thus (says) Nanni". Each sign was checked in the ORACC sign list (`osl.asl`). Line 1 ("To Ea-nasir") is left out because the
 transliteration's *ṣi* is ZE₂ in ORACC's numbering but ZI in the older convention, and no photo was available to settle which.
 The font is Noto Sans Cuneiform (OFL), subset to these 20 signs (`assets/fonts/NotoSansCuneiform-t2-subset.ttf`). The data is in
 `scenes/t2/lyric/cuneiform.js`. `python3 tools/t2/cuneiform_card.py` reads every numeral's value back from its Unicode names and
-renders `work/t2/tablet/cuneiform_card.png`. The incised lyric on the tablet moved 14 px lower to clear the Nanni line. If the
-V113 plate is ever re-made (for example by an upscale), re-run `tablet_clay.py`. The scene skips the clay cover when the
+renders `work/t2/tablet/cuneiform_card.png`. The line "carried the egg through the dust and the mud" (n 4) is split by clip,
+and each piece sits on its own surface: "carried the egg through" in the sky (V111), "the dust" in the road (V112), and "and the
+mud" pressed into the clay under the Nanni line (V113), parallel to the count and entirely on the tablet. "the" and "and the"
+are sung in the last 0.2 s of the clip before. They move forward because "dust and the" alone would get 0.67 s (4.5 words/s).
+If the V113 plate is ever re-made (for example by an upscale), re-run `tablet_clay.py` and re-mark `TIP`. The scene skips the clay cover when the
 plate's src or frame count no longer matches `tablet.json`.
 
 ## The coins (t2_coins, 1:48.0 to 1:53.2)

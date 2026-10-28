@@ -468,14 +468,12 @@ export function buildTimeline(A) {
     pan: (t, lt) => [20 * lt / (dustT - carried.t), -20 * lt / (dustT - carried.t)] })), method: 'video', era: ERA.v1, look: LK.blueprint,
     want: "An egg outline in blueprint line becomes a clay jar of grain on a woman's shoulder as Jade passes her" });
   S('0:24.70', wd('V1', 2, 'dust'), v1('Cart ruts in dust'));
-  const mudT = wd('V1', 2, 'mud').t;
-  // V113's tablet (Jade, v6 note at 0:26.1): the plate's painted triangles are covered with clean clay and the Fibonacci count
-  // 1 1 2 3 5 8 13 21 34 55 89 is pressed in real sexagesimal cuneiform, one number per sixteenth while "mud" holds (25.38 to
-  // 26.99, the old tally's span), above a line of the Ea-nasir tablet (scenes/t2/lyric/tablet.js, cuneiform.js)
-  const E8m = (j) => (j === 0 ? mudT : e8(mudT, j));
-  const fibT = Array.from({ length: 11 }, (_, k) => (k % 2 ? (E8m((k - 1) / 2) + E8m((k + 1) / 2)) / 2 : E8m(k / 2)));
-  S('0:25.37', wd('V1', 2, 'mud'), { ...over(plate(), { scene: 't2_tablet', p: { clip: 'V113', times: fibT } }), method: 'video', era: ERA.v1, look: LK.blueprint,
-    want: 'A reed stylus presses wedges into wet clay; while "mud" holds (to 27.3) the tablet counts 1 1 2 3 5 8 13 21 34 55 89 in Babylonian sexagesimal numerals, one number per sixteenth', notes: 'writing began as counting grain; the numerals are genuine (tools/t2/cuneiform_card.py)' });
+  // V113's tablet (Jade, v6 note at 0:26.1; take-two note: the stylus has to make the strokes that appear): the plate's painted
+  // triangles are covered with clean clay carrying the Fibonacci count 1 1 2 3 5 8 13 21 34 55 89 in real sexagesimal cuneiform
+  // above a line of the Ea-nasir tablet; all of it is on the clay when the shot opens except two wedges of 89, which the plate's
+  // stylus presses on its two touch-downs (plate frames 14 and 42: 25.79 and 26.96; scenes/t2/lyric/tablet.js, cuneiform.js)
+  S('0:25.37', wd('V1', 2, 'mud'), { ...over(plate(), { scene: 't2_tablet', p: { clip: 'V113' } }), method: 'video', era: ERA.v1, look: LK.blueprint,
+    want: 'A reed stylus presses wedges into wet clay: the tablet already counts 1 1 2 3 5 8 13 21 34 55 in Babylonian sexagesimal numerals, and the stylus presses the last two wedges of 89 where it touches down', notes: 'writing began as counting grain; the numerals are genuine (tools/t2/cuneiform_card.py)' });
   S('0:27.32', wd('V1', 3, 'seeds'), v1('A hand presses seeds into dark soil beside a dry irrigation channel'));
   // the cross-section on V115's painted cutaway (surface y ~500, seed ~(950, 630), the dry canal at the right): a slow push, the
   // lines ride it; stages on "dark", the beat, the snare

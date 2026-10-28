@@ -106,17 +106,18 @@ The card reads:
 
 ### Deliverables
 
-A 540p preview of RC3 is committed: [`previews/hold_fire_t2_rc3_540p.mp4`](previews/hold_fire_t2_rc3_540p.mp4) (960×540, 2-pass H.264
+A 540p preview of RC4 is committed: [`previews/hold_fire_t2_rc4_540p.mp4`](previews/hold_fire_t2_rc4_540p.mp4) (960×540, 2-pass H.264
 at 1.4 Mb/s, AAC 128k of the mix, 47 MB). The full-resolution files are rendered locally to `work/out/` (not committed;
 they exceed GitHub's 100 MB limit):
 
 | file | what |
 |---|---|
-| `hold_fire_t2_master_rc3.mp4` | 1920×1080, 24 fps, 4:07.17 (5,932 frames), H.264 CRF 14 (~29 Mb/s), AAC 320k of the mix (`media/audio/hold_fire_t2_mix.wav`: the song plus the light sound layer, `SOUND_T2.md`), sample-aligned (890 MB). Upload this to YouTube. |
+| `hold_fire_t2_master_rc4.mp4` | 1920×1080, 24 fps, 4:07.17 (5,932 frames), H.264 CRF 14 (~29 Mb/s), AAC 320k of the mix (`media/audio/hold_fire_t2_mix.wav`: the song plus the light sound layer, `SOUND_T2.md`), sample-aligned (890 MB). Upload this to YouTube. |
 | `hold_fire_t2_x.mp4` | the same, 2-pass H.264 High@4.1 at 12 Mb/s (maxrate 16M, `-tune grain`), AAC 256k, faststart (378 MB; PSNR 43.2 dB against the master). For X. |
 | `hold_fire_t2_hook_31s.mp4` | 0:00–0:31 of the master with a 0.5 s picture and sound fade-out, same settings as the X file (47 MB). A teaser. |
 
-Release candidate 3 (commit 869f897): RC2's full-res QA and its fixes are in `QA_RC2.md`. The days counter ends on 42 (Jade:
+Release candidate 4 (commit 245d40a): RC2's full-res QA, its fixes (RC3) and the chess reviewer's fixes (RC4: one-minute
+clocks, the clock on White's right in every shot, the moving hand presses the clock) are in `QA_RC2.md`. The days counter ends on 42 (Jade:
 keep 42; the release is planned for 1 Nov).
 
 ### Reproduce
@@ -129,11 +130,11 @@ cd render
 node tools/check_cuts.mjs && node tools/chess_check.mjs && node tools/chess_lens.mjs && node tools/lipcheck.mjs
 node tools/render.mjs --stills 13.5,95.5,246.5 --w 1920 --h 1080 --outdir ../work/stills/t2
 cd .. && python3 tools/audio/sfx_t2.py                  # the mix (re-run after any timing change)
-tools/t2/render_segments.sh hold_fire_t2_master_rc3 1920 1080 14 media/audio/hold_fire_t2_mix.wav   # restart-safe, 12 s segments
+tools/t2/render_segments.sh hold_fire_t2_master_rc4 1920 1080 14 media/audio/hold_fire_t2_mix.wav   # restart-safe, 12 s segments
 cd work/out                                           # X file (pipeline_lessons §3.7)
 X="-c:v libx264 -b:v 12M -maxrate 16M -bufsize 24M -profile:v high -level:v 4.1 -refs 4 -preset slow -tune grain -pix_fmt yuv420p -r 24"
-nice -n 10 ffmpeg -i hold_fire_t2_master_rc3.mp4 $X -pass 1 -an -f mp4 /dev/null
-nice -n 10 ffmpeg -i hold_fire_t2_master_rc3.mp4 $X -pass 2 -c:a aac -b:a 256k -movflags +faststart hold_fire_t2_x.mp4
+nice -n 10 ffmpeg -i hold_fire_t2_master_rc4.mp4 $X -pass 1 -an -f mp4 /dev/null
+nice -n 10 ffmpeg -i hold_fire_t2_master_rc4.mp4 $X -pass 2 -c:a aac -b:a 256k -movflags +faststart hold_fire_t2_x.mp4
 # hook: the same two passes with -t 31 -vf fade=t=out:st=30.5:d=0.5 -af afade=t=out:st=30.5:d=0.5 (audio on pass 2)
 ```
 
@@ -202,9 +203,7 @@ mattes, face landmarks) and redraws everything; the footage itself never appears
 
 ## Deliverables
 
-A 540p preview of RC3 is committed: [`previews/hold_fire_t2_rc3_540p.mp4`](previews/hold_fire_t2_rc3_540p.mp4) (960×540, 2-pass H.264
-at 1.4 Mb/s, AAC 128k of the mix, 47 MB). The full-resolution files are rendered locally to `work/out/` (not committed;
-they exceed GitHub's 100 MB limit):
+Rendered locally to `work/out/` (not committed; the files exceed GitHub's 100 MB limit):
 
 | file | what |
 |---|---|

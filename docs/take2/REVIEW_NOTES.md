@@ -270,7 +270,8 @@ onset, coverage OK, no type rule breaks; chess_check OK; plate_windows: C103L (1
 Goal (Jade): a first-time viewer reads teal-tips Jade as the other side, a default adversary, and likes her by the end. The
 friendship ending already worked; the adversary beginning was missing (a v7 viewer: "they seemed to be friends and then they
 were playing chess for some reason"). The open hand is the spine: cave stencil, Petrov's hand, the let-go, Arkhipov's hand, the
-palms on the glass. Preview: `previews/hold_fire_t2_rc5_540p.mp4` (review page v8). Stills and sheets: `docs/take2/adversary/`
+palms on the glass. Preview: `previews/hold_fire_t2_rc5_540p.mp4` (review page v10: https://claude.ai/artifact/5zJ9QMYwzPzPhzZ5Dx5PUx, a new page; this
+session could not write to the v1–v9 page, whose notes stay there). Stills and sheets: `docs/take2/adversary/`
 (the 0:58 / 1:58 checkpoint at 1920 and 480 px wide, `hand_sheet.jpg`). check_cuts: 0 cuts off onset, coverage OK (173 shots);
 the one type-rule line ("FLAMES ROSE…", a caption at 3.84 words/s) is on RC4 too. chess_check OK (42 plies). lipcheck: 16 picks,
 0 mismatches, no pick or lag changed (DR16's strip could not be drawn without its local dotfix clip; its frames were checked against

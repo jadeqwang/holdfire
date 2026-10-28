@@ -320,11 +320,11 @@ def build_cues(T, E, song_len_s, songM, vocM):
         add_at_1d(y, counter_clunk(rng(700 + i), heavy=1.0) * g, N(r["t"] - a0))
     for i, tk in enumerate(cn["ticks"]):
         if tk["t"] >= a0:
-            add_at_1d(y, roller_tick(rng(800 + i)) * db2a(-13), N(tk["t"] - a0))
+            add_at_1d(y, roller_tick(rng(800 + i), carry=tk.get("carry", False)) * db2a(-13), N(tk["t"] - a0))
     y = fades(reverb(pan(y, 0.05), IR_WALL, wet_db=-14)[:, :N(dur)], a=0.002, r=0.08)
     cues.append(Cue("counter_resets", f"Outro: DAYS SINCE LAST RESET snaps to zero {len(cn['resets'])} times (heavier clunk each), "
-                    "days ticking between", f"resets {cn['resets'][0]['t']:.3f} -> {cn['resets'][-1]['t']:.3f} (counter.js schedule(): "
-                    f"32nd grid from {cn['grid0']:.3f}); {len(cn['ticks'])} day ticks (whole counts on twos)",
+                    "the rollers ratcheting up each climb between", f"resets {cn['resets'][0]['t']:.3f} -> {cn['resets'][-1]['t']:.3f} (counter.js schedule(): "
+                    f"32nd grid from {cn['grid0']:.3f}); {len(cn['ticks'])} ratchet ticks (one per film frame the climb moves the rollers; carries at the hundreds)",
                     "synth: steel click + 3-4 detent clicks 5-9 ms apart + panel knock (modes 142-655 Hz) + faint ring (1.8-4.2 kHz), "
                     "+-1 dB per reset; ticks = detent click + 2.55/3.9 kHz modes at -13 dB; cinder-block wall RT60 0.4 s",
                     a0, y, med=12, worst=8, cap_db=-16, ride=True, group="counter"))

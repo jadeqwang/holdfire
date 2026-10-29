@@ -60,6 +60,8 @@ details p { font-size: 13px; color: var(--muted); margin-top: 6px; }
 .stills img { width: 100%; border-radius: 3px; border: 1px solid var(--line); }
 .stills figcaption { font-size: 13px; color: var(--muted); }
 .store { font-size: 13px; color: var(--muted); }
+.note { border-left: 3px solid var(--maybe); padding: 8px 12px; background: var(--surface); border-radius: 0 4px 4px 0; }
+.raw { font: 600 11px var(--f-body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 @media (max-width: 860px) { .head, .take { grid-template-columns: minmax(0, 1fr); } .stills { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 520px) { .players { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
@@ -70,6 +72,7 @@ details p { font-size: 13px; color: var(--muted); margin-top: 6px; }
     <div class="lede">
       <h1>Does any take press the last two strokes?</h1>
       <p>At 0:25.9 the scribe's hand should make the count's last two strokes, in order, where the clay shows them: the lower wedge of the 9's fourth column, then the tall wedge after it. At the film's scale they sit about 10 px apart, the second about 17 px higher. Each take below plays with its tip area enlarged; step frame by frame to see where the stylus actually lands.</p>
+      <p class="note"><strong>The takes are raw video.</strong> The model paints a row of plain triangles, not the count. In the film the renderer covers those with clean clay and draws the real numbers (1 1 2 3 5 8 13 21 34 55 89 in Babylonian numerals), so only the first entry, the shot as it plays now, shows them. For the other takes, judge only where and how the stylus lands; a take you mark usable gets composited with the real count before it goes in.</p>
       <p class="muted">Mark each take usable, maybe or no. Your marks are saved with the page, so Claude can read them.</p>
       <p class="store" id="store">Connecting to the page's store…</p>
     </div>
@@ -146,6 +149,7 @@ function card(t) {
   const side = el('div', { class: 'side' },
     el('div', { class: 'meta' }, el('h3', { text: t.title }), el('span', { class: `chip ${t.mine}`, text: chipText[t.mine] })),
     el('p', { class: 'mono muted', text: [t.tag, t.model, t.cost].filter(Boolean).join(' · ') }),
+    t.id === 'film' ? el('p', { class: 'raw', text: 'With the renderer’s clay and count' }) : el('p', { class: 'raw', text: 'Raw take: placeholder triangles, no count yet' }),
     t.note ? el('p', { class: 'muted', text: t.note }) : null,
     el('div', {}, el('div', { class: 'label', text: 'What Claude measured' }), el('p', { text: t.reading })),
     t.prompt ? el('details', {}, el('summary', { text: 'Prompt' }), el('p', { text: t.prompt })) : null,

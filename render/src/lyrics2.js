@@ -37,7 +37,7 @@ export const PLAN = [
   { n: 2, style: 'blueprint', ink: INK.navy, size: 50, segs: {
     V101: { x: 548, y: 560, align: 'left', size: 52, br: [6], maxW: 400, halo: NAVY_HALO, haloA: 0.5 },     // its own block under the hero, left of her hair (polish 3)
     V102: { x: 1640, y: 430, align: 'center', maxW: 560, br: [6], halo: NAVY_HALO, haloA: 0.3 } } },                 // a callout over the lobe-finned fish
-  { n: 3, style: 'blueprint', all: true, size: 54, x: 548, y: 790, align: 'left', maxW: 430, br: [3, 5], halo: 'rgba(8,16,40,0.9)', haloA: 0.5 },
+  { n: 3, style: 'blueprint', all: true, size: 52, x: 790, y: 790, align: 'right', maxW: 900, br: [5], halo: 'rgba(8,16,40,0.9)', haloA: 0.5 },   // two lines (Jade, RC9 note): FIN INTO FOOT INTO HAND / WE WERE YOUNG, left of the raised hand
   { n: 4, style: 'blueprint', size: 50, segs: {
     V111: { only: [0, 1, 2, 3], ink: INK.navy, x: 560, y: 150, align: 'left', maxW: 500, br: [3], halo: NAVY_HALO, haloA: 0.3 },     // in the pale sky over the mud-brick street
     V112: { only: [4, 5], style: 'incise', size: 72, weight: 700, quad: [[767, 725], [1153, 725], [1183, 865], [737, 865]], dark: 'rgba(28,14,4,1)', core: 'rgba(48,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', ghost: 0.45, shade: 0.9, shadeCol: 'rgba(60,36,14,1)' },   // drawn in the dust of the cart road: ink-filled recess, deeper shadow (polish 3: phone legibility)
@@ -48,7 +48,7 @@ export const PLAN = [
     'V116,V117': { ink: INK.navy, x: 560, y: 100, align: 'left', maxW: 640, halo: NAVY_HALO, haloA: 0.35 } } },
   // ---------------------------------------------------------------- the ISS: starlight, then the signal print
   { n: 6, style: 'light', size: 72, col: [0.92, 0.95, 1], segs: {
-    V122: { x: 1385, y: 330, align: 'right', maxW: 380, br: [1, 3] },
+    V122: { x: 1130, y: 330, align: 'left', maxW: 760, br: [3] },   // two lines (Jade, RC9 note): Snowflake in the / boundless night, in the sky right of her
     V123: { style: 'riso', size: 64, inks: [INK.paper, INK.orange], x: 960, y: 905, align: 'center', maxW: 760, br: [3] } } },
   // ---------------------------------------------------------------- PRE-CHORUS 1: riso type on the signal prints
   { n: 7, style: 'riso', size: 60, inks: [INK.paper, INK.orange], x: 960, y: 830, align: 'center', maxW: 1100, br: [4] },   // two lines (Jade, RC8 note): A CHORD THAT'S SEARCHING / THROUGH THE FOG
@@ -58,7 +58,7 @@ export const PLAN = [
   // WE'RE AWAKE is the edit's hero: "Hear it, and you'll know" glows on the dark window glass beside her
   { n: 11, style: 'crt', size: 62, col: '#9fe8ff', x: 470, y: 330, align: 'left', maxW: 420, br: [3] },   // two lines (Jade, RC8 note): Hear it and / you'll know, left of her hair
   // ---------------------------------------------------------------- CHORUS 1: light in the sky, the screens
-  { n: 12, style: 'light', size: 80, col: GOLD, shade: 2, x: 548, y: 405, align: 'left', maxW: 560, br: [5] },             // in the dark sky left of the Milky Way, under the hero and off the core (polish 4)
+  { n: 12, style: 'light', size: 80, col: GOLD, shade: 2, x: 548, y: 405, align: 'left', maxW: 760, only: [4, 5, 6] },   // Jade (RC9 note): "anyone is there" on one line, "that" dropped             // in the dark sky left of the Milky Way, under the hero and off the core (polish 4)
   { n: 13, style: 'engrave', size: 62, x: 770, y: 400, align: 'right', maxW: 620, br: [4, 6] },    // the record's own legend, beside the disc
   { n: 14, style: 'crt', size: 70, col: '#9fe8ff', panel: 'rgba(2,8,16,1)', x: 470, y: 770, align: 'center', handover: 0 },   // adversary pass: Jade's line on Jade's side of the wall (it bridged the split), on her chest, clear of her face   // "but if you are" gives way on the onset of the hero I'M COUNTING ON YOU (Jade's text rules)   // a shared readout across the split, at chest height (clear of both mouths)
   { n: 15, style: 'crt', size: 70, col: '#b8c8ff', panel: 'rgba(3,4,14,1)', x: 960, yLast: 985, align: 'center', maxW: 860, br: [3] },

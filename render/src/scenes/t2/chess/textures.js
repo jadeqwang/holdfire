@@ -61,9 +61,11 @@ export function clockCanvas() {
   return { cv, c: cv.getContext('2d'), tex: tex(cv, false), key: '' };
 }
 
-// face: {w, b (seconds left), running: 'w'|'b'|null, stopped}
+// face: {w, b (seconds left), running: 'w'|'b'|null, stopped}. Whole seconds (m:ss) like a tournament clock (DGT 3000); under
+// TENTHS_BELOW seconds the tenths digit lights, as online clocks do in a scramble (Andrej, 29 Oct)
+const TENTHS_BELOW = 20;
 export function drawClock(cc, s, flagW = 0, flagB = 0) {
-  const fmt = (x) => { x = Math.max(0, x); const tenths = Math.floor(x * 10 + 1e-6); const m = Math.floor(tenths / 600), sec = Math.floor(tenths / 10) % 60, d = tenths % 10; return [m, Math.floor(sec / 10), sec % 10, d]; };
+  const fmt = (x) => { x = Math.max(0, x); const tenths = Math.floor(x * 10 + 1e-6); const m = Math.floor(tenths / 600), sec = Math.floor(tenths / 10) % 60, d = x < TENTHS_BELOW ? tenths % 10 : -1; return [m, Math.floor(sec / 10), sec % 10, d]; };
   const key = `${fmt(s.w).join('')}|${fmt(s.b).join('')}|${s.running}|${s.stopped}`;
   if (key === cc.key) return;
   cc.key = key;
@@ -81,9 +83,9 @@ export function drawClock(cc, s, flagW = 0, flagB = 0) {
     colon(c, x0 + 128, top, dh, on);
     seg7(c, s1, x0 + 150, top, dw, dh, on, off);
     seg7(c, s2, x0 + 248, top, dw, dh, on, off);
-    // tenths, smaller
-    c.fillStyle = on; c.beginPath(); c.arc(x0 + 347, top + dh - 8, 8, 0, 7); c.fill();
-    seg7(c, d, x0 + 362, top + dh * 0.42, dw * 0.58, dh * 0.58, on, off);
+    // tenths, smaller: only under TENTHS_BELOW (d = -1 above: the point and the digit stay unlit)
+    c.fillStyle = d >= 0 ? on : off; c.beginPath(); c.arc(x0 + 347, top + dh - 8, 8, 0, 7); c.fill();
+    seg7(c, d >= 0 ? d : 8, x0 + 362, top + dh * 0.42, dw * 0.58, dh * 0.58, d >= 0 ? on : off, off);
     // running indicator and side accent
     c.fillStyle = accent; c.fillRect(x0 + 34, y0 + 16, 100, 12);
     if (run) { c.fillStyle = on; c.beginPath(); c.moveTo(x0 + fw - 60, y0 + 14); c.lineTo(x0 + fw - 30, y0 + 22); c.lineTo(x0 + fw - 60, y0 + 30); c.closePath(); c.fill(); }

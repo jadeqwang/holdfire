@@ -16,12 +16,15 @@
 //               ply is a beat away (moves 5-6, the hover beats), never after the opponent's next landing (the flurry: the press and
 //               the reply land together). 21...Qg4+ is not pressed: teal-tips Jade keeps her fingers on the queen until both let
 //               go, so her clock runs until the stop
-//   clocks      1+0 (one minute each, on the chess reviewer's advice: the game is played through in 15 s)
+//   clocks      1+0 (one minute each, on the chess reviewer's advice: the game is played through in 15 s), run at the moves' pace,
+//               not song time (Andrej, 29 Oct): the 21 moves take 15 s of song, so the clocks run K times faster, K derived so the
+//               side with less time is down to CLOCK_LEFT at the stop; the perpetual check lands in a time scramble
 //   stop        clocks stop on "let" of "let go"
 // The set (post-chorus 2): pieces slam down on the shouts, 1, 1, 2, 3, 5 of them, and "Counting" lands the other 20 (done by "on").
 import { GAME, sqOf } from './pgn.js';
 
 export const TC = 60;   // seconds per side (1+0)
+export const CLOCK_LEFT = 5;   // seconds left on the lower clock when both let go (Jade: 5 s)
 
 const clean = (w) => (w || '').toLowerCase().replace(/[^a-z0-9']/g, '');
 
@@ -97,6 +100,9 @@ export function buildSchedule(audio) {
   // clocks: 1+0, each side's clock runs only on its own turn: from the opponent's press to its own press
   const presses = [{ t: startPress, side: 'b', label: 'start' }, ...plies.filter((p) => p.tp != null).map((p) => ({ t: p.tp, side: p.side, label: p.label, ply: p.k }))];
   const stop = letgo;
+  // K: clock seconds per song second, from the song-time each side's clock runs before the stop
+  const runFor = (side) => { let el = 0; presses.forEach((pr, i) => { const next = i + 1 < presses.length ? Math.min(presses[i + 1].t, stop) : stop; if ((pr.side === 'w' ? 'b' : 'w') === side) el += Math.max(0, next - pr.t); }); return el; };
+  const K = (TC - CLOCK_LEFT) / Math.max(runFor('w'), runFor('b'));
   function clockAt(t) {
     let w = TC, b = TC, running = null, last = null;
     for (let i = 0; i < presses.length; i++) {
@@ -105,7 +111,7 @@ export function buildSchedule(audio) {
       last = pr;
       const next = i + 1 < presses.length ? Math.min(presses[i + 1].t, stop) : stop;
       const run = pr.side === 'w' ? 'b' : 'w';     // pressing your button starts the opponent's clock
-      const el = Math.max(0, Math.min(t, next) - pr.t);
+      const el = K * Math.max(0, Math.min(t, next) - pr.t);
       if (run === 'w') w -= el; else b -= el;
       running = t < stop ? run : null;
     }
@@ -129,7 +135,7 @@ export function buildSchedule(audio) {
   'hgfedcba'.split('').forEach((f, j) => set.push({ sq: S(f + '7'), t: count + 0.26 + (j + 0.5) * pd, shout: 5 }));
   const setBySq = new Map(set.map((x) => [x.sq, x]));
 
-  return { plies, presses, TC, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };
+  return { plies, presses, TC, K, CLOCK_LEFT, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };
 }
 
 // index of the last ply that has landed at time t (-1 before 1.e4)

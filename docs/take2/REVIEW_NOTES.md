@@ -324,3 +324,17 @@ uses those. The 540p preview re-renders only the changed ranges (46.0–51.7, 56
 - C208's "in the white noise…" readout still sits across the wall (both sing it); I'M COUNTING ON YOU and CAN'T BE SURE are
   title cards across the split, left as they were (moving them into a half would put them over a face).
 - The contact lettering (CONTACT 0217) is small at 480 px; the blip, bracket and track read.
+
+## Andrej's chess notes (29 Oct)
+"I don't know of digital clocks that show tenths of seconds like that… why would the clocks be set for a 3-minute blitz game… at
+one point you have an analog clock." The 3-minute clocks and X213's analog clock were RC3's; the chess reviewer's fixes in RC4 had
+already made them 1+0 and painted the analog clock out (`QA_RC2.md`). Jade: take his idea that the clocks should move faster than
+song time; 5 s left at the draw.
+- **The clocks run at the moves' pace** (`chess/schedule.js`): K clock seconds per song second, derived from the press schedule so
+  the lower clock is on `CLOCK_LEFT` = 5 s at the stop (K = 7.42; White 0:06.1, Black 0:05.0 when both let go). Presses, moves,
+  cuts and the clock slaps are unchanged; only the numbers on the faces move faster.
+- **The face** (`chess/textures.js`): whole seconds (1:00, 0:59 …) like a tournament clock (the FIDE-standard DGT 3000 shows
+  seconds, no tenths); the tenths digit and its point light only under 20 s (from 2:33.7, the drums' return), as online clocks
+  do in a scramble.
+- `chess_check`: the bookkeeping now includes K, the lower clock ends on CLOCK_LEFT, and no flag falls. Preview RC6 re-renders
+  2:19.0–2:38.5 (every chess frame with a clock in it) into RC5.

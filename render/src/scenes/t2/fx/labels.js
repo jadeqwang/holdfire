@@ -11,10 +11,12 @@
 // p: {labels: [{lines: ['OUR', 'LISTENING POST'], side: 'jade'|'teal' (whose thing: the tag's colour), t0, t1 (song s; t1 null =
 //       to the shot's end), at: [x, y] design px (the tag's centre) | quad: [[x,y] x4] (a display: the tag fills it, mapped in
 //       perspective), h (cap height, design px; 44), rot (rad), plate (true: a filled tag; false: coloured type on the dark display),
-//       strike: t (a hand-drawn strike through the words from t; Petrov), peel: {t, dir} (the tag peels off and falls: the mirror)}],
+//       strike: t (a hand-drawn strike through the words from t; Petrov), peel: {t, dir} (the tag peels off and falls: the mirror)}
+//       | {poster: 'jade'|'teal', quad, t0, t1, alpha} (the matched poster, fx/racepost.js)],
 //     gain (0.9: the tags stay their colour, not bloomed)}
 import { clamp, easeOutCubic, easeInCubic, hash1 } from '../../../util.js';
 import { mapQuad } from './contact.js';
+import { posterCanvas } from './racepost.js';
 
 export const LABEL_COL = { jade: '#ff7a2a', teal: '#3fe0c5' };
 export const LABEL_INK = '#0d1117';
@@ -31,7 +33,12 @@ export function drawTag(c, lines, h, col, a = 1, plate = true, strikeU = 0) {
   c.globalAlpha = a;
   if (plate) {
     c.fillStyle = 'rgba(0,0,0,0.35)'; c.beginPath(); c.roundRect(-W / 2 + h * 0.08, -H / 2 + h * 0.1, W, H, h * 0.16); c.fill();   // its shadow
-    c.fillStyle = col; c.beginPath(); c.roundRect(-W / 2, -H / 2, W, H, h * 0.16); c.fill();
+    if (Array.isArray(col)) {   // two owners (OUR, once, over both): the tag is half one colour, half the other
+      const gr = c.createLinearGradient(-W / 2, 0, W / 2, 0);
+      gr.addColorStop(0, col[0]); gr.addColorStop(0.5, col[0]); gr.addColorStop(0.5, col[1]); gr.addColorStop(1, col[1]);
+      c.fillStyle = gr;
+    } else c.fillStyle = col;
+    c.beginPath(); c.roundRect(-W / 2, -H / 2, W, H, h * 0.16); c.fill();
     c.strokeStyle = LABEL_INK; c.lineWidth = h * 0.07; c.beginPath(); c.roundRect(-W / 2 + h * 0.14, -H / 2 + h * 0.14, W - h * 0.28, H - h * 0.28, h * 0.1); c.stroke();
   }
   c.fillStyle = plate ? LABEL_INK : col;
@@ -71,9 +78,11 @@ export default {
     for (const L of p.labels || []) {
       const pr = presence(L, tq, shot);
       if (!pr) continue;
-      const col = LABEL_COL[L.side] || L.side;
+      const col = L.side === 'both' ? [LABEL_COL.jade, LABEL_COL.teal] : (LABEL_COL[L.side] || L.side);
       const strikeU = L.strike != null ? clamp((tq - L.strike) / 0.45) : 0;
-      if (L.quad) {   // a display: the label fills it, in coloured type on the display's dark, mapped in perspective
+      if (L.poster) {   // the matched poster (fx/racepost.js), mapped onto a wall / window quad
+        mapQuad(c, posterCanvas(L.poster), L.quad, pr.a * (L.alpha ?? 1), 600, 840);
+      } else if (L.quad) {   // a display: the label fills it, in coloured type on the display's dark, mapped in perspective
         const cv = quadCanvas(), g = cv.getContext('2d');
         g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, 640, 400);
         g.fillStyle = 'rgba(6,10,16,0.94)'; g.fillRect(0, 0, 640, 400);

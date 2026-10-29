@@ -1009,7 +1009,15 @@ export function buildTimeline(A) {
   // a swing that reads in one look: the two-frame impact, a three-frame whip (smear capped), then the clean reveal (g4's still)
   S('3:08.355', impact, mirror('swing', 'Impact frame; the camera swings around the plane: on the other side is teal-tips Jade, in her own world and palette, in exactly the same pose', { impactT: impact.t, swingDur: 0.13, blurMax: 220 }, {
     look: withLook({ ...LK.mirror, tonemap: 0 }, (t, lt) => ({ flash: lt > 2 / 24 ? 0.5 * Math.exp(-(lt - 2 / 24) / 0.08) : 0, flashCol: [1, 1, 1] })) }));
-  S('3:08.68', wd('DR', 2, 'but'), mirror('hands_rise', 'Both raise a hand; teal-tips Jade sings "but you were. You were counting too."', {}, { method: 'seedance_sung' }));
+  // part two G: the labels come off. Seen from teal-tips' side of the glass (she is on the left here, Jade on the right), each one
+  // still carries the names the other side gave her things, in her own colour; they peel off and fall away on "You", "were" and the
+  // next beat, so by the palms (DR05) there are two identical people with their hands raised
+  const PEEL = [wd('DR', 2, 'you', 1).t, wd('DR', 2, 'were', 1).t, beatK(wd('DR', 2, 'were', 1).t, 0).t];
+  const peelTags = ['SPY STATION', 'PROVOCATION', 'FIRST STRIKE'].flatMap((w, i) => [
+    { lines: ['THEIR', w], side: 'teal', at: [175, 430 + i * 190], h: 36, rot: -0.05 + 0.04 * i, peel: { t: PEEL[i], dir: -1 } },
+    { lines: ['THEIR', w], side: 'jade', at: [1760, 430 + i * 190], h: 36, rot: 0.05 - 0.04 * i, peel: { t: PEEL[i], dir: 1 } }]);
+  const dr04 = S('3:08.68', wd('DR', 2, 'but'), mirror('hands_rise', 'Both raise a hand; teal-tips Jade sings "but you were. You were counting too."; the labels the other side gave each of them peel off and fall', {}, { method: 'seedance_sung' }));
+  dr04.scene = 'multi'; dr04.p = { layers: [{ scene: 't2_mirror', p: dr04.p }, { scene: 't2_labels', p: { labels: peelTags } }] };
   // the palms touch on "too": DR05's contact frame (clip 3.40, g4) lands on the cut to DR06, which holds them together (rate 0.8 so
   // the plate's last frame is reached at the shot's end, not before)
   const tooT = wd('DR', 2, 'too').t, countingT2 = wd('DR', 2, 'counting').t;
@@ -1037,8 +1045,11 @@ export function buildTimeline(A) {
   S('3:15.84', wd('DR', 4, 'link'), { ...over({ scene: 'phyllo', p: { center: PALM, radius: 360, hud: 0 } }, { scene: 't2_chain_links', p: { center: PALM, radius: 360, opens, t0: wd('DR', 4, 'link').t } }), method: 'procedural', era: ERA.light, look: LK.light,
     want: 'A chain runs through the disk; each link opens into two hands letting go, and the hands become edges of the graph' });
   // the mirror vanishes on "alone": the plane flares and is gone, the two halves give way to the side-by-side plate (p.both)
-  S('3:18.93', wd('DR', 5, 'alone'), { scene: 't2_mirror', p: { phase: 'gone', full: { scene: 't2_plate', p: { clip: rippleShot.id, at: 99 } }, both: { scene: 't2_plate', p: { clip: '@' } }, palm: PALM, vanishT: wd('DR', 5, 'alone').t },
-    method: 'seedance_sung', era: ERA.mirror, look: { ...LK.mirror, tonemap: 0 }, want: 'The mirror vanishes (t2_mirror): the two Jades stand side by side and look up, singing' });
+  const dr11 = S('3:18.93', wd('DR', 5, 'alone'), { scene: 't2_mirror', p: { phase: 'gone', full: { scene: 't2_plate', p: { clip: rippleShot.id, at: 99 } }, both: { scene: 't2_plate', p: { clip: '@' } }, palm: PALM, vanishT: wd('DR', 5, 'alone').t },
+    method: 'seedance_sung', era: ERA.mirror, look: { ...LK.mirror, tonemap: 0 }, want: 'The mirror vanishes (t2_mirror): the two Jades stand side by side and look up, singing; on "we", one word over both of them, once: OUR' });
+  // part two G: "alone, we never would've made it here": on "we" the one label left, over both of them, half each one's colour.
+  // Nothing is labelled after this
+  dr11.scene = 'multi'; dr11.p = { layers: [{ scene: 't2_mirror', p: dr11.p }, { scene: 't2_labels', p: { labels: [{ lines: ['OUR'], side: 'both', at: [960, 610], h: 120, t0: wd('DR', 5, 'we').t, t1: wd('DR', 5, 'here').t + 0.45 }] } }] };
   S('3:21.55', hit('drop_counts', 3), phyllo('55 spiral arms'));
   S('3:22.26', hit('drop_counts', 4), phyllo('89 spiral arms; the disk relaxes back into the galaxy'));
   const andSeen = wd('DR', 7, 'and');

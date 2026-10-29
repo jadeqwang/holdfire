@@ -858,8 +858,10 @@ export function buildTimeline(A) {
   // part two D: as the board sets itself each king gets a tag from each player's view, colour = whose king, one per shout (the 3 words
   // a second limit): Jade's king OUR KING, then teal-tips' OUR KING, then each is also THEIR DESPOT; gone by the sit-down (X213)
   const setEnd = wd('X2', 3, 'on').t - 0.06;
+  // Jade (RC8 note, 2:21.3): here the colour is the speaker's: White's king is Jade's OUR KING (orange) and teal-tips' THEIR
+  // DESPOT (teal); Black's king is teal-tips' OUR KING (teal) and Jade's THEIR DESPOT (orange)
   const SET_TAGS = [{ sq: 'e1', lines: ['OUR KING'], side: 'jade', t0: x2h[5].t, t1: setEnd }, { sq: 'e8', lines: ['OUR KING'], side: 'teal', t0: x2h[6].t, t1: setEnd },
-    { sq: 'e1', lines: ['THEIR DESPOT'], side: 'jade', t0: x2h[7].t, t1: setEnd, slot: 1 }, { sq: 'e8', lines: ['THEIR DESPOT'], side: 'teal', t0: x2h[8].t, t1: setEnd, slot: 1 }];
+    { sq: 'e1', lines: ['THEIR DESPOT'], side: 'teal', t0: x2h[7].t, t1: setEnd, slot: 1 }, { sq: 'e8', lines: ['THEIR DESPOT'], side: 'jade', t0: x2h[8].t, t1: setEnd, slot: 1 }];
   for (let i = 0; i < 5; i++) S(i === 0 ? '2:19.11' : null, hit('post_chorus_2', 5 + i), { scene: 't2_chess', p: { mode: 'set', cam: 'auto', tags: SET_TAGS }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.3, 0.06)),
     want: `A chessboard sets itself: pieces slam down from above (${setN[i]} on the board)` });
   S('2:22.19', wd('X2', 3, 'counting'), { scene: 't2_chess', p: { mode: 'set', cam: 'auto', tags: SET_TAGS }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.5, 0.08)), want: '"Counting on you!" lands the rest of the pieces' });

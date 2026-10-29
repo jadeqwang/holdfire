@@ -1,0 +1,79 @@
+{
+ "V113": [
+  {
+   "tag": "t2_V113_veof_2s_t1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113_veof_2s_t1-f5e7040693",
+   "kf": "media/kf2/kf_V113_nbp_v5_up_ae46d8df4f.jpg",
+   "prompt_file": "media/gen/specs/t2_V113_veof_2s_t1.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113_veof_2s_t1_f5e7040693.mp4",
+   "verdict": "no: reversed (frames 25-72) it is one touch that drifts 7 px left and up, not two presses; forward, two touches ~100 px apart",
+   "pick": false
+  },
+  {
+   "tag": "t2_V113_veof_2s_t2",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113_veof_2s_t2-a4ec83aaae",
+   "kf": "media/kf2/kf_V113_nbp_v5_up_ae46d8df4f.jpg",
+   "prompt_file": "media/gen/specs/t2_V113_veof_2s_t2.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113_veof_2s_t2_a4ec83aaae.mp4",
+   "verdict": "no: rests at the row end and drags the last wedge longer; a hover",
+   "pick": false
+  },
+  {
+   "tag": "t2_V113_veof_2s_t3",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113_veof_2s_t3-75dc303699",
+   "kf": "media/kf2/kf_V113_nbp_v5_up_ae46d8df4f.jpg",
+   "prompt_file": "media/gen/specs/t2_V113_veof_2s_t3.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113_veof_2s_t3_75dc303699.mp4",
+   "verdict": "no: drags one long line across the clay",
+   "pick": false
+  },
+  {
+   "tag": "t2_V113_veof_2s_q1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113_veof_2s_q1-c6833f8144",
+   "prompt_file": "media/gen/specs/t2_V113_veof_2s_q1.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113_veof_2s_q1_c6833f8144.mp4",
+   "verdict": "closest: a real double tap (press, lift, press) but both presses within ~5 px at the row end, already pressing at frame 0",
+   "pick": false
+  },
+  {
+   "tag": "t2_V113_veof_2s_q2",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113_veof_2s_q2-d77d9d7aee",
+   "prompt_file": "media/gen/specs/t2_V113_veof_2s_q2.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113_veof_2s_q2_d77d9d7aee.mp4",
+   "verdict": "no: one long press at the row end",
+   "pick": false
+  },
+  {
+   "tag": "t2_V113_veof_2s_q3",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113_veof_2s_q3-34ff08ced2",
+   "prompt_file": "media/gen/specs/t2_V113_veof_2s_q3.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113_veof_2s_q3_34ff08ced2.mp4",
+   "verdict": "no (from the hover frame media/kf2/V113_hover_t1f28.jpg): two presses ~105 px apart",
+   "pick": false
+  }
+ ]
+}

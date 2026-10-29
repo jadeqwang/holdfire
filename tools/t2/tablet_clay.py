@@ -10,7 +10,10 @@ region R of the plate:
              median's), bottom half = the stylus/hand matte (255 where the plate must show through)
   tablet.json  region, sprite layout, frame count and the plate's src (the scene skips the cover if the plate changes)
 
-  work/venv/mp312/bin/python tools/t2/tablet_clay.py [--plate work/plates/V113] [--preview work/t2/tablet/clay_preview.jpg]
+  work/venv/mp312/bin/python tools/t2/tablet_clay.py [--plate work/plates/V113] [--preview work/t2/tablet/clay_preview.jpg] [--also 0,2]
+  --also: plate frames whose painted marks are covered too (a mark the take makes or unmakes mid-shot is not in the median;
+  V113's reversed take shows its new wedge until the stylus arrives: --also 0 --also-until 9, which also keeps that mark out of
+  the stylus matte before frame 9, where the stylus lands on it)
 (needs OpenCV; the system python has none here, the mediapipe venv does)
 """
 import argparse, json
@@ -29,6 +32,8 @@ def main():
     ap.add_argument('--plate', default=str(ROOT / 'work/plates/V113'))
     ap.add_argument('--out', default=str(ROOT / 'render/assets/t2/tablet'))
     ap.add_argument('--preview', default=str(ROOT / 'work/t2/tablet/clay_preview.jpg'))
+    ap.add_argument('--also', default='', help='comma-separated plate frames whose marks are covered too')
+    ap.add_argument('--also-until', type=int, default=0, help='before this plate frame, those marks are not part of the stylus matte')
     a = ap.parse_args()
     plate = Path(a.plate)
     meta = json.loads((plate / 'meta.json').read_text())
@@ -46,6 +51,12 @@ def main():
     lum = med.mean(axis=2)
     hp = np.abs(lum - cv2.GaussianBlur(lum, (0, 0), 9))
     tri = ((hp > 11) & band).astype(np.uint8)
+    extra = np.zeros((h, w), np.uint8)
+    for k in [int(x) for x in a.also.split(',') if x.strip()]:
+        lk = F[k].mean(axis=2)
+        extra |= ((np.abs(lk - cv2.GaussianBlur(lk, (0, 0), 9)) > 11) & band).astype(np.uint8)
+    extra = cv2.dilate(cv2.morphologyEx(extra, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8)), np.ones((9, 9), np.uint8)) & band.astype(np.uint8)
+    tri |= extra
     tri = cv2.morphologyEx(tri, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
     tri = cv2.dilate(tri, np.ones((5, 5), np.uint8), iterations=2) & band.astype(np.uint8)
     clean = cv2.inpaint(np.clip(med, 0, 255).astype(np.uint8), tri, 15, cv2.INPAINT_TELEA).astype(np.float32)
@@ -79,6 +90,8 @@ def main():
             if area > 60 and (y <= 1 or (x + bw >= w - 1 and y < h * 0.3)):
                 keep[lab == j] = 1
         keep = cv2.dilate(keep, np.ones((5, 5), np.uint8))
+        if k < a.also_until:
+            keep[extra > 0] = 0
         keepf = cv2.GaussianBlur(keep.astype(np.float32), (0, 0), 1.2)
         sprite[:hh, k * hw:(k + 1) * hw] = cv2.resize(((1 - shade) * 255).astype(np.uint8), (hw, hh), interpolation=cv2.INTER_AREA)
         sprite[hh:, k * hw:(k + 1) * hw] = cv2.resize((np.clip(keepf, 0, 1) * 255).astype(np.uint8), (hw, hh), interpolation=cv2.INTER_AREA)

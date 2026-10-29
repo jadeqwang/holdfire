@@ -1542,3 +1542,12 @@
 {"ts": "2026-10-29T17:35:09Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t1", "job": "holdfire/t2_V113_veof_2s_t1-f5e7040693", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
 {"ts": "2026-10-29T17:35:10Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t2", "job": "holdfire/t2_V113_veof_2s_t2-a4ec83aaae", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
 {"ts": "2026-10-29T17:35:11Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t3", "job": "holdfire/t2_V113_veof_2s_t3-75dc303699", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:39:43Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t1", "job": "holdfire/t2_V113_veof_2s_t1-f5e7040693", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:39:48Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t2", "job": "holdfire/t2_V113_veof_2s_t2-a4ec83aaae", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:40:52Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t3", "job": "holdfire/t2_V113_veof_2s_t3-75dc303699", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:47:34Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_q1", "job": "holdfire/t2_V113_veof_2s_q1-c6833f8144", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:47:35Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_q2", "job": "holdfire/t2_V113_veof_2s_q2-d77d9d7aee", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:47:35Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_q3", "job": "holdfire/t2_V113_veof_2s_q3-34ff08ced2", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:52:09Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_q1", "job": "holdfire/t2_V113_veof_2s_q1-c6833f8144", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:52:10Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_q2", "job": "holdfire/t2_V113_veof_2s_q2-d77d9d7aee", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:53:14Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_q3", "job": "holdfire/t2_V113_veof_2s_q3-34ff08ced2", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}

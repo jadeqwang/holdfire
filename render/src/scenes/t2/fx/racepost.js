@@ -4,9 +4,11 @@
 // Printed like the Arkhipov poster (cream stock, black, one colour, a coarse halftone), in Jade's orange or teal-tips' teal. No
 // country, no flag, no organisation. Drawn into an offscreen canvas (posterCanvas) that scenes map onto a wall, window or frame.
 //   posterCanvas(side) -> canvas 600 x 840; side 'jade' | 'teal'
+//   drawGraph(g, x, y, w, h, col): the poster's curve alone (axes, the steep climb with its ticks, the star), as a display draws it
 import { LABEL_COL } from './labels.js';
 
 const CACHE = new Map();
+const curveY = (u) => Math.pow(u, 3.2);   // the poster's climb: flat, then steeply off the top
 const CREAM = '#efe6d2', INK = '#121212';
 
 function halftone(g, x0, y0, w, h, col, k0, k1, cell = 9) {   // dots growing from k0 (top) to k1 (bottom) of the cell
@@ -28,10 +30,10 @@ export function posterCanvas(side) {
   // the curve: flat, then climbing steeply off the top (a trajectory / a capability chart), with tick marks along it
   g.strokeStyle = INK; g.lineWidth = 16; g.lineCap = 'round';
   g.beginPath(); g.moveTo(40, 600);
-  for (let i = 0; i <= 40; i++) { const u = i / 40, x = 40 + u * 520, y = 600 - 560 * Math.pow(u, 3.2); g.lineTo(x, y); }
+  for (let i = 0; i <= 40; i++) { const u = i / 40, x = 40 + u * 520, y = 600 - 560 * curveY(u); g.lineTo(x, y); }
   g.stroke();
   g.lineWidth = 5;
-  for (let i = 1; i < 8; i++) { const u = i / 8, x = 40 + u * 520, y = 600 - 560 * Math.pow(u, 3.2); g.beginPath(); g.moveTo(x, y - 14); g.lineTo(x, y + 14); g.stroke(); }
+  for (let i = 1; i < 8; i++) { const u = i / 8, x = 40 + u * 520, y = 600 - 560 * curveY(u); g.beginPath(); g.moveTo(x, y - 14); g.lineTo(x, y + 14); g.stroke(); }
   // the star it points at
   g.fillStyle = INK; g.beginPath();
   for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? 16 : 40; g.lineTo(505 + Math.cos(a) * r, 92 + Math.sin(a) * r); }
@@ -53,4 +55,23 @@ export function posterCanvas(side) {
   g.fillStyle = col; g.fillRect(30, 712, W - 60, 10);
   CACHE.set(side, cv);
   return cv;
+}
+
+// the poster's graph on a display (C103's monitors, part two, Jade 29 Oct): the same climb and star in the owner's colour on the
+// screen's dark, over a faint axis; (x, y, w, h) is the plot box
+export function drawGraph(g, x, y, w, h, col) {
+  g.save();
+  g.lineCap = 'round'; g.lineJoin = 'round';
+  g.strokeStyle = 'rgba(200,215,230,0.45)'; g.lineWidth = 5;
+  g.beginPath(); g.moveTo(x, y); g.lineTo(x, y + h); g.lineTo(x + w, y + h); g.stroke();
+  const px = (u) => x + 0.04 * w + u * 0.84 * w, py = (u) => y + h - 0.06 * h - 0.86 * h * curveY(u);
+  g.strokeStyle = col; g.lineWidth = Math.max(8, h * 0.07); g.shadowColor = col; g.shadowBlur = 14;
+  g.beginPath(); for (let i = 0; i <= 40; i++) { const u = i / 40; i ? g.lineTo(px(u), py(u)) : g.moveTo(px(u), py(u)); } g.stroke();
+  g.lineWidth = Math.max(3, h * 0.025);
+  for (let i = 1; i < 8; i++) { const u = i / 8, d = h * 0.05; g.beginPath(); g.moveTo(px(u), py(u) - d); g.lineTo(px(u), py(u) + d); g.stroke(); }
+  g.fillStyle = col; g.beginPath();
+  const sx = x + 0.95 * w, sy = y + 0.1 * h, R = h * 0.11;
+  for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, r = i % 2 ? R * 0.4 : R; g.lineTo(sx + Math.cos(a) * r, sy + Math.sin(a) * r); }
+  g.closePath(); g.fill();
+  g.restore();
 }

@@ -11,12 +11,13 @@
 // p: {labels: [{lines: ['OUR', 'LISTENING POST'], side: 'jade'|'teal' (whose thing: the tag's colour), t0, t1 (song s; t1 null =
 //       to the shot's end), at: [x, y] design px (the tag's centre) | quad: [[x,y] x4] (a display: the tag fills it, mapped in
 //       perspective), h (cap height, design px; 44), rot (rad), plate (true: a filled tag; false: coloured type on the dark display),
-//       strike: t (a hand-drawn strike through the words from t; Petrov), peel: {t, dir} (the tag peels off and falls: the mirror)}
+//       strike: t (a hand-drawn strike through the words from t; Petrov), peel: {t, dir} (the tag peels off and falls: the mirror),
+//       graph: 'jade'|'teal' (quad only: the tag takes the display's top, the matched poster's graph in that side's colour below it)}
 //       | {poster: 'jade'|'teal', quad, t0, t1, alpha} (the matched poster, fx/racepost.js)],
 //     gain (0.9: the tags stay their colour, not bloomed)}
 import { clamp, easeOutCubic, easeInCubic, hash1 } from '../../../util.js';
 import { mapQuad } from './contact.js';
-import { posterCanvas } from './racepost.js';
+import { posterCanvas, drawGraph } from './racepost.js';
 
 export const LABEL_COL = { jade: '#ff7a2a', teal: '#3fe0c5' };
 export const LABEL_INK = '#0d1117';
@@ -87,12 +88,15 @@ export default {
         g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, 640, 400);
         g.fillStyle = 'rgba(6,10,16,0.94)'; g.fillRect(0, 0, 640, 400);
         g.fillStyle = col; g.globalAlpha = 0.9; g.fillRect(0, 0, 640, 16); g.globalAlpha = 1;   // the panel's colour bar
-        g.translate(320, 212);
-        // fit: the tag fills the display edge to edge (the widest line inside 600 px, all lines inside its 400 px height)
+        // fit: the tag fills the display edge to edge (the widest line inside 600 px, all lines inside its 400 px height); with a
+        // graph, the tag takes the top TOP px and the graph the rest
+        const TOP = L.graph ? 196 : 396;
+        g.translate(320, L.graph ? 16 + TOP / 2 : 212);
         g.font = `800 ${100 * 1.36}px ${FONT}`;
         const wmax = Math.max(...L.lines.map((x) => g.measureText(x).width));
-        const hh = Math.min(L.h ?? 96, 100 * 600 / wmax, 396 / (L.lines.length * 1.32 + 0.3));
+        const hh = Math.min(L.h ?? 96, 100 * 600 / wmax, TOP / (L.lines.length * 1.32 + 0.3));
         drawTag(g, L.lines, hh, col, 1, L.plate ?? true, strikeU);
+        if (L.graph) { g.setTransform(1, 0, 0, 1, 0, 0); drawGraph(g, 70, 232, 520, 150, LABEL_COL[L.graph]); }
         mapQuad(c, cv, L.quad, pr.a, 640, 400);
       } else {
         let [x, y] = L.at, rot = L.rot || 0, a = pr.a;

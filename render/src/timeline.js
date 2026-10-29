@@ -316,6 +316,11 @@ export function buildTimeline(A) {
   const roomPair = (ours, theirs, t0, t1) => ({ scene: 't2_labels', p: { labels: [
     { lines: ['THEIR', ...theirs], side: 'teal', quad: TOPV.L, t0, t1 }, { lines: ['OUR', ...ours], side: 'jade', quad: LOWER.L, t0, t1 },
     { lines: ['THEIR', ...theirs], side: 'jade', quad: TOPV.R, t0, t1 }, { lines: ['OUR', ...ours], side: 'teal', quad: LOWER.R, t0, t1 }] } });
+  // C103 (Jade, 29 Oct): the matched posters' graph on each one's displays, her own on top as OUR RESOLVE, the other's below it
+  // as THEIR PROPAGANDA (colour = whose poster, as everywhere in part two); the same from teal-tips' side, colours swapped
+  const posterPair = (t0, t1) => ({ scene: 't2_labels', p: { labels: [
+    { lines: ['OUR', 'RESOLVE'], side: 'jade', graph: 'jade', quad: TOPV.L, t0, t1 }, { lines: ['THEIR', 'PROPAGANDA'], side: 'teal', graph: 'teal', quad: LOWER.L, t0, t1 },
+    { lines: ['OUR', 'RESOLVE'], side: 'teal', graph: 'teal', quad: TOPV.R, t0, t1 }, { lines: ['THEIR', 'PROPAGANDA'], side: 'jade', graph: 'jade', quad: LOWER.R, t0, t1 }] } });
   const contacts = (o = {}) => ({ scene: 't2_contact', p: { screens: [
     { quad: SCREENS.L, brg: '090', ...o }, { quad: SCREENS.R, brg: '090', mirror: true, cold: true, ...o }] } });
   const split = (l = {}, r = {}, line = 2, extra = {}) => ({ scene: 't2_split', p: { left: { scene: 't2_plate', p: { clip: '@L', ...l } }, right: { scene: 't2_plate', p: { clip: '@R', ...r } }, x: 960, line, ...extra } });
@@ -630,7 +635,7 @@ export function buildTimeline(A) {
   S('0:51.70', wd('C1', 0, "can't"), { ...plate({ swingT: dl1 }), method: 'video', era: ERA.room, look: (t) => ({ ...LK.night, flash: t >= dl1 ? Math.exp(-(t - dl1) / 0.15) * 0.4 : 0, flashCol: [1, 0.9, 0.7] }),
     want: 'Jade alone on the dish field at night; on the 0:51.82 downbeat every dish swings to the same point in the sky' });
   S('0:54.28', wd('C1', 1, 'message'), { scene: 'goldenrecord', p: {}, method: 'reuse', era: ERA.light, look: LK.diagram, want: "Take one's 0:54 diagram unchanged: the Golden Record cover engraves itself in gold light" });
-  S('0:56.67', wd('C1', 2, 'but'), { ...over(phraseSplit('C103', wd('C1', 2, "i'm").t, {}, {}, WALL), contacts({ range: 0.3 }), roomPair(['LISTENING', 'POST'], ['SPY', 'STATION'], beatK(wd('C1', 2, 'but').t, 0).t, null)), method: 'seedance_sung', era: ERA.room, look: LK.room,
+  S('0:56.67', wd('C1', 2, 'but'), { ...over(phraseSplit('C103', wd('C1', 2, "i'm").t, {}, {}, WALL), contacts({ range: 0.3 }), posterPair(beatK(wd('C1', 2, 'but').t, 0).t, null)), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'Split screen, two rooms with a wall between them: Jade (left, warm lamp) sings "but if you are" while teal-tips (right, cold fluorescent) listens; on "I\'m" teal-tips sings "I\'m counting on you" while Jade listens. Each one\'s monitor tracks the other as an unknown contact (CONTACT 0217)',
     notes: 'Jade v3: one phrase per half; both halves cut on the onset of "I\'m" (phraseSplit). Adversary pass: wall bar, warm/cold split grade (RM matching dropped), contact tracks' });
   // t2_crt_matrix is one continuous camera (close on one CRT, smash back on the two beats and on "swear"), so it is one shot;
@@ -1029,7 +1034,8 @@ export function buildTimeline(A) {
   // still carries the names the other side gave her things, in her own colour; they peel off and fall away on "You", "were" and the
   // next beat, so by the palms (DR05) there are two identical people with their hands raised
   const PEEL = [wd('DR', 2, 'you', 1).t, wd('DR', 2, 'were', 1).t, beatK(wd('DR', 2, 'were', 1).t, 0).t];
-  const peelTags = ['SPY STATION', 'PROVOCATION', 'FIRST STRIKE'].flatMap((w, i) => [
+  const peelTags = ['PROPAGANDA', 'PROVOCATION', 'FIRST STRIKE']   // PROPAGANDA: C103's displays (was SPY STATION)
+    .flatMap((w, i) => [
     { lines: ['THEIR', w], side: 'teal', at: [175, 430 + i * 190], h: 36, rot: -0.05 + 0.04 * i, peel: { t: PEEL[i], dir: -1 } },
     { lines: ['THEIR', w], side: 'jade', at: [1760, 430 + i * 190], h: 36, rot: 0.05 - 0.04 * i, peel: { t: PEEL[i], dir: 1 } }]);
   const dr04 = S('3:08.68', wd('DR', 2, 'but'), mirror('hands_rise', 'Both raise a hand; teal-tips Jade sings "but you were. You were counting too."; the labels the other side gave each of them peel off and fall', {}, { method: 'seedance_sung' }));

@@ -353,7 +353,7 @@ Tom Gauld's cartoon of two identical sides that only the labels tell apart, appl
   reversed lettering is waived for labels only). Two or three words, on >= 1 s, <= 3 words a second, cap height >= 9 px at 480 px
   (`docs/take2/adversary/p2_labels.jpg`). No country, flag or organisation.
 - **B, the rooms:** each split's top monitor names the other's station, the lower one her own (`roomPair`): C103 OUR LISTENING
-  POST / THEIR SPY STATION, C203 OUR SIGNAL / THEIR PROVOCATION, C209 OUR DEFENSIVE SYSTEM / THEIR FIRST-STRIKE WEAPON. Each
+  POST / THEIR SPY STATION (replaced on Jade's RC7 note, below), C203 OUR SIGNAL / THEIR PROVOCATION, C209 OUR DEFENSIVE SYSTEM / THEIR FIRST-STRIKE WEAPON. Each
   side's screens say the same from her side, colours swapped. C201, C202 have no displays; C208's banks are left clear.
 - **C, the history:** Petrov's screen THEIR FIRST STRIKE (V212, V215), the same tag on his desk protocol struck through as he
   reports (V217); B-59 OUR SIGNAL by the destroyers, THEIR ATTACK by the submarine (BR14): one set of depth charges, two names.
@@ -373,9 +373,23 @@ Tom Gauld's cartoon of two identical sides that only the labels tell apart, appl
   (n41) is in ink. The Earth-lights stills and `t2_earth_night`'s scale view are no longer in the edit. Stills:
   `docs/take2/adversary/f_gauld.jpg` and `f_gauld_480.png` (the option A/B drafts are kept beside them).
 - **G, the payoff:** at the glass (DR04) the names the other gave each girl (THEIR SPY STATION / PROVOCATION / FIRST STRIKE)
-  peel off one by one through "You were"; on "we" (DR11) OUR appears once over both of them, half orange, half teal.
+  peel off one by one through "You were" (PROPAGANDA replaced SPY STATION in RC8, with C103's displays); on "we" (DR11) OUR appears once over both of them, half orange, half teal.
 - **H:** no music change.
 
 Checks: check_cuts 0 cuts off onset (173 shots, coverage OK; the one type-rule line is RC4's "FLAMES ROSE…" caption),
 chess_check OK, chess_lens OK, lipcheck 16 picks 0 mismatches. Preview `previews/hold_fire_t2_rc7_540p.mp4` (review page v12):
 the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest render per frame (`work/preview8/splice.py`).
+
+## Jade's notes on RC7 (29 Oct)
+- **0:57.5, C103's displays** ("our resolve / (before they do graph) / their propaganda / (before they do graph)"): each one's top
+  monitor reads OUR RESOLVE over her own poster's graph, the lower one THEIR PROPAGANDA over the other's, in the owner's colours
+  (`posterPair`; `labels.js` quad `graph`, `racepost.js` drawGraph: the poster's climb, ticks and star, without the gantry or the
+  slogan, which would not read at that size). Teal-tips' side the same from her view, colours swapped. SPY STATION no longer
+  appears anywhere, so the name peeling off at the glass (DR04) is now THEIR PROPAGANDA (THEIR PROVOCATION and THEIR FIRST STRIKE
+  stay). Stills: `docs/take2/adversary/c103_posters.jpg`, `c103_posters_480.png`.
+- **0:25.9, the tablet's stroke order** (a question, not changed yet): the tablet opens with everything written except two wedges
+  of 89 (= 1;29: DISH | U U, NINE DISH). The stylus's first touch (25.79) presses 89's sixties wedge, its first stroke; the second
+  (26.96) presses the tall last wedge of the 9, its last. So 89 reads 28, 1;28, 1;29: the first press is out of a scribe's order
+  (left to right: the sixties place, then the tens, then the units). The last two strokes are the 9's last two wedges, about
+  10 px apart; the take's two touches are 117 px apart along the row, and its later presses (past the frames the shot uses) are
+  20 to 35 px apart, so no pair of this take's touches can make them. Options are with Jade.

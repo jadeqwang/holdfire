@@ -831,7 +831,7 @@ export function buildTimeline(A) {
   const gauldP = { beats: [
     { t0: x2h[0].t, t1: x2h[3].t, frame: [700, 470], L: DISH('C101', 980), R: { ...DISH('C201R', 960), t0: x2h[1].t },
       caps: [{ lines: ['OUR RADAR'], side: 'jade', t0: x2h[0].t }, { lines: ['THEIR TARGETING'], side: 'teal', t0: x2h[1].t }] },
-    { t0: x2h[3].t, t1: cnt2, frame: [380, 532], L: { poster: 'jade' }, R: { poster: 'teal' },
+    { t0: x2h[3].t, t1: cnt2, frame: [380, 532], y: 420, L: { poster: 'jade' }, R: { poster: 'teal' },
       caps: [{ lines: ['THEIR PROPAGANDA'], side: 'jade', t0: x2h[3].t }, { lines: ['OUR RESOLVE'], side: 'teal', t0: x2h[3].t }] },
     { t0: cnt2, t1: x2End + 1, frame: [700, 470], L: { img: 'work/plates/C208b/f_00000.jpg', crop: [823, 420, 760] },
       R: { img: 'work/plates/C209b/f_00000.jpg', crop: [1097, 420, 760], flipX: true },

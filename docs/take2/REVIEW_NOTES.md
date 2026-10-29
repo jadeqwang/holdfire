@@ -344,3 +344,38 @@ song time; 5 s left at the draw.
   ply or press moved). The other captures stay hand-free (the battle angles, the chain). chess_check, chess_lens, check_cuts pass.
 - Preview `previews/hold_fire_t2_rc6_540p.mp4` (review page v11): 2:19.0–2:38.5 (every chess frame with a clock in it)
   re-rendered and spliced, with RC5's ranges, into RC4's frames.
+
+## Part two: "our and their" (29 Oct, the plan's second part, A–H)
+Tom Gauld's cartoon of two identical sides that only the labels tell apart, applied to the film. No generation: $0.
+- **A, the label rule** (`fx/labels.js`, `t2_labels` and `drawTag`): short in-world labels drawn by the renderer on surfaces in
+  the picture, never subtitles. Colour = whose thing (Jade's orange `#ff7a2a`, teal-tips' teal `#3fe0c5`); the words = who is
+  speaking (OUR / THEIR). Big Shoulders Display stamped tags, the same on both sides; teal-tips' read normally (the mirror rule's
+  reversed lettering is waived for labels only). Two or three words, on >= 1 s, <= 3 words a second, cap height >= 9 px at 480 px
+  (`docs/take2/adversary/p2_labels.jpg`). No country, flag or organisation.
+- **B, the rooms:** each split's top monitor names the other's station, the lower one her own (`roomPair`): C103 OUR LISTENING
+  POST / THEIR SPY STATION, C203 OUR SIGNAL / THEIR PROVOCATION, C209 OUR DEFENSIVE SYSTEM / THEIR FIRST-STRIKE WEAPON. Each
+  side's screens say the same from her side, colours swapped. C201, C202 have no displays; C208's banks are left clear.
+- **C, the history:** Petrov's screen THEIR FIRST STRIKE (V212, V215), the same tag on his desk protocol struck through as he
+  reports (V217); B-59 OUR SIGNAL by the destroyers, THEIR ATTACK by the submarine (BR14): one set of depth charges, two names.
+  The near-miss stamps were optional and are not done.
+- **D, the chess set:** OUR KING and THEIR DESPOT on each king while the board sets itself, one tag per shout, gone before the
+  sit-down (kings only: knights too would break three words a second). The close-ups clamp the tag beside the piece.
+- **E, the matched posters** (`fx/racepost.js`): one composition in two palettes, BEFORE THEY DO, which reads equally as the
+  space race or the AI race (a figure on a gantry points at a star; a curve climbs off the sheet: a trajectory, or a capability
+  chart). No chorus 2 wall is big enough for it at 480 px, so it hangs in F.
+- **F, the escalation (option B, Jade's pick):** the post-chorus 2 lights pass (X201–X206, 2:14.06–2:19.11) is the cartoon
+  itself (`fx/gauld.js`, `t2_gauld`): cream paper, two identical framed pictures, Jade's left and teal-tips' right, a plaque under
+  each. One move per two or three shouts, to keep the label rule:
+  1. shouts 1–3, Jade captioning: their dish fields (C101 / C201R plates, moving on twos), OUR RADAR (orange) / THEIR TARGETING (teal);
+  2. shouts 4–5, teal-tips captioning: the matched posters, THEIR PROPAGANDA (orange) / OUR RESOLVE (teal);
+  3. "Counting on you!": both hands beside the guarded switch (C208b / C209b), OUR DETERRENT under each.
+  The 1 1 2 3 5 8 row stays, in ink on the paper; the 8 now lands in the row (a giant 8 covered both switches). "Counting on you"
+  (n41) is in ink. The Earth-lights stills and `t2_earth_night`'s scale view are no longer in the edit. Stills:
+  `docs/take2/adversary/f_gauld.jpg` and `f_gauld_480.png` (the option A/B drafts are kept beside them).
+- **G, the payoff:** at the glass (DR04) the names the other gave each girl (THEIR SPY STATION / PROVOCATION / FIRST STRIKE)
+  peel off one by one through "You were"; on "we" (DR11) OUR appears once over both of them, half orange, half teal.
+- **H:** no music change.
+
+Checks: check_cuts 0 cuts off onset (173 shots, coverage OK; the one type-rule line is RC4's "FLAMES ROSE…" caption),
+chess_check OK, chess_lens OK, lipcheck 16 picks 0 mismatches. Preview `previews/hold_fire_t2_rc7_540p.mp4` (review page v12):
+the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest render per frame (`work/preview8/splice.py`).

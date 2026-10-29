@@ -436,3 +436,13 @@ the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest r
   change on twos like V110. A scan of RC12 against RC4 for still stretches finds nothing else new (the Gauld frames hold by design).
 - **0:25.9, the tablet:** Jade marked the film's current shot usable on the takes page (https://claude.ai/artifact/J2CUxfEiXyFGSvaEDLT8Zs),
   so V113 stays as it is.
+
+## The near-miss list at 34 (29 Oct)
+- Four of take one's entries restored at Jade's request, surfaced by the research for the holdfire.cc page (each re-checked):
+  Mars Bluff (11 Mar 1958), the SAC relay failure (24 Nov 1961), the bomb lost off USS Ticonderoga (5 Dec 1965) and the
+  Hawaii false alert (13 Jan 2018). Tybee Island (1958) and DEFCON 3 (1973) were already in the film.
+- The teletype prints 34 lines in the same 5 s (about seven a second); the coins keep 46 stamps (these four lose their "?");
+  the counter's 33 resets are redistributed over the same 49 thirty-second notes, so the last (15 Sep 2026) still lands on
+  "count" and the board ends on 42.
+- `docs/research/film_nearmiss_list.md`: the film's list with dates and on-screen wording and its differences from the site,
+  for the site's author. RC13 re-renders 1:43.0-1:53.2 and 3:44.3-3:50.0.

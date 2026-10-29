@@ -293,21 +293,21 @@
   "kind": "video",
   "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
   "in": 0,
-  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 0.4 s, keyed, over painted era plate media/kf2/V108_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+  "note": "composite (tools/t2/comp_walk.py; was a scratchpad script): green-screen walk take t2_WALK_veo_t1 from 0.4 s, keyed, over painted era plate media/kf2/V108_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
  },
  "V109": {
   "dir": "work/plates/V109",
   "kind": "video",
   "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
   "in": 0,
-  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.046 s, keyed, over painted era plate media/kf2/V109_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+  "note": "composite (tools/t2/comp_walk.py; was a scratchpad script): green-screen walk take t2_WALK_veo_t1 from 1.046 s, keyed, over painted era plate media/kf2/V109_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
  },
  "V110": {
   "dir": "work/plates/V110",
   "kind": "video",
   "src": "media/gen/t2_WALK_veo_t1_8f93e107ff.mp4",
   "in": 0,
-  "note": "composite (scratchpad comp_walk.py): green-screen walk take t2_WALK_veo_t1 from 1.691 s, keyed, over painted era plate media/kf2/V110_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
+  "note": "composite (tools/t2/comp_walk.py; was a scratchpad script): green-screen walk take t2_WALK_veo_t1 from 1.691 s, keyed, over painted era plate media/kf2/V110_nbp_v1.jpg scrolling 300 px/s; one continuous walk across V108-V110, same scale/anchor (figure 760 px, feet y 1010, x~800)"
  },
  "V111": {
   "dir": "work/plates/V111",

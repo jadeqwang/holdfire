@@ -107,7 +107,7 @@ The card reads:
 
 ### Deliverables
 
-A 540p preview of RC8 (the adversary pass, the chess clocks at the moves' pace and the 9.Qxg7 hand, part two, "our and their", and Jade's notes on RC7 to RC9) is committed: [`previews/hold_fire_t2_rc10_540p.mp4`](previews/hold_fire_t2_rc10_540p.mp4) (960×540, 2-pass H.264
+A 540p preview of RC8 (the adversary pass, the chess clocks at the moves' pace and the 9.Qxg7 hand, part two, "our and their", and Jade's notes on RC7 to RC9) is committed: [`previews/hold_fire_t2_rc11_540p.mp4`](previews/hold_fire_t2_rc11_540p.mp4) (960×540, 2-pass H.264
 at 1.4 Mb/s, AAC 128k of the mix). It was made in a cloud session: the changed ranges re-rendered at 1080p and spliced into RC4's
 preview frames (RC4's preview is in git history, commit 9b9bdf7); see the adversary pass in `REVIEW_NOTES.md`. The full-resolution files are rendered locally to `work/out/` (not committed;
 they exceed GitHub's 100 MB limit):
@@ -140,6 +140,7 @@ clocks at the moves' pace and the 9.Qxg7 hand holding its pawn.
 python3 tools/t2/merge_picks.py                          # docs/take2/picks_*.json -> render/data/picks2.json
 python3 tools/t2/plates.py media/gen/<take>.mp4 <PICK>   # once per pick (its src in picks2.json; stills: media/kf2/*.jpg --fit keep)
 python3 tools/t2/credits.py                              # end-card credits from the picks the edit uses
+python3 tools/t2/comp_walk.py                            # V108-V110: the green-screen walk over the scrolling era plates
 cd render
 node tools/check_cuts.mjs && node tools/chess_check.mjs && node tools/chess_lens.mjs && node tools/lipcheck.mjs
 node tools/render.mjs --stills 13.5,95.5,246.5 --w 1920 --h 1080 --outdir ../work/stills/t2

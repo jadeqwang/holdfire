@@ -416,3 +416,11 @@ the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest r
 - **0:33.7:** Snowflake in the / boundless night (n6 on V122) on two lines, left-aligned at x 1130 in the sky right of her.
 - **0:53.7:** "anyone is there" (n12) on one line under CAN'T BE SURE; "that" is dropped, as Jade allowed.
 - Preview RC10 (review page v15): 0:18.1–0:22.8, 0:32.6–0:33.7 and 0:51.8–0:54.3 re-rendered and spliced over RC9's sources.
+
+## Jade's note on RC10 (29 Oct): 0:22.2 green screen
+- My error: V108-V110 are composites (the green-screen walk keyed over a scrolling painted plate), made in an earlier session by a
+  scratchpad script that was not in git. This session had conformed the raw green-screen take as their plates, and RC10's re-render
+  of the 0:19.7 lyric reached into V108-V109. `tools/t2/comp_walk.py` (new, committed) rebuilds all three plates; its parameters
+  (the plate 1080 px high from x 390 at 300 px/s; the walk x0.84 with its feet-and-centre point at (790, 1016); the take from 0.4 /
+  1.046 / 1.691 s) were fitted to RC4's frames. RC11 re-renders V108-V109; a scan of every RC11 frame finds no green screen.
+- Option 1 for 0:25.9 (a closer framing of the tablet so the stylus can press two neighbouring wedges) is next.

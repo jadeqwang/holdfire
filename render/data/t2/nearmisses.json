@@ -1,13 +1,13 @@
 {
  "title": "Near-miss list, take two (fact-checked)",
  "from_doc": "docs/PLAN_TAKE_TWO.md § The near-miss list (fact-checked): year, place, on-screen text and source copied exactly, in the plan's order",
- "dates": "Day and month researched per entry (date_source). Every entry but one has a known day; none uses the 1 Jan fallback (date_precision would read 'year'). The exception is n 29 (approx: true, date_precision 'approx'): reported only as spring 2026, placed at 2026-04-15 for ordering and the counter. 27 Oct 2026: entries 28-30 added at Jade's request (docs/research/nearmiss_update_2026-10.md, 'Second pass').",
+ "dates": "Day and month researched per entry (date_source). Every entry but one has a known day; none uses the 1 Jan fallback (date_precision would read 'year'). The exception is n 29 (approx: true, date_precision 'approx'): reported only as spring 2026, placed at 2026-04-15 for ordering and the counter. 27 Oct 2026: entries 28-30 added at Jade's request (docs/research/nearmiss_update_2026-10.md, 'Second pass'). 29 Oct 2026: four take-one entries restored at Jade's request (Mars Bluff 1958, the SAC relay 1961, Ticonderoga 1965, Hawaii 2018), surfaced by the holdfire.cc page's research; each re-checked (date_source).",
  "epoch": {
   "date": "1945-08-09",
   "note": "Nagasaki: day 0 of the outro counter (last use of a nuclear weapon in war)"
  },
  "release_default": "2026-10-26",
- "count": 30,
+ "count": 34,
  "entries": [
   {
    "n": 1,
@@ -44,6 +44,17 @@
   },
   {
    "n": 4,
+   "year": 1958,
+   "place": "S. Carolina",
+   "text": "Coreless A-bomb hits a family's yard",
+   "source": "https://en.wikipedia.org/wiki/1958_Mars_Bluff_B-47_nuclear_weapon_loss_incident",
+   "date": "1958-03-11",
+   "date_precision": "day",
+   "date_note": "Mars Bluff, 11 Mar 1958: a B-47 from Hunter AFB released a Mark 6 bomb without its fissile core; the conventional explosives detonated in the Gregg family's garden, six people injured.",
+   "date_source": "https://en.wikipedia.org/wiki/1958_Mars_Bluff_B-47_nuclear_weapon_loss_incident"
+  },
+  {
+   "n": 5,
    "year": 1960,
    "place": "Greenland",
    "text": "Radar mistakes the Moon for missiles",
@@ -54,7 +65,7 @@
    "date_source": "https://blog.ucs.org/david-wright/the-moon-and-nuclear-war-904/"
   },
   {
-   "n": 5,
+   "n": 6,
    "year": 1961,
    "place": "N. Carolina",
    "text": "Two H-bombs fall; one switch holds",
@@ -65,7 +76,18 @@
    "date_source": "https://en.wikipedia.org/wiki/1961_Goldsboro_B-52_crash"
   },
   {
-   "n": 6,
+   "n": 7,
+   "year": 1961,
+   "place": "Colorado",
+   "text": "One relay fails; SAC loses all its radars",
+   "source": "https://www.wagingpeace.org/20-mishaps-that-might-have-started-accidental-nuclear-war/",
+   "date": "1961-11-24",
+   "date_precision": "day",
+   "date_note": "Night of 24 Nov 1961: every SAC HQ-NORAD link went dead (all routed through one relay station in Colorado, where a motor had overheated); B-52 crews started engines (Phillips, '20 Mishaps').",
+   "date_source": "https://www.wagingpeace.org/20-mishaps-that-might-have-started-accidental-nuclear-war/"
+  },
+  {
+   "n": 8,
    "year": 1962,
    "place": "Duluth, MN",
    "text": "Bear trips alarm; nuclear jets roll",
@@ -76,7 +98,7 @@
    "date_source": "https://en.wikipedia.org/wiki/Duluth_Air_Defense_Sector"
   },
   {
-   "n": 7,
+   "n": 9,
    "year": 1962,
    "place": "Vandenberg",
    "text": "Test ICBM launched, SAC at DEFCON 2",
@@ -87,7 +109,7 @@
    "date_source": "https://www.armscontrolwonk.com/archive/402833/organizations-accidents-and-nuclear-weapons/"
   },
   {
-   "n": 8,
+   "n": 10,
    "year": 1962,
    "place": "Atlantic",
    "text": "Nuclear-armed sub B-59 forced to surface",
@@ -98,7 +120,7 @@
    "date_source": "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB75/"
   },
   {
-   "n": 9,
+   "n": 11,
    "year": 1962,
    "place": "Chukotka",
    "text": "Lost U-2 strays into Soviet airspace",
@@ -109,7 +131,18 @@
    "date_source": "https://www.adn.com/alaska-life/we-alaskans/2017/06/09/when-off-course-u-2-spy-plane-out-of-alaska-nearly-triggered-war/"
   },
   {
-   "n": 10,
+   "n": 12,
+   "year": 1965,
+   "place": "Philippine Sea",
+   "text": "H-bomb jet rolls off a carrier, lost",
+   "source": "https://en.wikipedia.org/wiki/1965_Philippine_Sea_A-4_incident",
+   "date": "1965-12-05",
+   "date_precision": "day",
+   "date_note": "5 Dec 1965: an A-4E with a one-megaton B43 rolled off USS Ticonderoga's no. 2 elevator; pilot, aircraft and bomb never recovered (disclosed 1989).",
+   "date_source": "https://en.wikipedia.org/wiki/1965_Philippine_Sea_A-4_incident"
+  },
+  {
+   "n": 13,
    "year": 1966,
    "place": "Palomares",
    "text": "4 H-bombs fall; 2 spill plutonium",
@@ -120,7 +153,7 @@
    "date_source": "https://en.wikipedia.org/wiki/1966_Palomares_accident"
   },
   {
-   "n": 11,
+   "n": 14,
    "year": 1967,
    "place": "Arctic",
    "text": "Solar storm jams all 3 missile radars",
@@ -131,7 +164,7 @@
    "date_source": "https://www.colorado.edu/today/2016/08/09/1967-solar-storm-nearly-took-us-brink-war"
   },
   {
-   "n": 12,
+   "n": 15,
    "year": 1968,
    "place": "Greenland",
    "text": "Burning B-52 crashes with 4 H-bombs",
@@ -142,7 +175,7 @@
    "date_source": "https://en.wikipedia.org/wiki/1968_Thule_Air_Base_B-52_crash"
   },
   {
-   "n": 13,
+   "n": 16,
    "year": 1968,
    "place": "N. Pacific",
    "text": "K-129 sinks with nuclear missiles",
@@ -153,7 +186,7 @@
    "date_source": "https://en.wikipedia.org/wiki/Soviet_submarine_K-129_(1960)"
   },
   {
-   "n": 14,
+   "n": 17,
    "year": 1968,
    "place": "Azores",
    "text": "USS Scorpion lost with nuclear torpedoes",
@@ -164,7 +197,7 @@
    "date_source": "https://en.wikipedia.org/wiki/USS_Scorpion_(SSN-589)"
   },
   {
-   "n": 15,
+   "n": 18,
    "year": 1973,
    "place": "Washington",
    "text": "US forces go to DEFCON 3",
@@ -175,7 +208,7 @@
    "date_source": "https://nsarchive2.gwu.edu/NSAEBB/NSAEBB98/press.htm"
   },
   {
-   "n": 16,
+   "n": 19,
    "year": 1979,
    "place": "Sverdlovsk, USSR",
    "text": "Anthrax escapes bioweapons plant",
@@ -186,7 +219,7 @@
    "date_source": "https://en.wikipedia.org/wiki/Sverdlovsk_anthrax_leak"
   },
   {
-   "n": 17,
+   "n": 20,
    "year": 1979,
    "place": "NORAD",
    "text": "Exercise data shows mass Soviet attack",
@@ -197,7 +230,7 @@
    "date_source": "https://nsarchive2.gwu.edu/nukevault/ebb371/"
   },
   {
-   "n": 18,
+   "n": 21,
    "year": 1980,
    "place": "NORAD",
    "text": "46-cent chip blamed for phantom missiles",
@@ -208,18 +241,7 @@
    "date_source": "https://nsarchive2.gwu.edu/nukevault/ebb371/"
   },
   {
-   "n": 19,
-   "year": 1980,
-   "place": "Arkansas",
-   "text": "Dropped socket blows up a Titan II",
-   "source": "https://encyclopediaofarkansas.net/entries/titan-ii-missile-explosion-2543/",
-   "date": "1980-09-19",
-   "date_precision": "day",
-   "date_note": "Socket dropped evening of 18 Sep; explosion about 03:00 on 19 Sep 1980.",
-   "date_source": "https://en.wikipedia.org/wiki/1980_Damascus_Titan_missile_explosion"
-  },
-  {
-   "n": 20,
+   "n": 22,
    "year": 1980,
    "place": "N. Dakota",
    "text": "Nuclear-armed B-52 burns for hours",
@@ -230,7 +252,18 @@
    "date_source": "https://nationalinterest.org/node/183210"
   },
   {
-   "n": 21,
+   "n": 23,
+   "year": 1980,
+   "place": "Arkansas",
+   "text": "Dropped socket blows up a Titan II",
+   "source": "https://encyclopediaofarkansas.net/entries/titan-ii-missile-explosion-2543/",
+   "date": "1980-09-19",
+   "date_precision": "day",
+   "date_note": "Socket dropped evening of 18 Sep; explosion about 03:00 on 19 Sep 1980.",
+   "date_source": "https://en.wikipedia.org/wiki/1980_Damascus_Titan_missile_explosion"
+  },
+  {
+   "n": 24,
    "year": 1983,
    "place": "USSR",
    "text": "Petrov calls 5 'launches' a false alarm",
@@ -241,7 +274,7 @@
    "date_source": "https://en.wikipedia.org/wiki/1983_Soviet_nuclear_false_alarm_incident"
   },
   {
-   "n": 22,
+   "n": 25,
    "year": 1983,
    "place": "Europe",
    "text": "Able Archer exercise alarms Moscow",
@@ -252,7 +285,7 @@
    "date_source": "https://en.wikipedia.org/wiki/Able_Archer_83"
   },
   {
-   "n": 23,
+   "n": 26,
    "year": 1995,
    "place": "Norway",
    "text": "Rocket alert activates Yeltsin's briefcase",
@@ -263,7 +296,7 @@
    "date_source": "https://en.wikipedia.org/wiki/Norwegian_rocket_incident"
   },
   {
-   "n": 24,
+   "n": 27,
    "year": 2007,
    "place": "USA",
    "text": "B-52 flies 6 nuclear missiles unawares",
@@ -274,7 +307,7 @@
    "date_source": "https://en.wikipedia.org/wiki/2007_United_States_Air_Force_nuclear_weapons_incident"
   },
   {
-   "n": 25,
+   "n": 28,
    "year": 2010,
    "place": "Wyoming",
    "text": "50 ICBMs lose contact for 45 minutes",
@@ -285,7 +318,18 @@
    "date_source": "https://www.globalsecurity.org/wmd/library/news/usa/2010/usa-101027-afps01.htm"
   },
   {
-   "n": 26,
+   "n": 29,
+   "year": 2018,
+   "place": "Hawaii",
+   "text": "False missile alert: 38 min to correct",
+   "source": "https://en.wikipedia.org/wiki/2018_Hawaii_false_missile_alert",
+   "date": "2018-01-13",
+   "date_precision": "day",
+   "date_note": "Alert sent 08:07-08:08 HST, 13 Jan 2018; the correction came 38 minutes later.",
+   "date_source": "https://en.wikipedia.org/wiki/2018_Hawaii_false_missile_alert"
+  },
+  {
+   "n": 30,
    "year": 2022,
    "place": "Pakistan",
    "text": "Unarmed Indian missile fired by accident",
@@ -296,7 +340,7 @@
    "date_source": "https://www.armscontrol.org/act/2022-04/news/india-accidentally-fires-missile-pakistan"
   },
   {
-   "n": 27,
+   "n": 31,
    "year": 2025,
    "place": "India–Pakistan",
    "text": "Nuclear-armed rivals trade strikes",
@@ -307,7 +351,7 @@
    "date_source": "https://www.armscontrol.org/node/14664"
   },
   {
-   "n": 28,
+   "n": 32,
    "year": 2025,
    "place": "Poland",
    "text": "NATO jets down Russian drones",
@@ -318,7 +362,7 @@
    "date_source": "https://www.armscontrol.org/act/2025-10/news/nato-downs-russian-drones-over-poland"
   },
   {
-   "n": 29,
+   "n": 33,
    "year": 2026,
    "place": "Mideast",
    "text": "AI error nearly boards Chinese ship (rptd)",
@@ -331,7 +375,7 @@
    "date_source": "https://www.cnn.com/2026/09/18/politics/us-military-ai-false-intelligence-china-ship"
   },
   {
-   "n": 30,
+   "n": 34,
    "year": 2026,
    "place": "Arabian Sea",
    "text": "Indian and Pakistani warships collide",

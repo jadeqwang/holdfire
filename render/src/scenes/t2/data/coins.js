@@ -2,8 +2,8 @@
 // Adapted from take one's coins.js (render/src/scenes/signal/coins.js): same engraved gold coin, same faces.
 //
 // t2_coins (1:48.00-1:50.61): straight down over a 10 x 10 grid. A hundred coins flip and land HEADS, faster and faster, in
-//   reading order. The first 46 are stamped, in date order: the 30 years of the fact-checked list (render/data/t2/nearmisses.json)
-//   and the 16 known close calls that list leaves out (UNVALIDATED below: take one's entries it did not carry over, incl. the
+//   reading order. The first 46 are stamped, in date order: the 34 years of the fact-checked list (render/data/t2/nearmisses.json)
+//   and the 12 known close calls that list leaves out (UNVALIDATED below: take one's entries it did not carry over, incl. the
 //   two disputed ones the plan dropped), which carry a small "?" under the year and a duller patina. 46 of 100: paused, the
 //   grid reads "nearly halfway". The rest carry no year (the true number is unknown). The odds type across the bottom on teletype mono:
 //   1 / 1,267,650,600,228,229,401,496,703,205,376 (= 2^100, computed with BigInt). Ends on the still grid.
@@ -33,11 +33,10 @@ let three = null;
 // not re-validated for take two (nm03 Suez 1956 and nm18 Okinawa 1962 are the two disputed ones the plan dropped; nm32 is
 // Chernobyl, a civil disaster). docs/take2/LYRICS.md, "The coins".
 export const UNVALIDATED = [
-  ['nm02', '1956-07-27'], ['nm03', '1956-11-05'], ['nm04', '1957-05-22'], ['nm07', '1958-03-11'], ['nm10', '1961-03-14'],
-  ['nm11', '1961-07-04'], ['nm12', '1961-11-24'], ['nm17', '1962-10-27'], ['nm18', '1962-10-28'], ['nm19', '1962-10-28'],
-  ['nm20', '1964-01-13'], ['nm21', '1965-12-05'], ['nm32', '1986-04-26'], ['nm33', '1986-10-03'], ['nm34', '1991-08-18'],
-  ['nm38', '2018-01-13'],
-];
+  ['nm02', '1956-07-27'], ['nm03', '1956-11-05'], ['nm04', '1957-05-22'], ['nm10', '1961-03-14'], ['nm11', '1961-07-04'],
+  ['nm17', '1962-10-27'], ['nm18', '1962-10-28'], ['nm19', '1962-10-28'], ['nm20', '1964-01-13'], ['nm32', '1986-04-26'],
+  ['nm33', '1986-10-03'], ['nm34', '1991-08-18'],
+];   // 29 Oct 2026: nm07 Mars Bluff, nm12 the SAC relay, nm21 Ticonderoga and nm38 Hawaii moved into the fact-checked list
 // the stamped coins in date order: {year, v (validated)}; the atlas holds 62 tiles (stamps + plain heads + tails)
 const stamps = () => [
   ...listNow().entries.map((x) => ({ date: x.date, year: String(x.year), v: true })),

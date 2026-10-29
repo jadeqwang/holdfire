@@ -242,7 +242,7 @@ Sources: the full score from RamaChess; moves 11 to 21 from Tal's annotated scor
 
 Take one's list had 39 entries. All 39 were checked against the National Security Archive, the Union of Concerned Scientists, Chatham House's Too Close for Comfort (2014), the Atomic Heritage Foundation and the original reports. 20 were right as written, 15 needed a fix, and 4 are disputed. Two of the disputed ones are left off: the 1956 Suez "swans" alarm (thinly sourced, and it names NORAD, which did not exist yet) and the 1962 Okinawa launch order (one witness, rejected publicly by ten crewmates). Four entries were added to fill gaps: a US submarine (Scorpion, 1968), the 1980 Grand Forks B-52 fire, the May 2025 India–Pakistan strikes, and the 1979 Sverdlovsk anthrax leak, so the list and the outro's reset counter cover more than nuclear weapons.
 
-**How it plays.** The list scrolls on teletype paper from 1:42.99 to 1:47.98, about six or seven lines a second (30 entries), so it reads as texture and pays off when paused. Years are big; place and description are small. The running total climbs with the entries, then its digits keep rolling without settling as the coins start, because the real total is unknown. Don't show "39" or any fixed total. The first 30 coins in the coin shot carry these years, and the outro's reset counter snaps to zero on each of them.
+**How it plays.** The list scrolls on teletype paper from 1:42.99 to 1:47.98, about seven lines a second (34 entries), so it reads as texture and pays off when paused. Years are big; place and description are small. The running total climbs with the entries, then its digits keep rolling without settling as the coins start, because the real total is unknown. Don't show "39" or any fixed total. The first 34 coins in the coin shot carry these years, and the outro's reset counter snaps to zero on each of them.
 
 **Corrections to take one that matter on screen:**
 
@@ -291,6 +291,8 @@ Take one's list had 39 entries. All 39 were checked against the National Securit
 | 2026 | Arabian Sea | Indian and Pakistani warships collide | Bloomberg, 16 Sep 2026; Japan Times, 17 Sep 2026; The Diplomat (15 Sep 2026; both governments protested; no ship names on screen) |
 
 27 Oct: three entries added at Jade's request; see docs/research/nearmiss_update_2026-10.md. The list is now 30 entries; the 15 Sep 2026 collision is the last reset on the outro counter.
+
+29 Oct: four of take one's entries restored at Jade's request, after the holdfire.cc page's research surfaced them: Mars Bluff (11 Mar 1958, "Coreless A-bomb hits a family's yard"), the SAC relay failure (24 Nov 1961, "One relay fails; SAC loses all its radars"), Ticonderoga (5 Dec 1965, "H-bomb jet rolls off a carrier, lost") and Hawaii (13 Jan 2018, "False missile alert: 38 min to correct"). The list is now 34 entries; the film's list as it prints, with dates and the differences from the site, is docs/research/film_nearmiss_list.md.
 
 Kyshtym is the one disaster included, because it was a plant making plutonium for bombs. Chernobyl fits "disaster" in the lyric but has no weapons link; if you want it, swap out 2010 Wyoming. The 2025 line is the most recent and the most political; it states only that two nuclear-armed states exchanged strikes (7 to 10 May 2025). It is also the last reset on the outro counter.
 

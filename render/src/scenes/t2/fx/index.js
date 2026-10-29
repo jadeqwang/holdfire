@@ -11,5 +11,6 @@ import t2_endcard from './endcard.js';
 import t2_contact from './contact.js';
 import t2_signal_link from './signallink.js';
 import t2_rewind_console from './rewind.js';
+import t2_labels from './labels.js';
 
-export const SCENES = { t2_first, t2_seed_spiral, t2_spiral_trace, t2_tower_bursts, t2_chain_links, t2_mirror, t2_endcard, t2_contact, t2_signal_link, t2_rewind_console };
+export const SCENES = { t2_first, t2_seed_spiral, t2_spiral_trace, t2_tower_bursts, t2_chain_links, t2_mirror, t2_endcard, t2_contact, t2_signal_link, t2_rewind_console, t2_labels };

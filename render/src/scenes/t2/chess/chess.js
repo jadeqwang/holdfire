@@ -19,7 +19,8 @@
 // Recommended look: CHESS_LOOK (no tone map: the colours are authored display-referred; the dive needs tonemap 0, bloom 0).
 import * as THREE from 'three';
 import { buildGeometries, linkGeometry, PROFILES, QUEEN_BALLS, HEIGHT } from './pieces.js';
-import { GAME } from './pgn.js';
+import { GAME, sqOf } from './pgn.js';
+import { drawTag, LABEL_COL } from '../fx/labels.js';
 import { buildSchedule } from './schedule.js';
 import { boardState, sqPos, FALL, carriedPose, tossPose } from './state.js';
 import { cameraAt, cameraFx, CLOCK_POS, SHEET_POS } from './camera.js';
@@ -731,6 +732,31 @@ function drawImpl(ctx, shot, t, lt, p) {
     r.autoClear = false; r.render(G.scene, cam); r.autoClear = true;
     if (needPost) postPass(e, st, sp, imp, t, cam);
     if (hands.length) drawHands(e, hands, cam, G.v, p.handLook || {});
+    if (p.tags) drawPieceTags(e, p.tags, st, cam, t);
+}
+
+// part two D ("our and their"): tags by a piece from each player's view while the board sets itself (p.tags: [{sq (the piece's
+// square in the start position), lines, side ('jade'|'teal': whose piece), t0, t1, slot (0, 1: stacked upward over its head)}]),
+// stamped in on twos, drawn with the label renderer (fx/labels.js), only while the piece is on screen
+function drawPieceTags(e, tags, st, cam, t) {
+  const tq = Math.floor(t * 12 + 1e-3) / 12;
+  const c = e.c2dBegin(); let drew = false;
+  for (const g of tags) {
+    if (tq < g.t0 || tq > g.t1) continue;
+    const id = GAME.boards[0][sqOf(g.sq)], ps = st.pieces.find((o) => o.id === id);
+    if (!ps || !ps.visible) continue;
+    G.v.set(ps.pos[0], ps.pos[1] + HEIGHT[ps.type] * ps.scale[1] + 0.25, ps.pos[2]).project(cam);
+    if (G.v.z > 1 || Math.abs(G.v.x) > 1.05 || G.v.y < -1.05) continue;
+    const h = g.h ?? 40, slot = g.slot || 0, headY = (0.5 - G.v.y * 0.5) * 1080;
+    let x = (G.v.x * 0.5 + 0.5) * 1920, y = headY - h * 1.1 - slot * h * 1.9;
+    // a close-up puts the head at (or past) the frame's top: both tags come down beside the piece instead (same stacking order)
+    if (headY - h * 1.1 - h * 1.9 < 70 + h) { y = Math.max(70 + h, headY + h) + (1 - slot) * h * 1.9; x += h * 5.2; }
+    const a = Math.min(clamp((tq - g.t0) / 0.1), clamp((g.t1 - tq) / 0.15));
+    c.save(); c.translate(x, y);
+    drawTag(c, g.lines, h, LABEL_COL[g.side], a, true);
+    c.restore(); drew = true;
+  }
+  if (drew) e.blit2d('over', 0.9);
 }
 
 function postPass(e, st, sp, imp, t, cam) {

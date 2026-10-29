@@ -831,9 +831,14 @@ export function buildTimeline(A) {
   const setN = [1, 2, 4, 7, 12];
   // t2_chess sets the board from its own schedule (scenes/t2/chess/schedule.js: 1, 1, 2, 3, 5 pieces on the shouts, the other 20
   // on "Counting on you!"); cam 'auto' cuts on each shout to the angle that frames the pieces landing
-  for (let i = 0; i < 5; i++) S(i === 0 ? '2:19.11' : null, hit('post_chorus_2', 5 + i), { scene: 't2_chess', p: { mode: 'set', cam: 'auto' }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.3, 0.06)),
+  // part two D: as the board sets itself each king gets a tag from each player's view, colour = whose king, one per shout (the 3 words
+  // a second limit): Jade's king OUR KING, then teal-tips' OUR KING, then each is also THEIR DESPOT; gone by the sit-down (X213)
+  const setEnd = wd('X2', 3, 'on').t - 0.06;
+  const SET_TAGS = [{ sq: 'e1', lines: ['OUR KING'], side: 'jade', t0: x2h[5].t, t1: setEnd }, { sq: 'e8', lines: ['OUR KING'], side: 'teal', t0: x2h[6].t, t1: setEnd },
+    { sq: 'e1', lines: ['THEIR DESPOT'], side: 'jade', t0: x2h[7].t, t1: setEnd, slot: 1 }, { sq: 'e8', lines: ['THEIR DESPOT'], side: 'teal', t0: x2h[8].t, t1: setEnd, slot: 1 }];
+  for (let i = 0; i < 5; i++) S(i === 0 ? '2:19.11' : null, hit('post_chorus_2', 5 + i), { scene: 't2_chess', p: { mode: 'set', cam: 'auto', tags: SET_TAGS }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.3, 0.06)),
     want: `A chessboard sets itself: pieces slam down from above (${setN[i]} on the board)` });
-  S('2:22.19', wd('X2', 3, 'counting'), { scene: 't2_chess', p: { mode: 'set', cam: 'auto' }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.5, 0.08)), want: '"Counting on you!" lands the rest of the pieces' });
+  S('2:22.19', wd('X2', 3, 'counting'), { scene: 't2_chess', p: { mode: 'set', cam: 'auto', tags: SET_TAGS }, method: 'procedural', era: ERA.chess, look: withLook(CHESS_LOOK, flash([1, 1, 1], 0.5, 0.08)), want: '"Counting on you!" lands the rest of the pieces' });
   // chess reviewer: the plate's analog clock stood on the board's far edge = White's left (Jade and White are on the left of frame), with
   // dials that were not a 1+0 start; it is painted out and the procedural clock is drawn on the near edge (White's right), seen from
   // behind as this camera must see it, orange button on Jade's side, teal on teal-tips' (tools/t2/chess_x213_clock.py)

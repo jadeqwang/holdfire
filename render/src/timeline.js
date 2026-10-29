@@ -598,9 +598,13 @@ export function buildTimeline(A) {
   // adversary pass (item 2): her room cold and hard (COLD_P: cooler, deeper blacks), and on her monitor bank a target track in red
   // alert that ends on Jade's dish field (C101's plate, Jade in the reticle): before she has done anything she is watching Jade's side
   const COLD_P = { exposure: 0.9, contrast: 1.18, sat: 0.6, tint: [0.82, 0.95, 1.16], lift: [-0.02, -0.012, 0.0] };
+  // Jade (RC8 note): the 1420 MHz arm patch read too white against the cold-lit sleeve; toned to the sleeve's own white around it
+  // (per-channel sleeve / patch medians over every plate frame), tracked by template match in plate px (layer.js fix 'tone')
+  const PATCH_TONE = {   // (P106's patch is below its 1.3x frame)
+    P105: { mode: 'tone', r: [33, 45], col: [0.732, 0.78, 0.799], track: [[0, 1175, 901], [4, 1174, 899], [8, 1174, 890], [12, 1174, 897], [16, 1175, 900], [20, 1175, 900], [24, 1174, 899], [28, 1174, 899], [32, 1175, 900], [36, 1175, 901], [40, 1175, 900], [44, 1175, 900], [48, 1175, 900], [52, 1174, 899], [56, 1173, 898], [60, 1172, 897], [64, 1173, 897], [68, 1173, 897], [72, 1174, 897], [76, 1174, 897], [80, 1174, 897], [84, 1174, 897], [88, 1174, 897], [92, 1175, 897], [96, 1175, 899]] } };
   const P105_SCREENS = [{ quad: [[1607, 354], [1848, 126], [1950, 500], [1700, 638]], mirror: true, alert: true, feed: 'work/plates/C101/f_00040.jpg', feedAt: [0.48, 0.66], code: '0217', brg: '270' },
     { quad: [[1362, 487], [1582, 372], [1658, 642], [1406, 690]], mirror: true, alert: true, range: 0.6, code: '0217', brg: '270' }];
-  S('0:46.02', hearT, { ...over(plate({ grade: COLD_P }), { scene: 't2_contact', p: { screens: P105_SCREENS, gain: 1.4 } }), method: 'seedance_sung', era: ERA.room, look: LK.room,
+  S('0:46.02', hearT, { ...over(plate({ grade: { ...COLD_P, fix: [PATCH_TONE.P105] } }), { scene: 't2_contact', p: { screens: P105_SCREENS, gain: 1.4 } }), method: 'seedance_sung', era: ERA.room, look: LK.room,
     want: 'First sight of teal-tips Jade in her own (mirrored, cold) control room, headphones on, singing; on her monitor bank a target track in red alert ends on Jade\'s dish field' });
   // P106 (Jade: "both of them are singing 'we're awake'"): P105 sings "we're" up to the cut, so P106 starts on w2's own held, wide
   // "-WAKE" (take frame 72, eyes already open: the cut opens them on "awake") instead of its "a" + "w" (frames 57-71, which played a

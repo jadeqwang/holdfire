@@ -51,12 +51,12 @@ export const PLAN = [
     V122: { x: 1385, y: 330, align: 'right', maxW: 380, br: [1, 3] },
     V123: { style: 'riso', size: 64, inks: [INK.paper, INK.orange], x: 960, y: 905, align: 'center', maxW: 760, br: [3] } } },
   // ---------------------------------------------------------------- PRE-CHORUS 1: riso type on the signal prints
-  { n: 7, style: 'riso', size: 66, inks: [INK.paper, INK.orange], x: 960, y: 830, align: 'center', maxW: 820, br: [3] },
+  { n: 7, style: 'riso', size: 60, inks: [INK.paper, INK.orange], x: 960, y: 830, align: 'center', maxW: 1100, br: [4] },   // two lines (Jade, RC8 note): A CHORD THAT'S SEARCHING / THROUGH THE FOG
   { n: 8, style: 'riso', size: 68, inks: [INK.paper, INK.violet], mis: [5, 4], x: 960, y: 880, align: 'center', maxW: 820, br: [3] },
   { n: 9, style: 'light', size: 86, col: GOLD, shade: 0.8, x: 960, y: 900, align: 'center', italic: false },
   { n: 10, style: 'light', size: 72, col: [0.96, 0.9, 0.78], shade: 0.8, x: 960, y: 1010, align: 'center', maxW: 1000, flare: false },
   // WE'RE AWAKE is the edit's hero: "Hear it, and you'll know" glows on the dark window glass beside her
-  { n: 11, style: 'crt', size: 66, col: '#9fe8ff', x: 508, y: 330, align: 'left', maxW: 250, br: [2, 4] },
+  { n: 11, style: 'crt', size: 62, col: '#9fe8ff', x: 470, y: 330, align: 'left', maxW: 420, br: [3] },   // two lines (Jade, RC8 note): Hear it and / you'll know, left of her hair
   // ---------------------------------------------------------------- CHORUS 1: light in the sky, the screens
   { n: 12, style: 'light', size: 80, col: GOLD, shade: 2, x: 548, y: 405, align: 'left', maxW: 560, br: [5] },             // in the dark sky left of the Milky Way, under the hero and off the core (polish 4)
   { n: 13, style: 'engrave', size: 62, x: 770, y: 400, align: 'right', maxW: 620, br: [4, 6] },    // the record's own legend, beside the disc

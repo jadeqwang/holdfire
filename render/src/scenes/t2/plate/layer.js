@@ -77,6 +77,16 @@ function build(e) {
           col = mix(col, fixB[i].rgb, ink);
           continue;
         }
+        if (fixB[i].w > 5.5) {
+          // tone (Jade, RC8 note: P105/P106's 1420 MHz patch read brighter than the sleeve it is sewn on once her room went cold):
+          // everything inside the ellipse (turned by rot) is scaled by col, per channel, with a soft edge; the paper takes the
+          // sleeve's white, and the ring and lettering, already dark, barely move
+          vec2 dt = (rot(fixC[i].z) * (ipx - fixA[i].xy)) / fixA[i].zw;
+          float mt = 1. - smoothstep(.9, 1.06, length(dt));
+          if (mt <= 0.) continue;
+          col = mix(col, col * fixB[i].rgb, mt);
+          continue;
+        }
         if (fixB[i].w > 4.5) {
           // neutral (adversary pass, BU04): the alarm-red cast lifted off a surface (the jog wheel's platter) inside the ellipse: its
           // low-saturation pixels take col at their own luma, saturated ones (her fingers) are left alone
@@ -139,6 +149,7 @@ function build(e) {
 //     the plate's letters lifted out, lines [{text, y, w, h}] (disc units, y down; default 1420 / MHz) laid in, in col (the ink).
 //     'neutral': inside the ellipse r, pixels under satMax (0.42) saturation take col at their luma (a red cast lifted off metal;
 //     saturated pixels, e.g. skin, kept).
+//     'tone': everything inside the ellipse r (rot) is multiplied by col per channel (a patch toned down to the cloth around it).
 function fixAt(F, f) {
   let c = F.c || [0, 0], r = F.r ?? 10;
   const K = F.track;
@@ -157,7 +168,7 @@ function fixAt(F, f) {
   }
   const rr = Array.isArray(r) ? r : [r, r];
   const c0 = F.mode === 'neutral' ? (F.satMax ?? 0.42) : (F.core || 0);
-  return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3, patch: 4, neutral: 5 })[F.mode] || 1], [c0, F.glow || 0, a, 0]];
+  return [[c[0], c[1], rr[0], rr[1]], [...(F.col || [1, 1, 1]), ({ dot: 1, iris: 2, erase: 3, patch: 4, neutral: 5, tone: 6 })[F.mode] || 1], [c0, F.glow || 0, a, 0]];
 }
 // the 'patch' lettering: lines of type set in the unit disc (y down), white on transparent, one texture per text (cached)
 const patchTex = new Map();

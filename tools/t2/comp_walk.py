@@ -60,7 +60,8 @@ def main(ids):
             B = B[:, :1920] * (1 - fr) + B[:, 1:1921] * fr
             c = B * (1 - a[..., None]) + w * a[..., None]
             cv2.imwrite(os.path.join(out, f'f_{k:05d}.jpg'), np.clip(c, 0, 255).astype(np.uint8), [cv2.IMWRITE_JPEG_QUALITY, 93])
-        meta = {'fps': 24.0, 'n': N, 'w': 1920, 'h': 1080, 'src': WALK, 'start': t0, 'dur': N / 24, 'fit': 'cover', 'kind': 'video', 'key': None,
+        # 'start' is plate time (the renderer offsets the pick's in by it); where the walk starts in the take is take_start
+        meta = {'fps': 24.0, 'n': N, 'w': 1920, 'h': 1080, 'src': WALK, 'start': 0.0, 'take_start': t0, 'dur': N / 24, 'fit': 'cover', 'kind': 'video', 'key': None,
                 'comp': f'tools/t2/comp_walk.py: {bgf} scrolling {SPEED:g} px/s from x {X0}, walk keyed x{S} to ({AX}, {AY})'}
         json.dump(meta, open(os.path.join(out, 'meta.json'), 'w'), indent=1)
         print(sid, N, 'frames ->', out)

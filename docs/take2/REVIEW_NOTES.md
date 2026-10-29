@@ -428,3 +428,11 @@ the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest r
   ($1.33): each lengthens the last wedge, then presses again ~250 px back along the row. An end frame for a first/last-frame take
   (Seedance 2.0) was tried ($0.13): it reframed the tablet and spaced the new wedge like the row, so it was not used. Spend on the
   last-two-strokes fix: $3.86 (`takes_g6.json`). The shot is unchanged; next options are with Jade.
+
+## Jade's notes on RC11 (29 Oct)
+- **0:22.2, frames that do not move:** my error in the rebuilt walk plates: their meta.json carried the walk's start in the take
+  (0.4 / 1.046 s) as `start`, which the renderer subtracts from the pick's `in`, so V108 held its first frame for 0.4 s and V109
+  for its whole length. `comp_walk.py` now writes `start: 0` (the take time is `take_start`); RC12 re-renders V108-V109, which now
+  change on twos like V110. A scan of RC12 against RC4 for still stretches finds nothing else new (the Gauld frames hold by design).
+- **0:25.9, the tablet:** Jade marked the film's current shot usable on the takes page (https://claude.ai/artifact/J2CUxfEiXyFGSvaEDLT8Zs),
+  so V113 stays as it is.

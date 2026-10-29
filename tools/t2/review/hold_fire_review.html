@@ -278,7 +278,7 @@ button { font: inherit; color: inherit; }
     </section>
 
     <section id="p-eye" role="tabpanel" aria-labelledby="tab-eye" hidden>
-      <p class="unfinished"><b>New in v14 (RC9):</b> the lyric at 0:36 and the readout at 0:47 on two lines; her arm patch at 0:46 toned to the sleeve; the king tags at 2:21 in the speaker’s colour; the end card credits Tom Gauld and Andrey Gorlin. <b>From v13 (RC8):</b> at 0:57 each one’s displays read OUR RESOLVE over her own BEFORE THEY DO graph and THEIR PROPAGANDA over the other’s; at the glass THEIR PROPAGANDA is one of the names that peel off. <b>From v12 (RC7):</b> part two, “our and their”: the same thing gets the opposite name across the wall. Labels in the owner’s colour, worded by whoever is speaking: the room monitors (LISTENING POST / SPY STATION and more), Petrov’s THEIR FIRST STRIKE struck through, B-59’s OUR SIGNAL / THEIR ATTACK, OUR KING / THEIR DESPOT on the chess set, the post-chorus as Tom Gauld’s two identical framed pictures (OUR RADAR / THEIR TARGETING, the BEFORE THEY DO posters, OUR DETERRENT under both), the names peeling off at the glass and OUR once over both. <b>From v11:</b> the chess clocks at the moves’ pace, tenths only under 20 s, the Qxg7 hand holding its pawn. <b>From v10:</b> teal-tips as the other side, the walls and warm/cold rooms. <b>Note:</b> this preview splices the changed shots into RC4’s frames; the counter reads 42.</p>
+      <p class="unfinished"><b>New in v15 (RC10):</b> the lyrics at 0:19, 0:33 and 0:53 on fewer, longer lines. <b>From v14 (RC9):</b> the lyric at 0:36 and the readout at 0:47 on two lines; her arm patch at 0:46 toned to the sleeve; the king tags at 2:21 in the speaker’s colour; the end card credits Tom Gauld and Andrey Gorlin. <b>From v13 (RC8):</b> at 0:57 each one’s displays read OUR RESOLVE over her own BEFORE THEY DO graph and THEIR PROPAGANDA over the other’s; at the glass THEIR PROPAGANDA is one of the names that peel off. <b>From v12 (RC7):</b> part two, “our and their”: the same thing gets the opposite name across the wall. Labels in the owner’s colour, worded by whoever is speaking: the room monitors (LISTENING POST / SPY STATION and more), Petrov’s THEIR FIRST STRIKE struck through, B-59’s OUR SIGNAL / THEIR ATTACK, OUR KING / THEIR DESPOT on the chess set, the post-chorus as Tom Gauld’s two identical framed pictures (OUR RADAR / THEIR TARGETING, the BEFORE THEY DO posters, OUR DETERRENT under both), the names peeling off at the glass and OUR once over both. <b>From v11:</b> the chess clocks at the moves’ pace, tenths only under 20 s, the Qxg7 hand holding its pawn. <b>From v10:</b> teal-tips as the other side, the walls and warm/cold rooms. <b>Note:</b> this preview splices the changed shots into RC4’s frames; the counter reads 42.</p>
       <p class="hint">Things to check in this cut. Each one starts 2 seconds before the moment.</p>
       <ul class="list eye" id="eye"></ul>
     </section>
@@ -292,7 +292,7 @@ button { font: inherit; color: inherit; }
   'use strict';
   // ---------------------------------------------------------------- this cut
   // One cut at a time. To publish v3: re-encode into media/, update VERSION, SEGS and FILM_LEN. Notes keep the version they were made on.
-  const VERSION = 'v14 · RC9 · 29 Oct · 540p';
+  const VERSION = 'v15 · RC10 · 29 Oct · 540p';
 
   // ---------------------------------------------------------------- film data
   // media/init.mp4 + media/s000.mp4 … s041.mp4: fMP4 HLS, H.264 main (no B-frames), keyframe at every 6 s segment start, AAC copied from the cut.
@@ -326,6 +326,9 @@ button { font: inherit; color: inherit; }
 
   // Eyeball list: [moment (s), label, what to look at]. Each jump starts 2 s before.
   const EYE = [
+    [18.9, '0:18.9', 'FIN INTO FOOT INTO HAND / WE WERE YOUNG on two lines.'],
+    [32.6, '0:32.6', 'Snowflake in the / boundless night on two lines.'],
+    [52.5, '0:52.5', 'CAN’T BE SURE, then anyone is there on one line.'],
     [35.5, '0:35.5', 'The lyric on two lines: A CHORD THAT’S SEARCHING / THROUGH THE FOG.'],
     [46.0, '0:46.0', 'Hear it and / you’ll know on two lines; the 1420 MHz patch now the shade of her sleeve.'],
     [139.1, '2:19.1', 'The king tags in the speaker’s colour: White’s OUR KING orange, THEIR DESPOT teal; Black’s the other way round.'],

@@ -410,3 +410,9 @@ the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest r
   none with two presses where the 9's last two wedges are (about 10 px apart, the tall one 17 px higher). The nearest: q1, a real
   double tap but both presses within ~5 px, and already pressing at its first frame; t1 reversed is one touch that drifts 7 px.
   The shot is unchanged (still the sixties wedge, then the 9's last wedge). Options are with Jade.
+
+## Jade's notes on RC9 (29 Oct)
+- **0:19.7:** FIN INTO FOOT INTO HAND / WE WERE YOUNG (n3) on two lines, 52 px, right-aligned at x 790, left of the raised hand.
+- **0:33.7:** Snowflake in the / boundless night (n6 on V122) on two lines, left-aligned at x 1130 in the sky right of her.
+- **0:53.7:** "anyone is there" (n12) on one line under CAN'T BE SURE; "that" is dropped, as Jade allowed.
+- Preview RC10 (review page v15): 0:18.1–0:22.8, 0:32.6–0:33.7 and 0:51.8–0:54.3 re-rendered and spliced over RC9's sources.

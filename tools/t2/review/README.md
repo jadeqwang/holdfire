@@ -9,3 +9,9 @@ segment; e.g. `ffmpeg -i PREVIEW -c:v libx264 -profile:v main -bf 0 -b:v 1500k -
 "expr:gte(t,n_forced*6)" -c:a copy -f hls -hls_time 6 -hls_playlist_type vod -hls_segment_type fmp4 -hls_fmp4_init_filename
 init.mp4 -hls_segment_filename media/s%03d.mp4 media/film.m3u8`, then copy film.m3u8 to film.txt), update `VERSION`, `SEGS` in the page, and republish to the same URL in ≤ 64 MB batches (page + init + first half,
 then the rest). Read Jade's notes back with the ArtifactData tool (`list` on `notes`).
+
+## Tablet takes (0:25.9)
+`tablet_takes.html`: every generated V113 take for the last-two-strokes fix, each frame-steppable with its tip area enlarged, with
+Claude's measurements and a usable / maybe / no mark per take saved in the artifact's `db` (collection `verdicts`, one document
+per take id). Published at https://claude.ai/artifact/J2CUxfEiXyFGSvaEDLT8Zs (private). Media: `tablet_takes_media.sh` writes
+`work/assess/media/` (published under `media/`).

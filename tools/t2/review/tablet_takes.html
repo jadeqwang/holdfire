@@ -1,0 +1,184 @@
+<title>Tablet Strokes Takes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* layout: an editing desk - a header with the question and the target, then one row per take: the take, its tip close-up, the reading and your call */
+:root {
+  --bg: #eef0f1; --surface: #ffffff; --line: #d5d9dc; --fg: #1a1d20; --muted: #5d656c;
+  --one: #e8661a; --two: #13a58c; --ok: #2a8a52; --maybe: #b07c16; --no: #b8433a; --clay: #c4a880;
+  --f-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111315; --surface: #1a1d20; --line: #2c3135; --fg: #e9ecee; --muted: #9aa3aa;
+  --one: #ff7a2a; --two: #3fe0c5; --ok: #4cc27f; --maybe: #e2ad3b; --no: #ef6b5f; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111315; --surface: #1a1d20; --line: #2c3135; --fg: #e9ecee; --muted: #9aa3aa;
+  --one: #ff7a2a; --two: #3fe0c5; --ok: #4cc27f; --maybe: #e2ad3b; --no: #ef6b5f; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.5 var(--f-body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 36px; }
+h1, h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: .01em; text-wrap: balance; margin: 0; line-height: 1.05; }
+h1 { font-size: clamp(34px, 6vw, 56px); }
+h2 { font-size: 30px; }
+p { margin: 0; max-width: 68ch; }
+.muted { color: var(--muted); }
+.mono { font-family: var(--f-mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: center; }
+.head .lede { display: grid; gap: 12px; }
+.target { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 10px; }
+.target img { width: 100%; border-radius: 3px; display: block; }
+.k1 { color: var(--one); font-weight: 600; } .k2 { color: var(--two); font-weight: 600; }
+.group { display: grid; gap: 16px; }
+.group > header { display: grid; gap: 4px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.take { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+.take .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; }
+.take h3 { font-family: var(--f-display); font-weight: 700; font-size: 24px; margin: 0; letter-spacing: .01em; }
+.players { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 8px; align-items: start; }
+.players figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+.players video { width: 100%; max-width: 100%; display: block; background: #000; border-radius: 3px; }
+.players figcaption { font: 12px var(--f-mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.controls { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+button, select { font: 500 13px var(--f-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; cursor: pointer; }
+button:hover, select:hover { border-color: var(--muted); }
+button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--two); outline-offset: 1px; }
+.fc { margin-left: auto; }
+.side { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.side .label { font: 600 11px var(--f-body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.chip { display: inline-block; font: 600 11px var(--f-body); letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; border: 1px solid currentColor; }
+.chip.no { color: var(--no); } .chip.closest { color: var(--maybe); } .chip.current { color: var(--muted); }
+.verdict { display: flex; gap: 6px; flex-wrap: wrap; }
+.verdict button[aria-pressed="true"].v-usable { background: var(--ok); border-color: var(--ok); color: #fff; }
+.verdict button[aria-pressed="true"].v-maybe { background: var(--maybe); border-color: var(--maybe); color: #fff; }
+.verdict button[aria-pressed="true"].v-no { background: var(--no); border-color: var(--no); color: #fff; }
+textarea { width: 100%; box-sizing: border-box; min-height: 64px; font: 14px/1.4 var(--f-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px; resize: vertical; }
+.saved { font: 12px var(--f-mono); color: var(--muted); min-height: 1.2em; }
+details summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+details p { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.stills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stills figure { margin: 0; display: grid; gap: 6px; }
+.stills img { width: 100%; border-radius: 3px; border: 1px solid var(--line); }
+.stills figcaption { font-size: 13px; color: var(--muted); }
+.store { font-size: 13px; color: var(--muted); }
+@media (max-width: 860px) { .head, .take { grid-template-columns: minmax(0, 1fr); } .stills { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) { .players { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <section class="head">
+    <div class="lede">
+      <h1>Does any take press the last two strokes?</h1>
+      <p>At 0:25.9 the scribe's hand should make the count's last two strokes, in order, where the clay shows them: the lower wedge of the 9's fourth column, then the tall wedge after it. At the film's scale they sit about 10 px apart, the second about 17 px higher. Each take below plays with its tip area enlarged; step frame by frame to see where the stylus actually lands.</p>
+      <p class="muted">Mark each take usable, maybe or no. Your marks are saved with the page, so Claude can read them.</p>
+      <p class="store" id="store">Connecting to the page's store…</p>
+    </div>
+    <figure class="target">
+      <img src="media/target_89.png" alt="89 in Babylonian numerals: one vertical wedge, two corner wedges, then the 9 as four columns of two short wedges and one tall wedge. The fourth column's lower wedge is boxed in orange as stroke 1, the tall last wedge in teal as stroke 2.">
+      <p class="mono"><span class="k1">1</span> the 9's fourth-column lower wedge, then <span class="k2">2</span> the tall wedge: 0.25 em right, 0.41 em higher (≈10 px and 17 px in the shot)</p>
+    </figure>
+  </section>
+  <div id="groups"></div>
+  <section class="group">
+    <header><h2>Keyframes</h2><p class="muted">The first frames the takes started from, and the end frame tried for a first-and-last-frame take (not used: it reframed the tablet).</p></header>
+    <div class="stills">
+      <figure><img src="media/kf_kf_V113_nbp_v5_up_ae46d8df4f.jpg" alt="The film's keyframe: the hand and stylus at the end of a row of wedges on the tablet."><figcaption>The film's keyframe (rounds 1 and 2)</figcaption></figure>
+      <figure><img src="media/kf_V113_close_nbp_v1.jpg" alt="The close-up keyframe: the row's end four times larger, the stylus touching the clay."><figcaption>Close-up keyframe ($0.13)</figcaption></figure>
+      <figure><img src="media/kf_V113_close_end_nbp_v1.jpg" alt="The end-frame attempt: the stylus lifted, one more wedge at the row's normal spacing, the tablet reframed."><figcaption>End-frame attempt ($0.13, not used)</figcaption></figure>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = {"takes": [{"g": "now", "id": "film", "title": "In the film now (RC11)", "tag": "RC11 0:25.37\u20130:27.32", "model": "the edit", "cost": "", "note": "The shot as it plays: the plate on twos with the renderer's clay and cuneiform over it.", "reading": "The stylus presses 89's sixties wedge first (0:25.79), then the tall last wedge of the 9 (0:26.96). The last stroke is right; the one before it is out of order.", "mine": "current", "prompt": ""}, {"g": "now", "id": "cur", "title": "The take the film uses", "tag": "t2_V113_veof_t1", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "Raw take, 4 s. The film uses 0.3\u20132.9 s.", "reading": "Two touches, 117 px apart along the row (take frames ~21 and ~49).", "mine": "current", "prompt": ""}, {"g": "r1", "id": "t1", "title": "Round 1 \u00b7 t1", "tag": "t2_V113_veof_2s_t1", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "Same keyframe as the film's take.", "reading": "Rests at the row end (frames 0\u201321), lifts, then lands about 100 px further right (frames 34\u201362) and lifts.", "mine": "no", "prompt": "Continue this exact drawing as one continuous shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. The old hand holds the reed stylus just above the wet clay at the right end of the row of triangular wedges. It presses the tip down once into the clay, making a small wedge just after the last one, lifts the tip a few millimetres, moves it only a tiny step to the right and presses again right beside it, so the two new wedges almost touch. Then the hand lifts the stylus a little and holds still until the end. Exactly two presses. The clay shows only plain triangular wedge impressions: no letters, no symbols, no text. The tablet, the table and the background do not move."}, {"g": "r1", "id": "t1rev", "title": "Round 1 \u00b7 t1 played backwards", "tag": "media/derived/V113_t1rev.mp4", "model": "derived", "cost": "\u2013", "note": "t1 frames 25\u201372 reversed.", "reading": "Reversed it lands, holds, then drifts 7 px left and up before lifting: one touch, not two presses.", "mine": "no", "prompt": ""}, {"g": "r1", "id": "t2", "title": "Round 1 \u00b7 t2", "tag": "t2_V113_veof_2s_t2", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "", "reading": "Rests at the row end and drags the last wedge longer.", "mine": "no", "prompt": "Continue this exact drawing as one continuous shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. The old hand holds the reed stylus just above the wet clay at the right end of the row of triangular wedges. It makes a quick double press in almost the same spot: tap, a tiny lift, tap again a hair to the right, two small wedges side by side at the end of the row. Then the hand lifts the stylus a little and holds still until the end. Exactly two presses. The clay shows only plain triangular wedge impressions: no letters, no symbols, no text. The tablet, the table and the background do not move."}, {"g": "r1", "id": "t3", "title": "Round 1 \u00b7 t3", "tag": "t2_V113_veof_2s_t3", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "", "reading": "Drags one long line across the clay.", "mine": "no", "prompt": "Continue this exact drawing as one continuous shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. The old hand holds the reed stylus just above the wet clay at the right end of the row of triangular wedges. It presses one small wedge into the clay just after the last one, lifts slightly, and presses a second wedge immediately to its right and a little higher, pulling the tip down so the second wedge is longer, the two side by side and nearly touching. Then the hand lifts the stylus a little and holds still until the end. Exactly two presses. The clay shows only plain triangular wedge impressions: no letters, no symbols, no text. The tablet, the table and the background do not move."}, {"g": "r2", "id": "q1", "title": "Round 2 \u00b7 q1", "tag": "t2_V113_veof_2s_q1", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "", "reading": "A real double tap: press (frames 0\u201310), lift (12\u201320), press again (24\u201334), lift. Both presses within about 5 px, at the row end, and it is already pressing at frame 0.", "mine": "closest", "prompt": "Continue this exact drawing as one continuous shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. The reed stylus taps the wet clay twice in quick succession just after the last wedge of the row: it presses the tip down, lifts it barely a millimetre, and presses down again almost exactly where it was, only a tiny step to the right. Two small presses, nearly touching. Then the hand lifts the stylus away and holds still until the end. The clay shows only plain small triangular wedge impressions: no letters, no symbols, no text. The tablet, the table and the background do not move."}, {"g": "r2", "id": "q2", "title": "Round 2 \u00b7 q2", "tag": "t2_V113_veof_2s_q2", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "", "reading": "One long press at the row end.", "mine": "no", "prompt": "Continue this exact drawing as one continuous shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. Like a tiny double tap: tap, tap. The stylus tip pecks the clay twice at one spot just past the end of the row, with the smallest lift between the two pecks; the hand hardly moves. Then the hand lifts the stylus away and holds still until the end. The clay shows only plain small triangular wedge impressions: no letters, no symbols, no text. The tablet, the table and the background do not move."}, {"g": "r2", "id": "q3", "title": "Round 2 \u00b7 q3 (from a hover frame)", "tag": "t2_V113_veof_2s_q3", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "First frame: t1 frame 28, the stylus hovering.", "reading": "Presses once below the row at (927, 642), then moves left and presses the row end at (822, 590): about 105 px apart.", "mine": "no", "prompt": "Continue this exact drawing as one continuous shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. The reed stylus, hovering just above the wet clay, comes down and presses the tip in once, lifts it barely a millimetre, then presses in once more right beside the first press, a tiny step to the right and slightly higher. Two small presses side by side, nearly touching. Then the hand lifts the stylus away and holds still until the end. The clay shows only plain small triangular wedge impressions: no letters, no symbols, no text. The tablet, the table and the background do not move."}, {"g": "c", "id": "c1", "title": "Close-up \u00b7 c1", "tag": "t2_V113c_veof_c1", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "From the close-up keyframe (wedges ~4x).", "reading": "Drags the last wedge longer, lifts, then presses about 250 px back along the row.", "mine": "no", "prompt": "Continue this exact drawing as one continuous close-up shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. The old hand lifts the reed stylus a little, then presses its cut tip down into the smooth clay just right of the last wedge, making one new small wedge; it lifts the tip slightly and presses a second wedge right beside the first, a short step to the right and a little higher, almost touching it. Then the hand lifts the stylus away and holds still. The clay shows only plain wedge impressions: no letters, no symbols, no text. The tablet and the background do not move."}, {"g": "c", "id": "c2", "title": "Close-up \u00b7 c2", "tag": "t2_V113c_veof_c2", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "", "reading": "One press at the row end, then back along the row.", "mine": "no", "prompt": "Continue this exact drawing as one continuous close-up shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. The reed stylus makes two quick presses into the wet clay next to each other at the end of the row: press, a small lift, press again just beside the first press. Two new small wedges side by side, nearly touching. Then the hand lifts the stylus away and holds still. The clay shows only plain wedge impressions: no letters, no symbols, no text. The tablet and the background do not move."}, {"g": "c", "id": "c3", "title": "Close-up \u00b7 c3", "tag": "t2_V113c_veof_c3", "model": "Veo 3.1 Fast", "cost": "$0.40", "note": "", "reading": "Lengthens the last wedge, then presses about 250 px left and lower.", "mine": "no", "prompt": "Continue this exact drawing as one continuous close-up shot: locked-off camera, no zoom, no pan, no cut, the same painted sepia style, light and framing. Slowly and deliberately, the scribe's hand presses the reed into the clay once beside the last wedge, lifts it a few millimetres, moves it a short step to the right and slightly up, and presses once more, so the second wedge sits right next to the first and a little higher. Then the hand lifts the stylus away and holds still. The clay shows only plain wedge impressions: no letters, no symbols, no text. The tablet and the background do not move."}], "groups": {"now": ["The shot now", "What plays at 0:25.9 today, and the take it is built from."], "r1": ["Round 1 \u00b7 same framing", "Three takes from the film's keyframe, asked for two presses side by side."], "r2": ["Round 2 \u00b7 double tap", "Three more, asked for a tap-tap in nearly one spot; q3 starts from a frame where the stylus hovers."], "c": ["Close-up", "A new keyframe pushed in on the row's end so the wedges are about four times larger, and three takes from it."]}};
+const FPS = 24;
+const groupsEl = document.getElementById('groups');
+const ui = {};   // id -> {buttons, note, saved}
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const k of kids) if (k) e.append(k);
+  return e;
+}
+const chipText = { no: 'Claude: no', closest: 'Claude: closest', current: 'in the film' };
+for (const [gid, [gtitle, gsub]] of Object.entries(DATA.groups)) {
+  const sec = el('section', { class: 'group' }, el('header', {}, el('h2', { text: gtitle }), el('p', { class: 'muted', text: gsub })));
+  for (const t of DATA.takes.filter((x) => x.g === gid)) sec.append(card(t));
+  groupsEl.append(sec);
+}
+function card(t) {
+  const full = el('video', { src: `media/${t.id}_full.mp4`, poster: `media/${t.id}_poster.jpg`, preload: 'metadata', muted: '', playsinline: '', loop: '' });
+  const tip = el('video', { src: `media/${t.id}_tip.mp4`, preload: 'metadata', muted: '', playsinline: '', loop: '' });
+  full.muted = tip.muted = true;
+  const fc = el('span', { class: 'mono fc', text: 'frame 0' });
+  const play = el('button', { type: 'button', text: 'Play' });
+  const back = el('button', { type: 'button', text: '◀ 1 frame', 'aria-label': 'Back one frame' });
+  const fwd = el('button', { type: 'button', text: '1 frame ▶', 'aria-label': 'Forward one frame' });
+  const speed = el('select', { id: `speed-${t.id}`, 'aria-label': 'Playback speed' });
+  for (const s of [0.25, 0.5, 1]) { const o = el('option', { value: s, text: s + '×' }); if (s === 0.5) o.selected = true; speed.append(o); }
+  const sync = () => { if (Math.abs(tip.currentTime - full.currentTime) > 0.04) tip.currentTime = full.currentTime; };
+  const frameOf = () => Math.round(full.currentTime * FPS);
+  const show = () => { fc.textContent = `frame ${frameOf()}`; };
+  let raf = 0;
+  const loop = () => { sync(); show(); raf = requestAnimationFrame(loop); };
+  const setRate = () => { full.playbackRate = tip.playbackRate = +speed.value; };
+  setRate();
+  speed.addEventListener('change', setRate);
+  play.addEventListener('click', () => {
+    if (full.paused) { setRate(); full.play().catch(() => {}); tip.play().catch(() => {}); play.textContent = 'Pause'; raf = requestAnimationFrame(loop); }
+    else { full.pause(); tip.pause(); play.textContent = 'Play'; cancelAnimationFrame(raf); tip.currentTime = full.currentTime; show(); }
+  });
+  const step = (d) => { full.pause(); tip.pause(); play.textContent = 'Play'; cancelAnimationFrame(raf);
+    const f = Math.max(0, frameOf() + d); full.currentTime = tip.currentTime = (f + 0.5) / FPS; fc.textContent = `frame ${f}`; };
+  back.addEventListener('click', () => step(-1));
+  fwd.addEventListener('click', () => step(1));
+  full.addEventListener('seeked', show);
+  const players = el('div', {},
+    el('div', { class: 'players' }, el('figure', {}, full, el('figcaption', { text: 'Full frame' })), el('figure', {}, tip, el('figcaption', { text: 'Tip area, enlarged' }))),
+    el('div', { class: 'controls' }, play, back, fwd, speed, fc));
+  const buttons = ['usable', 'maybe', 'no'].map((v) => el('button', { type: 'button', class: `v-${v}`, 'aria-pressed': 'false', text: v[0].toUpperCase() + v.slice(1), 'data-v': v }));
+  const note = el('textarea', { id: `note-${t.id}`, placeholder: 'What you see (optional)', 'aria-label': `Note on ${t.title}` });
+  const saved = el('div', { class: 'saved' });
+  ui[t.id] = { buttons, note, saved };
+  buttons.forEach((b) => b.addEventListener('click', () => save(t.id, { verdict: b.dataset.v === current(t.id) ? null : b.dataset.v })));
+  let timer = 0;
+  note.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(() => save(t.id, { note: note.value }), 700); });
+  const side = el('div', { class: 'side' },
+    el('div', { class: 'meta' }, el('h3', { text: t.title }), el('span', { class: `chip ${t.mine}`, text: chipText[t.mine] })),
+    el('p', { class: 'mono muted', text: [t.tag, t.model, t.cost].filter(Boolean).join(' · ') }),
+    t.note ? el('p', { class: 'muted', text: t.note }) : null,
+    el('div', {}, el('div', { class: 'label', text: 'What Claude measured' }), el('p', { text: t.reading })),
+    t.prompt ? el('details', {}, el('summary', { text: 'Prompt' }), el('p', { text: t.prompt })) : null,
+    el('div', { class: 'label', text: 'Your call' }), el('div', { class: 'verdict' }, ...buttons), note, saved);
+  return el('article', { class: 'take', id: `take-${t.id}` }, players, side);
+}
+// your marks: one document per take in the page's store (verdicts/<take id>)
+let db = null, me = null; const state = {};
+const current = (id) => state[id]?.verdict ?? null;
+function paint(id) {
+  const u = ui[id]; if (!u) return; const s = state[id] || {};
+  u.buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === s.verdict)));
+  if (document.activeElement !== u.note && (s.note ?? '') !== u.note.value) u.note.value = s.note ?? '';
+  u.saved.textContent = s.at ? `Saved ${new Date(s.at).toLocaleString()}` : '';
+}
+async function save(id, patch) {
+  if (!db) { ui[id].saved.textContent = 'Not saved: the page store is unavailable here.'; return; }
+  const next = { ...(state[id] || {}), ...patch, at: new Date().toISOString(), by: me };
+  state[id] = next; paint(id);
+  try { await db.doc(`verdicts/${id}`).set(next); }
+  catch (e) { ui[id].saved.textContent = `Not saved (${e?.code || 'error'}). Your view of this page may be read-only.`; }
+}
+(async () => {
+  const storeEl = document.getElementById('store');
+  try {
+    db = await window.claude?.use?.('db');
+    const user = await window.claude?.use?.('user');
+    me = user ? await user.id().catch(() => null) : null;
+  } catch (e) { db = null; }
+  if (!db) { storeEl.textContent = 'Marks can only be saved when the page is opened signed in on claude.ai.'; return; }
+  storeEl.textContent = 'Marks save as you click.';
+  db.collection('verdicts').onSnapshot((snap) => {
+    for (const d of snap.docs) { state[d.id] = d.data() || {}; paint(d.id); }
+  }, () => { storeEl.textContent = 'The page store stopped responding; reload to keep saving.'; });
+})();
+</script>

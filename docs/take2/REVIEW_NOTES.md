@@ -393,3 +393,20 @@ the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest r
   (left to right: the sixties place, then the tens, then the units). The last two strokes are the 9's last two wedges, about
   10 px apart; the take's two touches are 117 px apart along the row, and its later presses (past the frames the shot uses) are
   20 to 35 px apart, so no pair of this take's touches can make them. Options are with Jade.
+
+## Jade's notes on RC8 (29 Oct)
+- **0:36.5, two lines:** "a chord that's searching through the fog" (n7, riso on the Voyager print) is A CHORD THAT'S SEARCHING /
+  THROUGH THE FOG (the most even break the words allow), 60 px (was 66 in three lines); the first line is ~950 px, a little over
+  the 864 px 4:5 area.
+- **0:47.4, two lines:** the readout "Hear it and you'll know" (n11) is Hear it and / you'll know (was four lines), 62 px, moved
+  left to x 470 so it stays off her hair; WE'RE AWAKE stays the hero above her.
+- **0:47.4, the arm patch:** P105's 1420 MHz patch read whiter than the cold-lit sleeve it is sewn on. New plate fix `tone`
+  (layer.js mode 6): a tracked ellipse multiplied per channel; the gains are the sleeve's own white around the patch over its
+  paper, medians over every plate frame (R 0.73, G 0.78, B 0.80), tracked by template match. P106's patch is below its 1.3x frame.
+- **2:21.3, the king tags:** in the speaker's colour here: White's king OUR KING orange (Jade) and THEIR DESPOT teal (teal-tips);
+  Black's king OUR KING teal and THEIR DESPOT orange. (Elsewhere in part two the colour is whose thing it is.)
+- **Credits:** the end card adds “our” and “their” after a cartoon by Tom Gauld · chess human: Andrey Gorlin (README too).
+- **0:25.9, the last two strokes (option C, not done):** six Veo 3.1 Fast retakes from the V113 keyframe ($2.40; `takes_g6.json`),
+  none with two presses where the 9's last two wedges are (about 10 px apart, the tall one 17 px higher). The nearest: q1, a real
+  double tap but both presses within ~5 px, and already pressing at its first frame; t1 reversed is one touch that drifts 7 px.
+  The shot is unchanged (still the sixties wedge, then the 9's last wedge). Options are with Jade.

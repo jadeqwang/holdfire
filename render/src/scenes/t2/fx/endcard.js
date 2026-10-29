@@ -27,6 +27,7 @@ const SONG = [
     [['and ', 'dim'], ['Variations and Metamorphosis', 'ititle']]],
 ];
 const SMALL = ['Fischer\u2013Tal · Leipzig 1960 · \u00bd\u2013\u00bd   ·   fonts under the SIL Open Font License', 'near-miss sources: National Security Archive, Union of Concerned Scientists,', 'Chatham House, Atomic Heritage Fdn., Arms Control Assn., NPR, CNN, Bloomberg'];   // 850 px at 22 px: fits the 864 px safe width unscaled
+const THANKS = '\u201cour\u201d and \u201ctheir\u201d after a cartoon by Tom Gauld   \u00b7   chess human: Andrey Gorlin';
 // credits.json (tools/t2/credits.py): the models that made the cut, read at render time
 let creditsP = null;
 const creditsJSON = () => (creditsP = creditsP || fetch('data/t2/credits.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
@@ -157,6 +158,10 @@ export default {
     y2 = grid(vids, 'name', y2, 40, T.cIn + T.s16 * 2);
     y2 = grid(imgs, 'name', y2, 40, T.cIn + T.s16 * 3);
     y2 = grid(tools, 'support', y2 + 2, 34, T.cIn + T.s16 * 4);
+    // the people behind two ideas (Jade, 29 Oct): part two's "our and their" labels come from Tom Gauld's cartoon of two identical
+    // sides; Andrey Gorlin's notes made the chess right (the clocks, the hand that presses with the captured piece in it)
+    const a5 = ain(T.cIn + T.s16 * 5);
+    if (a5 > 0) row([[THANKS, 'dim']], y2 + 14, a5);
     const asm = ain(T.beats[2]);
     if (asm > 0) SMALL.forEach((x, i) => row([[x, 'small']], Math.min(Math.max(y2 + 8, 990), 994) + i * 27, asm * 0.9));   // the last small line stays inside the frame
   },

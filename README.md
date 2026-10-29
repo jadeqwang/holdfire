@@ -100,6 +100,7 @@ The card reads:
 > and a supporting cast of models:<br>
 > Seedance 2.5 · Seedance 2.0 · Veo 3.1 · Nano Banana Pro<br>
 > BS-RoFormer · Whisper · Parakeet · GPT-4o Transcribe · Grok STT · MediaPipe · P-Image Upscale<br>
+> “our” and “their” after a cartoon by Tom Gauld · chess human: Andrey Gorlin<br>
 > Fischer–Tal · Leipzig 1960 · ½–½ · fonts under the SIL Open Font License<br>
 > near-miss sources: National Security Archive, Union of Concerned Scientists, Chatham House, Atomic Heritage Fdn.,
 > Arms Control Assn., NPR, CNN, Bloomberg

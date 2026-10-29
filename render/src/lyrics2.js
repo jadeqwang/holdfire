@@ -94,7 +94,7 @@ export const PLAN = [
     'C209,C209b': { x: 470, y: 770, align: 'center', only: [0, 1, 2] },   // adversary pass: Jade's line on her side of the wall (held through teal-tips' switch insert)
     C210: { style: 'light', size: 84, col: GOLD, shade: 0.8, x: 960, y: 230, align: 'center', only: [3, 4, 5, 6] } } },
   // ---------------------------------------------------------------- POST-CHORUS 2
-  { n: 41, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 150, align: 'center', segs: { X206: {} } },   // ends at the cut to the chess board (no lyric over the set-up)
+  { n: 41, style: 'light', size: 86, col: [0.09, 0.08, 0.07], shade: 0, flare: false, x: 960, y: 150, align: 'center', segs: { X206: {} } },   // in ink over the Gauld frames' paper (part two F); ends at the cut to the chess board (no lyric over the set-up)
   // n 42, the shouted "One, one, two, three, five" over the chess board setting itself: no lyric (Jade, sung reel v4); the shouts
   // stay unsubtitled and the edit's numerals stay off the board
   { n: 43, style: 'impact', size: 108, texts: ['Counting', 'on', 'you!'], x: 960, yLast: 1020, align: 'center', maxW: 1000 },

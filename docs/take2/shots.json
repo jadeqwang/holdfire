@@ -1396,7 +1396,8 @@
   "scene": "multi",
   "layers": [
    "t2_split",
-   "t2_contact"
+   "t2_contact",
+   "t2_labels"
   ],
   "clip": [
    "C103L",
@@ -2104,7 +2105,8 @@
   "scene": "multi",
   "layers": [
    "t2_first",
-   "t2_petrov_screen"
+   "t2_petrov_screen",
+   "t2_labels"
   ],
   "clip": [
    "V211"
@@ -2190,7 +2192,8 @@
   "scene": "multi",
   "layers": [
    "t2_first",
-   "t2_petrov_screen"
+   "t2_petrov_screen",
+   "t2_labels"
   ],
   "clip": [
    "V211"
@@ -2246,7 +2249,8 @@
   "scene": "multi",
   "layers": [
    "t2_first",
-   "t2_petrov_screen"
+   "t2_petrov_screen",
+   "t2_labels"
   ],
   "clip": [
    "V211"
@@ -2433,7 +2437,8 @@
   "scene": "multi",
   "layers": [
    "t2_split",
-   "t2_contact"
+   "t2_contact",
+   "t2_labels"
   ],
   "clip": [
    "C203L",
@@ -2553,10 +2558,10 @@
   "picture": "Split: each Jade looks at her own screen; Jade (left) sings \"If you are\", teal-tips (right) listens, mouth closed",
   "era_style": "Control rooms (no era row): Rare Earth control room / its mirror with cooler fluorescent light; anime cel figures on twos",
   "method": "seedance_sung",
-  "scene": "t2_split",
+  "scene": "multi",
   "layers": [
-   "t2_plate",
-   "t2_plate"
+   "t2_split",
+   "t2_labels"
   ],
   "clip": [
    "C209L",
@@ -2640,14 +2645,15 @@
   "timing_section": "Post-Chorus 2",
   "lyric": "One One",
   "voice": "both",
-  "picture": "Earth's lights at increasing scale: A lamp in one window at night",
-  "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
-  "method": "still",
-  "scene": "t2_still",
+  "picture": "Two identical framed dish fields on cream paper, Jade's left: Jade hangs OUR RADAR under hers",
+  "era_style": "Tom Gauld frames: two identical framed pictures on cream paper, told apart only by caption plaques in the sides' colours",
+  "method": "procedural",
+  "scene": "t2_gauld",
   "clip": [
-   "X201"
+   "work/plates/C208b/f_00000.jpg",
+   "work/plates/C209b/f_00000.jpg"
   ],
-  "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
+  "type": "1 1 2 3 5 8 (row; the 8 on \"Counting on you!\") (the frames pass only, in ink on the paper; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
    "kind": "hit",
@@ -2666,14 +2672,15 @@
   "timing_section": "Post-Chorus 2",
   "lyric": null,
   "voice": "both",
-  "picture": "Earth's lights at increasing scale: A second window lights",
-  "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
-  "method": "still",
-  "scene": "t2_still",
+  "picture": "The second frame is hung: THEIR TARGETING under teal-tips' (Jade captioning)",
+  "era_style": "Tom Gauld frames: two identical framed pictures on cream paper, told apart only by caption plaques in the sides' colours",
+  "method": "procedural",
+  "scene": "t2_gauld",
   "clip": [
-   "X202"
+   "work/plates/C208b/f_00000.jpg",
+   "work/plates/C209b/f_00000.jpg"
   ],
-  "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
+  "type": "1 1 2 3 5 8 (row; the 8 on \"Counting on you!\") (the frames pass only, in ink on the paper; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
    "kind": "hit",
@@ -2692,14 +2699,15 @@
   "timing_section": "Post-Chorus 2",
   "lyric": "Two",
   "voice": "both",
-  "picture": "Earth's lights at increasing scale: A street of lit windows",
-  "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
-  "method": "still",
-  "scene": "t2_still",
+  "picture": "Held: the same picture, two names",
+  "era_style": "Tom Gauld frames: two identical framed pictures on cream paper, told apart only by caption plaques in the sides' colours",
+  "method": "procedural",
+  "scene": "t2_gauld",
   "clip": [
-   "X203"
+   "work/plates/C208b/f_00000.jpg",
+   "work/plates/C209b/f_00000.jpg"
   ],
-  "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
+  "type": "1 1 2 3 5 8 (row; the 8 on \"Counting on you!\") (the frames pass only, in ink on the paper; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
    "kind": "hit",
@@ -2718,12 +2726,15 @@
   "timing_section": "Post-Chorus 2",
   "lyric": "Three Five",
   "voice": "both",
-  "picture": "Earth's lights at increasing scale: A city at night (t2_earth_night 'scale')",
-  "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
+  "picture": "The matched posters framed: teal-tips captions Jade's THEIR PROPAGANDA and her own OUR RESOLVE",
+  "era_style": "Tom Gauld frames: two identical framed pictures on cream paper, told apart only by caption plaques in the sides' colours",
   "method": "procedural",
-  "scene": "t2_earth_night",
-  "clip": null,
-  "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
+  "scene": "t2_gauld",
+  "clip": [
+   "work/plates/C208b/f_00000.jpg",
+   "work/plates/C209b/f_00000.jpg"
+  ],
+  "type": "1 1 2 3 5 8 (row; the 8 on \"Counting on you!\") (the frames pass only, in ink on the paper; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
    "kind": "hit",
@@ -2742,12 +2753,15 @@
   "timing_section": "Post-Chorus 2",
   "lyric": null,
   "voice": "both",
-  "picture": "Earth's lights at increasing scale: A coastline of city lights (t2_earth_night 'scale')",
-  "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
+  "picture": "Held: the same poster, two names",
+  "era_style": "Tom Gauld frames: two identical framed pictures on cream paper, told apart only by caption plaques in the sides' colours",
   "method": "procedural",
-  "scene": "t2_earth_night",
-  "clip": null,
-  "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
+  "scene": "t2_gauld",
+  "clip": [
+   "work/plates/C208b/f_00000.jpg",
+   "work/plates/C209b/f_00000.jpg"
+  ],
+  "type": "1 1 2 3 5 8 (row; the 8 on \"Counting on you!\") (the frames pass only, in ink on the paper; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
    "kind": "hit",
@@ -2766,12 +2780,15 @@
   "timing_section": "Post-Chorus 2",
   "lyric": "Counting on you",
   "voice": "both",
-  "picture": "Then the whole night side of Earth",
-  "era_style": "Human lights: night photography, then Earth from orbit; sodium orange on black",
+  "picture": "On \"Counting on you!\": both hands beside the guarded switch, framed side by side, OUR DETERRENT under each",
+  "era_style": "Tom Gauld frames: two identical framed pictures on cream paper, told apart only by caption plaques in the sides' colours",
   "method": "procedural",
-  "scene": "t2_earth_night",
-  "clip": null,
-  "type": "1 1 2 3 5 (row) + giant 8 on \"Counting on you!\" (lights pass only; the board stays clear)",
+  "scene": "t2_gauld",
+  "clip": [
+   "work/plates/C208b/f_00000.jpg",
+   "work/plates/C209b/f_00000.jpg"
+  ],
+  "type": "1 1 2 3 5 8 (row; the 8 on \"Counting on you!\") (the frames pass only, in ink on the paper; the board stays clear)",
   "lipsync_window": null,
   "anchor": {
    "kind": "word",
@@ -3113,7 +3130,7 @@
   "timing_section": "Bridge",
   "lyric": "any world that lights a",
   "voice": "A",
-  "picture": "The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3",
+  "picture": "The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3; on the last of them Jade's hand comes in for her queen",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -3137,7 +3154,7 @@
   "timing_section": "Bridge",
   "lyric": "spark",
   "voice": "A",
-  "picture": "The first capture, 9.Qxg7 on \"spark\": impact frame, sparks off the clock",
+  "picture": "The first capture, 9.Qxg7 on \"spark\": Jade's hand lands the queen on g7 and lifts the pawn off; impact frame",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -3161,7 +3178,7 @@
   "timing_section": "Bridge",
   "lyric": "is lighting its own",
   "voice": "both",
-  "picture": "9...Rg8 to 13.O-O on eighths",
+  "picture": "Jade's hand slaps her clock with the captured pawn still in her fingers (sparks), tosses it to the captured row; then 9...Rg8 to 13.O-O on eighths",
   "era_style": "Chess: anime battle (speed lines, impact frames, smash zooms); full colour; the board stays legible when paused",
   "method": "procedural",
   "scene": "t2_chess",
@@ -3404,7 +3421,11 @@
   "picture": "Pull back out of the poster into the Arkhipov scene (newsprint-halftone poster): B-59, batteries nearly dead, trapped under US destroyers; practice depth charges fall as black dots",
   "era_style": "Chess into Arkhipov: Suprematist shapes (black square, red wedge) assembling into a Soviet poster, printed as newsprint halftone; red, black, cream",
   "method": "procedural",
-  "scene": "t2_arkhipov",
+  "scene": "multi",
+  "layers": [
+   "t2_arkhipov",
+   "t2_labels"
+  ],
   "clip": null,
   "type": null,
   "lipsync_window": null,
@@ -3985,10 +4006,14 @@
   "timing_section": "Drop",
   "lyric": "but you were You were",
   "voice": "B",
-  "picture": "Both raise a hand; teal-tips Jade sings \"but you were. You were counting too.\"",
+  "picture": "Both raise a hand; teal-tips Jade sings \"but you were. You were counting too.\"; the labels the other side gave each of them peel off and fall",
   "era_style": "Mirror: white void; each Jade keeps her own palette (signal-print inks on one side, cool teal and silver on the other)",
   "method": "seedance_sung",
-  "scene": "t2_mirror",
+  "scene": "multi",
+  "layers": [
+   "t2_mirror",
+   "t2_labels"
+  ],
   "clip": [
    "DR04"
   ],
@@ -4168,10 +4193,14 @@
   "timing_section": "Drop",
   "lyric": "alone we never would've made it here Fifty-five",
   "voice": "both",
-  "picture": "The mirror vanishes (t2_mirror): the two Jades stand side by side and look up, singing",
+  "picture": "The mirror vanishes (t2_mirror): the two Jades stand side by side and look up, singing; on \"we\", one word over both of them, once: OUR",
   "era_style": "Mirror: white void; each Jade keeps her own palette (signal-print inks on one side, cool teal and silver on the other)",
   "method": "seedance_sung",
-  "scene": "t2_mirror",
+  "scene": "multi",
+  "layers": [
+   "t2_mirror",
+   "t2_labels"
+  ],
   "clip": [
    "DR06",
    "DR11"

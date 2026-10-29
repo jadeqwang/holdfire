@@ -203,6 +203,7 @@ const LK = {
 export const ERA = {
   spiral: 'Cold open spirals: macro nature photography, true colour; natural colour, gold numerals on black; spiral centre locked at frame centre',
   lights: 'Human lights: night photography, then Earth from orbit; sodium orange on black',
+  frames: 'Tom Gauld frames: two identical framed pictures on cream paper, told apart only by caption plaques in the sides\' colours',
   v1: 'Verse 1, deep time to spaceflight: painted plates with white blueprint linework drawn over them; sepia and cyanotype blue; schematics draw on with the snare',
   flood: 'Okavango flood: nature-documentary frames painted over in gouache; greens, silver water',
   signal: 'Space and signals: Rare Earth "signal print" (risograph inks, halftone, slight misregistration); Klein blue, beacon orange, pale blue; Echo in fluo pink and mint',
@@ -820,14 +821,28 @@ export function buildTimeline(A) {
   // ============================================================================================== POST-CHORUS 2 (134.06 to 143.58)
   section('X2');
   const x2h = HITS.filter((h) => h.kind === 'post_chorus_2');
-  const lightsW = ['A lamp in one window at night', 'A second window lights', 'A street of lit windows', 'A city at night', 'A coastline of city lights'];
-  // lamp, window, street: generated stills; from the city up, t2_earth_night's 'scale' view (one log-altitude jump per shout,
-  // its closest scales are too coarse for a window) carries it out to the whole night side on "Counting on you!"
-  const scaleP = { view: 'scale', shouts: [...x2h.slice(0, 5).map((h) => h.t), wd('X2', 1, 'counting').t] };
-  for (let i = 0; i < 5; i++) S(i === 0 ? '2:14.06' : null, hit('post_chorus_2', i), i < 3
-    ? { ...still(), method: 'still', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.2)), want: `Earth's lights at increasing scale: ${lightsW[i]}` }
-    : { scene: 't2_earth_night', p: scaleP, method: 'procedural', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.2)), want: `Earth's lights at increasing scale: ${lightsW[i]} (t2_earth_night 'scale')` });
-  S('2:17.21', wd('X2', 1, 'counting'), { scene: 't2_earth_night', p: scaleP, method: 'procedural', era: ERA.lights, look: withLook(LK.night, flash([1, 0.8, 0.5], 0.35)), want: "Then the whole night side of Earth" });
+  // part two F, option B (Jade, 29 Oct): Tom Gauld's cartoon. The lights pass becomes two identical framed pictures on cream
+  // paper, Jade's on the left, teal-tips' on the right, told apart only by their caption plaques (fx/gauld.js; colour = whose
+  // thing, words = who is captioning). One move per two or three shouts, so the plaques keep the label rule (on >= 1 s, <= 3 words
+  // a second): the dish fields captioned by Jade (shouts 1 to 3), the matched posters captioned by teal-tips (shouts 4 and 5),
+  // then both hands beside the guarded switch, OUR DETERRENT from both sides, on "Counting on you!"
+  const cnt2 = wd('X2', 1, 'counting').t, x2End = hit('post_chorus_2', 5).t;
+  const DISH = (plate, at) => ({ plate: `work/plates/${plate}`, in: 1.2, crop: [at, 640, 760] });
+  const gauldP = { beats: [
+    { t0: x2h[0].t, t1: x2h[3].t, frame: [700, 470], L: DISH('C101', 980), R: { ...DISH('C201R', 960), t0: x2h[1].t },
+      caps: [{ lines: ['OUR RADAR'], side: 'jade', t0: x2h[0].t }, { lines: ['THEIR TARGETING'], side: 'teal', t0: x2h[1].t }] },
+    { t0: x2h[3].t, t1: cnt2, frame: [380, 532], L: { poster: 'jade' }, R: { poster: 'teal' },
+      caps: [{ lines: ['THEIR PROPAGANDA'], side: 'jade', t0: x2h[3].t }, { lines: ['OUR RESOLVE'], side: 'teal', t0: x2h[3].t }] },
+    { t0: cnt2, t1: x2End + 1, frame: [700, 470], L: { img: 'work/plates/C208b/f_00000.jpg', crop: [823, 420, 760] },
+      R: { img: 'work/plates/C209b/f_00000.jpg', crop: [1097, 420, 760], flipX: true },
+      caps: [{ lines: ['OUR DETERRENT'], side: 'jade', t0: cnt2 }, { lines: ['OUR DETERRENT'], side: 'teal', t0: cnt2 }] },
+  ] };
+  const gauldW = ["Two identical framed dish fields on cream paper, Jade's left: Jade hangs OUR RADAR under hers",
+    'The second frame is hung: THEIR TARGETING under teal-tips\' (Jade captioning)', 'Held: the same picture, two names',
+    "The matched posters framed: teal-tips captions Jade's THEIR PROPAGANDA and her own OUR RESOLVE", 'Held: the same poster, two names'];
+  for (let i = 0; i < 5; i++) S(i === 0 ? '2:14.06' : null, hit('post_chorus_2', i), { scene: 't2_gauld', p: gauldP, method: 'procedural', era: ERA.frames, look: LK.posterProc, want: gauldW[i] });
+  S('2:17.21', wd('X2', 1, 'counting'), { scene: 't2_gauld', p: gauldP, method: 'procedural', era: ERA.frames, look: LK.posterProc,
+    want: 'On "Counting on you!": both hands beside the guarded switch, framed side by side, OUR DETERRENT under each' });
   const setN = [1, 2, 4, 7, 12];
   // t2_chess sets the board from its own schedule (scenes/t2/chess/schedule.js: 1, 1, 2, 3, 5 pieces on the shouts, the other 20
   // on "Counting on you!"); cam 'auto' cuts on each shout to the angle that frames the pieces landing
@@ -844,9 +859,10 @@ export function buildTimeline(A) {
   // behind as this camera must see it, orange button on Jade's side, teal on teal-tips' (tools/t2/chess_x213_clock.py)
   S(null, wd('X2', 3, 'on'), { ...over(plate(), { scene: 't2_chess_paint', p: { img: 'assets/t2/chess/X213_clock.png' } }), method: 'video', era: ERA.chess, look: LK.anime,
     want: 'The two Jades sit down across the board from each other; the clock on White\'s right (the near edge), seen from behind' });
+  const X2_INK = [0.09, 0.08, 0.07];
   const x2Row = x2h.slice(0, 5).map((h, i) => ({ n: [1, 1, 2, 3, 5][i], t: h.t, slot: i, giant: false }));
-  x2Row.push({ n: 8, t: wd('X2', 1, 'counting').t, slot: 5, giant: true });
-  cue({ kind: 'num', label: '1 1 2 3 5 (row) + giant 8 on "Counting on you!" (lights pass only; the board stays clear)', t0: x2Row[0].t, t1: x2h[5].t - 0.05, items: x2Row, slots: 6, size: 110, hold: 0.55, fly: 0.3, draw: drawCount });
+  x2Row.push({ n: 8, t: wd('X2', 1, 'counting').t, slot: 5, giant: false });   // lands in the row: a giant 8 would cover the two switches (part two F)
+  cue({ kind: 'num', label: '1 1 2 3 5 8 (row; the 8 on "Counting on you!") (the frames pass only, in ink on the paper; the board stays clear)', t0: x2Row[0].t, t1: x2h[5].t - 0.05, items: x2Row, slots: 6, size: 110, hold: 0.55, fly: 0.3, color: X2_INK, draw: drawCount });
 
   // ============================================================================================== BRIDGE (143.58 to 163.67): Fischer-Tal
   section('BR');

@@ -1556,3 +1556,8 @@
 {"ts": "2026-10-29T19:12:49Z", "model": "google/veo-3.1-fast", "tag": "t2_V113c_veof_c1", "job": "holdfire/t2_V113c_veof_c1-b34a4b3c6b", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
 {"ts": "2026-10-29T19:12:51Z", "model": "google/veo-3.1-fast", "tag": "t2_V113c_veof_c2", "job": "holdfire/t2_V113c_veof_c2-e9cce3d6db", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
 {"ts": "2026-10-29T19:12:52Z", "model": "google/veo-3.1-fast", "tag": "t2_V113c_veof_c3", "job": "holdfire/t2_V113c_veof_c3-338f9293d4", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T19:16:18Z", "model": "google/veo-3.1-fast", "tag": "t2_V113c_veof_c1", "job": "holdfire/t2_V113c_veof_c1-b34a4b3c6b", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T19:17:24Z", "model": "google/veo-3.1-fast", "tag": "t2_V113c_veof_c2", "job": "holdfire/t2_V113c_veof_c2-e9cce3d6db", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T19:17:25Z", "model": "google/veo-3.1-fast", "tag": "t2_V113c_veof_c3", "job": "holdfire/t2_V113c_veof_c3-338f9293d4", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T19:19:14Z", "model": "google/nano-banana-pro", "tag": "kf_V113_close_end_nbp_v1", "job": "holdfire/kf_V113_close_end_nbp_v1-e8b12e9057", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-29T19:22:59Z", "model": "google/nano-banana-pro", "tag": "kf_V113_close_end_nbp_v1", "job": "holdfire/kf_V113_close_end_nbp_v1-e8b12e9057", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}

@@ -424,3 +424,7 @@ the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest r
   (the plate 1080 px high from x 390 at 300 px/s; the walk x0.84 with its feet-and-centre point at (790, 1016); the take from 0.4 /
   1.046 / 1.691 s) were fitted to RC4's frames. RC11 re-renders V108-V109; a scan of every RC11 frame finds no green screen.
 - Option 1 for 0:25.9 (a closer framing of the tablet so the stylus can press two neighbouring wedges) is next.
+- **0:25.9, option 1 (the close-up):** a Nano Banana Pro close-up of the row's end (wedges ~4x) and three Veo 3.1 Fast takes from it
+  ($1.33): each lengthens the last wedge, then presses again ~250 px back along the row. An end frame for a first/last-frame take
+  (Seedance 2.0) was tried ($0.13): it reframed the tablet and spaced the new wedge like the row, so it was not used. Spend on the
+  last-two-strokes fix: $3.86 (`takes_g6.json`). The shot is unchanged; next options are with Jade.

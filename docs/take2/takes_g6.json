@@ -75,5 +75,62 @@
    "verdict": "no (from the hover frame media/kf2/V113_hover_t1f28.jpg): two presses ~105 px apart",
    "pick": false
   }
+ ],
+ "V113_close": [
+  {
+   "tag": "t2_V113c_veof_c1",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113c_veof_c1-b34a4b3c6b",
+   "kf": "media/kf2/V113_close_nbp_v1.png",
+   "prompt_file": "media/gen/specs/t2_V113c_veof_c1.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113c_veof_c1_b34a4b3c6b.mp4",
+   "verdict": "no: drags the last wedge longer, then presses ~250 px back along the row",
+   "pick": false
+  },
+  {
+   "tag": "t2_V113c_veof_c2",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113c_veof_c2-e9cce3d6db",
+   "kf": "media/kf2/V113_close_nbp_v1.png",
+   "prompt_file": "media/gen/specs/t2_V113c_veof_c2.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113c_veof_c2_e9cce3d6db.mp4",
+   "verdict": "no: one press at the row end, then back along the row",
+   "pick": false
+  },
+  {
+   "tag": "t2_V113c_veof_c3",
+   "model": "google/veo-3.1-fast",
+   "job": "holdfire/t2_V113c_veof_c3-338f9293d4",
+   "kf": "media/kf2/V113_close_nbp_v1.png",
+   "prompt_file": "media/gen/specs/t2_V113c_veof_c3.prompt.txt",
+   "dur": "4s",
+   "dims": "1920x1080",
+   "est_usd": 0.4,
+   "file": "media/gen/t2_V113c_veof_c3_338f9293d4.mp4",
+   "verdict": "no: lengthens the last wedge, then presses ~250 px left and lower",
+   "pick": false
+  }
+ ],
+ "V113_close_kf": [
+  {
+   "tag": "kf_V113_close_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "file": "media/kf2/V113_close_nbp_v1.png",
+   "est_usd": 0.1344,
+   "verdict": "the close-up (wedges ~4x): good"
+  },
+  {
+   "tag": "kf_V113_close_end_nbp_v1",
+   "model": "google/nano-banana-pro",
+   "file": "media/kf2/V113_close_end_nbp_v1.jpg",
+   "est_usd": 0.1344,
+   "verdict": "no: an end frame for first/last-frame video; it reframed the tablet and spaced the new wedge like the row (~140 px)"
+  }
  ]
 }

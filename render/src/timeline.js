@@ -721,7 +721,10 @@ export function buildTimeline(A) {
   const screen = (mode, extra = {}) => ({ scene: 't2_petrov_screen', p: { mode, quad: SCREEN_Q, occ: HEAD_BOX, ...extra } });
   const sat = wd('V2', 4, 'satellites'), saw = wd('V2', 4, 'saw'), five = wd('V2', 4, 'five');
   // one track on "satellites", then four more: on "saw", two sixteenths, and "five"
-  S(null, sat, { ...over(painting(), screen('map', { tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
+  // part two C: the alarm is labelled from his side as the other side's strike (Jade's orange: their thing); struck through on the
+  // protocol when he reports a malfunction. No cause is labelled (the fact sheet does not give one)
+  const FIRST_STRIKE = (t0, extra = {}) => ({ scene: 't2_labels', p: { labels: [{ lines: ['THEIR', 'FIRST STRIKE'], side: 'jade', at: [1362, 268], h: 38, t0, ...extra }] } });
+  S(null, sat, { ...over(painting(), screen('map', { tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] }), FIRST_STRIKE(five.t)), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'The big screen: one missile track rises from the United States, then four more on "five"' });
   const every = wd('V2', 5, 'every');
   // RC2 (QA_RC1 #4): the reliability panel sits right of his head (HEAD_BOX + 25 px to the screen's right edge), so the matte never
@@ -731,7 +734,7 @@ export function buildTimeline(A) {
     want: 'The wall display lights up in big red letters, СТАРТ (drawn by the scene); reliability rated highest' });
   S(null, wd('V2', 5, 'first'), oil('Petrov sits with his hand near the phone (no launch button in the room)', { zoom: 1.12 }, { notes: 'zoom 1.12 crops the red line Veo drew along the screen from 0.75 s' }));
   const petrovW = wd('V2', 6, 'petrov');
-  S('1:37.88', petrovW, { ...over(painting(), screen('ghost', { t0: petrovW.t, tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
+  S('1:37.88', petrovW, { ...over(painting(), screen('ghost', { t0: petrovW.t, tracks: [sat.t + 0.1, saw.t, s16(saw.t, 1), s16(saw.t, 2), five.t] }), FIRST_STRIKE(petrovW.t)), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'Over the five tracks, a ghost of a real first strike (hundreds of tracks) fades and leaves five' });
   S('1:40.31', wd('V2', 7, 'ignored'), oil('He picks up the phone and reports a system malfunction'));
   const prev = wd('V2', 7, 'previous');
@@ -744,7 +747,8 @@ export function buildTimeline(A) {
   const paperQ0 = PAPER_Q.map(([x, y]) => [960 + PZ * (x - 960) + PPAN[0], 540 + PZ * (y - 540) + PPAN[1]]);
   const pc = [paperQ0.reduce((a, q) => a + q[0], 0) / 4, paperQ0.reduce((a, q) => a + q[1], 0) / 4];
   const paperQ = paperQ0.map(([x, y]) => [pc[0] + 1.45 * (x - pc[0]), pc[1] - 75 + 1.45 * (y - pc[1])]);
-  S(null, prev, { ...over(painting({ zoom: PZ, pan: PPAN }), screen('protocol', { quad: paperQ, occ: null, light: [0.92, 0.74, 0.56], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] })), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
+  S(null, prev, { ...over(painting({ zoom: PZ, pan: PPAN }), screen('protocol', { quad: paperQ, occ: null, light: [0.92, 0.74, 0.56], strike: [prev.t, ...[1, 2, 3, 4, 5].map((k) => s16(prev.t, k))] }),
+      { scene: 't2_labels', p: { labels: [{ lines: ['THEIR', 'FIRST STRIKE'], side: 'jade', at: [1190, 575], rot: -0.09, h: 38, t0: prev.t - 0.02, strike: s16(prev.t, 3) }] } }), method: 'procedural', era: ERA.oil, look: PETROV_LOOK,
     want: 'Insert: the printed protocol on the desk beside him is struck through line by line' });
   // RC3 (QA_RC2 #5): gain .9 with gamma 1.1 rolls the highlights off (mids kept), so teal-tips' face holds its skin tone under the oil look
   S('1:42.0', wd('V2', 7, "we're"), oil('Morning in Moscow, 26 September 1983: buses, people going to work, nobody knowing; teal-tips Jade breathes out', { grade: { ...COOL, gain: 0.9, gamma: 1.1 } }, { notes: 'she exhales on "We\'re alive" (voice B); lip-sync optional' }));
@@ -902,7 +906,11 @@ export function buildTimeline(A) {
   // the surfacing would get one frame before the build, so NO holds to the cut (tSurface after it)
   const arkP = { charges, tFire: twoW.t, tHand: arkW.t, tNo: noT.t, tSurface: buildT + 1, zoom0: 1.3 };
   const arkLook = (t) => ({ ...LK.posterProc, shakeX: 7 * charges.reduce((m, x) => Math.max(m, shk(t, x + 0.7, 1)), 0) * Math.sin(t * 83), shakeY: shk(t, noT.t, 10) });
-  S('2:38.76', sixty2, { scene: 't2_arkhipov', p: arkP, method: 'procedural', era: ERA.poster, look: arkLook,
+  // part two C: the same practice depth charges under two names: from the destroyers OUR SIGNAL (to surface), from inside the hull
+  // THEIR ATTACK (they sounded like real ones); both Jade's orange, the destroyers' thing. From the first charge, after the pull-back
+  const B59 = { scene: 't2_labels', p: { labels: [{ lines: ['OUR SIGNAL'], side: 'jade', at: [1470, 140], h: 48, t0: arkP.charges[0] },
+    { lines: ['THEIR ATTACK'], side: 'jade', at: [1690, 600], h: 48, t0: arkP.charges[1] }] } };
+  S('2:38.76', sixty2, { scene: 'multi', p: { layers: [{ scene: 't2_arkhipov', p: arkP }, B59] }, method: 'procedural', era: ERA.poster, look: arkLook,
     want: 'Pull back out of the poster into the Arkhipov scene (newsprint-halftone poster): B-59, batteries nearly dead, trapped under US destroyers; practice depth charges fall as black dots' });
   S('2:41.23', twoW, { scene: 't2_arkhipov', p: arkP, method: 'procedural', era: ERA.poster, look: arkLook,
     want: 'Two officers in red silhouette, faces in shadow and unnamed, one pointing toward the torpedo room (anonymous; no one else shown as a hawk)' });

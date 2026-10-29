@@ -278,7 +278,7 @@ button { font: inherit; color: inherit; }
     </section>
 
     <section id="p-eye" role="tabpanel" aria-labelledby="tab-eye" hidden>
-      <p class="unfinished"><b>New in v10 (RC5, the adversary pass):</b> teal-tips Jade arrives as the other side (a cold room, her monitors tracking your dish field in red alert); a wall and a warm/cold grade between the two rooms in every split until the glass, each monitor tracking the other as an unknown contact; a hand beside a guarded switch on each side in chorus 2; a line of signal between the two buildings; BU04 now a rewind from its first frame; the palms on the glass rhyme with the hands letting go of the pieces. <b>Note:</b> this preview splices the changed shots into RC4’s frames; the counter reads 42 as in RC4.</p>
+      <p class="unfinished"><b>New in v11 (RC6):</b> the chess clocks run at the moves’ pace and end in a time scramble (about 5 s left each at the perpetual check), showing whole seconds and tenths only under 20 s; on 9.Qxg7 Jade’s hand presses the clock with the captured pawn still in her fingers (Andrej’s notes). <b>From v10:</b> teal-tips as the other side, the walls and warm/cold rooms, the contact tracks, the switch inserts, the signal line, BU04 as a rewind, the palms rhymed with the let-go. <b>Note:</b> this preview splices the changed shots into RC4’s frames; the counter reads 42.</p>
       <p class="hint">Things to check in this cut. Each one starts 2 seconds before the moment.</p>
       <ul class="list eye" id="eye"></ul>
     </section>
@@ -292,7 +292,7 @@ button { font: inherit; color: inherit; }
   'use strict';
   // ---------------------------------------------------------------- this cut
   // One cut at a time. To publish v3: re-encode into media/, update VERSION, SEGS and FILM_LEN. Notes keep the version they were made on.
-  const VERSION = 'v10 · RC5 · 28 Oct · 540p';
+  const VERSION = 'v11 · RC6 · 29 Oct · 540p';
 
   // ---------------------------------------------------------------- film data
   // media/init.mp4 + media/s000.mp4 … s041.mp4: fMP4 HLS, H.264 main (no B-frames), keyframe at every 6 s segment start, AAC copied from the cut.
@@ -339,6 +339,9 @@ button { font: inherit; color: inherit; }
     [180.1, '3:00.1', 'Hand lights on either side of a wall: parallel, not together.'],
     [191.4, '3:11.4', 'The palms on the glass open framed like the let-go at the chess board, with its ghost.'],
     [158.1, '2:38.1', 'The let-go itself, to compare with 3:11.'],
+    [143.4, '2:23.4', 'The clocks: whole seconds, starting at 1:00 and running at the moves’ pace.'],
+    [150.1, '2:30.1', '9.Qxg7: Jade’s hand takes the pawn and presses her clock with it still in her fingers.'],
+    [155.5, '2:35.5', 'The time scramble: tenths under 20 s, about 5 s left each when they let go.'],
   ];
 
   // ---------------------------------------------------------------- helpers

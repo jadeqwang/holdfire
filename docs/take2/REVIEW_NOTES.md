@@ -336,5 +336,11 @@ song time; 5 s left at the draw.
 - **The face** (`chess/textures.js`): whole seconds (1:00, 0:59 …) like a tournament clock (the FIDE-standard DGT 3000 shows
   seconds, no tenths); the tenths digit and its point light only under 20 s (from 2:33.7, the drums' return), as online clocks
   do in a scramble.
-- `chess_check`: the bookkeeping now includes K, the lower clock ends on CLOCK_LEFT, and no flag falls. Preview RC6 re-renders
-  2:19.0–2:38.5 (every chess frame with a clock in it) into RC5.
+- `chess_check`: the bookkeeping now includes K, the lower clock ends on CLOCK_LEFT, and no flag falls.
+- **The capture stays in the hand** (Andrej: the hand that moves presses the clock, so after a capture it still holds the captured
+  piece). 9.Qxg7 on "spark" now has Jade's hand: it comes in as 8...dxc3 lands, takes the queen to g7 lifting the pawn off, slaps
+  her button (the clock's sparks, 2:30.54) with the pawn still pinched, base on the button, and tosses it to the captured row, where
+  it lands exactly as the old capture flight left it (`hands.js` carry / quick, `state.js` carriedPose / tossPose; BR03-BR05, no
+  ply or press moved). The other captures stay hand-free (the battle angles, the chain). chess_check, chess_lens, check_cuts pass.
+- Preview `previews/hold_fire_t2_rc6_540p.mp4` (review page v11): 2:19.0–2:38.5 (every chess frame with a clock in it)
+  re-rendered and spliced, with RC5's ranges, into RC4's frames.

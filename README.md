@@ -106,7 +106,7 @@ The card reads:
 
 ### Deliverables
 
-A 540p preview of RC5 (the adversary pass) is committed: [`previews/hold_fire_t2_rc5_540p.mp4`](previews/hold_fire_t2_rc5_540p.mp4) (960×540, 2-pass H.264
+A 540p preview of RC6 (the adversary pass, plus the chess clocks at the moves' pace and the 9.Qxg7 hand) is committed: [`previews/hold_fire_t2_rc6_540p.mp4`](previews/hold_fire_t2_rc6_540p.mp4) (960×540, 2-pass H.264
 at 1.4 Mb/s, AAC 128k of the mix). It was made in a cloud session: the changed ranges re-rendered at 1080p and spliced into RC4's
 preview frames (RC4's preview is in git history, commit 9b9bdf7); see the adversary pass in `REVIEW_NOTES.md`. The full-resolution files are rendered locally to `work/out/` (not committed;
 they exceed GitHub's 100 MB limit):

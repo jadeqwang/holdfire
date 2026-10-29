@@ -62,6 +62,24 @@ function sideFlight(S, capPly, pc, t) {
   return { pos, q, vel, done: u >= 1 };
 }
 
+// a captured piece carried in the capturing hand (hands.js carry, 9.Qxg7: Andrej, 29 Oct: the hand that moved presses the clock with
+// the captured piece still in its fingers), then tossed from `from` to its graveyard spot over [t0, t1], landing exactly as
+// sideFlight would have left it (lying down, same axis, same yaw)
+export function carriedPose(pc, head, gripH) {   // hanging from the fingers by its head (gripH: hands.js GRIP_H of its type)
+  return { pos: add(head, [0, -gripH, 0]), q: qY(restYaw(pc)) };
+}
+export function tossPose(S, capPly, pc, from, t0, t1, t) {
+  const p = S.plies[capPly];
+  const a = sqPos(p.capSq), b = graveSpot(S, capPly);
+  const u = clamp((t - t0) / (t1 - t0)), e = easeOutCubic(u);
+  const r = BASE_R[pc.p.toUpperCase()];
+  const pos = lerp3(from, [b[0], r - 0.28, b[2]], e);
+  pos[1] += 0.8 * 4 * u * (1 - u);
+  const dir = norm([b[0] - a[0], 0, b[2] - a[2]]);
+  const ang = (Math.PI / 2 + Math.PI * 2) * e;
+  return { pos, q: qMul(qAxis([dir[2], 0, -dir[0]], -ang), qY(restYaw(pc))), done: u >= 1 };
+}
+
 // chain flight: launched off the board, then pulled into a path that runs past the lens (in camera space, so it passes the
 // lens whatever the camera does)
 export function chainPath(S, capPly, tau, cam) {

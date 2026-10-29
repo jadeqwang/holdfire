@@ -8,6 +8,11 @@
 //                                                open and withdraw
 //   { side, move: '5...Ba5', press: true }        the same, and then the same hand goes on to its clock button and presses it at the
 //                                                ply's press time (schedule.js tp), then lifts away
+//   carry: true (with press, on a capture)       the hand lifts the captured piece off as its own piece lands and presses the clock with
+//                                                it still pinched (the piece's base on the button), then tosses it to its graveyard spot
+//                                                (Andrej, 29 Oct: the hand that moved presses the clock, so it still holds the capture);
+//                                                the hand returns carry {id, head} / toss {id, from, t0, t1}, which chess.js poses
+//   quick: true                                  no hover: the hand comes in when the opponent's move lands (blitz)
 //   { side, press: t | 'start' | '1.e4' }        slap the side's clock button at song time t (the start press, or a ply's press time), lift away
 //   hand: 'L' | 'R' on any track                 which of her hands (default: the clock-side hand, the one that presses: the clock is on
 //                                                White's right = Black's left, so Jade plays with her right hand, teal-tips with her left)
@@ -81,6 +86,20 @@ function pressAt(side, hand, tp, t, from, t0 = tp - 0.3) {
   return { pose: u < 0.2 ? 'press' : 'reach', grip: L3(B, retreat(side, B, hand), u) };
 }
 
+// after a capture lands: the captured piece in the fingers (its head at the grip), up and over to the clock, its base on the button at
+// the press time, held through the press, then let go and tossed to the graveyard while the hand lifts away
+function carryPose(S, P, side, hand, toHead, t) {
+  const cap = GAME.pieces.find((x) => x.id === P.capId), gh = GRIP_H[cap.p.toUpperCase()];
+  const a = t - P.t, up = add(toHead, [0, 0.5, 0]);
+  if (a < 0.1) { const g = add(toHead, [0, 0.5 * easeOutCubic(a / 0.1), 0]); return { pose: 'pinch', grip: g, carry: { id: cap.id, head: g, gh } }; }
+  const tRel = P.tp + 0.16;
+  const r = pressAt(side, hand, P.tp, t, up, P.t + 0.1);
+  if (!r) return null;
+  if (t < tRel) { const g = add(r.grip, [0, gh + 0.05, 0]); return { pose: 'pinch', grip: g, carry: { id: cap.id, head: g, gh } }; }
+  const rel = pressAt(side, hand, P.tp, tRel, up, P.t + 0.1), from = add(rel.grip, [0, 0.05, 0]);   // the piece's base as it is let go
+  return { pose: 'release', grip: add(r.grip, [0, gh + 0.05, 0]), toss: { id: cap.id, from, t0: tRel, t1: tRel + 0.34, capPly: S.plies.indexOf(P) } };
+}
+
 // one hand at time t -> {pose, grip [x,y,z], amt (0..1 presence), side, hand} or null
 function trackAt(S, tr, t, st) {
   const side = tr.side, hand = tr.hand || clockHand(side);
@@ -99,8 +118,9 @@ function trackPose(S, tr, t, st, side, hand) {
     const fr = sqPos(P.from);
     const restHead = add(fr, [0, GRIP_H[type], 0]);
     const toHead = add(sqPos(P.to), [0, GRIP_H[type], 0]);
-    const t0 = P.t0, t1 = P.t, h0 = Math.min(P.hover0, t0 - 0.18);
-    const tA = h0 - (tr.approach ?? 0.3);
+    const t0 = P.t0, t1 = P.t;
+    let h0 = Math.min(P.hover0, t0 - 0.18), tA = h0 - (tr.approach ?? 0.3);
+    if (tr.quick && i > 0) { tA = S.plies[i - 1].t; h0 = Math.max(tA + 0.03, t0 - 0.09); }
     const above = add(restHead, [0, 0.55, sideZ(side) * 0.15]);
     if (t < tA) return null;
     if (t < h0) { const u = easeOutCubic((t - tA) / (h0 - tA)); return { side, pose: 'reach', grip: L3(retreat_(side, restHead), above, u), amt: 1 }; }
@@ -111,6 +131,7 @@ function trackPose(S, tr, t, st, side, hand) {
     if (t < t0) { const u = smooth((t - (t0 - 0.09)) / 0.09); return { side, pose: u > 0.55 ? 'pinch' : 'reach', grip: L3(above, restHead, u), amt: 1 }; }
     if (t < t1) return { side, pose: 'pinch', grip: headOf(ps), amt: 1 };
     const a = t - t1;
+    if (tr.carry && tr.press === true && P.capId >= 0 && P.tp != null) return carryPose(S, P, side, hand, toHead, t);
     if (a < 0.1) return { side, pose: a < 0.04 ? 'pinch' : 'release', grip: add(toHead, [0, 0.5 * easeOutCubic(a / 0.1), 0]), amt: 1 };
     // and on to the clock: the same hand presses her button at the ply's press time
     if (tr.press === true && P.tp != null) return pressAt(side, hand, P.tp, t, add(toHead, [0, 0.5, 0]), t1 + 0.1);

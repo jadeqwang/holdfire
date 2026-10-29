@@ -861,9 +861,13 @@ export function buildTimeline(A) {
       { pos: [1.45, 3.1, -0.35], target: [5.8, 0.8, -0.1], fov: 36 }, [{ side: 'b', press: '5...Ba5' }]), sub: 'b' });
   S(null, holdsW, { ...brPlate('BR_faceW', { in: 0.3, zoom: 1.1, pan: [0, 50] }, 'Jade (White) underlit, holding her breath; eyes in the dark around her reflect light like animals in a forest (BR_faceW; framed above the plate\'s board edge)'), sub: 'c' });
   S(null, breathW, { ...brPlate('BR_faceB', { in: 0.3, zoom: 1.1, pan: [0, 50], grade: COOL }, 'Teal-tips Jade (Black) underlit, the reverse shot; her eyes flick up and back (BR_faceB; framed above the plate\'s board edge)'), sub: 'd' });
-  S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3'));
-  S('2:30.32', wd('BR', 2, 'spark'), chess('The first capture, 9.Qxg7 on "spark": impact frame, sparks off the clock', {}, withLook(CHESS_LOOK, flash([1, 1, 1], 0.9, 0.05))));
-  S('2:30.5', eighth('2:30.5'), chess('9...Rg8 to 13.O-O on eighths'));
+  // Andrej (29 Oct): the hand that moves presses the clock, so after a capture it still holds the captured piece. 9.Qxg7 on "spark":
+  // Jade's hand comes in as 8...dxc3 lands, takes the queen to g7 lifting the pawn off, and slaps her button (the clock's sparks)
+  // with the pawn still pinched, then tosses it to the captured row (hands.js carry); the same track runs over the three shots it spans
+  const QXG7 = { handTracks: [{ side: 'w', move: '9.Qxg7', press: true, carry: true, quick: true }], keepShadow: true };
+  S('2:28.6', beat('2:28.6'), chess('The moves speed up: 7.Qg4 Ne7 8.bxa5 dxc3; on the last of them Jade\'s hand comes in for her queen', QXG7));
+  S('2:30.32', wd('BR', 2, 'spark'), chess('The first capture, 9.Qxg7 on "spark": Jade\'s hand lands the queen on g7 and lifts the pawn off; impact frame', QXG7, withLook(CHESS_LOOK, flash([1, 1, 1], 0.9, 0.05))));
+  S('2:30.5', eighth('2:30.5'), chess('Jade\'s hand slaps her clock with the captured pawn still in her fingers (sparks), tosses it to the captured row; then 9...Rg8 to 13.O-O on eighths', QXG7));
   S('2:33.04', wd('BR', 3, 'death'), chess('Black castles long on "death": kings on opposite sides, both attacks on'));
   S('2:33.69', ev('impact', /drums \+ 808 return/), chess('Drums return, 14.Bg5: the anime battle, speed lines, smash zooms', {}, withLook(CHESS_LOOK, flash([1, 1, 1], 0.6, 0.06))));
   S('2:34.15', wd('BR', 4, 'chain'), chess('The camera swings 180 degrees around the board on "chain"'));

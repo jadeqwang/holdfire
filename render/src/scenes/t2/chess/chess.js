@@ -21,7 +21,7 @@ import * as THREE from 'three';
 import { buildGeometries, linkGeometry, PROFILES, QUEEN_BALLS, HEIGHT } from './pieces.js';
 import { GAME } from './pgn.js';
 import { buildSchedule } from './schedule.js';
-import { boardState, sqPos, FALL } from './state.js';
+import { boardState, sqPos, FALL, carriedPose, tossPose } from './state.js';
 import { cameraAt, cameraFx, CLOCK_POS, SHEET_POS } from './camera.js';
 import { loadHands, handsAt, drawHands, handShadowOf } from './hands.js';
 import { borderTexture, clockCanvas, drawClock, sheetCanvas, drawSheet, BORDER } from './textures.js';
@@ -617,7 +617,16 @@ function drawImpl(ctx, shot, t, lt, p) {
     const flat = dive ? smooth((dive.u - 0.26) / 0.15) : 0;
     sh.uFlat.value = flat;
     const hands = p.handTracks ? handsAt(S, p.handTracks, t, st) : [];
-    const hd = p.handTracks ? handShadowOf(hands) : st.hand;
+    // a capture carried in the hand (hands.js carry): the piece rides the fingers, then is tossed to its graveyard spot
+    for (const h of hands) {
+      const c = h.carry || h.toss; if (!c) continue;
+      const ps = st.pieces.find((o) => o.id === c.id), pc = GAME.pieces.find((x) => x.id === c.id);
+      if (!ps || !pc) continue;
+      const f = h.carry ? carriedPose(pc, h.carry.head, h.carry.gh) : tossPose(S, c.capPly, pc, c.from, c.t0, c.t1, t);
+      if (h.toss && f.done) continue;
+      ps.pos = f.pos; ps.q = f.q; ps.vel = [0, 0, 0]; ps.flying = false; ps.visible = true; ps.chain = undefined;
+    }
+    const hd = p.handTracks ? (hands.length || !p.keepShadow ? handShadowOf(hands) : st.hand) : st.hand;
     sh.hand.value.set(hd ? hd.x : 0, hd ? hd.z : 0, hd ? hd.amt * (p.hands ?? 1) : 0, hd ? (hd.side === 'w' ? 1 : -1) : 1);
 
     // pieces

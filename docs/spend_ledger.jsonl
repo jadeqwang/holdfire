@@ -1539,3 +1539,6 @@
 {"ts": "2026-10-28T16:09:49Z", "model": "google/nano-banana-pro", "tag": "t2_switch_B_nbp_v2", "job": "holdfire/t2_switch_B_nbp_v2-b9d3ef7321", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-28T16:13:40Z", "model": "google/nano-banana-pro", "tag": "t2_switch_B_nbp_v3", "job": "holdfire/t2_switch_B_nbp_v3-8335ac6d34", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-28T16:17:25Z", "model": "google/nano-banana-pro", "tag": "t2_switch_B_nbp_v3", "job": "holdfire/t2_switch_B_nbp_v3-8335ac6d34", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-29T17:35:09Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t1", "job": "holdfire/t2_V113_veof_2s_t1-f5e7040693", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:35:10Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t2", "job": "holdfire/t2_V113_veof_2s_t2-a4ec83aaae", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}
+{"ts": "2026-10-29T17:35:11Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_veof_2s_t3", "job": "holdfire/t2_V113_veof_2s_t3-75dc303699", "event": "submit", "ok": null, "est_usd": 0.4, "where": "cloud"}

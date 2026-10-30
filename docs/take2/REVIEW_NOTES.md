@@ -488,3 +488,18 @@ turned about its head). The take's two touches still make the two wedges: the si
 DISH (no partial NINE DISH); 89's place gap is re-solved so the 1's head is on the second landing. 89 reads 30-, 1;30-, 1;29 over
 the shot. `cuneiformNumber` writes any units 9 this way; `cuneiform_card.py` reads LAL as minus the next sign. Font + LAL (U+121F2).
 The preview's V113 (0:25.0-0:27.0) is re-rendered.
+
+## The 1080p master on the minor-fixes song (30 Oct, rendered in the cloud)
+- Plates: `tools/t2/conform_all.py` rebuilt all 98 plate dirs from the relay plus the derived-plates branch (the take-two session's
+  originals: CRT_roomA/B, DR01, DR05, P107, V102, three keyframes, and the V118-V121 machine composites as plate folders);
+  `comp_walk.py` rebuilt V108-V110. The upscales are the plates where a pick has one (as RC2).
+- Fixes found on the way: `docs/take2/shots.json` regenerated (lipcheck read its v1 windows); the chess schedule's "chain"
+  anchor on the v1 clock (the 180-degree swing had fallen back to v1's 154.15); `render_segments.sh` renders the last whole frame
+  (the loop frame was dropped).
+- Checks: check_cuts 0 off onset; chess_check and chess_lens OK; lip sync from the renderer's own records, 15 sung picks, 906 drawn
+  frames, 0 off the formula (P106 with its 0.57x hold). QA: every master frame against the preview (240x136 grey): median
+  difference 1.2/255; the remaining differences are the preview's +-1 frame remap rounding in fast motion (the chess swing, the
+  poster morph) and texture in the cold open. The loop: frame 0 vs the last frame 0.4/255.
+- `work/out/hold_fire_t2_master_minor_fixes.mp4` (1920x1080, 24 fps, 238.67 s, 5,728 frames, H.264 CRF 14, AAC 320k of the mix padded
+  to the film, 845 MB), `hold_fire_t2_x_minor_fixes.mp4` and `hold_fire_t2_hook_31s_minor_fixes.mp4` (the README's X settings).
+- Subtitles: `deliverables/subtitles/hold_fire.{en,zh-Hans,ru,uk,fr}.srt` (`tools/t2/subtitles.py`).

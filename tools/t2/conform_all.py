@@ -9,8 +9,9 @@ Sources, per pick in render/data/picks2.json (TEST_ picks skipped; picks with `f
   * work/...         derived clips: derived/work/ on the derived-plates branch (copy it over the repo first)
 Conform: plates.py with its defaults (the whole clip, 24 fps, cover 1920x1080), --fit keep for stills (README), --key green where
 the pick keys. A pick's `in` is in source seconds, so a plate conformed from 0 serves every `in`. Exceptions with fixed settings:
-V113 (start 0.3, 62 frames: the tablet's clay assets were baked on that plate, tools/t2/tablet_clay.py) and V108-V110 (the
-green-screen walk composites, tools/t2/comp_walk.py, run afterwards).
+V113 (start 0.3, 62 frames: the tablet's clay assets were baked on that plate, tools/t2/tablet_clay.py), V108-V110 (the
+green-screen walk composites, tools/t2/comp_walk.py, run afterwards) and V118-V121 (the machine composites: plate folders on the
+derived-plates branch).
 Plate dirs shared by several picks are conformed once. Existing plate dirs are kept unless --force.
 
     python3 tools/t2/conform_all.py [--force] [--only ID,ID] [--jobs 3]
@@ -28,7 +29,10 @@ sys.path.insert(0, os.path.join(ROOT, 'tools', 't2'))
 import restore_media as R  # noqa: E402
 
 FIXED = {'V113': ['--start', '0.3', '--dur', '2.5833']}
-SKIP_DIRS = {'work/plates/V108', 'work/plates/V109', 'work/plates/V110'}   # comp_walk.py
+SKIP_DIRS = {'work/plates/V108', 'work/plates/V109', 'work/plates/V110',   # comp_walk.py
+             # the verse 1 machines: the walk keyed over the machine plates, composited straight to frames (no video exists);
+             # the plate folders themselves are on the derived-plates branch, derived/work/plates/V118..V121 (copy them over work/)
+             'work/plates/V118', 'work/plates/V119', 'work/plates/V120', 'work/plates/V121'}
 
 
 def ledger_jobs():

@@ -230,7 +230,8 @@ export function buildTimeline(A) {
   const T = A.d;
   const num = (x) => (typeof x === 'number' ? x : x && (x.t ?? x.time ?? x.start));
   const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9'-]/g, '');
-  const pt = (s) => { const [m, x] = String(s).split(':'); return Number(m) * 60 + Number(x); };   // plan time 'm:ss.ss' -> s
+  // plan time 'm:ss.ss' -> s. Plan times were typed against the v1 song; A.v1 carries them to the same musical point in the new one
+  const pt = (s) => { const [m, x] = String(s).split(':'); return A.v1(Number(m) * 60 + Number(x)); };
 
   // ---------------------------------------------------------------------------------------------- anchors (from timing.json)
   const SECN = { CO: 'Intro', V1: 'Verse 1', P1: 'Pre-Chorus 1', C1: 'Chorus 1', X1: 'Post-Chorus 1', V2: 'Verse 2', P2: 'Pre-Chorus 2', C2: 'Chorus 2', X2: 'Post-Chorus 2', BR: 'Bridge', BU: 'Build', DR: 'Drop', OU: 'Outro' };

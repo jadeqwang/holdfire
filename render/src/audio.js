@@ -3,6 +3,13 @@
 import { clamp } from './util.js';
 
 const num = (x) => (typeof x === 'number' ? x : (x && (x.t ?? x.time ?? x.start)));
+// piecewise linear through knots (xs ascending), extrapolated with the end segments' slopes
+function pwl(xs, ys, x) {
+  const n = xs.length;
+  let i = AudioMap.last(xs, x);
+  i = Math.max(0, Math.min(n - 2, i));
+  return ys[i] + (ys[i + 1] - ys[i]) * (x - xs[i]) / (xs[i + 1] - xs[i]);
+}
 
 export class AudioMap {
   constructor(timing, feats) {
@@ -23,6 +30,13 @@ export class AudioMap {
     this.f = (feats && (feats.features || feats.frames || feats)) || {};
     this.kicks = ((feats && feats.kicks) || []).map((k) => (Array.isArray(k) ? k : [num(k), k.s ?? k.strength ?? 1]));
     this.snares = ((feats && feats.snares) || []).map((k) => (Array.isArray(k) ? k : [num(k), k.s ?? k.strength ?? 1]));
+    // the song was replaced by "Hold Fire (minor fixes)" (30 Oct): timing.v1_map pairs v1 times with the new song's times at the
+    // same musical point (beats, then the outro's own anchors). v1(t): a time typed against the v1 song (a plan time, a lip-synced
+    // take's s0) -> the new song; v1inv(t): back. Identity when there is no map.
+    const m = timing.v1_map;
+    this.v1 = m ? (t) => pwl(m.v1, m.v2, t) : (t) => t;
+    this.v1inv = m ? (t) => pwl(m.v2, m.v1, t) : (t) => t;
+    globalThis.__songV1inv = this.v1inv;   // plate/lib.js plateFrame: lip-synced takes run on the v1 clock
   }
 
   static last(arr, t, key = (x) => x) {

@@ -5,7 +5,7 @@
 // drops thrown along rays with tails and satellites, cinnabar sparks that land as red, a fine mist (deterministic, closed form).
 // p: {layout ('columns' | 'row'), t: [4 start times], dur: [4], tFlash, flash: [x, y], brush (true), zoom, pan, seed,
 //     splat {n, reach, red, mist}, dry (0.55: dry-brush streaks), smoke (0.6: a faint drift of the alchemists' smoke)}
-// Times default to line 23's words in timing.json: sulfur 85.00, saltpeter 85.73, thunder 86.42.
+// Times default to line 23's words in timing.json (found by text; fallbacks are v1 times: sulfur 85.00, saltpeter 85.73, thunder 86.42).
 import * as THREE from 'three';
 import { clamp, smooth, range, easeOutCubic, easeInOutCubic, hash1 } from '../../../util.js';
 import { loadT2HistoryFonts, BRUSH } from './fonts.js';
@@ -17,9 +17,9 @@ const LAYOUTS = {
 };
 
 export function brushTimes(A, p = {}) {
-  const l = A.lines.find((x) => /^sulfur and saltpeter/.test(x.text));
-  const w = (j, d) => (l && l.words[j] ? l.words[j].t : d);
-  const s = w(0, 85.0), sp = w(2, 85.73), th = w(3, 86.42);
+  const l = A.lines.find((x) => /^sulfur,? (and )?saltpeter/.test(x.text));   // the new song sings "sulfur, saltpeter" (no "and")
+  const w = (word, d) => { const W = l && l.words.find((x) => x.w.toLowerCase().replace(/[^a-z]/g, '') === word); return W ? W.t : A.v1(d); };
+  const s = w('sulfur', 85.0), sp = w('saltpeter', 85.73), th = w('thunder', 86.42);
   return { t: p.t || [s, s + 0.32, sp, sp + 0.33], dur: p.dur || [0.31, 0.31, 0.32, 0.29], tFlash: p.tFlash ?? th };
 }
 

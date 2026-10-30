@@ -44,12 +44,34 @@ Made 30 Oct 2026 from a cloud session, which has no copy of Jade's local `work/`
 | `derived/media/kf2/candidates/DR03_mir_v3__maybe_t2d_mirror_v3.png` | 1.5 MB | – | candidate only, not used by any pick (see below) |
 | `derived/media/kf2/candidates/DR03_mir_v3__maybe_t2d_mirror_v3e2.jpg` | 0.2 MB | – | candidate only, not used by any pick (see below) |
 | `derived/media/kf2/candidates/V207_nbp_v2__before_fix.jpg` | 2.4 MB | – | candidate only, not used by any pick (see below) |
-| `derived/work/g4/derived/DR05_mirror_t1.mp4` | 6.7 MB | DR05, DR06 | **Reconstruction** (28 Oct, cloud session), not the original: checked against RC4. Recipe: `tools/t2/derived/rebuild_DR05_mirror.py` (reproduces this file byte for byte). |
-| `derived/work/t2/mirror/P107_push.mp4` | 4.9 MB | P107 | **Reconstruction** (28 Oct, cloud session), not the original: fitted to RC4. Recipe: `tools/t2/derived/rebuild_P107_push.py`. |
+| `derived/reconstructed/work/g4/derived/DR05_mirror_t1.mp4` | 6.7 MB | (DR05, DR06) | **Reconstruction**, kept beside the original (see below) (28 Oct, cloud session), not the original: checked against RC4. Recipe: `tools/t2/derived/rebuild_DR05_mirror.py` (reproduces this file byte for byte). |
+| `derived/reconstructed/work/t2/mirror/P107_push.mp4` | 4.9 MB | (P107) | **Reconstruction**, kept beside the original (see below) (28 Oct, cloud session), not the original: fitted to RC4. Recipe: `tools/t2/derived/rebuild_P107_push.py`. |
 
 40 files, 82.0 MB in all; the largest is 6.7 MB (GitHub's limit is 100 MB).
 
-## Not here
+## Originals from the take-two session (added 30 Oct)
+
+The session that made take two still had its working files, so the originals are here. Copy `derived/work` and
+`derived/media` over the repo root as above; the reconstructions moved to `derived/reconstructed/` (same relative paths) and are
+no longer needed, but are kept for comparison.
+
+| File | Size | Used by (render/data/picks2.json) | Kind | How it was made |
+|---|---|---|---|---|
+| `derived/work/t2/g2/crt/CRT_roomA.mp4` | 0.6 MB | CRT_roomA | original | `tools/t2/derived/crt_rooms.sh` (from `t2_C103L_sd25_t1_d610863352`) |
+| `derived/work/t2/g2/crt/CRT_roomB.mp4` | 1.0 MB | CRT_roomB | original | `tools/t2/derived/crt_rooms.sh` (from `t2_C103R_sd25_t2_1584d49648`) |
+| `derived/work/g4/derived/DR01_mirror_t1.mp4` | 13.3 MB | DR01 | original | `python3 tools/t2/derived/mirror_comp.py media/gen/t2_DR01_veo_t1_6514fc0a3e.mp4 work/g4/derived/DR01_mirror_t1.mp4 --right=pale` |
+| `derived/work/g4/derived/DR05_mirror_t1.mp4` | 4.8 MB | DR05, DR06 | original | `python3 tools/t2/derived/mirror_comp.py media/gen/t2_DR05_veo_t1_1099c66960.mp4 work/g4/derived/DR05_mirror_t1.mp4 --right=teal --reverse` |
+| `derived/work/t2/mirror/P107_push.mp4` | 6.9 MB | P107 | original | `tools/t2/derived/p107_push.py` (take `t2_P107_veo31_m1`, eye still `media/kf2/P107_eye_nbp_v1_2k.jpg`) |
+| `derived/work/t2/mirror/V102_lettered.mp4` | 3.7 MB | V102 | original | `tools/t2/derived/v102_letter.py` on the frames of `t2_V102_sd20_t2_b72e2c06c8` (expects them extracted to `work/t2/mirror/v102/f_*.jpg`; paths are hard-coded) |
+| `derived/media/kf2/DR03_mir_v3.jpg` | 0.3 MB | DR03 | original | the keyframe the pick uses (the two `candidates/DR03_*` files are no longer needed) |
+| `derived/media/kf2/V207_nbp_v2fix.jpg` | 0.3 MB | V207 | original | `t2g3_V207_nbp_v2` with its bottom band faded to paper (hand fix; no script) |
+| `derived/media/kf2/V123_nbp_v1_key.jpg` | 0.6 MB | V123K | original | V123_nbp_v1 with its black ground painted green (see the pick's note; no script survives) |
+
+Scripts added to `tools/t2/derived/`: `mirror_comp.py` (DR01, DR05), `crt_rooms.sh` (CRT_roomA/B, recovered verbatim from the
+session transcript), `p107_push.py` (P107), `v102_letter.py` (V102), `letter.py` (paints clean RARE EARTH / 1420 MHz marks on
+stills; used for keyframe fixes). They are copied as they ran, with the session's absolute paths.
+
+## Not here (before 30 Oct; superseded by the section above)
 
 **Derived clips with no copy in the cloud session** (Jade's local `work/` has them; nothing in git rebuilds them):
 

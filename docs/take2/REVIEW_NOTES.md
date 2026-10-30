@@ -482,6 +482,9 @@ final hit would land, so there is no final hit.
 Foster confirmed the edge line ("um-ma Na-an-ni-ma", "Thus says Nanni"), identified the ṣi of Ea-naṣir as the sign ZE₂, and said the
 last wedge of a nine-wedge 9 is the tall one on the right (the stylus's second press). Line 1, *a-na é-a-na-ṣi-ir* ("to Ea-nasir"),
 is now on the tablet above Nanni's line (`cuneiform.js` EA_NASIR, `tablet.js` EDGE); the font subset adds A, E2, ZE2 and IR
-(Noto Sans Cuneiform 2.001, outlines of the existing 20 signs identical); `cuneiform_card.py` checks both lines. The 9 stays as nine
-wedges (Foster: scribes usually wrote 10 LAL 1, but nine wedges is fine "to make your point"; 89 would be 1;30 LAL 1, which the take's
-two presses can't make). The preview's V113 (0:25.0-0:27.0) is re-rendered.
+(Noto Sans Cuneiform 2.001, outlines of the existing 20 signs identical); `cuneiform_card.py` checks both lines. Then (Jade: make it
+10 - 1) 89 = 1;29 is written the scribes' way, 1;(30 LAL 1), 𒁹 𒌍𒇲𒁹, the last 1 tilted ~12 degrees to the left (`tablet.js` LAL_TILT,
+turned about its head). The take's two touches still make the two wedges: the sixties wedge, and the tilted 1, which is now a whole
+DISH (no partial NINE DISH); 89's place gap is re-solved so the 1's head is on the second landing. 89 reads 30-, 1;30-, 1;29 over
+the shot. `cuneiformNumber` writes any units 9 this way; `cuneiform_card.py` reads LAL as minus the next sign. Font + LAL (U+121F2).
+The preview's V113 (0:25.0-0:27.0) is re-rendered.

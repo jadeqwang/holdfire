@@ -2,7 +2,8 @@
 """Check V113's tablet cuneiform (render/src/scenes/t2/lyric/cuneiform.js) and render a test card.
 
 For every Fibonacci number the module writes, the sign sequence it produces is read back from the Unicode names alone
-(unicodedata.name: DISH = 1, MIN = 2, "THREE DISH" = 3 ...; U = 10, "U U" = 20, "FOUR U" = 40 ...), summed per place, and the
+(unicodedata.name: DISH = 1, MIN = 2, "THREE DISH" = 3 ...; U = 10, "U U" = 20, "FOUR U" = 40 ...; LAL subtracts the sign after it),
+summed per place, and the
 places are read in base 60; the result must equal the number. Every sign must be in the subset font's cmap (fontTools glyph
 name printed). The letter lines' signs (Ea-nasir tablet obv. 1 and 3) are printed with their names. The card (1920x1080) shows number -> glyphs -> names.
 
@@ -40,6 +41,18 @@ def sign_value(cp):
     raise ValueError(f'not a sexagesimal numeral sign: U+{cp:X} {name}')
 
 
+def place_value(place):
+    """One place's value: the signs summed, except that LAL ('minus') subtracts the sign after it (30 LAL 1 = 29)."""
+    v, neg = 0, False
+    for cp in place:
+        if unicodedata.name(chr(cp)) == 'CUNEIFORM SIGN LAL':
+            neg = True
+            continue
+        v += -sign_value(cp) if neg else sign_value(cp)
+        neg = False
+    return v
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=str(ROOT / 'work/t2/tablet/cuneiform_card.png'))
@@ -50,7 +63,7 @@ def main():
     cmap = TTFont(str(FONT)).getBestCmap()
     rows, ok = [], True
     for n, places in zip(data['fib'], data['nums']):
-        vals = [sum(sign_value(cp) for cp in place) for place in places]
+        vals = [place_value(place) for place in places]
         got = 0
         for v in vals:
             if not 0 < v < 60:

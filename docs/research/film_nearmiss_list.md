@@ -47,7 +47,7 @@ From `render/data/t2/nearmisses.json` on branch `claude/hold-fire-take-two`, 29 
 
 **Every site entry is in the film** (all 18).
 
-**Two dates differ** (both defensible; pick one and the film or the site can follow):
+**Two dates differ.** Jade's decision (30 Oct): the film keeps the explosion date for Damascus and the flight date for Minot, so the site should change to match:
 - 1980-09-19: site says 18 Sep (the socket was dropped that evening; the explosion came about 03:00 on 19 Sep). The film uses the explosion date.
 - 2007-08-30: site says 29 Aug (the missiles were loaded that day; the flight was 30 Aug). The film uses the flight date.
 

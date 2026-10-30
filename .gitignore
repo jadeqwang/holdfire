@@ -5,3 +5,7 @@ node_modules/
 __pycache__/
 render/out/
 render/data/picks2.json.lock
+
+# derived/ keeps the source clips and keyframes cloud sessions cannot rebuild (derived/README.md)
+!derived/media/
+!derived/work/

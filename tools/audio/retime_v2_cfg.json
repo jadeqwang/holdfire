@@ -1,6 +1,239 @@
 {
+ "doc": "tools/audio/retime_v2.py config. Knots: v1 beat i -> new beat i (analysis/retime_v2_beats.json) for beats 2..352, then the outro measured on the new vocal stem (work/stems/vocals.wav, 5 ms envelope): the outro count's first 'One' 221.64 and 'The count goes higher' 224.02, the full 'Hold your fire' 228.98, the end of its 'fire' 230.45 (v1's 4 s held 'fire' + choir, 234.49-238.49, is gone), the last whisper 234.00-235.40, the end card's anchor 0.13 s after it (as v1: last vocal 243.921, final hit 244.05), and the film's end 3.11 s after that (v1's card length). The new MP3 ends at 236.0 s, where v1's final hit would land: there is no final hit, the end card holds over 2.6 s of silence.",
  "beats_fit": "analysis/retime_v2_beats.json",
- "beat_range": [2, 352],
- "extra_knots": [],
- "edits": []
+ "beat_range": [
+  2,
+  352
+ ],
+ "extra_knots": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   225.56,
+   221.64
+  ],
+  [
+   227.792,
+   224.02
+  ],
+  [
+   233.17,
+   228.98
+  ],
+  [
+   238.493,
+   230.45
+  ],
+  [
+   242.08,
+   234.0
+  ],
+  [
+   243.921,
+   235.4
+  ],
+  [
+   244.05,
+   235.53
+  ],
+  [
+   247.16,
+   238.64
+  ]
+ ],
+ "film_duration": 238.64,
+ "edits": [
+  {
+   "op": "drop_word",
+   "section": "Intro",
+   "k": 0,
+   "i": 6,
+   "w": "eight"
+  },
+  {
+   "op": "line",
+   "section": "Intro",
+   "k": 0,
+   "set": {
+    "note": "whispered count #1: 6 whispers on 6 consecutive beats (the v1 render doubled the last 'eight'; the minor-fixes render drops that echo)"
+   }
+  },
+  {
+   "op": "hit",
+   "kind": "intro_whisper",
+   "i": 6,
+   "w": "eight",
+   "drop": true
+  },
+  {
+   "op": "deviation",
+   "i": 0,
+   "set": {
+    "sung": "whispered twice: #1 'One... one... two... three... five... eight...' (one whisper per beat; the v1 render's doubled 'eight' is gone); #2 'One... two... three... five... eight...' (the second 'one' is NOT whispered) plus a short extra whisper heard as 'yeah' after 'eight'"
+   }
+  },
+  {
+   "op": "drop_word",
+   "section": "Verse 2",
+   "k": 1,
+   "i": 1,
+   "w": "and",
+   "text": "sulfur, saltpeter, thunder in the sky;"
+  },
+  {
+   "op": "word",
+   "section": "Outro",
+   "k": 1,
+   "i": 7,
+   "was": "its",
+   "set": {
+    "w": "their"
+   },
+   "text": "every one could've burned. Every one held their fire."
+  },
+  {
+   "op": "word",
+   "section": "Outro",
+   "k": 5,
+   "i": 0,
+   "was": "Hold",
+   "set": {
+    "start": 228.98,
+    "end": 229.355
+   }
+  },
+  {
+   "op": "word",
+   "section": "Outro",
+   "k": 5,
+   "i": 1,
+   "was": "your",
+   "set": {
+    "start": 229.36,
+    "end": 229.595
+   }
+  },
+  {
+   "op": "word",
+   "section": "Outro",
+   "k": 5,
+   "i": 2,
+   "was": "fire",
+   "set": {
+    "start": 229.6,
+    "end": 230.4
+   }
+  },
+  {
+   "op": "word",
+   "section": "Outro",
+   "k": 6,
+   "i": 0,
+   "was": "Hold",
+   "set": {
+    "start": 234.0,
+    "end": 234.355
+   }
+  },
+  {
+   "op": "word",
+   "section": "Outro",
+   "k": 6,
+   "i": 1,
+   "was": "your",
+   "set": {
+    "start": 234.36,
+    "end": 234.765
+   }
+  },
+  {
+   "op": "word",
+   "section": "Outro",
+   "k": 6,
+   "i": 2,
+   "was": "fire",
+   "set": {
+    "start": 234.77,
+    "end": 235.4
+   }
+  },
+  {
+   "op": "event",
+   "type": "drums_out",
+   "match": "after the last full",
+   "set": {
+    "t": 230.32,
+    "desc": "drums/808s cut after the last full \"Hold your fire\" (the strongest late onset, a hit at 230.32); the v1 render's held 'fire' and choir are gone; piano + quiet beats to the last whisper"
+   },
+   "after": 200
+  },
+  {
+   "op": "event",
+   "type": "choir_wide",
+   "match": "stacked/choir",
+   "drop": true,
+   "after": 200
+  },
+  {
+   "op": "event",
+   "type": "vocal_gap",
+   "match": "no vocals for",
+   "set": {
+    "t": 230.45,
+    "until": 234.0,
+    "desc": "no vocals for 3.55 s"
+   },
+   "after": 200
+  },
+  {
+   "op": "event",
+   "type": "vocal",
+   "match": "last vocal ends",
+   "set": {
+    "t": 235.4
+   },
+   "after": 200
+  },
+  {
+   "op": "event",
+   "type": "impact",
+   "match": "FINAL HIT",
+   "set": {
+    "t": 235.53,
+    "desc": "FINAL HIT (end card anchor): the new render has no final hit (the file ends at 236.0, where v1's 808 + crash would land); the end card lands 0.13 s after the last whisper ends, as v1's hit did"
+   },
+   "after": 200
+  },
+  {
+   "op": "event",
+   "type": "end",
+   "match": "final 808 decays",
+   "set": {
+    "t": 236.0,
+    "desc": "the song ends (the last whisper's reverb is cut at the end of the file, ~-47 dBFS)"
+   },
+   "after": 200
+  },
+  {
+   "op": "event",
+   "type": "end",
+   "match": "last audible sound",
+   "set": {
+    "t": 236.0
+   },
+   "after": 200
+  },
+  {
+   "op": "event",
+   "type": "end",
+   "match": "end of file",
+   "set": {
+    "t": 238.64,
+    "desc": "end of the film: the song (236.0) plus a silent tail, so the end card holds 3.11 s as in v1"
+   },
+   "after": 200
+  }
+ ]
 }

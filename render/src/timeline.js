@@ -261,7 +261,8 @@ export function buildTimeline(A) {
   const HITS = T.hits || [];
   const hit = (kind, i) => { const h = HITS.filter((x) => x.kind === kind)[i]; if (!h) throw new Error(`no hit ${kind}[${i}]`); return { t: h.t, kind: 'hit', ref: `hit ${kind}[${i}] "${h.word}"` }; };
   const hitWord = (word) => { const h = HITS.find((x) => x.word === word); return { t: h.t, kind: 'hit', ref: `hit "${word}"` }; };
-  const ev = (type, re, after = 0) => { const e = (T.events || []).find((x) => x.type === type && x.t >= after && (!re || re.test(x.desc || ''))); if (!e) throw new Error(`no event ${type} ${re}`); return { t: e.t, kind: 'event', ref: `event ${type} @${e.t} (${(e.desc || '').slice(0, 40)})` }; };
+  // after: a v1 time (typed), carried to the new song like the plan times
+  const ev = (type, re, after = 0) => { const e = (T.events || []).find((x) => x.type === type && x.t >= A.v1(after) && (!re || re.test(x.desc || ''))); if (!e) throw new Error(`no event ${type} ${re}`); return { t: e.t, kind: 'event', ref: `event ${type} @${e.t} (${(e.desc || '').slice(0, 40)})` }; };
   const secStart = (sec) => ({ t: A.sections.find((s) => s.name === SECN[sec]).start, kind: 'section', ref: `${SECN[sec]} start` });
   const START = { t: 0, kind: 'start', ref: 'file start' };
 
@@ -389,9 +390,10 @@ export function buildTimeline(A) {
   co.push(S('0:05.30', wd('CO', 0, 'five'), { ...over(plate(), { scene: 't2_spiral_trace', p: { count: 5, hand: 1, center: [960, 540], r0: 60, r1: 480, turns: 0.42, t0: wd('CO', 0, 'five').t + 0.04, dur: 0.42 } }), method: 'video', era: ERA.spiral, look: LK.photo,
     want: 'Spiral aloe (Aloe polyphylla) from above; its five spiral rows of leaves trace in gold (the one real count)' }));
   co.push(S('0:06.00', wd('CO', 0, 'eight', 0), spiral('Hurricane from orbit (log spiral: no golden-rectangle overlay)')));
-  // Jade's note (26 Oct): the doubled "eight" is a stylistic echo: no second numeral; the galaxy cuts in on the beat after the echo
-  const echo1 = wd('CO', 0, 'eight', 1);
-  const coGal = S(null, beatK(echo1.t, 0, 'beat after the echoed "eight" (Jade\'s note: cut on the beat, no numeral)'), { ...spiral('Spiral galaxy, face on (if ESA/Hubble: visible "ESA/Hubble" credit); no numeral (the echoed "eight")'),
+  // Jade's note (26 Oct): the doubled "eight" was a stylistic echo (no second numeral; the galaxy cut on the beat after it). The
+  // minor-fixes song (30 Oct) drops the echo, so the galaxy keeps that same beat: the second beat after "eight"
+  const eight1 = wd('CO', 0, 'eight');
+  const coGal = S(null, beatK(eight1.t, 1, 'second beat after the whispered "eight" (where the v1 echo was; cut on the beat, no numeral)'), { ...spiral('Spiral galaxy, face on (if ESA/Hubble: visible "ESA/Hubble" credit); no numeral (the echoed "eight")'),
     notes: 'plan prints 0:06.63 (the echo); Jade: cut on the next beat instead' });
   co.push(coGal);
   const redT = eighth('0:07.0');

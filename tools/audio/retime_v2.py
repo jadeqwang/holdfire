@@ -29,7 +29,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 V1 = os.path.join(ROOT, 'analysis', 'timing_v1.json')
 OUT = [os.path.join(ROOT, 'analysis', 'timing.json'), os.path.join(ROOT, 'render', 'data', 'timing.json')]
 REPORT = os.path.join(ROOT, 'analysis', 'retime_v2.json')
-NEW_DUR = 236.04            # decoded length of the new MP3 (ffprobe), s
+SONG_DUR = 236.0            # decoded length of the new MP3 (11,328,000 samples at 48 kHz, gapless decode), s
 
 
 def load_knots(cfg):
@@ -76,13 +76,16 @@ def main():
     for key in ('bars', 'beat_zones', 'deviations', 'events', 'hits', 'lines', 'sections'):
         N[key] = warp_tree(T[key], W)
     N['tempo'] = warp_tree(T['tempo'], W)
-    N['duration'] = NEW_DUR
-    N['audio']['duration_s'] = NEW_DUR
+    # the film runs past the song: the new render ends where v1's final hit was, so the end card holds over a silent tail
+    N['duration'] = cfg['film_duration']
+    N['audio']['duration_s'] = SONG_DUR
     N['audio']['file'] = 'inputs/Hold Fire.mp3'
     N['audio']['v1_file'] = 'inputs/Hold Fire (v1).mp3'
     # edits: explicit per-item overrides measured on the new song (cfg['edits'], applied in order)
     for e in cfg['edits']:
         apply_edit(N, e)
+    N['lines'] = [l for l in N['lines'] if l['words']]
+    N['hits'].sort(key=lambda h: h['t'])
     # beat-relative fields
     beats = np.array(N['beats'])
     for h in N['hits']:
@@ -90,8 +93,8 @@ def main():
     for l in N['lines']:
         if l['words']:
             l['start'] = l['words'][0]['start']; l['end'] = l['words'][-1]['end']
-    N['bars'] = [{**b, 'end': N['bars'][i + 1]['t'] if i + 1 < len(N['bars']) else min(b['end'], NEW_DUR)} for i, b in enumerate(N['bars'])]
-    N['sections'][-1]['end'] = NEW_DUR
+    N['bars'] = [{**b, 'end': N['bars'][i + 1]['t'] if i + 1 < len(N['bars']) else min(b['end'], N['duration'])} for i, b in enumerate(N['bars'])]
+    N['sections'][-1]['end'] = N['duration']
     N['v1_map'] = {'doc': 'v1 song time -> new song time at the same musical point (tools/audio/retime_v2.py): beat knots, then '
                           'the outro anchors. render/src/audio.js A.v1 / A.v1inv.',
                    'v1': [round(float(x), 3) for x in k1], 'v2': [round(float(x), 3) for x in k2]}
@@ -101,6 +104,40 @@ def main():
     for p in OUT:
         json.dump(N, open(p, 'w'), indent=1, ensure_ascii=False)
     print('wrote', ', '.join(os.path.relpath(p, ROOT) for p in OUT))
+    warp_features(N, k1, k2)
+
+
+def warp_features(N, k1, k2):
+    """audio.json (per-frame features, kicks, snares; tools/audio/features.py needs the drum-stem envelopes, not in the repo):
+    each new frame i takes the v1 frame at v1inv(i / 24), kicks and snares go through W, and 'sung' is rebuilt from the new
+    word spans. Past the song's end (the silent tail) every feature is its minimum."""
+    F = json.load(open(os.path.join(ROOT, 'analysis', 'audio_v1.json')))
+    fps = F['fps']; n = int(np.ceil(N['duration'] * fps - 1e-6))
+    inv = lambda t: np.interp(t, k2, k1, left=None, right=None)
+    src = np.clip(np.floor(np.array([inv(i / fps) for i in range(n)]) * fps + 1e-6).astype(int), 0, F['n_frames'] - 1)
+    out = dict(F)
+    out['doc'] = ('retimed to the minor-fixes song by tools/audio/retime_v2.py (frame i = the v1 frame at v1inv(i/24); kicks/snares '
+                  'through timing.json v1_map; sung from the new word spans). v1: ' + F['doc'])
+    out['n_frames'] = n; out['duration'] = N['duration']
+    feats = {}
+    for k, v in F['features'].items():
+        v = np.array(v)
+        w = v[src]
+        w[np.arange(n) / fps >= SONG_DUR] = v.min()
+        feats[k] = [round(float(x), 3) for x in w]
+    sung = np.zeros(n, int)
+    for l in N['lines']:
+        for wd in l['words']:
+            sung[int(wd['start'] * fps):int(np.ceil(wd['end'] * fps))] = 1
+    if 'sung' in feats:
+        feats['sung'] = sung.tolist()
+    out['features'] = feats
+    Wf = lambda t: round(float(np.interp(t, k1, k2)), 3)
+    for key in ('kicks', 'snares'):
+        out[key] = [[Wf(t), s] for t, s in F[key] if Wf(t) < SONG_DUR]
+    for p in (os.path.join(ROOT, 'analysis', 'audio.json'), os.path.join(ROOT, 'render', 'data', 'audio.json')):
+        json.dump(out, open(p, 'w'), separators=(',', ':'))
+    print('wrote analysis/audio.json, render/data/audio.json', n, 'frames')
 
 
 def find_line(N, sec, k):
@@ -117,15 +154,31 @@ def apply_edit(N, e):
         for k in ('note', 'verify'):
             if k in e:
                 l[k] = e[k]
-    elif op == 'hit':               # set / drop hits by (kind, word, index)
+    elif op == 'drop_word':         # a word the new song no longer sings
+        l = find_line(N, e['section'], e['k'])
+        assert l['words'][e['i']]['w'] == e['w'], (l['words'][e['i']], e)
+        del l['words'][e['i']]
+        if 'text' in e:
+            l['text'] = e['text']
+    elif op == 'word':              # change a word's text and/or times (new clock)
+        l = find_line(N, e['section'], e['k'])
+        w = l['words'][e['i']]
+        assert w['w'] == e['was'], (w, e)
+        w.update(e['set'])
+        if 'text' in e:
+            l['text'] = e['text']
+    elif op == 'line':              # line-level fields (text, note)
+        find_line(N, e['section'], e['k']).update(e['set'])
+    elif op == 'hit':               # set / drop hits by (kind, index)
         hs = [h for h in N['hits'] if h['kind'] == e['kind']]
         h = hs[e['i']]
+        assert h['word'] == e['w'], (h, e)
         if e.get('drop'):
             N['hits'].remove(h)
         else:
             h.update(e['set'])
     elif op == 'event':
-        ev = [x for x in N['events'] if x['type'] == e['type'] and e['match'] in x.get('desc', '')][e.get('i', 0)]
+        ev = [x for x in N['events'] if x['type'] == e['type'] and e['match'] in x.get('desc', '') and x['t'] >= e.get('after', 0)][e.get('i', 0)]
         if e.get('drop'):
             N['events'].remove(ev)
         else:

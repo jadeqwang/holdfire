@@ -477,3 +477,11 @@ final hit would land, so there is no final hit.
   v1inv(i/24); `tools/t2/remap_preview.py`), with the ranges that changed re-rendered at 1080p and spliced: line 23
   (83.67-86.25), line 68 (214.88-220.38), OU10 to the end (226.13-238.64). The full-res master needs a local render with the full
   `work/` (the CRT room clips, DR01 and V102 exist only there; `derived/` on the `derived-plates` branch has the rest).
+
+## The tablet's letter lines (30 Oct, after Benjamin R. Foster's reply)
+Foster confirmed the edge line ("um-ma Na-an-ni-ma", "Thus says Nanni"), identified the ṣi of Ea-naṣir as the sign ZE₂, and said the
+last wedge of a nine-wedge 9 is the tall one on the right (the stylus's second press). Line 1, *a-na é-a-na-ṣi-ir* ("to Ea-nasir"),
+is now on the tablet above Nanni's line (`cuneiform.js` EA_NASIR, `tablet.js` EDGE); the font subset adds A, E2, ZE2 and IR
+(Noto Sans Cuneiform 2.001, outlines of the existing 20 signs identical); `cuneiform_card.py` checks both lines. The 9 stays as nine
+wedges (Foster: scribes usually wrote 10 LAL 1, but nine wedges is fine "to make your point"; 89 would be 1;30 LAL 1, which the take's
+two presses can't make). The preview's V113 (0:25.0-0:27.0) is re-rendered.

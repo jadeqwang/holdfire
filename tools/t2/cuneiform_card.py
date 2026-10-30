@@ -4,7 +4,7 @@
 For every Fibonacci number the module writes, the sign sequence it produces is read back from the Unicode names alone
 (unicodedata.name: DISH = 1, MIN = 2, "THREE DISH" = 3 ...; U = 10, "U U" = 20, "FOUR U" = 40 ...), summed per place, and the
 places are read in base 60; the result must equal the number. Every sign must be in the subset font's cmap (fontTools glyph
-name printed). The Nanni line's signs are printed with their names. The card (1920x1080) shows number -> glyphs -> names.
+name printed). The letter lines' signs (Ea-nasir tablet obv. 1 and 3) are printed with their names. The card (1920x1080) shows number -> glyphs -> names.
 
   python3 tools/t2/cuneiform_card.py [--out work/t2/tablet/cuneiform_card.png]
 """
@@ -44,7 +44,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=str(ROOT / 'work/t2/tablet/cuneiform_card.png'))
     a = ap.parse_args()
-    js = ("import('%s').then((m) => console.log(JSON.stringify({fib: m.FIB, nums: m.FIB.map(m.cuneiformNumber), nanni: m.NANNI})))"
+    js = ("import('%s').then((m) => console.log(JSON.stringify({fib: m.FIB, nums: m.FIB.map(m.cuneiformNumber), lines: [m.EA_NASIR, m.NANNI]})))"
           % MOD.as_uri())
     data = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', js], text=True))
     cmap = TTFont(str(FONT)).getBestCmap()
@@ -62,10 +62,11 @@ def main():
         ok &= good
         print(f'{n:3d} = {";".join(map(str, vals)):>5}  {" ".join("".join(map(chr, p)) for p in places):<6} {names}   glyphs {glyphs}  {"OK" if good else "MISMATCH"}')
         rows.append((n, places, vals, names, good))
-    print('Nanni line:', data['nanni']['src'], '|', data['nanni']['translit'])
-    for v, cp in data['nanni']['signs']:
-        print(f'   {v:3s} U+{cp:X} {chr(cp)} {unicodedata.name(chr(cp))}  glyph {cmap.get(cp)}')
-        ok &= bool(cmap.get(cp))
+    for ln in data['lines']:
+        print('letter line:', ln['src'], '|', ln['translit'])
+        for v, cp in ln['signs']:
+            print(f'   {v:3s} U+{cp:X} {chr(cp)} {unicodedata.name(chr(cp))}  glyph {cmap.get(cp)}')
+            ok &= bool(cmap.get(cp))
 
     # the card
     W, H = 1920, 1080
@@ -75,7 +76,7 @@ def main():
     fl = ImageFont.truetype(str(LATIN), 22)
     fls = ImageFont.truetype(str(LATIN), 17)
     d.text((60, 30), 'V113 tablet: Fibonacci in sexagesimal cuneiform (values read back from the Unicode names)', font=fl, fill=(40, 24, 10))
-    y = 90
+    y = 70
     for n, places, vals, names, good in rows:
         d.text((60, y + 18), f'{n:>3}', font=fl, fill=(40, 24, 10))
         d.text((130, y + 18), ';'.join(map(str, vals)), font=fl, fill=(110, 80, 50))
@@ -86,14 +87,15 @@ def main():
             x += int(d.textlength(s, font=fc)) + 34
         d.text((560, y + 22), names, font=fls, fill=(40, 24, 10))
         d.text((1800, y + 18), 'OK' if good else 'BAD', font=fl, fill=(20, 120, 40) if good else (200, 20, 20))
-        y += 74
-    nn = data['nanni']
-    d.text((60, y + 20), nn['src'] + ':  ' + nn['translit'], font=fl, fill=(40, 24, 10))
-    x = 760
-    for v, cp in nn['signs']:
-        d.text((x, y + 44), chr(cp), font=fc, fill=(30, 18, 8), anchor='ls')
-        d.text((x, y + 70), v, font=fls, fill=(110, 80, 50))
-        x += int(d.textlength(chr(cp), font=fc)) + 22
+        y += 70
+    for nn in data['lines']:
+        d.text((60, y + 20), nn['src'] + ':  ' + nn['translit'], font=fl, fill=(40, 24, 10))
+        x = 840
+        for v, cp in nn['signs']:
+            d.text((x, y + 44), chr(cp), font=fc, fill=(30, 18, 8), anchor='ls')
+            d.text((x, y + 70), v, font=fls, fill=(110, 80, 50))
+            x += int(d.textlength(chr(cp), font=fc)) + 22
+        y += 84
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     im.save(a.out)
     print('card ->', a.out, '| all OK' if ok else '| FAILED')

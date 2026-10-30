@@ -15,7 +15,7 @@
 // p: {clip ('V113'), size (sign px), gain}
 import { clamp, lerp } from '../../../util.js';
 import { scratch, knock, grainTile } from './kit.js';
-import { FIB, cuneiformNumber, NANNI, cps } from './cuneiform.js';
+import { FIB, cuneiformNumber, EA_NASIR, NANNI, cps } from './cuneiform.js';
 import { picks2, plateMeta, plateFrame, withPick } from '../plate/lib.js';
 
 const ASSET = 'assets/t2/tablet';
@@ -65,8 +65,10 @@ function tipAt(f) {
 const PRESSES = [{ f: 14, key: 'sixties' }, { f: 42, key: 'last' }];
 
 // ------------------------------------------------------------------------------------------------ the inscription
-// tablet space: u along a row, v down the tablet (row 2's baseline at v = 0, row 1's at -ROW, Nanni's at +NANNI_V)
-const GAP = 30, SIGN_GAP = 3, ROW = 58, NANNI_V = 58, NANNI_PX = 34;
+// tablet space: u along a row, v down the tablet (row 2's baseline at v = 0, row 1's at -ROW, the letter's lines at EDGE's v)
+const GAP = 30, SIGN_GAP = 3, ROW = 58, NANNI_PX = 28;
+// the letter's lines under the ruling: obverse 1 "to Ea-nasir" (added 30 Oct, the s,i sign confirmed by B. R. Foster), then 3, Nanni
+const EDGE = [[EA_NASIR, 46], [NANNI, 94]];
 // Noto Sans Cuneiform geometry (em): a vertical wedge's head centre is 0.69 above the baseline; DISH's head centre is 0.208 from
 // its origin; NINE DISH is four columns of two short wedges and a tall fifth column at 1.096-1.331 (head centre 1.2135)
 const HEAD_Y = 0.69, DISH_HX = 0.208, NINE_SPLIT = 1.089, NINE_HX = 1.2135, WEDGE_W = 0.24;
@@ -201,13 +203,15 @@ export default {
     const uEnd = Math.max(...items.map((x) => x.u + gi.measureText(x.s).width));
     rule(gi, -14, uEnd + 10, -ROW + 13);
     rule(gi, -8, uEnd + 10, 13); rule(gi, -8, uEnd + 10, 19);
-    // the Nanni line: already on the tablet (dried a little)
-    let u = 8;
+    // the letter's lines: already on the tablet (dried a little)
     gi.font = `400 ${NANNI_PX}px L2Cun`;
-    for (const [, cp] of NANNI.signs) {
-      const s = cps([cp]);
-      pressed(gi, { s, u, v: NANNI_V, size: NANNI_PX });
-      u += gi.measureText(s).width + 10;
+    for (const [line, v] of EDGE) {
+      let u = 8;
+      for (const [, cp] of line.signs) {
+        const s = cps([cp]);
+        pressed(gi, { s, u, v, size: NANNI_PX });
+        u += gi.measureText(s).width + 7;
+      }
     }
     for (const it of items) {
       if (!it.press) { pressed(gi, it); continue; }

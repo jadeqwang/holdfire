@@ -1,0 +1,12 @@
+{
+ "fps": 24,
+ "n": 10,
+ "w": 1920,
+ "h": 1080,
+ "src": "composite work/plates/WALK_key t0=3.5 over media/kf2/V118_nbp_v1.jpg",
+ "start": 0,
+ "dur": 0.4167,
+ "fit": "cover",
+ "kind": "video",
+ "key": null
+}

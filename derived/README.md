@@ -84,3 +84,25 @@ stills; used for keyframe fixes). They are copied as they ran, with the session'
 - `media/kf2/DR03_mir_v3.jpg` (pick DR03): no job carries that name. Two mirror-reveal generations are candidates, `candidates/DR03_mir_v3__maybe_t2d_mirror_v3.png` and `__maybe_t2d_mirror_v3e2.jpg`; compare them with the DR03 plate before using either.
 - `media/kf2/V207_nbp_v2fix.jpg` (pick V207): a hand fix of `t2g3_V207_nbp_v2` (its bottom band faded to paper to remove a leaked figure). The unfixed v2 is `candidates/V207_nbp_v2__before_fix.jpg`.
 - `media/kf2/V123_nbp_v1_key.jpg` (pick V123K): derived from V123_nbp_v1 (its black ground keyed to green, see the pick's note); no script in git.
+
+## Verse 1 machine composites (added 30 Oct)
+
+Plate folders (conformed frames + `meta.json`), copied whole from the take-two session. They were written straight to frames by
+the compositor, so there is no intermediate mp4. Copy `derived/work/plates/*` to `work/plates/`; the renderer reads them as they
+are (no `plates.py` step).
+
+| Folder | Size | Used by (render/data/picks2.json) | Kind | Source (meta.json `src`) |
+|---|---|---|---|---|
+| `derived/work/plates/V118/` (10 frames) | 3.5 MB | V118 | original | composite work/plates/WALK_key t0=3.5 over media/kf2/V118_nbp_v1.jpg (locomotive) |
+| `derived/work/plates/V119/` (10 frames) | 3.9 MB | V119 | original | composite work/plates/WALK_key t0=3.823 over media/kf2/V119_nbp_v1.jpg (Wright Flyer) |
+| `derived/work/plates/V120/` (10 frames) | 2.0 MB | V120 | original | composite work/plates/WALK_key t0=4.146 over media/kf2/V120_nbp_v1.jpg (jet) |
+| `derived/work/plates/V121/` (13 frames) | 3.2 MB | V121 | original | composite work/plates/WALK_key t0=4.469 over media/kf2/V121_nbp_v1.jpg (Saturn V) |
+
+Recipe: `tools/t2/derived/comp_walk.py` (the compositor, unchanged since it made these; `ROOT` is hard-coded to
+`/home/user/holdfire`) and `tools/t2/derived/comp_walk_machines.sh` (the exact final command lines from the session transcript,
+plus the `WALK_key` keying step and the V108-V110 commands). Rebuilding needs the walk take `t2_WALK_veo_t1_8f93e107ff` and the
+four era keyframes in `media/kf2/`.
+
+Other composite plates in that session's `work/plates/` (meta.json `src` not under `media/gen/` or `media/kf2/`): V108, V109,
+V110 (the same walk over `V108/V109/V110_nbp_v1.jpg`, not added here; 6.0, 6.4 and 6.6 MB); CRT_roomA/B, DR01, DR05, P107, V102
+(their source clips are above); and the `TEST_*` plates (plate-toolkit tests, not in the edit).

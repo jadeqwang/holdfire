@@ -107,6 +107,8 @@ The card reads:
 
 ### Deliverables
 
+**30 Oct, the minor-fixes song:** the edit, timing map and sound design are retimed to `inputs/Hold Fire.mp3` (the minor-fixes render; see the last section of `REVIEW_NOTES.md`); preview [`previews/hold_fire_t2_rcv2_minor_fixes_540p.mp4`](previews/hold_fire_t2_rcv2_minor_fixes_540p.mp4) (238.64 s), mix as MP3 in `deliverables/`. Render the master with `media/audio/hold_fire_t2_mix.wav` padded to the film's 238.64 s (`ffmpeg -i media/audio/hold_fire_t2_mix.wav -af apad=whole_dur=238.6667 ...`).
+
 A 540p preview of RC8 (the adversary pass, the chess clocks at the moves' pace and the 9.Qxg7 hand, part two, "our and their", and Jade's notes on RC7 to RC9) is committed: [`previews/hold_fire_t2_rc13_540p.mp4`](previews/hold_fire_t2_rc13_540p.mp4) (960×540, 2-pass H.264
 at 1.4 Mb/s, AAC 128k of the mix). It was made in a cloud session: the changed ranges re-rendered at 1080p and spliced into RC4's
 preview frames (RC4's preview is in git history, commit 9b9bdf7); see the adversary pass in `REVIEW_NOTES.md`. The full-resolution files are rendered locally to `work/out/` (not committed;

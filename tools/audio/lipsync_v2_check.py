@@ -28,7 +28,7 @@ def env(path):
     n = len(x) // h
     e = np.sqrt((x[:n * h].reshape(n, h) ** 2).mean(1))
     db = 20 * np.log10(e + 1e-6)
-    return np.clip(db, -60, 0) + 60          # 0..60, silence 0
+    return np.clip(db, -60, 0) + 60, h / sr  # 0..60 (silence 0), and the true hop (220 samples at 44.1 kHz is 4.989 ms, not 5)
 
 
 def main():
@@ -37,7 +37,7 @@ def main():
     inv = lambda t: np.interp(t, k2, k1)
     e2 = env(os.path.join(ROOT, 'work', 'stems', 'vocals.wav'))
     e1 = env(glob.glob(os.path.join(ROOT, 'work', 'stems', 'v1', '*(Vocals)*.wav'))[0])
-    at = lambda e, t: np.interp(t / HOP, np.arange(len(e)), e)
+    at = lambda e, t: np.interp(t / e[1], np.arange(len(e[0])), e[0])
 
     def lag(t0, t1, max_ms=240):
         tt = np.arange(t0, t1, HOP)

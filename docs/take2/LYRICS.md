@@ -104,13 +104,21 @@ brief blueprint flash. Near the tip, the plate matte is trimmed to the shaft, so
 
 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 | 89 = 1;29 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 𒁹 | 𒁹 | 𒈫 | 𒐈 | 𒐊 | 𒐍 | 𒌋𒐈 | 𒎙𒁹 | 𒌍𒐉 | 𒐐𒐊 | 𒁹 𒎙𒐎 |
+| 𒁹 | 𒁹 | 𒈫 | 𒐈 | 𒐊 | 𒐍 | 𒌋𒐈 | 𒎙𒁹 | 𒌍𒐉 | 𒐐𒐊 | 𒁹 𒌍𒇲𒁹 |
 
-Row 1 holds 1 to 13 and row 2 holds 21 to 89, ending at the stylus. Under a double ruling, already on the tablet, is obverse line 3 of the Ea-nasir
-complaint tablet (UET 5, 81; CDLI P414985, transliteration read from the CDLI ATF dump): 𒌝𒈠 𒈾𒀭𒉌𒈠 *um-ma na-an-ni-ma*,
-"thus (says) Nanni". Each sign was checked in the ORACC sign list (`osl.asl`). Line 1 ("To Ea-nasir") is left out because the
-transliteration's *ṣi* is ZE₂ in ORACC's numbering but ZI in the older convention, and no photo was available to settle which.
-The font is Noto Sans Cuneiform (OFL), subset to these 20 signs (`assets/fonts/NotoSansCuneiform-t2-subset.ttf`). The data is in
+89's 29 is written the scribes' way, 30 LAL 1 ("thirty less one": 𒌍 U U U, 𒇲 LAL, then a single wedge tilted slightly to the left;
+B. R. Foster, 29 Oct). The stylus's first touch makes the sixties wedge 𒁹, its second the tilted 1, the last wedge impressed.
+
+Row 1 holds 1 to 13 and row 2 holds 21 to 89, ending at the stylus. Under a double ruling, already on the tablet, are two
+lines of the Ea-nasir complaint tablet (UET 5, 81; CDLI P414985, transliteration read from the CDLI ATF dump): obverse line 1,
+𒀀𒈾 𒂍𒀀𒈾𒍢𒅕 *a-na é-a-na-ṣi-ir*, "to Ea-nasir", and obverse line 3, 𒌝𒈠 𒈾𒀭𒉌𒈠 *um-ma na-an-ni-ma*, "thus (says) Nanni"
+(line 2, *qí-bí-ma*, "speak!", is left out). Each sign was checked in the ORACC sign list (`osl.asl`). Line 1 was first left out
+because the transliteration's *ṣi* is ZE₂ in ORACC's numbering but ZI in the older convention; Benjamin R. Foster (Yale) settled
+it in reply to Jade (29 Oct): "the s. you are looking for in ea-nasir is in fact the sign you have as zé", so 𒍢 ZE₂ (U+12362).
+He also confirmed line 3 as "Thus says Nanni", and on the count: scribes usually wrote 9 as 10 minus 1 (U, then LAL, then a
+single wedge tilted slightly left) rather than nine wedges, so 89 is now 𒁹 𒌍𒇲𒁹 (above). Line 1 was added on 30 Oct: both letter lines at 28 px, line 1 at v 46 and Nanni at
+v 94 (tablet.js `EDGE`), and "and the mud" moved 18 px further down the clay.
+The font is Noto Sans Cuneiform 2.001 (OFL), subset to these 24 signs (`assets/fonts/NotoSansCuneiform-t2-subset.ttf`). The data is in
 `scenes/t2/lyric/cuneiform.js`. `python3 tools/t2/cuneiform_card.py` reads every numeral's value back from its Unicode names and
 renders `work/t2/tablet/cuneiform_card.png`. The line "carried the egg through the dust and the mud" (n 4) is split by clip,
 and each piece sits on its own surface: "carried the egg through" in the sky (V111), "the dust" in the road (V112), and "and the

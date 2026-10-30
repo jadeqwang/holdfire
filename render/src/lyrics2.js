@@ -41,7 +41,7 @@ export const PLAN = [
   { n: 4, style: 'blueprint', size: 50, segs: {
     V111: { only: [0, 1, 2, 3], ink: INK.navy, x: 560, y: 150, align: 'left', maxW: 500, br: [3], halo: NAVY_HALO, haloA: 0.3 },     // in the pale sky over the mud-brick street
     V112: { only: [4, 5], style: 'incise', size: 72, weight: 700, quad: [[767, 725], [1153, 725], [1183, 865], [737, 865]], dark: 'rgba(28,14,4,1)', core: 'rgba(48,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', ghost: 0.45, shade: 0.9, shadeCol: 'rgba(60,36,14,1)' },   // drawn in the dust of the cart road: ink-filled recess, deeper shadow (polish 3: phone legibility)
-    V113: { only: [6, 7, 8], style: 'incise', size: 64, maxW: 1500, quad: [[520, 767], [890, 678], [908, 752], [538, 840]], wedges: true, ghost: 0.45, dark: 'rgba(24,12,4,1)', core: 'rgba(46,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', shade: 0.6, shadeCol: 'rgba(60,36,14,1)' } } },   // pressed into the clay under the Nanni line, ruled parallel to the count (t2_tablet's rows), all of it on the clay
+    V113: { only: [6, 7, 8], style: 'incise', size: 64, maxW: 1500, quad: [[520, 785], [890, 696], [908, 770], [538, 858]], wedges: true, ghost: 0.45, dark: 'rgba(24,12,4,1)', core: 'rgba(46,28,12,0.97)', lite: 'rgba(255,240,210,0.95)', shade: 0.6, shadeCol: 'rgba(60,36,14,1)' } } },   // pressed into the clay under the Nanni line, ruled parallel to the count (t2_tablet's rows), all of it on the clay
   { n: 5, style: 'blueprint', size: 52, segs: {
     V114: { x: 1385, y: 760, align: 'right', maxW: 560, halo: 'rgba(24,14,6,0.9)', haloA: 0.6 },   // on the dark soil by the furrow, inside the safe area (polish 3)
     V115: { x: 600, y: 790, align: 'left', maxW: 760 },                                  // a label in the blueprint cross-section
@@ -71,7 +71,7 @@ export const PLAN = [
   { n: 21, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 110, align: 'center' },
   // ---------------------------------------------------------------- VERSE 2: brushed into the ink painting
   { n: 22, style: 'brush', size: 88, shade: 1.6, shadeCol: 'rgba(246,242,232,1)', x: 1060, y: 150, align: 'left', maxW: 640, br: [4] },          // in the smoke over the cauldron
-  { n: 23, style: 'brush', size: 84, x: 1330, y: 420, align: 'left', maxW: 560, br: [2, 3, 4] },     // on the bare paper beside the characters
+  { n: 23, style: 'brush', size: 84, x: 1330, y: 420, align: 'left', maxW: 560, br: [1, 2, 3] },     // on the bare paper beside the characters (sulfur / saltpeter / thunder / in the sky: the new song drops "and")
   { n: 24, style: 'brush', size: 86, x: 590, y: 300, align: 'left', maxW: 560, br: [4, 7] },      // on the scroll beside the warning
   { n: 25, style: 'brush', size: 80, yLast: 1045, x: 960, align: 'center', maxW: 1100, br: [5] },
   // ---------------------------------------------------------------- Petrov: the console readout (Plex Mono, phosphor)

@@ -18,16 +18,33 @@ TIMING = os.path.join(ROOT, 'render', 'data', 'timing.json')        # master clo
 FPS = 24
 
 
-def frame_on_twos(t, s0, lag, fps=FPS, twos=True, start=0.0, n=None):
+def song_v1inv():
+    """new song time -> v1 song time (render/src/audio.js AudioMap.v1inv: timing.json v1_map, piecewise linear, end segments
+    extended); identity when timing.json has no map. Lip-synced takes' s0 and lag are on the v1 clock."""
+    m = json.load(open(TIMING)).get('v1_map')
+    if not m:
+        return lambda x: x
+    xs, ys = np.asarray(m['v2'], float), np.asarray(m['v1'], float)
+
+    def v1inv(x):
+        x = np.asarray(x, float)
+        i = np.clip(np.searchsorted(xs, x, side='right') - 1, 0, len(xs) - 2)
+        return ys[i] + (ys[i + 1] - ys[i]) * (x - xs[i]) / (xs[i + 1] - xs[i])
+    return v1inv
+
+
+def frame_on_twos(t, s0, lag, fps=FPS, twos=True, start=0.0, n=None, v1inv=None):
     """Clip frame index the renderer shows at song time t (array ok): exactly render/src/scenes/t2/plate/lib.js plateFrame.
     The renderer holds FILM frames on twos (song frame ff -= ff % 2), then maps that time into the clip:
     clipT = ff/24 - s0 + lag, f = floor((clipT - start) * fps). When s0 is not on the 24 fps grid the drawings it shows are
     odd clip frames; the old rule here (floor clip frame, then f -= f % 2) was up to a frame off and changed drawing on the
-    other film frame. start = plate meta.start (plates.py --start), n = plate frame count (clamp)."""
+    other film frame. start = plate meta.start (plates.py --start), n = plate frame count (clamp). v1inv (song_v1inv()): the held
+    time is taken back to the v1 clock first, as the renderer does since the minor-fixes song (clipT = v1inv(ff/24) - s0 + lag)."""
     ff = np.floor(np.asarray(t, float) * 24 + 1e-3).astype(int)
     if twos:
         ff = ff - ff % 2
-    f = np.floor(((ff / 24 - s0 + lag) - start) * fps + 1e-3).astype(int)
+    th = ff / 24 if v1inv is None else v1inv(ff / 24)
+    f = np.floor(((th - s0 + lag) - start) * fps + 1e-3).astype(int)
     if n is not None:
         f = np.clip(f, 0, n - 1)
     return f

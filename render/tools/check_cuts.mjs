@@ -11,7 +11,7 @@ const FR = 1 / 24;
 const { A, shots } = await loadEdit();
 const L = [];
 const ms = (x) => `${x >= 0 ? '+' : ''}${(x * 1000).toFixed(0)}`.padStart(6);
-const pt = (s) => { if (!s) return null; const [m, x] = s.split(':'); return Number(m) * 60 + Number(x); };
+const pt = (s) => { if (!s) return null; const [m, x] = s.split(':'); return A.v1(Number(m) * 60 + Number(x)); };   // v1 plan time -> the new song
 let bad = 0, planFar = 0;
 L.push('id     t0        plan       anchor(t)   cut-anchor  frame-anchor  plan-anchor  anchor');
 L.push('-'.repeat(118));

@@ -74,17 +74,19 @@ export function withPick(src, p) {
 // q: effective params (withPick). Returns a frame index clamped to [0, n-1] (never loops).
 //   q.at (source-clip seconds, number | fn(lt, t)) overrides everything (scrubs, rewinds);
 //   q.s0 (lip-synced take: its audio ref started at song time s0) -> clipT = t - s0 + lag, unless the shot set p.in explicitly;
+//   s0 and lag are on the v1 song's clock (the takes were made and synced to it), so t goes back through the song map first
+//   (AudioMap.v1inv, published as globalThis.__songV1inv);
 //   else clipT = (in ?? meta.start) + lt * rate (reverse: minus).
 // Twos (default for video unless twos === false) count FILM frames (MGP drawingAt: retimed clips then hold evenly): the song frame
 // for s0 clips, the shot frame otherwise.
-export function plateFrame(meta, q, lt, t = lt) {
+export function plateFrame(meta, q, lt, t = lt, v1inv = globalThis.__songV1inv || ((x) => x)) {
   if ((meta.n || 1) <= 1 || meta.kind === 'still') return 0;
   const fps = meta.fps || 24;
   const twos = q.twos !== false;
   const hold = (x) => { let ff = Math.floor(x * 24 + 1e-3); if (twos) ff -= ((ff % 2) + 2) % 2; return ff / 24; };
   let clipT;
   if (q.at !== undefined && q.at !== null) clipT = typeof q.at === 'function' ? q.at(lt, t) : q.at;
-  else if (q.s0 !== undefined && q.s0 !== null && !q.__explicitIn) clipT = hold(t) - q.s0 + (q.lag || 0);
+  else if (q.s0 !== undefined && q.s0 !== null && !q.__explicitIn) clipT = v1inv(hold(t)) - q.s0 + (q.lag || 0);   // s0, lag: v1 song clock
   else clipT = (q.in ?? meta.start ?? 0) + (q.reverse ? -1 : 1) * hold(lt) * (q.rate ?? 1);
   const f = Math.floor((clipT - (meta.start || 0)) * fps + 1e-3);
   return Math.max(0, Math.min(meta.n - 1, f));

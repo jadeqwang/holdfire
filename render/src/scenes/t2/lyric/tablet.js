@@ -4,18 +4,19 @@
 // (cuneiform.js), in two ruled registers; under a double ruling, a line already on the tablet: "um-ma na-an-ni-ma", "thus (says)
 // Nanni", from the Ea-nasir complaint tablet.
 // Jade (take two notes): the stylus has to make the strokes that appear. So the count is on the clay when the shot opens except
-// two wedges of 89 (= 1;29, 𒁹 𒎙𒐎), and those are pressed by the plate's stylus: the tip is tracked on every plate frame the
-// shot shows (TIP), the plate's two touch-downs are frames 14 and 42, and the rows are laid out so that 89's sixties wedge 𒁹
-// has its head where the first touch lands and the last unit wedge of 𒐎 (its tall right column) where the second one lands.
-// Each impression grows down from its head as the tip slides down the clay, with a ridge of displaced clay ahead of it, and is
-// whole once the tip moves off it. (The sixties wedge goes in before the last unit wedge, so 89 reads 28, 1;28, 1;29 over the
-// shot; the other 9 wedges of 89 are already there.)
+// two wedges of 89, and those are pressed by the plate's stylus: the tip is tracked on every plate frame the shot shows (TIP), the
+// plate's two touch-downs are frames 14 and 42, and the rows are laid out so that 89's sixties wedge 𒁹 has its head where the
+// first touch lands and the last wedge of its 29 where the second one lands. 89 = 1;29 is written the scribes' way (30 Oct, after
+// B. R. Foster): 29 = 30 LAL 1, 𒁹 𒌍𒇲𒁹, the 1 tilted slightly to the left, and that 1 is the last wedge impressed (as he says the
+// last wedge would be). Each impression grows down from its head as the tip slides down the clay, with a ridge of displaced clay
+// ahead of it, and is whole once the tip moves off it. (The sixties wedge goes in first, out of a scribe's order, so 89 reads
+// 30-, 1;30-, 1;29 over the shot; 𒌍𒇲 is already there.)
 // The plate's stylus and hand stay on top (a per-plate-frame matte, trimmed to the stylus within 90 px of the tip so the plate's
 // own marks and the stylus' contact shadow there do not cut the inscription), and their shadow falls on the new clay.
 // p: {clip ('V113'), size (sign px), gain}
 import { clamp, lerp } from '../../../util.js';
 import { scratch, knock, grainTile } from './kit.js';
-import { FIB, cuneiformNumber, NANNI, cps } from './cuneiform.js';
+import { FIB, cuneiformNumber, EA_NASIR, NANNI, cps } from './cuneiform.js';
 import { picks2, plateMeta, plateFrame, withPick } from '../plate/lib.js';
 
 const ASSET = 'assets/t2/tablet';
@@ -65,19 +66,23 @@ function tipAt(f) {
 const PRESSES = [{ f: 14, key: 'sixties' }, { f: 42, key: 'last' }];
 
 // ------------------------------------------------------------------------------------------------ the inscription
-// tablet space: u along a row, v down the tablet (row 2's baseline at v = 0, row 1's at -ROW, Nanni's at +NANNI_V)
-const GAP = 30, SIGN_GAP = 3, ROW = 58, NANNI_V = 58, NANNI_PX = 34;
+// tablet space: u along a row, v down the tablet (row 2's baseline at v = 0, row 1's at -ROW, the letter's lines at EDGE's v)
+const GAP = 30, SIGN_GAP = 3, ROW = 58, NANNI_PX = 28;
+// the letter's lines under the ruling: obverse 1 "to Ea-nasir" (added 30 Oct, the s,i sign confirmed by B. R. Foster), then 3, Nanni
+const EDGE = [[EA_NASIR, 46], [NANNI, 94]];
 // Noto Sans Cuneiform geometry (em): a vertical wedge's head centre is 0.69 above the baseline; DISH's head centre is 0.208 from
-// its origin; NINE DISH is four columns of two short wedges and a tall fifth column at 1.096-1.331 (head centre 1.2135)
-const HEAD_Y = 0.69, DISH_HX = 0.208, NINE_SPLIT = 1.089, NINE_HX = 1.2135, WEDGE_W = 0.24;
+// its origin
+const HEAD_Y = 0.69, DISH_HX = 0.208, WEDGE_W = 0.24;
+// the 1 after LAL leans left: turned about its head, the tail swung right (radians; canvas rotation, negative = counter-clockwise)
+const LAL_TILT = -0.21;
 const V_AXIS = [0.2, 0.8];          // a tablet unit down the tablet, on screen (u is a unit along the stylus' two landings)
 
 // rows: 1 1 2 3 5 8 13 / 21 34 55 89. 89's place gap is set so its two pressed wedges are exactly as far apart as the landings.
 function layoutSigns(g, size, span) {
   g.font = `400 ${size}px L2Cun`;
   const w = (cp) => g.measureText(cps([cp])).width;
-  const n89 = cuneiformNumber(89);                                   // [[DISH], [U U, NINE DISH]]
-  const placeGap = span - ((w(n89[0][0]) - DISH_HX * size) + SIGN_GAP + w(n89[1][0]) + SIGN_GAP + NINE_HX * size);
+  const n89 = cuneiformNumber(89);                                   // [[DISH], [U U U, LAL, DISH]]
+  const placeGap = span - ((w(n89[0][0]) - DISH_HX * size) + SIGN_GAP + w(n89[1][0]) + SIGN_GAP + w(n89[1][1]) + SIGN_GAP + DISH_HX * size);
   const out = [];
   const rows = [FIB.slice(0, 7), FIB.slice(7)];
   rows.forEach((nums, r) => {
@@ -89,7 +94,7 @@ function layoutSigns(g, size, span) {
         for (const cp of place) {
           const it = { s: cps([cp]), cp, u, v, size, n };
           if (n === 89 && pi === 0) it.press = 'sixties';
-          if (n === 89 && pi === 1 && cp === place[place.length - 1]) it.press = 'last';
+          if (n === 89 && pi === 1 && cp === place[place.length - 1]) { it.press = 'last'; it.tilt = LAL_TILT; }
           out.push(it); u += w(cp) + SIGN_GAP;
         }
       });
@@ -101,8 +106,13 @@ function layoutSigns(g, size, span) {
 // the wedge each press makes: its head (tablet), and its extent in u
 function pressWedge(it) {
   const s = it.size;
-  if (it.press === 'sixties') return { hu: it.u + DISH_HX * s, u0: it.u - 4, u1: it.u + s * 0.42 };
-  return { hu: it.u + NINE_HX * s, u0: it.u + NINE_SPLIT * s, u1: it.u + s * 1.45 };
+  return { hu: it.u + DISH_HX * s, u0: it.u - 4, u1: it.u + s * 0.42 };    // both presses make a single DISH
+}
+// a tilted sign (the 1 after LAL) is drawn turned about its wedge's head
+function tiltAbout(g, it) {
+  if (!it.tilt) return;
+  const hu = it.u + DISH_HX * it.size, hv = it.v - HEAD_Y * it.size;
+  g.translate(hu, hv); g.rotate(it.tilt); g.translate(-hu, -hv);
 }
 
 const DARK = 'rgba(30,16,6,1)', CORE = 'rgba(70,44,22,0.98)', LITE = 'rgba(255,236,200,0.9)';
@@ -111,9 +121,9 @@ function impress(g, s, u, v, size) {
   g.fillStyle = DARK; g.fillText(s, u + size * 0.035, v + size * 0.04);   // the shadowed wall
   g.fillStyle = CORE; g.fillText(s, u, v);                                // the floor of the impression
 }
-// a sign already on the clay (clip: [u0, u1] of the sign to draw, for NINE DISH without its last column)
+// a sign already on the clay (clip: [u0, u1] of the sign to draw)
 function pressed(g, it, clipU) {
-  g.save(); g.font = `400 ${it.size}px L2Cun`; g.textBaseline = 'alphabetic';
+  g.save(); g.font = `400 ${it.size}px L2Cun`; g.textBaseline = 'alphabetic'; tiltAbout(g, it);
   if (clipU) { g.beginPath(); g.rect(clipU[0], it.v - it.size * 1.3, clipU[1] - clipU[0], it.size * 1.8); g.clip(); }
   impress(g, it.s, it.u, it.v, it.size);
   g.restore();
@@ -122,7 +132,7 @@ function pressed(g, it, clipU) {
 // clay ahead of it while the tip is in it, then the ridge settles; a brief blueprint flash as the tip lands (verse 1's line)
 function pressing(g, it, W, st, flash) {
   const s = it.size;
-  g.save(); g.font = `400 ${s}px L2Cun`; g.textBaseline = 'alphabetic';
+  g.save(); g.font = `400 ${s}px L2Cun`; g.textBaseline = 'alphabetic'; tiltAbout(g, it);
   g.save(); g.beginPath(); g.rect(W.u0, it.v - s * 1.3, W.u1 - W.u0, st.dv - (it.v - s * 1.3)); g.clip();
   impress(g, it.s, it.u, it.v, s);
   if (flash > 0) { g.globalAlpha = 0.85 * flash * flash; g.strokeStyle = 'rgba(215,240,255,1)'; g.lineWidth = 1.6; g.strokeText(it.s, it.u, it.v); }
@@ -201,18 +211,19 @@ export default {
     const uEnd = Math.max(...items.map((x) => x.u + gi.measureText(x.s).width));
     rule(gi, -14, uEnd + 10, -ROW + 13);
     rule(gi, -8, uEnd + 10, 13); rule(gi, -8, uEnd + 10, 19);
-    // the Nanni line: already on the tablet (dried a little)
-    let u = 8;
+    // the letter's lines: already on the tablet (dried a little)
     gi.font = `400 ${NANNI_PX}px L2Cun`;
-    for (const [, cp] of NANNI.signs) {
-      const s = cps([cp]);
-      pressed(gi, { s, u, v: NANNI_V, size: NANNI_PX });
-      u += gi.measureText(s).width + 10;
+    for (const [line, v] of EDGE) {
+      let u = 8;
+      for (const [, cp] of line.signs) {
+        const s = cps([cp]);
+        pressed(gi, { s, u, v, size: NANNI_PX });
+        u += gi.measureText(s).width + 7;
+      }
     }
     for (const it of items) {
       if (!it.press) { pressed(gi, it); continue; }
       const W = pressWedge(it), pr = PRESSES.find((x) => x.key === it.press);
-      if (it.press === 'last') pressed(gi, it, [it.u - 4, W.u0]);   // NINE DISH's first four columns are already there
       const ps = pressState(F, o, it, W, pr.f, pf);
       if (!ps) continue;
       const fl = 1 - (pf - pr.f) / (flashDur * 24);

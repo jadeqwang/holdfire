@@ -2,7 +2,7 @@
  {
   "id": "CO01",
   "t0": 0,
-  "t1": 2.799,
+  "t1": 2.677,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -31,8 +31,8 @@
  },
  {
   "id": "CO02",
-  "t0": 2.799,
-  "t1": 3.437,
+  "t0": 2.677,
+  "t1": 3.292,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -50,15 +50,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[0] \"One\"",
-   "t": 2.799
+   "t": 2.677
   },
   "plan": "0:02.80",
   "notes": null
  },
  {
   "id": "CO03",
-  "t0": 3.437,
-  "t1": 4.076,
+  "t0": 3.292,
+  "t1": 3.917,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -76,15 +76,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[0] \"one\"",
-   "t": 3.437
+   "t": 3.292
   },
   "plan": "0:03.44",
   "notes": null
  },
  {
   "id": "CO04",
-  "t0": 4.076,
-  "t1": 4.719,
+  "t0": 3.917,
+  "t1": 4.553,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -102,15 +102,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[0] \"two\"",
-   "t": 4.076
+   "t": 3.917
   },
   "plan": "0:04.08",
   "notes": null
  },
  {
   "id": "CO05",
-  "t0": 4.719,
-  "t1": 5.298,
+  "t0": 4.553,
+  "t1": 5.13,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -128,15 +128,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[0] \"three\"",
-   "t": 4.719
+   "t": 4.553
   },
   "plan": "0:04.72",
   "notes": null
  },
  {
   "id": "CO06",
-  "t0": 5.298,
-  "t1": 6.001,
+  "t0": 5.13,
+  "t1": 5.834,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -158,19 +158,19 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[0] \"five\"",
-   "t": 5.298
+   "t": 5.13
   },
   "plan": "0:05.30",
   "notes": null
  },
  {
   "id": "CO07",
-  "t0": 6.001,
-  "t1": 6.706,
+  "t0": 5.834,
+  "t1": 6.54,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
-  "lyric": "eight eight",
+  "lyric": "eight",
   "voice": "A",
   "picture": "Hurricane from orbit (log spiral: no golden-rectangle overlay); spiral centre locked at frame centre",
   "era_style": "Cold open spirals: macro nature photography, true colour; natural colour, gold numerals on black; spiral centre locked at frame centre",
@@ -184,20 +184,20 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[0] \"eight\"",
-   "t": 6.001
+   "t": 5.834
   },
   "plan": "0:06.00",
   "notes": null
  },
  {
   "id": "CO08",
-  "t0": 6.706,
-  "t1": 7.028,
+  "t0": 6.54,
+  "t1": 6.862,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
   "lyric": null,
-  "voice": "A",
+  "voice": null,
   "picture": "Spiral galaxy, face on (if ESA/Hubble: visible \"ESA/Hubble\" credit); no numeral (the echoed \"eight\"); spiral centre locked at frame centre",
   "era_style": "Cold open spirals: macro nature photography, true colour; natural colour, gold numerals on black; spiral centre locked at frame centre",
   "method": "video",
@@ -209,16 +209,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "beat",
-   "ref": "beat after the echoed \"eight\" (Jade's note: cut on the beat, no numeral)",
-   "t": 6.706
+   "ref": "second beat after the whispered \"eight\" (where the v1 echo was; cut on the beat, no numeral)",
+   "t": 6.54
   },
   "plan": null,
   "notes": "plan prints 0:06.63 (the echo); Jade: cut on the next beat instead"
  },
  {
   "id": "CO09",
-  "t0": 7.028,
-  "t1": 7.16,
+  "t0": 6.862,
+  "t1": 6.993,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -236,15 +236,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "eighth nearest 0:07.0",
-   "t": 7.028
+   "t": 6.862
   },
   "plan": "0:07.0",
   "notes": "continues the galaxy clip; red grade + red flash"
  },
  {
   "id": "CO10",
-  "t0": 7.16,
-  "t1": 8.6,
+  "t0": 6.993,
+  "t1": 8.426,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -259,16 +259,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event sub_hit @7.16 (sub-bass / 808 entry from a quiet low en)",
-   "t": 7.16
+   "ref": "event sub_hit @6.993 (sub-bass / 808 entry from a quiet low en)",
+   "t": 6.993
   },
   "plan": "0:07.16",
   "notes": "no text: the red does the work. Jade (0:08.8): the rewind stops on the first 1 (was: down to black), so the match reads as the second 1"
  },
  {
   "id": "CO11",
-  "t0": 8.6,
-  "t1": 9.234,
+  "t0": 8.426,
+  "t1": 9.055,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -286,15 +286,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[1] \"One\"",
-   "t": 8.6
+   "t": 8.426
   },
   "plan": "0:08.60",
   "notes": null
  },
  {
   "id": "CO12",
-  "t0": 9.234,
-  "t1": 9.86,
+  "t0": 9.055,
+  "t1": 9.675,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -312,15 +312,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[1] \"two\"",
-   "t": 9.234
+   "t": 9.055
   },
   "plan": "0:09.23",
   "notes": null
  },
  {
   "id": "CO13",
-  "t0": 9.86,
-  "t1": 10.435,
+  "t0": 9.675,
+  "t1": 10.245,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -338,15 +338,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[1] \"three\"",
-   "t": 9.86
+   "t": 9.675
   },
   "plan": "0:09.86",
   "notes": null
  },
  {
   "id": "CO14",
-  "t0": 10.435,
-  "t1": 11.165,
+  "t0": 10.245,
+  "t1": 10.968,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -364,15 +364,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[1] \"five\"",
-   "t": 10.435
+   "t": 10.245
   },
   "plan": "0:10.44",
   "notes": null
  },
  {
   "id": "CO15",
-  "t0": 11.165,
-  "t1": 11.857,
+  "t0": 10.968,
+  "t1": 11.654,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -388,15 +388,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Intro[1] \"eight\"",
-   "t": 11.165
+   "t": 10.968
   },
   "plan": "0:11.16",
   "notes": null
  },
  {
   "id": "CO16",
-  "t0": 11.857,
-  "t1": 12.501,
+  "t0": 11.654,
+  "t1": 12.293,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -414,15 +414,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat after the echo whisper (Jade's note)",
-   "t": 11.857
+   "t": 11.654
   },
   "plan": null,
   "notes": "plan prints 0:11.5 (the echo whisper); Jade: the pull-back carries it on the next beat. rate 6.15: the whole pull-back (take 0 to 3.96 s) inside the 0.64 s shot"
  },
  {
   "id": "CO17",
-  "t0": 12.501,
-  "t1": 13.05,
+  "t0": 12.293,
+  "t1": 12.839,
   "section": "Cold open",
   "edit_section": "CO",
   "timing_section": "Intro",
@@ -440,15 +440,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 0:12.50",
-   "t": 12.501
+   "t": 12.293
   },
   "plan": "0:12.50",
   "notes": null
  },
  {
   "id": "V101",
-  "t0": 13.05,
-  "t1": 15.068,
+  "t0": 12.839,
+  "t1": 14.847,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Intro",
@@ -463,21 +463,21 @@
   ],
   "type": "OUT OF THE SEA / with salt in our lungs",
   "lipsync_window": [
-   13.05,
-   15.068
+   12.839,
+   14.847
   ],
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[0] \"Out\"",
-   "t": 13.05
+   "t": 12.839
   },
   "plan": "0:13.05",
   "notes": "verse downbeat 13.14 with a sub slide lands 0.09 s in"
  },
  {
   "id": "V102",
-  "t0": 15.068,
-  "t1": 16.99,
+  "t0": 14.847,
+  "t1": 16.756,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -495,15 +495,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 0:15.07",
-   "t": 15.068
+   "t": 14.847
   },
   "plan": "0:15.07",
   "notes": null
  },
  {
   "id": "V103",
-  "t0": 16.99,
-  "t1": 18.074,
+  "t0": 16.756,
+  "t1": 17.829,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -524,16 +524,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event impact @16.99 (first snare/clap hit (bar 7 beat 3))",
-   "t": 16.99
+   "ref": "event impact @16.756 (first snare/clap hit (bar 7 beat 3))",
+   "t": 16.756
   },
   "plan": "0:16.99",
   "notes": null
  },
  {
   "id": "V104",
-  "t0": 18.074,
-  "t1": 18.892,
+  "t0": 17.829,
+  "t1": 18.637,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -549,15 +549,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[1] \"fin\"",
-   "t": 18.074
+   "t": 17.829
   },
   "plan": "0:18.07",
   "notes": null
  },
  {
   "id": "V105",
-  "t0": 18.892,
-  "t1": 19.556,
+  "t0": 18.637,
+  "t1": 19.292,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -573,15 +573,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[1] \"foot\"",
-   "t": 18.892
+   "t": 18.637
   },
   "plan": "0:18.89",
   "notes": null
  },
  {
   "id": "V106",
-  "t0": 19.556,
-  "t1": 19.84,
+  "t0": 19.292,
+  "t1": 19.572,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -603,15 +603,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[1] \"hand\"",
-   "t": 19.556
+   "t": 19.292
   },
   "plan": "0:19.56",
   "notes": null
  },
  {
   "id": "V107",
-  "t0": 19.84,
-  "t1": 20.86,
+  "t0": 19.572,
+  "t1": 20.578,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -629,15 +629,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[1] \"we\"",
-   "t": 19.84
+   "t": 19.572
   },
   "plan": "0:19.84",
   "notes": "plate frames 11-22 only: before 10 a spray can shows, after 23 the hand picks up a stone"
  },
  {
   "id": "V107b",
-  "t0": 20.86,
-  "t1": 21.507,
+  "t0": 20.578,
+  "t1": 21.216,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -655,15 +655,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 0:20.86",
-   "t": 20.86
+   "t": 20.578
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "V108",
-  "t0": 21.507,
-  "t1": 22.153,
+  "t0": 21.216,
+  "t1": 21.854,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -681,15 +681,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 0:21.51",
-   "t": 21.507
+   "t": 21.216
   },
   "plan": "0:21.51",
   "notes": "one continuous walk cycle across the three era beats"
  },
  {
   "id": "V109",
-  "t0": 22.153,
-  "t1": 22.798,
+  "t0": 21.854,
+  "t1": 22.491,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -707,15 +707,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 0:22.15",
-   "t": 22.153
+   "t": 21.854
   },
   "plan": "0:22.15",
   "notes": "deep 808 at 22.48 inside this shot"
  },
  {
   "id": "V110",
-  "t0": 22.798,
-  "t1": 23.407,
+  "t0": 22.491,
+  "t1": 23.092,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -733,15 +733,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 0:22.80",
-   "t": 22.798
+   "t": 22.491
   },
   "plan": "0:22.80",
   "notes": null
  },
  {
   "id": "V111",
-  "t0": 23.407,
-  "t1": 24.699,
+  "t0": 23.092,
+  "t1": 24.37,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -763,15 +763,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[2] \"carried\"",
-   "t": 23.407
+   "t": 23.092
   },
   "plan": "0:23.41",
   "notes": null
  },
  {
   "id": "V112",
-  "t0": 24.699,
-  "t1": 25.372,
+  "t0": 24.37,
+  "t1": 25.035,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -789,15 +789,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[2] \"dust\"",
-   "t": 24.699
+   "t": 24.37
   },
   "plan": "0:24.70",
   "notes": null
  },
  {
   "id": "V113",
-  "t0": 25.372,
-  "t1": 27.318,
+  "t0": 25.035,
+  "t1": 26.959,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -819,15 +819,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[2] \"mud\"",
-   "t": 25.372
+   "t": 25.035
   },
   "plan": "0:25.37",
   "notes": "writing began as counting grain; the numerals are genuine (tools/t2/cuneiform_card.py)"
  },
  {
   "id": "V114",
-  "t0": 27.318,
-  "t1": 28.635,
+  "t0": 26.959,
+  "t1": 28.259,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -845,15 +845,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[3] \"seeds\"",
-   "t": 27.318
+   "t": 26.959
   },
   "plan": "0:27.32",
   "notes": null
  },
  {
   "id": "V115",
-  "t0": 28.635,
-  "t1": 30.062,
+  "t0": 28.259,
+  "t1": 29.667,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -875,15 +875,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[3] \"dark\"",
-   "t": 28.635
+   "t": 28.259
   },
   "plan": "0:28.64",
   "notes": null
  },
  {
   "id": "V116",
-  "t0": 30.062,
-  "t1": 30.96,
+  "t0": 29.667,
+  "t1": 30.552,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -901,15 +901,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[3] \"waking\"",
-   "t": 30.062
+   "t": 29.667
   },
   "plan": "0:30.06",
   "notes": null
  },
  {
   "id": "V117",
-  "t0": 30.96,
-  "t1": 31.182,
+  "t0": 30.552,
+  "t1": 30.771,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Verse 1",
@@ -927,15 +927,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 1[3] \"flood\"",
-   "t": 30.96
+   "t": 30.552
   },
   "plan": "0:30.96",
   "notes": null
  },
  {
   "id": "V118",
-  "t0": 31.182,
-  "t1": 31.505,
+  "t0": 30.771,
+  "t1": 31.089,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Pre-Chorus 1",
@@ -957,15 +957,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "eighth nearest 0:31.18",
-   "t": 31.182
+   "t": 30.771
   },
   "plan": "0:31.18",
   "notes": "bar 13 downbeat; stacked choir enters"
  },
  {
   "id": "V119",
-  "t0": 31.505,
-  "t1": 31.827,
+  "t0": 31.089,
+  "t1": 31.406,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Pre-Chorus 1",
@@ -987,15 +987,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "eighth nearest 0:31.51",
-   "t": 31.505
+   "t": 31.089
   },
   "plan": "0:31.51",
   "notes": "eighth-note cut"
  },
  {
   "id": "V120",
-  "t0": 31.827,
-  "t1": 32.149,
+  "t0": 31.406,
+  "t1": 31.724,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Pre-Chorus 1",
@@ -1017,15 +1017,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "eighth nearest 0:31.83",
-   "t": 31.827
+   "t": 31.406
   },
   "plan": "0:31.83",
   "notes": "eighth-note cut"
  },
  {
   "id": "V121",
-  "t0": 32.149,
-  "t1": 32.625,
+  "t0": 31.724,
+  "t1": 32.193,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Pre-Chorus 1",
@@ -1047,15 +1047,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "eighth nearest 0:32.15",
-   "t": 32.149
+   "t": 31.724
   },
   "plan": "0:32.15",
   "notes": "eighth-note cut"
  },
  {
   "id": "V122",
-  "t0": 32.625,
-  "t1": 33.723,
+  "t0": 32.193,
+  "t1": 33.275,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Pre-Chorus 1",
@@ -1077,15 +1077,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[0] \"Snowflake\"",
-   "t": 32.625
+   "t": 32.193
   },
   "plan": "0:32.62",
   "notes": null
  },
  {
   "id": "V123",
-  "t0": 33.723,
-  "t1": 35.499,
+  "t0": 33.275,
+  "t1": 35.024,
   "section": "Verse 1",
   "edit_section": "V1",
   "timing_section": "Pre-Chorus 1",
@@ -1108,15 +1108,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[0] \"boundless\"",
-   "t": 33.723
+   "t": 33.275
   },
   "plan": null,
   "notes": "cut placed on \"boundless\" (plan gives no time for the cut to the ISS); Jade v3: the pull-back"
  },
  {
   "id": "P101",
-  "t0": 35.499,
-  "t1": 38.073,
+  "t0": 35.024,
+  "t1": 37.557,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1134,15 +1134,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[1] \"a\"",
-   "t": 35.499
+   "t": 35.024
   },
   "plan": "0:35.50",
   "notes": null
  },
  {
   "id": "P102",
-  "t0": 38.073,
-  "t1": 40.648,
+  "t0": 37.557,
+  "t1": 40.089,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1164,15 +1164,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[2] \"counting\"",
-   "t": 38.073
+   "t": 37.557
   },
   "plan": "0:38.07",
   "notes": null
  },
  {
   "id": "P103",
-  "t0": 40.648,
-  "t1": 43.267,
+  "t0": 40.089,
+  "t1": 42.664,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1188,15 +1188,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[3] \"a\"",
-   "t": 40.648
+   "t": 40.089
   },
   "plan": "0:40.65",
   "notes": "teal-tips Jade's voice enters, heard not seen"
  },
  {
   "id": "P104",
-  "t0": 43.267,
-  "t1": 46.015,
+  "t0": 42.664,
+  "t1": 45.368,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1212,15 +1212,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[4] \"a\"",
-   "t": 43.267
+   "t": 42.664
   },
   "plan": "0:43.27",
   "notes": "NATURAL / NOT NATURAL are drawn by pulsar.js itself"
  },
  {
   "id": "P105",
-  "t0": 46.015,
-  "t1": 47.732,
+  "t0": 45.368,
+  "t1": 47.06,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1239,21 +1239,21 @@
   ],
   "type": "WE'RE AWAKE",
   "lipsync_window": [
-   46.015,
-   47.727
+   45.368,
+   47.055
   ],
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[5] \"Hear\"",
-   "t": 46.015
+   "t": 45.368
   },
   "plan": "0:46.02",
   "notes": null
  },
  {
   "id": "P106",
-  "t0": 47.732,
-  "t1": 49.244,
+  "t0": 47.06,
+  "t1": 48.55,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1270,21 +1270,21 @@
   "clip": null,
   "type": "WE'RE AWAKE",
   "lipsync_window": [
-   47.732,
-   49.244
+   47.06,
+   48.55
   ],
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 1[5] \"awake\"",
-   "t": 47.732
+   "t": 47.06
   },
   "plan": null,
   "notes": "cut on \"awake\" so the eyes open on the word; the held -WAKE at 0.57x so no second onset"
  },
  {
   "id": "P107",
-  "t0": 49.244,
-  "t1": 50.21,
+  "t0": 48.55,
+  "t1": 49.503,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1299,16 +1299,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event snare_roll @49.244 (16th-note drum/808 fill (4 beats, until )",
-   "t": 49.244
+   "ref": "event snare_roll @48.55 (16th-note drum/808 fill (4 beats, until )",
+   "t": 48.55
   },
   "plan": "0:49.24",
   "notes": null
  },
  {
   "id": "P107b",
-  "t0": 50.21,
-  "t1": 51.698,
+  "t0": 49.503,
+  "t1": 50.969,
   "section": "Pre-chorus 1",
   "edit_section": "P1",
   "timing_section": "Pre-Chorus 1",
@@ -1326,15 +1326,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "roll eighth 3 (before her lips part)",
-   "t": 50.21
+   "t": 49.503
   },
   "plan": null,
   "notes": "insert: the eye still, so P107 ends before her lips part"
  },
  {
   "id": "C101",
-  "t0": 51.698,
-  "t1": 54.279,
+  "t0": 50.969,
+  "t1": 53.506,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Pre-Chorus 1",
@@ -1352,15 +1352,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 1[0] \"Can't\"",
-   "t": 51.698
+   "t": 50.969
   },
   "plan": "0:51.70",
   "notes": null
  },
  {
   "id": "C102",
-  "t0": 54.279,
-  "t1": 56.671,
+  "t0": 53.506,
+  "t1": 55.854,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Chorus 1",
@@ -1376,15 +1376,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 1[1] \"message\"",
-   "t": 54.279
+   "t": 53.506
   },
   "plan": "0:54.28",
   "notes": null
  },
  {
   "id": "C103",
-  "t0": 56.671,
-  "t1": 62.154,
+  "t0": 55.854,
+  "t1": 61.24,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Chorus 1",
@@ -1407,21 +1407,21 @@
   ],
   "type": "I'M COUNTING ON YOU",
   "lipsync_window": [
-   56.671,
-   62.134
+   55.854,
+   61.22
   ],
   "anchor": {
    "kind": "word",
    "ref": "Chorus 1[2] \"but\"",
-   "t": 56.671
+   "t": 55.854
   },
   "plan": "0:56.67",
   "notes": "Jade v3: one phrase per half; both halves cut on the onset of \"I'm\" (phraseSplit). Adversary pass: wall bar, warm/cold split grade (RM matching dropped), contact tracks"
  },
  {
   "id": "C104",
-  "t0": 62.154,
-  "t1": 64.589,
+  "t0": 61.24,
+  "t1": 63.631,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Chorus 1",
@@ -1437,15 +1437,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 1[3] \"Silent\"",
-   "t": 62.154
+   "t": 61.24
   },
   "plan": "1:02.15",
   "notes": null
  },
  {
   "id": "C108",
-  "t0": 64.589,
-  "t1": 67.307,
+  "t0": 63.631,
+  "t1": 66.298,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Chorus 1",
@@ -1460,21 +1460,21 @@
   ],
   "type": null,
   "lipsync_window": [
-   64.589,
-   67.287
+   63.631,
+   66.279
   ],
   "anchor": {
    "kind": "word",
    "ref": "Chorus 1[4] \"in\"",
-   "t": 64.589
+   "t": 63.631
   },
   "plan": "1:04.59",
   "notes": "plan says \"Jade\"; the timing tags this line B_belt, so teal-tips Jade sings it (chorus 2 has both in this pose)"
  },
  {
   "id": "C109",
-  "t0": 67.307,
-  "t1": 70.749,
+  "t0": 66.298,
+  "t1": 69.68,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Chorus 1",
@@ -1492,15 +1492,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 1[5] \"If\"",
-   "t": 67.307
+   "t": 66.298
   },
   "plan": "1:07.31",
   "notes": null
  },
  {
   "id": "C110",
-  "t0": 70.749,
-  "t1": 73.034,
+  "t0": 69.68,
+  "t1": 71.928,
   "section": "Chorus 1",
   "edit_section": "C1",
   "timing_section": "Chorus 1",
@@ -1516,15 +1516,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 1[5] \"I'm\"",
-   "t": 70.749
+   "t": 69.68
   },
   "plan": null,
   "notes": "split from the crane on \"I'm\""
  },
  {
   "id": "X101",
-  "t0": 73.034,
-  "t1": 73.67,
+  "t0": 71.928,
+  "t1": 72.553,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1540,15 +1540,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[0] \"One\"",
-   "t": 73.034
+   "t": 71.928
   },
   "plan": "1:13.03",
   "notes": null
  },
  {
   "id": "X102",
-  "t0": 73.67,
-  "t1": 74.28,
+  "t0": 72.553,
+  "t1": 73.152,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1564,15 +1564,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[1] \"One\"",
-   "t": 73.67
+   "t": 72.553
   },
   "plan": "1:13.67",
   "notes": null
  },
  {
   "id": "X103",
-  "t0": 74.28,
-  "t1": 74.98,
+  "t0": 73.152,
+  "t1": 73.839,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1588,15 +1588,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[2] \"Two\"",
-   "t": 74.28
+   "t": 73.152
   },
   "plan": "1:14.28",
   "notes": null
  },
  {
   "id": "X104",
-  "t0": 74.98,
-  "t1": 75.585,
+  "t0": 73.839,
+  "t1": 74.433,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1612,15 +1612,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[3] \"Three\"",
-   "t": 74.98
+   "t": 73.839
   },
   "plan": "1:14.98",
   "notes": null
  },
  {
   "id": "X105",
-  "t0": 75.585,
-  "t1": 76.247,
+  "t0": 74.433,
+  "t1": 75.082,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1636,15 +1636,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[4] \"Five\"",
-   "t": 75.585
+   "t": 74.433
   },
   "plan": "1:15.59",
   "notes": null
  },
  {
   "id": "X106",
-  "t0": 76.247,
-  "t1": 78.177,
+  "t0": 75.082,
+  "t1": 76.975,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1660,15 +1660,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Post-Chorus 1[1] \"Counting\"",
-   "t": 76.247
+   "t": 75.082
   },
   "plan": "1:16.24",
   "notes": null
  },
  {
   "id": "X107",
-  "t0": 78.177,
-  "t1": 78.815,
+  "t0": 76.975,
+  "t1": 77.6,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1684,15 +1684,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[5] \"One\"",
-   "t": 78.177
+   "t": 76.975
   },
   "plan": "1:18.18",
   "notes": null
  },
  {
   "id": "X108",
-  "t0": 78.815,
-  "t1": 79.39,
+  "t0": 77.6,
+  "t1": 78.164,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1708,15 +1708,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[6] \"One\"",
-   "t": 78.815
+   "t": 77.6
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X109",
-  "t0": 79.39,
-  "t1": 80.1,
+  "t0": 78.164,
+  "t1": 78.859,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1732,15 +1732,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[7] \"Two\"",
-   "t": 79.39
+   "t": 78.164
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X110",
-  "t0": 80.1,
-  "t1": 80.725,
+  "t0": 78.859,
+  "t1": 79.472,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1756,15 +1756,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[8] \"Three\"",
-   "t": 80.1
+   "t": 78.859
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X111",
-  "t0": 80.725,
-  "t1": 81.345,
+  "t0": 79.472,
+  "t1": 80.08,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1780,15 +1780,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_1[9] \"Five\"",
-   "t": 80.725
+   "t": 79.472
   },
   "plan": "1:20.73",
   "notes": null
  },
  {
   "id": "X112",
-  "t0": 81.345,
-  "t1": 82.547,
+  "t0": 80.08,
+  "t1": 81.259,
   "section": "Post-chorus 1",
   "edit_section": "X1",
   "timing_section": "Post-Chorus 1",
@@ -1804,15 +1804,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit counting_on_you[1] \"Counting on you\"",
-   "t": 81.345
+   "t": 80.08
   },
   "plan": "1:21.35",
   "notes": null
  },
  {
   "id": "V201",
-  "t0": 82.547,
-  "t1": 84.995,
+  "t0": 81.259,
+  "t1": 83.661,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Post-Chorus 1",
@@ -1827,25 +1827,25 @@
   ],
   "type": null,
   "lipsync_window": [
-   82.547,
-   84.975
+   81.259,
+   83.642
   ],
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[0] \"Priests\"",
-   "t": 82.547
+   "t": 81.259
   },
   "plan": "1:22.55",
   "notes": null
  },
  {
   "id": "V202",
-  "t0": 84.995,
-  "t1": 85.735,
+  "t0": 83.661,
+  "t1": 84.388,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
-  "lyric": "sulfur and",
+  "lyric": "sulfur",
   "voice": "B",
   "picture": "The characters for sulfur, 硫黃, brushed large",
   "era_style": "Gunpowder: Chinese ink wash with fine-line figures, brushed characters, a red seal; ink black, rice paper, cinnabar",
@@ -1857,15 +1857,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[1] \"sulfur\"",
-   "t": 84.995
+   "t": 83.661
   },
   "plan": "1:25.00",
   "notes": null
  },
  {
   "id": "V203",
-  "t0": 85.735,
-  "t1": 86.424,
+  "t0": 84.388,
+  "t1": 85.065,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -1881,15 +1881,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[1] \"saltpeter\"",
-   "t": 85.735
+   "t": 84.388
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "V204",
-  "t0": 86.424,
-  "t1": 87.389,
+  "t0": 85.065,
+  "t1": 86.013,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -1905,15 +1905,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[1] \"thunder\"",
-   "t": 86.424
+   "t": 85.065
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "V205",
-  "t0": 87.389,
-  "t1": 89.995,
+  "t0": 86.013,
+  "t1": 88.57,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -1929,15 +1929,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[2] \"looked\"",
-   "t": 87.389
+   "t": 86.013
   },
   "plan": "1:27.39",
   "notes": null
  },
  {
   "id": "V206",
-  "t0": 89.995,
-  "t1": 90.285,
+  "t0": 88.57,
+  "t1": 88.854,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -1955,15 +1955,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[3] \"an\"",
-   "t": 89.995
+   "t": 88.57
   },
   "plan": "1:30.00",
   "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V207",
-  "t0": 90.285,
-  "t1": 90.922,
+  "t0": 88.854,
+  "t1": 89.479,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -1981,15 +1981,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 1:30.28",
-   "t": 90.285
+   "t": 88.854
   },
   "plan": "1:30.28",
   "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V208",
-  "t0": 90.922,
-  "t1": 91.612,
+  "t0": 89.479,
+  "t1": 90.154,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2007,15 +2007,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 1:30.92",
-   "t": 90.922
+   "t": 89.479
   },
   "plan": "1:30.92",
   "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V209",
-  "t0": 91.612,
-  "t1": 92.151,
+  "t0": 90.154,
+  "t1": 90.682,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2033,15 +2033,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[3] \"level\"",
-   "t": 91.612
+   "t": 90.154
   },
   "plan": "1:31.61",
   "notes": "still optional: t2_ink_weapons draws it procedurally until work/plates/<id>/f_00000.jpg exists"
  },
  {
   "id": "V210",
-  "t0": 92.151,
-  "t1": 92.6,
+  "t0": 90.682,
+  "t1": 91.122,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2059,15 +2059,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[3] \"ground\"",
-   "t": 92.151
+   "t": 90.682
   },
   "plan": "1:32.15",
   "notes": null
  },
  {
   "id": "V211",
-  "t0": 92.6,
-  "t1": 93.43,
+  "t0": 91.122,
+  "t1": 91.934,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2085,15 +2085,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[4] \"Eighty-three\"",
-   "t": 92.6
+   "t": 91.122
   },
   "plan": "1:32.60",
   "notes": null
  },
  {
   "id": "V212",
-  "t0": 93.43,
-  "t1": 95.363,
+  "t0": 91.934,
+  "t1": 93.826,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2116,15 +2116,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[4] \"satellites\"",
-   "t": 93.43
+   "t": 91.934
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "V213",
-  "t0": 95.363,
-  "t1": 96.719,
+  "t0": 93.826,
+  "t1": 95.153,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2146,15 +2146,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[5] \"every\"",
-   "t": 95.363
+   "t": 93.826
   },
   "plan": "1:35.36",
   "notes": null
  },
  {
   "id": "V214",
-  "t0": 96.719,
-  "t1": 97.883,
+  "t0": 95.153,
+  "t1": 96.293,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2172,15 +2172,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[5] \"first\"",
-   "t": 96.719
+   "t": 95.153
   },
   "plan": null,
   "notes": "zoom 1.12 crops the red line Veo drew along the screen from 0.75 s"
  },
  {
   "id": "V215",
-  "t0": 97.883,
-  "t1": 100.312,
+  "t0": 96.293,
+  "t1": 98.678,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2203,15 +2203,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[6] \"Petrov\"",
-   "t": 97.883
+   "t": 96.293
   },
   "plan": "1:37.88",
   "notes": null
  },
  {
   "id": "V216",
-  "t0": 100.312,
-  "t1": 101.05,
+  "t0": 98.678,
+  "t1": 99.403,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2229,15 +2229,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[7] \"ignored\"",
-   "t": 100.312
+   "t": 98.678
   },
   "plan": "1:40.31",
   "notes": null
  },
  {
   "id": "V217",
-  "t0": 101.05,
-  "t1": 102.048,
+  "t0": 99.403,
+  "t1": 100.384,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2260,15 +2260,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[7] \"previous\"",
-   "t": 101.05
+   "t": 99.403
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "V218",
-  "t0": 102.048,
-  "t1": 102.986,
+  "t0": 100.384,
+  "t1": 101.305,
   "section": "Verse 2",
   "edit_section": "V2",
   "timing_section": "Verse 2",
@@ -2286,15 +2286,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Verse 2[7] \"We're\"",
-   "t": 102.048
+   "t": 100.384
   },
   "plan": "1:42.0",
   "notes": "she exhales on \"We're alive\" (voice B); lip-sync optional"
  },
  {
   "id": "P201",
-  "t0": 102.986,
-  "t1": 108.005,
+  "t0": 101.305,
+  "t1": 106.21,
   "section": "Pre-chorus 2",
   "edit_section": "P2",
   "timing_section": "Verse 2",
@@ -2310,15 +2310,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 2[0] \"Secret\"",
-   "t": 102.986
+   "t": 101.305
   },
   "plan": "1:42.99",
   "notes": null
  },
  {
   "id": "P203",
-  "t0": 108.005,
-  "t1": 110.609,
+  "t0": 106.21,
+  "t1": 108.754,
   "section": "Pre-chorus 2",
   "edit_section": "P2",
   "timing_section": "Pre-Chorus 2",
@@ -2334,15 +2334,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 2[2] \"coin\"",
-   "t": 108.005
+   "t": 106.21
   },
   "plan": "1:48.00",
   "notes": null
  },
  {
   "id": "P204",
-  "t0": 110.609,
-  "t1": 113.178,
+  "t0": 108.754,
+  "t1": 111.271,
   "section": "Pre-chorus 2",
   "edit_section": "P2",
   "timing_section": "Pre-Chorus 2",
@@ -2358,15 +2358,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Pre-Chorus 2[3] \"the\"",
-   "t": 110.609
+   "t": 108.754
   },
   "plan": "1:50.61",
   "notes": null
  },
  {
   "id": "C201",
-  "t0": 113.178,
-  "t1": 115.657,
+  "t0": 111.271,
+  "t1": 113.699,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2389,15 +2389,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[0] \"Can't\"",
-   "t": 113.178
+   "t": 111.271
   },
   "plan": null,
   "notes": "chorus 1 shot returns as a split; cut on \"Can't\" like chorus 1"
  },
  {
   "id": "C202",
-  "t0": 115.657,
-  "t1": 117.937,
+  "t0": 113.699,
+  "t1": 115.93,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2417,15 +2417,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[1] \"message\"",
-   "t": 115.657
+   "t": 113.699
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "C203",
-  "t0": 117.937,
-  "t1": 123.32,
+  "t0": 115.93,
+  "t1": 121.202,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2448,21 +2448,21 @@
   ],
   "type": "I'M COUNTING ON YOU",
   "lipsync_window": [
-   117.937,
-   123.3
+   115.93,
+   121.182
   ],
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[2] \"but\"",
-   "t": 117.937
+   "t": 115.93
   },
   "plan": null,
   "notes": "Jade v3: one phrase per half; both halves cut on the onset of \"I'm\" (phraseSplit)"
  },
  {
   "id": "C204",
-  "t0": 123.32,
-  "t1": 125.824,
+  "t0": 121.202,
+  "t1": 123.653,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2481,15 +2481,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[3] \"Silent\"",
-   "t": 123.32
+   "t": 121.202
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "C208",
-  "t0": 125.824,
-  "t1": 127.739,
+  "t0": 123.653,
+  "t1": 125.525,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2509,21 +2509,21 @@
   ],
   "type": null,
   "lipsync_window": [
-   125.824,
-   127.739
+   123.653,
+   125.525
   ],
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[4] \"in\"",
-   "t": 125.824
+   "t": 123.653
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "C208b",
-  "t0": 127.739,
-  "t1": 128.398,
+  "t0": 125.525,
+  "t1": 126.169,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2541,15 +2541,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat after \"breathe\" (on \"somewhere\")",
-   "t": 127.739
+   "t": 125.525
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "C209",
-  "t0": 128.398,
-  "t1": 130.911,
+  "t0": 126.169,
+  "t1": 128.625,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2569,21 +2569,21 @@
   ],
   "type": null,
   "lipsync_window": [
-   128.398,
-   130.911
+   126.169,
+   128.625
   ],
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[5] \"If\"",
-   "t": 128.398
+   "t": 126.169
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "C209b",
-  "t0": 130.911,
-  "t1": 131.845,
+  "t0": 128.625,
+  "t1": 129.539,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2601,15 +2601,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "second beat of the held \"are\"",
-   "t": 130.911
+   "t": 128.625
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "C210",
-  "t0": 131.845,
-  "t1": 134.055,
+  "t0": 129.539,
+  "t1": 131.7,
   "section": "Chorus 2",
   "edit_section": "C2",
   "timing_section": "Chorus 2",
@@ -2631,15 +2631,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Chorus 2[5] \"I'm\"",
-   "t": 131.845
+   "t": 129.539
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X201",
-  "t0": 134.055,
-  "t1": 134.655,
+  "t0": 131.7,
+  "t1": 132.287,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2658,15 +2658,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[0] \"One\"",
-   "t": 134.055
+   "t": 131.7
   },
   "plan": "2:14.06",
   "notes": null
  },
  {
   "id": "X202",
-  "t0": 134.655,
-  "t1": 135.285,
+  "t0": 132.287,
+  "t1": 132.904,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2685,15 +2685,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[1] \"One\"",
-   "t": 134.655
+   "t": 132.287
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X203",
-  "t0": 135.285,
-  "t1": 135.89,
+  "t0": 132.904,
+  "t1": 133.496,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2712,15 +2712,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[2] \"Two\"",
-   "t": 135.285
+   "t": 132.904
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X204",
-  "t0": 135.89,
-  "t1": 136.595,
+  "t0": 133.496,
+  "t1": 134.185,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2739,15 +2739,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[3] \"Three\"",
-   "t": 135.89
+   "t": 133.496
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X205",
-  "t0": 136.595,
-  "t1": 137.208,
+  "t0": 134.185,
+  "t1": 134.785,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2766,15 +2766,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[4] \"Five\"",
-   "t": 136.595
+   "t": 134.185
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X206",
-  "t0": 137.208,
-  "t1": 139.109,
+  "t0": 134.785,
+  "t1": 136.646,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2793,15 +2793,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Post-Chorus 2[1] \"Counting\"",
-   "t": 137.208
+   "t": 134.785
   },
   "plan": "2:17.21",
   "notes": null
  },
  {
   "id": "X207",
-  "t0": 139.109,
-  "t1": 139.715,
+  "t0": 136.646,
+  "t1": 137.24,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2817,15 +2817,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[5] \"One\"",
-   "t": 139.109
+   "t": 136.646
   },
   "plan": "2:19.11",
   "notes": null
  },
  {
   "id": "X208",
-  "t0": 139.715,
-  "t1": 140.36,
+  "t0": 137.24,
+  "t1": 137.871,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2841,15 +2841,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[6] \"One\"",
-   "t": 139.715
+   "t": 137.24
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X209",
-  "t0": 140.36,
-  "t1": 141.015,
+  "t0": 137.871,
+  "t1": 138.513,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2865,15 +2865,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[7] \"Two\"",
-   "t": 140.36
+   "t": 137.871
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X210",
-  "t0": 141.015,
-  "t1": 141.67,
+  "t0": 138.513,
+  "t1": 139.154,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2889,15 +2889,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[8] \"Three\"",
-   "t": 141.015
+   "t": 138.513
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X211",
-  "t0": 141.67,
-  "t1": 142.187,
+  "t0": 139.154,
+  "t1": 139.661,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2913,15 +2913,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit post_chorus_2[9] \"Five\"",
-   "t": 141.67
+   "t": 139.154
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "X212",
-  "t0": 142.187,
-  "t1": 142.915,
+  "t0": 139.661,
+  "t1": 140.374,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2937,15 +2937,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Post-Chorus 2[3] \"Counting\"",
-   "t": 142.187
+   "t": 139.661
   },
   "plan": "2:22.19",
   "notes": null
  },
  {
   "id": "X213",
-  "t0": 142.915,
-  "t1": 143.423,
+  "t0": 140.374,
+  "t1": 140.871,
   "section": "Post-chorus 2",
   "edit_section": "X2",
   "timing_section": "Post-Chorus 2",
@@ -2968,15 +2968,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Post-Chorus 2[3] \"on\"",
-   "t": 142.915
+   "t": 140.374
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BR01",
-  "t0": 143.423,
-  "t1": 143.898,
+  "t0": 140.871,
+  "t1": 141.336,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Post-Chorus 2",
@@ -2992,15 +2992,15 @@
   "anchor": {
    "kind": "sixteenth",
    "ref": "last 16th before the drums-out beat (Black presses the clock; 1.e4 on the beat)",
-   "t": 143.423
+   "t": 140.871
   },
   "plan": "2:23.58",
   "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR01b",
-  "t0": 143.898,
-  "t1": 146.111,
+  "t0": 141.336,
+  "t1": 143.501,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3016,15 +3016,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "eighth nearest 2:23.9",
-   "t": 143.898
+   "t": 141.336
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BR02",
-  "t0": 146.111,
-  "t1": 146.902,
+  "t0": 143.501,
+  "t1": 144.274,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3040,15 +3040,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 2:26.1",
-   "t": 146.111
+   "t": 143.501
   },
   "plan": "2:26.1",
   "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR02b",
-  "t0": 146.902,
-  "t1": 147.365,
+  "t0": 144.274,
+  "t1": 144.727,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3064,15 +3064,15 @@
   "anchor": {
    "kind": "sixteenth",
    "ref": "a sixteenth after 5...Ba5 lands (the hand lets go of the bishop first)",
-   "t": 146.902
+   "t": 144.274
   },
   "plan": null,
   "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR02c",
-  "t0": 147.365,
-  "t1": 147.979,
+  "t0": 144.727,
+  "t1": 145.327,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3090,15 +3090,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[1] \"holds\"",
-   "t": 147.365
+   "t": 144.727
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BR02d",
-  "t0": 147.979,
-  "t1": 148.64,
+  "t0": 145.327,
+  "t1": 145.973,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3116,15 +3116,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[1] \"breath\"",
-   "t": 147.979
+   "t": 145.327
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BR03",
-  "t0": 148.64,
-  "t1": 150.325,
+  "t0": 145.973,
+  "t1": 147.622,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3140,15 +3140,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat nearest 2:28.6",
-   "t": 148.64
+   "t": 145.973
   },
   "plan": "2:28.6",
   "notes": null
  },
  {
   "id": "BR04",
-  "t0": 150.325,
-  "t1": 150.536,
+  "t0": 147.622,
+  "t1": 147.828,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3164,15 +3164,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[2] \"spark\"",
-   "t": 150.325
+   "t": 147.622
   },
   "plan": "2:30.32",
   "notes": null
  },
  {
   "id": "BR05",
-  "t0": 150.536,
-  "t1": 153.037,
+  "t0": 147.828,
+  "t1": 150.279,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3188,15 +3188,15 @@
   "anchor": {
    "kind": "eighth",
    "ref": "eighth nearest 2:30.5",
-   "t": 150.536
+   "t": 147.828
   },
   "plan": "2:30.5",
   "notes": null
  },
  {
   "id": "BR06",
-  "t0": 153.037,
-  "t1": 153.695,
+  "t0": 150.279,
+  "t1": 150.924,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3212,15 +3212,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[3] \"death\"",
-   "t": 153.037
+   "t": 150.279
   },
   "plan": "2:33.04",
   "notes": null
  },
  {
   "id": "BR07",
-  "t0": 153.695,
-  "t1": 154.15,
+  "t0": 150.924,
+  "t1": 151.37,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3235,16 +3235,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event impact @153.695 (drums + 808 return inside the Bridge (\"B)",
-   "t": 153.695
+   "ref": "event impact @150.924 (drums + 808 return inside the Bridge (\"B)",
+   "t": 150.924
   },
   "plan": "2:33.69",
   "notes": null
  },
  {
   "id": "BR08",
-  "t0": 154.15,
-  "t1": 154.808,
+  "t0": 151.37,
+  "t1": 152.015,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3260,15 +3260,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[4] \"chain\"",
-   "t": 154.15
+   "t": 151.37
   },
   "plan": "2:34.15",
   "notes": null
  },
  {
   "id": "BR09",
-  "t0": 154.808,
-  "t1": 155.901,
+  "t0": 152.015,
+  "t1": 153.086,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3284,15 +3284,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[4] \"chains\"",
-   "t": 154.808
+   "t": 152.015
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BR10",
-  "t0": 155.901,
-  "t1": 157.482,
+  "t0": 153.086,
+  "t1": 154.635,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3308,15 +3308,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[5] \"and\"",
-   "t": 155.901
+   "t": 153.086
   },
   "plan": "2:35.90",
   "notes": null
  },
  {
   "id": "BR11",
-  "t0": 157.482,
-  "t1": 157.786,
+  "t0": 154.635,
+  "t1": 154.933,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3332,15 +3332,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[5] \"hand\"",
-   "t": 157.482
+   "t": 154.635
   },
   "plan": "2:37.48",
   "notes": null
  },
  {
   "id": "BR11b",
-  "t0": 157.786,
-  "t1": 158.101,
+  "t0": 154.933,
+  "t1": 155.241,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3356,15 +3356,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[5] \"that\"",
-   "t": 157.786
+   "t": 154.933
   },
   "plan": null,
   "notes": "hand sprites: render/assets/t2/hands (nano-banana-pro on green, keyed)"
  },
  {
   "id": "BR12",
-  "t0": 158.101,
-  "t1": 158.405,
+  "t0": 155.241,
+  "t1": 155.539,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3380,15 +3380,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[5] \"let\"",
-   "t": 158.101
+   "t": 155.241
   },
   "plan": "2:38.10",
   "notes": "was the hands-off plate; the dive needs the window between \"let\" and \"go\" (the poster cut on \"go\" is fixed)"
  },
  {
   "id": "BR13",
-  "t0": 158.405,
-  "t1": 158.764,
+  "t0": 155.539,
+  "t1": 155.891,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3404,15 +3404,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[5] \"go\"",
-   "t": 158.405
+   "t": 155.539
   },
   "plan": "2:37.8",
   "notes": "plan starts the dive at 2:37.8; here the dive runs \"let\" to \"go\" and the morph \"go\" to \"sixty-two\""
  },
  {
   "id": "BR14",
-  "t0": 158.764,
-  "t1": 161.234,
+  "t0": 155.891,
+  "t1": 158.31,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3432,15 +3432,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[6] \"sixty-two\"",
-   "t": 158.764
+   "t": 155.891
   },
   "plan": "2:38.76",
   "notes": null
  },
  {
   "id": "BR15",
-  "t0": 161.234,
-  "t1": 162.189,
+  "t0": 158.31,
+  "t1": 159.245,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3456,15 +3456,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[7] \"two\"",
-   "t": 161.234
+   "t": 158.31
   },
   "plan": "2:41.23",
   "notes": null
  },
  {
   "id": "BR16",
-  "t0": 162.189,
-  "t1": 163.344,
+  "t0": 159.245,
+  "t1": 160.377,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3480,15 +3480,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[7] \"Arkhipov\"",
-   "t": 162.189
+   "t": 159.245
   },
   "plan": "2:42.19",
   "notes": null
  },
  {
   "id": "BR17",
-  "t0": 163.344,
-  "t1": 163.668,
+  "t0": 160.377,
+  "t1": 160.695,
   "section": "Bridge",
   "edit_section": "BR",
   "timing_section": "Bridge",
@@ -3504,15 +3504,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Bridge[7] \"no\"",
-   "t": 163.344
+   "t": 160.377
   },
   "plan": "2:43.34",
   "notes": "B-59 surfacing (t2_arkhipov mode surface) has no room before the build at 2:43.67"
  },
  {
   "id": "BU01",
-  "t0": 163.668,
-  "t1": 166.931,
+  "t0": 160.695,
+  "t1": 163.898,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Bridge",
@@ -3528,15 +3528,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[0] \"Hunters\"",
-   "t": 163.668
+   "t": 160.695
   },
   "plan": "2:43.67",
   "notes": null
  },
  {
   "id": "BU02",
-  "t0": 166.931,
-  "t1": 169.44,
+  "t0": 163.898,
+  "t1": 166.362,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3552,15 +3552,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[1] \"fire\"",
-   "t": 166.931
+   "t": 163.898
   },
   "plan": "2:46.93",
   "notes": null
  },
  {
   "id": "BU03",
-  "t0": 169.44,
-  "t1": 170.073,
+  "t0": 166.362,
+  "t1": 166.983,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3576,15 +3576,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[2] \"burn\"",
-   "t": 169.44
+   "t": 166.362
   },
   "plan": "2:49.44",
   "notes": null
  },
  {
   "id": "BU04",
-  "t0": 170.073,
-  "t1": 170.832,
+  "t0": 166.983,
+  "t1": 167.727,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3604,15 +3604,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[2] \"fall\"",
-   "t": 170.073
+   "t": 166.983
   },
   "plan": "2:50.83",
   "notes": "moved from \"Only\" (2:50.83) to \"fall\" so the rewind gets 3 s; rate 3.0: hand on the wheel to her face in 0.76 s. Adversary pass: reads as a rewind, never a launch (Jade, 28 Oct)"
  },
  {
   "id": "BU05",
-  "t0": 170.832,
-  "t1": 173.876,
+  "t0": 167.727,
+  "t1": 170.708,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3628,15 +3628,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[3] \"Only\"",
-   "t": 170.832
+   "t": 167.727
   },
   "plan": null,
   "notes": "starts on \"Only\" (the plan's console time); the war clock is piecewise so Earth and the galaxy each get their share"
  },
  {
   "id": "BU06",
-  "t0": 173.876,
-  "t1": 175.057,
+  "t0": 170.708,
+  "t1": 171.864,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3652,15 +3652,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat before \"all\": Earth whole (the rewind stops)",
-   "t": 173.876
+   "t": 170.708
   },
   "plan": "2:53.25",
   "notes": "moved from \"out\" (173.25) to the beat before \"all\": the rewind runs through \"out there\""
  },
  {
   "id": "BU08",
-  "t0": 175.057,
-  "t1": 175.746,
+  "t0": 171.864,
+  "t1": 172.538,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3676,15 +3676,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[5] \"Hold\"",
-   "t": 175.057
+   "t": 171.864
   },
   "plan": "2:55.06",
   "notes": null
  },
  {
   "id": "BU09",
-  "t0": 175.746,
-  "t1": 176.393,
+  "t0": 172.538,
+  "t1": 173.172,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3702,15 +3702,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[5] \"fire\"",
-   "t": 175.746
+   "t": 172.538
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BU10",
-  "t0": 176.393,
-  "t1": 177.636,
+  "t0": 173.172,
+  "t1": 174.39,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3728,15 +3728,15 @@
   "anchor": {
    "kind": "bar",
    "ref": "bar line after \"fire\"",
-   "t": 176.393
+   "t": 173.172
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BU11",
-  "t0": 177.636,
-  "t1": 180.086,
+  "t0": 174.39,
+  "t1": 176.793,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3752,15 +3752,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[5] \"Show\"",
-   "t": 177.636
+   "t": 174.39
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BU12",
-  "t0": 180.086,
-  "t1": 180.796,
+  "t0": 176.793,
+  "t1": 177.491,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3783,15 +3783,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Build[6] \"Hold\"",
-   "t": 180.086
+   "t": 176.793
   },
   "plan": "3:00.09",
   "notes": null
  },
  {
   "id": "BU13",
-  "t0": 180.796,
-  "t1": 181.425,
+  "t0": 177.491,
+  "t1": 178.109,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3808,16 +3808,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event snare_roll @180.796 (BUILD snare/808 roll: 16th notes for 5 b)",
-   "t": 180.796
+   "ref": "event snare_roll @177.491 (BUILD snare/808 roll: 16th notes for 5 b)",
+   "t": 177.491
   },
   "plan": "3:00.80",
   "notes": null
  },
  {
   "id": "BU14",
-  "t0": 181.425,
-  "t1": 182.054,
+  "t0": 178.109,
+  "t1": 178.727,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3835,15 +3835,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat 1 of the build roll",
-   "t": 181.425
+   "t": 178.109
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BU15",
-  "t0": 182.054,
-  "t1": 182.684,
+  "t0": 178.727,
+  "t1": 179.346,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3859,15 +3859,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat 2 of the build roll",
-   "t": 182.054
+   "t": 178.727
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BU16",
-  "t0": 182.684,
-  "t1": 183.313,
+  "t0": 179.346,
+  "t1": 179.964,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3883,15 +3883,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat 3 of the build roll",
-   "t": 182.684
+   "t": 179.346
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "BU17",
-  "t0": 183.313,
-  "t1": 183.882,
+  "t0": 179.964,
+  "t1": 180.523,
   "section": "Build",
   "edit_section": "BU",
   "timing_section": "Build",
@@ -3914,15 +3914,15 @@
   "anchor": {
    "kind": "beat",
    "ref": "beat 4 of the build roll",
-   "t": 183.313
+   "t": 179.964
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "DR01",
-  "t0": 183.882,
-  "t1": 186.416,
+  "t0": 180.523,
+  "t1": 183.012,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Build",
@@ -3940,15 +3940,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Drop[0] \"Couldn't\"",
-   "t": 183.882
+   "t": 180.523
   },
   "plan": "3:03.88",
   "notes": null
  },
  {
   "id": "DR02",
-  "t0": 186.416,
-  "t1": 188.355,
+  "t0": 183.012,
+  "t1": 184.916,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -3966,15 +3966,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Drop[1] \"message\"",
-   "t": 186.416
+   "t": 183.012
   },
   "plan": "3:06.42",
   "notes": null
  },
  {
   "id": "DR03",
-  "t0": 188.355,
-  "t1": 188.676,
+  "t0": 184.916,
+  "t1": 185.231,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -3991,16 +3991,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event impact @188.355 (DROP IMPACT: full-spectrum slam on bar 7)",
-   "t": 188.355
+   "ref": "event impact @184.916 (DROP IMPACT: full-spectrum slam on bar 7)",
+   "t": 184.916
   },
   "plan": "3:08.355",
   "notes": null
  },
  {
   "id": "DR04",
-  "t0": 188.676,
-  "t1": 191.445,
+  "t0": 185.231,
+  "t1": 187.957,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4019,21 +4019,21 @@
   ],
   "type": "YOU WERE COUNTING TOO",
   "lipsync_window": [
-   188.676,
-   191.44
+   185.231,
+   187.952
   ],
   "anchor": {
    "kind": "word",
    "ref": "Drop[2] \"but\"",
-   "t": 188.676
+   "t": 185.231
   },
   "plan": "3:08.68",
   "notes": null
  },
  {
   "id": "DR05",
-  "t0": 191.445,
-  "t1": 193.38,
+  "t0": 187.957,
+  "t1": 189.866,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4053,15 +4053,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Drop[2] \"counting\"",
-   "t": 191.445
+   "t": 187.957
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "DR06",
-  "t0": 193.38,
-  "t1": 194.01,
+  "t0": 189.866,
+  "t1": 190.488,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4079,15 +4079,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Drop[2] \"too\"",
-   "t": 193.38
+   "t": 189.866
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "DR07",
-  "t0": 194.01,
-  "t1": 194.615,
+  "t0": 190.488,
+  "t1": 191.085,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4103,15 +4103,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit drop_counts[0] \"Thirteen\"",
-   "t": 194.01
+   "t": 190.488
   },
   "plan": "3:14.01",
   "notes": null
  },
  {
   "id": "DR08",
-  "t0": 194.615,
-  "t1": 195.27,
+  "t0": 191.085,
+  "t1": 191.731,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4127,15 +4127,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit drop_counts[1] \"Twenty-one\"",
-   "t": 194.615
+   "t": 191.085
   },
   "plan": "3:14.62",
   "notes": null
  },
  {
   "id": "DR09",
-  "t0": 195.27,
-  "t1": 195.84,
+  "t0": 191.731,
+  "t1": 192.292,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4151,15 +4151,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit drop_counts[2] \"Thirty-four\"",
-   "t": 195.27
+   "t": 191.731
   },
   "plan": "3:15.27",
   "notes": null
  },
  {
   "id": "DR10",
-  "t0": 195.84,
-  "t1": 198.928,
+  "t0": 192.292,
+  "t1": 195.331,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4179,15 +4179,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Drop[4] \"Link\"",
-   "t": 195.84
+   "t": 192.292
   },
   "plan": "3:15.84",
   "notes": null
  },
  {
   "id": "DR11",
-  "t0": 198.928,
-  "t1": 201.56,
+  "t0": 195.331,
+  "t1": 197.924,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4207,21 +4207,21 @@
   ],
   "type": null,
   "lipsync_window": [
-   198.928,
-   201.56
+   195.331,
+   197.924
   ],
   "anchor": {
    "kind": "word",
    "ref": "Drop[5] \"alone\"",
-   "t": 198.928
+   "t": 195.331
   },
   "plan": "3:18.93",
   "notes": null
  },
  {
   "id": "DR12",
-  "t0": 201.56,
-  "t1": 202.255,
+  "t0": 197.924,
+  "t1": 198.61,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4237,15 +4237,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit drop_counts[3] \"Fifty-five\"",
-   "t": 201.56
+   "t": 197.924
   },
   "plan": "3:21.55",
   "notes": null
  },
  {
   "id": "DR13",
-  "t0": 202.255,
-  "t1": 202.89,
+  "t0": 198.61,
+  "t1": 199.237,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4261,15 +4261,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit drop_counts[4] \"Eighty-nine\"",
-   "t": 202.255
+   "t": 198.61
   },
   "plan": "3:22.26",
   "notes": null
  },
  {
   "id": "DR14",
-  "t0": 202.89,
-  "t1": 204.124,
+  "t0": 199.237,
+  "t1": 200.455,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4291,15 +4291,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Drop[7] \"And\"",
-   "t": 202.89
+   "t": 199.237
   },
   "plan": "3:22.89",
   "notes": null
  },
  {
   "id": "DR15",
-  "t0": 204.124,
-  "t1": 207.523,
+  "t0": 200.455,
+  "t1": 203.805,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4315,15 +4315,15 @@
   "anchor": {
    "kind": "bar",
    "ref": "bar line after \"too\" (inside the held note)",
-   "t": 204.124
+   "t": 200.455
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "DR16",
-  "t0": 207.523,
-  "t1": 213.036,
+  "t0": 203.805,
+  "t1": 209.239,
   "section": "Drop",
   "edit_section": "DR",
   "timing_section": "Drop",
@@ -4338,21 +4338,21 @@
   ],
   "type": null,
   "lipsync_window": [
-   207.523,
-   213.016
+   203.805,
+   209.219
   ],
   "anchor": {
    "kind": "word",
    "ref": "Drop[7] \"wherever\"",
-   "t": 207.523
+   "t": 203.805
   },
   "plan": null,
   "notes": null
  },
  {
   "id": "OU01",
-  "t0": 213.036,
-  "t1": 218.868,
+  "t0": 209.239,
+  "t1": 214.955,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Drop",
@@ -4368,19 +4368,19 @@
   "anchor": {
    "kind": "word",
    "ref": "Outro[0] \"Six\"",
-   "t": 213.036
+   "t": 209.239
   },
   "plan": "3:33.04",
   "notes": null
  },
  {
   "id": "OU02",
-  "t0": 218.868,
-  "t1": 224.33,
+  "t0": 214.955,
+  "t1": 220.367,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
-  "lyric": "every one could've burned Every one held its fire",
+  "lyric": "every one could've burned Every one held their fire",
   "voice": "A",
   "picture": "Each world flickers red once, its own near-miss, then holds gold; the near-silences between phrases stay empty",
   "era_style": "Contact graph, outro: pure light on black (the Rare Earth finale); gold and pale blue",
@@ -4392,15 +4392,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Outro[1] \"every\"",
-   "t": 218.868
+   "t": 214.955
   },
   "plan": "3:38.87",
   "notes": null
  },
  {
   "id": "OU03",
-  "t0": 224.33,
-  "t1": 230.042,
+  "t0": 220.367,
+  "t1": 226.095,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
@@ -4415,16 +4415,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event impact @224.33 (Outro: drums + 808 slam back in (bar 89))",
-   "t": 224.33
+   "ref": "event impact @220.367 (Outro: drums + 808 slam back in (bar 89))",
+   "t": 220.367
   },
   "plan": "3:44.33",
   "notes": null
  },
  {
   "id": "OU10",
-  "t0": 230.042,
-  "t1": 233.17,
+  "t0": 226.095,
+  "t1": 228.98,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
@@ -4446,15 +4446,15 @@
   "anchor": {
    "kind": "hit",
    "ref": "hit outro_whisper[4] \"One\"",
-   "t": 230.042
+   "t": 226.095
   },
   "plan": "3:50.04",
   "notes": null
  },
  {
   "id": "OU11",
-  "t0": 233.17,
-  "t1": 238.493,
+  "t0": 228.98,
+  "t1": 230.45,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
@@ -4472,15 +4472,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Outro[5] \"Hold\"",
-   "t": 233.17
+   "t": 228.98
   },
   "plan": "3:53.17",
   "notes": null
  },
  {
   "id": "OU12",
-  "t0": 238.493,
-  "t1": 242.08,
+  "t0": 230.45,
+  "t1": 234,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
@@ -4497,16 +4497,16 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event vocal_gap @238.493 (no vocals for 3.59 s)",
-   "t": 238.493
+   "ref": "event vocal_gap @230.45 (no vocals for 3.55 s)",
+   "t": 230.45
   },
   "plan": "3:58.5",
   "notes": null
  },
  {
   "id": "OU13",
-  "t0": 242.08,
-  "t1": 244.05,
+  "t0": 234,
+  "t1": 235.53,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
@@ -4524,15 +4524,15 @@
   "anchor": {
    "kind": "word",
    "ref": "Outro[6] \"Hold\"",
-   "t": 242.08
+   "t": 234
   },
   "plan": "4:02.08",
   "notes": null
  },
  {
   "id": "OU14",
-  "t0": 244.05,
-  "t1": 247.16,
+  "t0": 235.53,
+  "t1": 238.64,
   "section": "Outro",
   "edit_section": "OU",
   "timing_section": "Outro",
@@ -4549,8 +4549,8 @@
   "lipsync_window": null,
   "anchor": {
    "kind": "event",
-   "ref": "event impact @244.05 (FINAL HIT: 808 + crash on bar 96 beat 4 )",
-   "t": 244.05
+   "ref": "event impact @235.53 (FINAL HIT (end card anchor): the new ren)",
+   "t": 235.53
   },
   "plan": "4:04.05",
   "notes": "no real images are used so far (every picture is generated or drawn): add p.images [{credit: \"ESA/Hubble\"}] / NASA if one is; p.support adds FLUX Video Upscale (RC2: the 720p sung and close-up plates are built from its 1080p upscales, picks2 `upscaled`)"

@@ -39,12 +39,13 @@ assert.equal(S.plies.length, 42);
 for (let i = 1; i < 42; i++) assert.ok(S.plies[i].t > S.plies[i - 1].t + 0.1, `ply ${i + 1} after ply ${i}`);
 const near = (a, b, tol, msg) => assert.ok(Math.abs(a - b) <= tol, `${msg}: ${a.toFixed(3)} vs ${b.toFixed(3)}`);
 const T = (lbl) => S.plies.find((p) => p.label === lbl).t;
-near(T('1.e4'), 143.58, 0.03, '1.e4 on drums-out');
-near(T('9.Qxg7'), 150.32, 0.042, '9.Qxg7 on "spark"');
-near(T('13...O-O-O'), 153.04, 0.042, '13...O-O-O on "death"');
-near(T('14.Bg5'), 153.69, 0.042, '14.Bg5 on drums back');
-near(T('21...Qg4+'), 157.48, 0.042, '21...Qg4+ on "hand"');
-near(S.stop, 158.10, 0.042, 'clocks stop on "let go"');
+// the anchors as heard in the v1 song, carried to the new one (timing.json v1_map)
+near(T('1.e4'), A.v1(143.58), 0.03, '1.e4 on drums-out');
+near(T('9.Qxg7'), A.v1(150.32), 0.042, '9.Qxg7 on "spark"');
+near(T('13...O-O-O'), A.v1(153.04), 0.042, '13...O-O-O on "death"');
+near(T('14.Bg5'), A.v1(153.69), 0.042, '14.Bg5 on drums back');
+near(T('21...Qg4+'), A.v1(157.48), 0.042, '21...Qg4+ on "hand"');
+near(S.stop, A.v1(158.10), 0.042, 'clocks stop on "let go"');
 // clocks: 1+0 (chess reviewer); each side's clock only runs on its own move; the clocks run at the moves' pace, K clock seconds per
 // song second (Andrej): the sum of both elapsed times = K (stop - start press); the lower clock ends on CLOCK_LEFT (5 s), no flag falls
 assert.equal(S.TC, 60, 'one minute per side');

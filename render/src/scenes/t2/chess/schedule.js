@@ -30,6 +30,8 @@ const clean = (w) => (w || '').toLowerCase().replace(/[^a-z0-9']/g, '');
 
 export function buildSchedule(audio) {
   const beats = audio.beats;
+  // the literals below (search bounds, fallbacks) are v1 song times: V carries them to the new song (timing.json v1_map)
+  const V = audio.v1 || ((x) => x);
   const words = [];
   for (const l of audio.lines) for (const w of l.words) words.push({ w: clean(w.w), t: w.t, section: l.section || '' });
   const word = (w, after, fb) => { const x = words.find((y) => y.w === w && y.t >= after); return x ? x.t : fb; };
@@ -37,14 +39,14 @@ export function buildSchedule(audio) {
   // grid position g in beats (fractional; multiples of 1/4) relative to beat index k -> time
   const G = (k, g) => { const i = k + Math.floor(g), f = g - Math.floor(g); const a = audio.beatT(i), b = audio.beatT(i + 1); return a + (b - a) * f; };
 
-  const drumsOut = audio.event('drums_out', null, 140) ?? 143.595;
-  const k0 = bi(drumsOut);                                       // 143.581
-  const spark = word('spark', 148, 150.325);
-  const death = word('death', 151, 153.037);
-  const back = audio.event('impact', /return/i, 150) ?? 153.695;
-  const kb = bi(back);                                           // 153.694
-  const hand = word('hand', 156, 157.482);
-  const letgo = word('let', 157.5, 158.101);
+  const drumsOut = audio.event('drums_out', null, V(140)) ?? V(143.595);
+  const k0 = bi(drumsOut);                                       // 143.581 in v1
+  const spark = word('spark', V(148), V(150.325));
+  const death = word('death', V(151), V(153.037));
+  const back = audio.event('impact', /return/i, V(150)) ?? V(153.695);
+  const kb = bi(back);                                           // 153.694 in v1
+  const hand = word('hand', V(156), V(157.482));
+  const letgo = word('let', V(157.5), V(158.101));
 
   const T = [];  // [t, grid]
   for (let i = 0; i < 8; i++) T.push([G(k0, i / 2), i ? '8th' : 'beat']);            // 1.e4 .. 4...c5
@@ -119,14 +121,14 @@ export function buildSchedule(audio) {
   }
 
   // the set: shouts from timing.json hits (t_attack), squares per shout (1, 1, 2, 3, 5, then 20 on "Counting on you!")
-  const shouts = audio.hits.filter((h) => h.t > 138.8 && h.t < 142.0 && /post_chorus/.test(h.kind || '')).map((h) => h.t_attack ?? h.t);
-  const cy = audio.hits.find((h) => h.t > 141.9 && h.t < 143 && /counting/.test(h.kind || ''));
-  const count = cy ? (cy.t_attack ?? cy.t) : 142.21;
-  const on = word('on', count + 0.2, 142.915), you = word('you', count + 0.2, 143.199);
+  const shouts = audio.hits.filter((h) => h.t > V(138.8) && h.t < V(142.0) && /post_chorus/.test(h.kind || '')).map((h) => h.t_attack ?? h.t);
+  const cy = audio.hits.find((h) => h.t > V(141.9) && h.t < V(143) && /counting/.test(h.kind || ''));
+  const count = cy ? (cy.t_attack ?? cy.t) : V(142.21);
+  const on = word('on', count + 0.2, V(142.915)), you = word('you', count + 0.2, V(143.199));
   const S = (n) => sqOf(n);
   const groups = [['e1'], ['e8'], ['d1', 'd8'], ['a1', 'h8', 'h1'], ['a8', 'c1', 'f8', 'f1', 'c8']];
   const set = [];
-  groups.forEach((g, i) => g.forEach((n, j) => set.push({ sq: S(n), t: (shouts[i] ?? (139.13 + i * 0.63)) + j * 0.06, shout: i })));
+  groups.forEach((g, i) => g.forEach((n, j) => set.push({ sq: S(n), t: (shouts[i] ?? (V(139.13) + i * 0.63)) + j * 0.06, shout: i })));
   ['b1', 'g1', 'b8', 'g8'].forEach((n, j) => set.push({ sq: S(n), t: count + j * 0.05, shout: 5 }));
   // both pawn ranks land on "Counting" (interleaved, a2 h7 b2 g7 ...), so the board is whole before the cut on "on" to the plate of
   // the two Jades sitting down at the set board (X213): the plate never shows a position the board has not reached
@@ -135,7 +137,7 @@ export function buildSchedule(audio) {
   'hgfedcba'.split('').forEach((f, j) => set.push({ sq: S(f + '7'), t: count + 0.26 + (j + 0.5) * pd, shout: 5 }));
   const setBySq = new Map(set.map((x) => [x.sq, x]));
 
-  return { plies, presses, TC, K, CLOCK_LEFT, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };
+  return { plies, presses, TC, K, CLOCK_LEFT, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', V(153.5), V(154.15)), count, shouts } };
 }
 
 // index of the last ply that has landed at time t (-1 before 1.e4)

@@ -446,3 +446,60 @@ the changed ranges re-rendered at 1080p and spliced over RC6's sources, newest r
   "count" and the board ends on 42.
 - `docs/research/film_nearmiss_list.md`: the film's list with dates and on-screen wording and its differences from the site,
   for the site's author. RC13 re-renders 1:43.0-1:53.2 and 3:44.3-3:50.0.
+
+## The minor-fixes song (30 Oct)
+Jade and Suno re-rendered the song with small lyric changes ("Hold Fire (minor fixes)", now `inputs/Hold Fire.mp3`; v1 kept as
+`inputs/Hold Fire (v1).mp3`). Same arrangement and performance, ~1.9 % faster with a different tempo drift; three edits:
+the intro's doubled whispered "eight" is gone, "sulfur, saltpeter" (no "and"), "Every one held their fire"; and the ending is
+shorter: v1's 4 s held "fire" + choir after the last full "Hold your fire" is gone, and the file ends (236.00 s) where v1's
+final hit would land, so there is no final hit.
+- **The map** (`tools/audio/retime_v2.py`, `retime_v2_cfg.json`, `analysis/retime_v2_beats.json`): v1 beat i -> new beat i
+  (281 strong beats within 25 ms, MAD 4.7 ms), plus outro knots measured on the new BS-RoFormer vocal stem. `timing.json` is the
+  v1 map carried through it (with `v1_map`), and `audio.json` is warped the same way (features.py needs the drum stem).
+- **The edit runs on the v1 clock where it typed v1 times**: `A.v1` / `A.v1inv` (`render/src/audio.js`). Plan times (`beat('m:ss')`),
+  `ev()`'s search bounds (CO10's rewind had jumped to a sub hit at 26.6 s), the chess schedule's anchors and fallbacks, and the
+  lip-synced takes' `s0`/`lag` (`plate/lib.js`: clipT = v1inv(hold(t)) - s0 + lag).
+- **Lip sync** (`tools/audio/lipsync_v2_check.py`, `analysis/lipsync_v2_check.json`): the new vocal at t against the v1 vocal at
+  v1inv(t), cross-correlated per sung shot: all 15 shots within 0 to -10 ms (a quarter frame); whole song, 91 % of 3 s windows
+  within a frame (median -5 ms). No lag pick changes.
+- **Intro:** the galaxy keeps its beat (the second after "eight", where the echo was); no other change.
+- **Line 23:** brushed rows sulfur / saltpeter / thunder / in the sky (`lyrics2.js` br).
+- **Outro:** the second whispered count (line 71) stays: in both renders it sits under the held "higher". The end card lands
+  0.13 s after the last whisper ends (235.53, as v1's hit followed its last whisper), and the film runs 2.67 s past the song on
+  silence so the card holds 3.11 s as before (film 238.64 s). Jade may prefer to end on the song: set `film_duration` in
+  `retime_v2_cfg.json` (and the last knot) and re-run.
+- **Sound:** `sfx_t2.py` re-run on the new song and stem (all checks pass). `t2_events.mjs` now finds the Arkhipov poster inside
+  BR14's `multi` (since part two it had taken BR15, which clipped the sonar and depth charges; the committed mix predated part
+  two, so this only showed now). `deliverables/Hold Fire (minor fixes, with sfx).mp3`: the mix at 320k.
+- **Checks:** check_cuts 0 cuts off onset (173 shots, 0 -> 238.64); chess_check OK (the clocks now run at 7.58x to end on 5 s);
+  chess_lens OK.
+- **Preview** `previews/hold_fire_t2_rcv2_minor_fixes_540p.mp4`: RC13's frames remapped through the map (frame i = RC13 at
+  v1inv(i/24); `tools/t2/remap_preview.py`), with the ranges that changed re-rendered at 1080p and spliced: line 23
+  (83.67-86.25), line 68 (214.88-220.38), OU10 to the end (226.13-238.64). The full-res master needs a local render with the full
+  `work/` (the CRT room clips, DR01 and V102 exist only there; `derived/` on the `derived-plates` branch has the rest).
+
+## The tablet's letter lines (30 Oct, after Benjamin R. Foster's reply)
+Foster confirmed the edge line ("um-ma Na-an-ni-ma", "Thus says Nanni"), identified the ṣi of Ea-naṣir as the sign ZE₂, and said the
+last wedge of a nine-wedge 9 is the tall one on the right (the stylus's second press). Line 1, *a-na é-a-na-ṣi-ir* ("to Ea-nasir"),
+is now on the tablet above Nanni's line (`cuneiform.js` EA_NASIR, `tablet.js` EDGE); the font subset adds A, E2, ZE2 and IR
+(Noto Sans Cuneiform 2.001, outlines of the existing 20 signs identical); `cuneiform_card.py` checks both lines. Then (Jade: make it
+10 - 1) 89 = 1;29 is written the scribes' way, 1;(30 LAL 1), 𒁹 𒌍𒇲𒁹, the last 1 tilted ~12 degrees to the left (`tablet.js` LAL_TILT,
+turned about its head). The take's two touches still make the two wedges: the sixties wedge, and the tilted 1, which is now a whole
+DISH (no partial NINE DISH); 89's place gap is re-solved so the 1's head is on the second landing. 89 reads 30-, 1;30-, 1;29 over
+the shot. `cuneiformNumber` writes any units 9 this way; `cuneiform_card.py` reads LAL as minus the next sign. Font + LAL (U+121F2).
+The preview's V113 (0:25.0-0:27.0) is re-rendered.
+
+## The 1080p master on the minor-fixes song (30 Oct, rendered in the cloud)
+- Plates: `tools/t2/conform_all.py` rebuilt all 98 plate dirs from the relay plus the derived-plates branch (the take-two session's
+  originals: CRT_roomA/B, DR01, DR05, P107, V102, three keyframes, and the V118-V121 machine composites as plate folders);
+  `comp_walk.py` rebuilt V108-V110. The upscales are the plates where a pick has one (as RC2).
+- Fixes found on the way: `docs/take2/shots.json` regenerated (lipcheck read its v1 windows); the chess schedule's "chain"
+  anchor on the v1 clock (the 180-degree swing had fallen back to v1's 154.15); `render_segments.sh` renders the last whole frame
+  (the loop frame was dropped).
+- Checks: check_cuts 0 off onset; chess_check and chess_lens OK; lip sync from the renderer's own records, 15 sung picks, 906 drawn
+  frames, 0 off the formula (P106 with its 0.57x hold). QA: every master frame against the preview (240x136 grey): median
+  difference 1.2/255; the remaining differences are the preview's +-1 frame remap rounding in fast motion (the chess swing, the
+  poster morph) and texture in the cold open. The loop: frame 0 vs the last frame 0.4/255.
+- `work/out/hold_fire_t2_master_minor_fixes.mp4` (1920x1080, 24 fps, 238.67 s, 5,728 frames, H.264 CRF 14, AAC 320k of the mix padded
+  to the film, 845 MB), `hold_fire_t2_x_minor_fixes.mp4` and `hold_fire_t2_hook_31s_minor_fixes.mp4` (the README's X settings).
+- Subtitles: `deliverables/subtitles/hold_fire.{en,zh-Hans,ru,uk,fr}.srt` (`tools/t2/subtitles.py`).

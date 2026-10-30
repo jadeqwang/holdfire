@@ -18,7 +18,8 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from common import FPS, ROOT, frame_on_twos  # noqa: E402
+from common import FPS, ROOT, frame_on_twos, song_v1inv  # noqa: E402
+V1INV = song_v1inv()   # the renderer runs lip-synced takes on the v1 clock (timing.json v1_map)
 
 TH = 96
 
@@ -86,7 +87,7 @@ def main():
     mism = 0
     for d in ds:
         L = lag + d
-        fs = [int(frame_on_twos(w['t'], rec['s0'], L, twos=rec.get('twos', True), start=start, n=n)) for w in ws]
+        fs = [int(frame_on_twos(w['t'], rec['s0'], L, twos=rec.get('twos', True), start=start, n=n, v1inv=V1INV)) for w in ws]
         if abs(L - rec['lag']) < 1e-6:
             mism = sum(1 for w, f in zip(ws, fs) if w['f'] is not None and w['f'] != f)
         row = labelled(f'{L:+.3f}', f'{L * FPS:+.0f}f', [crop(f) for f in fs], (0, 255, 0) if abs(d) < 1e-6 else (200, 200, 200))

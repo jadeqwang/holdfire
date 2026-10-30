@@ -25,13 +25,14 @@ export const GLYPHS = [
 ];
 
 export function gunTimes(A, p = {}) {
-  const l22 = A.lines.find((l) => /^Priests in the smoke/.test(l.text)), l23 = A.lines.find((l) => /^sulfur and saltpeter/.test(l.text));
+  const l22 = A.lines.find((l) => /^Priests in the smoke/.test(l.text)), l23 = A.lines.find((l) => /^sulfur,? (and )?saltpeter/.test(l.text));
   const w = (l, j, d) => (l && l.words[j] ? l.words[j].t : d);
-  const tBurst = p.tBurst ?? w(l23, 3, 86.44);
+  const wt = (l, word, d) => { const W = l && l.words.find((x) => x.w.toLowerCase().replace(/[^a-z]/g, '') === word); return W ? W.t : d; };   // by text: "and" is gone
+  const tBurst = p.tBurst ?? wt(l23, 'thunder', 86.44);
   return {
     tLife: p.tLife || [w(l22, 4, 83.56), 0.25],      // "wanted ..."
     tSulfur: p.tSulfur ?? w(l23, 0, 85.12),
-    tSaltpeter: p.tSaltpeter ?? w(l23, 2, 85.76),
+    tSaltpeter: p.tSaltpeter ?? wt(l23, 'saltpeter', 85.76),
     tBurst,
     tFire: p.tFire ?? tBurst + 0.24,
   };

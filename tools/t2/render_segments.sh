@@ -4,10 +4,13 @@
 #   tools/t2/render_segments.sh NAME W H CRF [AUDIO]
 #   tools/t2/render_segments.sh preview_540p_v7 960 540 23
 #   tools/t2/render_segments.sh hold_fire_t2_master_rc2 1920 1080 14 media/audio/hold_fire_t2_mix.wav
+# Renders to render/data/timing.json's duration (END=<s> overrides).
 set -euo pipefail
 NAME=$1; W=$2; H=$3; CRF=$4; AUDIO=${5:-"inputs/Hold Fire.mp3"}
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
-SEG=12; END=247.16
+# the film's length (238.64 since the minor-fixes song), up to its last whole frame: ceil(duration * 24) frames, so the final frame
+# (the loop frame, frame 0 again) is rendered; render.mjs rounds (to - from) * fps, which dropped it when the length is not on a frame
+SEG=12; END=${END:-$(python3 -c "import json,math;print(math.ceil(json.load(open('$ROOT/render/data/timing.json'))['duration']*24-1e-6)/24)")}
 DIR="$ROOT/work/out/seg_$NAME"; mkdir -p "$DIR"
 n=$(python3 -c "import math;print(math.ceil($END/$SEG))")
 : > "$DIR/list.txt"

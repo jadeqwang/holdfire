@@ -94,10 +94,12 @@ if (cs) {
 }
 
 // ---------------------------------------------------------------- Arkhipov (scenes/t2/history/arkhipov.js)
-const ak = shots.find((s) => s.scene === 't2_arkhipov');
+// the first shot drawing t2_arkhipov, alone or as a 'multi' layer (part two made BR14 a multi: the poster + the B-59 labels)
+const akLayer = (s) => (s.scene === 't2_arkhipov' ? s.p : s.scene === 'multi' ? ((s.p.layers || []).find((l) => l.scene === 't2_arkhipov') || {}).p : null);
+const ak = shots.find((s) => akLayer(s));
 let arkhipov = null;
 if (ak) {
-  const p = P(ak, ak.t0);
+  const p = typeof akLayer(ak) === 'function' ? akLayer(ak)(ak.t0, 0) : akLayer(ak);
   const LAYOUT = { d1: { x: 150, L: 640 }, d2: { x: 1190, L: 540 } };
   const chargeX = (i) => { const d = i % 2 ? LAYOUT.d2 : LAYOUT.d1; return d.x + d.L * (0.06 + 0.2 * hash1(i * 3.7)); };
   const detAt = (i) => 0.62 + 0.22 * hash1(i * 5.3);

@@ -71,7 +71,7 @@ export const PLAN = [
   { n: 21, style: 'light', size: 86, col: GOLD, shade: 1, x: 960, y: 110, align: 'center' },
   // ---------------------------------------------------------------- VERSE 2: brushed into the ink painting
   { n: 22, style: 'brush', size: 88, shade: 1.6, shadeCol: 'rgba(246,242,232,1)', x: 1060, y: 150, align: 'left', maxW: 640, br: [4] },          // in the smoke over the cauldron
-  { n: 23, style: 'brush', size: 84, x: 1330, y: 420, align: 'left', maxW: 560, br: [2, 3, 4] },     // on the bare paper beside the characters
+  { n: 23, style: 'brush', size: 84, x: 1330, y: 420, align: 'left', maxW: 560, br: [1, 2, 3] },     // on the bare paper beside the characters (sulfur / saltpeter / thunder / in the sky: the new song drops "and")
   { n: 24, style: 'brush', size: 86, x: 590, y: 300, align: 'left', maxW: 560, br: [4, 7] },      // on the scroll beside the warning
   { n: 25, style: 'brush', size: 80, yLast: 1045, x: 960, align: 'center', maxW: 1100, br: [5] },
   // ---------------------------------------------------------------- Petrov: the console readout (Plex Mono, phosphor)

@@ -137,7 +137,7 @@ export function buildSchedule(audio) {
   'hgfedcba'.split('').forEach((f, j) => set.push({ sq: S(f + '7'), t: count + 0.26 + (j + 0.5) * pd, shout: 5 }));
   const setBySq = new Map(set.map((x) => [x.sq, x]));
 
-  return { plies, presses, TC, K, CLOCK_LEFT, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', 153.5, 154.15), count, shouts } };
+  return { plies, presses, TC, K, CLOCK_LEFT, startPress, stop, clockAt, set, setBySq, setEnd: you, anchors: { drumsOut: audio.beatT(k0), spark, death, back: audio.beatT(kb), hand, letgo, chain: word('chain', V(153.5), V(154.15)), count, shouts } };
 }
 
 // index of the last ply that has landed at time t (-1 before 1.e4)

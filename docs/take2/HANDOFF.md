@@ -16,7 +16,7 @@ still open, and the traps that cost time. The detailed record is the last three 
 | Previews | `previews/hold_fire_t2_minor_fixes_1080p_github.mp4` (the full film from the 1080p master, 89 MB); `previews/hold_fire_t2_rcv2_minor_fixes_540p.mp4` |
 | Streaming page | https://claude.ai/artifact/3xHnfB3znu7LV2f5LUHeS3 (HLS 1080p, section marks, the five caption tracks; Jade's, private) |
 | Sent to Jade in chat | the X file (12 Mb/s, 364 MB), the 31 s hook, the MP3, the subtitles, the tablet clip |
-| Not anywhere persistent | the CRF 14 master (845 MB) and the 456 MB YouTube copy: they were in the reclaimed container; re-render if needed |
+| Master | `work/out/hold_fire_t2_master_minor_fixes.mp4` on Jade's home computer (CRF 14, 929 MB, 31 Oct, gitignored). The 456 MB YouTube copy and the X file were not re-made from it |
 
 ## Rebuilding in a fresh cloud session (about 2.5 h, mostly unattended)
 
@@ -71,7 +71,7 @@ commits in pieces under 95 MB, or the project's Cloudflare account (R2) if Jade 
    runs 2.67 s past the song on silence (card held 3.11 s, as before). To end on the song instead: `film_duration` and the last
    knot in `retime_v2_cfg.json`, re-run `retime_v2.py`, then everything downstream.
 3. **The tablet** (V113): Benjamin R. Foster (Yale) reviewed it and agreed to the credit (on the card). Done 31 Oct: the last 1 inside LAL
-   and the hand writing left to right (`LYRICS.md`). `deliverables/hold_fire_tablet_V113_1080p.mp4` is the old clip until it is re-cut.
+   and the hand writing left to right (`LYRICS.md`). `deliverables/hold_fire_tablet_V113_1080p.mp4` is re-cut from the new master.
 4. **Subtitles**: written by Claude; a native read of uk and zh is worth having. ru/uk address "you" in the masculine (two words to
    change for feminine). zh is Simplified; Traditional not made. The second intro count is subtitled as the lyric sheet has it.
 5. **Delivery**: the CRF 14 master and the YouTube copy do not exist anywhere now (see above). Chat attachments cap at 400-500 MiB;

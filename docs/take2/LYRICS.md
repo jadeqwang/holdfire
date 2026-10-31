@@ -95,19 +95,21 @@ triangles, and blueprint outlines counted them 1 to 6, one per eighth, with a di
 count. **Now:** the painted triangles are covered with clean clay (`tools/t2/tablet_clay.py` bakes `render/assets/t2/tablet/`:
 the inpainted clay, plus a per-plate-frame shadow and stylus/hand matte so the stylus stays on top). The scene `t2_tablet`
 (`scenes/t2/lyric/tablet.js`) puts the Fibonacci numbers on the clay in Old Babylonian sexagesimal numerals. Jade's take-two
-note: the stylus has to make the strokes that appear. So the count is already there when the shot opens except two wedges of
-89, and the plate's stylus presses those. The reed tip is hand-marked on every plate frame the shot shows (`TIP`, even plate
-frames 4 to 50). It touches down twice: plate frame 14 (25.79 s) and plate frame 42 (26.96 s). The rows are fitted so that
-89's sixties wedge 𒁹 has its head where the first touch lands and the tall last column of 𒐎 has its head where the second
-lands. Each impression grows down from its head as the tip slides, with a ridge of displaced clay ahead of it, and gets a
-brief blueprint flash. Near the tip, the plate matte is trimmed to the shaft, so the plate's own marks don't cut the inscription:
+note: the stylus has to make the strokes that appear. So the count is already there when the shot opens except 89, which the stylus
+writes (`TIP`, hand-marked on even plate frames 4 to 50). The plate is a new Veo take from 31 Oct, `t2_V113_ltr_veof_t1` (first frame:
+the old plate's frame 12), because Foster asked that the hand "write continuously from left to right, just as we do, ending on that
+last 1-sign after the LAL"; the old take flew back left. Its landings are plate frames 6 (𒁹), 22 (𒌍), 38 (𒇲) and 44 (the last 1, where
+the tip slides on from 𒇲). Each sign grows down from its top on its landing, with a ridge of displaced clay and a blueprint flash.
+Near the tip, the plate matte is trimmed to the shaft, so the plate's own marks don't cut the inscription:
 
 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 | 89 = 1;29 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 𒁹 | 𒁹 | 𒈫 | 𒐈 | 𒐊 | 𒐍 | 𒌋𒐈 | 𒎙𒁹 | 𒌍𒐉 | 𒐐𒐊 | 𒁹 𒌍𒇲𒁹 |
 
-89's 29 is written the scribes' way, 30 LAL 1 ("thirty less one": 𒌍 U U U, 𒇲 LAL, then a single wedge tilted slightly to the left;
-B. R. Foster, 29 Oct). The stylus's first touch makes the sixties wedge 𒁹, its second the tilted 1, the last wedge impressed.
+89's 29 is written the scribes' way, 30 LAL 1 ("thirty less one"; B. R. Foster, 29 Oct). His note of 31 Oct places the 1: inside LAL, so
+LAL's top wedge roofs it, with its head pointing at the join of LAL's two wedges at 11 o'clock and not touching. `tablet.js` draws it at
+70% with a 30 degree lean (`LAST_SCALE`, `LAL_TILT`, `LAST_IN`, the join measured from the font's outline). Rebake with
+`python3 tools/t2/tablet_clay.py --also 5,20,51 --also-until 3`.
 
 Row 1 holds 1 to 13 and row 2 holds 21 to 89, ending at the stylus. Under a double ruling, already on the tablet, are two
 lines of the Ea-nasir complaint tablet (UET 5, 81; CDLI P414985, transliteration read from the CDLI ATF dump): obverse line 1,
@@ -115,8 +117,8 @@ lines of the Ea-nasir complaint tablet (UET 5, 81; CDLI P414985, transliteration
 (line 2, *qí-bí-ma*, "speak!", is left out). Each sign was checked in the ORACC sign list (`osl.asl`). Line 1 was first left out
 because the transliteration's *ṣi* is ZE₂ in ORACC's numbering but ZI in the older convention; Benjamin R. Foster (Yale) settled
 it in reply to Jade (29 Oct): "the s. you are looking for in ea-nasir is in fact the sign you have as zé", so 𒍢 ZE₂ (U+12362).
-He also confirmed line 3 as "Thus says Nanni", and on the count: scribes usually wrote 9 as 10 minus 1 (U, then LAL, then a
-single wedge tilted slightly left) rather than nine wedges, so 89 is now 𒁹 𒌍𒇲𒁹 (above). Line 1 was added on 30 Oct: both letter lines at 28 px, line 1 at v 46 and Nanni at
+He also confirmed line 3 as "Thus says Nanni", and on the count: scribes usually wrote 9 as 10 minus 1 rather than nine wedges,
+so 89 is 𒁹 𒌍𒇲𒁹 (above). Line 1 was added on 30 Oct: both letter lines at 28 px, line 1 at v 46 and Nanni at
 v 94 (tablet.js `EDGE`), and "and the mud" moved 18 px further down the clay.
 The font is Noto Sans Cuneiform 2.001 (OFL), subset to these 24 signs (`assets/fonts/NotoSansCuneiform-t2-subset.ttf`). The data is in
 `scenes/t2/lyric/cuneiform.js`. `python3 tools/t2/cuneiform_card.py` reads every numeral's value back from its Unicode names and

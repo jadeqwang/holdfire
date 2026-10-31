@@ -59,7 +59,8 @@ def main():
     tri |= extra
     tri = cv2.morphologyEx(tri, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
     tri = cv2.dilate(tri, np.ones((5, 5), np.uint8), iterations=2) & band.astype(np.uint8)
-    clean = cv2.inpaint(np.clip(med, 0, 255).astype(np.uint8), tri, 15, cv2.INPAINT_TELEA).astype(np.float32)
+    bright = np.percentile(F, 85, axis=0)                    # the clay without the stylus, which lingers in the median on this take
+    clean = cv2.inpaint(np.clip(bright, 0, 255).astype(np.uint8), tri, 15, cv2.INPAINT_TELEA).astype(np.float32)
     # grain: the clay 150 px below the row (clean, same light), high-passed, added inside the inpainted area
     ref = cv2.imread(str(plate / 'f_00030.jpg')).astype(np.float32)[Y0 + 150:Y1 + 150, X0:X1]
     grain = ref - cv2.GaussianBlur(ref, (0, 0), 4)
@@ -70,7 +71,7 @@ def main():
 
     # per frame: shadow (smooth luminance ratio) and the stylus/hand matte (what the median cannot explain, connected to the
     # region's top edge or the top of its right edge, where the stylus and the fingers come in)
-    lm = cv2.GaussianBlur(lum, (0, 0), 10) + 1
+    lm = cv2.GaussianBlur(bright.mean(axis=2), (0, 0), 10) + 1
     hw, hh = w // 2, h // 2
     sprite = np.zeros((hh * 2, hw * n), np.uint8)
     prev = None

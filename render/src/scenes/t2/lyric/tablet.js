@@ -4,13 +4,11 @@
 // (cuneiform.js), in two ruled registers; under a double ruling, a line already on the tablet: "um-ma na-an-ni-ma", "thus (says)
 // Nanni", from the Ea-nasir complaint tablet.
 // Jade (take two notes): the stylus has to make the strokes that appear. So the count is on the clay when the shot opens except
-// two wedges of 89, and those are pressed by the plate's stylus: the tip is tracked on every plate frame the shot shows (TIP), the
-// plate's two touch-downs are frames 14 and 42, and the rows are laid out so that 89's sixties wedge 𒁹 has its head where the
-// first touch lands and the last wedge of its 29 where the second one lands. 89 = 1;29 is written the scribes' way (30 Oct, after
-// B. R. Foster): 29 = 30 LAL 1, 𒁹 𒌍𒇲𒁹, the 1 tilted slightly to the left, and that 1 is the last wedge impressed (as he says the
-// last wedge would be). Each impression grows down from its head as the tip slides down the clay, with a ridge of displaced clay
-// ahead of it, and is whole once the tip moves off it. (The sixties wedge goes in first, out of a scribe's order, so 89 reads
-// 30-, 1;30-, 1;29 over the shot; 𒌍𒇲 is already there.)
+// 89, and the plate's stylus writes that, left to right without going back (B. R. Foster, 31 Oct: the hand "should write continuously
+// from left to right, just as we do, ending on that last 1-sign after the LAL"): 𒁹 on its first landing, 𒌍 on the next, 𒇲 on
+// the third and the last 1 where the tip slides on from there. 89 = 1;29 is written the scribes' way: 29 = 30 LAL 1, 𒁹 𒌍𒇲𒁹. The last 1
+// sits inside LAL under its top wedge, which roofs it, its head pointing at the join of LAL's two wedges at 11 o'clock and not touching
+// (Foster, 31 Oct). Each sign grows down from its top on its landing, with a ridge of displaced clay ahead of it.
 // The plate's stylus and hand stay on top (a per-plate-frame matte, trimmed to the stylus within 90 px of the tip so the plate's
 // own marks and the stylus' contact shadow there do not cut the inscription), and their shadow falls on the new clay.
 // p: {clip ('V113'), size (sign px), gain}
@@ -46,14 +44,12 @@ function assets() {
 }
 
 // ------------------------------------------------------------------------------------------------ the stylus
-// The reed tip (design px = plate px) on V113's even plate frames 4..50, the frames the shot shows (on twos: plate frame
-// 4 + 2 * floor(lt * 12)). Hand-marked on 3x crops of work/plates/V113 and checked on a strip with the marks drawn in.
-// In the air 4-12; first touch-down 14 at (745, 617), the tip slides 25 px down the clay to 26, then right along the bottom to
-// 32; lifted 34-40; second touch-down 42 at (858, 590), sinks to 46, slides off to the right by 48-50.
+// The reed tip (design px = plate px) on the even plate frames 4..50 the shot shows (on twos: plate frame 4 + 2 * floor(lt * 12)).
+// Hand-marked on 3x crops of work/plates/V113. Landings: frame 6-16 (782, 640), 22-34 (846, 622), 38, sliding right to 44 and off.
 const TIP = {
-  4: [836, 587], 6: [807, 563], 8: [783, 575], 10: [762, 592], 12: [752, 603], 14: [745, 617], 16: [745, 622], 18: [750, 625],
-  20: [748, 627], 22: [750, 632], 24: [753, 637], 26: [748, 642], 28: [760, 647], 30: [778, 648], 32: [773, 648], 34: [780, 593],
-  36: [812, 563], 38: [845, 565], 40: [859, 581], 42: [858, 590], 44: [857, 593], 46: [863, 597], 48: [877, 600], 50: [898, 602],
+  4: [770, 622], 6: [782, 640], 8: [792, 639], 10: [792, 639], 12: [792, 639], 14: [790, 640], 16: [792, 635], 18: [812, 605],
+  20: [829, 595], 22: [840, 625], 24: [846, 622], 26: [850, 622], 28: [853, 622], 30: [853, 622], 32: [853, 622], 34: [857, 618],
+  36: [880, 595], 38: [894, 601], 40: [901, 601], 42: [904, 605], 44: [908, 601], 46: [918, 598], 48: [925, 595], 50: [935, 598],
 };
 const TIP_F0 = 4, TIP_F1 = 50;
 const AXIS = [0.78, -0.625];        // the shaft, from the tip up to the hand (screen; it turns by a few degrees over the shot)
@@ -62,8 +58,8 @@ function tipAt(f) {
   const a = f - (f % 2), b = Math.min(TIP_F1, a + 2), k = b > a ? (f - a) / (b - a) : 0;
   return [lerp(TIP[a][0], TIP[b][0], k), lerp(TIP[a][1], TIP[b][1], k)];
 }
-// the two presses: the plate frame the tip lands on, and which wedge it makes
-const PRESSES = [{ f: 14, key: 'sixties' }, { f: 42, key: 'last' }];
+// the presses: the plate frame the tip lands on, which sign it makes, and the frames that sign takes to grow
+const PRESSES = [{ f: 6, key: 'sixties', dur: 6 }, { f: 22, key: 'thirty', dur: 8 }, { f: 38, key: 'lal', dur: 4 }, { f: 44, key: 'last', dur: 4 }];
 
 // ------------------------------------------------------------------------------------------------ the inscription
 // tablet space: u along a row, v down the tablet (row 2's baseline at v = 0, row 1's at -ROW, the letter's lines at EDGE's v)
@@ -73,40 +69,43 @@ const EDGE = [[EA_NASIR, 46], [NANNI, 94]];
 // Noto Sans Cuneiform geometry (em): a vertical wedge's head centre is 0.69 above the baseline; DISH's head centre is 0.208 from
 // its origin
 const HEAD_Y = 0.69, DISH_HX = 0.208, WEDGE_W = 0.24;
-// the 1 after LAL leans left: turned about its head, the tail swung right (radians; canvas rotation, negative = counter-clockwise)
-const LAL_TILT = -0.21;
+// the last 1 leans so its head points at LAL's join at 11 o'clock: turned about its head, the tail swung right (radians; canvas
+// rotation, negative = counter-clockwise). Scaled to fit under LAL's top wedge; LAST_IN is its head centre in LAL's em box (the join,
+// from the font's outline, is at about 0.31, 0.72). THIRTY_AT: 𒌍's centre past the sixties head, on the second landing.
+const LAL_TILT = -0.52, LAST_SCALE = 0.7, LAST_IN = [0.38, 0.58], THIRTY_AT = 66;
 const V_AXIS = [0.2, 0.8];          // a tablet unit down the tablet, on screen (u is a unit along the stylus' two landings)
 
-// rows: 1 1 2 3 5 8 13 / 21 34 55 89. 89's place gap is set so its two pressed wedges are exactly as far apart as the landings.
+// rows: 1 1 2 3 5 8 13 / 21 34 55 89. 89 is set from the landings: its last wedge's head is `span` past the sixties wedge's head.
 function layoutSigns(g, size, span) {
   g.font = `400 ${size}px L2Cun`;
   const w = (cp) => g.measureText(cps([cp])).width;
-  const n89 = cuneiformNumber(89);                                   // [[DISH], [U U U, LAL, DISH]]
-  const placeGap = span - ((w(n89[0][0]) - DISH_HX * size) + SIGN_GAP + w(n89[1][0]) + SIGN_GAP + w(n89[1][1]) + SIGN_GAP + DISH_HX * size);
   const out = [];
   const rows = [FIB.slice(0, 7), FIB.slice(7)];
   rows.forEach((nums, r) => {
     let u = 0;
     const v = (r - 1) * ROW;
     for (const n of nums) {
+      if (n === 89) {
+        const [[one], [thirty, lal, last]] = cuneiformNumber(89);
+        const hu = u + DISH_HX * size, lalU = hu + span - LAST_IN[0] * size, ls = size * LAST_SCALE;
+        out.push({ s: cps([one]), cp: one, u, v, size, n, press: 'sixties', w: w(one) });
+        out.push({ s: cps([thirty]), cp: thirty, u: hu + THIRTY_AT - w(thirty) / 2, v, size, n, press: 'thirty', w: w(thirty) });
+        out.push({ s: cps([lal]), cp: lal, u: lalU, v, size, n, press: 'lal', w: w(lal) });
+        out.push({ s: cps([last]), cp: last, u: hu + span - DISH_HX * ls, v: v + HEAD_Y * ls - LAST_IN[1] * size, size: ls, n, press: 'last', tilt: LAL_TILT, w: w(last) * LAST_SCALE });
+        continue;
+      }
       cuneiformNumber(n).forEach((place, pi) => {
-        if (pi) u += n === 89 ? placeGap : 20;
-        for (const cp of place) {
-          const it = { s: cps([cp]), cp, u, v, size, n };
-          if (n === 89 && pi === 0) it.press = 'sixties';
-          if (n === 89 && pi === 1 && cp === place[place.length - 1]) { it.press = 'last'; it.tilt = LAL_TILT; }
-          out.push(it); u += w(cp) + SIGN_GAP;
-        }
+        if (pi) u += 20;
+        for (const cp of place) { out.push({ s: cps([cp]), cp, u, v, size, n }); u += w(cp) + SIGN_GAP; }
       });
       u += GAP - SIGN_GAP;
     }
   });
   return out;
 }
-// the wedge each press makes: its head (tablet), and its extent in u
+// the sign each press makes: where the tip is on it, and its extent in u
 function pressWedge(it) {
-  const s = it.size;
-  return { hu: it.u + DISH_HX * s, u0: it.u - 4, u1: it.u + s * 0.42 };    // both presses make a single DISH
+  return { hu: it.u + it.w / 2, u0: it.u - 4, u1: it.u + it.w + 4 };
 }
 // a tilted sign (the 1 after LAL) is drawn turned about its wedge's head
 function tiltAbout(g, it) {
@@ -156,29 +155,18 @@ function rule(g, u0, u1, v) {
 }
 
 // the frame of tablet space on screen: u along the two landings, v = V_AXIS, origin so that the sixties wedge's head is on the
-// first landing (the last unit wedge's head then lands on the second, by the place gap)
+// first landing (the last wedge's head then lands on the last, by layoutSigns)
 function frameOf(size) {
-  const P1 = TIP[PRESSES[0].f], P2 = TIP[PRESSES[1].f];
+  const P1 = TIP[PRESSES[0].f], P2 = TIP[PRESSES[PRESSES.length - 1].f];
   const dx = P2[0] - P1[0], dy = P2[1] - P1[1], span = Math.hypot(dx, dy);
   return { U: [dx / span, dy / span], V: V_AXIS, span, P1, size };
 }
-const toTab = (F, o, [x, y]) => {   // screen -> tablet (u, v)
-  const [a, b] = F.U, [c, d] = F.V, det = a * d - b * c, X = x - o[0], Y = y - o[1];
-  return [(d * X - c * Y) / det, (-b * X + a * Y) / det];
-};
-// a press's state on plate frame f: dv (the impression's lower end) follows the deepest the tip has been; done once the tip has
-// moved off the wedge along the row (or past its tail)
-function pressState(F, o, it, W, landF, f) {
-  if (f < landF) return null;
-  const s = it.size, top = it.v - HEAD_Y * s, bottom = it.v + 0.13 * s;
-  let dv = top + s * 0.14, done = false;
-  for (let k = landF; k <= Math.min(f, TIP_F1); k += 2) {
-    const [tu, tv] = toTab(F, o, tipAt(k));
-    dv = Math.max(dv, tv + s * 0.14);
-    if (k > landF && Math.abs(tu - W.hu) > s * 0.3) done = true;
-  }
-  if (done || f > TIP_F1 || dv >= bottom) return { dv: bottom + s * 0.05, done: true };
-  return { dv, done: false };
+// a press's state on plate frame f: the sign grows down from its top over pr.dur frames from the landing
+function pressState(it, pr, f) {
+  if (f < pr.f) return null;
+  const s = it.size, top = it.v - HEAD_Y * s, bottom = it.v + 0.13 * s, k = (f - pr.f) / pr.dur;
+  if (k >= 1) return { dv: bottom + s * 0.05, done: true };
+  return { dv: lerp(top + s * 0.14, bottom, k), done: false };
 }
 
 export default {
@@ -224,7 +212,7 @@ export default {
     for (const it of items) {
       if (!it.press) { pressed(gi, it); continue; }
       const W = pressWedge(it), pr = PRESSES.find((x) => x.key === it.press);
-      const ps = pressState(F, o, it, W, pr.f, pf);
+      const ps = pressState(it, pr, pf);
       if (!ps) continue;
       const fl = 1 - (pf - pr.f) / (flashDur * 24);
       pressing(gi, it, W, ps, frame >= 0 ? fl : 0);

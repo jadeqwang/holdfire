@@ -70,10 +70,8 @@ commits in pieces under 95 MB, or the project's Cloudflare account (R2) if Jade 
 2. **The ending** (Jade to confirm): the new song has no final hit, so the end card lands 0.13 s after the last whisper and the film
    runs 2.67 s past the song on silence (card held 3.11 s, as before). To end on the song instead: `film_duration` and the last
    knot in `retime_v2_cfg.json`, re-run `retime_v2.py`, then everything downstream.
-3. **The tablet** (V113): Benjamin R. Foster (Yale) answered Jade's questions. Done: the letter's first line ("to Ea-nasir", ṣi = ZE₂)
-   and 89 = 1;(30 LAL 1) with the 1 tilted left and pressed last. Waiting: his view of the clip (`deliverables/hold_fire_tablet_V113_1080p.mp4`;
-   the tilt `LAL_TILT` in `tablet.js` is a guess at "slightly"), and whether he agrees to a credit line on the end card (then add it
-   to `t2_endcard`'s credits; wording his choice).
+3. **The tablet** (V113): Benjamin R. Foster (Yale) reviewed it and agreed to the credit (on the card). Done 31 Oct: the last 1 inside LAL
+   and the hand writing left to right (`LYRICS.md`). `deliverables/hold_fire_tablet_V113_1080p.mp4` is the old clip until it is re-cut.
 4. **Subtitles**: written by Claude; a native read of uk and zh is worth having. ru/uk address "you" in the masculine (two words to
    change for feminine). zh is Simplified; Traditional not made. The second intro count is subtitled as the lyric sheet has it.
 5. **Delivery**: the CRF 14 master and the YouTube copy do not exist anywhere now (see above). Chat attachments cap at 400-500 MiB;

@@ -1561,3 +1561,11 @@
 {"ts": "2026-10-29T19:17:25Z", "model": "google/veo-3.1-fast", "tag": "t2_V113c_veof_c3", "job": "holdfire/t2_V113c_veof_c3-338f9293d4", "event": "result", "ok": false, "est_usd": 0.4, "where": "cloud"}
 {"ts": "2026-10-29T19:19:14Z", "model": "google/nano-banana-pro", "tag": "kf_V113_close_end_nbp_v1", "job": "holdfire/kf_V113_close_end_nbp_v1-e8b12e9057", "event": "submit", "ok": null, "est_usd": 0.1344, "where": "cloud"}
 {"ts": "2026-10-29T19:22:59Z", "model": "google/nano-banana-pro", "tag": "kf_V113_close_end_nbp_v1", "job": "holdfire/kf_V113_close_end_nbp_v1-e8b12e9057", "event": "result", "ok": true, "est_usd": 0.1344, "where": "cloud"}
+{"ts": "2026-10-31T16:37:23Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t1", "job": "holdfire/t2_V113_ltr_veof_t1-330fef02c0", "event": "submit", "ok": null, "est_usd": 0.4, "where": "box"}
+{"ts": "2026-10-31T16:37:24Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t2", "job": "holdfire/t2_V113_ltr_veof_t2-83b62901be", "event": "submit", "ok": null, "est_usd": 0.4, "where": "box"}
+{"ts": "2026-10-31T16:37:25Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t3", "job": "holdfire/t2_V113_ltr_veof_t3-40203d2049", "event": "submit", "ok": null, "est_usd": 0.4, "where": "box"}
+{"ts": "2026-10-31T16:37:26Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t4", "job": "holdfire/t2_V113_ltr_veof_t4-571f336366", "event": "submit", "ok": null, "est_usd": 0.4, "where": "box"}
+{"ts": "2026-10-31T16:42:50Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t1", "job": "holdfire/t2_V113_ltr_veof_t1-330fef02c0", "event": "result", "ok": false, "est_usd": 0.4, "where": "box"}
+{"ts": "2026-10-31T16:42:51Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t2", "job": "holdfire/t2_V113_ltr_veof_t2-83b62901be", "event": "result", "ok": false, "est_usd": 0.4, "where": "box"}
+{"ts": "2026-10-31T16:42:52Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t3", "job": "holdfire/t2_V113_ltr_veof_t3-40203d2049", "event": "result", "ok": false, "est_usd": 0.4, "where": "box"}
+{"ts": "2026-10-31T16:42:53Z", "model": "google/veo-3.1-fast", "tag": "t2_V113_ltr_veof_t4", "job": "holdfire/t2_V113_ltr_veof_t4-571f336366", "event": "result", "ok": false, "est_usd": 0.4, "where": "box"}

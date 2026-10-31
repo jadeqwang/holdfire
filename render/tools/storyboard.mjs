@@ -1,6 +1,6 @@
 // Storyboard: one still per shot (at a fraction of its length) as a labelled contact sheet.
 //   node tools/storyboard.mjs OUT.jpg [--w 640 --h 360 --at 0.6 --from 0 --to 247 --cols 6]
-import pw from '/opt/node-tools/node_modules/playwright/index.js'; const { chromium } = pw;
+import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -10,7 +10,7 @@ const args = Object.fromEntries(process.argv.slice(3).reduce((acc, a, i, arr) =>
 const W = Number(args.w || 640), H = Number(args.h || 360), AT = Number(args.at || 0.6);
 const PORT = 8600 + Math.floor(Math.random() * 90);
 const server = await serve(PORT);
-const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome', args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+const b = await chromium.launch({ executablePath: process.env.CHROME || chromium.executablePath(), args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const page = await b.newPage({ viewport: { width: W, height: H } });
 page.on('pageerror', (e) => console.error('[pageerror]', e.message));
 await page.goto(`http://127.0.0.1:${PORT}/index.html?w=${W}&h=${H}${process.env.TL ? '&tl=' + process.env.TL : ''}`);

@@ -8,7 +8,7 @@
 //   cd render && node tools/lipcheck.mjs [--picks V101,C103L] [--lag V101=0.042,...] [--out ../work/t2/lips] [--w 960 --h 540]
 // Writes OUT/<PICK>.render.json and OUT/<PICK>.lipcheck.jpg. --lag overrides the pick's lag for the strip's centre row (the
 // renderer still plays the merged pick; the R row then shows the current pick and the d rows are around the override).
-import pw from '/opt/node-tools/node_modules/playwright/index.js'; const { chromium } = pw;
+import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -22,7 +22,7 @@ const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..',
 const W = Number(args.w || 960), H = Number(args.h || 540);
 const OUT = path.resolve(args.out || path.join(REPO, 'work', 't2', 'lips'));
 const PORT = 8900 + Math.floor(Math.random() * 90);
-const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome';
+const CHROME = process.env.CHROME || chromium.executablePath();
 const PY = fs.existsSync(path.join(REPO, 'work/venv/mp312/bin/python')) ? path.join(REPO, 'work/venv/mp312/bin/python') : 'python3';
 
 const picks = JSON.parse(fs.readFileSync(path.join(REPO, 'render/data/picks2.json'), 'utf8'));

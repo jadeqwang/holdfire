@@ -1,4 +1,4 @@
-import pkg from '/opt/node-tools/node_modules/playwright/index.js'; const { chromium } = pkg;
+import { chromium } from 'playwright';
 const html = `<!doctype html><html><body style="margin:0;background:#000"><canvas id=c width=1920 height=1080></canvas><script>
 const c=document.getElementById('c');const gl=c.getContext('webgl2',{preserveDrawingBuffer:true,antialias:false});
 const vs='#version 300 es\\nin vec2 p;out vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0,1);}';
@@ -8,7 +8,7 @@ const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attac
 const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
 window.draw=(t)=>{gl.uniform1f(gl.getUniformLocation(pr,'t'),t);for(let k=0;k<4;k++)gl.drawArrays(gl.TRIANGLES,0,3);gl.finish();return gl.getParameter(gl.RENDERER);};
 </script></body></html>`;
-const b = await chromium.launch({ args: ['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'] });
+const b = await chromium.launch({ executablePath: process.env.CHROME || chromium.executablePath(), args: ['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'] });
 const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
 await p.setContent(html);
 console.log(await p.evaluate(() => draw(0)));

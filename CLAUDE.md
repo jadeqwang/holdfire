@@ -29,12 +29,13 @@ Then run `node tools/check_cuts.mjs`, `node tools/chess_check.mjs`, `node tools/
 around 15 Nov 2026**: after that the takes exist only where they were downloaded. Keep a backup of `media/gen/`.
 
 ## This machine (Jade's home computer)
-The render tools were written for the cloud container: `render/tools/render.mjs`, `lipcheck.mjs` (and `bench`, `lookdev`, `profile`,
-`storyboard`) import Playwright from `/opt/node-tools/node_modules/playwright/index.js` and launch Chromium from
-`/opt/pw-browsers/...`. Locally, install Playwright and point these at it (`render.mjs` and `lipcheck.mjs` already honour `CHROME`);
-keep the SwiftShader flags (the look was built on them) and confirm with one still. `tools/gen/*` mention an old
-`~/Documents/moongazing/.venv`; the generation relay is only needed for new takes (spend is logged in `docs/spend_ledger.jsonl`, cap
-in `tools/gen/spend.py`).
+Python tools run from `.venv` (3.12, gitignored): `source .venv/bin/activate` first, so `python3` and `sys.executable` resolve there.
+The render tools import `playwright` from `render/node_modules`, pinned to 1.63.0 because it ships Chromium r1243, the build the look
+was made on; `npx playwright install --no-shell chromium` puts it in `~/.cache/ms-playwright`, and `chromium.executablePath()` finds
+it (`CHROME` overrides). Keep the SwiftShader flags. `media/gen/` holds all 543 jobs in `docs/spend_ledger.jsonl`, downloaded 31 Oct 2026
+before the relay's mirror expired; `conform_all.py` alone skips a pick's original when it has an upscale. `tools/gen/*` mention an
+old `~/Documents/moongazing/.venv`; the generation relay is only needed for new takes (spend is logged in
+`docs/spend_ledger.jsonl`, cap in `tools/gen/spend.py`).
 
 ## Conventions
 - Jade reviews by eye: render stills or a short clip of every change and look before reporting it done.

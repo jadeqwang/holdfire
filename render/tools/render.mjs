@@ -4,7 +4,7 @@
 // Range mode: the range is split into one contiguous chunk per job (plates load sequentially, so caches stay warm); each job's browser
 // pipes JPEG frames straight into its own ffmpeg (no frame files on disk), then the chunks are concatenated and muxed with the audio.
 // --framedir D --noenc 1 writes JPEG frames instead (for inspection). TL=name env selects a test timeline.
-import pw from '/opt/node-tools/node_modules/playwright/index.js'; const { chromium } = pw;
+import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
@@ -18,7 +18,7 @@ const W = Number(args.w || 1920), H = Number(args.h || 1080);
 const FPS = Number(args.fps || 24);
 const JOBS = Number(args.jobs || 1);
 const PORT = 8800 + Math.floor(Math.random() * 100);
-const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome';
+const CHROME = process.env.CHROME || chromium.executablePath();
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
 
 async function openPage(browser) {

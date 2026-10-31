@@ -1,6 +1,7 @@
 media/
 work/
 node_modules/
+.venv/
 *.pyc
 __pycache__/
 render/out/

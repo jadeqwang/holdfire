@@ -3,12 +3,12 @@
 // carries real cuneiform: the Fibonacci numbers 1 1 2 3 5 8 13 21 34 55 89 in Old Babylonian sexagesimal numerals
 // (cuneiform.js), in two ruled registers; under a double ruling, a line already on the tablet: "um-ma na-an-ni-ma", "thus (says)
 // Nanni", from the Ea-nasir complaint tablet.
-// Jade (take two notes): the stylus has to make the strokes that appear. So the count is on the clay when the shot opens except
-// 89, and the plate's stylus writes that, left to right without going back (B. R. Foster, 31 Oct: the hand "should write continuously
-// from left to right, just as we do, ending on that last 1-sign after the LAL"): 𒁹 on its first landing, 𒌍 on the next, 𒇲 on
-// the third and the last 1 where the tip slides on from there. 89 = 1;29 is written the scribes' way: 29 = 30 LAL 1, 𒁹 𒌍𒇲𒁹. The last 1
-// sits inside LAL under its top wedge, which roofs it, its head pointing at the join of LAL's two wedges at 11 o'clock and not touching
-// (Foster, 31 Oct). Each sign grows down from its top on its landing, with a ridge of displaced clay ahead of it.
+// Jade (take two notes): the stylus has to make the strokes that appear, one stroke per touch (31 Oct). So the count is on the clay when
+// the shot opens except the last two wedges of 89, and the stylus presses those, moving only to the right (B. R. Foster, 31 Oct: the hand
+// "should write continuously from left to right, just as we do, ending on that last 1-sign after the LAL"): LAL's top wedge, then the
+// 1. 89 = 1;29 is written the scribes' way: 29 = 30 LAL 1, 𒁹 𒌍𒇲𒁹. The last 1 sits inside LAL under its top wedge, which roofs it, its
+// head pointing at the join of LAL's two wedges at 11 o'clock and not touching (Foster, 31 Oct). The plate is built, not generated
+// (tools/t2/tablet_built.py: no video model takes coordinates): the hand is cut from a take and moved along a designed path.
 // The plate's stylus and hand stay on top (a per-plate-frame matte, trimmed to the stylus within 90 px of the tip so the plate's
 // own marks and the stylus' contact shadow there do not cut the inscription), and their shadow falls on the new clay.
 // p: {clip ('V113'), size (sign px), gain}
@@ -44,12 +44,13 @@ function assets() {
 }
 
 // ------------------------------------------------------------------------------------------------ the stylus
-// The reed tip (design px = plate px) on the even plate frames 4..50 the shot shows (on twos: plate frame 4 + 2 * floor(lt * 12)).
-// Hand-marked on 3x crops of work/plates/V113. Landings: frame 6-16 (782, 640), 22-34 (846, 622), 38, sliding right to 44 and off.
+// The reed tip (design px = plate px) on the even plate frames 4..50 the shot shows (on twos: plate frame 4 + 2 * floor(lt * 12)),
+// printed by tools/t2/tablet_built.py, whose path this is (keep the two in step).
 const TIP = {
-  4: [770, 622], 6: [782, 640], 8: [792, 639], 10: [792, 639], 12: [792, 639], 14: [790, 640], 16: [792, 635], 18: [812, 605],
-  20: [829, 595], 22: [840, 625], 24: [846, 622], 26: [850, 622], 28: [853, 622], 30: [853, 622], 32: [853, 622], 34: [857, 618],
-  36: [880, 595], 38: [894, 601], 40: [901, 601], 42: [904, 605], 44: [908, 601], 46: [918, 598], 48: [925, 595], 50: [935, 598],
+  4: [867.7, 584.3], 6: [870.5, 585.5], 8: [877.5, 588.4], 10: [886.7, 592.3], 12: [895.8, 596.1], 14: [902.8, 599.1],
+  16: [905.7, 600.3], 18: [906.4, 600], 20: [908.1, 599.5], 22: [909.7, 599], 24: [910.5, 598.8], 26: [910.1, 600.3],
+  28: [909.3, 603.2], 30: [908.9, 604.7], 32: [911.5, 606.8], 34: [917, 611.5], 36: [922.6, 616.2], 38: [925.1, 618.4],
+  40: [926.3, 617.5], 42: [929.3, 615.3], 44: [933.1, 612.4], 46: [937, 609.5], 48: [939.9, 607.3], 50: [941.1, 606.4],
 };
 const TIP_F0 = 4, TIP_F1 = 50;
 const AXIS = [0.78, -0.625];        // the shaft, from the tip up to the hand (screen; it turns by a few degrees over the shot)
@@ -58,8 +59,10 @@ function tipAt(f) {
   const a = f - (f % 2), b = Math.min(TIP_F1, a + 2), k = b > a ? (f - a) / (b - a) : 0;
   return [lerp(TIP[a][0], TIP[b][0], k), lerp(TIP[a][1], TIP[b][1], k)];
 }
-// the presses: the plate frame the tip lands on, which sign it makes, and the frames that sign takes to grow
-const PRESSES = [{ f: 6, key: 'sixties', dur: 6 }, { f: 22, key: 'thirty', dur: 8 }, { f: 38, key: 'lal', dur: 4 }, { f: 44, key: 'last', dur: 4 }];
+// the presses: the plate frame the tip lands on, which wedge it makes, and the frames it takes
+const PRESSES = [{ f: 16, key: 'roof', dur: 8 }, { f: 30, key: 'last', dur: 8 }];
+// where the rows sit: the sixties wedge's head and the last wedge's head (design px)
+const ANCHOR = [[782, 640], [908, 601]];
 
 // ------------------------------------------------------------------------------------------------ the inscription
 // tablet space: u along a row, v down the tablet (row 2's baseline at v = 0, row 1's at -ROW, the letter's lines at EDGE's v)
@@ -71,8 +74,8 @@ const EDGE = [[EA_NASIR, 46], [NANNI, 94]];
 const HEAD_Y = 0.69, DISH_HX = 0.208, WEDGE_W = 0.24;
 // the last 1 leans so its head points at LAL's join at 11 o'clock: turned about its head, the tail swung right (radians; canvas
 // rotation, negative = counter-clockwise). Scaled to fit under LAL's top wedge; LAST_IN is its head centre in LAL's em box (the join,
-// from the font's outline, is at about 0.31, 0.72). THIRTY_AT: 𒌍's centre past the sixties head, on the second landing.
-const LAL_TILT = -0.52, LAST_SCALE = 0.7, LAST_IN = [0.38, 0.58], THIRTY_AT = 66;
+// from the font's outline, is at about 0.31, 0.72). LAL_SPLIT: where the font's two wedges of LAL part, in em. THIRTY_AT: 𒌍's centre past the sixties head.
+const LAL_TILT = -0.52, LAST_SCALE = 0.7, LAST_IN = [0.38, 0.58], LAL_SPLIT = 0.325, THIRTY_AT = 66;
 const V_AXIS = [0.2, 0.8];          // a tablet unit down the tablet, on screen (u is a unit along the stylus' two landings)
 
 // rows: 1 1 2 3 5 8 13 / 21 34 55 89. 89 is set from the landings: its last wedge's head is `span` past the sixties wedge's head.
@@ -88,9 +91,10 @@ function layoutSigns(g, size, span) {
       if (n === 89) {
         const [[one], [thirty, lal, last]] = cuneiformNumber(89);
         const hu = u + DISH_HX * size, lalU = hu + span - LAST_IN[0] * size, ls = size * LAST_SCALE;
-        out.push({ s: cps([one]), cp: one, u, v, size, n, press: 'sixties', w: w(one) });
-        out.push({ s: cps([thirty]), cp: thirty, u: hu + THIRTY_AT - w(thirty) / 2, v, size, n, press: 'thirty', w: w(thirty) });
-        out.push({ s: cps([lal]), cp: lal, u: lalU, v, size, n, press: 'lal', w: w(lal) });
+        out.push({ s: cps([one]), cp: one, u, v, size, n });
+        out.push({ s: cps([thirty]), cp: thirty, u: hu + THIRTY_AT - w(thirty) / 2, v, size, n });
+        out.push({ s: cps([lal]), cp: lal, u: lalU, v, size, n, clipU: [lalU - 4, lalU + LAL_SPLIT * size] });          // its upright, on the clay
+        out.push({ s: cps([lal]), cp: lal, u: lalU, v, size, n, press: 'roof', w: w(lal), head: lalU + LAL_SPLIT * size });
         out.push({ s: cps([last]), cp: last, u: hu + span - DISH_HX * ls, v: v + HEAD_Y * ls - LAST_IN[1] * size, size: ls, n, press: 'last', tilt: LAL_TILT, w: w(last) * LAST_SCALE });
         continue;
       }
@@ -103,8 +107,9 @@ function layoutSigns(g, size, span) {
   });
   return out;
 }
-// the sign each press makes: where the tip is on it, and its extent in u
+// the wedge each press makes: where the tip is on it, and its extent in u (LAL's top wedge is the sign right of the split)
 function pressWedge(it) {
+  if (it.press === 'roof') return { hu: it.head, u0: it.head, u1: it.u + it.w + 4 };
   return { hu: it.u + it.w / 2, u0: it.u - 4, u1: it.u + it.w + 4 };
 }
 // a tilted sign (the 1 after LAL) is drawn turned about its wedge's head
@@ -132,7 +137,7 @@ function pressed(g, it, clipU) {
 function pressing(g, it, W, st, flash) {
   const s = it.size;
   g.save(); g.font = `400 ${s}px L2Cun`; g.textBaseline = 'alphabetic'; tiltAbout(g, it);
-  g.save(); g.beginPath(); g.rect(W.u0, it.v - s * 1.3, W.u1 - W.u0, st.dv - (it.v - s * 1.3)); g.clip();
+  g.save(); g.beginPath(); g.rect(W.u0, it.v - s * 1.3, (st.u1 ?? W.u1) - W.u0, st.dv - (it.v - s * 1.3)); g.clip();
   impress(g, it.s, it.u, it.v, s);
   if (flash > 0) { g.globalAlpha = 0.85 * flash * flash; g.strokeStyle = 'rgba(215,240,255,1)'; g.lineWidth = 1.6; g.strokeText(it.s, it.u, it.v); }
   g.restore();
@@ -157,15 +162,16 @@ function rule(g, u0, u1, v) {
 // the frame of tablet space on screen: u along the two landings, v = V_AXIS, origin so that the sixties wedge's head is on the
 // first landing (the last wedge's head then lands on the last, by layoutSigns)
 function frameOf(size) {
-  const P1 = TIP[PRESSES[0].f], P2 = TIP[PRESSES[PRESSES.length - 1].f];
+  const [P1, P2] = ANCHOR;
   const dx = P2[0] - P1[0], dy = P2[1] - P1[1], span = Math.hypot(dx, dy);
   return { U: [dx / span, dy / span], V: V_AXIS, span, P1, size };
 }
-// a press's state on plate frame f: the sign grows down from its top over pr.dur frames from the landing
-function pressState(it, pr, f) {
+// a press's state on plate frame f: LAL's top wedge opens rightward from its head, the 1 grows down from its head, over pr.dur frames
+function pressState(it, W, pr, f) {
   if (f < pr.f) return null;
   const s = it.size, top = it.v - HEAD_Y * s, bottom = it.v + 0.13 * s, k = (f - pr.f) / pr.dur;
   if (k >= 1) return { dv: bottom + s * 0.05, done: true };
+  if (it.press === 'roof') return { dv: bottom + s * 0.05, u1: lerp(W.u0, W.u1, k), done: false };
   return { dv: lerp(top + s * 0.14, bottom, k), done: false };
 }
 
@@ -193,7 +199,7 @@ export default {
     const I = scratch('t2tab_ins', RW * S, RH * S), gi = I.g;
     const F = frameOf(size);
     const items = layoutSigns(gi, size, F.span);
-    const sx = items.find((x) => x.press === 'sixties');
+    const sx = items.find((x) => x.n === 89);
     const o = [F.P1[0] - (sx.u + DISH_HX * size) * F.U[0] + HEAD_Y * size * F.V[0], F.P1[1] - (sx.u + DISH_HX * size) * F.U[1] + HEAD_Y * size * F.V[1]];
     gi.setTransform(S, 0, 0, S, 0, 0); gi.transform(F.U[0], F.U[1], F.V[0], F.V[1], o[0] - X0, o[1] - Y0);
     const uEnd = Math.max(...items.map((x) => x.u + gi.measureText(x.s).width));
@@ -210,9 +216,9 @@ export default {
       }
     }
     for (const it of items) {
-      if (!it.press) { pressed(gi, it); continue; }
+      if (!it.press) { pressed(gi, it, it.clipU); continue; }
       const W = pressWedge(it), pr = PRESSES.find((x) => x.key === it.press);
-      const ps = pressState(it, pr, pf);
+      const ps = pressState(it, W, pr, pf);
       if (!ps) continue;
       const fl = 1 - (pf - pr.f) / (flashDur * 24);
       pressing(gi, it, W, ps, frame >= 0 ? fl : 0);

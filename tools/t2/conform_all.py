@@ -28,8 +28,9 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'tools', 't2'))
 import restore_media as R  # noqa: E402
 
-FIXED = {'V113': ['--start', '1.5', '--dur', '2.2']}
-SKIP_DIRS = {'work/plates/V108', 'work/plates/V109', 'work/plates/V110',   # comp_walk.py
+FIXED = {}
+SKIP_DIRS = {'work/plates/V113',   # built: tools/t2/tablet_built.py
+             'work/plates/V108', 'work/plates/V109', 'work/plates/V110',   # comp_walk.py
              # the verse 1 machines: the walk keyed over the machine plates, composited straight to frames (no video exists);
              # the plate folders themselves are on the derived-plates branch, derived/work/plates/V118..V121 (copy them over work/)
              'work/plates/V118', 'work/plates/V119', 'work/plates/V120', 'work/plates/V121'}

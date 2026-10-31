@@ -95,12 +95,12 @@ triangles, and blueprint outlines counted them 1 to 6, one per eighth, with a di
 count. **Now:** the painted triangles are covered with clean clay (`tools/t2/tablet_clay.py` bakes `render/assets/t2/tablet/`:
 the inpainted clay, plus a per-plate-frame shadow and stylus/hand matte so the stylus stays on top). The scene `t2_tablet`
 (`scenes/t2/lyric/tablet.js`) puts the Fibonacci numbers on the clay in Old Babylonian sexagesimal numerals. Jade's take-two
-note: the stylus has to make the strokes that appear. So the count is already there when the shot opens except 89, which the stylus
-writes (`TIP`, hand-marked on even plate frames 4 to 50). The plate is a new Veo take from 31 Oct, `t2_V113_ltr_veof_t1` (first frame:
-the old plate's frame 12), because Foster asked that the hand "write continuously from left to right, just as we do, ending on that
-last 1-sign after the LAL"; the old take flew back left. Its landings are plate frames 6 (𒁹), 22 (𒌍), 38 (𒇲) and 44 (the last 1, where
-the tip slides on from 𒇲). Each sign grows down from its top on its landing, with a ridge of displaced clay and a blueprint flash.
-Near the tip, the plate matte is trimmed to the shaft, so the plate's own marks don't cut the inscription:
+note: the stylus has to make the strokes that appear, and (31 Oct) one touch makes one wedge. So the count is on the clay when the shot
+opens except the last two wedges of 89: LAL's top wedge and the last 1. Foster asked that the hand "write continuously from left to right,
+just as we do, ending on that last 1-sign after the LAL". No video model on the relay takes coordinates, and Veo's takes pecked several
+signs at once, so the plate is built, not generated: `tools/t2/tablet_built.py` cuts the hand out of `t2_V113_ltr_veof_t1` and moves it
+along a designed path, as Moongazing's `calli_take.py` did for the last two strokes of 月. `TIP` in `tablet.js` is that path, printed by the
+script. Near the tip, the plate matte is trimmed to the shaft, so the plate's own marks don't cut the inscription:
 
 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 | 89 = 1;29 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -109,7 +109,7 @@ Near the tip, the plate matte is trimmed to the shaft, so the plate's own marks 
 89's 29 is written the scribes' way, 30 LAL 1 ("thirty less one"; B. R. Foster, 29 Oct). His note of 31 Oct places the 1: inside LAL, so
 LAL's top wedge roofs it, with its head pointing at the join of LAL's two wedges at 11 o'clock and not touching. `tablet.js` draws it at
 70% with a 30 degree lean (`LAST_SCALE`, `LAL_TILT`, `LAST_IN`, the join measured from the font's outline). Rebake with
-`python3 tools/t2/tablet_clay.py --also 5,20,51 --also-until 3`.
+`python3 tools/t2/tablet_built.py && python3 tools/t2/tablet_clay.py --also 5,20,51 --also-until 3`. "And the mud" moved to the empty clay at lower right (31 Oct): it had covered the Ea-nasir lines.
 
 Row 1 holds 1 to 13 and row 2 holds 21 to 89, ending at the stylus. Under a double ruling, already on the tablet, are two
 lines of the Ea-nasir complaint tablet (UET 5, 81; CDLI P414985, transliteration read from the CDLI ATF dump): obverse line 1,

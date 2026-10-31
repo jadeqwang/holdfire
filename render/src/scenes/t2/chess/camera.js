@@ -38,7 +38,7 @@ export const PRESETS = {
   piece: (t, p, st) => { const f = focusSq(p, st); const az = p.az ?? 0.6; return { pos: [f[0] + Math.sin(az) * 3.1, 1.25, f[2] + Math.cos(az) * 3.1], target: [f[0], 0.62, f[2]], fov: p.fov ?? 30 }; },
   // the clock faces
   clock: () => ({ pos: [CLOCK_POS[0] - 3.0, 2.5, CLOCK_POS[2] + 0.45], target: [CLOCK_POS[0], 0.3, CLOCK_POS[2]], fov: 30 }),
-  // the scoresheet (pause-frame credit)
+  // the scoresheet
   sheet: () => ({ pos: [SHEET_POS[0] - 0.2, 4.6, SHEET_POS[2] + 2.0], target: [SHEET_POS[0], 0, SHEET_POS[2] - 0.1], fov: 34 }),
 };
 

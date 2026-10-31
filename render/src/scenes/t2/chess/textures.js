@@ -1,5 +1,5 @@
 // Canvas textures for t2_chess: the board's coordinate border, the clock's two LCD faces (seven-segment digits),
-// and the scoresheet (the pause-frame credit "Fischer–Tal · Leipzig 1960 · ½–½" plus the moves written so far).
+// and the scoresheet (the moves written so far; the game and its result are in the end card's credits only).
 import * as THREE from 'three';
 import { GAME } from './pgn.js';
 
@@ -108,13 +108,8 @@ export function drawSheet(sc, nPlies) {
   const c = sc.c, W = 768, H = 1024;
   c.fillStyle = '#f4eddc'; c.fillRect(0, 0, W, H);
   c.fillStyle = '#1b2233'; c.textBaseline = 'alphabetic';
-  // the credit (the only claim on the sheet)
-  c.textAlign = 'center';
-  c.font = '600 50px Cormorant';
-  c.fillText('Fischer–Tal · Leipzig 1960 · ½–½', W / 2, 92);
-  c.fillStyle = 'rgba(27,34,51,0.85)'; c.fillRect(48, 118, W - 96, 3);
   // ruled grid
-  const top = 176, rows = 21, rh = (H - top - 40) / rows;
+  const top = 96, rows = 22, rh = (H - top - 40) / rows;
   c.font = '700 22px OpenSans'; c.fillStyle = 'rgba(27,34,51,0.75)';
   c.textAlign = 'left'; c.fillText('WHITE', 140, top - 18); c.fillText('BLACK', 450, top - 18);
   c.strokeStyle = 'rgba(40,70,140,0.35)'; c.lineWidth = 2;

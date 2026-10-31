@@ -27,7 +27,7 @@ const SONG = [
     [['and ', 'dim'], ['Variations and Metamorphosis', 'ititle']]],
 ];
 const SMALL = ['Fischer\u2013Tal · Leipzig 1960 · \u00bd\u2013\u00bd   ·   fonts under the SIL Open Font License', 'near-miss sources: National Security Archive, Union of Concerned Scientists,', 'Chatham House, Atomic Heritage Fdn., Arms Control Assn., NPR, CNN, Bloomberg'];   // 850 px at 22 px: fits the 864 px safe width unscaled
-const THANKS = '\u201cour\u201d and \u201ctheir\u201d after a cartoon by Tom Gauld   \u00b7   chess human: Andrey Gorlin';
+const HUMANS = ['Cuneiform reviewed by: Benjamin R. Foster', 'Chess and Cyrillic reviewed by: Andrey Gorlin', '\u201cour\u201d and \u201ctheir\u201d after a cartoon by Tom Gauld'];
 // credits.json (tools/t2/credits.py): the models that made the cut, read at render time
 let creditsP = null;
 const creditsJSON = () => (creditsP = creditsP || fetch('data/t2/credits.json').then((r) => (r.ok ? r.json() : null)).catch(() => null));
@@ -148,20 +148,19 @@ export default {
       balanced(names, names.length <= 4 ? 4 : 3).forEach((rw, r) => { const al = ain(t0 + T.s16 * r); if (al > 0) row([[rw.join('  ·  '), st]], y, al); y += lead; });
       return y;
     };
+    // the humans above the models (Jade, 31 Oct): music, the two reviewers and Tom Gauld, then the animation credit and its cast
     let y2 = 692;
     const a0 = ain(T.cIn);
-    if (a0 > 0) row([['Music by Jade Wang and Suno', 'line'], ['   ·   ', 'line'], [`Animated by ${C.animated}`, 'key']], y2, a0);
-    y2 += 42;
-    const a1 = ain(T.cIn + T.s16);
-    if (a1 > 0) row([['and a supporting cast of models:', 'dim']], y2, a1);
-    y2 += 40;
-    y2 = grid(vids, 'name', y2, 40, T.cIn + T.s16 * 2);
-    y2 = grid(imgs, 'name', y2, 40, T.cIn + T.s16 * 3);
-    y2 = grid(tools, 'support', y2 + 2, 34, T.cIn + T.s16 * 4);
-    // the people behind two ideas (Jade, 29 Oct): part two's "our and their" labels come from Tom Gauld's cartoon of two identical
-    // sides; Andrey Gorlin's notes made the chess right (the clocks, the hand that presses with the captured piece in it)
-    const a5 = ain(T.cIn + T.s16 * 5);
-    if (a5 > 0) row([[THANKS, 'dim']], y2 + 14, a5);
+    if (a0 > 0) row([['Music by Jade Wang and Suno', 'line']], y2, a0);
+    y2 += 38;
+    HUMANS.forEach((x, i) => { const al = ain(T.cIn + T.s16 * (i + 1)); if (al > 0) row([[x, 'dim']], y2, al); y2 += 30; });
+    y2 += 8;
+    const a1 = ain(T.cIn + T.s16 * 4);
+    if (a1 > 0) row([[`Animated by ${C.animated}`, 'key'], [' and a supporting cast of models:', 'dim']], y2, a1);
+    y2 += 36;
+    y2 = grid(vids, 'name', y2, 34, T.cIn + T.s16 * 5);
+    y2 = grid(imgs, 'name', y2, 34, T.cIn + T.s16 * 6);
+    y2 = grid(tools, 'support', y2, 30, T.cIn + T.s16 * 7);
     const asm = ain(T.beats[2]);
     if (asm > 0) SMALL.forEach((x, i) => row([[x, 'small']], Math.min(Math.max(y2 + 8, 990), 994) + i * 27, asm * 0.9));   // the last small line stays inside the frame
   },

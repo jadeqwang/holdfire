@@ -1,6 +1,6 @@
 // t2_chess: the bridge's chess game (Fischer–Tal, Leipzig 1960, ½–½) as an anime battle. A real 3D board and lathe-turned
 // pieces with cel shading (three-tone ramp, hard spec and rim) and inverted-hull ink outlines; a twin chess clock with LCD faces
-// that count down for real; a scoresheet with the pause-frame credit; the hall's lights going down to one pool on the board;
+// that count down for real; a scoresheet; the hall's lights going down to one pool on the board;
 // eyes in the dark; speed lines, impact frames, smash zooms; captured pieces flying past the lens as a chain; and a dive into
 // the black queen that ends on a flat black square on cream (handoff to t2_poster_morph).
 //
